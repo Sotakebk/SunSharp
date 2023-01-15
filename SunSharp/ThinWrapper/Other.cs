@@ -16,6 +16,7 @@ namespace SunSharp.ThinWrapper
 
     public enum Channel : int
     {
+        Mono = 0,
         Left = 0,
         Right = 1
     }
@@ -38,6 +39,7 @@ namespace SunSharp.ThinWrapper
     [Flags]
     public enum InitFlags : uint
     {
+        Default = 0,
         NoDebugOutput = Constants.SV_INIT_FLAG_NO_DEBUG_OUTPUT,
         UserAudioCallback = Constants.SV_INIT_FLAG_USER_AUDIO_CALLBACK,
         AudioInt16 = Constants.SV_INIT_FLAG_AUDIO_INT16,

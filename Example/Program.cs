@@ -4,7 +4,8 @@
     {
         private static Dictionary<int, (string name, Action action)> Options = new Dictionary<int, (string, Action)>()
         {
-            {1, ("Thin wrapper example", ThinWrapperExample.RunExample) }
+            {1, ("Thin wrapper example", ThinWrapperExample.RunExample) },
+            {2, ("Object oriented example", ObjectOrientedExample.RunExample) },
         };
 
         private static void Main(string[] args)

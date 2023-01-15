@@ -30,13 +30,19 @@ namespace SunSharp.ThinWrapper
         public byte EE;
 
         [FieldOffset(6)]
-        public ushort XXYY;
+        public short XXYY;
 
         [FieldOffset(6)]
         public byte YY;
 
         [FieldOffset(7)]
         public byte XX;
+
+        public Effect Effect
+        {
+            get => (Effect)EE;
+            set => EE = (byte)value;
+        }
 
         public Event(ulong value) : this()
         {
@@ -48,6 +54,12 @@ namespace SunSharp.ThinWrapper
             NN = note;
             VV = velocity;
             MM = module;
+        }
+
+        public Event(Effect effect, short XXYY) : this()
+        {
+            EE = (byte)effect;
+            this.XXYY = XXYY;
         }
 
         public static implicit operator Event(ulong value)
