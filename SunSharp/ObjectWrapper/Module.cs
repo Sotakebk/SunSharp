@@ -76,6 +76,8 @@ namespace SunSharp.ObjectWrapper
             _id = id;
         }
 
+        public ModuleFlags GetFlags => _lib.GetModuleFlags(_slot.Id, _id);
+
         public string GetName() => _lib.GetModuleName(_slot.Id, _id);
 
         public (int x, int y) GetPosition() => _lib.GetModulePosition(_slot.Id, _id);

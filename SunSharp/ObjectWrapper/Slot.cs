@@ -45,7 +45,8 @@ namespace SunSharp.ObjectWrapper
             try
             {
                 Monitor.Enter(temp, ref lockWasTaken);
-                Lock();
+                if (lockWasTaken)
+                    Lock();
                 action();
             }
             finally
@@ -65,7 +66,8 @@ namespace SunSharp.ObjectWrapper
             try
             {
                 Monitor.Enter(temp, ref lockWasTaken);
-                Lock();
+                if (lockWasTaken)
+                    Lock();
                 return function();
             }
             finally

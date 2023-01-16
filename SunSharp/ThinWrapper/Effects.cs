@@ -45,4 +45,29 @@
         CopyTrackFromPattern = 0x3C,
         WriteRandomValue = 0x3D,
     }
+
+    public static class EffectHelper
+    {
+        public static bool IsNonLinear(this Effect effect)
+        {
+            return effect == Effect.Jump
+                || effect == Effect.SetJumpMode;
+        }
+
+        public static bool IsDestructive(this Effect effect)
+        {
+            return effect == Effect.DeleteEventOnTrackWithProbability
+                || effect == Effect.CyclicShiftTrackLines
+                || effect == Effect.GeneratePolyrhythm
+                || effect == Effect.CopyTrackToPattern
+                || effect == Effect.CopyTrackFromPattern
+                || effect == Effect.WriteRandomValue;
+        }
+
+        public static bool ModifiesTime(this Effect effect)
+        {
+            return effect == Effect.SetBPM
+                || effect == Effect.SetPlayingSpeed;
+        }
+    }
 }
