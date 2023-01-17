@@ -12,6 +12,16 @@ namespace SunSharp.ObjectWrapper
         private readonly Slot[] _slots;
         private readonly object _lock;
 
+        public Slot this[int i]
+        {
+            get
+            {
+                if (i < 0 || i >= SlotCount)
+                    throw new ArgumentOutOfRangeException(nameof(i), i, $"Possible values: 0-{SlotCount}.");
+                return _slots[i];
+            }
+        }
+
         internal Slots(SunVox sunVox)
         {
             _lock = new object();
@@ -33,16 +43,6 @@ namespace SunSharp.ObjectWrapper
             lock (_lock)
             {
                 return func();
-            }
-        }
-
-        public Slot this[int i]
-        {
-            get
-            {
-                if (i < 0 || i >= SlotCount)
-                    throw new ArgumentOutOfRangeException(nameof(i), i, $"Possible values: 0-{SlotCount}.");
-                return _slots[i];
             }
         }
 

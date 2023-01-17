@@ -5,33 +5,36 @@ namespace SunSharp.ObjectWrapper
 {
     public struct Pattern
     {
-        public int Id => _id;
-        public Slot Slot => _slot;
-
         private readonly ISunVoxLib _lib;
         private readonly int _id;
+        private readonly int _slotId;
         private readonly Slot _slot;
+
+        public int Id => _id;
+        public Slot Slot => _slot;
+        public ISunVoxLib Library => _lib;
 
         internal Pattern(Timeline timeline, int id)
         {
             _lib = timeline.Slot.SunVox.Library;
             _slot = timeline.Slot;
+            _slotId = timeline.Slot.Id;
             _id = id;
         }
 
-        public bool GetExists() => _lib.GetPatternExists(_slot.Id, _id);
+        public bool GetExists() => _lib.GetPatternExists(_slotId, _id);
 
-        public string GetName() => _lib.GetPatternName(_slot.Id, _id);
+        public string GetName() => _lib.GetPatternName(_slotId, _id);
 
-        public (int X, int Y) GetPosition() => _lib.GetModulePosition(_slot.Id, _id);
+        public (int X, int Y) GetPosition() => _lib.GetModulePosition(_slotId, _id);
 
-        public int GetTrackCount() => _lib.GetPatternTracks(_slot.Id, _id);
+        public int GetTrackCount() => _lib.GetPatternTracks(_slotId, _id);
 
-        public int GetLength() => _lib.GetPatternLines(_slot.Id, _id);
+        public int GetLength() => _lib.GetPatternLines(_slotId, _id);
 
         public Event[] GetData()
         {
-            int slotId = _slot.Id;
+            int slotId = _slotId;
             int id = _id;
             var lib = _lib;
             return _slot.RunInLock(() =>
@@ -60,7 +63,7 @@ namespace SunSharp.ObjectWrapper
         public void SetData(Event[] data)
         {
             // TODO: sv_set_pattern_data() does not exist
-            var slotId = _slot.Id;
+            var slotId = _slotId;
             var id = _id;
             var lib = _lib;
             _slot.RunInLock(() =>
@@ -82,7 +85,7 @@ namespace SunSharp.ObjectWrapper
         public void SetData2D(Event[,] data)
         {
             // TODO: sv_set_pattern_data() does not exist
-            var slotId = _slot.Id;
+            var slotId = _slotId;
             var id = _id;
             var lib = _lib;
             int inputLines = data.GetLength(0);

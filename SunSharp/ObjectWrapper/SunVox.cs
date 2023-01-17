@@ -1,43 +1,91 @@
 ﻿using SunSharp.ThinWrapper;
 using System.Collections.Generic;
 using System.Linq;
-using static SunSharp.ThinWrapper.SunVoxHelper;
 
 namespace SunSharp.ObjectWrapper
 {
     public class SunVox : System.IDisposable
     {
-        public ISunVoxLib Library => _lib;
-        public Version Version => _version;
-        public int SampleRate => _sampleRate;
-        public Slots Slots { get; private set; }
-
-        private readonly Version _version;
         private readonly int _sampleRate;
         private readonly ISunVoxLib _lib;
-        private readonly bool _userCallback;
-        private readonly bool _outputFloat;
+        private readonly Slots _slots;
+        private readonly OutputType? _outputType;
+        private readonly Version _version;
+        private readonly bool _singleThreaded;
 
-        public SunVox(ISunVoxLib lib, int sampleRate, Channels channels = Channels.Stereo,
-            InitFlags flags = InitFlags.Default, uint? bufferSize = null, string deviceIn = null,
-            string deviceOut = null, string driver = null)
+        public ISunVoxLib Library => _lib;
+        public Slots Slots => _slots;
+        public bool NeedsUserCallback => OutputType != null;
+        public bool SingleThreaded => _singleThreaded;
+        public OutputType? OutputType => _outputType;
+        public Version Version => _version;
+        public int SampleRate => _sampleRate;
+
+        /// <summary>
+        /// Create an instance of the engine with own audio stream and threading.
+        /// </summary>
+        /// <param name="lib"></param>
+        /// <param name="bufferSize"></param>
+        /// <param name="deviceIn"></param>
+        /// <param name="deviceOut"></param>
+        /// <param name="driver"></param>
+        public SunVox(ISunVoxLib lib, uint? bufferSize = null, Channels channels = Channels.Stereo,
+            string deviceIn = null, string deviceOut = null, string driver = null, bool noDebugOutput = true)
         {
-            if (flags.HasFlag(InitFlags.AudioFloat32) && flags.HasFlag(InitFlags.AudioInt16))
-                throw new System.ArgumentException($"InitFlags cannot have both {InitFlags.AudioFloat32} and {InitFlags.AudioInt16} set!");
+            var flags = InitFlags.Default;
+            if (noDebugOutput)
+                flags |= InitFlags.NoDebugOutput;
 
-            _userCallback = flags.HasFlag(InitFlags.UserAudioCallback);
-            _outputFloat = _userCallback && flags.HasFlag(InitFlags.AudioFloat32);
             var @params = new List<string>();
             if (bufferSize != null) @params.Add($"buffer={bufferSize.Value}");
             if (deviceIn != null) @params.Add($"audiodevice_in={deviceIn}");
             if (deviceOut != null) @params.Add($"audiodevice={deviceOut}");
             if (driver != null) @params.Add($"audiodriver={driver}");
             var configuration = @params.Any() ? string.Join("|", @params) : null;
-            _lib = lib;
-            _version = Library.Init(configuration, sampleRate, channels, flags);
-            _sampleRate = Library.GetSampleRate();
 
-            Slots = new Slots(this);
+            _lib = lib;
+            _version = _lib.Init(configuration, -1, channels, flags);
+            _sampleRate = _lib.GetSampleRate();
+            _singleThreaded = false;
+            _outputType = null;
+            _slots = new Slots(this);
+        }
+
+        /// <summary>
+        /// Create an instance of the engine with the intent of using AudioCallback.
+        /// </summary>
+        /// <param name="lib"></param>
+        /// <param name="sampleRate"></param>
+        /// <param name="outputType"></param>
+        /// <param name="singleThreaded"></param>
+        /// <param name="noDebugOutput"></param>
+        public SunVox(ISunVoxLib lib, int sampleRate, OutputType outputType, Channels channels = Channels.Stereo,
+            bool singleThreaded = false, bool noDebugOutput = true)
+        {
+            var flags = InitFlags.UserAudioCallback;
+
+            if (noDebugOutput)
+                flags |= InitFlags.NoDebugOutput;
+
+            if (outputType == ObjectWrapper.OutputType.Float32)
+                flags |= InitFlags.AudioFloat32;
+            else if (outputType == ObjectWrapper.OutputType.Int16)
+                flags |= InitFlags.AudioInt16;
+            else
+                throw new System.ArgumentException($"Invalid value: {(int)outputType}", nameof(outputType));
+
+            if (singleThreaded)
+                flags |= InitFlags.OneThread;
+
+            if (sampleRate < 1)
+                throw new System.ArgumentException($"Invalid value: {sampleRate}", nameof(sampleRate));
+
+            _lib = lib;
+            _version = _lib.Init(null, sampleRate, channels, flags);
+            _sampleRate = _lib.GetSampleRate();
+            _singleThreaded = false;
+            _outputType = null;
+            _slots = new Slots(this);
         }
 
         #region disposable
@@ -74,12 +122,17 @@ namespace SunSharp.ObjectWrapper
 
         public void UpdateInputDevices() => _lib.UpdateInputDevices();
 
-        private void AudioGuard(bool floatOutput)
+        private void AudioGuard(bool @float)
         {
-            if (!_userCallback)
-                throw new System.InvalidOperationException($"Engine was not initialized with {InitFlags.UserAudioCallback} flag.");
-            if (floatOutput == _outputFloat)
-                throw new System.InvalidOperationException("Output type not compatible with type defined at initialization.");
+            if (_outputType == null)
+                throw new System.InvalidOperationException("SunVox was not initialized in user callback mode.");
+
+            if ((_outputType == ObjectWrapper.OutputType.Float32) == @float)
+            {
+                var expected = @float ? ObjectWrapper.OutputType.Float32 : ObjectWrapper.OutputType.Int16;
+                var msg = $"SunVox was initialized with output type \"{OutputType}\", but callback was called expecting output type \"{expected}\"";
+                throw new System.InvalidOperationException(msg);
+            }
         }
 
         public bool AudioCallback(float[] outputBuffer, int latency, uint outTime)

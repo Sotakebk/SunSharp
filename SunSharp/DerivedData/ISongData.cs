@@ -3,9 +3,7 @@ using System.Collections.Generic;
 
 namespace SunSharp.DerivedData
 {
-    public interface ISongData<T, V>
-        where T : IModuleData
-        where V : IPatternData
+    public interface ISongData
     {
         string Name { get; }
         int BPM { get; }
@@ -18,8 +16,8 @@ namespace SunSharp.DerivedData
         bool IsLinear { get; }
         bool IsDestructive { get; }
         bool HasDynamicTempo { get; }
-        IReadOnlyCollection<T> Modules { get; }
-        IReadOnlyCollection<V> Patterns { get; }
+        IReadOnlyCollection<IModuleData> Modules { get; }
+        IReadOnlyCollection<IPatternData> Patterns { get; }
     }
 
     public interface IModuleData

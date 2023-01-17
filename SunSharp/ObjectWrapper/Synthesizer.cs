@@ -7,11 +7,11 @@ namespace SunSharp.ObjectWrapper
 {
     public class Synthesizer : IEnumerable<Module>
     {
-        public Slot Slot => _slot;
-
         private readonly ISunVoxLib _lib;
         private readonly Slot _slot;
         private readonly int _id;
+
+        public Slot Slot => _slot;
 
         internal Synthesizer(Slot slot)
         {

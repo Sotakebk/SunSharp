@@ -61,53 +61,54 @@ namespace SunSharp.ObjectWrapper
 
     public struct Module
     {
-        public int Id => _id;
-
-        public Slot Slot => _slot;
-
         private readonly ISunVoxLib _lib;
         private readonly Slot _slot;
         private readonly int _id;
+        private readonly int _slotId;
+
+        public int Id => _id;
+        public Slot Slot => _slot;
 
         internal Module(Synthesizer synthesizer, int id)
         {
             _slot = synthesizer.Slot;
+            _slotId = _slot.Id;
             _lib = synthesizer.Slot.Library;
             _id = id;
         }
 
-        public ModuleFlags GetFlags => _lib.GetModuleFlags(_slot.Id, _id);
+        public ModuleFlags GetFlags => _lib.GetModuleFlags(_slotId, _id);
 
-        public string GetName() => _lib.GetModuleName(_slot.Id, _id);
+        public string GetName() => _lib.GetModuleName(_slotId, _id);
 
-        public (int x, int y) GetPosition() => _lib.GetModulePosition(_slot.Id, _id);
+        public (int x, int y) GetPosition() => _lib.GetModulePosition(_slotId, _id);
 
-        public (int finetune, int relativeNote) GetFinetune() => _lib.GetModuleFinetune(_slot.Id, _id);
+        public (int finetune, int relativeNote) GetFinetune() => _lib.GetModuleFinetune(_slotId, _id);
 
-        public (byte R, byte G, byte B) GetColor() => _lib.GetModuleColor(_slot.Id, _id);
+        public (byte R, byte G, byte B) GetColor() => _lib.GetModuleColor(_slotId, _id);
 
-        public bool GetModuleExists() => _lib.GetModuleExists(_slot.Id, _id);
+        public bool GetModuleExists() => _lib.GetModuleExists(_slotId, _id);
 
-        public int[] GetModuleInputs() => _lib.GetModuleInputs(_slot.Id, _id);
+        public int[] GetModuleInputs() => _lib.GetModuleInputs(_slotId, _id);
 
         public Module[] GetModuleInputModules()
         {
             var synthesizer = _slot.Synthesizer;
-            return _lib.GetModuleInputs(_slot.Id, _id).Select(i => new Module(synthesizer, i)).ToArray();
+            return _lib.GetModuleInputs(_slotId, _id).Select(i => new Module(synthesizer, i)).ToArray();
         }
 
-        public int[] GetModuleOutputs() => _lib.GetModuleInputs(_slot.Id, _id);
+        public int[] GetModuleOutputs() => _lib.GetModuleInputs(_slotId, _id);
 
         public Module[] GetModuleOutputModules()
         {
             var synthesizer = _slot.Synthesizer;
-            return _lib.GetModuleOutputs(_slot.Id, _id).Select(i => new Module(synthesizer, i)).ToArray();
+            return _lib.GetModuleOutputs(_slotId, _id).Select(i => new Module(synthesizer, i)).ToArray();
         }
 
         public void LoadSample(string path, int sampleSlot = -1)
         {
             var lib = _lib;
-            var slotId = _slot.Id;
+            var slotId = _slotId;
             var id = _id;
             _slot.RunInLock(() =>
             {
@@ -118,7 +119,7 @@ namespace SunSharp.ObjectWrapper
         public void LoadSample(byte[] data, int sampleSlot = -1)
         {
             var lib = _lib;
-            var slotId = _slot.Id;
+            var slotId = _slotId;
             var id = _id;
             _slot.RunInLock(() =>
             {
@@ -128,13 +129,13 @@ namespace SunSharp.ObjectWrapper
 
         public int ReadScope(Channel channel, short[] buffer)
         {
-            return _lib.ReadModuleScope(_slot.Id, _id, (int)channel, buffer);
+            return _lib.ReadModuleScope(_slotId, _id, (int)channel, buffer);
         }
 
         public int WriteModuleCurve(int curveId, float[] buffer)
         {
             var lib = _lib;
-            var slotId = _slot.Id;
+            var slotId = _slotId;
             var id = _id;
             return _slot.RunInLock(() =>
             {
@@ -145,7 +146,7 @@ namespace SunSharp.ObjectWrapper
         public int ReadModuleCurve(int curveId, float[] buffer)
         {
             var lib = _lib;
-            var slotId = _slot.Id;
+            var slotId = _slotId;
             var id = _id;
             return _slot.RunInLock(() =>
             {
@@ -155,17 +156,17 @@ namespace SunSharp.ObjectWrapper
 
         public int GetControllerCount()
         {
-            return _lib.GetModuleControllerCount(_slot.Id, _id);
+            return _lib.GetModuleControllerCount(_slotId, _id);
         }
 
         public string GetControllerName(int controllerId)
         {
-            return _lib.GetModuleControllerName(_slot.Id, _id, controllerId);
+            return _lib.GetModuleControllerName(_slotId, _id, controllerId);
         }
 
         public int GetControllerValue(int controllerId, bool scaled = false)
         {
-            return _lib.GetModuleControllerValue(_slot.Id, _id, controllerId, scaled);
+            return _lib.GetModuleControllerValue(_slotId, _id, controllerId, scaled);
         }
 
         public void SetControllerValue(int controllerId, float value, int min, int max)

@@ -87,9 +87,9 @@ namespace SunSharp.DerivedData
         }
     }
 
-    public class SongData<T, V> : ISongData<T, V>
-        where T : ModuleData
-        where V : PatternData
+    public class SongData<T, V> : ISongData
+        where T : ModuleData, new()
+        where V : PatternData, new()
     {
         #region properties
 
@@ -104,34 +104,50 @@ namespace SunSharp.DerivedData
         public bool IsLinear { get; protected set; }
         public bool IsDestructive { get; protected set; }
         public bool HasDynamicTempo { get; protected set; }
-        public IReadOnlyCollection<T> Modules { get; protected set; }
-        public IReadOnlyCollection<V> Patterns { get; protected set; }
+        public IReadOnlyCollection<IModuleData> Modules { get; protected set; }
+        public IReadOnlyCollection<IPatternData> Patterns { get; protected set; }
 
         #endregion properties
 
-        public SongData(ISunVoxLib lib, int slotId, LockingMechanism lockingMechanism)
+        public SongData()
         {
-            lockingMechanism.RunInLock(() => ReadSong(lib, slotId, lockingMechanism));
         }
 
-        protected virtual void ReadSong(ISunVoxLib lib, int slot, LockingMechanism lockingMechanism)
+        public SongData(ISunVoxLib lib, int slotId, LockingMechanism lockingMechanism)
+        {
+            ReadSong(lib, slotId, lockingMechanism);
+        }
+
+        public virtual void ReadSong(ISunVoxLib lib, int slot, LockingMechanism lockingMechanism)
         {
             var moduleCount = lib.GetUpperModuleCount(slot);
-            var modules = new List<ModuleData>(moduleCount);
+            var modules = new List<T>(moduleCount);
 
             for (int i = 0; i < moduleCount; i++)
+            {
                 if (lib.GetModuleExists(slot, i))
-                    modules.Add(new ModuleData(lib, slot, i, lockingMechanism));
+                {
+                    var m = new T();
+                    m.ReadModuleData(lib, slot, i, lockingMechanism);
+                    modules.Add(m);
+                }
+            }
 
             var patternCount = lib.GetUpperPatternCount(slot);
-            var patterns = new List<PatternData>(patternCount);
+            var patterns = new List<V>(patternCount);
 
             for (int i = 0; i < patternCount; i++)
+            {
                 if (lib.GetPatternExists(slot, i))
-                    patterns.Add(new PatternData(lib, slot, i, lockingMechanism));
+                {
+                    var p = new V();
+                    p.ReadPatternData(lib, slot, i, lockingMechanism);
+                    patterns.Add(p);
+                }
+            }
 
-            Modules = (IReadOnlyCollection<T>)modules.ToArray();
-            Patterns = (IReadOnlyCollection<V>)patterns.ToArray();
+            Modules = modules.ToArray();
+            Patterns = patterns.ToArray();
 
             BPM = lib.GetSongBpm(slot);
             CurrentLine = lib.GetCurrentLine(slot);
@@ -177,34 +193,36 @@ namespace SunSharp.DerivedData
 
         #endregion properties
 
-        internal ModuleData(ISunVoxLib lib, int slot, int moduleId, LockingMechanism lockingMechanism)
+        public ModuleData()
         {
-            lockingMechanism.RunInLock(() => ReadModuleData(lib, slot, moduleId));
         }
 
-        protected void ReadModuleData(ISunVoxLib lib, int slot, int moduleId)
+        public virtual void ReadModuleData(ISunVoxLib lib, int slot, int moduleId, LockingMechanism lockingMechanism)
         {
-            var flags = lib.GetModuleFlags(slot, moduleId);
-            var controllers = new (string name, int value)[lib.GetModuleControllerCount(slot, moduleId)];
-
-            for (int i = 0; i < controllers.Length; i++)
+            lockingMechanism.RunInLock(() =>
             {
-                var name = lib.GetModuleControllerName(slot, moduleId, i);
-                var value = lib.GetModuleControllerValue(slot, moduleId, i, false);
-                controllers[i] = (name, value);
-            }
+                var flags = lib.GetModuleFlags(slot, moduleId);
+                var controllers = new (string name, int value)[lib.GetModuleControllerCount(slot, moduleId)];
 
-            Bypass = flags.Bypass;
-            Color = lib.GetModuleColor(slot, moduleId);
-            Controllers = controllers;
-            Finetune = lib.GetModuleFinetune(slot, moduleId);
-            Id = moduleId;
-            Inputs = lib.GetModuleInputs(slot, moduleId);
-            Mute = flags.Mute;
-            Name = lib.GetModuleName(slot, moduleId);
-            Outputs = lib.GetModuleOutputs(slot, moduleId);
-            Position = lib.GetModulePosition(slot, moduleId);
-            Solo = flags.Solo;
+                for (int i = 0; i < controllers.Length; i++)
+                {
+                    var name = lib.GetModuleControllerName(slot, moduleId, i);
+                    var value = lib.GetModuleControllerValue(slot, moduleId, i, false);
+                    controllers[i] = (name, value);
+                }
+
+                Bypass = flags.Bypass;
+                Color = lib.GetModuleColor(slot, moduleId);
+                Controllers = controllers;
+                Finetune = lib.GetModuleFinetune(slot, moduleId);
+                Id = moduleId;
+                Inputs = lib.GetModuleInputs(slot, moduleId);
+                Mute = flags.Mute;
+                Name = lib.GetModuleName(slot, moduleId);
+                Outputs = lib.GetModuleOutputs(slot, moduleId);
+                Position = lib.GetModulePosition(slot, moduleId);
+                Solo = flags.Solo;
+            });
         }
     }
 
@@ -221,39 +239,41 @@ namespace SunSharp.DerivedData
         public bool HasDynamicTempo { get; protected set; }
         public IReadOnlyCollection<ReadOnlyEvent> Data { get; protected set; }
 
-        public PatternData(ISunVoxLib lib, int slot, int patternId, LockingMechanism lockingMechanism)
+        public PatternData()
         {
-            lockingMechanism.RunInLock(() => ReadPatternData(lib, slot, patternId));
         }
 
-        protected void ReadPatternData(ISunVoxLib lib, int slot, int patternId)
+        public virtual void ReadPatternData(ISunVoxLib lib, int slot, int patternId, LockingMechanism lockingMechanism)
         {
-            var data = lib.GetPatternData(slot, patternId).Cast<ReadOnlyEvent>().ToArray();
-            bool isDestructive = false;
-            bool isLinear = true;
-            bool hasDynamicTempo = false;
-
-            for (int i = 0; i < data.Length; i++)
+            lockingMechanism.RunInLock(() =>
             {
-                var @event = data[i];
-                isDestructive = @event.Effect.IsDestructive() || isDestructive;
-                isLinear = isLinear && !@event.Effect.IsNonLinear();
-                hasDynamicTempo = hasDynamicTempo || @event.Effect.ModifiesTime();
-            }
+                var data = lib.GetPatternData(slot, patternId).Cast<ReadOnlyEvent>().ToArray();
+                bool isDestructive = false;
+                bool isLinear = true;
+                bool hasDynamicTempo = false;
 
-            bool muted = lib.PatternMute(slot, patternId, false);
-            lib.PatternMute(slot, patternId, muted);
+                for (int i = 0; i < data.Length; i++)
+                {
+                    var @event = data[i];
+                    isDestructive = @event.Effect.IsDestructive() || isDestructive;
+                    isLinear = isLinear && !@event.Effect.IsNonLinear();
+                    hasDynamicTempo = hasDynamicTempo || @event.Effect.ModifiesTime();
+                }
 
-            Data = data;
-            HasDynamicTempo = hasDynamicTempo;
-            Id = patternId;
-            IsDestructive = isDestructive;
-            IsLinear = isLinear;
-            IsMuted = muted;
-            Lines = lib.GetPatternLines(slot, patternId);
-            Name = lib.GetPatternName(slot, patternId);
-            Position = lib.GetPatternPosition(slot, patternId);
-            Tracks = lib.GetPatternTracks(slot, patternId);
+                bool muted = lib.PatternMute(slot, patternId, false);
+                lib.PatternMute(slot, patternId, muted);
+
+                Data = data;
+                HasDynamicTempo = hasDynamicTempo;
+                Id = patternId;
+                IsDestructive = isDestructive;
+                IsLinear = isLinear;
+                IsMuted = muted;
+                Lines = lib.GetPatternLines(slot, patternId);
+                Name = lib.GetPatternName(slot, patternId);
+                Position = lib.GetPatternPosition(slot, patternId);
+                Tracks = lib.GetPatternTracks(slot, patternId);
+            });
         }
     }
 }

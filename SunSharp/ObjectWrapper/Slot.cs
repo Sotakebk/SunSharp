@@ -7,14 +7,6 @@ namespace SunSharp.ObjectWrapper
 {
     public class Slot
     {
-        public int Id => _id;
-        public VirtualPattern VirtualPattern => _virtualPattern;
-        public Timeline Timeline => _timeline;
-        public Synthesizer Synthesizer => _synthesizer;
-        public SunVox SunVox => _sunVox;
-        public ISunVoxLib Library => _lib;
-        public bool IsOpen { get; private set; }
-
         private readonly int _id;
         private readonly ISunVoxLib _lib;
         private readonly SunVox _sunVox;
@@ -23,6 +15,14 @@ namespace SunSharp.ObjectWrapper
         private readonly Timeline _timeline;
         private readonly Synthesizer _synthesizer;
         private readonly object _lock;
+
+        public int Id => _id;
+        public VirtualPattern VirtualPattern => _virtualPattern;
+        public Timeline Timeline => _timeline;
+        public Synthesizer Synthesizer => _synthesizer;
+        public SunVox SunVox => _sunVox;
+        public ISunVoxLib Library => _lib;
+        public bool IsOpen { get; private set; }
 
         internal Slot(int id, Slots slots, SunVox sunVox)
         {
