@@ -13,6 +13,7 @@ namespace SunSharp.ObjectWrapper
         private readonly VirtualPattern _virtualPattern;
         private readonly Timeline _timeline;
         private readonly Synthesizer _synthesizer;
+        private readonly object _lock;
 
         public int Id => _id;
         public VirtualPattern VirtualPattern => _virtualPattern;
@@ -25,6 +26,7 @@ namespace SunSharp.ObjectWrapper
         internal Slot(int id, Slots slots, SunVox sunVox)
         {
             _id = id;
+            _lock = new object();
             _slots = slots;
             _sunVox = sunVox;
             _lib = sunVox.Library;
@@ -150,7 +152,7 @@ namespace SunSharp.ObjectWrapper
 
         public int GetCurrentLine()
         {
-            return RunInLock(() => _lib.GetCurrentLine(_id));
+            return _lib.GetCurrentLine(_id);
         }
 
         public int GetCurrentLineHundreds()

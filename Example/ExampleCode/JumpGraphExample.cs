@@ -1,5 +1,6 @@
 ﻿using SunSharp;
 using SunSharp.Abstractions.Horizontal.JumpGraph;
+using SunSharp.DerivedData;
 using SunSharp.ObjectWrapper;
 
 namespace Examples.ExampleCode
@@ -43,23 +44,9 @@ namespace Examples.ExampleCode
             return description;
         }
 
-        public static void RunExample()
+        public static void RunExample(ISunVoxLib lib)
         {
-            try
-            {
-                SunSharp.Redistribution.Redistribution.LoadLibrary();
-                var lib = SunSharp.Redistribution.Redistribution.GetLibrary();
-                InitAndDoWork(lib);
-            }
-            finally
-            {
-                SunSharp.Redistribution.Redistribution.UnloadLibrary();
-            }
-        }
-
-        private static void InitAndDoWork(ISunVoxLib lib)
-        {
-            using (var sv = new SunVox(lib, 48000))
+            using (var sv = new SunVox(lib))
             {
                 DoWork(sv);
             }
@@ -80,7 +67,7 @@ namespace Examples.ExampleCode
             }
 
             var description = BuildDescription();
-            var songData = SunSharp.DerivedData.SongDataBuilder.ReadSongData(slot);
+            var songData = SongData.ReadSongData(slot);
             var graph = JumpGraphBuilder.BuildJumpGraph(songData, description, Feedback);
             var controller = new JumpGraphController(slot, graph);
 

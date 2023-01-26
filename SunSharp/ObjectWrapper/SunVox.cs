@@ -29,7 +29,7 @@ namespace SunSharp.ObjectWrapper
         /// <param name="deviceIn"></param>
         /// <param name="deviceOut"></param>
         /// <param name="driver"></param>
-        public SunVox(ISunVoxLib lib, uint? bufferSize = null, Channels channels = Channels.Stereo,
+        public SunVox(ISunVoxLib lib, Channels channels = Channels.Stereo, uint? bufferSize = null,
             string deviceIn = null, string deviceOut = null, string driver = null, bool noDebugOutput = true)
         {
             var flags = InitFlags.Default;
@@ -44,7 +44,7 @@ namespace SunSharp.ObjectWrapper
             var configuration = @params.Any() ? string.Join("|", @params) : null;
 
             _lib = lib;
-            _version = _lib.Init(configuration, -1, channels, flags);
+            _version = _lib.Init(sampleRate: -1, config: configuration, channels: channels, flags: flags);
             _sampleRate = _lib.GetSampleRate();
             _singleThreaded = false;
             _outputType = null;
@@ -81,7 +81,7 @@ namespace SunSharp.ObjectWrapper
                 throw new System.ArgumentException($"Invalid value: {sampleRate}", nameof(sampleRate));
 
             _lib = lib;
-            _version = _lib.Init(null, sampleRate, channels, flags);
+            _version = _lib.Init(sampleRate: sampleRate, channels: channels, flags: flags);
             _sampleRate = _lib.GetSampleRate();
             _singleThreaded = false;
             _outputType = null;

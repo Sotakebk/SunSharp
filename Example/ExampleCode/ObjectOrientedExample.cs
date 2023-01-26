@@ -5,23 +5,9 @@ namespace Examples.ExampleCode
 {
     internal static class ObjectOrientedExample
     {
-        public static void RunExample()
+        public static void RunExample(ISunVoxLib lib)
         {
-            try
-            {
-                SunSharp.Redistribution.Redistribution.LoadLibrary();
-                var lib = SunSharp.Redistribution.Redistribution.GetLibrary();
-                InitAndDoWork(lib);
-            }
-            finally
-            {
-                SunSharp.Redistribution.Redistribution.UnloadLibrary();
-            }
-        }
-
-        private static void InitAndDoWork(ISunVoxLib lib)
-        {
-            using (var sv = new SunVox(lib, 48000))
+            using (var sv = new SunVox(lib))
             {
                 DoWork(sv);
             }
@@ -34,6 +20,7 @@ namespace Examples.ExampleCode
             slot.Open();
             slot.Load(@"ExampleProjects/the_lick.sunvox");
             Console.WriteLine($"Loaded song: {slot.GetSongName()}");
+
             ListPatterns(slot);
             ListModules(slot);
             PlaySong(slot);
@@ -42,10 +29,14 @@ namespace Examples.ExampleCode
 
         private static void PlaySong(Slot slot)
         {
-            slot.SetAutostop(true);
-            slot.Rewind(0);
-            var l = slot.GetCurrentLine();
-            slot.PlayFromBeginning();
+            int l = int.MinValue + 1;
+            slot.RunInLock(() =>
+            {
+                slot.SetAutostop(true);
+                slot.Rewind(0);
+                slot.Play();
+            });
+
             do
             {
                 var nl = slot.GetCurrentLine();
@@ -54,8 +45,8 @@ namespace Examples.ExampleCode
                     l = nl;
                     Console.WriteLine($"Current line: {l}");
                 }
-                Thread.Sleep(50);
-            } while (l != slot.GetSongLengthInLines() - 1);
+                Thread.Sleep(20);
+            } while (l != slot.GetSongLengthInLines() - 1 || slot.IsPlaying()); // this is weird and should be unnecessary
         }
 
         private static void ListModules(Slot slot)

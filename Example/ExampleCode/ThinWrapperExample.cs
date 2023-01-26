@@ -6,32 +6,12 @@ namespace Examples.ExampleCode
 {
     internal static class ThinWrapperExample
     {
-        public static void RunExample()
+        public static void RunExample(ISunVoxLib lib)
         {
-            try
-            {
-                SunSharp.Redistribution.Redistribution.LoadLibrary();
-                var lib = SunSharp.Redistribution.Redistribution.GetLibrary();
-                InitAndDoWork(lib);
-            }
-            finally
-            {
-                SunSharp.Redistribution.Redistribution.UnloadLibrary();
-            }
-        }
-
-        // I have no idea if this is even needed...
-        private static void InitAndDoWork(ISunVoxLib lib)
-        {
-            try
-            {
-                Console.WriteLine(lib.Init(null, 48000, Channels.Stereo, default).ToString());
-                DoWork(lib);
-            }
-            finally
-            {
-                lib.Deinit();
-            }
+            var version = lib.Init(sampleRate: 48000);
+            Console.WriteLine(version.ToString());
+            DoWork(lib);
+            lib.Deinit();
         }
 
         private static void DoWork(ISunVoxLib lib)
@@ -40,6 +20,8 @@ namespace Examples.ExampleCode
             lib.OpenSlot(0);
             lib.LockSlot(0);
             lib.Load(0, "ExampleProjects/the_lick.sunvox");
+            lib.UnlockSlot(0);
+
             Console.WriteLine($"Loaded song: {lib.GetSongName(0)}");
 
             ListModules(lib);
@@ -111,17 +93,19 @@ namespace Examples.ExampleCode
         private static void PlaySong(ISunVoxLib lib)
         {
             Console.WriteLine("Playing the song");
+            lib.LockSlot(0);
             lib.SetAutostop(0, true);
             lib.Rewind(0, 0);
             lib.Play(0);
             lib.UnlockSlot(0);
 
             int l = 0;
-            while (!lib.EndOfSong(0))
+            while (l != lib.GetSongLengthLines(0) - 1 || !lib.EndOfSong(0))
             {
                 var nl = lib.GetCurrentLine(0);
                 if (nl != l)
                 {
+                    Console.WriteLine($"{DateTime.Now:HH:mm:ss:fffffff} G {!lib.EndOfSong(0)}");
                     l = nl;
                     Console.WriteLine($"Current line: {l}");
                 }

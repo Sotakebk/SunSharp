@@ -1,10 +1,11 @@
 ﻿using Examples.ExampleCode;
+using SunSharp;
 
 namespace Examples
 {
     internal static partial class Program
     {
-        private static Dictionary<int, (string name, Action action)> Options = new Dictionary<int, (string, Action)>()
+        private static Dictionary<int, (string name, Action<ISunVoxLib> action)> Options = new Dictionary<int, (string, Action<ISunVoxLib>)>()
         {
             {1, ("Thin wrapper example", ThinWrapperExample.RunExample) },
             {2, ("Object oriented example", ObjectOrientedExample.RunExample) },
@@ -23,7 +24,16 @@ namespace Examples
             {
                 if (Options.TryGetValue(i, out var value))
                 {
-                    value.action();
+                    try
+                    {
+                        SunSharp.Redistribution.Redistribution.LoadLibrary();
+                        var lib = SunSharp.Redistribution.Redistribution.GetLibrary();
+                        value.action(lib);
+                    }
+                    finally
+                    {
+                        SunSharp.Redistribution.Redistribution.UnloadLibrary();
+                    }
                 }
             }
         }

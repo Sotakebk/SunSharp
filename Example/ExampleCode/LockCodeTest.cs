@@ -1,28 +1,14 @@
-﻿using SunSharp.ObjectWrapper;
-using SunSharp;
+﻿using SunSharp;
+using SunSharp.ObjectWrapper;
 using SunSharp.ThinWrapper;
 
 namespace Examples.ExampleCode
 {
     internal static class LockCodeTest
     {
-        public static void RunExample()
+        public static void RunExample(ISunVoxLib lib)
         {
-            try
-            {
-                SunSharp.Redistribution.Redistribution.LoadLibrary();
-                var lib = SunSharp.Redistribution.Redistribution.GetLibrary();
-                InitAndDoWork(lib);
-            }
-            finally
-            {
-                SunSharp.Redistribution.Redistribution.UnloadLibrary();
-            }
-        }
-
-        private static void InitAndDoWork(ISunVoxLib lib)
-        {
-            using (var sv = new SunVox(lib, 48000))
+            using (var sv = new SunVox(lib))
             {
                 DoWork(sv);
             }

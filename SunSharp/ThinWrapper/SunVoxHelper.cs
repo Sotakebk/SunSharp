@@ -167,7 +167,7 @@ namespace SunSharp.ThinWrapper
 
         #region engine
 
-        public static Version Init(this ISunVoxLib lib, string config, int sampleRate, Channels channels, InitFlags flags)
+        public static Version Init(this ISunVoxLib lib, int sampleRate, string config = null, Channels channels = Channels.Stereo, InitFlags flags = InitFlags.Default)
         {
             var ptr = Marshal.StringToHGlobalAnsi(config);
             try

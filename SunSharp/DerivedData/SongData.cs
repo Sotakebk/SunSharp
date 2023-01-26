@@ -1,9 +1,27 @@
-﻿using SunSharp.ThinWrapper;
+﻿using SunSharp.ObjectWrapper;
+using SunSharp.ThinWrapper;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace SunSharp.DerivedData
 {
+    public interface IReadOnlySongData
+    {
+        string Name { get; }
+        int BPM { get; }
+        int TPL { get; }
+        int Frames { get; }
+        int Lines { get; }
+        int CurrentLine { get; }
+        int FirstLine { get; }
+        int LastLine { get; }
+        bool IsLinear { get; }
+        bool IsDestructive { get; }
+        bool HasDynamicTempo { get; }
+        IReadOnlyCollection<IReadOnlyModuleData> Modules { get; }
+        IReadOnlyCollection<IReadOnlyPatternData> Patterns { get; }
+    }
+
     public class SongData : IReadOnlySongData
     {
         public string Name { get; set; }
@@ -27,6 +45,72 @@ namespace SunSharp.DerivedData
         {
         }
 
+        public static SongData ReadSongData(ISunVoxLib lib, int slotId)
+        {
+            return lib.RunInLock(slotId, () => ReadSongDataInternal(lib, slotId));
+        }
+
+        public static SongData ReadSongData(Slot slot)
+        {
+            return slot.RunInLock(() => ReadSongDataInternal(slot.Library, slot.Id));
+        }
+
+        internal static SongData ReadSongDataInternal(ISunVoxLib lib, int slot)
+        {
+            var modules = ReadModuleDataArray(lib, slot);
+            var patterns = ReadPatternDataArray(lib, slot);
+
+            var songData = new SongData()
+            {
+                Modules = modules,
+                Patterns = patterns,
+                BPM = lib.GetSongBpm(slot),
+                CurrentLine = lib.GetCurrentLine(slot),
+                FirstLine = patterns.Min(p => p.Position.X),
+                Frames = lib.GetSongLengthFrames(slot),
+                HasDynamicTempo = patterns.Any(p => p.HasDynamicTempo),
+                IsDestructive = patterns.Any(p => p.IsDestructive),
+                IsLinear = patterns.All(p => p.IsLinear),
+                LastLine = patterns.Max(p => p.Position.X + p.Lines),
+                Lines = lib.GetSongLengthLines(slot),
+                Name = lib.GetSongName(slot),
+                TPL = lib.GetSongTpl(slot)
+            };
+            return songData;
+        }
+
+        private static ModuleData[] ReadModuleDataArray(ISunVoxLib lib, int slot)
+        {
+            var moduleCount = lib.GetUpperModuleCount(slot);
+            var modules = new List<ModuleData>(moduleCount);
+
+            for (int i = 0; i < moduleCount; i++)
+            {
+                if (lib.GetModuleExists(slot, i))
+                {
+                    var m = ModuleData.ReadModuleDataInternal(lib, slot, i);
+                    modules.Add(m);
+                }
+            }
+            return modules.ToArray();
+        }
+
+        private static PatternData[] ReadPatternDataArray(ISunVoxLib lib, int slot)
+        {
+            var patternCount = lib.GetUpperPatternCount(slot);
+            var patterns = new List<PatternData>(patternCount);
+
+            for (int i = 0; i < patternCount; i++)
+            {
+                if (lib.GetPatternExists(slot, i))
+                {
+                    var p = PatternData.ReadPatternDataInternal(lib, slot, i);
+                    patterns.Add(p);
+                }
+            }
+            return patterns.ToArray();
+        }
+
         public static SongData DeepCopy(IReadOnlySongData original)
         {
             return new SongData()
@@ -44,84 +128,6 @@ namespace SunSharp.DerivedData
                 HasDynamicTempo = original.HasDynamicTempo,
                 Modules = original.Modules.Select(m => ModuleData.DeepCopy(m)).ToArray(),
                 Patterns = original.Patterns.Select(p => PatternData.DeepCopy(p)).ToArray()
-            };
-        }
-    }
-
-    public class ModuleData : IReadOnlyModuleData
-    {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public (int X, int Y) Position { get; set; }
-        public (int finetune, int relativeNote) Finetune { get; set; }
-        public bool Solo { get; set; }
-        public bool Mute { get; set; }
-        public bool Bypass { get; set; }
-        public (int R, int G, int B) Color { get; set; }
-        public ICollection<(string name, int value)> Controllers { get; set; }
-        public ICollection<int> Inputs { get; set; }
-        public ICollection<int> Outputs { get; set; }
-
-        IReadOnlyCollection<(string name, int value)> IReadOnlyModuleData.Controllers => Controllers.AsReadonlyOrGetWrapper();
-        IReadOnlyCollection<int> IReadOnlyModuleData.Inputs => Inputs.AsReadonlyOrGetWrapper();
-        IReadOnlyCollection<int> IReadOnlyModuleData.Outputs => Outputs.AsReadonlyOrGetWrapper();
-
-        public ModuleData()
-        {
-        }
-
-        public static ModuleData DeepCopy(IReadOnlyModuleData data)
-        {
-            return new ModuleData
-            {
-                Id = data.Id,
-                Name = data.Name,
-                Position = data.Position,
-                Finetune = data.Finetune,
-                Solo = data.Solo,
-                Mute = data.Mute,
-                Bypass = data.Bypass,
-                Color = data.Color,
-                Controllers = data.Controllers.Select(c => (c.name, c.value)).ToArray(),
-                Inputs = data.Inputs.Select(i => i).ToArray(),
-                Outputs = data.Outputs.Select(o => o).ToArray()
-            };
-        }
-    }
-
-    public class PatternData : IReadOnlyPatternData
-    {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public (int X, int Y) Position { get; set; }
-        public int Lines { get; set; }
-        public int Tracks { get; set; }
-        public bool IsMuted { get; set; }
-        public bool IsLinear { get; set; }
-        public bool IsDestructive { get; set; }
-        public bool HasDynamicTempo { get; set; }
-        public ICollection<ReadOnlyEvent> Data { get; set; }
-
-        IReadOnlyCollection<ReadOnlyEvent> IReadOnlyPatternData.Data => Data.AsReadonlyOrGetWrapper();
-
-        public PatternData()
-        {
-        }
-
-        public static PatternData DeepCopy(IReadOnlyPatternData data)
-        {
-            return new PatternData()
-            {
-                Id = data.Id,
-                Name = data.Name,
-                Position = data.Position,
-                Lines = data.Lines,
-                Tracks = data.Tracks,
-                IsMuted = data.IsMuted,
-                IsLinear = data.IsLinear,
-                IsDestructive = data.IsDestructive,
-                HasDynamicTempo = data.HasDynamicTempo,
-                Data = data.Data.Select(e => e).ToArray()
             };
         }
     }

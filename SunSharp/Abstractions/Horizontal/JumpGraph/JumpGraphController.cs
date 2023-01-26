@@ -1,8 +1,8 @@
 ﻿using SunSharp.ObjectWrapper;
-using System;
-using System.Linq;
 using SunSharp.ThinWrapper;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace SunSharp.Abstractions.Horizontal.JumpGraph
 {
