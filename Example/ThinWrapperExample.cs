@@ -39,7 +39,7 @@ namespace Examples
             Console.WriteLine("Loading a song");
             lib.OpenSlot(0);
             lib.LockSlot(0);
-            lib.Load(0, "example.sunvox");
+            lib.Load(0, "ExampleProjects/ths_lick.sunvox");
             Console.WriteLine($"Loaded song: {lib.GetSongName(0)}");
 
             ListModules(lib);

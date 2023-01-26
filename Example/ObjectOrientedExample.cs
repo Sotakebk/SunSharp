@@ -32,7 +32,7 @@ namespace Examples
             Console.WriteLine("Loading a song");
             var slot = sv.Slots[0];
             slot.Open();
-            slot.Load("example.sunvox");
+            slot.Load(@"ExampleProjects/ths_lick.sunvox");
             Console.WriteLine($"Loaded song: {slot.GetSongName()}");
             ListPatterns(slot);
             ListModules(slot);

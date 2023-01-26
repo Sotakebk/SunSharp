@@ -51,7 +51,8 @@
         public static bool IsNonLinear(this Effect effect)
         {
             return effect == Effect.Jump
-                || effect == Effect.SetJumpMode;
+                || effect == Effect.SetJumpMode
+                || effect == Effect.StopPlaying;
         }
 
         public static bool IsDestructive(this Effect effect)

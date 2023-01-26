@@ -6,6 +6,7 @@
         {
             {1, ("Thin wrapper example", ThinWrapperExample.RunExample) },
             {2, ("Object oriented example", ObjectOrientedExample.RunExample) },
+            {3, ("Jump graph example", JumpGraphExample.RunExample) }
         };
 
         private static void Main(string[] args)
