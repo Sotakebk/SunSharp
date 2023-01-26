@@ -1,6 +1,5 @@
 ﻿using SunSharp.ThinWrapper;
 using System;
-using System.Threading;
 using static SunSharp.ThinWrapper.SunVoxHelper;
 
 namespace SunSharp.ObjectWrapper
@@ -14,7 +13,6 @@ namespace SunSharp.ObjectWrapper
         private readonly VirtualPattern _virtualPattern;
         private readonly Timeline _timeline;
         private readonly Synthesizer _synthesizer;
-        private readonly object _lock;
 
         public int Id => _id;
         public VirtualPattern VirtualPattern => _virtualPattern;
@@ -30,7 +28,6 @@ namespace SunSharp.ObjectWrapper
             _slots = slots;
             _sunVox = sunVox;
             _lib = sunVox.Library;
-            _lock = new object();
             _virtualPattern = new VirtualPattern(this);
             _timeline = new Timeline(this);
             _synthesizer = new Synthesizer(this);
@@ -40,44 +37,18 @@ namespace SunSharp.ObjectWrapper
 
         public void RunInLock(Action action)
         {
-            bool lockWasTaken = false;
-            var temp = _lock;
-            try
-            {
-                Monitor.Enter(temp, ref lockWasTaken);
-                if (lockWasTaken)
-                    Lock();
-                action();
-            }
-            finally
-            {
-                if (lockWasTaken)
-                {
-                    Unlock();
-                    Monitor.Exit(temp);
-                }
-            }
+            if (!IsOpen)
+                throw new InvalidOperationException("Slot is closed.");
+
+            _lib.RunInLock(_id, action);
         }
 
         public T RunInLock<T>(Func<T> function)
         {
-            bool lockWasTaken = false;
-            var temp = _lock;
-            try
-            {
-                Monitor.Enter(temp, ref lockWasTaken);
-                if (lockWasTaken)
-                    Lock();
-                return function();
-            }
-            finally
-            {
-                if (lockWasTaken)
-                {
-                    Unlock();
-                    Monitor.Exit(temp);
-                }
-            }
+            if (!IsOpen)
+                throw new InvalidOperationException("Slot is closed.");
+
+            return _lib.RunInLock(_id, function);
         }
 
         protected void Lock() => _lib.LockSlot(_id);
@@ -95,8 +66,8 @@ namespace SunSharp.ObjectWrapper
                 if (!IsOpen)
                 {
                     _lib.OpenSlot(Id);
-                    RunInLock(() => _virtualPattern.ResetEventTiming());
                     IsOpen = true;
+                    RunInLock(() => _virtualPattern.ResetEventTiming());
                 }
             });
         }
@@ -108,6 +79,7 @@ namespace SunSharp.ObjectWrapper
                 if (IsOpen)
                 {
                     IsOpen = false;
+                    _lib.CloseSlot(_id);
                 }
             });
         }

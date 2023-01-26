@@ -454,6 +454,38 @@ namespace SunSharp.ThinWrapper
                 throw new SunVoxException(ret, nameof(lib.sv_unlock_slot));
         }
 
+        public static void RunInLock(this ISunVoxLib lib, int slot, Action action)
+        {
+            bool entered = false;
+            try
+            {
+                lib.LockSlot(slot);
+                entered = true;
+                action();
+            }
+            finally
+            {
+                if (entered)
+                    lib.UnlockSlot(slot);
+            }
+        }
+
+        public static T RunInLock<T>(this ISunVoxLib lib, int slot, Func<T> func)
+        {
+            bool entered = false;
+            try
+            {
+                lib.LockSlot(slot);
+                entered = true;
+                return func();
+            }
+            finally
+            {
+                if (entered)
+                    lib.UnlockSlot(slot);
+            }
+        }
+
         public static void Pause(this ISunVoxLib lib, int slot)
         {
             var ret = lib.sv_pause(slot);

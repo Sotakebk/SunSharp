@@ -9,23 +9,12 @@ namespace SunSharp.DerivedData
     {
         public static SongData ReadSongData(ISunVoxLib lib, int slotId)
         {
-            try
-            {
-                lib.LockSlot(slotId);
-                return ReadSongDataInternal(lib, slotId);
-            }
-            finally
-            {
-                lib.UnlockSlot(slotId);
-            }
+            return lib.RunInLock(slotId, () => ReadSongDataInternal(lib, slotId));
         }
 
         public static SongData ReadSongData(Slot slot)
         {
-            return slot.RunInLock(() =>
-            {
-                return ReadSongDataInternal(slot.Library, slot.Id);
-            });
+            return slot.RunInLock(() => ReadSongDataInternal(slot.Library, slot.Id));
         }
 
         private static SongData ReadSongDataInternal(ISunVoxLib lib, int slot)

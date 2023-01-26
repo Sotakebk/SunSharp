@@ -144,7 +144,7 @@ namespace SunSharp.Redistribution
             lock (_lock)
             {
                 if (LoadedLibraryHandle == IntPtr.Zero)
-                    throw new Exception();
+                    throw new InvalidOperationException("Library is not loaded yet.");
 
                 if (proxyClass == null)
                 {
@@ -160,8 +160,6 @@ namespace SunSharp.Redistribution
             {
                 if (LoadedLibraryHandle != IntPtr.Zero)
                     UnloadLibrary(LoadedLibraryHandle);
-                else
-                    throw new Exception();
             }
         }
 

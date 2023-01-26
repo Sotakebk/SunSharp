@@ -2,7 +2,7 @@
 using SunSharp.Abstractions.Horizontal.JumpGraph;
 using SunSharp.ObjectWrapper;
 
-namespace Examples
+namespace Examples.ExampleCode
 {
     internal static class JumpGraphExample
     {

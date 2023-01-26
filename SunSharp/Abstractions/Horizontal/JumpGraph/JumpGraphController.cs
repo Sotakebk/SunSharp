@@ -8,7 +8,6 @@ namespace SunSharp.Abstractions.Horizontal.JumpGraph
 {
     public class JumpGraphController
     {
-        protected LockWrapper _lockWrapper;
         protected JumpGraph _jumpGraph;
         protected ISunVoxLib _lib;
         protected int _slotId;
@@ -25,21 +24,17 @@ namespace SunSharp.Abstractions.Horizontal.JumpGraph
             _slotId = slotId;
         }
 
-        public JumpGraphController(Slot slot, JumpGraph graph) : this(new LockWrapper(slot), graph)
+        public JumpGraphController(Slot slot, JumpGraph graph)
         {
             _lib = slot.Library;
             _slotId = slot.Id;
+            _jumpGraph = graph;
         }
 
-        public JumpGraphController(ISunVoxLib lib, int slotId, JumpGraph graph) : this(new LockWrapper(lib, slotId), graph)
+        public JumpGraphController(ISunVoxLib lib, int slotId, JumpGraph graph)
         {
             _lib = lib;
             _slotId = slotId;
-        }
-
-        protected JumpGraphController(LockWrapper lockWrapper, JumpGraph graph)
-        {
-            _lockWrapper = lockWrapper;
             _jumpGraph = graph;
         }
 
@@ -82,7 +77,7 @@ namespace SunSharp.Abstractions.Horizontal.JumpGraph
         public JumpGraphState GetCurrentState()
         {
             var position = _lib.GetCurrentLine(_slotId);
-            return _lockWrapper.RunInLock(() =>
+            return _lib.RunInLock(_slotId, () =>
             {
                 return _jumpGraph.States.FirstOrDefault(s => s.FirstLine <= position && s.LastLine >= position);
             });
@@ -90,7 +85,7 @@ namespace SunSharp.Abstractions.Horizontal.JumpGraph
 
         public void SetTransitionEnabled(JumpGraphTransition transition, bool enabled)
         {
-            _lockWrapper.RunInLock(() =>
+            _lib.RunInLock(_slotId, () =>
             {
                 foreach (var i in transition.PatternIds)
                     _lib.PatternMute(_slotId, i, enabled);
@@ -106,7 +101,7 @@ namespace SunSharp.Abstractions.Horizontal.JumpGraph
             {
                 targetState = startingState;
             }
-            _lockWrapper.RunInLock(() =>
+            _lib.RunInLock(_slotId, () =>
             {
                 DirectGraphToState(targetState, targetType);
                 _lib.SetAutostop(_slotId, true);
@@ -173,7 +168,7 @@ namespace SunSharp.Abstractions.Horizontal.JumpGraph
                 newStates.Clear();
             }
 
-            _lockWrapper.RunInLock(() =>
+            _lib.RunInLock(_slotId, () =>
             {
                 foreach (var transition in _jumpGraph.Transitions)
                 {

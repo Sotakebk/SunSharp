@@ -2,7 +2,7 @@
 using SunSharp.ThinWrapper;
 using static SunSharp.ThinWrapper.SunVoxHelper;
 
-namespace Examples
+namespace Examples.ExampleCode
 {
     internal static class ThinWrapperExample
     {

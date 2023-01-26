@@ -1,7 +1,7 @@
 ﻿using SunSharp;
 using SunSharp.ObjectWrapper;
 
-namespace Examples
+namespace Examples.ExampleCode
 {
     internal static class ObjectOrientedExample
     {
@@ -32,7 +32,7 @@ namespace Examples
             Console.WriteLine("Loading a song");
             var slot = sv.Slots[0];
             slot.Open();
-            slot.Load(@"ExampleProjects/ths_lick.sunvox");
+            slot.Load(@"ExampleProjects/the_lick.sunvox");
             Console.WriteLine($"Loaded song: {slot.GetSongName()}");
             ListPatterns(slot);
             ListModules(slot);
@@ -46,7 +46,7 @@ namespace Examples
             slot.Rewind(0);
             var l = slot.GetCurrentLine();
             slot.PlayFromBeginning();
-            while (slot.IsPlaying())
+            do
             {
                 var nl = slot.GetCurrentLine();
                 if (nl != l)
@@ -54,8 +54,8 @@ namespace Examples
                     l = nl;
                     Console.WriteLine($"Current line: {l}");
                 }
-                Thread.Sleep(10);
-            }
+                Thread.Sleep(50);
+            } while (l != slot.GetSongLengthInLines() - 1);
         }
 
         private static void ListModules(Slot slot)

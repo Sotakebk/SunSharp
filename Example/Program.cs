@@ -1,4 +1,6 @@
-﻿namespace Examples
+﻿using Examples.ExampleCode;
+
+namespace Examples
 {
     internal static partial class Program
     {
@@ -6,7 +8,8 @@
         {
             {1, ("Thin wrapper example", ThinWrapperExample.RunExample) },
             {2, ("Object oriented example", ObjectOrientedExample.RunExample) },
-            {3, ("Jump graph example", JumpGraphExample.RunExample) }
+            {3, ("Jump graph example", JumpGraphExample.RunExample) },
+            {4, ("Lock test", LockCodeTest.RunExample) }
         };
 
         private static void Main(string[] args)
