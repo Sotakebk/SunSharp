@@ -1,0 +1,150 @@
+﻿<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Linq" #>
+<#@ include file="../_ModuleType.t4" #>
+<#+
+    // Defining data types
+    class ModuleDescriptions
+    {
+        public string Name { get; set; }
+        public ModuleType ModuleType { get; set; }
+        public ICollection<ControllerDescription> Controllers { get; set; }
+        public ICollection<EnumDescription> Enums { get; set; }
+        public ICollection<CurveDescription> Curves { get; set; }
+    }
+
+    class CurveDescription
+    {
+        public int Id { get; set; }
+        public float MinValue { get; set; }
+        public float MaxValue { get; set; }
+        public string Name { get; set; }
+        public int Size { get; set; }
+
+        public CurveDescription(int id, string name, float min, float max, int size)
+        {
+            Id = id;
+            Name = name;
+            MinValue = min;
+            MaxValue = max;
+            Size = size;
+        }
+    }
+
+    class EnumDescription
+    {
+        public string Name { get; set; }
+        public ICollection<(int value, string name)> Values { get; set; }
+
+        public EnumDescription(string name, params (int, string)[] values)
+        {
+            Name = name;
+            Values = values;
+        }
+    }
+
+    abstract class ControllerDescription
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+
+        public ControllerDescription(int id, string name, string description)
+        {
+            Id = id;
+            Name = name;
+            Description = description;
+        }
+    }
+
+    class ValueControllerDescription : ControllerDescription
+    {
+        public int MinValue { get; set; }
+        public int MaxValue { get; set; }
+
+        public ValueControllerDescription(int id, string name, int min, int max, string description = null) : base(id, name, description)
+        {
+            MinValue = min;
+            MaxValue = max;
+        }
+    }
+
+    class EnumControllerDescription : ControllerDescription
+    {
+        public string EnumTypeName { get; set; }
+
+        public EnumControllerDescription(int id, string name, string enumTypeName, string description = null) : base(id, name, description)
+        {
+            EnumTypeName = enumTypeName;
+        }
+    }
+
+    class DataList
+    {
+        public static ICollection<ModuleDescriptions> GetModuleSpecificData()
+        {
+            var value = new List<ModuleDescriptions>()
+            {
+                CreateDescriptionADSR(),
+            };
+
+            foreach(var moduleDescription in value)
+            {
+                foreach(var controllerDescription in moduleDescription.Controllers)
+                {
+                    if(controllerDescription is EnumControllerDescription ed)
+                    {
+                        if(!moduleDescription.Enums.Any(e => e.Name == ed.EnumTypeName))
+                            throw new System.Exception($"{moduleDescription.Name} has no enum named {ed.EnumTypeName}");
+                    }
+                }
+            }
+
+            return value;
+        }
+
+        private static ModuleDescriptions CreateDescriptionADSR()
+        {
+            var controllers = new List<ControllerDescription>()
+            {
+                new ValueControllerDescription(0x1, "Volume", 0, 32768),
+                new ValueControllerDescription(0x2, "Attack", 0, 10000),
+                new ValueControllerDescription(0x3, "Decay", 0, 10000),
+                new ValueControllerDescription(0x4, "SustainLevel", 0, 32768),
+                new ValueControllerDescription(0x5, "Release", 0, 10000),
+                new EnumControllerDescription(0x6, "AttackCurve", "CurveType"),
+                new EnumControllerDescription(0x7, "DecayCurve", "CurveType"),
+                new EnumControllerDescription(0x8, "ReleaseCurve", "CurveType"),
+                new EnumControllerDescription(0x9, "Sustain", "SustainMode"),
+                new EnumControllerDescription(0xA, "SustainPedal", "Toggle"),
+                new EnumControllerDescription(0xB, "State", "Active"),
+                new EnumControllerDescription(0xC, "OnNoteON", "OnNoteOnBehaviour"),
+                new EnumControllerDescription(0xD, "OnNoteOFF", "OnNoteOffBehaviour"),
+                new EnumControllerDescription(0xD, "Mode", "Mode"),
+                new EnumControllerDescription(0xD, "SmoothTransitions", "SmoothTransitionMode"),
+            };
+            var enums = new List<EnumDescription>()
+            {
+                new EnumDescription("CurveType", (0,"Linear"), (1,"Exp1"), (2,"Exp2"),(3,"Nexp1"), (4,"Nexp2"), (5,"Sin")),
+                new EnumDescription("SustainMode", (0, "Off"), (1,"On"), (2,"Repeat")),
+                new EnumDescription("Toggle", (0, "Off"), (1,"On")),
+                new EnumDescription("Active", (0, "Stop"), (1, "Start")),
+                new EnumDescription("OnNoteOnBehaviour", (0, "DoNothing"), (1, "StartOnFirstNote"), (2, "Start")),
+                new EnumDescription("OnNoteOffBehaviour", (0, "DoNothing"), (1, "StopOnLastNote"), (2, "Stop")),
+                new EnumDescription("Mode", (0, "Generator"), (1, "AmplitudeModulatorMono"), (2, "AmplitudeModulatorStereo")),
+                new EnumDescription("SmoothTransitionMode", (0, "Off"), (1, "RestartAndVolumeChange"), (2, "RestartAndVolumeChangeSmooth"), (3, "VolumeChange")),
+            };
+
+            var curves = new List<CurveDescription>() { };
+
+            return new ModuleDescriptions()
+            {
+                Name = "ADSR",
+                ModuleType = ModuleType.ADSR,
+                Controllers = controllers,
+                Enums = enums,
+                Curves = curves
+            };
+        }
+    }
+#>

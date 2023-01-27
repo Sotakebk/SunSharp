@@ -4,4 +4,56 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Include="ObjectWrapper\Modules\SpecificModules.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>SpecificModules.tt</DependentUpon>
+    </None>
+    <None Include="ObjectWrapper\ModuleType.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ModuleType.tt</DependentUpon>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="ObjectWrapper\Modules\_ModuleDefinitions.t4">
+      <Generator></Generator>
+    </None>
+    <None Update="ObjectWrapper\Modules\SpecificModules.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>SpecificModules.cs</LastGenOutput>
+    </None>
+    <None Update="ObjectWrapper\ModuleType.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>ModuleType.cs</LastGenOutput>
+    </None>
+    <None Update="ObjectWrapper\_ModuleType.t4">
+      <Generator></Generator>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="ObjectWrapper\Modules\ModuleDefinitions.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ModuleDefinitions.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ObjectWrapper\Modules\SpecificModules.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>SpecificModules.tt</DependentUpon>
+    </Compile>
+    <Compile Update="ObjectWrapper\ModuleType.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ModuleType.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
 </Project>

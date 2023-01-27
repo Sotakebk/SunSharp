@@ -1,64 +1,8 @@
 ﻿using SunSharp.ThinWrapper;
 using System.Linq;
-using static SunSharp.ThinWrapper.SunVoxHelper;
 
 namespace SunSharp.ObjectWrapper
 {
-    public enum ModuleType
-    {
-        Unknown,
-
-        // Synths
-
-        Analog_generator,
-        DrumSynth,
-        FM,
-        FMX,
-        Generator,
-        Input,
-        Kicker,
-        Vorbis_player,
-        Sampler,
-        SpectraVoice,
-
-        // Effects
-
-        Amplifier,
-        Compressor,
-        DC_Blocker,
-        Delay,
-        Distortion,
-        Echo,
-        EQ,
-        FFT,
-        Filter,
-        Filter_Pro,
-        Flanger,
-        LFO,
-        Loop,
-        Modulator,
-        Pitch_shifter,
-        Reverb,
-        Vocal_filter,
-        Vibrato,
-        WaveShaper,
-
-        // Misc
-
-        ADSR,
-        Ctl2Note,
-        Feedback,
-        Glide,
-        GPIO,
-        MetaModule,
-        MultiCtl,
-        MultiSynth,
-        Pitch2Ctl,
-        Pitch_Detector,
-        Sound2Ctl,
-        Velocity2Ctl,
-    }
-
     public struct Module
     {
         private readonly ISunVoxLib _lib;

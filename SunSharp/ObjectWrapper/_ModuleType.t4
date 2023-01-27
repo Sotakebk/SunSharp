@@ -1,0 +1,56 @@
+﻿<#+
+    enum ModuleType : int
+    {
+        Unknown = -1,
+
+        // Synths
+
+        AnalogGenerator = 0x1,
+        DrumSynth = 0x2,
+        FM = 0x3,
+        FMX = 0x4,
+        Generator = 0x5,
+        Input = 0x6,
+        Kicker = 0x7,
+        VorbisPlayer = 0x8,
+        Sampler = 0x9,
+        SpectraVoice = 0xA,
+
+        // Effects
+
+        Amplifier = 0x40,
+        Compressor = 0x41,
+        DcBlocker = 0x42,
+        Delay = 0x43,
+        Distortion = 0x44,
+        Echo = 0x45,
+        EQ = 0x46,
+        FFT = 0x47,
+        Filter = 0x48,
+        FilterPro = 0x49,
+        Flanger = 0x4A,
+        LFO = 0x4B,
+        Loop = 0x4C,
+        Modulator = 0x4D,
+        PitchShifter = 0x4E,
+        Reverb = 0x4F,
+        VocalFilter = 0x50,
+        Vibrato = 0x51,
+        WaveShaper = 0x52,
+
+        // Misc
+
+        ADSR = 0x80,
+        ControlToNote = 0x81,
+        Feedback = 0x82,
+        Glide = 0x83,
+        GPIO = 0x84,
+        MetaModule = 0x85,
+        MultiControl = 0x86,
+        MultiSynth = 0x87,
+        PitchToControl = 0x88,
+        PitchDetector = 0x89,
+        SoundToControl = 0x8A,
+        VelocityToControl = 0x8B,
+    }
+#>

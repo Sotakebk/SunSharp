@@ -1,6 +1,5 @@
 ﻿using SunSharp.ThinWrapper;
 using System;
-using static SunSharp.ThinWrapper.SunVoxHelper;
 
 namespace SunSharp.ObjectWrapper
 {

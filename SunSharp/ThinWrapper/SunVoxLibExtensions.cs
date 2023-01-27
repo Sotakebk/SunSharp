@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 
 namespace SunSharp.ThinWrapper
 {
-    public static class SunVoxHelper
+    public static class SunVoxLibExtensions
     {
         #region helper helpers
 

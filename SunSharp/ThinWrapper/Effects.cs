@@ -46,7 +46,7 @@
         WriteRandomValue = 0x3D,
     }
 
-    public static class EffectHelper
+    public static class EffectExtensions
     {
         public static bool IsNonLinear(this Effect effect)
         {

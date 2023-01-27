@@ -1,0 +1,21 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ include file="_ModuleType.t4"#>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".cs" #>
+namespace SunSharp.ObjectWrapper
+{
+    public enum ModuleType
+    {
+<#
+var values = new List<ModuleType>();
+values.AddRange((ModuleType[])Enum.GetValues(typeof(ModuleType)));
+foreach(var value in values) {
+#>
+        <#=value.ToString()#> = <#=(int)value#>,
+<#
+}
+#>
+    }
+}

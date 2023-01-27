@@ -1,7 +1,6 @@
 ﻿using SunSharp.ThinWrapper;
 using System.Collections;
 using System.Collections.Generic;
-using static SunSharp.ThinWrapper.SunVoxHelper;
 
 namespace SunSharp.ObjectWrapper
 {
