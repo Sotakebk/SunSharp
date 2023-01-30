@@ -116,7 +116,7 @@ namespace SunSharp.ObjectWrapper
         public void SetControllerValue(int controllerId, float value, int min, int max)
         {
             var svvalue = Map(value, min, max, 0, 0x8000);
-            SetControllerValue(controllerId, (short)svvalue);
+            SetControllerValue(controllerId, (ushort)svvalue);
         }
 
         private static float Map(float value, float min_in, float max_in, float min_out, float max_out)
@@ -124,7 +124,12 @@ namespace SunSharp.ObjectWrapper
             return min_out + (max_out - min_out) / (max_in - min_in) * (value - min_in);
         }
 
-        public void SetControllerValue(int controllerId, short value)
+        /// <summary>
+        /// Set controller value (counting up from zero). Value will be set as fast as possible.
+        /// </summary>
+        /// <param name="controllerId">Controller number (counted from zero, one less than in SunVox UI).</param>
+        /// <param name="value">Value to be applied, in XXYY column value format.</param>
+        public void SetControllerValue(int controllerId, ushort value)
         {
             var @event = new Event()
             {

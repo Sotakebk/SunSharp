@@ -13,7 +13,7 @@ namespace SunSharp.ThinWrapper
         [FieldOffset(4)] private readonly ushort _ccee;
         [FieldOffset(4)] private readonly byte _ee;
         [FieldOffset(5)] private readonly byte _cc;
-        [FieldOffset(6)] private readonly short _xxyy;
+        [FieldOffset(6)] private readonly ushort _xxyy;
         [FieldOffset(6)] private readonly byte _yy;
         [FieldOffset(7)] private readonly byte _xx;
 
@@ -26,7 +26,7 @@ namespace SunSharp.ThinWrapper
         public byte CC => _cc;
         public byte EE => _ee;
         public Effect Effect => (Effect)EE;
-        public short XXYY => _xxyy;
+        public ushort XXYY => _xxyy;
         public byte YY => _yy;
         public byte XX => _xx;
 
@@ -39,7 +39,7 @@ namespace SunSharp.ThinWrapper
         {
         }
 
-        public ReadOnlyEvent(byte nn, byte vv, ushort mm, ushort ccee, short xxyy) : this()
+        public ReadOnlyEvent(byte nn, byte vv, ushort mm, ushort ccee, ushort xxyy) : this()
         {
             _nn = nn;
             _vv = vv;
@@ -48,7 +48,7 @@ namespace SunSharp.ThinWrapper
             _xxyy = xxyy;
         }
 
-        public ReadOnlyEvent(Note note, byte velocity, ushort module, byte controller, Effect effect, short xxyy) : this()
+        public ReadOnlyEvent(Note note, byte velocity, ushort module, byte controller, Effect effect, ushort xxyy) : this()
         {
             _nn = (byte)note;
             _vv = velocity;
@@ -98,7 +98,7 @@ namespace SunSharp.ThinWrapper
         [FieldOffset(4)] private ushort _ccee;
         [FieldOffset(4)] private byte _ee;
         [FieldOffset(5)] private byte _cc;
-        [FieldOffset(6)] private short _xxyy;
+        [FieldOffset(6)] private ushort _xxyy;
         [FieldOffset(6)] private byte _yy;
         [FieldOffset(7)] private byte _xx;
 
@@ -111,7 +111,7 @@ namespace SunSharp.ThinWrapper
         public byte CC { get => _cc; set => _cc = value; }
         public byte EE { get => _ee; set => _ee = value; }
         public Effect Effect { get => (Effect)_ee; set => _ee = (byte)value; }
-        public short XXYY { get => _xxyy; set => _xxyy = value; }
+        public ushort XXYY { get => _xxyy; set => _xxyy = value; }
         public byte YY { get => _yy; set => _yy = value; }
         public byte XX { get => _xx; set => _xx = value; }
 
@@ -127,13 +127,13 @@ namespace SunSharp.ThinWrapper
             _mm = module;
         }
 
-        public Event(Effect effect, short xxyy) : this()
+        public Event(Effect effect, ushort xxyy) : this()
         {
             _ee = (byte)effect;
             _xxyy = xxyy;
         }
 
-        public Event(byte nn, byte vv, ushort mm, ushort ccee, short xxyy) : this()
+        public Event(byte nn, byte vv, ushort mm, ushort ccee, ushort xxyy) : this()
         {
             _nn = nn;
             _vv = vv;
@@ -142,7 +142,7 @@ namespace SunSharp.ThinWrapper
             _xxyy = xxyy;
         }
 
-        public Event(Note note, byte velocity, ushort module, byte controller, Effect effect, short xxyy) : this()
+        public Event(Note note, byte velocity, ushort module, byte controller, Effect effect, ushort xxyy) : this()
         {
             _nn = (byte)note;
             _vv = velocity;

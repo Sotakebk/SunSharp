@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SunSharp.Redistribution\SunSharp.Redistribution.csproj" />
+    <ProjectReference Include="..\SunSharp\SunSharp.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="SunVoxProjects\jump_demo.sunvox">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="SunVoxProjects\the_lick.sunvox">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>

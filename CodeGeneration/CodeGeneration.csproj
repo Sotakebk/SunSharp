@@ -4,7 +4,7 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
+    <Nullable>disable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
@@ -13,11 +13,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="ExampleProjects\jump_demo.sunvox">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="ExampleProjects\the_lick.sunvox">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    <None Update="all_modules.sunvox">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
 

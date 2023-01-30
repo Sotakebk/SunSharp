@@ -10,12 +10,14 @@ namespace SunSharp.ObjectWrapper
         private readonly Slot _slot;
         private readonly int _id;
         private int? lastSetTimeStamp = null;
+        private object _lock;
 
         internal VirtualPattern(Slot slot)
         {
             _slot = slot;
             _lib = slot.SunVox.Library;
             _id = slot.Id;
+            _lock = new object();
         }
 
         public uint GetCurrentTick() => _lib.GetTicks();
@@ -24,7 +26,7 @@ namespace SunSharp.ObjectWrapper
 
         public void SendEventImmediately(int track, Event e)
         {
-            _slot.RunInLock(() =>
+            lock (_lock)
             {
                 if (lastSetTimeStamp != null)
                 {
@@ -37,41 +39,41 @@ namespace SunSharp.ObjectWrapper
                 {
                     _lib.SendEvent(_id, track, e);
                 }
-            });
+            }
         }
 
         public void SetEventTiming(int timestamp)
         {
-            _slot.RunInLock(() =>
+            lock (_lock)
             {
                 _lib.SetSendEventTimestamp(_id, false, timestamp);
                 lastSetTimeStamp = timestamp;
-            });
+            }
         }
 
         public void ResetEventTiming()
         {
-            _slot.RunInLock(() =>
+            lock (_lock)
             {
                 _lib.SetSendEventTimestamp(_id, true);
                 lastSetTimeStamp = null;
-            });
+            }
         }
 
         public void SendEvent(int track, Event @event)
         {
-            _slot.RunInLock(() =>
+            lock (_lock)
             {
                 _lib.SendEvent(_id, track, @event);
-            });
+            }
         }
 
         public void SendEvent(int track, int NN = 0, int VV = 0, int MM = 0, int CCEE = 0, int XXYY = 0)
         {
-            _slot.RunInLock(() =>
+            lock (_lock)
             {
                 _lib.SendEvent(_id, track, NN, VV, MM, CCEE, XXYY);
-            });
+            }
         }
     }
 }

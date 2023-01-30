@@ -12,6 +12,7 @@
         VorbisPlayer = 8,
         Sampler = 9,
         SpectraVoice = 10,
+
         Amplifier = 64,
         Compressor = 65,
         DcBlocker = 66,
@@ -31,6 +32,7 @@
         VocalFilter = 80,
         Vibrato = 81,
         WaveShaper = 82,
+
         ADSR = 128,
         ControlToNote = 129,
         Feedback = 130,
@@ -43,6 +45,9 @@
         PitchDetector = 137,
         SoundToControl = 138,
         VelocityToControl = 139,
-        Unknown = -1,
+
+        Output = -1,
+
+        Unknown = 0,
     }
 }

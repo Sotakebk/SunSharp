@@ -1,25 +1,23 @@
 ﻿using SunSharp;
 using SunSharp.ObjectWrapper;
 
-namespace Examples.ExampleCode
+namespace ManualJobs.Tests
 {
-    internal static class ObjectOrientedExample
+    public class ObjectOrientedTest : BaseManualTest
     {
-        public static void RunExample(ISunVoxLib lib)
+        protected override void RunTest(ISunVoxLib lib)
         {
             using (var sv = new SunVox(lib))
-            {
                 DoWork(sv);
-            }
         }
 
-        private static void DoWork(SunVox sv)
+        private void DoWork(SunVox sv)
         {
-            Console.WriteLine("Loading a song");
+            WriteLine("Loading a song");
             var slot = sv.Slots[0];
             slot.Open();
-            slot.Load(@"ExampleProjects/the_lick.sunvox");
-            Console.WriteLine($"Loaded song: {slot.GetSongName()}");
+            slot.Load(Path.Join(Program.SunVoxProjectFolder, "the_lick.sunvox"));
+            WriteLine($"Loaded song: {slot.GetSongName()}");
 
             ListPatterns(slot);
             ListModules(slot);
@@ -27,7 +25,7 @@ namespace Examples.ExampleCode
             slot.Close();
         }
 
-        private static void PlaySong(Slot slot)
+        private void PlaySong(Slot slot)
         {
             int l = int.MinValue + 1;
             slot.RunInLock(() =>
@@ -43,34 +41,32 @@ namespace Examples.ExampleCode
                 if (nl != l)
                 {
                     l = nl;
-                    Console.WriteLine($"Current line: {l}");
+                    WriteLine($"Current line: {l}");
                 }
                 Thread.Sleep(20);
             } while (l != slot.GetSongLengthInLines() - 1 || slot.IsPlaying()); // this is weird and should be unnecessary
         }
 
-        private static void ListModules(Slot slot)
+        private void ListModules(Slot slot)
         {
-            Console.WriteLine("Modules:");
+            WriteLine("Modules:");
             foreach (var module in slot.Synthesizer)
             {
-                Console.WriteLine($"{module.Id}. {module.GetName()}");
+                WriteLine($"{module.Id}. {module.GetName()}");
                 for (int i = 0; i < module.GetControllerCount(); i++)
-                {
-                    Console.WriteLine($"\t{i}. {module.GetControllerName(i)}, v:{module.GetControllerValue(i)}");
-                }
+                    WriteLine($"\t{i}. {module.GetControllerName(i)}, v:{module.GetControllerValue(i)}");
             }
         }
 
-        private static void ListPatterns(Slot slot)
+        private void ListPatterns(Slot slot)
         {
-            Console.WriteLine("Patterns:");
+            WriteLine("Patterns:");
             foreach (var pattern in slot.Timeline)
             {
-                Console.WriteLine($"{pattern.Id}. {pattern.GetName()}");
+                WriteLine($"{pattern.Id}. {pattern.GetName()}");
 
-                Console.WriteLine("Data:");
-                Console.WriteLine(string.Join(" ", Enumerable.Repeat("NNVVMMMMCCEEXXYY", pattern.GetTrackCount())));
+                WriteLine("Data:");
+                WriteLine(string.Join(" ", Enumerable.Repeat("NNVVMMMMCCEEXXYY", pattern.GetTrackCount())));
                 var data = pattern.GetData2D();
                 var length = pattern.GetLength();
                 var tracks = pattern.GetTrackCount();
@@ -78,11 +74,11 @@ namespace Examples.ExampleCode
                 {
                     for (int t = 0; t < tracks; t++)
                     {
-                        Console.Write(data[l, t].ToString());
+                        Write(data[l, t].ToString());
                         if (t < tracks - 1)
-                            Console.Write(" ");
+                            Write(" ");
                     }
-                    Console.Write(Environment.NewLine);
+                    Write(Environment.NewLine);
                 }
             }
         }

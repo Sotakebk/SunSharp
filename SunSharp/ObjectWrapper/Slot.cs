@@ -185,40 +185,34 @@ namespace SunSharp.ObjectWrapper
 
         public void SetSongBpm(int value)
         {
-            var xxyy = (short)Math.Min(Math.Max(0, value), 800);
-            RunInLock(() =>
-            {
-                _virtualPattern.SendEventImmediately(0, new Event(Effect.SetBPM, xxyy));
-            });
+            var xxyy = (ushort)Math.Min(Math.Max(0, value), 800);
+            _virtualPattern.SendEventImmediately(0, new Event(Effect.SetBPM, xxyy));
         }
 
         public int GetSongTpl()
         {
-            return RunInLock(() => _lib.GetSongTpl(_id));
+            return _lib.GetSongTpl(_id);
         }
 
         public void SetSongTpl(int value)
         {
-            var xxyy = (short)Math.Min(Math.Max(1, value), 31);
-            RunInLock(() =>
-            {
-                _virtualPattern.SendEventImmediately(0, new Event(Effect.SetPlayingSpeed, xxyy));
-            });
+            var xxyy = (ushort)Math.Min(Math.Max(1, value), 31);
+            _virtualPattern.SendEventImmediately(0, new Event(Effect.SetPlayingSpeed, xxyy));
         }
 
         public int GetSongLengthInLines()
         {
-            return RunInLock(() => _lib.GetSongLengthLines(_id));
+            return _lib.GetSongLengthLines(_id);
         }
 
         public int GetSongLengthInFrames()
         {
-            return RunInLock(() => _lib.GetSongLengthFrames(_id));
+            return _lib.GetSongLengthFrames(_id);
         }
 
         public string GetSongName()
         {
-            return RunInLock(() => _lib.GetSongName(_id));
+            return _lib.GetSongName(_id);
         }
 
         public uint[] GetTimeMap(int startLine, int length, TimeMapType type)

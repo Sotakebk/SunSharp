@@ -89,14 +89,21 @@ namespace SunSharp.ThinWrapper
 
         #region audio rendering
 
-        private static bool AudioCallbackInternal<T>(this ISunVoxLib lib, T[] outputBuffer, int latency, uint outTime)
+        private static bool AudioCallbackInternal<T>(this ISunVoxLib lib, T[] outputBuffer, Channels channels, int latency, uint outTime)
         {
+            if (channels == Channels.Stereo && (outputBuffer.Length & 1) != 0)
+                throw new ArgumentException("Buffer size is not a multiple of two.");
+
+            int frames = outputBuffer.Length;
+            if (channels == Channels.Stereo)
+                frames /= 2;
+
             var outHandle = GCHandle.Alloc(outputBuffer, GCHandleType.Pinned);
             IntPtr ptr = outHandle.AddrOfPinnedObject();
             int ret;
             try
             {
-                ret = lib.sv_audio_callback(ptr, outputBuffer.Length, latency, outTime);
+                ret = lib.sv_audio_callback(ptr, frames, latency, outTime);
             }
             finally
             {
@@ -108,10 +115,24 @@ namespace SunSharp.ThinWrapper
             return (ret == 1);
         }
 
-        private static bool AudioCallbackInternal<T, V>(this ISunVoxLib lib, T[] outputBuffer, V[] inputBuffer, Channels inputChannels, int latency, uint outTime, int inputType)
+        private static bool AudioCallbackInternal<T, V>(this ISunVoxLib lib, T[] outputBuffer, Channels outputChannels, V[] inputBuffer, Channels inputChannels, int latency, uint outTime, int inputType)
         {
-            if (outputBuffer.Length != inputBuffer.Length)
-                throw new InvalidOperationException($"Input and output buffers are of different size.");
+            if (outputChannels == Channels.Stereo && (outputBuffer.Length & 1) != 0)
+                throw new ArgumentException("Output buffer size is not a multiple of two.");
+
+            if (inputChannels == Channels.Stereo && (inputBuffer.Length & 1) != 0)
+                throw new ArgumentException("Input buffer size is not a multiple of two.");
+
+            int inputFrames = inputBuffer.Length;
+            if (inputChannels == Channels.Stereo)
+                inputFrames /= 2;
+
+            int outputFrmaes = outputBuffer.Length;
+            if (outputChannels == Channels.Stereo)
+                outputFrmaes /= 2;
+
+            if (inputFrames != outputFrmaes)
+                throw new ArgumentException($"Input and output frame count is different (input: {inputFrames} vs {outputFrmaes}).");
 
             var outHandle = GCHandle.Alloc(outputBuffer, GCHandleType.Pinned);
             var inHandle = GCHandle.Alloc(inputBuffer, GCHandleType.Pinned);
@@ -120,7 +141,8 @@ namespace SunSharp.ThinWrapper
             int ret;
             try
             {
-                ret = lib.sv_audio_callback2(outPtr, outputBuffer.Length, latency, outTime, inputType, (int)inputChannels, inPtr);
+                int frames =
+                ret = lib.sv_audio_callback2(outPtr, outputFrmaes, latency, outTime, inputType, (int)inputChannels, inPtr);
             }
             finally
             {
@@ -133,34 +155,34 @@ namespace SunSharp.ThinWrapper
             return (ret == 1);
         }
 
-        public static bool AudioCallback(this ISunVoxLib lib, float[] outputBuffer, int latency, uint outTime)
+        public static bool AudioCallback(this ISunVoxLib lib, float[] outputBuffer, Channels channels, int latency, uint outTime)
         {
-            return AudioCallbackInternal(lib, outputBuffer, latency, outTime);
+            return AudioCallbackInternal(lib, outputBuffer, channels, latency, outTime);
         }
 
-        public static bool AudioCallback(this ISunVoxLib lib, short[] outputBuffer, int latency, uint outTime)
+        public static bool AudioCallback(this ISunVoxLib lib, short[] outputBuffer, Channels channels, int latency, uint outTime)
         {
-            return AudioCallbackInternal(lib, outputBuffer, latency, outTime);
+            return AudioCallbackInternal(lib, outputBuffer, channels, latency, outTime);
         }
 
-        public static bool AudioCallback(this ISunVoxLib lib, float[] outputBuffer, float[] inputBuffer, Channels inputChannels, int latency, uint outTime)
+        public static bool AudioCallback(this ISunVoxLib lib, float[] outputBuffer, Channels outputChannels, float[] inputBuffer, Channels inputChannels, int latency, uint outTime)
         {
-            return AudioCallbackInternal(lib, outputBuffer, inputBuffer, inputChannels, latency, outTime, 1);
+            return AudioCallbackInternal(lib, outputBuffer, outputChannels, inputBuffer, inputChannels, latency, outTime, 1);
         }
 
-        public static bool AudioCallback(this ISunVoxLib lib, float[] outputBuffer, short[] inputBuffer, Channels inputChannels, int latency, uint outTime)
+        public static bool AudioCallback(this ISunVoxLib lib, float[] outputBuffer, Channels outputChannels, short[] inputBuffer, Channels inputChannels, int latency, uint outTime)
         {
-            return AudioCallbackInternal(lib, outputBuffer, inputBuffer, inputChannels, latency, outTime, 0);
+            return AudioCallbackInternal(lib, outputBuffer, outputChannels, inputBuffer, inputChannels, latency, outTime, 0);
         }
 
-        public static bool AudioCallback(this ISunVoxLib lib, short[] outputBuffer, float[] inputBuffer, Channels inputChannels, int latency, uint outTime)
+        public static bool AudioCallback(this ISunVoxLib lib, short[] outputBuffer, Channels outputChannels, float[] inputBuffer, Channels inputChannels, int latency, uint outTime)
         {
-            return AudioCallbackInternal(lib, outputBuffer, inputBuffer, inputChannels, latency, outTime, 1);
+            return AudioCallbackInternal(lib, outputBuffer, outputChannels, inputBuffer, inputChannels, latency, outTime, 1);
         }
 
-        public static bool AudioCallback(this ISunVoxLib lib, short[] outputBuffer, short[] inputBuffer, Channels inputChannels, int latency, uint outTime)
+        public static bool AudioCallback(this ISunVoxLib lib, short[] outputBuffer, Channels outputChannels, short[] inputBuffer, Channels inputChannels, int latency, uint outTime)
         {
-            return AudioCallbackInternal(lib, outputBuffer, inputBuffer, inputChannels, latency, outTime, 0);
+            return AudioCallbackInternal(lib, outputBuffer, outputChannels, inputBuffer, inputChannels, latency, outTime, 0);
         }
 
         #endregion audio rendering

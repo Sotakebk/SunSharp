@@ -12,6 +12,7 @@ namespace SunSharp.ObjectWrapper
         private readonly OutputType? _outputType;
         private readonly Version _version;
         private readonly bool _singleThreaded;
+        private readonly Channels _channels;
 
         public ISunVoxLib Library => _lib;
         public Slots Slots => _slots;
@@ -20,6 +21,7 @@ namespace SunSharp.ObjectWrapper
         public OutputType? OutputType => _outputType;
         public Version Version => _version;
         public int SampleRate => _sampleRate;
+        public Channels Channels => _channels;
 
         /// <summary>
         /// Create an instance of the engine with own audio stream and threading.
@@ -48,6 +50,7 @@ namespace SunSharp.ObjectWrapper
             _sampleRate = _lib.GetSampleRate();
             _singleThreaded = false;
             _outputType = null;
+            _channels = channels;
             _slots = new Slots(this);
         }
 
@@ -84,7 +87,8 @@ namespace SunSharp.ObjectWrapper
             _version = _lib.Init(sampleRate: sampleRate, channels: channels, flags: flags);
             _sampleRate = _lib.GetSampleRate();
             _singleThreaded = false;
-            _outputType = null;
+            _channels = channels;
+            _outputType = outputType;
             _slots = new Slots(this);
         }
 
@@ -127,7 +131,7 @@ namespace SunSharp.ObjectWrapper
             if (_outputType == null)
                 throw new System.InvalidOperationException("SunVox was not initialized in user callback mode.");
 
-            if ((_outputType == ObjectWrapper.OutputType.Float32) == @float)
+            if ((_outputType == ObjectWrapper.OutputType.Float32) == !@float)
             {
                 var expected = @float ? ObjectWrapper.OutputType.Float32 : ObjectWrapper.OutputType.Int16;
                 var msg = $"SunVox was initialized with output type \"{OutputType}\", but callback was called expecting output type \"{expected}\"";
@@ -138,39 +142,43 @@ namespace SunSharp.ObjectWrapper
         public bool AudioCallback(float[] outputBuffer, int latency, uint outTime)
         {
             AudioGuard(true);
-            return _lib.AudioCallback(outputBuffer, latency, outTime);
+            return _lib.AudioCallback(outputBuffer, _channels, latency, outTime);
         }
 
         public bool AudioCallback(short[] outputBuffer, int latency, uint outTime)
         {
             AudioGuard(false);
-            return _lib.AudioCallback(outputBuffer, latency, outTime);
+            return _lib.AudioCallback(outputBuffer, _channels, latency, outTime);
         }
 
         public bool AudioCallback(float[] outputBuffer, float[] inputBuffer, Channels inputChannels, int latency, uint outTime)
         {
             AudioGuard(true);
-            return _lib.AudioCallback(outputBuffer, inputBuffer, inputChannels, latency, outTime);
+            return _lib.AudioCallback(outputBuffer, _channels, inputBuffer, inputChannels, latency, outTime);
         }
 
         public bool AudioCallback(float[] outputBuffer, short[] inputBuffer, Channels inputChannels, int latency, uint outTime)
         {
             AudioGuard(true);
-            return _lib.AudioCallback(outputBuffer, inputBuffer, inputChannels, latency, outTime);
+            return _lib.AudioCallback(outputBuffer, _channels, inputBuffer, inputChannels, latency, outTime);
         }
 
         public bool AudioCallback(short[] outputBuffer, float[] inputBuffer, Channels inputChannels, int latency, uint outTime)
         {
             AudioGuard(false);
-            return _lib.AudioCallback(outputBuffer, inputBuffer, inputChannels, latency, outTime);
+            return _lib.AudioCallback(outputBuffer, _channels, inputBuffer, inputChannels, latency, outTime);
         }
 
         public bool AudioCallback(short[] outputBuffer, short[] inputBuffer, Channels inputChannels, int latency, uint outTime)
         {
             AudioGuard(false);
-            return _lib.AudioCallback(outputBuffer, inputBuffer, inputChannels, latency, outTime);
+            return _lib.AudioCallback(outputBuffer, _channels, inputBuffer, inputChannels, latency, outTime);
         }
 
         #endregion audio I/O
+
+        public uint GetTicks() => _lib.GetTicks();
+
+        public uint GetTicksPerSecond() => _lib.GetTicksPerSecond();
     }
 }
