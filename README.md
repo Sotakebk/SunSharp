@@ -2,8 +2,8 @@
 A .NET SunVox Library wrapper written in C#. The library contains a thin wrapper, allowing for comfortably making calls with C#-style methods and objects, as well as an intuitive object-oriented wrapper, managing a few more things for the user.
 ## How to install
 Currently, two packages are available:
-* [SunSharp](https://www.nuget.org/packages/Sotakebk.SunSharp/) ![Nuget](https://img.shields.io/nuget/v/Sotakebk.SunSharp?label=SunSharp)
-* [SunSharp.Redistribution](https://www.nuget.org/packages/Sotakebk.SunSharp.Redistribution/) ![Nuget](https://img.shields.io/nuget/v/Sotakebk.SunSharp.Redistribution?label=SunSharp.Redistribution)
+* [SunSharp](https://www.nuget.org/packages/Sotakebk.SunSharp/) ![Nuget](https://img.shields.io/nuget/v/Sotakebk.SunSharp)
+* [SunSharp.Redistribution](https://www.nuget.org/packages/Sotakebk.SunSharp.Redistribution/) ![Nuget](https://img.shields.io/nuget/v/Sotakebk.SunSharp.Redistribution)
 
 To use the wrapper, install the SunSharp package.
 SunSharp.Redistribution contains the SunVox library, and a class for loading them on Windows/Linux/MacOS. As an option, you may provide your own method for retrieving library functions and load the library yourself instead.
