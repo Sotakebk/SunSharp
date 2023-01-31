@@ -8,16 +8,20 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="NAudio" Version="2.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\SunSharp.Redistribution\SunSharp.Redistribution.csproj" />
     <ProjectReference Include="..\SunSharp\SunSharp.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="SunVoxProjects\jump_demo.sunvox">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    <None Update="jump_demo.sunvox">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="SunVoxProjects\the_lick.sunvox">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    <None Update="the_lick.sunvox">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
 
