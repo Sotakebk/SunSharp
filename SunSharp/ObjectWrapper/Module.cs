@@ -88,7 +88,7 @@ namespace SunSharp.ObjectWrapper
         /// <param name="channel"></param>
         /// <param name="buffer"></param>
         /// <returns>Number of samples successfully read.</returns>
-        public int ReadScope(Channel channel, short[] buffer)
+        public int ReadScope(AudioChannel channel, short[] buffer)
         {
             return _lib.ReadModuleScope(_slotId, _id, (int)channel, buffer);
         }
@@ -148,7 +148,7 @@ namespace SunSharp.ObjectWrapper
         /// <param name="value">Value to be applied, in XXYY column value format.</param>
         public void SetControllerValue(int controllerId, ushort value)
         {
-            var @event = new Event()
+            var @event = new PatternEvent()
             {
                 MM = (ushort)(_id + 1),
                 CC = (byte)(controllerId + 1),

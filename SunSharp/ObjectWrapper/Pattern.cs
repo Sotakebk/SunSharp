@@ -34,7 +34,7 @@ namespace SunSharp.ObjectWrapper
 
         public int GetLength() => _lib.GetPatternLines(_slotId, _id);
 
-        public Event[] GetData()
+        public PatternEvent[] GetData()
         {
             int slotId = _slotId;
             int id = _id;
@@ -45,12 +45,12 @@ namespace SunSharp.ObjectWrapper
             });
         }
 
-        public Event[,] GetData2D()
+        public PatternEvent[,] GetData2D()
         {
             int tracks = GetTrackCount();
             var lines = GetLength();
             var data = GetData();
-            var data2 = new Event[lines, tracks];
+            var data2 = new PatternEvent[lines, tracks];
             // TODO slow?
             for (int l = 0; l < lines; l++)
             {
@@ -62,7 +62,7 @@ namespace SunSharp.ObjectWrapper
             return data2;
         }
 
-        public void SetData(Event[] data)
+        public void SetData(PatternEvent[] data)
         {
             // TODO: sv_set_pattern_data() does not exist
             var slotId = _slotId;
@@ -84,7 +84,7 @@ namespace SunSharp.ObjectWrapper
             });
         }
 
-        public void SetData2D(Event[,] data)
+        public void SetData2D(PatternEvent[,] data)
         {
             // TODO: sv_set_pattern_data() does not exist
             var slotId = _slotId;
@@ -131,7 +131,7 @@ namespace SunSharp.ObjectWrapper
             });
         }
 
-        public void SetPatternEvent(int track, int line, Event @event)
+        public void SetPatternEvent(int track, int line, PatternEvent @event)
         {
             var lib = _lib;
             var slotId = _id;

@@ -1,22 +1,22 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace SunSharp.Abstractions.Horizontal.JumpGraph
+namespace SunSharp.Abstractions.Horizontal.Jumping
 {
-    public sealed class JumpGraph
+    public sealed class Graph
     {
         public string Name { get; internal set; }
-        public IReadOnlyCollection<JumpGraphState> States { get; internal set; }
-        public IReadOnlyCollection<JumpGraphTransition> Transitions { get; internal set; }
-        public JumpGraphState StartingState { get; internal set; }
+        public IReadOnlyCollection<State> States { get; internal set; }
+        public IReadOnlyCollection<Transition> Transitions { get; internal set; }
+        public State StartingState { get; internal set; }
 
-        internal JumpGraph()
+        internal Graph()
         {
         }
 
-        public static JumpGraph BuildFromData(JumpGraphData data)
+        public static Graph BuildFromData(GraphData data)
         {
-            var states = data.States.Select(s => new JumpGraphState()
+            var states = data.States.Select(s => new State()
             {
                 Id = s.Id,
                 Name = s.Name,
@@ -24,7 +24,7 @@ namespace SunSharp.Abstractions.Horizontal.JumpGraph
                 LastLine = s.LastLine
             }).ToArray();
 
-            var transitions = data.Transitions.Select(t => new JumpGraphTransition()
+            var transitions = data.Transitions.Select(t => new Transition()
             {
                 Id = t.Id,
                 Name = t.Name,
@@ -47,7 +47,7 @@ namespace SunSharp.Abstractions.Horizontal.JumpGraph
                                                           && t != state.StoppingTransition).ToArray();
             }
 
-            var graph = new JumpGraph()
+            var graph = new Graph()
             {
                 Name = data.Name,
                 StartingState = (data.StartStateId != null)
@@ -67,35 +67,35 @@ namespace SunSharp.Abstractions.Horizontal.JumpGraph
         }
     }
 
-    public sealed class JumpGraphState
+    public sealed class State
     {
-        public JumpGraph JumpGraph { get; internal set; }
+        public Graph JumpGraph { get; internal set; }
         public int Id { get; internal set; }
         public string Name { get; internal set; }
         public int FirstLine { get; internal set; }
         public int LastLine { get; internal set; }
-        public JumpGraphTransition LoopingTransition { get; internal set; }
-        public JumpGraphTransition StoppingTransition { get; internal set; }
-        public IReadOnlyCollection<JumpGraphTransition> TransitionsFrom { get; internal set; }
-        public IReadOnlyCollection<JumpGraphTransition> TransitionsTo { get; internal set; }
+        public Transition LoopingTransition { get; internal set; }
+        public Transition StoppingTransition { get; internal set; }
+        public IReadOnlyCollection<Transition> TransitionsFrom { get; internal set; }
+        public IReadOnlyCollection<Transition> TransitionsTo { get; internal set; }
 
-        internal JumpGraphState()
+        internal State()
         {
         }
     }
 
-    public sealed class JumpGraphTransition
+    public sealed class Transition
     {
-        public JumpGraph JumpGraph { get; internal set; }
+        public Graph JumpGraph { get; internal set; }
         public int Id { get; internal set; }
         public string Name { get; internal set; }
         public bool Stopping { get; internal set; }
         public bool Looping { get; internal set; }
-        public JumpGraphState FromState { get; internal set; }
-        public JumpGraphState ToState { get; internal set; }
+        public State FromState { get; internal set; }
+        public State ToState { get; internal set; }
         public IReadOnlyCollection<int> PatternIds { get; internal set; }
 
-        internal JumpGraphTransition()
+        internal Transition()
         {
         }
     }

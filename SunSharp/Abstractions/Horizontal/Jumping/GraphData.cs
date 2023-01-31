@@ -1,47 +1,53 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace SunSharp.Abstractions.Horizontal.JumpGraph
+namespace SunSharp.Abstractions.Horizontal.Jumping
 {
     // TODO make setters init, or properties readonly when raising C# version?
 
-    public class JumpGraphData
+    public class GraphData
     {
         public string Name { get; set; }
         public int? StartStateId { get; set; }
-        public IReadOnlyCollection<JumpGraphStateData> States { get; set; }
-        public IReadOnlyCollection<JumpGraphTransitionData> Transitions { get; set; }
+        public IReadOnlyCollection<StateData> States { get; set; }
+        public IReadOnlyCollection<TransitionData> Transitions { get; set; }
 
-        public JumpGraphData()
+        public GraphData()
         {
         }
 
-        public static JumpGraphData DeepCopy(JumpGraphData original)
+        public static GraphData DeepCopy(GraphData original)
         {
-            return new JumpGraphData()
+            if (original == null)
+                throw new System.ArgumentNullException(nameof(original));
+
+            return new GraphData()
             {
                 Name = original.Name,
                 StartStateId = original.StartStateId,
-                States = original.States.Select(s => JumpGraphStateData.DeepCopy(s)).ToArray(),
-                Transitions = original.Transitions.Select(t => JumpGraphTransitionData.DeepCopy(t)).ToArray()
+                States = original.States.Select(s => StateData.DeepCopy(s)).ToArray(),
+                Transitions = original.Transitions.Select(t => TransitionData.DeepCopy(t)).ToArray()
             };
         }
     }
 
-    public class JumpGraphStateData
+    public class StateData
     {
         public int Id { get; set; }
         public string Name { get; set; }
         public int FirstLine { get; set; }
         public int LastLine { get; set; }
 
-        public JumpGraphStateData()
+        public StateData()
         {
         }
 
-        public static JumpGraphStateData DeepCopy(JumpGraphStateData original)
+        public static StateData DeepCopy(StateData original)
         {
-            return new JumpGraphStateData()
+            if (original == null)
+                throw new System.ArgumentNullException(nameof(original));
+
+            return new StateData()
             {
                 Id = original.Id,
                 FirstLine = original.FirstLine,
@@ -51,7 +57,7 @@ namespace SunSharp.Abstractions.Horizontal.JumpGraph
         }
     }
 
-    public class JumpGraphTransitionData
+    public class TransitionData
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -60,13 +66,16 @@ namespace SunSharp.Abstractions.Horizontal.JumpGraph
         public bool IsStopping { get; set; }
         public IReadOnlyCollection<int> PatternIds { get; set; }
 
-        public JumpGraphTransitionData()
+        public TransitionData()
         {
         }
 
-        public static JumpGraphTransitionData DeepCopy(JumpGraphTransitionData original)
+        public static TransitionData DeepCopy(TransitionData original)
         {
-            return new JumpGraphTransitionData()
+            if (original == null)
+                throw new System.ArgumentNullException(nameof(original));
+
+            return new TransitionData()
             {
                 Id = original.Id,
                 Name = original.Name,

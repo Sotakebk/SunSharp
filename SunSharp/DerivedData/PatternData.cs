@@ -16,7 +16,7 @@ namespace SunSharp.DerivedData
         bool IsLinear { get; }
         bool IsDestructive { get; }
         bool HasDynamicTempo { get; }
-        IReadOnlyCollection<ReadOnlyEvent> Data { get; }
+        IReadOnlyCollection<ReadOnlyPatternEvent> Data { get; }
     }
 
     public class PatternData : IReadOnlyPatternData
@@ -30,9 +30,9 @@ namespace SunSharp.DerivedData
         public bool IsLinear { get; set; }
         public bool IsDestructive { get; set; }
         public bool HasDynamicTempo { get; set; }
-        public ICollection<ReadOnlyEvent> Data { get; set; }
+        public ICollection<ReadOnlyPatternEvent> Data { get; set; }
 
-        IReadOnlyCollection<ReadOnlyEvent> IReadOnlyPatternData.Data => Data.AsReadonlyOrGetWrapper();
+        IReadOnlyCollection<ReadOnlyPatternEvent> IReadOnlyPatternData.Data => Data.AsReadonlyOrGetWrapper();
 
         public PatternData()
         {
@@ -67,7 +67,7 @@ namespace SunSharp.DerivedData
 
         internal static PatternData ReadPatternDataInternal(ISunVoxLib lib, int slot, int patternId)
         {
-            var data = lib.GetPatternData(slot, patternId).Select(e => (ReadOnlyEvent)e).ToArray();
+            var data = lib.GetPatternData(slot, patternId).Select(e => (ReadOnlyPatternEvent)e).ToArray();
             bool isDestructive = false;
             bool isLinear = true;
             bool hasDynamicTempo = false;

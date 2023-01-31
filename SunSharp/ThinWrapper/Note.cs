@@ -5,18 +5,29 @@ namespace SunSharp.ThinWrapper
     public enum NoteName
     {
         C = 0,
-        c = 1,
+        CS = 1,
         D = 2,
-        d = 3,
+        DS = 3,
         E = 4,
         F = 5,
-        f = 6,
+        FS = 6,
         G = 7,
-        g = 8,
+        GS = 8,
         A = 9,
-        a = 10,
+        AS = 10,
         B = 11,
         Other = 12
+    }
+
+    public static class NoteNameExtensions
+    {
+        public static char GetNoteNameCharacter(this NoteName noteName)
+        {
+            var i = (int)noteName;
+            if (i < 0 || i > 11)
+                return '?';
+            return "CcDdEFfGgAaB"[i];
+        }
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 1)]
@@ -80,7 +91,7 @@ namespace SunSharp.ThinWrapper
                 case NOTECMD_STOP: return "S!";
                 case NOTECMD_PLAY: return "P!";
                 case NOTECMD_SET_PITCH: return "SP";
-                default: return Value < 128 ? $"{Name}{Octave}".Substring(0, 2) : "??";
+                default: return Value < 128 ? $"{Name.GetNoteNameCharacter()}{Octave}".Substring(0, 2) : "??";
             }
         }
     }

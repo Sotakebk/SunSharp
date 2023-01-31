@@ -99,13 +99,13 @@ namespace SunSharp.ThinWrapper
 
         #region audio rendering
 
-        private static bool AudioCallbackInternal<T>(this ISunVoxLib lib, T[] outputBuffer, Channels channels, int latency, uint outTime)
+        private static bool AudioCallbackInternal<T>(this ISunVoxLib lib, T[] outputBuffer, AudioChannels channels, int latency, uint outTime)
         {
-            if (channels == Channels.Stereo && (outputBuffer.Length & 1) != 0)
+            if (channels == AudioChannels.Stereo && (outputBuffer.Length & 1) != 0)
                 throw new ArgumentException("Buffer size is not a multiple of two.");
 
             int frames = outputBuffer.Length;
-            if (channels == Channels.Stereo)
+            if (channels == AudioChannels.Stereo)
                 frames /= 2;
 
             var outHandle = GCHandle.Alloc(outputBuffer, GCHandleType.Pinned);
@@ -125,20 +125,20 @@ namespace SunSharp.ThinWrapper
             return (ret == 1);
         }
 
-        private static bool AudioCallbackInternal<T, V>(this ISunVoxLib lib, T[] outputBuffer, Channels outputChannels, V[] inputBuffer, Channels inputChannels, int latency, uint outTime, int inputType)
+        private static bool AudioCallbackInternal<T, V>(this ISunVoxLib lib, T[] outputBuffer, AudioChannels outputChannels, V[] inputBuffer, AudioChannels inputChannels, int latency, uint outTime, int inputType)
         {
-            if (outputChannels == Channels.Stereo && (outputBuffer.Length & 1) != 0)
+            if (outputChannels == AudioChannels.Stereo && (outputBuffer.Length & 1) != 0)
                 throw new ArgumentException("Output buffer size is not a multiple of two.");
 
-            if (inputChannels == Channels.Stereo && (inputBuffer.Length & 1) != 0)
+            if (inputChannels == AudioChannels.Stereo && (inputBuffer.Length & 1) != 0)
                 throw new ArgumentException("Input buffer size is not a multiple of two.");
 
             int inputFrames = inputBuffer.Length;
-            if (inputChannels == Channels.Stereo)
+            if (inputChannels == AudioChannels.Stereo)
                 inputFrames /= 2;
 
             int outputFrmaes = outputBuffer.Length;
-            if (outputChannels == Channels.Stereo)
+            if (outputChannels == AudioChannels.Stereo)
                 outputFrmaes /= 2;
 
             if (inputFrames != outputFrmaes)
@@ -175,13 +175,13 @@ namespace SunSharp.ThinWrapper
         /// <param name="latency">Audio latency (in frames).</param>
         /// <param name="outTime">Buffer output time (in system ticks).</param>
         /// <returns><see langword="false"/> if buffer was filled with zeros.</returns>
-        public static bool AudioCallback(this ISunVoxLib lib, float[] outputBuffer, Channels channels, int latency, uint outTime)
+        public static bool AudioCallback(this ISunVoxLib lib, float[] outputBuffer, AudioChannels channels, int latency, uint outTime)
         {
             return AudioCallbackInternal(lib, outputBuffer, channels, latency, outTime);
         }
 
-        /// <inheritdoc cref="AudioCallback(ISunVoxLib, float[], Channels, int, uint)"/>
-        public static bool AudioCallback(this ISunVoxLib lib, short[] outputBuffer, Channels channels, int latency, uint outTime)
+        /// <inheritdoc cref="AudioCallback(ISunVoxLib, float[], AudioChannels, int, uint)"/>
+        public static bool AudioCallback(this ISunVoxLib lib, short[] outputBuffer, AudioChannels channels, int latency, uint outTime)
         {
             return AudioCallbackInternal(lib, outputBuffer, channels, latency, outTime);
         }
@@ -199,25 +199,25 @@ namespace SunSharp.ThinWrapper
         /// <param name="latency">Audio latency (in frames).</param>
         /// <param name="outTime">Buffer output time (in system ticks).</param>
         /// <returns><see langword="false"/> if buffer was filled with zeros.</returns>
-        public static bool AudioCallback(this ISunVoxLib lib, float[] outputBuffer, Channels outputChannels, float[] inputBuffer, Channels inputChannels, int latency, uint outTime)
+        public static bool AudioCallback(this ISunVoxLib lib, float[] outputBuffer, AudioChannels outputChannels, float[] inputBuffer, AudioChannels inputChannels, int latency, uint outTime)
         {
             return AudioCallbackInternal(lib, outputBuffer, outputChannels, inputBuffer, inputChannels, latency, outTime, 1);
         }
 
-        /// <inheritdoc cref="AudioCallback(ISunVoxLib, float[], Channels, float[], Channels, int, uint)"/>
-        public static bool AudioCallback(this ISunVoxLib lib, float[] outputBuffer, Channels outputChannels, short[] inputBuffer, Channels inputChannels, int latency, uint outTime)
+        /// <inheritdoc cref="AudioCallback(ISunVoxLib, float[], AudioChannels, float[], AudioChannels, int, uint)"/>
+        public static bool AudioCallback(this ISunVoxLib lib, float[] outputBuffer, AudioChannels outputChannels, short[] inputBuffer, AudioChannels inputChannels, int latency, uint outTime)
         {
             return AudioCallbackInternal(lib, outputBuffer, outputChannels, inputBuffer, inputChannels, latency, outTime, 0);
         }
 
-        /// <inheritdoc cref="AudioCallback(ISunVoxLib, float[], Channels, float[], Channels, int, uint)"/>
-        public static bool AudioCallback(this ISunVoxLib lib, short[] outputBuffer, Channels outputChannels, float[] inputBuffer, Channels inputChannels, int latency, uint outTime)
+        /// <inheritdoc cref="AudioCallback(ISunVoxLib, float[], AudioChannels, float[], AudioChannels, int, uint)"/>
+        public static bool AudioCallback(this ISunVoxLib lib, short[] outputBuffer, AudioChannels outputChannels, float[] inputBuffer, AudioChannels inputChannels, int latency, uint outTime)
         {
             return AudioCallbackInternal(lib, outputBuffer, outputChannels, inputBuffer, inputChannels, latency, outTime, 1);
         }
 
-        /// <inheritdoc cref="AudioCallback(ISunVoxLib, float[], Channels, float[], Channels, int, uint)"/>
-        public static bool AudioCallback(this ISunVoxLib lib, short[] outputBuffer, Channels outputChannels, short[] inputBuffer, Channels inputChannels, int latency, uint outTime)
+        /// <inheritdoc cref="AudioCallback(ISunVoxLib, float[], AudioChannels, float[], AudioChannels, int, uint)"/>
+        public static bool AudioCallback(this ISunVoxLib lib, short[] outputBuffer, AudioChannels outputChannels, short[] inputBuffer, AudioChannels inputChannels, int latency, uint outTime)
         {
             return AudioCallbackInternal(lib, outputBuffer, outputChannels, inputBuffer, inputChannels, latency, outTime, 0);
         }
@@ -236,7 +236,7 @@ namespace SunSharp.ThinWrapper
         /// <param name="flags">Initialization flags.</param>
         /// <returns>The version of underlying library.</returns>
         /// <exception cref="SunVoxException"></exception>
-        public static Version Init(this ISunVoxLib lib, int sampleRate, string config = null, Channels channels = Channels.Stereo, InitFlags flags = InitFlags.Default)
+        public static Version Init(this ISunVoxLib lib, int sampleRate, string config = null, AudioChannels channels = AudioChannels.Stereo, InitFlags flags = InitFlags.Default)
         {
             var ptr = Marshal.StringToHGlobalAnsi(config);
             try
@@ -426,7 +426,7 @@ namespace SunSharp.ThinWrapper
                 throw new SunVoxException(ret, nameof(lib.sv_save));
         }
 
-        public static void SendEvent(this ISunVoxLib lib, int slot, int track, Event @event)
+        public static void SendEvent(this ISunVoxLib lib, int slot, int track, PatternEvent @event)
         {
             SendEvent(lib, slot, track, @event.NN, @event.VV, @event.MM, @event.CCEE, @event.XXYY);
         }
@@ -1176,7 +1176,7 @@ namespace SunSharp.ThinWrapper
             return lib.sv_get_pattern_y(slot, pattern);
         }
 
-        public static Event[] GetPatternData(this ISunVoxLib lib, int slot, int pattern)
+        public static PatternEvent[] GetPatternData(this ISunVoxLib lib, int slot, int pattern)
         {
             if (!GetPatternExists(lib, slot, pattern))
                 return null;
@@ -1185,11 +1185,11 @@ namespace SunSharp.ThinWrapper
             int tracks = GetPatternTracks(lib, slot, pattern);
 
             var ptr = lib.sv_get_pattern_data(slot, pattern);
-            if (ptr == null)
+            if (ptr == IntPtr.Zero)
                 return null;
             try
             {
-                var arr = new Event[lines * tracks];
+                var arr = new PatternEvent[lines * tracks];
                 for (int i = 0; i < lines * tracks; i++)
                     arr[i] = (ulong)Marshal.ReadInt64(ptr, i * sizeof(ulong));
                 return arr;
@@ -1225,7 +1225,7 @@ namespace SunSharp.ThinWrapper
                 throw new SunVoxException(ret, nameof(lib.sv_set_pattern_event));
         }
 
-        public static void SetPatternEvent(this ISunVoxLib lib, int slot, int pattern, int track, int line, Event ev)
+        public static void SetPatternEvent(this ISunVoxLib lib, int slot, int pattern, int track, int line, PatternEvent ev)
         {
             var ret = lib.sv_set_pattern_event(slot, pattern, track, line, ev.NN, ev.VV, ev.MM, ev.CCEE, ev.XXYY);
             if (ret != 0)

@@ -755,7 +755,7 @@ namespace CodeGeneration
                     new List<ControllerDescription>()
                     {
                         new ControllerDescription(0, "Volume", "Volume", "", 0, 256),
-                        new ControllerDescription(1, "Type", "Type", "", 0, 5, "DistortionType"),
+                        new ControllerDescription(1, "DistortionType", "Type", "", 0, 5, "DistortionType"),
                         new ControllerDescription(2, "Power", "Power", "", 0, 256),
                         new ControllerDescription(3, "BitDepth", "Bit depth", "", 1, 16),
                         new ControllerDescription(4, "Freq", "Freq", "", 0, 44100),
@@ -876,7 +876,7 @@ namespace CodeGeneration
                         new ControllerDescription(0, "Volume", "Volume", "", 0, 256),
                         new ControllerDescription(1, "Freq", "Freq", "", 0, 14000),
                         new ControllerDescription(2, "Resonance", "Resonance", "", 0, 1530),
-                        new ControllerDescription(3, "Type", "Type", "", 0, 3, "FilterType"),
+                        new ControllerDescription(3, "FilterType", "Type", "", 0, 3, "FilterType"),
                         new ControllerDescription(4, "Response", "Response", "", 0, 256),
                         new ControllerDescription(5, "Mode", "Mode", "", 0, 3, "Quality"),
                         new ControllerDescription(6, "Impulse", "Impulse", "", 0, 14000),
@@ -900,7 +900,7 @@ namespace CodeGeneration
                     new List<ControllerDescription>()
                     {
                         new ControllerDescription(0, "Volume", "Volume", "", 0, 32768),
-                        new ControllerDescription(1, "Type", "Type", "", 0, 10, "FilterProType"),
+                        new ControllerDescription(1, "FilterType", "Type", "", 0, 10, "FilterProType"),
                         new ControllerDescription(2, "Freq", "Freq", "", 0, 22000),
                         new ControllerDescription(3, "FreqFinetune", "Freq finetune", "", 0, 2000),
                         new ControllerDescription(4, "FreqScale", "Freq scale", "", 0, 200),
@@ -1197,7 +1197,7 @@ namespace CodeGeneration
                     new List<ControllerDescription>()
                     {
                         new ControllerDescription(0, "Volume", "Volume", "", 0, 512),
-                        new ControllerDescription(1, "Type", "Type", "", 0, 1, "LFOType"),
+                        new ControllerDescription(1, "LfoType", "Type", "", 0, 1, "LFOType"),
                         new ControllerDescription(2, "Amplitude", "Amplitude", "", 0, 256),
                         new ControllerDescription(3, "Freq", "Freq", "", 1, 256),
                         new ControllerDescription(4, "Waveform", "Waveform", "", 0, 7, "LFOWaveform"),

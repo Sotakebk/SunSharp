@@ -11,37 +11,37 @@ namespace SunSharp.Redistribution
 
         private static class WindowsImports
         {
-            [DllImport("kernel32.dll")]
+            [DllImport("kernel32.dll", CharSet = CharSet.Unicode)]
             public static extern IntPtr LoadLibrary(string dllToLoad);
 
-            [DllImport("kernel32.dll")]
+            [DllImport("kernel32.dll", CharSet = CharSet.Unicode)]
             public static extern IntPtr GetProcAddress(IntPtr hModule, string procedureName);
 
-            [DllImport("kernel32.dll")]
+            [DllImport("kernel32.dll", CharSet = CharSet.Unicode)]
             public static extern bool FreeLibrary(IntPtr hModule);
         }
 
         private static class LinuxImports
         {
-            [DllImport("libdl.so")]
+            [DllImport("libdl.so", CharSet = CharSet.Unicode)]
             public static extern IntPtr dlopen(string filename, int flags);
 
-            [DllImport("libdl.so")]
+            [DllImport("libdl.so", CharSet = CharSet.Unicode)]
             public static extern IntPtr dlsym(IntPtr handle, string symbol);
 
-            [DllImport("libdl.so")]
+            [DllImport("libdl.so", CharSet = CharSet.Unicode)]
             public static extern int dlclose(IntPtr hModule);
         }
 
         private static class MacOSImports
         {
-            [DllImport("libdl.so")]
+            [DllImport("libdl.so", CharSet = CharSet.Unicode)]
             public static extern IntPtr dlopen(string fileName, int flags);
 
-            [DllImport("libdl.so")]
+            [DllImport("libdl.so", CharSet = CharSet.Unicode)]
             public static extern IntPtr dlsym(IntPtr handle, string symbol);
 
-            [DllImport("libdl.so")]
+            [DllImport("libdl.so", CharSet = CharSet.Unicode)]
             public static extern int dlclose(IntPtr handle);
         }
 
@@ -56,7 +56,7 @@ namespace SunSharp.Redistribution
             if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
                 return MacOSImports.dlopen(filename, 0);
 
-            throw new Exception("Unsupported OS.");
+            throw new InvalidOperationException("Unsupported OS.");
         }
 
         private static IntPtr FindFunction(IntPtr handle, string symbol)
@@ -64,36 +64,30 @@ namespace SunSharp.Redistribution
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
                 return WindowsImports.GetProcAddress(handle, symbol);
 
-            if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+            else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
                 return LinuxImports.dlsym(handle, symbol);
 
-            if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
+            else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
                 return MacOSImports.dlsym(handle, symbol);
 
-            throw new Exception("Unsupported OS.");
+            throw new InvalidOperationException("Unsupported OS.");
         }
 
         private static void UnloadLibrary(IntPtr handle)
         {
+            int returnCode;
+
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
-            {
-                WindowsImports.FreeLibrary(handle);
-                return;
-            }
+                returnCode = (WindowsImports.FreeLibrary(handle)? -1 : 0);
+            else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+                returnCode = LinuxImports.dlclose(handle);
+            else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
+                returnCode = MacOSImports.dlclose(handle);
+            else
+                throw new InvalidOperationException("Unsupported OS.");
 
-            if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
-            {
-                LinuxImports.dlclose(handle);
-                return;
-            }
-
-            if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
-            {
-                MacOSImports.dlclose(handle);
-                return;
-            }
-
-            throw new Exception("Unsupported OS.");
+            if (returnCode != 0)
+                throw new InvalidOperationException($"UnloadLibrary failed, code: {returnCode}");
         }
 
         private static string GetLibraryPath()
@@ -121,12 +115,12 @@ namespace SunSharp.Redistribution
                 if (RuntimeInformation.ProcessArchitecture == Architecture.X64)
                     return Path.Combine("lib", "macos", "lib_x86_64", "sunvox.dylib");
             }
-            throw new Exception("Unsupported OS.");
+            throw new InvalidOperationException("Unsupported OS.");
         }
 
         #endregion platform invoke
 
-        private static object _lock = new object();
+        private static readonly object _lock = new object();
         private static IntPtr LoadedLibraryHandle;
         private static ProxyClass proxyClass;
 
@@ -135,7 +129,11 @@ namespace SunSharp.Redistribution
             lock (_lock)
             {
                 if (LoadedLibraryHandle == IntPtr.Zero)
+                {
                     LoadedLibraryHandle = LoadLibrary(GetLibraryPath());
+                    if (LoadedLibraryHandle == IntPtr.Zero)
+                        throw new InvalidOperationException("LoadLibrary failed.");
+                }
             }
         }
 
@@ -167,7 +165,7 @@ namespace SunSharp.Redistribution
         {
             var ptr = FindFunction(LoadedLibraryHandle, name);
             if (ptr == IntPtr.Zero)
-                throw new Exception($"Symbol {name} not found! Library: {GetLibraryPath()}.");
+                throw new InvalidOperationException($"Symbol {name} not found! Library: {GetLibraryPath()}.");
             return Marshal.GetDelegateForFunctionPointer(ptr, delegateType);
         }
     }

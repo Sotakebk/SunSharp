@@ -1,5 +1,5 @@
 ﻿using SunSharp;
-using SunSharp.Abstractions.Horizontal.JumpGraph;
+using SunSharp.Abstractions.Horizontal.Jumping;
 using SunSharp.DerivedData;
 using SunSharp.ObjectWrapper;
 
@@ -28,8 +28,8 @@ namespace ManualJobs.Tests
 
             WriteLine("Building description and graph...");
             var songData = SongData.ReadSongData(slot);
-            var graph = JumpGraphBuilder.BuildJumpGraph(songData, _description, Feedback);
-            var controller = new JumpGraphController(slot, graph);
+            var graph = GraphBuilder.BuildJumpGraph(songData, _description, Feedback);
+            var controller = new GraphController(slot, graph);
             WriteLine("Description and graph built.");
 
             WriteLine("Enumerating states.");
@@ -60,9 +60,9 @@ namespace ManualJobs.Tests
             slot.Close();
         }
 
-        private static IJumpGraphDescription BuildDescription()
+        private static IGraphDescription BuildDescription()
         {
-            var description = new SimpleJumpGraphDescription();
+            var description = new SimpleGraphDescription();
             description.Name = "Example";
             var I = description.AddState("I", "State1", hasLoop: true);
             var ii = description.AddState("ii", "State2", hasLoop: true);

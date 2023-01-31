@@ -2,14 +2,61 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Title>SunSharp</Title>
+    <Authors>Sotakebk</Authors>
+    <Company />
+    <Product>SunSharp</Product>
+    <PackageId>Sotakebk.SunSharp</PackageId>
+    <Description>SunVox Library wrapper for .NET</Description>
+    <Copyright>Sotakebk</Copyright>
+    <PackageProjectUrl>https://github.com/Sotakebk/SunSharp</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/Sotakebk/SunSharp.git</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>sunvox;music;wrapper</PackageTags>
+    <Version>0.0.0</Version>
+    <IncludeSymbols>False</IncludeSymbols>
+    <EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
+    <EnableNETAnalyzers>True</EnableNETAnalyzers>
+    <AnalysisLevel>latest-recommended</AnalysisLevel>
+    <GenerateDocumentationFile>False</GenerateDocumentationFile>
+    <ProduceReferenceAssembly>False</ProduceReferenceAssembly>
+    <SignAssembly>False</SignAssembly>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageLicenseFile>license.txt</PackageLicenseFile>
   </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="SunSharp\**" />
+    <EmbeddedResource Remove="SunSharp\**" />
+    <None Remove="SunSharp\**" />
+  </ItemGroup>
 
   <ItemGroup>
     <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
   </ItemGroup>
-
+  
   <ItemGroup>
-    <Folder Include="ObjectWrapper\Modules\" />
+    <None Update="license.txt">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Update="README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Update="sunvox.h">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>

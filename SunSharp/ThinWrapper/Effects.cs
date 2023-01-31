@@ -2,6 +2,8 @@
 {
     public enum Effect : byte
     {
+        None = 0,
+
         SlideUp = 0x01,
         SlideDown = 0x02,
         SlideToNote = 0x03,

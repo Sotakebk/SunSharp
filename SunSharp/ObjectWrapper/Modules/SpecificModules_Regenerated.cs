@@ -531,96 +531,96 @@ namespace SunSharp.ObjectWrapper.Modules
 
     public static class ModuleExtensions
     {
-        public static ADSR AsADSR(this Module module) => new ADSR(module);
+        public static ADSRModule AsADSRModule(this Module module) => new ADSRModule(module);
 
-        public static Amplifier AsAmplifier(this Module module) => new Amplifier(module);
+        public static AmplifierModule AsAmplifierModule(this Module module) => new AmplifierModule(module);
 
-        public static AnalogGenerator AsAnalogGenerator(this Module module) => new AnalogGenerator(module);
+        public static AnalogGeneratorModule AsAnalogGeneratorModule(this Module module) => new AnalogGeneratorModule(module);
 
-        public static Compressor AsCompressor(this Module module) => new Compressor(module);
+        public static CompressorModule AsCompressorModule(this Module module) => new CompressorModule(module);
 
-        public static ControlToNote AsControlToNote(this Module module) => new ControlToNote(module);
+        public static ControlToNoteModule AsControlToNoteModule(this Module module) => new ControlToNoteModule(module);
 
-        public static DcBlocker AsDcBlocker(this Module module) => new DcBlocker(module);
+        public static DcBlockerModule AsDcBlockerModule(this Module module) => new DcBlockerModule(module);
 
-        public static Delay AsDelay(this Module module) => new Delay(module);
+        public static DelayModule AsDelayModule(this Module module) => new DelayModule(module);
 
-        public static Distortion AsDistortion(this Module module) => new Distortion(module);
+        public static DistortionModule AsDistortionModule(this Module module) => new DistortionModule(module);
 
-        public static DrumSynth AsDrumSynth(this Module module) => new DrumSynth(module);
+        public static DrumSynthModule AsDrumSynthModule(this Module module) => new DrumSynthModule(module);
 
-        public static Echo AsEcho(this Module module) => new Echo(module);
+        public static EchoModule AsEchoModule(this Module module) => new EchoModule(module);
 
-        public static EQ AsEQ(this Module module) => new EQ(module);
+        public static EQModule AsEQModule(this Module module) => new EQModule(module);
 
-        public static Feedback AsFeedback(this Module module) => new Feedback(module);
+        public static FeedbackModule AsFeedbackModule(this Module module) => new FeedbackModule(module);
 
-        public static FFT AsFFT(this Module module) => new FFT(module);
+        public static FFTModule AsFFTModule(this Module module) => new FFTModule(module);
 
-        public static Filter AsFilter(this Module module) => new Filter(module);
+        public static FilterModule AsFilterModule(this Module module) => new FilterModule(module);
 
-        public static FilterPro AsFilterPro(this Module module) => new FilterPro(module);
+        public static FilterProModule AsFilterProModule(this Module module) => new FilterProModule(module);
 
-        public static Flanger AsFlanger(this Module module) => new Flanger(module);
+        public static FlangerModule AsFlangerModule(this Module module) => new FlangerModule(module);
 
-        public static FM AsFM(this Module module) => new FM(module);
+        public static FMModule AsFMModule(this Module module) => new FMModule(module);
 
-        public static FMX AsFMX(this Module module) => new FMX(module);
+        public static FMXModule AsFMXModule(this Module module) => new FMXModule(module);
 
-        public static Generator AsGenerator(this Module module) => new Generator(module);
+        public static GeneratorModule AsGeneratorModule(this Module module) => new GeneratorModule(module);
 
-        public static Glide AsGlide(this Module module) => new Glide(module);
+        public static GlideModule AsGlideModule(this Module module) => new GlideModule(module);
 
-        public static GPIO AsGPIO(this Module module) => new GPIO(module);
+        public static GPIOModule AsGPIOModule(this Module module) => new GPIOModule(module);
 
-        public static Input AsInput(this Module module) => new Input(module);
+        public static InputModule AsInputModule(this Module module) => new InputModule(module);
 
-        public static Kicker AsKicker(this Module module) => new Kicker(module);
+        public static KickerModule AsKickerModule(this Module module) => new KickerModule(module);
 
-        public static LFO AsLFO(this Module module) => new LFO(module);
+        public static LFOModule AsLFOModule(this Module module) => new LFOModule(module);
 
-        public static Loop AsLoop(this Module module) => new Loop(module);
+        public static LoopModule AsLoopModule(this Module module) => new LoopModule(module);
 
-        public static MetaModule AsMetaModule(this Module module) => new MetaModule(module);
+        public static MetaModuleModule AsMetaModuleModule(this Module module) => new MetaModuleModule(module);
 
-        public static Modulator AsModulator(this Module module) => new Modulator(module);
+        public static ModulatorModule AsModulatorModule(this Module module) => new ModulatorModule(module);
 
-        public static MultiControl AsMultiControl(this Module module) => new MultiControl(module);
+        public static MultiControlModule AsMultiControlModule(this Module module) => new MultiControlModule(module);
 
-        public static MultiSynth AsMultiSynth(this Module module) => new MultiSynth(module);
+        public static MultiSynthModule AsMultiSynthModule(this Module module) => new MultiSynthModule(module);
 
-        public static Output AsOutput(this Module module) => new Output(module);
+        public static OutputModule AsOutputModule(this Module module) => new OutputModule(module);
 
-        public static PitchDetector AsPitchDetector(this Module module) => new PitchDetector(module);
+        public static PitchDetectorModule AsPitchDetectorModule(this Module module) => new PitchDetectorModule(module);
 
-        public static PitchShifter AsPitchShifter(this Module module) => new PitchShifter(module);
+        public static PitchShifterModule AsPitchShifterModule(this Module module) => new PitchShifterModule(module);
 
-        public static PitchToControl AsPitchToControl(this Module module) => new PitchToControl(module);
+        public static PitchToControlModule AsPitchToControlModule(this Module module) => new PitchToControlModule(module);
 
-        public static Reverb AsReverb(this Module module) => new Reverb(module);
+        public static ReverbModule AsReverbModule(this Module module) => new ReverbModule(module);
 
-        public static Sampler AsSampler(this Module module) => new Sampler(module);
+        public static SamplerModule AsSamplerModule(this Module module) => new SamplerModule(module);
 
-        public static SoundToControl AsSoundToControl(this Module module) => new SoundToControl(module);
+        public static SoundToControlModule AsSoundToControlModule(this Module module) => new SoundToControlModule(module);
 
-        public static SpectraVoice AsSpectraVoice(this Module module) => new SpectraVoice(module);
+        public static SpectraVoiceModule AsSpectraVoiceModule(this Module module) => new SpectraVoiceModule(module);
 
-        public static VelocityToControl AsVelocityToControl(this Module module) => new VelocityToControl(module);
+        public static VelocityToControlModule AsVelocityToControlModule(this Module module) => new VelocityToControlModule(module);
 
-        public static Vibrato AsVibrato(this Module module) => new Vibrato(module);
+        public static VibratoModule AsVibratoModule(this Module module) => new VibratoModule(module);
 
-        public static VocalFilter AsVocalFilter(this Module module) => new VocalFilter(module);
+        public static VocalFilterModule AsVocalFilterModule(this Module module) => new VocalFilterModule(module);
 
-        public static VorbisPlayer AsVorbisPlayer(this Module module) => new VorbisPlayer(module);
+        public static VorbisPlayerModule AsVorbisPlayerModule(this Module module) => new VorbisPlayerModule(module);
 
-        public static WaveShaper AsWaveShaper(this Module module) => new WaveShaper(module);
+        public static WaveShaperModule AsWaveShaperModule(this Module module) => new WaveShaperModule(module);
     }
 
-    public struct ADSR
+    public struct ADSRModule
     {
         public Module Module { get; private set; }
 
-        public ADSR(Module module)
+        public ADSRModule(Module module)
         {
             Module = module;
         }
@@ -810,11 +810,11 @@ namespace SunSharp.ObjectWrapper.Modules
         #endregion controllers
     }
 
-    public struct Amplifier
+    public struct AmplifierModule
     {
         public Module Module { get; private set; }
 
-        public Amplifier(Module module)
+        public AmplifierModule(Module module)
         {
             Module = module;
         }
@@ -932,11 +932,11 @@ namespace SunSharp.ObjectWrapper.Modules
         #endregion controllers
     }
 
-    public struct AnalogGenerator
+    public struct AnalogGeneratorModule
     {
         public Module Module { get; private set; }
 
-        public AnalogGenerator(Module module)
+        public AnalogGeneratorModule(Module module)
         {
             Module = module;
         }
@@ -1240,11 +1240,11 @@ namespace SunSharp.ObjectWrapper.Modules
         #endregion curves
     }
 
-    public struct Compressor
+    public struct CompressorModule
     {
         public Module Module { get; private set; }
 
-        public Compressor(Module module)
+        public CompressorModule(Module module)
         {
             Module = module;
         }
@@ -1338,11 +1338,11 @@ namespace SunSharp.ObjectWrapper.Modules
         #endregion controllers
     }
 
-    public struct ControlToNote
+    public struct ControlToNoteModule
     {
         public Module Module { get; private set; }
 
-        public ControlToNote(Module module)
+        public ControlToNoteModule(Module module)
         {
             Module = module;
         }
@@ -1472,11 +1472,11 @@ namespace SunSharp.ObjectWrapper.Modules
         #endregion controllers
     }
 
-    public struct DcBlocker
+    public struct DcBlockerModule
     {
         public Module Module { get; private set; }
 
-        public DcBlocker(Module module)
+        public DcBlockerModule(Module module)
         {
             Module = module;
         }
@@ -1498,11 +1498,11 @@ namespace SunSharp.ObjectWrapper.Modules
         #endregion controllers
     }
 
-    public struct Delay
+    public struct DelayModule
     {
         public Module Module { get; private set; }
 
-        public Delay(Module module)
+        public DelayModule(Module module)
         {
             Module = module;
         }
@@ -1644,11 +1644,11 @@ namespace SunSharp.ObjectWrapper.Modules
         #endregion controllers
     }
 
-    public struct Distortion
+    public struct DistortionModule
     {
         public Module Module { get; private set; }
 
-        public Distortion(Module module)
+        public DistortionModule(Module module)
         {
             Module = module;
         }
@@ -1666,6 +1666,18 @@ namespace SunSharp.ObjectWrapper.Modules
         /// <para> Value range: 1 to 16 </para>
         /// </summary>
         public void SetBitDepth(ushort value) => Module.SetControllerValue(3, (ushort)value);
+
+        /// <summary>
+        /// Original name: Type
+        /// <para> Value range: 0 to 5 </para>
+        /// </summary>
+        public ushort GetDistortionType() => (ushort)Module.GetControllerValue(1, true);
+
+        /// <summary>
+        /// Original name: Type
+        /// <para> Value range: 0 to 5 </para>
+        /// </summary>
+        public void SetDistortionType(DistortionType value) => Module.SetControllerValue(1, (ushort)value);
 
         /// <summary>
         /// Original name: Freq
@@ -1704,18 +1716,6 @@ namespace SunSharp.ObjectWrapper.Modules
         public void SetPower(ushort value) => Module.SetControllerValue(2, (ushort)value);
 
         /// <summary>
-        /// Original name: Type
-        /// <para> Value range: 0 to 5 </para>
-        /// </summary>
-        public ushort GetType() => (ushort)Module.GetControllerValue(1, true);
-
-        /// <summary>
-        /// Original name: Type
-        /// <para> Value range: 0 to 5 </para>
-        /// </summary>
-        public void SetType(DistortionType value) => Module.SetControllerValue(1, (ushort)value);
-
-        /// <summary>
         /// Original name: Volume
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
@@ -1730,11 +1730,11 @@ namespace SunSharp.ObjectWrapper.Modules
         #endregion controllers
     }
 
-    public struct DrumSynth
+    public struct DrumSynthModule
     {
         public Module Module { get; private set; }
 
-        public DrumSynth(Module module)
+        public DrumSynthModule(Module module)
         {
             Module = module;
         }
@@ -1924,11 +1924,11 @@ namespace SunSharp.ObjectWrapper.Modules
         #endregion controllers
     }
 
-    public struct Echo
+    public struct EchoModule
     {
         public Module Module { get; private set; }
 
-        public Echo(Module module)
+        public EchoModule(Module module)
         {
             Module = module;
         }
@@ -2048,11 +2048,11 @@ namespace SunSharp.ObjectWrapper.Modules
         #endregion controllers
     }
 
-    public struct EQ
+    public struct EQModule
     {
         public Module Module { get; private set; }
 
-        public EQ(Module module)
+        public EQModule(Module module)
         {
             Module = module;
         }
@@ -2110,11 +2110,11 @@ namespace SunSharp.ObjectWrapper.Modules
         #endregion controllers
     }
 
-    public struct Feedback
+    public struct FeedbackModule
     {
         public Module Module { get; private set; }
 
-        public Feedback(Module module)
+        public FeedbackModule(Module module)
         {
             Module = module;
         }
@@ -2148,11 +2148,11 @@ namespace SunSharp.ObjectWrapper.Modules
         #endregion controllers
     }
 
-    public struct FFT
+    public struct FFTModule
     {
         public Module Module { get; private set; }
 
-        public FFT(Module module)
+        public FFTModule(Module module)
         {
             Module = module;
         }
@@ -2366,11 +2366,11 @@ namespace SunSharp.ObjectWrapper.Modules
         #endregion controllers
     }
 
-    public struct Filter
+    public struct FilterModule
     {
         public Module Module { get; private set; }
 
-        public Filter(Module module)
+        public FilterModule(Module module)
         {
             Module = module;
         }
@@ -2388,6 +2388,18 @@ namespace SunSharp.ObjectWrapper.Modules
         /// <para> Value range: 0 to 1 </para>
         /// </summary>
         public void SetExponentialFreq(Toggle value) => Module.SetControllerValue(11, (ushort)value);
+
+        /// <summary>
+        /// Original name: Type
+        /// <para> Value range: 0 to 3 </para>
+        /// </summary>
+        public ushort GetFilterType() => (ushort)Module.GetControllerValue(3, true);
+
+        /// <summary>
+        /// Original name: Type
+        /// <para> Value range: 0 to 3 </para>
+        /// </summary>
+        public void SetFilterType(FilterType value) => Module.SetControllerValue(3, (ushort)value);
 
         /// <summary>
         /// Original name: Freq
@@ -2534,18 +2546,6 @@ namespace SunSharp.ObjectWrapper.Modules
         public void SetSetLFOPhase(ushort value) => Module.SetControllerValue(10, (ushort)value);
 
         /// <summary>
-        /// Original name: Type
-        /// <para> Value range: 0 to 3 </para>
-        /// </summary>
-        public ushort GetType() => (ushort)Module.GetControllerValue(3, true);
-
-        /// <summary>
-        /// Original name: Type
-        /// <para> Value range: 0 to 3 </para>
-        /// </summary>
-        public void SetType(FilterType value) => Module.SetControllerValue(3, (ushort)value);
-
-        /// <summary>
         /// Original name: Volume
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
@@ -2560,11 +2560,11 @@ namespace SunSharp.ObjectWrapper.Modules
         #endregion controllers
     }
 
-    public struct FilterPro
+    public struct FilterProModule
     {
         public Module Module { get; private set; }
 
-        public FilterPro(Module module)
+        public FilterProModule(Module module)
         {
             Module = module;
         }
@@ -2582,6 +2582,18 @@ namespace SunSharp.ObjectWrapper.Modules
         /// <para> Value range: 0 to 1 </para>
         /// </summary>
         public void SetExponentialFreq(Toggle value) => Module.SetControllerValue(5, (ushort)value);
+
+        /// <summary>
+        /// Original name: Type
+        /// <para> Value range: 0 to 10 </para>
+        /// </summary>
+        public ushort GetFilterType() => (ushort)Module.GetControllerValue(1, true);
+
+        /// <summary>
+        /// Original name: Type
+        /// <para> Value range: 0 to 10 </para>
+        /// </summary>
+        public void SetFilterType(FilterProType value) => Module.SetControllerValue(1, (ushort)value);
 
         /// <summary>
         /// Original name: Freq
@@ -2752,18 +2764,6 @@ namespace SunSharp.ObjectWrapper.Modules
         public void SetSetLFOPhase(ushort value) => Module.SetControllerValue(15, (ushort)value);
 
         /// <summary>
-        /// Original name: Type
-        /// <para> Value range: 0 to 10 </para>
-        /// </summary>
-        public ushort GetType() => (ushort)Module.GetControllerValue(1, true);
-
-        /// <summary>
-        /// Original name: Type
-        /// <para> Value range: 0 to 10 </para>
-        /// </summary>
-        public void SetType(FilterProType value) => Module.SetControllerValue(1, (ushort)value);
-
-        /// <summary>
         /// Original name: Volume
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
@@ -2778,11 +2778,11 @@ namespace SunSharp.ObjectWrapper.Modules
         #endregion controllers
     }
 
-    public struct Flanger
+    public struct FlangerModule
     {
         public Module Module { get; private set; }
 
-        public Flanger(Module module)
+        public FlangerModule(Module module)
         {
             Module = module;
         }
@@ -2912,11 +2912,11 @@ namespace SunSharp.ObjectWrapper.Modules
         #endregion controllers
     }
 
-    public struct FM
+    public struct FMModule
     {
         public Module Module { get; private set; }
 
-        public FM(Module module)
+        public FMModule(Module module)
         {
             Module = module;
         }
@@ -3130,11 +3130,11 @@ namespace SunSharp.ObjectWrapper.Modules
         #endregion controllers
     }
 
-    public struct FMX
+    public struct FMXModule
     {
         public Module Module { get; private set; }
 
-        public FMX(Module module)
+        public FMXModule(Module module)
         {
             Module = module;
         }
@@ -4572,11 +4572,11 @@ namespace SunSharp.ObjectWrapper.Modules
         #endregion controllers
     }
 
-    public struct Generator
+    public struct GeneratorModule
     {
         public Module Module { get; private set; }
 
-        public Generator(Module module)
+        public GeneratorModule(Module module)
         {
             Module = module;
         }
@@ -4706,11 +4706,11 @@ namespace SunSharp.ObjectWrapper.Modules
         #endregion controllers
     }
 
-    public struct Glide
+    public struct GlideModule
     {
         public Module Module { get; private set; }
 
-        public Glide(Module module)
+        public GlideModule(Module module)
         {
             Module = module;
         }
@@ -4804,11 +4804,11 @@ namespace SunSharp.ObjectWrapper.Modules
         #endregion controllers
     }
 
-    public struct GPIO
+    public struct GPIOModule
     {
         public Module Module { get; private set; }
 
-        public GPIO(Module module)
+        public GPIOModule(Module module)
         {
             Module = module;
         }
@@ -4902,11 +4902,11 @@ namespace SunSharp.ObjectWrapper.Modules
         #endregion controllers
     }
 
-    public struct Input
+    public struct InputModule
     {
         public Module Module { get; private set; }
 
-        public Input(Module module)
+        public InputModule(Module module)
         {
             Module = module;
         }
@@ -4940,11 +4940,11 @@ namespace SunSharp.ObjectWrapper.Modules
         #endregion controllers
     }
 
-    public struct Kicker
+    public struct KickerModule
     {
         public Module Module { get; private set; }
 
-        public Kicker(Module module)
+        public KickerModule(Module module)
         {
             Module = module;
         }
@@ -5062,11 +5062,11 @@ namespace SunSharp.ObjectWrapper.Modules
         #endregion controllers
     }
 
-    public struct LFO
+    public struct LFOModule
     {
         public Module Module { get; private set; }
 
-        public LFO(Module module)
+        public LFOModule(Module module)
         {
             Module = module;
         }
@@ -5158,6 +5158,18 @@ namespace SunSharp.ObjectWrapper.Modules
         public void SetGenerator(Toggle value) => Module.SetControllerValue(9, (ushort)value);
 
         /// <summary>
+        /// Original name: Type
+        /// <para> Value range: 0 to 1 </para>
+        /// </summary>
+        public ushort GetLfoType() => (ushort)Module.GetControllerValue(1, true);
+
+        /// <summary>
+        /// Original name: Type
+        /// <para> Value range: 0 to 1 </para>
+        /// </summary>
+        public void SetLfoType(LFOType value) => Module.SetControllerValue(1, (ushort)value);
+
+        /// <summary>
         /// Original name: Set phase
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
@@ -5194,18 +5206,6 @@ namespace SunSharp.ObjectWrapper.Modules
         public void SetSmoothTransitions(LFOSmoothTransitions value) => Module.SetControllerValue(11, (ushort)value);
 
         /// <summary>
-        /// Original name: Type
-        /// <para> Value range: 0 to 1 </para>
-        /// </summary>
-        public ushort GetType() => (ushort)Module.GetControllerValue(1, true);
-
-        /// <summary>
-        /// Original name: Type
-        /// <para> Value range: 0 to 1 </para>
-        /// </summary>
-        public void SetType(LFOType value) => Module.SetControllerValue(1, (ushort)value);
-
-        /// <summary>
         /// Original name: Volume
         /// <para> Value range: 0 to 512 </para>
         /// </summary>
@@ -5232,11 +5232,11 @@ namespace SunSharp.ObjectWrapper.Modules
         #endregion controllers
     }
 
-    public struct Loop
+    public struct LoopModule
     {
         public Module Module { get; private set; }
 
-        public Loop(Module module)
+        public LoopModule(Module module)
         {
             Module = module;
         }
@@ -5306,11 +5306,11 @@ namespace SunSharp.ObjectWrapper.Modules
         #endregion controllers
     }
 
-    public struct MetaModule
+    public struct MetaModuleModule
     {
         public Module Module { get; private set; }
 
-        public MetaModule(Module module)
+        public MetaModuleModule(Module module)
         {
             Module = module;
         }
@@ -5380,11 +5380,11 @@ namespace SunSharp.ObjectWrapper.Modules
         #endregion controllers
     }
 
-    public struct Modulator
+    public struct ModulatorModule
     {
         public Module Module { get; private set; }
 
-        public Modulator(Module module)
+        public ModulatorModule(Module module)
         {
             Module = module;
         }
@@ -5430,11 +5430,11 @@ namespace SunSharp.ObjectWrapper.Modules
         #endregion controllers
     }
 
-    public struct MultiControl
+    public struct MultiControlModule
     {
         public Module Module { get; private set; }
 
-        public MultiControl(Module module)
+        public MultiControlModule(Module module)
         {
             Module = module;
         }
@@ -5546,11 +5546,11 @@ namespace SunSharp.ObjectWrapper.Modules
         #endregion curves
     }
 
-    public struct MultiSynth
+    public struct MultiSynthModule
     {
         public Module Module { get; private set; }
 
-        public MultiSynth(Module module)
+        public MultiSynthModule(Module module)
         {
             Module = module;
         }
@@ -5712,21 +5712,21 @@ namespace SunSharp.ObjectWrapper.Modules
         #endregion curves
     }
 
-    public struct Output
+    public struct OutputModule
     {
         public Module Module { get; private set; }
 
-        public Output(Module module)
+        public OutputModule(Module module)
         {
             Module = module;
         }
     }
 
-    public struct PitchDetector
+    public struct PitchDetectorModule
     {
         public Module Module { get; private set; }
 
-        public PitchDetector(Module module)
+        public PitchDetectorModule(Module module)
         {
             Module = module;
         }
@@ -5880,11 +5880,11 @@ namespace SunSharp.ObjectWrapper.Modules
         #endregion controllers
     }
 
-    public struct PitchShifter
+    public struct PitchShifterModule
     {
         public Module Module { get; private set; }
 
-        public PitchShifter(Module module)
+        public PitchShifterModule(Module module)
         {
             Module = module;
         }
@@ -5978,11 +5978,11 @@ namespace SunSharp.ObjectWrapper.Modules
         #endregion controllers
     }
 
-    public struct PitchToControl
+    public struct PitchToControlModule
     {
         public Module Module { get; private set; }
 
-        public PitchToControl(Module module)
+        public PitchToControlModule(Module module)
         {
             Module = module;
         }
@@ -6076,11 +6076,11 @@ namespace SunSharp.ObjectWrapper.Modules
         #endregion controllers
     }
 
-    public struct Reverb
+    public struct ReverbModule
     {
         public Module Module { get; private set; }
 
-        public Reverb(Module module)
+        public ReverbModule(Module module)
         {
             Module = module;
         }
@@ -6210,11 +6210,11 @@ namespace SunSharp.ObjectWrapper.Modules
         #endregion controllers
     }
 
-    public struct Sampler
+    public struct SamplerModule
     {
         public Module Module { get; private set; }
 
-        public Sampler(Module module)
+        public SamplerModule(Module module)
         {
             Module = module;
         }
@@ -6296,11 +6296,11 @@ namespace SunSharp.ObjectWrapper.Modules
         #endregion controllers
     }
 
-    public struct SoundToControl
+    public struct SoundToControlModule
     {
         public Module Module { get; private set; }
 
-        public SoundToControl(Module module)
+        public SoundToControlModule(Module module)
         {
             Module = module;
         }
@@ -6418,11 +6418,11 @@ namespace SunSharp.ObjectWrapper.Modules
         #endregion controllers
     }
 
-    public struct SpectraVoice
+    public struct SpectraVoiceModule
     {
         public Module Module { get; private set; }
 
-        public SpectraVoice(Module module)
+        public SpectraVoiceModule(Module module)
         {
             Module = module;
         }
@@ -6588,11 +6588,11 @@ namespace SunSharp.ObjectWrapper.Modules
         #endregion controllers
     }
 
-    public struct VelocityToControl
+    public struct VelocityToControlModule
     {
         public Module Module { get; private set; }
 
-        public VelocityToControl(Module module)
+        public VelocityToControlModule(Module module)
         {
             Module = module;
         }
@@ -6662,11 +6662,11 @@ namespace SunSharp.ObjectWrapper.Modules
         #endregion controllers
     }
 
-    public struct Vibrato
+    public struct VibratoModule
     {
         public Module Module { get; private set; }
 
-        public Vibrato(Module module)
+        public VibratoModule(Module module)
         {
             Module = module;
         }
@@ -6760,11 +6760,11 @@ namespace SunSharp.ObjectWrapper.Modules
         #endregion controllers
     }
 
-    public struct VocalFilter
+    public struct VocalFilterModule
     {
         public Module Module { get; private set; }
 
-        public VocalFilter(Module module)
+        public VocalFilterModule(Module module)
         {
             Module = module;
         }
@@ -6942,11 +6942,11 @@ namespace SunSharp.ObjectWrapper.Modules
         #endregion controllers
     }
 
-    public struct VorbisPlayer
+    public struct VorbisPlayerModule
     {
         public Module Module { get; private set; }
 
-        public VorbisPlayer(Module module)
+        public VorbisPlayerModule(Module module)
         {
             Module = module;
         }
@@ -7040,11 +7040,11 @@ namespace SunSharp.ObjectWrapper.Modules
         #endregion controllers
     }
 
-    public struct WaveShaper
+    public struct WaveShaperModule
     {
         public Module Module { get; private set; }
 
-        public WaveShaper(Module module)
+        public WaveShaperModule(Module module)
         {
             Module = module;
         }

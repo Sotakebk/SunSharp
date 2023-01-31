@@ -198,7 +198,7 @@ namespace SunSharp.ObjectWrapper
             return _lib.GetCurrentLine2(_id);
         }
 
-        public int GetCurrentSignalLevel(Channel channel = Channel.Mono)
+        public int GetCurrentSignalLevel(AudioChannel channel = AudioChannel.Mono)
         {
             return _lib.GetCurrentSignalLevel(_id, (int)channel);
         }
@@ -225,7 +225,7 @@ namespace SunSharp.ObjectWrapper
         public void SetSongBpm(int value)
         {
             var xxyy = (ushort)Math.Min(Math.Max(0, value), 800);
-            _virtualPattern.SendEventImmediately(0, new Event(Effect.SetBPM, xxyy));
+            _virtualPattern.SendEventImmediately(0, new PatternEvent(Effect.SetBPM, xxyy));
         }
 
         public int GetSongTpl()
@@ -236,7 +236,7 @@ namespace SunSharp.ObjectWrapper
         public void SetSongTpl(int value)
         {
             var xxyy = (ushort)Math.Min(Math.Max(1, value), 31);
-            _virtualPattern.SendEventImmediately(0, new Event(Effect.SetPlayingSpeed, xxyy));
+            _virtualPattern.SendEventImmediately(0, new PatternEvent(Effect.SetPlayingSpeed, xxyy));
         }
 
         public int GetSongLengthInLines()

@@ -4,6 +4,9 @@ namespace SunSharp
 {
     public interface ISunVoxLib
     {
+#pragma warning disable CA1707 // Identifiers should not contain underscores
+#pragma warning disable IDE1006 // Naming Styles
+
         /// <summary>
         /// int sv_init(const char* config, int freq, int channels, uint32_t flags) SUNVOX_FN_ATTR;
         /// </summary>
@@ -358,5 +361,8 @@ namespace SunSharp
         /// const char* sv_get_log(int size) SUNVOX_FN_ATTR;
         /// </summary>
         IntPtr sv_get_log(int size);
+
+#pragma warning restore IDE1006 // Naming Styles
+#pragma warning restore CA1707 // Identifiers should not contain underscores
     }
 }

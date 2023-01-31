@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 namespace SunSharp.ThinWrapper
 {
     [StructLayout(LayoutKind.Explicit, Size = 8)]
-    public readonly struct ReadOnlyEvent : IEquatable<Event>, IEquatable<ReadOnlyEvent>
+    public readonly struct ReadOnlyPatternEvent : IEquatable<PatternEvent>, IEquatable<ReadOnlyPatternEvent>
     {
         [FieldOffset(0)] private readonly ulong _data;
         [FieldOffset(0)] private readonly byte _nn;
@@ -30,16 +30,16 @@ namespace SunSharp.ThinWrapper
         public byte YY => _yy;
         public byte XX => _xx;
 
-        public ReadOnlyEvent(ulong value) : this()
+        public ReadOnlyPatternEvent(ulong value) : this()
         {
             _data = value;
         }
 
-        public ReadOnlyEvent(Event @event) : this(@event.Data)
+        public ReadOnlyPatternEvent(PatternEvent @event) : this(@event.Data)
         {
         }
 
-        public ReadOnlyEvent(byte nn, byte vv, ushort mm, ushort ccee, ushort xxyy) : this()
+        public ReadOnlyPatternEvent(byte nn, byte vv, ushort mm, ushort ccee, ushort xxyy) : this()
         {
             _nn = nn;
             _vv = vv;
@@ -48,7 +48,7 @@ namespace SunSharp.ThinWrapper
             _xxyy = xxyy;
         }
 
-        public ReadOnlyEvent(Note note, byte velocity, ushort module, byte controller, Effect effect, ushort xxyy) : this()
+        public ReadOnlyPatternEvent(Note note, byte velocity, ushort module, byte controller, Effect effect, ushort xxyy) : this()
         {
             _nn = (byte)note;
             _vv = velocity;
@@ -58,38 +58,38 @@ namespace SunSharp.ThinWrapper
             _xxyy = xxyy;
         }
 
-        public static implicit operator ReadOnlyEvent(ulong value)
+        public static implicit operator ReadOnlyPatternEvent(ulong value)
         {
-            return new ReadOnlyEvent(value);
+            return new ReadOnlyPatternEvent(value);
         }
 
-        public static implicit operator ulong(ReadOnlyEvent ev)
+        public static implicit operator ulong(ReadOnlyPatternEvent ev)
         {
             return ev.Data;
         }
 
         public override string ToString() => $"{(Note)NN}{VV:X2}{MM:X4}{CC:X2}{EE:X2}{XX:X2}{YY:X2}";
 
-        public static bool operator ==(ReadOnlyEvent a, ReadOnlyEvent b) => a._data == b._data;
+        public static bool operator ==(ReadOnlyPatternEvent a, ReadOnlyPatternEvent b) => a._data == b._data;
 
-        public static bool operator !=(ReadOnlyEvent a, ReadOnlyEvent b) => a._data != b._data;
+        public static bool operator !=(ReadOnlyPatternEvent a, ReadOnlyPatternEvent b) => a._data != b._data;
 
         public override bool Equals(object obj)
         {
-            if (obj is ReadOnlyEvent readOnlyEvent) return readOnlyEvent._data == _data;
-            if (obj is Event @event) return @event.Data == _data;
+            if (obj is ReadOnlyPatternEvent readOnlyEvent) return readOnlyEvent._data == _data;
+            if (obj is PatternEvent @event) return @event.Data == _data;
             return false;
         }
 
-        public bool Equals(Event other) => this == other;
+        public bool Equals(PatternEvent other) => this == other;
 
         public override int GetHashCode() => -1945990370 + _data.GetHashCode();
 
-        public bool Equals(ReadOnlyEvent other) => _data == other.Data;
+        public bool Equals(ReadOnlyPatternEvent other) => _data == other.Data;
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 8)]
-    public struct Event : IEquatable<Event>, IEquatable<ReadOnlyEvent>
+    public struct PatternEvent : IEquatable<PatternEvent>, IEquatable<ReadOnlyPatternEvent>
     {
         [FieldOffset(0)] private ulong _data;
         [FieldOffset(0)] private byte _nn;
@@ -115,25 +115,25 @@ namespace SunSharp.ThinWrapper
         public byte YY { get => _yy; set => _yy = value; }
         public byte XX { get => _xx; set => _xx = value; }
 
-        public Event(ulong value) : this()
+        public PatternEvent(ulong value) : this()
         {
             _data = value;
         }
 
-        public Event(Note note, byte velocity, ushort module) : this()
+        public PatternEvent(Note note, byte velocity, ushort module) : this()
         {
             _nn = note;
             _vv = velocity;
             _mm = module;
         }
 
-        public Event(Effect effect, ushort xxyy) : this()
+        public PatternEvent(Effect effect, ushort xxyy) : this()
         {
             _ee = (byte)effect;
             _xxyy = xxyy;
         }
 
-        public Event(byte nn, byte vv, ushort mm, ushort ccee, ushort xxyy) : this()
+        public PatternEvent(byte nn, byte vv, ushort mm, ushort ccee, ushort xxyy) : this()
         {
             _nn = nn;
             _vv = vv;
@@ -142,7 +142,7 @@ namespace SunSharp.ThinWrapper
             _xxyy = xxyy;
         }
 
-        public Event(Note note, byte velocity, ushort module, byte controller, Effect effect, ushort xxyy) : this()
+        public PatternEvent(Note note, byte velocity, ushort module, byte controller, Effect effect, ushort xxyy) : this()
         {
             _nn = (byte)note;
             _vv = velocity;
@@ -152,33 +152,33 @@ namespace SunSharp.ThinWrapper
             _xxyy = xxyy;
         }
 
-        public static implicit operator Event(ulong value)
+        public static implicit operator PatternEvent(ulong value)
         {
-            return new Event(value);
+            return new PatternEvent(value);
         }
 
-        public static implicit operator ulong(Event @event)
+        public static implicit operator ulong(PatternEvent @event)
         {
             return @event.Data;
         }
 
-        public static implicit operator ReadOnlyEvent(Event @event)
+        public static implicit operator ReadOnlyPatternEvent(PatternEvent @event)
         {
-            return new ReadOnlyEvent(@event._data);
+            return new ReadOnlyPatternEvent(@event._data);
         }
 
         public override string ToString() => $"{(Note)NN}{VV:X2}{MM:X4}{CC:X2}{EE:X2}{XX:X2}{YY:X2}";
 
-        public static bool operator ==(Event a, Event b) => a._data == b._data;
+        public static bool operator ==(PatternEvent a, PatternEvent b) => a._data == b._data;
 
-        public static bool operator !=(Event a, Event b) => a._data != b._data;
+        public static bool operator !=(PatternEvent a, PatternEvent b) => a._data != b._data;
 
-        public override bool Equals(object obj) => (obj is Event e) ? this == e : false;
+        public override bool Equals(object obj) => (obj is PatternEvent e) && this == e;
 
-        public bool Equals(Event other) => this == other;
+        public bool Equals(PatternEvent other) => this == other;
 
         public override int GetHashCode() => -1945990370 + _data.GetHashCode();
 
-        public bool Equals(ReadOnlyEvent other) => _data == other.Data;
+        public bool Equals(ReadOnlyPatternEvent other) => _data == other.Data;
     }
 }

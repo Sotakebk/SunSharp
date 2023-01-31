@@ -13,27 +13,29 @@
         private const int SV_MODULE_OUTPUTS_OFF = 16 + 8;
         private const uint SV_MODULE_OUTPUTS_MASK = 255u << 16 + 8;
 
-        public readonly uint Value;
+        private readonly uint _value;
 
-        public bool Exists => (Value & SV_MODULE_FLAG_EXISTS) != 0;
-        public bool Effect => (Value & SV_MODULE_FLAG_EFFECT) != 0;
-        public bool Mute => (Value & SV_MODULE_FLAG_MUTE) != 0;
-        public bool Solo => (Value & SV_MODULE_FLAG_SOLO) != 0;
-        public bool Bypass => (Value & SV_MODULE_FLAG_BYPASS) != 0;
+        public uint Value => _value;
+
+        public bool Exists => (_value & SV_MODULE_FLAG_EXISTS) != 0;
+        public bool Effect => (_value & SV_MODULE_FLAG_EFFECT) != 0;
+        public bool Mute => (_value & SV_MODULE_FLAG_MUTE) != 0;
+        public bool Solo => (_value & SV_MODULE_FLAG_SOLO) != 0;
+        public bool Bypass => (_value & SV_MODULE_FLAG_BYPASS) != 0;
 
         /// <summary>
         /// Actual input count may be less or equal.
         /// </summary>
-        public int InputUpperCount => (int)((Value & SV_MODULE_INPUTS_MASK) >> SV_MODULE_INPUTS_OFF);
+        public int InputUpperCount => (int)((_value & SV_MODULE_INPUTS_MASK) >> SV_MODULE_INPUTS_OFF);
 
         /// <summary>
         /// Actual output count may be less or equal
         /// </summary>
-        public int OutputUpperCount => (int)((Value & SV_MODULE_OUTPUTS_MASK) >> SV_MODULE_OUTPUTS_OFF);
+        public int OutputUpperCount => (int)((_value & SV_MODULE_OUTPUTS_MASK) >> SV_MODULE_OUTPUTS_OFF);
 
         public ModuleFlags(uint value)
         {
-            Value = value;
+            _value = value;
         }
 
         public static implicit operator ModuleFlags(uint value)

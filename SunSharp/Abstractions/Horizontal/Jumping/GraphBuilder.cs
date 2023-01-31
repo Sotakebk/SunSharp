@@ -4,13 +4,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace SunSharp.Abstractions.Horizontal.JumpGraph
+namespace SunSharp.Abstractions.Horizontal.Jumping
 {
-    public static class JumpGraphBuilder
+    public static class GraphBuilder
     {
         #region building
 
-        public static JumpGraphData BuildJumpGraph(IReadOnlySongData songData, IJumpGraphDescription description, Action<MessageType, string> feedback = null)
+        public static GraphData BuildJumpGraph(IReadOnlySongData songData, IGraphDescription description, Action<MessageType, string> feedback = null)
         {
             var patterns = AnalyzePatterns(songData, feedback);
             var stacks = OrganizeStacks(patterns, feedback);
@@ -53,7 +53,7 @@ namespace SunSharp.Abstractions.Horizontal.JumpGraph
 
         private static AnalyzedPattern AnalyzePattern(IReadOnlyPatternData patternData, Action<MessageType, string> feedback)
         {
-            int CalculateJumpTargetLine(int currentLine, ReadOnlyEvent mode, ReadOnlyEvent jump)
+            int CalculateJumpTargetLine(int currentLine, ReadOnlyPatternEvent mode, ReadOnlyPatternEvent jump)
             {
                 switch (mode.XXYY)
                 {
@@ -88,8 +88,8 @@ namespace SunSharp.Abstractions.Horizontal.JumpGraph
             {
                 for (int l = 0; l < lines; l++)
                 {
-                    ReadOnlyEvent? setJumpMode = null;
-                    ReadOnlyEvent? jump = null;
+                    ReadOnlyPatternEvent? setJumpMode = null;
+                    ReadOnlyPatternEvent? jump = null;
 
                     for (int t = 0; t < tracks; t++)
                     {
@@ -222,7 +222,7 @@ namespace SunSharp.Abstractions.Horizontal.JumpGraph
             public AnalyzedPattern[] Patterns;
         }
 
-        private static TimelineSegment[] SplitTimeline(PatternStack[] stacks, IJumpGraphDescription description, Action<MessageType, string> feedback)
+        private static TimelineSegment[] SplitTimeline(PatternStack[] stacks, IGraphDescription description, Action<MessageType, string> feedback)
         {
             var sortedStacks = stacks.OrderBy(s => s.FirstLine).ToArray();
             var segments = new List<TimelineSegment>();
@@ -407,10 +407,10 @@ namespace SunSharp.Abstractions.Horizontal.JumpGraph
 
         #region construct graph
 
-        private static JumpGraphData ConstructGraph(TimelineSegment[] segments, PreparedTransition[] transitions, IJumpGraphDescription description, Action<MessageType, string> feedback)
+        private static GraphData ConstructGraph(TimelineSegment[] segments, PreparedTransition[] transitions, IGraphDescription description, Action<MessageType, string> feedback)
         {
-            var _states = new List<JumpGraphStateData>();
-            var _transitions = new List<JumpGraphTransitionData>();
+            var _states = new List<StateData>();
+            var _transitions = new List<TransitionData>();
 
             int _stateId = 1;
             foreach (var segment in segments)
@@ -418,7 +418,7 @@ namespace SunSharp.Abstractions.Horizontal.JumpGraph
                 if (segment.GuidePattern == null) // ignore overlaps and unknowns
                     continue;
 
-                var newState = new JumpGraphStateData()
+                var newState = new StateData()
                 {
                     Id = _stateId,
                     FirstLine = segment.FirstLine,
@@ -432,11 +432,11 @@ namespace SunSharp.Abstractions.Horizontal.JumpGraph
             int _transitionId = 1;
             foreach (var transition in transitions)
             {
-                var newTransition = new JumpGraphTransitionData()
+                var newTransition = new TransitionData()
                 {
                     Id = _transitionId,
                     Name = description.DescribedTransitions
-                    .FirstOrDefault(dt => dt.From.Name == transition.From.Name && dt.To.Name == transition.To.Name)
+                    .FirstOrDefault(dt => dt.FromState.Name == transition.From.Name && dt.ToState.Name == transition.To.Name)
                     ?.Name ?? $"(from \"{transition.From.Name}\" to \"{transition.To.Name}\")",
                     PatternIds = transition.PatternIds.ToArray(),
                     IsStopping = transition.HasStops,
@@ -447,7 +447,7 @@ namespace SunSharp.Abstractions.Horizontal.JumpGraph
                 _transitionId++;
             }
 
-            var graph = new JumpGraphData()
+            var graph = new GraphData()
             {
                 Name = description.Name,
                 States = _states.ToArray(),
@@ -464,7 +464,7 @@ namespace SunSharp.Abstractions.Horizontal.JumpGraph
 
         #region validate constructed graph
 
-        private static bool ValidateConstructedGraph(JumpGraphData graph, IJumpGraphDescription description, Action<MessageType, string> feedback)
+        private static bool ValidateConstructedGraph(GraphData graph, IGraphDescription description, Action<MessageType, string> feedback)
         {
             foreach (var describedState in description.DescribedStates)
             {
@@ -497,8 +497,8 @@ namespace SunSharp.Abstractions.Horizontal.JumpGraph
             foreach (var describedTransition in description.DescribedTransitions)
             {
                 var transition = graph.Transitions.FirstOrDefault(t =>
-                        graph.States.First(s => s.Id == t.FromStateId).Name == describedTransition.From.Name
-                     && graph.States.First(s => s.Id == t.ToStateId).Name == describedTransition.To.Name);
+                        graph.States.First(s => s.Id == t.FromStateId).Name == describedTransition.FromState.Name
+                     && graph.States.First(s => s.Id == t.ToStateId).Name == describedTransition.ToState.Name);
                 if (transition == null)
                     feedback?.Invoke(MessageType.Error, $"Expected transition \"{describedTransition.Name}\" was not found in built graph.");
                 return false;

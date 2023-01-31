@@ -1,4 +1,4 @@
-﻿namespace SunSharp.Abstractions.Horizontal.JumpGraph
+﻿namespace SunSharp.Abstractions.Horizontal.Jumping
 {
     public enum TargetType
     {

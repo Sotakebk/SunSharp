@@ -14,14 +14,14 @@ namespace SunSharp.ThinWrapper
         public const int SV_TIME_MAP_FRAMECNT = 1;
     }
 
-    public enum Channel : int
+    public enum AudioChannel : int
     {
-        Mono = 0,
         Left = 0,
-        Right = 1
+        Mono = Left,
+        Right = 1,
     }
 
-    public enum Channels : int
+    public enum AudioChannels : int
     {
         Mono = 1,
         Stereo = 2
@@ -37,6 +37,7 @@ namespace SunSharp.ThinWrapper
     }
 
     [Flags]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Naming", "CA1711:Identifiers should not have incorrect suffix", Justification = "Corresponds to SV_INIT_FLAG flags, this just makes sense.")]
     public enum InitFlags : uint
     {
         Default = 0,
@@ -73,22 +74,26 @@ namespace SunSharp.ThinWrapper
 
     public readonly struct Version
     {
-        public readonly byte Major, Minor, Minor2;
+        public byte Major => _major;
+        public byte Minor => _minor;
+        public byte Minor2 => _minor2;
+
+        private readonly byte _major, _minor, _minor2;
 
         public Version(byte major, byte minor, byte minor2)
         {
-            Major = major;
-            Minor = minor;
-            Minor2 = minor2;
+            _major = major;
+            _minor = minor;
+            _minor2 = minor2;
         }
 
         public Version(int code)
         {
-            Major = (byte)(code >> 16 & 255);
-            Minor = (byte)(code >> 8 & 255);
-            Minor2 = (byte)(code & 255);
+            _major = (byte)(code >> 16 & 255);
+            _minor = (byte)(code >> 8 & 255);
+            _minor2 = (byte)(code & 255);
         }
 
-        public override string ToString() => $"SunVox Lib v{Major}.{Minor}.{Minor2}";
+        public override string ToString() => $"SunVox Lib v{_major}.{_minor}.{_minor2}";
     }
 }

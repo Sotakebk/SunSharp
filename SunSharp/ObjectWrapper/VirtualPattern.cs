@@ -9,7 +9,7 @@ namespace SunSharp.ObjectWrapper
         private readonly ISunVoxLib _lib;
         private readonly Slot _slot;
         private readonly int _id;
-        private int? lastSetTimeStamp = null;
+        private int? lastSetTimeStamp;
         private object _lock;
 
         internal VirtualPattern(Slot slot)
@@ -30,7 +30,7 @@ namespace SunSharp.ObjectWrapper
         /// </summary>
         /// <param name="track"></param>
         /// <param name="e"></param>
-        public void SendEventImmediately(int track, Event e)
+        public void SendEventImmediately(int track, PatternEvent e)
         {
             lock (_lock)
             {
@@ -79,7 +79,7 @@ namespace SunSharp.ObjectWrapper
         /// </summary>
         /// <param name="track"></param>
         /// <param name="e"></param>
-        public void SendEvent(int track, Event @event)
+        public void SendEvent(int track, PatternEvent @event)
         {
             lock (_lock)
             {

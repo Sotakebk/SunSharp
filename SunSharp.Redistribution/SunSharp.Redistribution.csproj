@@ -2,7 +2,30 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>SunSharp.Redistribution</AssemblyName>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <PackageId>Sotakebk.SunSharp.Redistribution</PackageId>
+    <Title>SunSharp.Redistribution</Title>
+    <Version>0.0.0</Version>
+    <Authors>Sotakebk</Authors>
+    <Product>SunSharp.Redistribution</Product>
+    <Description>SunVox Library redistribution for SunSharp.</Description>
+    <Copyright>Sotakebk; SunDog and Tremor Xiph.org Foundation copyright applies</Copyright>
+    <PackageProjectUrl>https://github.com/Sotakebk/SunSharp</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/Sotakebk/SunSharp.git</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>sunvox;music;wrapper</PackageTags>
+    <AnalysisLevel>latest-recommended</AnalysisLevel>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageLicenseFile>license.txt</PackageLicenseFile>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\SunSharp\license.txt">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\SunSharp\SunSharp.csproj" />
@@ -26,6 +49,14 @@
     </None>
     <None Update="lib\windows\lib_x86_64\sunvox.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="license.txt">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Update="README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
     </None>
   </ItemGroup>
 

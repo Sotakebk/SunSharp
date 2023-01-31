@@ -37,6 +37,9 @@ namespace SunSharp.ObjectWrapper
 
         public void RunInOpeningLock(Action action)
         {
+            if (action == null)
+                throw new ArgumentNullException(nameof(action));
+
             lock (_lock)
             {
                 action();
@@ -45,6 +48,9 @@ namespace SunSharp.ObjectWrapper
 
         public T RunInOpeningLock<T>(Func<T> func)
         {
+            if (func == null)
+                throw new ArgumentNullException(nameof(func));
+
             lock (_lock)
             {
                 return func();

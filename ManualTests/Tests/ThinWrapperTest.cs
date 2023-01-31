@@ -124,7 +124,7 @@ namespace ManualJobs.Tests
             {
                 uint _current = lib.GetTicks();
                 lib.SetSendEventTimestamp(0, false, (int)(accumulator + current));
-                lib.SendEvent(0, 0, new Event(pair.note, 0x80, 2));
+                lib.SendEvent(0, 0, new PatternEvent(pair.note, 0x80, 2));
                 accumulator += pair.time;
             }
             lib.SetSendEventTimestamp(0, true);

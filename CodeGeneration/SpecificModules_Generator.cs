@@ -63,7 +63,7 @@
                 for (int i = 0; i < modules.Length; i++)
                 {
                     var module = modules[i];
-                    AppendLine($"public static {module.Name} As{module.Name}(this Module module) => new {module.Name}(module);");
+                    AppendLine($"public static {module.Name}Module As{module.Name}Module(this Module module) => new {module.Name}Module(module);");
 
                     if (i != modules.Length - 1)
                         AppendLine();
@@ -79,13 +79,13 @@
             {
                 var module = modules[i];
 
-                AppendLine($"public struct {module.Name}");
+                AppendLine($"public struct {module.Name}Module");
                 AppendLine("{");
                 AddIndent(() =>
                 {
                     AppendLine("public Module Module { get; private set; }");
                     AppendLine();
-                    AppendLine($"public {module.Name}(Module module)");
+                    AppendLine($"public {module.Name}Module(Module module)");
                     AppendLine("{");
                     AddIndent(() =>
                     {
