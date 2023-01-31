@@ -58,7 +58,7 @@ namespace SunSharp.ObjectWrapper
         {
             return _slot.RunInLock(() =>
             {
-                var moduleId = _lib.CreateModule(_id, type.ToString().Replace('_', ' '), name, x, y, z);
+                var moduleId = _lib.CreateModule(_id, type.ToInternalName(), name, x, y, z);
                 return new Module(this, moduleId);
             });
         }

@@ -132,7 +132,11 @@ namespace SunSharp.Redistribution
             {
                 if (LoadedLibraryHandle == IntPtr.Zero)
                 {
-                    LoadedLibraryHandle = LoadLibrary(GetLibraryPath());
+                    var path = GetLibraryPath();
+                    if (!File.Exists(path))
+                        throw new InvalidOperationException($"Library at location \"{path}\" does not exist.");
+
+                    LoadedLibraryHandle = LoadLibrary(path);
                     if (LoadedLibraryHandle == IntPtr.Zero)
                         throw new InvalidOperationException("LoadLibrary failed.");
                 }
