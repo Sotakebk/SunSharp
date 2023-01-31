@@ -9,41 +9,43 @@ namespace SunSharp.Redistribution
     {
         #region platform invoke
 
+#pragma warning disable CA2101 // Specify marshaling for P/Invoke string arguments
         private static class WindowsImports
         {
-            [DllImport("kernel32.dll", CharSet = CharSet.Unicode)]
+            [DllImport("kernel32.dll", CharSet = CharSet.Ansi)]
             public static extern IntPtr LoadLibrary(string dllToLoad);
 
-            [DllImport("kernel32.dll", CharSet = CharSet.Unicode)]
+            [DllImport("kernel32.dll", CharSet = CharSet.Ansi)]
             public static extern IntPtr GetProcAddress(IntPtr hModule, string procedureName);
 
-            [DllImport("kernel32.dll", CharSet = CharSet.Unicode)]
+            [DllImport("kernel32.dll", CharSet = CharSet.Ansi)]
             public static extern bool FreeLibrary(IntPtr hModule);
         }
 
         private static class LinuxImports
         {
-            [DllImport("libdl.so", CharSet = CharSet.Unicode)]
+            [DllImport("libdl.so", CharSet = CharSet.Ansi)]
             public static extern IntPtr dlopen(string filename, int flags);
 
-            [DllImport("libdl.so", CharSet = CharSet.Unicode)]
+            [DllImport("libdl.so", CharSet = CharSet.Ansi)]
             public static extern IntPtr dlsym(IntPtr handle, string symbol);
 
-            [DllImport("libdl.so", CharSet = CharSet.Unicode)]
+            [DllImport("libdl.so", CharSet = CharSet.Ansi)]
             public static extern int dlclose(IntPtr hModule);
         }
 
         private static class MacOSImports
         {
-            [DllImport("libdl.so", CharSet = CharSet.Unicode)]
+            [DllImport("libdl.so", CharSet = CharSet.Ansi)]
             public static extern IntPtr dlopen(string fileName, int flags);
 
-            [DllImport("libdl.so", CharSet = CharSet.Unicode)]
+            [DllImport("libdl.so", CharSet = CharSet.Ansi)]
             public static extern IntPtr dlsym(IntPtr handle, string symbol);
 
-            [DllImport("libdl.so", CharSet = CharSet.Unicode)]
+            [DllImport("libdl.so", CharSet = CharSet.Ansi)]
             public static extern int dlclose(IntPtr handle);
         }
+#pragma warning restore CA2101 // Specify marshaling for P/Invoke string arguments
 
         private static IntPtr LoadLibrary(string filename)
         {
@@ -78,7 +80,7 @@ namespace SunSharp.Redistribution
             int returnCode;
 
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
-                returnCode = (WindowsImports.FreeLibrary(handle)? -1 : 0);
+                returnCode = (WindowsImports.FreeLibrary(handle)? 0 : 1);
             else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
                 returnCode = LinuxImports.dlclose(handle);
             else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
