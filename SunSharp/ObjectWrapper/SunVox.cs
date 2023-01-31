@@ -4,6 +4,10 @@ using System.Linq;
 
 namespace SunSharp.ObjectWrapper
 {
+    /// <summary>
+    /// Allows for object-oriented approach to using the SunVox library.
+    /// No manual locking should be necessary.
+    /// </summary>
     public class SunVox : System.IDisposable
     {
         private readonly int _sampleRate;
@@ -14,6 +18,9 @@ namespace SunSharp.ObjectWrapper
         private readonly bool _singleThreaded;
         private readonly Channels _channels;
 
+        /// <summary>
+        /// The underlying library. Direct use is potentially dangerous and may break existing abstractions.
+        /// </summary>
         public ISunVoxLib Library => _lib;
         public Slots Slots => _slots;
         public bool NeedsUserCallback => OutputType != null;
@@ -27,10 +34,12 @@ namespace SunSharp.ObjectWrapper
         /// Create an instance of the engine with own audio stream and threading.
         /// </summary>
         /// <param name="lib"></param>
-        /// <param name="bufferSize"></param>
-        /// <param name="deviceIn"></param>
-        /// <param name="deviceOut"></param>
-        /// <param name="driver"></param>
+        /// <param name="channels"></param>
+        /// <param name="bufferSize">Leave <see langword="null"/> for the value to be assigned by the engine.</param>
+        /// <param name="deviceIn">Leave <see langword="null"/> for the value to be assigned by the engine.</param>
+        /// <param name="deviceOut">Leave <see langword="null"/> for the value to be assigned by the engine.</param>
+        /// <param name="driver">Leave <see langword="null"/> for the value to be assigned by the engine.</param>
+        /// <param name="noDebugOutput">Limit information sent to Standard Output.</param>
         public SunVox(ISunVoxLib lib, Channels channels = Channels.Stereo, uint? bufferSize = null,
             string deviceIn = null, string deviceOut = null, string driver = null, bool noDebugOutput = true)
         {
@@ -60,8 +69,10 @@ namespace SunSharp.ObjectWrapper
         /// <param name="lib"></param>
         /// <param name="sampleRate"></param>
         /// <param name="outputType"></param>
-        /// <param name="singleThreaded"></param>
-        /// <param name="noDebugOutput"></param>
+        /// <param name="channels"></param>
+        /// <param name="singleThreaded">Use to promise that audio callback and other methods will be called from one thread.</param>
+        /// <param name="noDebugOutput">Limit information sent to Standard Output.</param>
+        /// <exception cref="System.ArgumentException"></exception>
         public SunVox(ISunVoxLib lib, int sampleRate, OutputType outputType, Channels channels = Channels.Stereo,
             bool singleThreaded = false, bool noDebugOutput = true)
         {
@@ -114,6 +125,9 @@ namespace SunSharp.ObjectWrapper
             Dispose(disposing: false);
         }
 
+        /// <summary>
+        /// Use to deinitialize the library and free resources.
+        /// </summary>
         public void Dispose()
         {
             Dispose(disposing: true);
@@ -124,6 +138,9 @@ namespace SunSharp.ObjectWrapper
 
         #region audio I/O
 
+        /// <summary>
+        /// Handle input ON/OFF requests to enable/disable input ports of the sound card (for example, after the Input module creation). Call it from the main thread only, where the SunVox sound stream is not locked.
+        /// </summary>
         public void UpdateInputDevices() => _lib.UpdateInputDevices();
 
         private void AudioGuard(bool @float)
@@ -139,36 +156,57 @@ namespace SunSharp.ObjectWrapper
             }
         }
 
+        /// <summary>
+        /// Get the next piece of audio.
+        /// If library was initialized with <see cref="Channels.Stereo"/>, the samples will be interlaced, and the buffer size must be a multiple of two.
+        /// </summary>
+        /// <param name="outputBuffer">Buffer to write sound data to.</param>
+        /// <param name="latency">Audio latency (in frames).</param>
+        /// <param name="outTime">Buffer output time (in system ticks).</param>
         public bool AudioCallback(float[] outputBuffer, int latency, uint outTime)
         {
             AudioGuard(true);
             return _lib.AudioCallback(outputBuffer, _channels, latency, outTime);
         }
 
+        /// <inheritdoc cref="AudioCallback(float[], int, uint)"/>
         public bool AudioCallback(short[] outputBuffer, int latency, uint outTime)
         {
             AudioGuard(false);
             return _lib.AudioCallback(outputBuffer, _channels, latency, outTime);
         }
 
+        /// <summary>
+        /// Get the next piece of audio.
+        /// If audio is stereo, the samples will be interlaced, and the buffer size must be a multiple of two.
+        /// Sends equal size buffer of an input device, which will be applied to any Input modules.
+        /// </summary>
+        /// <param name="outputBuffer">Buffer to write sound data to.</param>
+        /// <param name="inputBuffer">Buffer to read sound data from.</param>
+        /// <param name="inputChannels">Input data channels.</param>
+        /// <param name="latency">Audio latency (in frames).</param>
+        /// <param name="outTime">Buffer output time (in system ticks).</param>
         public bool AudioCallback(float[] outputBuffer, float[] inputBuffer, Channels inputChannels, int latency, uint outTime)
         {
             AudioGuard(true);
             return _lib.AudioCallback(outputBuffer, _channels, inputBuffer, inputChannels, latency, outTime);
         }
 
+        /// <inheritdoc cref="AudioCallback(float[], float[], Channels, int, uint)"/>
         public bool AudioCallback(float[] outputBuffer, short[] inputBuffer, Channels inputChannels, int latency, uint outTime)
         {
             AudioGuard(true);
             return _lib.AudioCallback(outputBuffer, _channels, inputBuffer, inputChannels, latency, outTime);
         }
 
+        /// <inheritdoc cref="AudioCallback(float[], float[], Channels, int, uint)"/>
         public bool AudioCallback(short[] outputBuffer, float[] inputBuffer, Channels inputChannels, int latency, uint outTime)
         {
             AudioGuard(false);
             return _lib.AudioCallback(outputBuffer, _channels, inputBuffer, inputChannels, latency, outTime);
         }
 
+        /// <inheritdoc cref="AudioCallback(float[], float[], Channels, int, uint)"/>
         public bool AudioCallback(short[] outputBuffer, short[] inputBuffer, Channels inputChannels, int latency, uint outTime)
         {
             AudioGuard(false);

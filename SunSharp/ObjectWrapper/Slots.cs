@@ -12,6 +12,11 @@ namespace SunSharp.ObjectWrapper
         private readonly Slot[] _slots;
         private readonly object _lock;
 
+        /// <summary>
+        /// Get a reference to a slot. There are 16 slots, so index must be in range 0-15.
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
         public Slot this[int i]
         {
             get
@@ -46,6 +51,11 @@ namespace SunSharp.ObjectWrapper
             }
         }
 
+        /// <summary>
+        /// Try to get and open a new slot.
+        /// </summary>
+        /// <param name="slot"></param>
+        /// <returns><see langword="false"/> if failed to find an unused slot.</returns>
         public bool TryOpenNewSlot(out Slot slot)
         {
             slot = RunInOpeningLock(() =>

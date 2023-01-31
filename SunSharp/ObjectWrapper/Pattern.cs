@@ -2,7 +2,10 @@
 
 namespace SunSharp.ObjectWrapper
 {
-    public struct Pattern
+    /// <summary>
+    /// Represents a pattern. The underlying SunVox pattern may or may not exist!
+    /// </summary>
+    public readonly struct Pattern
     {
         private readonly ISunVoxLib _lib;
         private readonly int _id;
@@ -13,7 +16,7 @@ namespace SunSharp.ObjectWrapper
         public Slot Slot => _slot;
         public ISunVoxLib Library => _lib;
 
-        internal Pattern(Timeline timeline, int id)
+        public Pattern(Timeline timeline, int id)
         {
             _lib = timeline.Slot.SunVox.Library;
             _slot = timeline.Slot;

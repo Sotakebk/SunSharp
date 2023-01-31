@@ -67,12 +67,12 @@ namespace SunSharp.DerivedData
                 BPM = lib.GetSongBpm(slot),
                 CurrentLine = lib.GetCurrentLine(slot),
                 FirstLine = patterns.Min(p => p.Position.X),
-                Frames = lib.GetSongLengthFrames(slot),
+                Frames = lib.GetSongLengthInFrames(slot),
                 HasDynamicTempo = patterns.Any(p => p.HasDynamicTempo),
                 IsDestructive = patterns.Any(p => p.IsDestructive),
                 IsLinear = patterns.All(p => p.IsLinear),
                 LastLine = patterns.Max(p => p.Position.X + p.Lines),
-                Lines = lib.GetSongLengthLines(slot),
+                Lines = lib.GetSongLengthInLines(slot),
                 Name = lib.GetSongName(slot),
                 TPL = lib.GetSongTpl(slot)
             };

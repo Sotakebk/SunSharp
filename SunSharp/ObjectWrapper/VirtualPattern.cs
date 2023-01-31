@@ -24,6 +24,12 @@ namespace SunSharp.ObjectWrapper
 
         public uint GetTicksPerSecond() => _lib.GetTicksPerSecond();
 
+        /// <summary>
+        /// Send an event to be processed as fast as possible.
+        /// Do not use if any other code sends events to the library directly.
+        /// </summary>
+        /// <param name="track"></param>
+        /// <param name="e"></param>
         public void SendEventImmediately(int track, Event e)
         {
             lock (_lock)
@@ -41,7 +47,11 @@ namespace SunSharp.ObjectWrapper
                 }
             }
         }
-
+        /// <summary>
+        /// Set the tick timestamp of future events.
+        /// Do not use if any other code sends events to the library directly.
+        /// </summary>
+        /// <param name="timestamp"></param>
         public void SetEventTiming(int timestamp)
         {
             lock (_lock)
@@ -51,6 +61,10 @@ namespace SunSharp.ObjectWrapper
             }
         }
 
+        /// <summary>
+        /// Reset the tick timestamp of future events.
+        /// Do not use if any other code sends events to the library directly.
+        /// </summary>
         public void ResetEventTiming()
         {
             lock (_lock)
@@ -60,6 +74,11 @@ namespace SunSharp.ObjectWrapper
             }
         }
 
+        /// <summary>
+        /// Send an event.
+        /// </summary>
+        /// <param name="track"></param>
+        /// <param name="e"></param>
         public void SendEvent(int track, Event @event)
         {
             lock (_lock)
@@ -68,6 +87,11 @@ namespace SunSharp.ObjectWrapper
             }
         }
 
+        /// <summary>
+        /// Send an event.
+        /// </summary>
+        /// <param name="track"></param>
+        /// <param name="e"></param>
         public void SendEvent(int track, int NN = 0, int VV = 0, int MM = 0, int CCEE = 0, int XXYY = 0)
         {
             lock (_lock)

@@ -2,6 +2,12 @@
 {
     public static class ModuleTypeExtensions
     {
+        /// <summary>
+        /// Get internal module name from <paramref name="moduleType"/>.
+        /// <para>For example: <see cref="ModuleType.DcBlocker"/> -> "DC Blocker".</para>
+        /// </summary>
+        /// <param name="moduleType"></param>
+        /// <returns></returns>
         public static string ToInternalName(this ModuleType moduleType)
         {
             switch (moduleType)

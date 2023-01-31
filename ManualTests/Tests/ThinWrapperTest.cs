@@ -89,7 +89,7 @@ namespace ManualJobs.Tests
             lib.UnlockSlot(0);
 
             int l = 0;
-            while (l != lib.GetSongLengthLines(0) - 1 || !lib.EndOfSong(0))
+            while (l != lib.GetSongLengthInLines(0) - 1 || lib.IsPlaying(0))
             {
                 var nl = lib.GetCurrentLine(0);
                 if (nl != l)

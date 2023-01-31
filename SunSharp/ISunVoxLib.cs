@@ -269,7 +269,9 @@ namespace SunSharp
         /// </summary>
         uint sv_get_module_scope2(int slot, int mod_num, int channel, IntPtr dest_buf, uint samples_to_read);
 
-        //int sv_module_curve(int slot, int mod_num, int curve_num, float* data, int len, int w) SUNVOX_FN_ATTR;
+        /// <summary>
+        /// int sv_module_curve(int slot, int mod_num, int curve_num, float* data, int len, int w) SUNVOX_FN_ATTR;
+        /// </summary>
         int sv_module_curve(int slot, int mod_num, int curve_num, IntPtr data, int len, int w);
 
         /// <summary>

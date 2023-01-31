@@ -47,6 +47,11 @@ namespace SunSharp.ThinWrapper
 
         // this code is translated from sunvox.h
 
+        /// <summary>
+        /// Get x, y position from one xy value received from <see cref="ISunVoxLib.sv_get_module_xy(int, int)"/>.
+        /// </summary>
+        /// <param name="xy"></param>
+        /// <returns></returns>
         public static (short x, short y) PositionToXY(uint xy)
         {
             uint x = xy & 0xFFFF;
@@ -54,6 +59,11 @@ namespace SunSharp.ThinWrapper
             return (ToShortBitwise(x), ToShortBitwise(y));
         }
 
+        /// <summary>
+        /// Get finetune and relative note value from one finetune value received from <see cref="ISunVoxLib.sv_get_module_finetune(int, int)"/>.
+        /// </summary>
+        /// <param name="moduleFinetune"></param>
+        /// <returns></returns>
         public static (short finetune, short relativeNote) SplitFinetune(uint moduleFinetune)
         {
             uint out_finetune = moduleFinetune & 0xFFFF;
@@ -61,24 +71,24 @@ namespace SunSharp.ThinWrapper
             return (ToShortBitwise(out_finetune), ToShortBitwise(out_relative_note));
         }
 
-        public static float PitchToFrequency(float pitch)
+        public static float FrequencyFromPitch(float pitch)
         {
-            return (float)PitchToFrequency((double)pitch);
+            return (float)FrequencyFromPitch((double)pitch);
         }
 
-        public static double PitchToFrequency(double pitch)
+        public static double FrequencyFromPitch(double pitch)
         {
             var value = (30720.0 - pitch) / 3072.0;
             value = Math.Pow(2, value) * 16.333984375;
             return value;
         }
 
-        public static float FrequencyToPitch(float frequency)
+        public static float PitchFromFrequency(float frequency)
         {
-            return (float)FrequencyToPitch((double)frequency);
+            return (float)PitchFromFrequency((double)frequency);
         }
 
-        public static double FrequencyToPitch(double frequency)
+        public static double PitchFromFrequency(double frequency)
         {
             var value = Math.Log(frequency, 2) / 16.333984375;
             value = 30720 - value * 3072;
@@ -155,31 +165,58 @@ namespace SunSharp.ThinWrapper
             return (ret == 1);
         }
 
+        /// <summary>
+        /// Get the next piece of audio.
+        /// If audio is stereo, the samples will be interlaced, and the buffer size must be a multiple of two.
+        /// </summary>
+        /// <param name="lib"></param>
+        /// <param name="outputBuffer">Buffer to write sound data to.</param>
+        /// <param name="channels">Channels the library was initialized with.</param>
+        /// <param name="latency">Audio latency (in frames).</param>
+        /// <param name="outTime">Buffer output time (in system ticks).</param>
+        /// <returns><see langword="false"/> if buffer was filled with zeros.</returns>
         public static bool AudioCallback(this ISunVoxLib lib, float[] outputBuffer, Channels channels, int latency, uint outTime)
         {
             return AudioCallbackInternal(lib, outputBuffer, channels, latency, outTime);
         }
 
+        /// <inheritdoc cref="AudioCallback(ISunVoxLib, float[], Channels, int, uint)"/>
         public static bool AudioCallback(this ISunVoxLib lib, short[] outputBuffer, Channels channels, int latency, uint outTime)
         {
             return AudioCallbackInternal(lib, outputBuffer, channels, latency, outTime);
         }
 
+        /// <summary>
+        /// Get the next piece of audio.
+        /// If audio is stereo, the samples will be interlaced, and the buffer size must be a multiple of two.
+        /// Sends equal size buffer of an input device, which will be applied to any Input modules.
+        /// </summary>
+        /// <param name="lib"></param>
+        /// <param name="outputBuffer">Buffer to write sound data to.</param>
+        /// <param name="outputChannels">Channels the library was initialized with.</param>
+        /// <param name="inputBuffer">Buffer to read sound data from.</param>
+        /// <param name="inputChannels">Input data channels.</param>
+        /// <param name="latency">Audio latency (in frames).</param>
+        /// <param name="outTime">Buffer output time (in system ticks).</param>
+        /// <returns><see langword="false"/> if buffer was filled with zeros.</returns>
         public static bool AudioCallback(this ISunVoxLib lib, float[] outputBuffer, Channels outputChannels, float[] inputBuffer, Channels inputChannels, int latency, uint outTime)
         {
             return AudioCallbackInternal(lib, outputBuffer, outputChannels, inputBuffer, inputChannels, latency, outTime, 1);
         }
 
+        /// <inheritdoc cref="AudioCallback(ISunVoxLib, float[], Channels, float[], Channels, int, uint)"/>
         public static bool AudioCallback(this ISunVoxLib lib, float[] outputBuffer, Channels outputChannels, short[] inputBuffer, Channels inputChannels, int latency, uint outTime)
         {
             return AudioCallbackInternal(lib, outputBuffer, outputChannels, inputBuffer, inputChannels, latency, outTime, 0);
         }
 
+        /// <inheritdoc cref="AudioCallback(ISunVoxLib, float[], Channels, float[], Channels, int, uint)"/>
         public static bool AudioCallback(this ISunVoxLib lib, short[] outputBuffer, Channels outputChannels, float[] inputBuffer, Channels inputChannels, int latency, uint outTime)
         {
             return AudioCallbackInternal(lib, outputBuffer, outputChannels, inputBuffer, inputChannels, latency, outTime, 1);
         }
 
+        /// <inheritdoc cref="AudioCallback(ISunVoxLib, float[], Channels, float[], Channels, int, uint)"/>
         public static bool AudioCallback(this ISunVoxLib lib, short[] outputBuffer, Channels outputChannels, short[] inputBuffer, Channels inputChannels, int latency, uint outTime)
         {
             return AudioCallbackInternal(lib, outputBuffer, outputChannels, inputBuffer, inputChannels, latency, outTime, 0);
@@ -189,6 +226,16 @@ namespace SunSharp.ThinWrapper
 
         #region engine
 
+        /// <summary>
+        /// Initialize the engine.
+        /// </summary>
+        /// <param name="lib"></param>
+        /// <param name="sampleRate">Sample rate. If not using audio callback, may be set to -1.</param>
+        /// <param name="config">Configuration, which may include input and output devices. See SunVox Lib documentation for details.</param>
+        /// <param name="channels">Channels to be used.</param>
+        /// <param name="flags">Initialization flags.</param>
+        /// <returns>The version of underlying library.</returns>
+        /// <exception cref="SunVoxException"></exception>
         public static Version Init(this ISunVoxLib lib, int sampleRate, string config = null, Channels channels = Channels.Stereo, InitFlags flags = InitFlags.Default)
         {
             var ptr = Marshal.StringToHGlobalAnsi(config);
@@ -205,6 +252,11 @@ namespace SunSharp.ThinWrapper
             }
         }
 
+        /// <summary>
+        /// Deinitializes the library, frees resources.
+        /// </summary>
+        /// <param name="lib"></param>
+        /// <exception cref="SunVoxException"></exception>
         public static void Deinit(this ISunVoxLib lib)
         {
             var retCode = lib.sv_deinit();
@@ -212,6 +264,12 @@ namespace SunSharp.ThinWrapper
                 throw new SunVoxException(retCode, nameof(lib.sv_deinit));
         }
 
+        /// <summary>
+        /// Get first <paramref name="size"/> characters of engine logs.
+        /// </summary>
+        /// <param name="lib"></param>
+        /// <param name="size">Character count to be read.</param>
+        /// <returns></returns>
         public static string GetLog(this ISunVoxLib lib, int size)
         {
             var ptr = lib.sv_get_log(size);
@@ -251,6 +309,11 @@ namespace SunSharp.ThinWrapper
             return ret;
         }
 
+        /// <summary>
+        /// Handle input ON/OFF requests to enable/disable input ports of the sound card (for example, after the Input module creation). Call it from the main thread only, where the SunVox sound stream is not locked.
+        /// </summary>
+        /// <param name="lib"></param>
+        /// <exception cref="SunVoxException"></exception>
         public static void UpdateInputDevices(this ISunVoxLib lib)
         {
             var ret = lib.sv_update_input();
@@ -262,14 +325,21 @@ namespace SunSharp.ThinWrapper
 
         #region slot
 
-        public static bool EndOfSong(this ISunVoxLib lib, int slot)
+        public static bool IsPlaying(this ISunVoxLib lib, int slot)
         {
             var ret = lib.sv_end_of_song(slot);
             if (ret != 0 && ret != 1)
                 throw new SunVoxException(ret, nameof(lib.sv_end_of_song));
-            return ret == 1;
+            return ret == 0;
         }
 
+        /// <summary>
+        /// Get current behaviour for reaching the end of project timeline.
+        /// </summary>
+        /// <param name="lib"></param>
+        /// <param name="slot"></param>
+        /// <returns><see langword="true"/> if project is stopped after reaching the end.</returns>
+        /// <exception cref="SunVoxException"></exception>
         public static bool GetAutostop(this ISunVoxLib lib, int slot)
         {
             var ret = lib.sv_get_autostop(slot);
@@ -283,6 +353,12 @@ namespace SunSharp.ThinWrapper
             return lib.sv_get_current_line(slot);
         }
 
+        /// <summary>
+        /// Get current line in fixed point format (with tenth part).
+        /// </summary>
+        /// <param name="lib"></param>
+        /// <param name="slot"></param>
+        /// <returns></returns>
         public static int GetCurrentLine2(this ISunVoxLib lib, int slot)
         {
             return lib.sv_get_current_line2(slot);
@@ -301,7 +377,7 @@ namespace SunSharp.ThinWrapper
             return ret;
         }
 
-        public static int GetSongLengthFrames(this ISunVoxLib lib, int slot)
+        public static int GetSongLengthInFrames(this ISunVoxLib lib, int slot)
         {
             var ret = lib.sv_get_song_length_frames(slot);
             if (ret < 0)
@@ -309,7 +385,7 @@ namespace SunSharp.ThinWrapper
             return (int)ret;
         }
 
-        public static int GetSongLengthLines(this ISunVoxLib lib, int slot)
+        public static int GetSongLengthInLines(this ISunVoxLib lib, int slot)
         {
             var ret = lib.sv_get_song_length_lines(slot);
             if (ret < 0)
@@ -390,6 +466,14 @@ namespace SunSharp.ThinWrapper
                 throw new SunVoxException(ret, nameof(lib.sv_sync_resume));
         }
 
+        /// <summary>
+        /// Get and set volume. Call with <paramref name="volume"/> = -1 to only get the value.
+        /// </summary>
+        /// <param name="lib"></param>
+        /// <param name="slot"></param>
+        /// <param name="volume">Value in range 0-256.</param>
+        /// <returns>Previous volume in range 0-256.</returns>
+        /// <exception cref="SunVoxException"></exception>
         public static int Volume(this ISunVoxLib lib, int slot, int volume)
         {
             var ret = lib.sv_volume(slot, volume);
@@ -398,6 +482,18 @@ namespace SunSharp.ThinWrapper
             return ret;
         }
 
+        /// <summary>
+        /// Get the project time map.
+        /// <para>For <paramref name="type"/> = <see cref="TimeMapType.Speed"/>, Nth value equals speed at the beginning of Nth line (Bpm | Tpl &lt;&lt; 16). </para>
+        /// <para>For <paramref name="type"/> = <see cref="TimeMapType.FrameCount"/>, Nth value equals frame counter at the beginning of Nth line. </para>
+        /// </summary>
+        /// <param name="lib"></param>
+        /// <param name="slot"></param>
+        /// <param name="startLine"></param>
+        /// <param name="length"></param>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        /// <exception cref="SunVoxException"></exception>
         public static uint[] GetTimeMap(this ISunVoxLib lib, int slot, int startLine, int length, TimeMapType type)
         {
             var arr = new uint[length];
@@ -416,6 +512,13 @@ namespace SunSharp.ThinWrapper
             return arr;
         }
 
+        /// <summary>
+        /// Load a project from path.
+        /// </summary>
+        /// <param name="lib"></param>
+        /// <param name="slot"></param>
+        /// <param name="path"></param>
+        /// <exception cref="SunVoxException"></exception>
         public static void Load(this ISunVoxLib lib, int slot, string path)
         {
             var ptr = Marshal.StringToHGlobalAnsi(path);
@@ -432,6 +535,13 @@ namespace SunSharp.ThinWrapper
                 throw new SunVoxException(ret, nameof(lib.sv_load));
         }
 
+        /// <summary>
+        /// Load a project from memory.
+        /// </summary>
+        /// <param name="lib"></param>
+        /// <param name="slot"></param>
+        /// <param name="data"></param>
+        /// <exception cref="SunVoxException"></exception>
         public static void Load(this ISunVoxLib lib, int slot, byte[] data)
         {
             var handle = GCHandle.Alloc(data, GCHandleType.Pinned);
@@ -462,6 +572,14 @@ namespace SunSharp.ThinWrapper
                 throw new SunVoxException(ret, nameof(lib.sv_close_slot));
         }
 
+        /// <summary>
+        /// Enter a lock block.
+        /// Use to send multiple events at the same time, read or write data from multiple threads.
+        /// Remember to call <see cref="UnlockSlot(ISunVoxLib, int)"/>!
+        /// </summary>
+        /// <param name="lib"></param>
+        /// <param name="slot"></param>
+        /// <exception cref="SunVoxException"></exception>
         public static void LockSlot(this ISunVoxLib lib, int slot)
         {
             var ret = lib.sv_lock_slot(slot);
@@ -469,6 +587,12 @@ namespace SunSharp.ThinWrapper
                 throw new SunVoxException(ret, nameof(lib.sv_lock_slot));
         }
 
+        /// <summary>
+        /// Leave a lock block.
+        /// </summary>
+        /// <param name="lib"></param>
+        /// <param name="slot"></param>
+        /// <exception cref="SunVoxException"></exception>
         public static void UnlockSlot(this ISunVoxLib lib, int slot)
         {
             var ret = lib.sv_unlock_slot(slot);
@@ -476,6 +600,10 @@ namespace SunSharp.ThinWrapper
                 throw new SunVoxException(ret, nameof(lib.sv_unlock_slot));
         }
 
+        /// <summary>
+        /// Use to group multiple calls in one lock/unlock block.
+        /// Possible issues: when a slot is closed, then re-opened while user code is running, it may escape the abstraction and/or throw an exception.
+        /// </summary>
         public static void RunInLock(this ISunVoxLib lib, int slot, Action action)
         {
             bool entered = false;
@@ -492,6 +620,7 @@ namespace SunSharp.ThinWrapper
             }
         }
 
+        /// <inheritdoc cref="RunInLock(ISunVoxLib, int, Action)"/>
         public static T RunInLock<T>(this ISunVoxLib lib, int slot, Func<T> func)
         {
             bool entered = false;
@@ -545,6 +674,14 @@ namespace SunSharp.ThinWrapper
 
         #region module
 
+        /// <summary>
+        /// <para>Use <see cref="LockSlot(ISunVoxLib, int)"/> or an alternative!</para>
+        /// </summary>
+        /// <param name="lib"></param>
+        /// <param name="slot"></param>
+        /// <param name="source"></param>
+        /// <param name="destination"></param>
+        /// <exception cref="SunVoxException"></exception>
         public static void ConnectModule(this ISunVoxLib lib, int slot, int source, int destination)
         {
             var ret = lib.sv_connect_module(slot, source, destination);
@@ -552,6 +689,15 @@ namespace SunSharp.ThinWrapper
                 throw new SunVoxException(ret, nameof(lib.sv_connect_module));
         }
 
+        /// <summary>
+        ///
+        /// <para>Use <see cref="LockSlot(ISunVoxLib, int)"/> or an alternative!</para>
+        /// </summary>
+        /// <param name="lib"></param>
+        /// <param name="slot"></param>
+        /// <param name="source"></param>
+        /// <param name="destination"></param>
+        /// <exception cref="SunVoxException"></exception>
         public static void DisconnectModule(this ISunVoxLib lib, int slot, int source, int destination)
         {
             var ret = lib.sv_disconnect_module(slot, source, destination);
@@ -559,6 +705,14 @@ namespace SunSharp.ThinWrapper
                 throw new SunVoxException(ret, nameof(lib.sv_disconnect_module));
         }
 
+        /// <summary>
+        /// Find module by name.
+        /// </summary>
+        /// <param name="lib"></param>
+        /// <param name="slot"></param>
+        /// <param name="name"></param>
+        /// <returns>Id of found module, -1 if it was not found.</returns>
+        /// <exception cref="SunVoxException"></exception>
         public static int FindModule(this ISunVoxLib lib, int slot, string name)
         {
             var ptr = Marshal.StringToHGlobalAnsi(name);
@@ -595,6 +749,16 @@ namespace SunSharp.ThinWrapper
             return Marshal.PtrToStringAnsi(ptr);
         }
 
+        /// <summary>
+        /// Get module controller value. If scaled, it will be in XXYY column format, in range of 0x0000 to 0x8000.
+        /// Otherwise, it will return actual values.
+        /// </summary>
+        /// <param name="lib"></param>
+        /// <param name="slot"></param>
+        /// <param name="module"></param>
+        /// <param name="controller"></param>
+        /// <param name="scaled"></param>
+        /// <returns></returns>
         public static int GetModuleControllerValue(this ISunVoxLib lib, int slot, int module, int controller, bool scaled)
         {
             return lib.sv_get_module_ctl_value(slot, module, controller, scaled ? 1 : 0);
@@ -615,9 +779,17 @@ namespace SunSharp.ThinWrapper
             return GetModuleFlags(lib, slot, module).Exists;
         }
 
+        /// <summary>
+        /// Get an array of Ids of modules.
+        /// Does NOT return -1 for empty connection slots.
+        /// </summary>
+        /// <param name="lib"></param>
+        /// <param name="slot"></param>
+        /// <param name="module"></param>
+        /// <returns></returns>
         public static int[] GetModuleInputs(this ISunVoxLib lib, int slot, int module)
         {
-            var count = GetModuleFlags(lib, slot, module).InputCount;
+            var count = GetModuleFlags(lib, slot, module).InputUpperCount;
             if (count == 0)
                 return Array.Empty<int>();
 
@@ -641,9 +813,17 @@ namespace SunSharp.ThinWrapper
             return Marshal.PtrToStringAnsi(ptr);
         }
 
+        /// <summary>
+        /// Get an array of Ids of modules.
+        /// Does NOT return -1 for empty connection slots.
+        /// </summary>
+        /// <param name="lib"></param>
+        /// <param name="slot"></param>
+        /// <param name="module"></param>
+        /// <returns></returns>
         public static int[] GetModuleOutputs(this ISunVoxLib lib, int slot, int module)
         {
-            var count = GetModuleFlags(lib, slot, module).OutputCount;
+            var count = GetModuleFlags(lib, slot, module).OutputUpperCount;
             if (count == 0)
                 return Array.Empty<int>();
 
@@ -658,6 +838,15 @@ namespace SunSharp.ThinWrapper
             }
         }
 
+        /// <summary>
+        /// Read module scope view, and write it to a buffer.
+        /// </summary>
+        /// <param name="lib"></param>
+        /// <param name="slot"></param>
+        /// <param name="module"></param>
+        /// <param name="channel"></param>
+        /// <param name="buffer"></param>
+        /// <returns>Number of samples successfully read.</returns>
         public static int ReadModuleScope(this ISunVoxLib lib, int slot, int module, int channel, short[] buffer)
         {
             var handle = GCHandle.Alloc(buffer, GCHandleType.Pinned);
@@ -677,6 +866,13 @@ namespace SunSharp.ThinWrapper
             return PositionToXY(lib.sv_get_module_xy(slot, module));
         }
 
+        /// <summary>
+        /// Get the upper module count, which may be greater than the actual module count.
+        /// </summary>
+        /// <param name="lib"></param>
+        /// <param name="slot"></param>
+        /// <returns></returns>
+        /// <exception cref="SunVoxException"></exception>
         public static int GetUpperModuleCount(this ISunVoxLib lib, int slot)
         {
             var ret = lib.sv_get_number_of_modules(slot);
@@ -693,6 +889,17 @@ namespace SunSharp.ThinWrapper
             return ret;
         }
 
+        /// <summary>
+        /// Load a MetaModule from a file.
+        /// </summary>
+        /// <param name="lib"></param>
+        /// <param name="slot"></param>
+        /// <param name="path"></param>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <param name="z"></param>
+        /// <returns></returns>
+        /// <exception cref="SunVoxException"></exception>
         public static int LoadModule(this ISunVoxLib lib, int slot, string path, int x = 0, int y = 0, int z = 0)
         {
             var ptr = Marshal.StringToHGlobalAnsi(path);
@@ -710,6 +917,17 @@ namespace SunSharp.ThinWrapper
             return ret;
         }
 
+        /// <summary>
+        /// Load a MetaModule from memory.
+        /// </summary>
+        /// <param name="lib"></param>
+        /// <param name="slot"></param>
+        /// <param name="data"></param>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <param name="z"></param>
+        /// <returns></returns>
+        /// <exception cref="SunVoxException"></exception>
         public static int LoadModule(this ISunVoxLib lib, int slot, byte[] data, int x = 0, int y = 0, int z = 0)
         {
             var handle = GCHandle.Alloc(data, GCHandleType.Pinned);
@@ -761,6 +979,19 @@ namespace SunSharp.ThinWrapper
             return ret;
         }
 
+        /// <summary>
+        /// Create a new module. Type refers to the name visible on new module creation window.
+        /// <para>Use <see cref="LockSlot(ISunVoxLib, int)"/> or an alternative!</para>
+        /// </summary>
+        /// <param name="lib"></param>
+        /// <param name="slot"></param>
+        /// <param name="type"></param>
+        /// <param name="name"></param>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <param name="z"></param>
+        /// <returns>ID of newly created module.</returns>
+        /// <exception cref="SunVoxException"></exception>
         public static int CreateModule(this ISunVoxLib lib, int slot, string type, string name, int x = 0, int y = 0, int z = 0)
         {
             var typeptr = Marshal.StringToHGlobalAnsi(type);
@@ -780,6 +1011,14 @@ namespace SunSharp.ThinWrapper
             return ret;
         }
 
+        /// <summary>
+        /// Remove an existing module.
+        /// <para>Use <see cref="LockSlot(ISunVoxLib, int)"/> or an alternative!</para>
+        /// </summary>
+        /// <param name="lib"></param>
+        /// <param name="slot"></param>
+        /// <param name="module"></param>
+        /// <exception cref="SunVoxException"></exception>
         public static void RemoveModule(this ISunVoxLib lib, int slot, int module)
         {
             var ret = lib.sv_remove_module(slot, module);
@@ -787,6 +1026,16 @@ namespace SunSharp.ThinWrapper
                 throw new SunVoxException(ret, nameof(lib.sv_remove_module));
         }
 
+        /// <summary>
+        /// Load a sample (xi, wav, aiff) to an existing Sampler module from file.
+        /// Set <paramref name="sampleSlot"/> to -1 to apply the sample to all sample slots.
+        /// </summary>
+        /// <param name="lib"></param>
+        /// <param name="slot"></param>
+        /// <param name="module"></param>
+        /// <param name="path"></param>
+        /// <param name="sampleSlot"></param>
+        /// <exception cref="SunVoxException"></exception>
         public static void LoadSample(this ISunVoxLib lib, int slot, int module, string path, int sampleSlot = -1)
         {
             var ptr = Marshal.StringToHGlobalAnsi(path);
@@ -803,6 +1052,16 @@ namespace SunSharp.ThinWrapper
                 throw new SunVoxException(ret, nameof(lib.sv_sampler_load));
         }
 
+        /// <summary>
+        /// Load a sample (xi, wav, aiff) to an existing Sampler module from memory.
+        /// Set <paramref name="sampleSlot"/> to -1 to apply the sample to all sample slots.
+        /// </summary>
+        /// <param name="lib"></param>
+        /// <param name="slot"></param>
+        /// <param name="module"></param>
+        /// <param name="path"></param>
+        /// <param name="sampleSlot"></param>
+        /// <exception cref="SunVoxException"></exception>
         public static void LoadSample(this ISunVoxLib lib, int slot, int module, byte[] data, int sampleSlot = -1)
         {
             var handle = GCHandle.Alloc(data, GCHandleType.Pinned);
@@ -823,6 +1082,13 @@ namespace SunSharp.ThinWrapper
 
         #region pattern
 
+        /// <summary>
+        /// Get the upper pattern count, which may be greater than the actual pattern count.
+        /// </summary>
+        /// <param name="lib"></param>
+        /// <param name="slot"></param>
+        /// <returns></returns>
+        /// <exception cref="SunVoxException"></exception>
         public static int GetUpperPatternCount(this ISunVoxLib lib, int slot)
         {
             var ret = lib.sv_get_number_of_patterns(slot);
@@ -831,6 +1097,14 @@ namespace SunSharp.ThinWrapper
             return ret;
         }
 
+        /// <summary>
+        /// Find pattern by name.
+        /// </summary>
+        /// <param name="lib"></param>
+        /// <param name="slot"></param>
+        /// <param name="name"></param>
+        /// <returns>Pattern Id, or -1 if pattern was not found.</returns>
+        /// <exception cref="SunVoxException"></exception>
         public static int FindPattern(this ISunVoxLib lib, int slot, string name)
         {
             var ptr = Marshal.StringToHGlobalAnsi(name);
@@ -926,6 +1200,16 @@ namespace SunSharp.ThinWrapper
             }
         }
 
+        /// <summary>
+        ///
+        /// <para>Use <see cref="LockSlot(ISunVoxLib, int)"/> or an alternative!</para>
+        /// </summary>
+        /// <param name="lib"></param>
+        /// <param name="slot"></param>
+        /// <param name="pattern"></param>
+        /// <param name="muted"></param>
+        /// <returns></returns>
+        /// <exception cref="SunVoxException"></exception>
         public static bool PatternMute(this ISunVoxLib lib, int slot, int pattern, bool muted)
         {
             var ret = lib.sv_pattern_mute(slot, pattern, muted ? 1 : 0);

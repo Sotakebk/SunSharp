@@ -3,7 +3,10 @@ using System.Linq;
 
 namespace SunSharp.ObjectWrapper
 {
-    public struct Module
+    /// <summary>
+    /// Represents a module. The underlying SunVox module may or may not exist!
+    /// </summary>
+    public readonly struct Module
     {
         private readonly ISunVoxLib _lib;
         private readonly Slot _slot;
@@ -13,7 +16,7 @@ namespace SunSharp.ObjectWrapper
         public int Id => _id;
         public Slot Slot => _slot;
 
-        internal Module(Synthesizer synthesizer, int id)
+        public Module(Synthesizer synthesizer, int id)
         {
             _slot = synthesizer.Slot;
             _slotId = _slot.Id;
@@ -49,6 +52,10 @@ namespace SunSharp.ObjectWrapper
             return _lib.GetModuleOutputs(_slotId, _id).Select(i => new Module(synthesizer, i)).ToArray();
         }
 
+        /// <summary>
+        /// Load a sample (xi, wav, aiff) to a Sampler module from file.
+        /// Set <paramref name="sampleSlot"/> to -1 to apply the sample to all sample slots.
+        /// </summary>
         public void LoadSample(string path, int sampleSlot = -1)
         {
             var lib = _lib;
@@ -60,6 +67,10 @@ namespace SunSharp.ObjectWrapper
             });
         }
 
+        /// <summary>
+        /// Load a sample (xi, wav, aiff) to a Sampler module from memory.
+        /// Set <paramref name="sampleSlot"/> to -1 to apply the sample to all sample slots.
+        /// </summary>
         public void LoadSample(byte[] data, int sampleSlot = -1)
         {
             var lib = _lib;
@@ -71,6 +82,12 @@ namespace SunSharp.ObjectWrapper
             });
         }
 
+        /// <summary>
+        /// Read module scope view, and write it to a buffer.
+        /// </summary>
+        /// <param name="channel"></param>
+        /// <param name="buffer"></param>
+        /// <returns>Number of samples successfully read.</returns>
         public int ReadScope(Channel channel, short[] buffer)
         {
             return _lib.ReadModuleScope(_slotId, _id, (int)channel, buffer);

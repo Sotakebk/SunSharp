@@ -3,6 +3,9 @@ using System;
 
 namespace SunSharp.ObjectWrapper
 {
+    /// <summary>
+    /// Represents a SunVox slot.
+    /// </summary>
     public class Slot
     {
         private readonly int _id;
@@ -15,10 +18,26 @@ namespace SunSharp.ObjectWrapper
         private readonly object _lock;
 
         public int Id => _id;
+
+        /// <summary>
+        /// Virtual, 16-track pattern for sending events to the engine.
+        /// </summary>
         public VirtualPattern VirtualPattern => _virtualPattern;
+
+        /// <summary>
+        /// Project timeline, containing all the existing patterns.
+        /// </summary>
         public Timeline Timeline => _timeline;
+
+        /// <summary>
+        /// Project synthesizer, containing all the existing modules.
+        /// </summary>
         public Synthesizer Synthesizer => _synthesizer;
         public SunVox SunVox => _sunVox;
+
+        /// <summary>
+        /// Underlying library instance.
+        /// </summary>
         public ISunVoxLib Library => _lib;
         public bool IsOpen { get; private set; }
 
@@ -36,6 +55,10 @@ namespace SunSharp.ObjectWrapper
 
         #region locks
 
+        /// <summary>
+        /// Use to execute multiple operations in the 'same' SunVox time.
+        /// </summary>
+        /// <exception cref="InvalidOperationException"></exception>
         public void RunInLock(Action action)
         {
             if (!IsOpen)
@@ -44,6 +67,7 @@ namespace SunSharp.ObjectWrapper
             _lib.RunInLock(_id, action);
         }
 
+        /// <inheritdoc cref="RunInLock(Action)"/>
         public T RunInLock<T>(Func<T> function)
         {
             if (!IsOpen)
@@ -89,11 +113,23 @@ namespace SunSharp.ObjectWrapper
 
         #region loading, saving
 
-        public void Load(string path) => _lib.Load(_id, path);
+        /// <summary>
+        /// Load a project from file.
+        /// </summary>
+        /// <param name="path"></param>
+        public void Load(string path) => RunInLock(() => _lib.Load(_id, path));
 
-        public void Load(byte[] data) => _lib.Load(_id, data);
+        /// <summary>
+        /// load a project from memory.
+        /// </summary>
+        /// <param name="data"></param>
+        public void Load(byte[] data) => RunInLock(() => _lib.Load(_id, data));
 
-        public void Save(string path) => _lib.Save(_id, path);
+        /// <summary>
+        /// Save a project to file.
+        /// </summary>
+        /// <param name="path"></param>
+        public void Save(string path) => RunInLock(() => _lib.Save(_id, path));
 
         #endregion loading, saving
 
@@ -136,12 +172,12 @@ namespace SunSharp.ObjectWrapper
 
         public bool GetAutostop()
         {
-            return RunInLock(() => _lib.GetAutostop(_id));
+            return _lib.GetAutostop(_id);
         }
 
         public bool IsPlaying()
         {
-            return RunInLock(() => !_lib.EndOfSong(_id));
+            return _lib.IsPlaying(_id);
         }
 
         public void Rewind(int lineNumber)
@@ -154,14 +190,17 @@ namespace SunSharp.ObjectWrapper
             return _lib.GetCurrentLine(_id);
         }
 
+        /// <summary>
+        /// Get current line in fixed point format (with tenth part).
+        /// </summary>
         public int GetCurrentLineHundreds()
         {
-            return RunInLock(() => _lib.GetCurrentLine2(_id));
+            return _lib.GetCurrentLine2(_id);
         }
 
         public int GetCurrentSignalLevel(Channel channel = Channel.Mono)
         {
-            return RunInLock(() => _lib.GetCurrentSignalLevel(_id, (int)channel));
+            return _lib.GetCurrentSignalLevel(_id, (int)channel);
         }
 
         #endregion playing, stopping
@@ -202,12 +241,12 @@ namespace SunSharp.ObjectWrapper
 
         public int GetSongLengthInLines()
         {
-            return _lib.GetSongLengthLines(_id);
+            return _lib.GetSongLengthInLines(_id);
         }
 
         public int GetSongLengthInFrames()
         {
-            return _lib.GetSongLengthFrames(_id);
+            return _lib.GetSongLengthInFrames(_id);
         }
 
         public string GetSongName()
@@ -215,6 +254,15 @@ namespace SunSharp.ObjectWrapper
             return _lib.GetSongName(_id);
         }
 
+        /// <summary>
+        /// Get the project time map.
+        /// <para>For <paramref name="type"/> = <see cref="TimeMapType.Speed"/>, Nth value equals speed at the beginning of Nth line (Bpm | Tpl &lt;&lt; 16). </para>
+        /// <para>For <paramref name="type"/> = <see cref="TimeMapType.FrameCount"/>, Nth value equals frame counter at the beginning of Nth line. </para>
+        /// </summary>
+        /// <param name="startLine"></param>
+        /// <param name="length"></param>
+        /// <param name="type"></param>
+        /// <returns></returns>
         public uint[] GetTimeMap(int startLine, int length, TimeMapType type)
         {
             return _lib.GetTimeMap(_id, startLine, length, type);

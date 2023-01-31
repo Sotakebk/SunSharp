@@ -1,6 +1,6 @@
 ﻿namespace SunSharp.ThinWrapper
 {
-    public struct ModuleFlags
+    public readonly struct ModuleFlags
     {
         private const uint SV_MODULE_FLAG_EXISTS = 1 << 0;
         private const uint SV_MODULE_FLAG_EFFECT = 1 << 1;
@@ -13,7 +13,7 @@
         private const int SV_MODULE_OUTPUTS_OFF = 16 + 8;
         private const uint SV_MODULE_OUTPUTS_MASK = 255u << 16 + 8;
 
-        public uint Value;
+        public readonly uint Value;
 
         public bool Exists => (Value & SV_MODULE_FLAG_EXISTS) != 0;
         public bool Effect => (Value & SV_MODULE_FLAG_EFFECT) != 0;
@@ -21,8 +21,15 @@
         public bool Solo => (Value & SV_MODULE_FLAG_SOLO) != 0;
         public bool Bypass => (Value & SV_MODULE_FLAG_BYPASS) != 0;
 
-        public int InputCount => (int)((Value & SV_MODULE_INPUTS_MASK) >> SV_MODULE_INPUTS_OFF);
-        public int OutputCount => (int)((Value & SV_MODULE_OUTPUTS_MASK) >> SV_MODULE_OUTPUTS_OFF);
+        /// <summary>
+        /// Actual input count may be less or equal.
+        /// </summary>
+        public int InputUpperCount => (int)((Value & SV_MODULE_INPUTS_MASK) >> SV_MODULE_INPUTS_OFF);
+
+        /// <summary>
+        /// Actual output count may be less or equal
+        /// </summary>
+        public int OutputUpperCount => (int)((Value & SV_MODULE_OUTPUTS_MASK) >> SV_MODULE_OUTPUTS_OFF);
 
         public ModuleFlags(uint value)
         {
