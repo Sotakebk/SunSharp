@@ -19,8 +19,8 @@ namespace CodeGeneration
 
         internal static void Main()
         {
-            SunSharp.Redistribution.Redistribution.LoadLibrary();
-            var lib = SunSharp.Redistribution.Redistribution.GetLibrary();
+            SunSharp.Redistribution.LibraryLoader.LoadLibrary();
+            var lib = SunSharp.Redistribution.LibraryLoader.GetLibrary();
 
             _sunVox = new SunVox(lib, 48000, OutputType.Float32, singleThreaded: true, noDebugOutput: false);
             var slot = _sunVox.Slots[0];

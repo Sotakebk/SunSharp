@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 
 namespace SunSharp.Redistribution
 {
-    public static class Redistribution
+    public static class LibraryLoader
     {
         #region platform invoke
 

@@ -8,13 +8,13 @@ public abstract class BaseExample
     {
         try
         {
-            SunSharp.Redistribution.Redistribution.LoadLibrary();
-            var lib = SunSharp.Redistribution.Redistribution.GetLibrary();
+            SunSharp.Redistribution.LibraryLoader.LoadLibrary();
+            var lib = SunSharp.Redistribution.LibraryLoader.GetLibrary();
             RunTest(lib);
         }
         finally
         {
-            SunSharp.Redistribution.Redistribution.UnloadLibrary();
+            SunSharp.Redistribution.LibraryLoader.UnloadLibrary();
         }
     }
 
