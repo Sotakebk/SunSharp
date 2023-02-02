@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -9,13 +9,13 @@
     <Product>SunSharp</Product>
     <PackageId>Sotakebk.SunSharp</PackageId>
     <Description>SunVox Library wrapper for .NET</Description>
-    <Copyright>Sotakebk</Copyright>
+    <Copyright></Copyright>
     <PackageProjectUrl>https://github.com/Sotakebk/SunSharp</PackageProjectUrl>
     <RepositoryUrl>https://github.com/Sotakebk/SunSharp.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>sunvox;music;wrapper</PackageTags>
     <Version>0.1.0</Version>
-    <IncludeSymbols>False</IncludeSymbols>
+    <IncludeSymbols>True</IncludeSymbols>
     <EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
     <EnableNETAnalyzers>True</EnableNETAnalyzers>
     <AnalysisLevel>latest-recommended</AnalysisLevel>
@@ -23,7 +23,8 @@
     <ProduceReferenceAssembly>False</ProduceReferenceAssembly>
     <SignAssembly>False</SignAssembly>
     <PackageReadmeFile>README.md</PackageReadmeFile>
-    <PackageLicenseFile>license.txt</PackageLicenseFile>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <SymbolPackageFormat>symbols.nupkg</SymbolPackageFormat>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
