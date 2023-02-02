@@ -1339,6 +1339,9 @@ namespace SunSharp.ThinWrapper
                 throw new SunVoxException(ret, nameof(lib.sv_set_pattern_xy));
         }
 
+        /// <summary>
+        /// <para>Use <see cref="LockSlot(ISunVoxLib, int)"/> or an alternative!</para>
+        /// </summary>
         public static PatternEvent[] GetPatternData(this ISunVoxLib lib, int slot, int pattern)
         {
             if (!GetPatternExists(lib, slot, pattern))
@@ -1360,6 +1363,28 @@ namespace SunSharp.ThinWrapper
             finally
             {
                 Marshal.FreeHGlobal(ptr);
+            }
+        }
+
+        /// <summary>
+        /// <para>Use <see cref="LockSlot(ISunVoxLib, int)"/> or an alternative!</para>
+        /// </summary>
+        /// <exception cref="SunVoxException"></exception>
+        public static void SetPatternData(this ISunVoxLib lib, int slot, int pattern, PatternEvent[] data)
+        {
+            var ptr = lib.sv_get_pattern_data(slot, pattern);
+            if (ptr == IntPtr.Zero)
+                throw new SunVoxException(ptr.ToInt32(), nameof(lib.sv_get_pattern_data));
+
+            int lines = GetPatternLines(lib, slot, pattern);
+            int tracks = GetPatternTracks(lib, slot, pattern);
+
+            var minSize = Math.Min(lines * tracks, data.Length);
+
+            // TODO CHANGEME when raising .NET version, use memory copy between IntPtr and IntPtr?
+            for (int i = 0; i < data.Length; i++)
+            {
+                Marshal.WriteInt64(ptr + i * sizeof(ulong), unchecked((long)data[i].Data));
             }
         }
 

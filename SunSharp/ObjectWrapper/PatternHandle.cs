@@ -1,4 +1,6 @@
 ﻿using SunSharp.ThinWrapper;
+using System;
+using System.Diagnostics;
 using System.Xml.Linq;
 
 namespace SunSharp.ObjectWrapper
@@ -77,40 +79,33 @@ namespace SunSharp.ObjectWrapper
 
         public PatternEvent[,] GetData2D()
         {
-            int tracks = GetTrackCount();
-            var lines = GetLength();
-            var data = GetData();
-            var data2 = new PatternEvent[lines, tracks];
-            // TODO slow?
+            int slotId = _slotId;
+            int id = _id;
+            var lib = _lib;
+            var (data, tracks, lines) = _slot.RunInLock(() => {
+                var _data = lib.GetPatternData(slotId, id);
+                int _tracks = lib.GetPatternTracks(slotId, id);
+                var _lines = lib.GetPatternLines(slotId, id);
+                return (_data, _tracks, _lines);
+            });
+
+            var newData = new PatternEvent[lines, tracks];
+
             for (int l = 0; l < lines; l++)
-            {
                 for (int t = 0; t < tracks; t++)
-                {
-                    data2[l, t] = data[t + l * tracks];
-                }
-            }
-            return data2;
+                    newData[l, t] = data[l * tracks + t];
+
+            return newData;
         }
 
         public void SetData(PatternEvent[] data)
         {
-            // TODO: sv_set_pattern_data() does not exist
             var slotId = _slotId;
             var id = _id;
             var lib = _lib;
             _slot.RunInLock(() =>
             {
-                int tracks = lib.GetPatternTracks(slotId, id);
-                var arr = lib.GetPatternData(slotId, id);
-                for (int i = 0; i < data.Length; i++)
-                {
-                    if (arr[i].Data == data[i].Data)
-                        continue;
-
-                    var track = i % tracks;
-                    var line = i - track * tracks;
-                    lib.SetPatternEvent(slotId, id, track, line, data[i]);
-                }
+                lib.SetPatternData(slotId, id, data);
             });
         }
 
@@ -122,20 +117,15 @@ namespace SunSharp.ObjectWrapper
             var lib = _lib;
             int inputLines = data.GetLength(0);
             int inputTracks = data.GetLength(1);
+            var newData = new PatternEvent[inputLines * inputTracks];
+
+            for (int l = 0; l < inputLines; l++)
+                for (int t = 0; t < inputTracks; t++)
+                    newData[l * inputTracks + t] = data[l, t];
+
             _slot.RunInLock(() =>
             {
-                var tracks = lib.GetPatternTracks(slotId, id);
-                var arr = lib.GetPatternData(slotId, id);
-                for (int l = 0; l < inputLines; l++)
-                {
-                    for (int t = 0; t < inputTracks; t++)
-                    {
-                        if (arr[t + l * tracks].Data == data[l, t].Data)
-                            continue;
-
-                        lib.SetPatternEvent(slotId, id, t, l, data[l, t]);
-                    }
-                }
+                lib.SetPatternData(slotId, id, newData);
             });
         }
 
