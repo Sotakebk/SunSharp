@@ -11,17 +11,18 @@ internal static partial class Program
         new ManualJobContainer<ObjectWrapperPlaySong>("Object wrapper - play a song"),
         new ManualJobContainer<ObjectWrapperListModulesAndPatterns>("Object wrapper - list modules and patterns"),
         new ManualJobContainer<ObjectWrapperSendEvents>("Object wrapper - send events"),
+        new ManualJobContainer<ObjectWrapperUseModules>("Object wrapper - using Modules"),
+        new ManualJobContainer<ObjectWrapperManagePatterns>("Object wrapper - manage patterns"),
         new ManualJobContainer<AbstractionHorizontalJumps>("Abstraction - horizontal jumps"),
     };
 
     private static void Main(string[] args)
     {
         Console.WriteLine($"Select an option:");
-        for(int index = 0; index < Options.Count; index++)
+        for (int index = 0; index < Options.Count; index++)
         {
             Console.WriteLine($"{index + 1}. {Options[index].Name}");
         }
-
 
         if (int.TryParse(Console.ReadLine(), out int number))
         {

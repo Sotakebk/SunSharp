@@ -1,12 +1,10 @@
-﻿using System;
+using System;
 using System.Reflection;
 
 namespace SunSharp.LibraryLoading
 {
     public class ProxyClass : ISunVoxLib
     {
-        #region proxy
-
         public ProxyClass(Func<string, Type, Delegate> GetDelegate)
         {
             var type = GetType();
@@ -19,8 +17,6 @@ namespace SunSharp.LibraryLoading
                 }
             }
         }
-
-        #endregion proxy
 
         #region delegate definitions
 
@@ -38,11 +34,17 @@ namespace SunSharp.LibraryLoading
 
         private delegate int o_Int_i_Int_Int_Int_Int_Int_Int_Int_Int_Int(int _int, int _int1, int _int2, int _int3, int _int4, int _int5, int _int6, int _int7, int _int8);
 
+        private delegate int o_Int_i_Int_Int_Int_Int_Int_Int_Int_IntPtr(int _int, int _int1, int _int2, int _int3, int _int4, int _int5, int _int6, IntPtr _IntPtr);
+
         private delegate int o_Int_i_Int_Int_Int_IntPtr_Int(int _int, int _int1, int _int2, IntPtr _IntPtr, int _int3);
 
         private delegate int o_Int_i_Int_Int_Int_IntPtr_Int_Int(int _int, int _int1, int _int2, IntPtr _IntPtr, int _int3, int _int4);
 
+        private delegate int o_Int_i_Int_Int_IntPtr(int _int, int _int1, IntPtr _IntPtr);
+
         private delegate int o_Int_i_Int_Int_IntPtr_Int(int _int, int _int1, IntPtr _IntPtr, int _int2);
+
+        private delegate int o_Int_i_Int_Int_IntPtr_Uint(int _int, int _int1, IntPtr _IntPtr, uint _uint);
 
         private delegate int o_Int_i_Int_Int_IntPtr_Uint_Int(int _int, int _int1, IntPtr _IntPtr, uint _uint, int _int2);
 
@@ -81,82 +83,198 @@ namespace SunSharp.LibraryLoading
         #region delegates
 
 #pragma warning disable CS0649
+
         private o_Int_i_Int sv_close_slot;
+
         private o_Int_i_Int sv_end_of_song;
+
         private o_Int_i_Int sv_get_autostop;
+
         private o_Int_i_Int sv_get_current_line;
+
         private o_Int_i_Int sv_get_current_line2;
+
         private o_Int_i_Int sv_get_number_of_modules;
+
         private o_Int_i_Int sv_get_number_of_patterns;
+
         private o_Int_i_Int sv_get_song_bpm;
+
         private o_Int_i_Int sv_get_song_tpl;
+
         private o_Int_i_Int sv_lock_slot;
+
         private o_Int_i_Int sv_open_slot;
+
         private o_Int_i_Int sv_pause;
+
         private o_Int_i_Int sv_play;
+
         private o_Int_i_Int sv_play_from_beginning;
+
         private o_Int_i_Int sv_resume;
+
         private o_Int_i_Int sv_stop;
+
         private o_Int_i_Int sv_sync_resume;
+
         private o_Int_i_Int sv_unlock_slot;
+
         private o_Int_i_Int_Int sv_get_current_signal_level;
+
         private o_Int_i_Int_Int sv_get_module_color;
+
         private o_Int_i_Int_Int sv_get_number_of_module_ctls;
+
         private o_Int_i_Int_Int sv_get_pattern_lines;
+
         private o_Int_i_Int_Int sv_get_pattern_tracks;
+
         private o_Int_i_Int_Int sv_get_pattern_x;
+
         private o_Int_i_Int_Int sv_get_pattern_y;
+
         private o_Int_i_Int_Int sv_remove_module;
+
+        private o_Int_i_Int_Int sv_remove_pattern;
+
         private o_Int_i_Int_Int sv_rewind;
+
         private o_Int_i_Int_Int sv_set_autostop;
+
         private o_Int_i_Int_Int sv_volume;
+
         private o_Int_i_Int_Int_Int sv_connect_module;
+
         private o_Int_i_Int_Int_Int sv_disconnect_module;
+
+        private o_Int_i_Int_Int_Int sv_get_module_ctl_group;
+
+        private o_Int_i_Int_Int_Int sv_get_module_ctl_offset;
+
+        private o_Int_i_Int_Int_Int sv_get_module_ctl_type;
+
         private o_Int_i_Int_Int_Int sv_pattern_mute;
+
         private o_Int_i_Int_Int_Int sv_set_event_t;
+
+        private o_Int_i_Int_Int_Int sv_set_module_color;
+
+        private o_Int_i_Int_Int_Int sv_set_module_finetune;
+
+        private o_Int_i_Int_Int_Int sv_set_module_relnote;
+
+        private o_Int_i_Int_Int_Int_Int sv_get_module_ctl_max;
+
+        private o_Int_i_Int_Int_Int_Int sv_get_module_ctl_min;
+
         private o_Int_i_Int_Int_Int_Int sv_get_module_ctl_value;
+
+        private o_Int_i_Int_Int_Int_Int sv_set_module_xy;
+
+        private o_Int_i_Int_Int_Int_Int sv_set_pattern_size;
+
+        private o_Int_i_Int_Int_Int_Int sv_set_pattern_xy;
+
         private o_Int_i_Int_Int_Int_Int_Int sv_get_pattern_event;
+
+        private o_Int_i_Int_Int_Int_Int_Int sv_set_module_ctl_value;
+
         private o_Int_i_Int_Int_Int_Int_Int_Int_Int sv_send_event;
+
         private o_Int_i_Int_Int_Int_Int_Int_Int_Int_Int_Int sv_set_pattern_event;
+
+        private o_Int_i_Int_Int_Int_Int_Int_Int_Int_IntPtr sv_new_pattern;
+
         private o_Int_i_Int_Int_Int_IntPtr_Int sv_get_time_map;
+
         private o_Int_i_Int_Int_Int_IntPtr_Int_Int sv_module_curve;
+
+        private o_Int_i_Int_Int_IntPtr sv_metamodule_load;
+
+        private o_Int_i_Int_Int_IntPtr sv_set_module_name;
+
+        private o_Int_i_Int_Int_IntPtr sv_set_pattern_name;
+
+        private o_Int_i_Int_Int_IntPtr sv_vplayer_load;
+
         private o_Int_i_Int_Int_IntPtr_Int sv_sampler_load;
+
+        private o_Int_i_Int_Int_IntPtr_Uint sv_metamodule_load_from_memory;
+
+        private o_Int_i_Int_Int_IntPtr_Uint sv_vplayer_load_from_memory;
+
         private o_Int_i_Int_Int_IntPtr_Uint_Int sv_sampler_load_from_memory;
+
         private o_Int_i_Int_IntPtr sv_find_module;
+
         private o_Int_i_Int_IntPtr sv_find_pattern;
+
         private o_Int_i_Int_IntPtr sv_load;
+
         private o_Int_i_Int_IntPtr sv_save;
+
+        private o_Int_i_Int_IntPtr sv_set_song_name;
+
         private o_Int_i_Int_IntPtr_Int_Int_Int sv_load_module;
+
         private o_Int_i_Int_IntPtr_IntPtr_Int_Int_Int sv_new_module;
+
         private o_Int_i_Int_IntPtr_Uint sv_load_from_memory;
+
         private o_Int_i_Int_IntPtr_Uint_Int_Int_Int sv_load_module_from_memory;
+
         private o_Int_i_IntPtr_Int_Int_Uint sv_audio_callback;
+
         private o_Int_i_IntPtr_Int_Int_Uint sv_init;
+
         private o_Int_i_IntPtr_Int_Int_Uint_Int_Int_IntPtr sv_audio_callback2;
+
         private o_Int_i_Void sv_deinit;
+
         private o_Int_i_Void sv_get_sample_rate;
+
         private o_Int_i_Void sv_update_input;
+
         private o_IntPtr_i_Int sv_get_log;
+
         private o_IntPtr_i_Int sv_get_song_name;
+
         private o_IntPtr_i_Int_Int sv_get_module_inputs;
+
         private o_IntPtr_i_Int_Int sv_get_module_name;
+
         private o_IntPtr_i_Int_Int sv_get_module_outputs;
+
+        private o_IntPtr_i_Int_Int sv_get_module_type;
+
         private o_IntPtr_i_Int_Int sv_get_pattern_data;
+
         private o_IntPtr_i_Int_Int sv_get_pattern_name;
+
         private o_IntPtr_i_Int_Int_Int sv_get_module_ctl_name;
+
         private o_Uint_i_Int sv_get_song_length_frames;
+
         private o_Uint_i_Int sv_get_song_length_lines;
+
         private o_Uint_i_Int_Int sv_get_module_finetune;
+
         private o_Uint_i_Int_Int sv_get_module_flags;
+
         private o_Uint_i_Int_Int sv_get_module_xy;
+
         private o_Uint_i_Int_Int_Int_IntPtr_Uint sv_get_module_scope2;
+
         private o_Uint_i_Void sv_get_ticks;
+
         private o_Uint_i_Void sv_get_ticks_per_second;
+
 #pragma warning restore CS0649
 
         #endregion delegates
 
-        #region ISunVoxLib interface
+        #region interface
 
         int ISunVoxLib.sv_audio_callback(IntPtr buf, int frames, int latency, uint out_time) => sv_audio_callback(buf, frames, latency, out_time);
 
@@ -185,6 +303,16 @@ namespace SunSharp.LibraryLoading
         int ISunVoxLib.sv_get_current_signal_level(int slot, int channel) => sv_get_current_signal_level(slot, channel);
 
         int ISunVoxLib.sv_get_module_color(int slot, int mod_num) => sv_get_module_color(slot, mod_num);
+
+        int ISunVoxLib.sv_get_module_ctl_group(int slot, int mod_num, int ctl_num) => sv_get_module_ctl_group(slot, mod_num, ctl_num);
+
+        int ISunVoxLib.sv_get_module_ctl_max(int slot, int mod_num, int ctl_num, int scaled) => sv_get_module_ctl_max(slot, mod_num, ctl_num, scaled);
+
+        int ISunVoxLib.sv_get_module_ctl_min(int slot, int mod_num, int ctl_num, int scaled) => sv_get_module_ctl_min(slot, mod_num, ctl_num, scaled);
+
+        int ISunVoxLib.sv_get_module_ctl_offset(int slot, int mod_num, int ctl_num) => sv_get_module_ctl_offset(slot, mod_num, ctl_num);
+
+        int ISunVoxLib.sv_get_module_ctl_type(int slot, int mod_num, int ctl_num) => sv_get_module_ctl_type(slot, mod_num, ctl_num);
 
         int ISunVoxLib.sv_get_module_ctl_value(int slot, int mod_num, int ctl_num, int scaled) => sv_get_module_ctl_value(slot, mod_num, ctl_num, scaled);
 
@@ -224,9 +352,15 @@ namespace SunSharp.LibraryLoading
 
         int ISunVoxLib.sv_lock_slot(int slot) => sv_lock_slot(slot);
 
+        int ISunVoxLib.sv_metamodule_load(int slot, int mod_num, IntPtr file_name) => sv_metamodule_load(slot, mod_num, file_name);
+
+        int ISunVoxLib.sv_metamodule_load_from_memory(int slot, int mod_num, IntPtr data, uint data_size) => sv_metamodule_load_from_memory(slot, mod_num, data, data_size);
+
         int ISunVoxLib.sv_module_curve(int slot, int mod_num, int curve_num, IntPtr data, int len, int w) => sv_module_curve(slot, mod_num, curve_num, data, len, w);
 
         int ISunVoxLib.sv_new_module(int slot, IntPtr type, IntPtr name, int x, int y, int z) => sv_new_module(slot, type, name, x, y, z);
+
+        int ISunVoxLib.sv_new_pattern(int slot, int clone, int x, int y, int tracks, int lines, int icon_seed, IntPtr name) => sv_new_pattern(slot, clone, x, y, tracks, lines, icon_seed, name);
 
         int ISunVoxLib.sv_open_slot(int slot) => sv_open_slot(slot);
 
@@ -239,6 +373,8 @@ namespace SunSharp.LibraryLoading
         int ISunVoxLib.sv_play_from_beginning(int slot) => sv_play_from_beginning(slot);
 
         int ISunVoxLib.sv_remove_module(int slot, int mod_num) => sv_remove_module(slot, mod_num);
+
+        int ISunVoxLib.sv_remove_pattern(int slot, int pat_num) => sv_remove_pattern(slot, pat_num);
 
         int ISunVoxLib.sv_resume(int slot) => sv_resume(slot);
 
@@ -256,7 +392,27 @@ namespace SunSharp.LibraryLoading
 
         int ISunVoxLib.sv_set_event_t(int slot, int set, int t) => sv_set_event_t(slot, set, t);
 
+        int ISunVoxLib.sv_set_module_color(int slot, int mod_num, int color) => sv_set_module_color(slot, mod_num, color);
+
+        int ISunVoxLib.sv_set_module_ctl_value(int slot, int mod_num, int ctl_num, int val, int scaled) => sv_set_module_ctl_value(slot, mod_num, ctl_num, val, scaled);
+
+        int ISunVoxLib.sv_set_module_finetune(int slot, int mod_num, int finetune) => sv_set_module_finetune(slot, mod_num, finetune);
+
+        int ISunVoxLib.sv_set_module_name(int slot, int mod_num, IntPtr name) => sv_set_module_name(slot, mod_num, name);
+
+        int ISunVoxLib.sv_set_module_relnote(int slot, int mod_num, int relative_note) => sv_set_module_relnote(slot, mod_num, relative_note);
+
+        int ISunVoxLib.sv_set_module_xy(int slot, int mod_num, int x, int y) => sv_set_module_xy(slot, mod_num, x, y);
+
         int ISunVoxLib.sv_set_pattern_event(int slot, int pat_num, int track, int line, int nn, int vv, int mm, int ccee, int xxyy) => sv_set_pattern_event(slot, pat_num, track, line, nn, vv, mm, ccee, xxyy);
+
+        int ISunVoxLib.sv_set_pattern_name(int slot, int pat_num, IntPtr name) => sv_set_pattern_name(slot, pat_num, name);
+
+        int ISunVoxLib.sv_set_pattern_size(int slot, int pat_num, int tracks, int lines) => sv_set_pattern_size(slot, pat_num, tracks, lines);
+
+        int ISunVoxLib.sv_set_pattern_xy(int slot, int pat_num, int x, int y) => sv_set_pattern_xy(slot, pat_num, x, y);
+
+        int ISunVoxLib.sv_set_song_name(int slot, IntPtr name) => sv_set_song_name(slot, name);
 
         int ISunVoxLib.sv_stop(int slot) => sv_stop(slot);
 
@@ -268,6 +424,10 @@ namespace SunSharp.LibraryLoading
 
         int ISunVoxLib.sv_volume(int slot, int vol) => sv_volume(slot, vol);
 
+        int ISunVoxLib.sv_vplayer_load(int slot, int mod_num, IntPtr file_name) => sv_vplayer_load(slot, mod_num, file_name);
+
+        int ISunVoxLib.sv_vplayer_load_from_memory(int slot, int mod_num, IntPtr data, uint data_size) => sv_vplayer_load_from_memory(slot, mod_num, data, data_size);
+
         IntPtr ISunVoxLib.sv_get_log(int size) => sv_get_log(size);
 
         IntPtr ISunVoxLib.sv_get_module_ctl_name(int slot, int mod_num, int ctl_num) => sv_get_module_ctl_name(slot, mod_num, ctl_num);
@@ -277,6 +437,8 @@ namespace SunSharp.LibraryLoading
         IntPtr ISunVoxLib.sv_get_module_name(int slot, int mod_num) => sv_get_module_name(slot, mod_num);
 
         IntPtr ISunVoxLib.sv_get_module_outputs(int slot, int mod_num) => sv_get_module_outputs(slot, mod_num);
+
+        IntPtr ISunVoxLib.sv_get_module_type(int slot, int mod_num) => sv_get_module_type(slot, mod_num);
 
         IntPtr ISunVoxLib.sv_get_pattern_data(int slot, int pat_num) => sv_get_pattern_data(slot, pat_num);
 
@@ -300,6 +462,6 @@ namespace SunSharp.LibraryLoading
 
         uint ISunVoxLib.sv_get_ticks_per_second() => sv_get_ticks_per_second();
 
-        #endregion ISunVoxLib interface
+        #endregion interface
     }
 }

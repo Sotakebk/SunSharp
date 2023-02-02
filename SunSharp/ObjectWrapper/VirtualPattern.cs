@@ -47,6 +47,7 @@ namespace SunSharp.ObjectWrapper
                 }
             }
         }
+
         /// <summary>
         /// Set the tick timestamp of future events.
         /// Do not use if any other code sends events to the library directly.

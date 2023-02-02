@@ -1,11 +1,12 @@
 ﻿using SunSharp.ThinWrapper;
+using System.Xml.Linq;
 
 namespace SunSharp.ObjectWrapper
 {
     /// <summary>
     /// Represents a pattern. The underlying SunVox pattern may or may not exist!
     /// </summary>
-    public readonly struct Pattern
+    public readonly struct PatternHandle
     {
         private readonly ISunVoxLib _lib;
         private readonly int _id;
@@ -16,7 +17,7 @@ namespace SunSharp.ObjectWrapper
         public Slot Slot => _slot;
         public ISunVoxLib Library => _lib;
 
-        public Pattern(Timeline timeline, int id)
+        public PatternHandle(Timeline timeline, int id)
         {
             _lib = timeline.Slot.SunVox.Library;
             _slot = timeline.Slot;
@@ -28,11 +29,40 @@ namespace SunSharp.ObjectWrapper
 
         public string GetName() => _lib.GetPatternName(_slotId, _id);
 
-        public (int X, int Y) GetPosition() => _lib.GetModulePosition(_slotId, _id);
+        public void SetName(string name)
+        {
+            var lib = _lib;
+            var slotId = _slotId;
+            var id = _id;
+            _slot.RunInLock(() => lib.SetPatternName(slotId, id, name));
+        }
+
+        public (int x, int y) GetPosition() => _lib.GetPatternPosition(_slotId, _id);
+
+        public void SetPosition(int x, int y)
+        {
+            var lib = _lib;
+            var slotId = _slotId;
+            var id = _id;
+            _slot.RunInLock(() => lib.SetPatternPosition(slotId, id, x, y));
+        }
 
         public int GetTrackCount() => _lib.GetPatternTracks(_slotId, _id);
 
         public int GetLength() => _lib.GetPatternLines(_slotId, _id);
+
+        /// <summary>
+        /// Resize the pattern.
+        /// </summary>
+        /// <param name="tracks"><see langword="null"/> to leave as is.</param>
+        /// <param name="lines"><see langword="null"/> to leave as is.</param>
+        public void Resize(int? tracks = null, int? lines = null)
+        {
+            var lib = _lib;
+            var slotId = _slotId;
+            var id = _id;
+            _slot.RunInLock(() => lib.SetPatternSize(slotId, id, tracks, lines));
+        }
 
         public PatternEvent[] GetData()
         {
@@ -109,29 +139,29 @@ namespace SunSharp.ObjectWrapper
             });
         }
 
-        public void SetPatternMute(int id, bool mute)
+        public void SetMute(int id, bool mute)
         {
             var lib = _lib;
             var slotId = _id;
             _slot.RunInLock(() =>
             {
-                lib.PatternMute(slotId, id, mute);
+                lib.SetPatternMute(slotId, id, mute);
             });
         }
 
-        public bool GetPatternMute(int id)
+        public bool GetMute(int id)
         {
             var lib = _lib;
             var slotId = _id;
             return _slot.RunInLock(() =>
             {
-                var wasMuted = lib.PatternMute(slotId, id, false);
-                lib.PatternMute(slotId, id, wasMuted);
+                var wasMuted = lib.SetPatternMute(slotId, id, false);
+                lib.SetPatternMute(slotId, id, wasMuted);
                 return wasMuted;
             });
         }
 
-        public void SetPatternEvent(int track, int line, PatternEvent @event)
+        public void SetEvent(int track, int line, PatternEvent @event)
         {
             var lib = _lib;
             var slotId = _id;
@@ -142,7 +172,7 @@ namespace SunSharp.ObjectWrapper
             });
         }
 
-        public void SetPatternEvent(int track, int line, int NN, int VV, int MM, int CCEE, int XXYY)
+        public void SetEvent(int track, int line, int NN, int VV, int MM, int CCEE, int XXYY)
         {
             var lib = _lib;
             var slotId = _id;
@@ -153,7 +183,7 @@ namespace SunSharp.ObjectWrapper
             });
         }
 
-        public int GetPatternEventValue(int track, int line, Column column)
+        public int GetEventValue(int track, int line, Column column)
         {
             var lib = _lib;
             var slotId = _id;

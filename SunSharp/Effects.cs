@@ -1,4 +1,4 @@
-﻿namespace SunSharp.ThinWrapper
+﻿namespace SunSharp
 {
     public enum Effect : byte
     {
@@ -24,7 +24,7 @@
         FineVelocitySlide = 0x1A,
         CutNote = 0x1C,
         DelayNote = 0x1D,
-        SetBPM = 0x1F,
+        SetBpm = 0x1F,
         NoteProbability = 0x20,
         NoteProbabilityRandomVelocity = 0x21,
         SetControllerRandomAbsolute = 0x22,
@@ -40,6 +40,7 @@
         SetJumpMode = 0x32,
         SlotSync = 0x33,
         SetResetProjectOptions = 0x34,
+        BindMidiOut = 0x35,
         DeleteEventOnTrackWithProbability = 0x38,
         CyclicShiftTrackLines = 0x39,
         GeneratePolyrhythm = 0x3A,
@@ -69,7 +70,7 @@
 
         public static bool ModifiesTime(this Effect effect)
         {
-            return effect == Effect.SetBPM
+            return effect == Effect.SetBpm
                 || effect == Effect.SetPlayingSpeed;
         }
     }

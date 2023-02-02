@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-namespace SunSharp.ThinWrapper
+namespace SunSharp
 {
     [StructLayout(LayoutKind.Explicit, Size = 8)]
-    public readonly struct ReadOnlyPatternEvent : IEquatable<PatternEvent>, IEquatable<ReadOnlyPatternEvent>
+    public readonly struct ImmutablePatternEvent : IEquatable<PatternEvent>, IEquatable<ImmutablePatternEvent>
     {
         [FieldOffset(0)] private readonly ulong _data;
         [FieldOffset(0)] private readonly byte _nn;
@@ -30,16 +30,16 @@ namespace SunSharp.ThinWrapper
         public byte YY => _yy;
         public byte XX => _xx;
 
-        public ReadOnlyPatternEvent(ulong value) : this()
+        public ImmutablePatternEvent(ulong value) : this()
         {
             _data = value;
         }
 
-        public ReadOnlyPatternEvent(PatternEvent @event) : this(@event.Data)
+        public ImmutablePatternEvent(PatternEvent @event) : this(@event.Data)
         {
         }
 
-        public ReadOnlyPatternEvent(byte nn, byte vv, ushort mm, ushort ccee, ushort xxyy) : this()
+        public ImmutablePatternEvent(byte nn, byte vv, ushort mm, ushort ccee, ushort xxyy) : this()
         {
             _nn = nn;
             _vv = vv;
@@ -48,7 +48,7 @@ namespace SunSharp.ThinWrapper
             _xxyy = xxyy;
         }
 
-        public ReadOnlyPatternEvent(Note note, byte velocity, ushort module, byte controller, Effect effect, ushort xxyy) : this()
+        public ImmutablePatternEvent(Note note, byte velocity, ushort module, byte controller, Effect effect, ushort xxyy) : this()
         {
             _nn = (byte)note;
             _vv = velocity;
@@ -58,25 +58,25 @@ namespace SunSharp.ThinWrapper
             _xxyy = xxyy;
         }
 
-        public static implicit operator ReadOnlyPatternEvent(ulong value)
+        public static implicit operator ImmutablePatternEvent(ulong value)
         {
-            return new ReadOnlyPatternEvent(value);
+            return new ImmutablePatternEvent(value);
         }
 
-        public static implicit operator ulong(ReadOnlyPatternEvent ev)
+        public static implicit operator ulong(ImmutablePatternEvent ev)
         {
             return ev.Data;
         }
 
         public override string ToString() => $"{(Note)NN}{VV:X2}{MM:X4}{CC:X2}{EE:X2}{XX:X2}{YY:X2}";
 
-        public static bool operator ==(ReadOnlyPatternEvent a, ReadOnlyPatternEvent b) => a._data == b._data;
+        public static bool operator ==(ImmutablePatternEvent a, ImmutablePatternEvent b) => a._data == b._data;
 
-        public static bool operator !=(ReadOnlyPatternEvent a, ReadOnlyPatternEvent b) => a._data != b._data;
+        public static bool operator !=(ImmutablePatternEvent a, ImmutablePatternEvent b) => a._data != b._data;
 
         public override bool Equals(object obj)
         {
-            if (obj is ReadOnlyPatternEvent readOnlyEvent) return readOnlyEvent._data == _data;
+            if (obj is ImmutablePatternEvent readOnlyEvent) return readOnlyEvent._data == _data;
             if (obj is PatternEvent @event) return @event.Data == _data;
             return false;
         }
@@ -85,11 +85,11 @@ namespace SunSharp.ThinWrapper
 
         public override int GetHashCode() => -1945990370 + _data.GetHashCode();
 
-        public bool Equals(ReadOnlyPatternEvent other) => _data == other.Data;
+        public bool Equals(ImmutablePatternEvent other) => _data == other.Data;
     }
 
     [StructLayout(LayoutKind.Explicit, Size = 8)]
-    public struct PatternEvent : IEquatable<PatternEvent>, IEquatable<ReadOnlyPatternEvent>
+    public struct PatternEvent : IEquatable<PatternEvent>, IEquatable<ImmutablePatternEvent>
     {
         [FieldOffset(0)] private ulong _data;
         [FieldOffset(0)] private byte _nn;
@@ -162,9 +162,9 @@ namespace SunSharp.ThinWrapper
             return @event.Data;
         }
 
-        public static implicit operator ReadOnlyPatternEvent(PatternEvent @event)
+        public static implicit operator ImmutablePatternEvent(PatternEvent @event)
         {
-            return new ReadOnlyPatternEvent(@event._data);
+            return new ImmutablePatternEvent(@event._data);
         }
 
         public override string ToString() => $"{(Note)NN}{VV:X2}{MM:X4}{CC:X2}{EE:X2}{XX:X2}{YY:X2}";
@@ -173,12 +173,12 @@ namespace SunSharp.ThinWrapper
 
         public static bool operator !=(PatternEvent a, PatternEvent b) => a._data != b._data;
 
-        public override bool Equals(object obj) => (obj is PatternEvent e) && this == e;
+        public override bool Equals(object obj) => obj is PatternEvent e && this == e;
 
         public bool Equals(PatternEvent other) => this == other;
 
         public override int GetHashCode() => -1945990370 + _data.GetHashCode();
 
-        public bool Equals(ReadOnlyPatternEvent other) => _data == other.Data;
+        public bool Equals(ImmutablePatternEvent other) => _data == other.Data;
     }
 }

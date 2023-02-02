@@ -5,6 +5,7 @@ namespace SunSharp
     public interface ISunVoxLib
     {
 #pragma warning disable CA1707 // Identifiers should not contain underscores
+#pragma warning disable CA1716 // Identifiers should not match keywords
 #pragma warning disable IDE1006 // Naming Styles
 
         /// <summary>
@@ -158,6 +159,11 @@ namespace SunSharp
         IntPtr sv_get_song_name(int slot);
 
         /// <summary>
+        /// int sv_set_song_name( int slot, const char* name ) SUNVOX_FN_ATTR;
+        /// </summary>
+        int sv_set_song_name(int slot, IntPtr name);
+
+        /// <summary>
         /// int sv_get_song_bpm(int slot) SUNVOX_FN_ATTR;
         /// </summary>
         int sv_get_song_bpm(int slot);
@@ -223,6 +229,26 @@ namespace SunSharp
         int sv_sampler_load_from_memory(int slot, int sampler_module, IntPtr data, uint data_size, int sample_slot);
 
         /// <summary>
+        /// int sv_metamodule_load(int slot, int mod_num, const char* file_name) SUNVOX_FN_ATTR;
+        /// </summary>
+        int sv_metamodule_load(int slot, int mod_num, IntPtr file_name);
+
+        /// <summary>
+        /// int sv_metamodule_load_from_memory(int slot, int mod_num, void* data, uint32_t data_size) SUNVOX_FN_ATTR;
+        /// </summary>
+        int sv_metamodule_load_from_memory(int slot, int mod_num, IntPtr data, uint data_size);
+
+        /// <summary>
+        /// int sv_vplayer_load(int slot, int mod_num, const char* file_name) SUNVOX_FN_ATTR;
+        /// </summary>
+        int sv_vplayer_load(int slot, int mod_num, IntPtr file_name);
+
+        /// <summary>
+        /// int sv_vplayer_load_from_memory(int slot, int mod_num, void* data, uint32_t data_size) SUNVOX_FN_ATTR;
+        /// </summary>
+        int sv_vplayer_load_from_memory(int slot, int mod_num, IntPtr data, uint data_size);
+
+        /// <summary>
         /// int sv_get_number_of_modules(int slot) SUNVOX_FN_ATTR;
         /// </summary>
         int sv_get_number_of_modules(int slot);
@@ -253,9 +279,24 @@ namespace SunSharp
         IntPtr sv_get_module_name(int slot, int mod_num);
 
         /// <summary>
+        /// int sv_set_module_name( int slot, int mod_num, const char* name ) SUNVOX_FN_ATTR;
+        /// </summary>
+        int sv_set_module_name(int slot, int mod_num, IntPtr name);
+
+        /// <summary>
+        /// const char* sv_get_module_type( int slot, int mod_num) SUNVOX_FN_ATTR;
+        /// </summary>
+        IntPtr sv_get_module_type(int slot, int mod_num);
+
+        /// <summary>
         /// uint32_t sv_get_module_xy(int slot, int mod_num) SUNVOX_FN_ATTR;
         /// </summary>
         uint sv_get_module_xy(int slot, int mod_num);
+
+        /// <summary>
+        /// int sv_set_module_xy(int slot, int mod_num, int x, int y) SUNVOX_FN_ATTR;
+        /// </summary>
+        int sv_set_module_xy(int slot, int mod_num, int x, int y);
 
         /// <summary>
         /// int sv_get_module_color( int slot, int mod_num) SUNVOX_FN_ATTR;
@@ -263,9 +304,24 @@ namespace SunSharp
         int sv_get_module_color(int slot, int mod_num);
 
         /// <summary>
+        /// int sv_set_module_color(int slot, int mod_num, int color) SUNVOX_FN_ATTR;
+        /// </summary>
+        int sv_set_module_color(int slot, int mod_num, int color);
+
+        /// <summary>
         /// uint32_t sv_get_module_finetune(int slot, int mod_num) SUNVOX_FN_ATTR;
         /// </summary>
         uint sv_get_module_finetune(int slot, int mod_num);
+
+        /// <summary>
+        /// int sv_set_module_finetune(int slot, int mod_num, int finetune) SUNVOX_FN_ATTR;
+        /// </summary>
+        int sv_set_module_finetune(int slot, int mod_num, int finetune);
+
+        /// <summary>
+        /// int sv_set_module_relnote(int slot, int mod_num, int relative_note) SUNVOX_FN_ATTR;
+        /// </summary>
+        int sv_set_module_relnote(int slot, int mod_num, int relative_note);
 
         /// <summary>
         /// uint32_t sv_get_module_scope2(int slot, int mod_num, int channel, int16_t* dest_buf, uint32_t samples_to_read) SUNVOX_FN_ATTR;
@@ -293,9 +349,49 @@ namespace SunSharp
         int sv_get_module_ctl_value(int slot, int mod_num, int ctl_num, int scaled);
 
         /// <summary>
+        /// int sv_set_module_ctl_value(int slot, int mod_num, int ctl_num, int val, int scaled) SUNVOX_FN_ATTR;
+        /// </summary>
+        int sv_set_module_ctl_value(int slot, int mod_num, int ctl_num, int val, int scaled);
+
+        /// <summary>
+        /// int sv_get_module_ctl_min(int slot, int mod_num, int ctl_num, int scaled) SUNVOX_FN_ATTR;
+        /// </summary>
+        int sv_get_module_ctl_min(int slot, int mod_num, int ctl_num, int scaled);
+
+        /// <summary>
+        /// int sv_get_module_ctl_max(int slot, int mod_num, int ctl_num, int scaled) SUNVOX_FN_ATTR;
+        /// </summary>
+        int sv_get_module_ctl_max(int slot, int mod_num, int ctl_num, int scaled);
+
+        /// <summary>
+        /// int sv_get_module_ctl_offset(int slot, int mod_num, int ctl_num) SUNVOX_FN_ATTR;
+        /// </summary>
+        int sv_get_module_ctl_offset(int slot, int mod_num, int ctl_num);
+
+        /// <summary>
+        /// int sv_get_module_ctl_type(int slot, int mod_num, int ctl_num) SUNVOX_FN_ATTR;
+        /// </summary>
+        int sv_get_module_ctl_type(int slot, int mod_num, int ctl_num);
+
+        /// <summary>
+        /// int sv_get_module_ctl_group(int slot, int mod_num, int ctl_num) SUNVOX_FN_ATTR;
+        /// </summary>
+        int sv_get_module_ctl_group(int slot, int mod_num, int ctl_num);
+
+        /// <summary>
         /// int sv_get_number_of_patterns(int slot) SUNVOX_FN_ATTR;
         /// </summary>
         int sv_get_number_of_patterns(int slot);
+
+        /// <summary>
+        /// int sv_new_pattern(int slot, int clone, int x, int y, int tracks, int lines, int icon_seed, const char* name ) SUNVOX_FN_ATTR;
+        /// </summary>
+        int sv_new_pattern(int slot, int clone, int x, int y, int tracks, int lines, int icon_seed, IntPtr name);
+
+        /// <summary>
+        /// int sv_remove_pattern(int slot, int pat_num) SUNVOX_FN_ATTR;
+        /// </summary>
+        int sv_remove_pattern(int slot, int pat_num);
 
         /// <summary>
         /// int sv_find_pattern(int slot, const char* name ) SUNVOX_FN_ATTR;
@@ -313,6 +409,11 @@ namespace SunSharp
         int sv_get_pattern_y(int slot, int pat_num);
 
         /// <summary>
+        /// int sv_set_pattern_xy(int slot, int pat_num, int x, int y) SUNVOX_FN_ATTR;
+        /// </summary>
+        int sv_set_pattern_xy(int slot, int pat_num, int x, int y);
+
+        /// <summary>
         /// int sv_get_pattern_tracks(int slot, int pat_num) SUNVOX_FN_ATTR;
         /// </summary>
         int sv_get_pattern_tracks(int slot, int pat_num);
@@ -323,9 +424,19 @@ namespace SunSharp
         int sv_get_pattern_lines(int slot, int pat_num);
 
         /// <summary>
+        /// int sv_set_pattern_size(int slot, int pat_num, int tracks, int lines) SUNVOX_FN_ATTR;
+        /// </summary>
+        int sv_set_pattern_size(int slot, int pat_num, int tracks, int lines);
+
+        /// <summary>
         /// const char* sv_get_pattern_name( int slot, int pat_num) SUNVOX_FN_ATTR;
         /// </summary>
         IntPtr sv_get_pattern_name(int slot, int pat_num);
+
+        /// <summary>
+        /// int sv_set_pattern_name( int slot, int pat_num, const char* name ) SUNVOX_FN_ATTR;
+        /// </summary>
+        int sv_set_pattern_name(int slot, int pat_num, IntPtr name);
 
         /// <summary>
         /// sunvox_note* sv_get_pattern_data(int slot, int pat_num) SUNVOX_FN_ATTR;
@@ -362,6 +473,7 @@ namespace SunSharp
         /// </summary>
         IntPtr sv_get_log(int size);
 
+#pragma warning restore CA1716 // Identifiers should not match keywords
 #pragma warning restore IDE1006 // Naming Styles
 #pragma warning restore CA1707 // Identifiers should not contain underscores
     }

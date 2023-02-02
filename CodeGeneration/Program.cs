@@ -1,4 +1,6 @@
-﻿using SunSharp.ObjectWrapper;
+﻿using CodeGeneration.Generators.SpecificGenerators;
+using CodeGeneration.ReparsedData;
+using SunSharp.ObjectWrapper;
 using System.Runtime.CompilerServices;
 
 namespace CodeGeneration
@@ -19,6 +21,34 @@ namespace CodeGeneration
 
         internal static void Main()
         {
+            // regenerate ProxyClass
+            {
+                var path = Path.GetDirectoryName(GetSourceFilePathName());
+                path = Path.Join(path, "SunSharp", "LibraryLoading", "ProxyClass_Regenerated.cs");
+
+                var generator = new ProxyClass_Generator();
+                var changed = generator.Generate(path);
+                if (changed)
+                {
+                    Console.WriteLine("ProxyClass was regenerated, rebuild SunSharp and re-run to continue.");
+                    return;
+                }
+            }
+
+            // regenerate ModuleType
+            {
+                var path = Path.GetDirectoryName(GetSourceFilePathName()); // SunSharp parent path
+                path = Path.Join(path, "SunSharp", "ObjectWrapper", "ModuleType_Regenerated.cs");
+
+                var generator = new ModuleType_Generator();
+                var changed = generator.Generate(path);
+                if (changed)
+                {
+                    Console.WriteLine("ModuleType was regenerated, rebuild and re-run to regenerate SongData!");
+                    return;
+                }
+            }
+
             SunSharp.Redistribution.LibraryLoader.LoadLibrary();
             var lib = SunSharp.Redistribution.LibraryLoader.GetLibrary();
 
@@ -27,38 +57,56 @@ namespace CodeGeneration
             slot.Open();
             slot.Load("all_modules.sunvox");
 
-            CheckModuleTypeEnum();
-            var data = ModuleDataParser.ReparseModuleData(slot);
-
-            var generator = new ModuleData_Generator(data);
-            var moduleDataPath = Path.Join(GetSourceFilePathName(), "ModuleData_Regenerated.cs");
-            if (generator.Generate(moduleDataPath))
+            // is ModuleTypes up to date?
             {
-                Console.WriteLine("ModuleData was regenerated, rebuild and re-run to regenerate SpecificModules!");
-                return;
+                var set = new HashSet<string>();
+                foreach (var value in ModuleTypes.GetModuleTypes())
+                    set.Add(value.internalName);
+
+                foreach (var module in _sunVox.Slots[0].Synthesizer)
+                {
+                    var name = ModuleTypeHelper.InternalNameFromType(module.GetModuleType());
+                    if (!set.Contains(name))
+                    {
+                        throw new Exception($"Type {name} is not known, add it to the ModuleTypes.cs first!");
+                    }
+                }
             }
 
-            var smgenerator = new SpecificModules_Generator(data);
-            var path = Path.GetDirectoryName(GetSourceFilePathName()); // SunSharp parent path
-            path = Path.Join(path, "SunSharp", "ObjectWrapper", "Modules", "SpecificModules_Regenerated.cs");
-            if (smgenerator.Generate(path))
+            // regenerate SongData
             {
-                Console.WriteLine("SpecificModules was regenerated, rebuild SunSharp!");
+                var data = ModuleDataParser.ReparseModuleData(slot);
+
+                var path = Path.Join(GetSourceFilePathName(), "ReparsedData", "Data_Regenerated.cs");
+
+                var generator = new ModuleData_Generator(data);
+                var changed = generator.Generate(path);
+                if (changed)
+                {
+                    Console.WriteLine("ModuleData was regenerated, rebuild and re-run to regenerate SpecificModules!");
+                    return;
+                }
             }
-        }
+            slot.Close();
+            _sunVox.Dispose();
 
-        internal static void CheckModuleTypeEnum()
-        {
-            var dictionary = new Dictionary<string, string>();
-            foreach (var value in Data.GetModuleTypeDictionary())
-                dictionary.Add(value.Key, value.Value);
-
-            foreach (var module in _sunVox.Slots[0].Synthesizer)
+            // regenerate SpecificModules
             {
-                var name = module.GetName();
-                if (!dictionary.ContainsKey(name))
-                    throw new Exception($"Type {name} is not known, add it to the enums first!");
+                var data = Data.GetData();
+
+                var path = Path.GetDirectoryName(GetSourceFilePathName()); // SunSharp parent path
+                path = Path.Join(path, "SunSharp", "ObjectWrapper", "Modules", "SpecificModules_Regenerated.cs");
+
+                var generator = new SpecificModules_Generator(data);
+                var changed = generator.Generate(path);
+                if (changed)
+                {
+                    Console.WriteLine("SpecificModules was regenerated, rebuild SunSharp!");
+                    return;
+                }
             }
+
+            Console.WriteLine("Nothing was changed, yay! :)");
         }
     }
 }

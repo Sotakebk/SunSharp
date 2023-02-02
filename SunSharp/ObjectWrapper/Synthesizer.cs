@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace SunSharp.ObjectWrapper
 {
-    public class Synthesizer : IEnumerable<Module>
+    public class Synthesizer : IEnumerable<ModuleHandle>
     {
         private readonly ISunVoxLib _lib;
         private readonly Slot _slot;
@@ -25,11 +25,11 @@ namespace SunSharp.ObjectWrapper
 
         public ModuleFlags GetModuleFlags(int moduleId) => _lib.GetModuleFlags(_id, moduleId);
 
-        public bool TryGetModule(int moduleId, out Module module)
+        public bool TryGetModule(int moduleId, out ModuleHandle module)
         {
             if (_lib.GetModuleExists(_id, moduleId))
             {
-                module = new Module(this, moduleId);
+                module = new ModuleHandle(this, moduleId);
                 return true;
             }
             else
@@ -39,12 +39,12 @@ namespace SunSharp.ObjectWrapper
             }
         }
 
-        public bool TryGetModule(string name, out Module module)
+        public bool TryGetModule(string name, out ModuleHandle module)
         {
             int moduleId = _lib.FindModule(_id, name);
             if (moduleId > -1)
             {
-                module = new Module(this, moduleId);
+                module = new ModuleHandle(this, moduleId);
                 return true;
             }
             else
@@ -54,30 +54,46 @@ namespace SunSharp.ObjectWrapper
             }
         }
 
-        public Module CreateModule(ModuleType type, string name, int x = 0, int y = 0, int z = 0)
+        public ModuleHandle CreateModule(ModuleType type, string name, int x = 0, int y = 0, int z = 0)
         {
             return _slot.RunInLock(() =>
             {
-                var moduleId = _lib.CreateModule(_id, type.ToInternalName(), name, x, y, z);
-                return new Module(this, moduleId);
+                var moduleId = _lib.CreateModule(_id, ModuleTypeHelper.InternalNameFromType(type), name, x, y, z);
+                return new ModuleHandle(this, moduleId);
             });
         }
 
-        public Module LoadModule(byte[] data, int x = 0, int y = 0, int z = 0)
+        /// <summary>
+        /// load a module or sample. Supported file formats: sunsynth, xi, wav, aiff.
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <param name="z"></param>
+        /// <returns></returns>
+        public ModuleHandle LoadModule(byte[] data, int x = 0, int y = 0, int z = 0)
         {
             return _slot.RunInLock(() =>
             {
                 var moduleId = _lib.LoadModule(_id, data, x, y, z);
-                return new Module(this, moduleId);
+                return new ModuleHandle(this, moduleId);
             });
         }
 
-        public Module LoadModule(string path, int x = 0, int y = 0, int z = 0)
+        /// <summary>
+        /// load a module or sample. Supported file formats: sunsynth, xi, wav, aiff.
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <param name="z"></param>
+        /// <returns></returns>
+        public ModuleHandle LoadModule(string path, int x = 0, int y = 0, int z = 0)
         {
             return _slot.RunInLock(() =>
             {
                 var moduleId = _lib.LoadModule(_id, path, x, y, z);
-                return new Module(this, moduleId);
+                return new ModuleHandle(this, moduleId);
             });
         }
 
@@ -89,7 +105,7 @@ namespace SunSharp.ObjectWrapper
             });
         }
 
-        public void RemoveModule(Module module) => RemoveModule(module.Id);
+        public void RemoveModule(ModuleHandle module) => RemoveModule(module.Id);
 
         public void ConnectModule(int sourceId, int destinationId)
         {
@@ -99,7 +115,7 @@ namespace SunSharp.ObjectWrapper
             });
         }
 
-        public void ConnectModule(Module source, Module destination) => ConnectModule(source.Id, destination.Id);
+        public void ConnectModule(ModuleHandle source, ModuleHandle destination) => ConnectModule(source.Id, destination.Id);
 
         public void DisconnectModule(int sourceId, int destinationId)
         {
@@ -109,9 +125,9 @@ namespace SunSharp.ObjectWrapper
             });
         }
 
-        public void DisconnectModule(Module source, Module destination) => DisconnectModule(source.Id, destination.Id);
+        public void DisconnectModule(ModuleHandle source, ModuleHandle destination) => DisconnectModule(source.Id, destination.Id);
 
-        public IEnumerator<Module> GetEnumerator()
+        public IEnumerator<ModuleHandle> GetEnumerator()
         {
             for (int i = 0; i < GetUpperModuleCount(); i++)
                 if (TryGetModule(i, out var p))

@@ -65,7 +65,7 @@ namespace SunSharp.DerivedData
             return lib.RunInLock(slotId, () => ReadModuleDataInternal(lib, slotId, moduleId));
         }
 
-        public static ModuleData ReadModuleData(Module module)
+        public static ModuleData ReadModuleData(ModuleHandle module)
         {
             return module.Slot.RunInLock(() => ReadModuleDataInternal(module.Slot.Library, module.Slot.Id, module.Id));
         }
@@ -73,12 +73,12 @@ namespace SunSharp.DerivedData
         internal static ModuleData ReadModuleDataInternal(ISunVoxLib lib, int slot, int moduleId)
         {
             var flags = lib.GetModuleFlags(slot, moduleId);
-            var controllers = new (string name, int value)[lib.GetModuleControllerCount(slot, moduleId)];
+            var controllers = new (string name, int realValue)[lib.GetModuleControllerCount(slot, moduleId)];
 
             for (int i = 0; i < controllers.Length; i++)
             {
                 var name = lib.GetModuleControllerName(slot, moduleId, i);
-                var value = lib.GetModuleControllerValue(slot, moduleId, i, false);
+                var value = lib.GetModuleControllerValue(slot, moduleId, i, ValueScalingType.Real);
                 controllers[i] = (name, value);
             }
 

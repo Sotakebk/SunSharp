@@ -1,6 +1,5 @@
 ﻿using SunSharp;
 using SunSharp.ObjectWrapper;
-using SunSharp.ThinWrapper;
 
 namespace Examples;
 
@@ -20,6 +19,7 @@ internal class ObjectWrapperSendEvents : BaseExample
             slot.Close();
         }
     }
+
     private void SendNotes(Slot slot)
     {
         var vp = slot.VirtualPattern;

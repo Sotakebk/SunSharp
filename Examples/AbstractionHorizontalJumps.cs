@@ -12,7 +12,6 @@ internal class AbstractionHorizontalJumps : BaseExample
         WriteLine($"[{type}]{message}");
     }
 
-
     protected override void RunTest(ISunVoxLib lib)
     {
         WriteLine("Initializing");
@@ -37,7 +36,6 @@ internal class AbstractionHorizontalJumps : BaseExample
             WriteLine("Enumerating transitions.");
             foreach (var transition in graph.Transitions)
                 WriteLine($"{transition.Id}. {transition.Name} (from: \"{transition.FromStateId}\" to: \"{transition.ToStateId}\")");
-
 
             var allowedNames = graph.States.Select(s => s.Name);
             controller.Start(controller.GetState("I"));

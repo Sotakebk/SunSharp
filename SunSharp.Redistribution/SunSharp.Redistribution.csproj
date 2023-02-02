@@ -6,7 +6,7 @@
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageId>Sotakebk.SunSharp.Redistribution</PackageId>
     <Title>SunSharp.Redistribution</Title>
-    <Version>0.0.2</Version>
+    <Version>0.1.0</Version>
     <Authors>Sotakebk</Authors>
     <Product>SunSharp.Redistribution</Product>
     <Description>SunVox Library redistribution for SunSharp.</Description>

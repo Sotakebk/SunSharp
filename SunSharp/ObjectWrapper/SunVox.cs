@@ -22,6 +22,7 @@ namespace SunSharp.ObjectWrapper
         /// The underlying library. Direct use is potentially dangerous and may break existing abstractions.
         /// </summary>
         public ISunVoxLib Library => _lib;
+
         public Slots Slots => _slots;
         public bool NeedsUserCallback => OutputType != null;
         public bool SingleThreaded => _singleThreaded;

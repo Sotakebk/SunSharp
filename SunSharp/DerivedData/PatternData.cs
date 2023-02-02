@@ -16,7 +16,7 @@ namespace SunSharp.DerivedData
         bool IsLinear { get; }
         bool IsDestructive { get; }
         bool HasDynamicTempo { get; }
-        IReadOnlyCollection<ReadOnlyPatternEvent> Data { get; }
+        IReadOnlyCollection<ImmutablePatternEvent> Data { get; }
     }
 
     public class PatternData : IReadOnlyPatternData
@@ -30,9 +30,9 @@ namespace SunSharp.DerivedData
         public bool IsLinear { get; set; }
         public bool IsDestructive { get; set; }
         public bool HasDynamicTempo { get; set; }
-        public ICollection<ReadOnlyPatternEvent> Data { get; set; }
+        public ICollection<ImmutablePatternEvent> Data { get; set; }
 
-        IReadOnlyCollection<ReadOnlyPatternEvent> IReadOnlyPatternData.Data => Data.AsReadonlyOrGetWrapper();
+        IReadOnlyCollection<ImmutablePatternEvent> IReadOnlyPatternData.Data => Data.AsReadonlyOrGetWrapper();
 
         public PatternData()
         {
@@ -60,14 +60,14 @@ namespace SunSharp.DerivedData
             return lib.RunInLock(slotId, () => ReadPatternDataInternal(lib, slotId, patternId));
         }
 
-        public static PatternData ReadModuleData(Pattern pattern)
+        public static PatternData ReadModuleData(PatternHandle pattern)
         {
             return pattern.Slot.RunInLock(() => ReadPatternDataInternal(pattern.Slot.Library, pattern.Slot.Id, pattern.Id));
         }
 
         internal static PatternData ReadPatternDataInternal(ISunVoxLib lib, int slot, int patternId)
         {
-            var data = lib.GetPatternData(slot, patternId).Select(e => (ReadOnlyPatternEvent)e).ToArray();
+            var data = lib.GetPatternData(slot, patternId).Select(e => (ImmutablePatternEvent)e).ToArray();
             bool isDestructive = false;
             bool isLinear = true;
             bool hasDynamicTempo = false;
@@ -80,8 +80,8 @@ namespace SunSharp.DerivedData
                 hasDynamicTempo = hasDynamicTempo || @event.Effect.ModifiesTime();
             }
 
-            bool muted = lib.PatternMute(slot, patternId, false);
-            lib.PatternMute(slot, patternId, muted);
+            bool muted = lib.SetPatternMute(slot, patternId, false);
+            lib.SetPatternMute(slot, patternId, muted);
 
             var patternData = new PatternData()
             {

@@ -10,6 +10,7 @@ namespace SunSharp.Redistribution
         #region platform invoke
 
 #pragma warning disable CA2101 // Specify marshaling for P/Invoke string arguments
+
         private static class WindowsImports
         {
             [DllImport("kernel32.dll", CharSet = CharSet.Ansi)]
@@ -45,6 +46,7 @@ namespace SunSharp.Redistribution
             [DllImport("libdl.so", CharSet = CharSet.Ansi)]
             public static extern int dlclose(IntPtr handle);
         }
+
 #pragma warning restore CA2101 // Specify marshaling for P/Invoke string arguments
 
         private static IntPtr LoadLibrary(string filename)
@@ -65,10 +67,8 @@ namespace SunSharp.Redistribution
         {
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
                 return WindowsImports.GetProcAddress(handle, symbol);
-
             else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
                 return LinuxImports.dlsym(handle, symbol);
-
             else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
                 return MacOSImports.dlsym(handle, symbol);
 
@@ -80,7 +80,7 @@ namespace SunSharp.Redistribution
             int returnCode;
 
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
-                returnCode = (WindowsImports.FreeLibrary(handle)? 0 : 1);
+                returnCode = (WindowsImports.FreeLibrary(handle) ? 0 : 1);
             else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
                 returnCode = LinuxImports.dlclose(handle);
             else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))

@@ -33,12 +33,14 @@ namespace SunSharp.ObjectWrapper
         /// Project synthesizer, containing all the existing modules.
         /// </summary>
         public Synthesizer Synthesizer => _synthesizer;
+
         public SunVox SunVox => _sunVox;
 
         /// <summary>
         /// Underlying library instance.
         /// </summary>
         public ISunVoxLib Library => _lib;
+
         public bool IsOpen { get; private set; }
 
         internal Slot(int id, Slots slots, SunVox sunVox)
@@ -209,23 +211,23 @@ namespace SunSharp.ObjectWrapper
 
         public int GetVolume()
         {
-            return RunInLock(() => _lib.Volume(_id, -1));
+            return _lib.Volume(_id, -1);
         }
 
         public void SetVolume(int value)
         {
-            RunInLock(() => _lib.Volume(_id, value));
+            _lib.Volume(_id, value);
         }
 
         public int GetSongBpm()
         {
-            return RunInLock(() => _lib.GetSongBpm(_id));
+            return _lib.GetSongBpm(_id);
         }
 
         public void SetSongBpm(int value)
         {
             var xxyy = (ushort)Math.Min(Math.Max(0, value), 800);
-            _virtualPattern.SendEventImmediately(0, new PatternEvent(Effect.SetBPM, xxyy));
+            _virtualPattern.SendEventImmediately(0, new PatternEvent(Effect.SetBpm, xxyy));
         }
 
         public int GetSongTpl()
@@ -252,6 +254,11 @@ namespace SunSharp.ObjectWrapper
         public string GetSongName()
         {
             return _lib.GetSongName(_id);
+        }
+
+        public void SetSongName(string name)
+        {
+            _lib.SetSongName(_id, name);
         }
 
         /// <summary>

@@ -1,4 +1,6 @@
-﻿namespace CodeGeneration
+﻿using CodeGeneration.ReparsedData;
+
+namespace CodeGeneration.Generators.SpecificGenerators
 {
     internal class ModuleData_Generator : BaseGenerator
     {
@@ -16,7 +18,9 @@
             AppendLine(" * Please run CodeGeneration each time this file is manually changed.");
             AppendLine("*/");
             AppendLine();
-            AppendLine("namespace CodeGeneration");
+            AppendLine("using CodeGeneration.Generators;");
+            AppendLine();
+            AppendLine("namespace CodeGeneration.ReparsedData");
             AppendLine("{");
             AddIndent(() =>
             {
@@ -46,13 +50,13 @@
 
         protected void AddEnums()
         {
-            AppendLine("data.Enums = new EnumDescription[]");
+            AppendLine($"data.Enums = new {nameof(EnumDesc)}[]");
             AppendLine("{");
             AddIndent(() =>
             {
                 foreach (var ed in _data.Enums.OrderBy(e => e.Name))
                 {
-                    AppendLine($"new EnumDescription(");
+                    AppendLine($"new {nameof(EnumDesc)}(");
                     AddIndent(() =>
                     {
                         AppendLine($"\"{ed.Name}\",");
@@ -74,46 +78,66 @@
 
         protected void AddModules()
         {
-            AppendLine("data.Modules = new ModuleDescription[]");
+            AppendLine($"data.Modules = new {nameof(ModuleDesc)}[]");
             AppendLine("{");
             AddIndent(() =>
             {
-                foreach (var moduleDescription in _data.Modules.OrderBy(n => n.Name))
+                foreach (var md in _data.Modules.OrderBy(n => n.FriendlyName))
                 {
-                    AppendLine("new ModuleDescription(");
+                    AppendLine($"new {nameof(ModuleDesc)}(");
                     AddIndent(() =>
                     {
-                        AppendLine($"\"{moduleDescription.Name}\",");
-                        AppendLine($"\"{moduleDescription.InternalName}\",");
-                        AppendLine($"\"{moduleDescription.Description}\",");
-                        AppendLine("new List<ControllerDescription>()");
+                        AppendLine($"\"{md.FriendlyName}\",");
+                        AppendLine($"\"{md.InternalName}\",");
+                        AppendLine($"\"{md.Description}\",");
+                        AppendLine($"new List<{nameof(CtlDesc)}>()");
                         AppendLine("{");
                         AddIndent(() =>
                         {
-                            foreach (var cd in moduleDescription.Controllers.OrderBy(c => c.Id))
+                            foreach (var cd in md.Controllers.OrderBy(c => c.Id))
                             {
-                                if (!string.IsNullOrWhiteSpace(cd.EnumTypeName))
-                                    AppendLine($"new ControllerDescription({cd.Id}, \"{cd.Name}\", \"{cd.OriginalName}\", \"{cd.Description}\", {cd.MinValue}, {cd.MaxValue}, \"{cd.EnumTypeName}\"),");
-                                else
-                                    AppendLine($"new ControllerDescription({cd.Id}, \"{cd.Name}\", \"{cd.OriginalName}\", \"{cd.Description}\", {cd.MinValue}, {cd.MaxValue}),");
+                                AddController(cd);
                             }
                         });
                         AppendLine("},");
-                        AppendLine("new List<CurveDescription>()");
+                        AppendLine($"new List<{nameof(CurveDesc)}>()");
                         AppendLine("{");
                         AddIndent(() =>
                         {
-                            foreach (var cd in moduleDescription.Curves.OrderBy(c => c.Id))
+                            foreach (var cd in md.Curves.OrderBy(c => c.Id))
                             {
-                                AppendLine($"new CurveDescription({cd.Id}, \"{cd.Name}\", \"{cd.Description}\", {cd.MinValue}, {cd.MaxValue}, {cd.Size}),");
+                                AppendLine($"new {nameof(CurveDesc)}({cd.Id}, \"{cd.FriendlyName}\", \"{cd.Description}\", {cd.MinValue}, {cd.MaxValue}, {cd.Size}),");
                             }
                         });
-                        AppendLine("}");
+                        AppendLine("},");
+                        if (md.AdditionalCodeDescription == null)
+                            AppendLine("null");
+                        else
+                        {
+                            var genericType = md.AdditionalCodeDescription.GetType().GetGenericArguments()[0];
+                            AppendLine($"new {nameof(AddCodeDesc)}<{genericType.Name}>()");
+                        }
                     });
                     AppendLine("),");
                 }
             });
             AppendLine("};");
+        }
+
+        private void AddController(CtlDesc cd)
+        {
+            if (cd.IgnoreInternalEnum)
+            {
+                AppendLine($"new {nameof(CtlDesc)}({cd.Id}, \"{cd.FriendlyName}\", \"{cd.InternalName}\", \"{cd.Description}\", {cd.MinValue}, {cd.MaxValue}, ignoreInternalEnum: true),");
+            }
+            else if (!string.IsNullOrWhiteSpace(cd.EnumTypeName))
+            {
+                AppendLine($"new {nameof(CtlDesc)}({cd.Id}, \"{cd.FriendlyName}\", \"{cd.InternalName}\", \"{cd.Description}\", {cd.MinValue}, {cd.MaxValue}, enumTypeName: \"{cd.EnumTypeName}\"),");
+            }
+            else
+            {
+                AppendLine($"new {nameof(CtlDesc)}({cd.Id}, \"{cd.FriendlyName}\", \"{cd.InternalName}\", \"{cd.Description}\", {cd.MinValue}, {cd.MaxValue}),");
+            }
         }
     }
 }

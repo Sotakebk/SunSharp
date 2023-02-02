@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace SunSharp.ObjectWrapper
 {
-    public class Timeline : IEnumerable<Pattern>
+    public class Timeline : IEnumerable<PatternHandle>
     {
         public Slot Slot => _slot;
 
@@ -23,13 +23,13 @@ namespace SunSharp.ObjectWrapper
 
         public bool GetPatternExists(int patternId) => _lib.GetPatternExists(_id, patternId);
 
-        public bool TryGetPattern(string name, out Pattern pattern)
+        public bool TryGetPattern(string name, out PatternHandle pattern)
         {
             var id = _lib.FindPattern(_id, name);
 
             if (id > -1)
             {
-                pattern = new Pattern(this, id);
+                pattern = new PatternHandle(this, id);
                 return true;
             }
             else
@@ -39,11 +39,11 @@ namespace SunSharp.ObjectWrapper
             }
         }
 
-        public bool TryGetPattern(int id, out Pattern pattern)
+        public bool TryGetPattern(int id, out PatternHandle pattern)
         {
             if (_lib.GetPatternExists(_id, id))
             {
-                pattern = new Pattern(this, id);
+                pattern = new PatternHandle(this, id);
                 return true;
             }
             else
@@ -53,7 +53,24 @@ namespace SunSharp.ObjectWrapper
             }
         }
 
-        public IEnumerator<Pattern> GetEnumerator()
+        public PatternHandle CreatePattern(string name, int lines, int tracks, int x, int y, int? iconSeed = null)
+        {
+            return Slot.RunInLock(() => {
+                var id = _lib.CreatePattern(_id, null, x, y, tracks, lines, iconSeed, name);
+                return new PatternHandle(this, id);
+            });
+        }
+
+        public PatternHandle ClonePattern(PatternHandle original, int x, int y)
+        {
+            return Slot.RunInLock(() =>
+            {
+                var id = _lib.CreatePattern(_id, original.Id, x, y, -1, -1, null, null);
+                return new PatternHandle(this, id);
+            });
+        }
+
+        public IEnumerator<PatternHandle> GetEnumerator()
         {
             for (int i = 0; i < GetUpperPatternCount(); i++)
                 if (TryGetPattern(i, out var p))

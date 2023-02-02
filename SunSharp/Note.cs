@@ -1,6 +1,6 @@
 ﻿using System.Runtime.InteropServices;
 
-namespace SunSharp.ThinWrapper
+namespace SunSharp
 {
     public enum NoteName
     {
@@ -42,13 +42,34 @@ namespace SunSharp.ThinWrapper
         private const byte NOTECMD_STOP = 131;
         private const byte NOTECMD_PLAY = 132;
         private const byte NOTECMD_SET_PITCH = 133;
+        private const byte NOTECMD_CLEAN_MODULE = 140;
 
         public static Note Silence => new Note(0);
         public static Note Off => new Note(NOTECMD_NOTE_OFF);
+
+        /// <summary>
+        /// Send "note off" to all modules.
+        /// </summary>
         public static Note AllNotesOff => new Note(NOTECMD_ALL_NOTES_OFF);
+
+        /// <summary>
+        /// Stop all modules, clear their internal buffers and put them into standby mode.
+        /// </summary>
         public static Note CleanSynths => new Note(NOTECMD_CLEAN_SYNTHS);
+
+        /// <summary>
+        /// Stop playing the project.
+        /// </summary>
         public static Note Stop => new Note(NOTECMD_STOP);
+
+        /// <summary>
+        /// Start playing the project.
+        /// </summary>
         public static Note Play => new Note(NOTECMD_PLAY);
+
+        /// <summary>
+        /// Set the pitch specified in column XXYY, where 0x0000 - highest possible pitch, 0x7800 - lowest pitch (note C0); one semitone = 0x100.
+        /// </summary>
         public static Note SetPitch => new Note(NOTECMD_SET_PITCH);
 
         public NoteName Name => Value > 0 || Value < 128 ? (NoteName)((Value - 1) % 12) : NoteName.Other;

@@ -1,4 +1,7 @@
-﻿using SunSharp.ObjectWrapper;
+﻿using CodeGeneration.ReparsedData;
+using SunSharp;
+using SunSharp.ObjectWrapper;
+using SunSharp.ThinWrapper;
 using System.Text.RegularExpressions;
 
 namespace CodeGeneration
@@ -7,93 +10,110 @@ namespace CodeGeneration
     {
         internal static Data ReparseModuleData(Slot slot)
         {
-            var currentData = Data.GetData();
+            var oldData = Data.GetData();
 
             var newData = new Data();
-            newData.Modules = new List<ModuleDescription>();
-            newData.Enums = currentData.Enums;
+            newData.Modules = new List<ModuleDesc>();
+            newData.Enums = oldData.Enums;
 
-            foreach (var module in slot.Synthesizer)
-            {
-                var internalName = module.GetName();
-                var existingDescription = currentData.Modules.FirstOrDefault(d => d.InternalName == internalName);
-                newData.Modules.Add(CreateModuleDescription(existingDescription, module));
-            }
-
-            foreach (var module in newData.Modules)
-            {
-                foreach (var controller in module.Controllers)
-                {
-                    if (controller.EnumTypeName == null)
-                        continue;
-
-                    var @enum = newData.Enums.FirstOrDefault(e => e.Name == controller.EnumTypeName);
-                    if (@enum == null)
-                    {
-                        Console.WriteLine($"Missing enum type {controller.EnumTypeName} of controller {controller.Id} on module {module.Name}");
-                        continue;
-                    }
-
-                    var min = @enum.Values.Min(v => v.value);
-                    var max = @enum.Values.Max(v => v.value);
-                    if (min != controller.MinValue || max != controller.MaxValue)
-                    {
-                        Console.WriteLine($"Enum {controller.EnumTypeName} of module {module.Name} doesn't fit value range of controller {controller.OriginalName} (is: {min} to {max}, but expected ({controller.MinValue} to {controller.MaxValue})");
-                    }
-                }
-            }
+            RecreateModuleDescriptions(oldData, newData, slot);
 
             return newData;
         }
 
-        internal static ModuleDescription CreateModuleDescription(ModuleDescription original, Module module)
+        internal static void RecreateModuleDescriptions(Data oldData, Data newData, Slot slot)
         {
-            var moduleInternalName = module.GetName();
-            var name = Data.GetModuleTypeDictionary()[moduleInternalName];
+            foreach (var module in slot.Synthesizer)
+            {
+                var internalName = module.GetName();
+                var existingDescription = oldData.Modules.FirstOrDefault(d => d.InternalName == internalName);
+                var newDescription = CreateModuleDescription(newData, existingDescription, module);
+                newData.Modules.Add(newDescription);
+            }
+        }
+
+        internal static ModuleDesc CreateModuleDescription(Data newData, ModuleDesc original, SunSharp.ObjectWrapper.ModuleHandle module)
+        {
+            var internalName = module.Slot.Library.GetModuleName(module.Slot.Id, module.Id);
+            var friendlyName = ModuleTypes.GetFriendlyName(internalName);
             var description = original?.Description ?? string.Empty;
-            var controllerDescriptions = new List<ControllerDescription>();
-            var curveDescriptions = original?.Curves ?? new List<CurveDescription>();
+            var controllerDescriptions = new List<CtlDesc>();
+            var curveDescriptions = original?.Curves ?? new List<CurveDesc>();
 
             for (int i = 0; i < module.GetControllerCount(); i++)
             {
-                var origController = original?.Controllers?.FirstOrDefault(c => c.Id == i);
-                controllerDescriptions.Add(CreateControllerDescription(origController, module, i));
+                var originalControllerDescription = original?.Controllers?.FirstOrDefault(c => c.Id == i);
+                var controllerDescription = CreateControllerDescription(newData, originalControllerDescription, module, i);
+                controllerDescriptions.Add(controllerDescription);
             }
 
-            return new ModuleDescription(name, moduleInternalName, description, controllerDescriptions, curveDescriptions);
+            return new ModuleDesc(friendlyName, internalName, description, controllerDescriptions, curveDescriptions, original?.AdditionalCodeDescription);
         }
 
-        internal static ControllerDescription CreateControllerDescription(ControllerDescription original, Module module, int i)
+        internal static CtlDesc CreateControllerDescription(Data newData, CtlDesc original, SunSharp.ObjectWrapper.ModuleHandle module, int i)
         {
             var originalName = module.GetControllerName(i);
-            var name = original?.Name ?? SanitizeControllerName(originalName);
+            var friendlyName = original?.FriendlyName ?? SanitizeControllerName(originalName);
             var description = original?.Description ?? string.Empty;
 
-            module.SetControllerValue(i, 0);
-            Program.GuaranteeEventProcessing();
-            var min = module.GetControllerValue(i, false);
-
-            module.SetControllerValue(i, 0x8000);
-            Program.GuaranteeEventProcessing();
-            var max = module.GetControllerValue(i, false);
-            if (min == max)
-            {
-                Console.WriteLine($"min==max ({min}) on {i}.{name}@{module.GetName()}, ignoring if possible.");
-                min = original?.MinValue ?? min;
-                max = original?.MaxValue ?? max + 1;
-            }
+            var minValue = module.GetControllerMinValue(i, ValueScalingType.Displayed);
+            var maxValue = module.GetControllerMaxValue(i, ValueScalingType.Displayed);
 
             if (original != null)
             {
-                if (original.MinValue != min)
-                    Console.WriteLine($"MinValue changed on {i}.{name}@{module.GetName()}");
-                if (original.MaxValue != max)
-                    Console.WriteLine($"MaxValue changed on {i}.{name}@{module.GetName()}");
-                if (original.OriginalName != originalName)
-                    Console.WriteLine($"Originalname changed on {i}.{name}@{module.GetName()}");
+                if (original.MinValue != minValue)
+                    Console.WriteLine($"MinValue changed on {i}.{friendlyName}@{module.GetName()} (was: {original.MinValue}, is: {minValue})");
+                if (original.MaxValue != maxValue)
+                    Console.WriteLine($"MaxValue changed on {i}.{friendlyName}@{module.GetName()} (was: {original.MaxValue}, is: {maxValue})");
+                if (original.InternalName != originalName)
+                    Console.WriteLine($"InternalName changed on {i}.{friendlyName}@{module.GetName()}  (was: {original.FriendlyName}, is: {friendlyName})");
             }
 
-            return new ControllerDescription(i, name, originalName, description, min, max, original?.EnumTypeName);
+            var originalIsEnum = module.GetControllerType(i);
+            if (originalIsEnum == ControllerType.Enum)
+            {
+                if (original == null)
+                {
+                    Console.WriteLine($"Newly found controller {i}.{friendlyName}@{module.GetName()} is of type Enum");
+                }
+                else if (original.IgnoreInternalEnum == false && !string.IsNullOrWhiteSpace(original.EnumTypeName))
+                {
+                    var @enum = newData.Enums.FirstOrDefault(e => e.Name == original.EnumTypeName);
+                    if (@enum == null)
+                    {
+                        Console.WriteLine($"Enum {original.EnumTypeName} of controller {i}.{friendlyName}@{module.GetName()} was not found!");
+                    }
+                    else
+                    {
+                        var min = @enum.Values.Min(v => v.value);
+                        var max = @enum.Values.Max(v => v.value);
+                        if (min != original.MinValue || max != original.MaxValue)
+                        {
+                            Console.WriteLine($"Enum {@enum.Name} doesn't fit value range of controller {i}.{friendlyName}@{module.GetName()} (is: {min} to {max}, but expected ({minValue} to {maxValue})");
+                        }
+                    }
+                }
+                else if (original.IgnoreInternalEnum == false)
+                {
+                    Console.WriteLine($"Missing enum type or ignore on controller {i}.{friendlyName}@{module.GetName()}");
+                }
+            }
+            else
+            {
+                if (original != null)
+                {
+                    if (!string.IsNullOrWhiteSpace(original.EnumTypeName))
+                    {
+                        Console.WriteLine($"Controller {i}.{friendlyName}@{module.GetName()} is of type Real, but enum name is assigned");
+                    }
+                    if (original.IgnoreInternalEnum)
+                    {
+                        Console.WriteLine($"Controller {i}.{friendlyName}@{module.GetName()} has unnecessary ignore of missing Enum, since controller is of type Real");
+                    }
+                }
+            }
+
+            return new CtlDesc(i, friendlyName, originalName, description, minValue, maxValue, original?.IgnoreInternalEnum ?? false, original?.EnumTypeName);
         }
 
         internal static string SanitizeControllerName(string name)

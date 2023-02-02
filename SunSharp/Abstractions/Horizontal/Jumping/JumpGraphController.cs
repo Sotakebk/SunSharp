@@ -72,7 +72,7 @@ namespace SunSharp.Abstractions.Horizontal.Jumping
             Lib.RunInLock(SlotId, () =>
             {
                 foreach (var i in transition.PatternIds)
-                    Lib.PatternMute(SlotId, i, enabled);
+                    Lib.SetPatternMute(SlotId, i, enabled);
             });
         }
 
@@ -157,7 +157,7 @@ namespace SunSharp.Abstractions.Horizontal.Jumping
                     var enabled = transitionsToEnable.Contains(transition);
                     foreach (var patternId in transition.PatternIds)
                     {
-                        Lib.PatternMute(SlotId, patternId, !enabled);
+                        Lib.SetPatternMute(SlotId, patternId, !enabled);
                     }
                 }
             });

@@ -1,5 +1,4 @@
 ﻿using SunSharp.DerivedData;
-using SunSharp.ThinWrapper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -53,7 +52,7 @@ namespace SunSharp.Abstractions.Horizontal.Jumping
 
         private static AnalyzedPattern AnalyzePattern(IReadOnlyPatternData patternData, Action<MessageType, string> feedback)
         {
-            int CalculateJumpTargetLine(int currentLine, ReadOnlyPatternEvent mode, ReadOnlyPatternEvent jump)
+            int CalculateJumpTargetLine(int currentLine, ImmutablePatternEvent mode, ImmutablePatternEvent jump)
             {
                 switch (mode.XXYY)
                 {
@@ -88,8 +87,8 @@ namespace SunSharp.Abstractions.Horizontal.Jumping
             {
                 for (int l = 0; l < lines; l++)
                 {
-                    ReadOnlyPatternEvent? setJumpMode = null;
-                    ReadOnlyPatternEvent? jump = null;
+                    ImmutablePatternEvent? setJumpMode = null;
+                    ImmutablePatternEvent? jump = null;
 
                     for (int t = 0; t < tracks; t++)
                     {

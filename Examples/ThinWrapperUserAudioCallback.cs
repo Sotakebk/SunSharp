@@ -40,7 +40,6 @@ namespace Examples
                 Thread.Sleep(1000); // wait a second, so the reverb may fade out a bit...
             }
 
-
             lib.CloseSlot(0);
             lib.Deinit();
         }
@@ -72,7 +71,7 @@ namespace Examples
                 }
 
                 var copiedCount = Math.Min(_internalBuffer.Length - _offset, count);
-                for(int i = 0; i < copiedCount; i++)
+                for (int i = 0; i < copiedCount; i++)
                 {
                     buffer[offset + i] = _internalBuffer[_offset + i];
                 }
