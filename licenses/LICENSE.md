@@ -1,4 +1,4 @@
-SunSharp is distributed under the MIT license:
+MIT License
 
 Copyright (c) 2023 Sotakebk
 
