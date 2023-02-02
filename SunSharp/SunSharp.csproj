@@ -9,7 +9,6 @@
     <Product>SunSharp</Product>
     <PackageId>Sotakebk.SunSharp</PackageId>
     <Description>SunVox Library wrapper for .NET</Description>
-    <Copyright></Copyright>
     <PackageProjectUrl>https://github.com/Sotakebk/SunSharp</PackageProjectUrl>
     <RepositoryUrl>https://github.com/Sotakebk/SunSharp.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
@@ -24,7 +23,7 @@
     <SignAssembly>False</SignAssembly>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <SymbolPackageFormat>symbols.nupkg</SymbolPackageFormat>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
