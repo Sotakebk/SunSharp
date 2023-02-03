@@ -202,7 +202,7 @@ namespace CodeGeneration.Generators.SpecificGenerators
                 AppendLine($"/// Read {curve.FriendlyName} containing {curve.Size} values.");
                 AppendLine($"/// <para> Value range: {curve.MinValue} to {curve.MaxValue}. </para>");
                 if (!string.IsNullOrWhiteSpace(curve.Description))
-                    AppendLine($"/// <para> Value range: {curve.Description} </para>");
+                    AppendLine($"/// <para> {curve.Description} </para>");
                 AppendLine("/// </summary>");
                 AppendLine($"public void Read{curve.FriendlyName}(float[] buffer)");
                 AppendLine("{");
@@ -219,7 +219,7 @@ namespace CodeGeneration.Generators.SpecificGenerators
                 AppendLine($"/// Write {curve.FriendlyName} containing {curve.Size} values.");
                 AppendLine($"/// <para> Value range: {curve.MinValue} to {curve.MaxValue}. </para>");
                 if (!string.IsNullOrWhiteSpace(curve.Description))
-                    AppendLine($"/// <para> Value range: {curve.Description} </para>");
+                    AppendLine($"/// <para> {curve.Description} </para>");
                 AppendLine("/// </summary>");
                 AppendLine($"public void Write{curve.FriendlyName}(float[] buffer)");
                 AppendLine("{");

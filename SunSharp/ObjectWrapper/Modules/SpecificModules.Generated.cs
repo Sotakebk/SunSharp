@@ -1298,7 +1298,7 @@ namespace SunSharp.ObjectWrapper.Modules
         /// <summary>
         /// Read DrawnValues containing 32 values.
         /// <para> Value range: -1 to 1. </para>
-        /// <para> Value range: Used for 'Drawn', 'DrawnSpline' and 'Harmonics'. </para>
+        /// <para> Used for 'Drawn', 'DrawnSpline' and 'Harmonics'. </para>
         /// </summary>
         public void ReadDrawnValues(float[] buffer)
         {
@@ -1311,7 +1311,7 @@ namespace SunSharp.ObjectWrapper.Modules
         /// <summary>
         /// Write DrawnValues containing 32 values.
         /// <para> Value range: -1 to 1. </para>
-        /// <para> Value range: Used for 'Drawn', 'DrawnSpline' and 'Harmonics'. </para>
+        /// <para> Used for 'Drawn', 'DrawnSpline' and 'Harmonics'. </para>
         /// </summary>
         public void WriteDrawnValues(float[] buffer)
         {
@@ -5178,6 +5178,37 @@ namespace SunSharp.ObjectWrapper.Modules
         public void SetWaveform5(FMXWaveform value) => Module.SetControllerValue(78, (int)value, ValueScalingType.Displayed);
 
         #endregion controllers
+
+        #region curves
+
+        /// <summary>
+        /// Read CustomWaveform containing 256 values.
+        /// <para> Value range: -1 to 1. </para>
+        /// <para> Used as a waveform where 'Custom' waveform type was applied. </para>
+        /// </summary>
+        public void ReadCustomWaveform(float[] buffer)
+        {
+            if (buffer.Length < 256)
+                throw new System.ArgumentException("Buffer must be at least of size 256");
+
+            Module.ReadCurve(0, buffer);
+        }
+
+        /// <summary>
+        /// Write CustomWaveform containing 256 values.
+        /// <para> Value range: -1 to 1. </para>
+        /// <para> Used as a waveform where 'Custom' waveform type was applied. </para>
+        /// </summary>
+        public void WriteCustomWaveform(float[] buffer)
+        {
+            if (buffer.Length < 256)
+                throw new System.ArgumentException("Buffer must be at least of size 256");
+
+            Module.WriteCurve(0, buffer);
+        }
+
+        #endregion curves
+
     }
 
     public struct GeneratorModuleHandle : IModuleHandleWrapper
@@ -6174,7 +6205,7 @@ namespace SunSharp.ObjectWrapper.Modules
         /// <summary>
         /// Read Curve containing 257 values.
         /// <para> Value range: 0 to 1. </para>
-        /// <para> Value range: Modifies applied values. </para>
+        /// <para> Modifies applied values. </para>
         /// </summary>
         public void ReadCurve(float[] buffer)
         {
@@ -6187,7 +6218,7 @@ namespace SunSharp.ObjectWrapper.Modules
         /// <summary>
         /// Write Curve containing 257 values.
         /// <para> Value range: 0 to 1. </para>
-        /// <para> Value range: Modifies applied values. </para>
+        /// <para> Modifies applied values. </para>
         /// </summary>
         public void WriteCurve(float[] buffer)
         {
@@ -6315,7 +6346,7 @@ namespace SunSharp.ObjectWrapper.Modules
         /// <summary>
         /// Read NoteVelocityCurve containing 128 values.
         /// <para> Value range: 0 to 1. </para>
-        /// <para> Value range: Velocity to apply to arriving note. </para>
+        /// <para> Velocity to apply to arriving note. </para>
         /// </summary>
         public void ReadNoteVelocityCurve(float[] buffer)
         {
@@ -6328,7 +6359,7 @@ namespace SunSharp.ObjectWrapper.Modules
         /// <summary>
         /// Write NoteVelocityCurve containing 128 values.
         /// <para> Value range: 0 to 1. </para>
-        /// <para> Value range: Velocity to apply to arriving note. </para>
+        /// <para> Velocity to apply to arriving note. </para>
         /// </summary>
         public void WriteNoteVelocityCurve(float[] buffer)
         {
@@ -6341,7 +6372,7 @@ namespace SunSharp.ObjectWrapper.Modules
         /// <summary>
         /// Read VelocityToVelocityCurve containing 257 values.
         /// <para> Value range: 0 to 1. </para>
-        /// <para> Value range: Map velocity values. </para>
+        /// <para> Map velocity values. </para>
         /// </summary>
         public void ReadVelocityToVelocityCurve(float[] buffer)
         {
@@ -6354,7 +6385,7 @@ namespace SunSharp.ObjectWrapper.Modules
         /// <summary>
         /// Write VelocityToVelocityCurve containing 257 values.
         /// <para> Value range: 0 to 1. </para>
-        /// <para> Value range: Map velocity values. </para>
+        /// <para> Map velocity values. </para>
         /// </summary>
         public void WriteVelocityToVelocityCurve(float[] buffer)
         {
@@ -7818,7 +7849,7 @@ namespace SunSharp.ObjectWrapper.Modules
         /// <summary>
         /// Read Curve containing 256 values.
         /// <para> Value range: 0 to 1. </para>
-        /// <para> Value range: Maps input to output. </para>
+        /// <para> Maps input to output. </para>
         /// </summary>
         public void ReadCurve(float[] buffer)
         {
@@ -7831,7 +7862,7 @@ namespace SunSharp.ObjectWrapper.Modules
         /// <summary>
         /// Write Curve containing 256 values.
         /// <para> Value range: 0 to 1. </para>
-        /// <para> Value range: Maps input to output. </para>
+        /// <para> Maps input to output. </para>
         /// </summary>
         public void WriteCurve(float[] buffer)
         {

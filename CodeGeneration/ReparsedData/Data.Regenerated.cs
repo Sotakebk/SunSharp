@@ -1205,6 +1205,7 @@ namespace CodeGeneration.ReparsedData
                     },
                     new List<CurveDesc>()
                     {
+                        new CurveDesc(0, "CustomWaveform", "Used as a waveform where 'Custom' waveform type was applied.", -1, 1, 256),
                     },
                     new AddCodeDesc<FMXAdditionalCodeGenerator>()
                 ),
