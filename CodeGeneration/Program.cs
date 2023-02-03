@@ -21,30 +21,30 @@ namespace CodeGeneration
 
         internal static void Main()
         {
-            // regenerate ProxyClass
+            // generate ProxyClass
             {
                 var path = Path.GetDirectoryName(GetSourceFilePathName());
-                path = Path.Join(path, "SunSharp", "LibraryLoading", "ProxyClass_Regenerated.cs");
+                path = Path.Join(path, "SunSharp", "LibraryLoading", "ProxyClass.Generated.cs");
 
                 var generator = new ProxyClass_Generator();
                 var changed = generator.Generate(path);
                 if (changed)
                 {
-                    Console.WriteLine("ProxyClass was regenerated, rebuild SunSharp and re-run to continue.");
+                    Console.WriteLine("ProxyClass was Generated, rebuild SunSharp and re-run to continue.");
                     return;
                 }
             }
 
-            // regenerate ModuleType
+            // generate ModuleType
             {
                 var path = Path.GetDirectoryName(GetSourceFilePathName()); // SunSharp parent path
-                path = Path.Join(path, "SunSharp", "ObjectWrapper", "ModuleType_Regenerated.cs");
+                path = Path.Join(path, "SunSharp", "ObjectWrapper", "ModuleType.Generated.cs");
 
                 var generator = new ModuleType_Generator();
                 var changed = generator.Generate(path);
                 if (changed)
                 {
-                    Console.WriteLine("ModuleType was regenerated, rebuild and re-run to regenerate SongData!");
+                    Console.WriteLine("ModuleType was generated, rebuild and re-run to regenerate SongData!");
                     return;
                 }
             }
@@ -77,7 +77,7 @@ namespace CodeGeneration
             {
                 var data = ModuleDataParser.ReparseModuleData(slot);
 
-                var path = Path.Join(GetSourceFilePathName(), "ReparsedData", "Data_Regenerated.cs");
+                var path = Path.Join(GetSourceFilePathName(), "ReparsedData", "Data.Regenerated.cs");
 
                 var generator = new ModuleData_Generator(data);
                 var changed = generator.Generate(path);
@@ -90,18 +90,18 @@ namespace CodeGeneration
             slot.Close();
             _sunVox.Dispose();
 
-            // regenerate SpecificModules
+            // generate SpecificModules
             {
                 var data = Data.GetData();
 
                 var path = Path.GetDirectoryName(GetSourceFilePathName()); // SunSharp parent path
-                path = Path.Join(path, "SunSharp", "ObjectWrapper", "Modules", "SpecificModules_Regenerated.cs");
+                path = Path.Join(path, "SunSharp", "ObjectWrapper", "Modules", "SpecificModules.Generated.cs");
 
                 var generator = new SpecificModules_Generator(data);
                 var changed = generator.Generate(path);
                 if (changed)
                 {
-                    Console.WriteLine("SpecificModules was regenerated, rebuild SunSharp!");
+                    Console.WriteLine("SpecificModules was generated, rebuild SunSharp!");
                     return;
                 }
             }
