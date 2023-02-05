@@ -66,7 +66,7 @@ namespace SunSharp.ObjectWrapper
         {
             slot = RunInOpeningLock(() =>
             {
-                var _slot = _slots.FirstOrDefault(s => s.IsOpen);
+                var _slot = _slots.FirstOrDefault(s => !s.IsOpen);
                 _slot?.Open();
                 return _slot;
             });
