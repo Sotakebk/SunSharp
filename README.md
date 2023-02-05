@@ -5,7 +5,7 @@
 
 Target SunVox version: 2.1.0.
 ## How to install
-Currently, two packages are available:
+Two packages are available on NuGet:
 * [SunSharp](https://www.nuget.org/packages/Sotakebk.SunSharp/) ![Nuget](https://img.shields.io/nuget/v/Sotakebk.SunSharp) ![Nuget](https://img.shields.io/nuget/dt/Sotakebk.SunSharp)
 * [SunSharp.Redistribution](https://www.nuget.org/packages/Sotakebk.SunSharp.Redistribution/)  ![Nuget](https://img.shields.io/nuget/v/Sotakebk.SunSharp.Redistribution) ![Nuget](https://img.shields.io/nuget/dt/Sotakebk.SunSharp.Redistribution)
 
@@ -17,8 +17,7 @@ Platforms supported by the binaries in *SunSharp.Redistribution* are:
 * Linux x86, x86_64, arm64;
 * macOS x86_64, arm64.
 
-
-A Unity3D package is in the works.
+There is also a [Unity package](https://github.com/Sotakebk/SunSharpUnity).
 
 ## How to start
 ### Object wrapper
