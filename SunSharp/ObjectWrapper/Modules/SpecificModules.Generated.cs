@@ -422,6 +422,12 @@ namespace SunSharp.ObjectWrapper.Modules
         PingPong = 1,
     }
 
+    public enum LoopOnNoteOn : ushort
+    {
+        Restart = 0,
+        RestartCurrentIteration = 1,
+    }
+
     public enum LoopTimeUnit : ushort
     {
         LineDivBy128 = 0,
@@ -5950,6 +5956,18 @@ namespace SunSharp.ObjectWrapper.Modules
         /// <para> Possible values: Normal, PingPong </para>
         /// </summary>
         public void SetMode(LoopMode value) => Module.SetControllerValue(4, (int)value, ValueScalingType.Displayed);
+
+        /// <summary>
+        /// Original name: On NoteON
+        /// <para> Possible values: Restart, RestartCurrentIteration </para>
+        /// </summary>
+        public LoopOnNoteOn GetOnNoteOn() => (LoopOnNoteOn)Module.GetControllerValue(7, ValueScalingType.Displayed);
+
+        /// <summary>
+        /// Original name: On NoteON
+        /// <para> Possible values: Restart, RestartCurrentIteration </para>
+        /// </summary>
+        public void SetOnNoteOn(LoopOnNoteOn value) => Module.SetControllerValue(7, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Repeat (128=endless)

@@ -474,6 +474,13 @@ namespace CodeGeneration.ReparsedData
                     }
                 ),
                 new EnumDesc(
+                    "LoopOnNoteOn",
+                    new []{
+                        (0, "Restart"),
+                        (1, "RestartCurrentIteration"),
+                    }
+                ),
+                new EnumDesc(
                     "LoopTimeUnit",
                     new []{
                         (0, "LineDivBy128"),
@@ -1342,6 +1349,7 @@ namespace CodeGeneration.ReparsedData
                         new CtlDesc(4, "Mode", "Mode", "", 0, 1, enumTypeName: "LoopMode"),
                         new CtlDesc(5, "LengthUnit", "Length unit", "", 0, 6, enumTypeName: "LoopTimeUnit"),
                         new CtlDesc(6, "MaxBufferSize", "Max buffer size", "Max buffer size in seconds", 1, 240, ignoreInternalEnum: true),
+                        new CtlDesc(7, "OnNoteOn", "On NoteON", "", 0, 1, enumTypeName: "LoopOnNoteOn"),
                     },
                     new List<CurveDesc>()
                     {
