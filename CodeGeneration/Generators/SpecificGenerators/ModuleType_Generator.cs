@@ -8,7 +8,8 @@
         {
             AppendLine("/*");
             AppendLine(" * IMPORTANT!");
-            AppendLine(" * Do not modify this file manually. It was generated automatically by the CodeGeneration project.");
+            AppendLine(
+                " * Do not modify this file manually. It was generated automatically by the CodeGeneration project.");
             AppendLine("*/");
             AppendLine();
             AppendLine("namespace SunSharp.ObjectWrapper");

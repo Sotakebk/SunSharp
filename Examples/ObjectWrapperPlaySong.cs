@@ -29,8 +29,10 @@ internal class ObjectWrapperPlaySong : BaseExample
                     line = currentLine;
                     WriteLine($"Current line: {line}");
                 }
+
                 Thread.Sleep(10);
             }
+
             WriteLine("Song finished");
             Thread.Sleep(1000); // wait a second, so the reverb may fade out a bit...
 

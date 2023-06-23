@@ -26,13 +26,13 @@ internal class ThinWrapperSendEvents : BaseExample
         var tpb = (int)(tps * 60f / 80f);
         var data = new (Note note, int time)[] // the lick, lol
         {
-            (new Note(NoteName.D, 3), tpb/4), // note, and the time it should be held, in ticks
-            (new Note(NoteName.E, 3), tpb/4),
-            (new Note(NoteName.F, 3), tpb/4),
-            (new Note(NoteName.G, 3), tpb/4),
-            (new Note(NoteName.E, 3), tpb * 2/4),
-            (new Note(NoteName.C, 3), tpb/4),
-            (new Note(NoteName.D, 3), tpb/4),
+            (new Note(NoteName.D, 3), tpb / 4), // note, and the time it should be held, in ticks
+            (new Note(NoteName.E, 3), tpb / 4),
+            (new Note(NoteName.F, 3), tpb / 4),
+            (new Note(NoteName.G, 3), tpb / 4),
+            (new Note(NoteName.E, 3), tpb * 2 / 4),
+            (new Note(NoteName.C, 3), tpb / 4),
+            (new Note(NoteName.D, 3), tpb / 4),
             (Note.Off, 0)
         };
 
@@ -44,6 +44,7 @@ internal class ThinWrapperSendEvents : BaseExample
             lib.SendEvent(0, 0, new PatternEvent(pair.note, 0x80, 2));
             accumulator += pair.time;
         }
+
         lib.SetSendEventTimestamp(0, true);
 
         var wait = accumulator / (float)tps + 1;

@@ -1,6 +1,8 @@
-﻿namespace SunSharp
+﻿#pragma warning disable CA1707 // keep same naming as in official sunvox documentation
+
+namespace SunSharp
 {
-    internal static class Constants
+    public static class Constants
     {
         public const uint SV_INIT_FLAG_NO_DEBUG_OUTPUT = 1 << 0;
         public const uint SV_INIT_FLAG_USER_AUDIO_CALLBACK = 1 << 1;

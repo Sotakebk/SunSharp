@@ -1,6 +1,6 @@
 ﻿namespace Examples;
 
-internal static partial class Program
+internal static class Program
 {
     private static List<ExampleContainer> Options = new List<ExampleContainer>()
     {
@@ -13,7 +13,6 @@ internal static partial class Program
         new ManualJobContainer<ObjectWrapperSendEvents>("Object wrapper - send events"),
         new ManualJobContainer<ObjectWrapperUseModules>("Object wrapper - using Modules"),
         new ManualJobContainer<ObjectWrapperManagePatterns>("Object wrapper - manage patterns"),
-        new ManualJobContainer<AbstractionHorizontalJumps>("Abstraction - horizontal jumps"),
     };
 
     private static void Main(string[] args)

@@ -1,8 +1,8 @@
-﻿using CodeGeneration.ReparsedData;
+﻿using System.Text.RegularExpressions;
+using CodeGeneration.ReparsedData;
 using SunSharp;
 using SunSharp.ObjectWrapper;
 using SunSharp.ThinWrapper;
-using System.Text.RegularExpressions;
 
 namespace CodeGeneration
 {
@@ -32,7 +32,8 @@ namespace CodeGeneration
             }
         }
 
-        internal static ModuleDesc CreateModuleDescription(Data newData, ModuleDesc original, SunSharp.ObjectWrapper.ModuleHandle module)
+        internal static ModuleDesc CreateModuleDescription(Data newData, ModuleDesc original,
+            SunSharp.ObjectWrapper.ModuleHandle module)
         {
             var internalName = module.Slot.Library.GetModuleName(module.Slot.Id, module.Id);
             var friendlyName = ModuleTypes.GetFriendlyName(internalName);
@@ -43,14 +44,17 @@ namespace CodeGeneration
             for (int i = 0; i < module.GetControllerCount(); i++)
             {
                 var originalControllerDescription = original?.Controllers?.FirstOrDefault(c => c.Id == i);
-                var controllerDescription = CreateControllerDescription(newData, originalControllerDescription, module, i);
+                var controllerDescription =
+                    CreateControllerDescription(newData, originalControllerDescription, module, i);
                 controllerDescriptions.Add(controllerDescription);
             }
 
-            return new ModuleDesc(friendlyName, internalName, description, controllerDescriptions, curveDescriptions, original?.AdditionalCodeDescription);
+            return new ModuleDesc(friendlyName, internalName, description, controllerDescriptions, curveDescriptions,
+                original?.AdditionalCodeDescription);
         }
 
-        internal static CtlDesc CreateControllerDescription(Data newData, CtlDesc original, SunSharp.ObjectWrapper.ModuleHandle module, int i)
+        internal static CtlDesc CreateControllerDescription(Data newData, CtlDesc original,
+            SunSharp.ObjectWrapper.ModuleHandle module, int i)
         {
             var originalName = module.GetControllerName(i);
             var friendlyName = original?.FriendlyName ?? SanitizeControllerName(originalName);
@@ -62,11 +66,14 @@ namespace CodeGeneration
             if (original != null)
             {
                 if (original.MinValue != minValue)
-                    Console.WriteLine($"MinValue changed on {i}.{friendlyName}@{module.GetName()} (was: {original.MinValue}, is: {minValue})");
+                    Console.WriteLine(
+                        $"MinValue changed on {i}.{friendlyName}@{module.GetName()} (was: {original.MinValue}, is: {minValue})");
                 if (original.MaxValue != maxValue)
-                    Console.WriteLine($"MaxValue changed on {i}.{friendlyName}@{module.GetName()} (was: {original.MaxValue}, is: {maxValue})");
+                    Console.WriteLine(
+                        $"MaxValue changed on {i}.{friendlyName}@{module.GetName()} (was: {original.MaxValue}, is: {maxValue})");
                 if (original.InternalName != originalName)
-                    Console.WriteLine($"InternalName changed on {i}.{friendlyName}@{module.GetName()}  (was: {original.FriendlyName}, is: {friendlyName})");
+                    Console.WriteLine(
+                        $"InternalName changed on {i}.{friendlyName}@{module.GetName()}  (was: {original.FriendlyName}, is: {friendlyName})");
             }
 
             var originalIsEnum = module.GetControllerType(i);
@@ -81,7 +88,8 @@ namespace CodeGeneration
                     var @enum = newData.Enums.FirstOrDefault(e => e.Name == original.EnumTypeName);
                     if (@enum == null)
                     {
-                        Console.WriteLine($"Enum {original.EnumTypeName} of controller {i}.{friendlyName}@{module.GetName()} was not found!");
+                        Console.WriteLine(
+                            $"Enum {original.EnumTypeName} of controller {i}.{friendlyName}@{module.GetName()} was not found!");
                     }
                     else
                     {
@@ -89,13 +97,15 @@ namespace CodeGeneration
                         var max = @enum.Values.Max(v => v.value);
                         if (min != original.MinValue || max != original.MaxValue)
                         {
-                            Console.WriteLine($"Enum {@enum.Name} doesn't fit value range of controller {i}.{friendlyName}@{module.GetName()} (is: {min} to {max}, but expected ({minValue} to {maxValue})");
+                            Console.WriteLine(
+                                $"Enum {@enum.Name} doesn't fit value range of controller {i}.{friendlyName}@{module.GetName()} (is: {min} to {max}, but expected ({minValue} to {maxValue})");
                         }
                     }
                 }
                 else if (original.IgnoreInternalEnum == false)
                 {
-                    Console.WriteLine($"Missing enum type or ignore on controller {i}.{friendlyName}@{module.GetName()}");
+                    Console.WriteLine(
+                        $"Missing enum type or ignore on controller {i}.{friendlyName}@{module.GetName()}");
                 }
             }
             else
@@ -104,16 +114,20 @@ namespace CodeGeneration
                 {
                     if (!string.IsNullOrWhiteSpace(original.EnumTypeName))
                     {
-                        Console.WriteLine($"Controller {i}.{friendlyName}@{module.GetName()} is of type Real, but enum name is assigned");
+                        Console.WriteLine(
+                            $"Controller {i}.{friendlyName}@{module.GetName()} is of type Real, but enum name is assigned");
                     }
+
                     if (original.IgnoreInternalEnum)
                     {
-                        Console.WriteLine($"Controller {i}.{friendlyName}@{module.GetName()} has unnecessary ignore of missing Enum, since controller is of type Real");
+                        Console.WriteLine(
+                            $"Controller {i}.{friendlyName}@{module.GetName()} has unnecessary ignore of missing Enum, since controller is of type Real");
                     }
                 }
             }
 
-            return new CtlDesc(i, friendlyName, originalName, description, minValue, maxValue, original?.IgnoreInternalEnum ?? false, original?.EnumTypeName);
+            return new CtlDesc(i, friendlyName, originalName, description, minValue, maxValue,
+                original?.IgnoreInternalEnum ?? false, original?.EnumTypeName);
         }
 
         internal static string SanitizeControllerName(string name)

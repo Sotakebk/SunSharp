@@ -705,11 +705,11 @@ namespace SunSharp.ObjectWrapper.Modules
 
     public struct ADSRModuleHandle : IModuleHandleWrapper
     {
-        public ModuleHandle Module { get; private set; }
+        public ModuleHandle ModuleHandle { get; private set; }
 
         public ADSRModuleHandle(ModuleHandle module)
         {
-            Module = module;
+            ModuleHandle = module;
         }
 
 
@@ -719,192 +719,192 @@ namespace SunSharp.ObjectWrapper.Modules
         /// Original name: Attack
         /// <para> Value range: 0 to 10000 </para>
         /// </summary>
-        public int GetAttack() => Module.GetControllerValue(1, ValueScalingType.Displayed);
+        public int GetAttack() => ModuleHandle.GetControllerValue(1, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Attack
         /// <para> Value range: 0 to 10000 </para>
         /// </summary>
-        public void SetAttack(int value) => Module.SetControllerValue(1, value, ValueScalingType.Displayed);
+        public void SetAttack(int value) => ModuleHandle.SetControllerValue(1, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Attack curve
         /// <para> Possible values: Linear, Exp1, Exp2, Nexp1, Nexp2, Sin, Rect, SmoothRect, Bit2, Bit3, Bit4, Bit5 </para>
         /// </summary>
-        public ADSRCurveType GetAttackCurve() => (ADSRCurveType)Module.GetControllerValue(5, ValueScalingType.Displayed);
+        public ADSRCurveType GetAttackCurve() => (ADSRCurveType)ModuleHandle.GetControllerValue(5, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Attack curve
         /// <para> Possible values: Linear, Exp1, Exp2, Nexp1, Nexp2, Sin, Rect, SmoothRect, Bit2, Bit3, Bit4, Bit5 </para>
         /// </summary>
-        public void SetAttackCurve(ADSRCurveType value) => Module.SetControllerValue(5, (int)value, ValueScalingType.Displayed);
+        public void SetAttackCurve(ADSRCurveType value) => ModuleHandle.SetControllerValue(5, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Decay
         /// <para> Value range: 0 to 10000 </para>
         /// </summary>
-        public int GetDecay() => Module.GetControllerValue(2, ValueScalingType.Displayed);
+        public int GetDecay() => ModuleHandle.GetControllerValue(2, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Decay
         /// <para> Value range: 0 to 10000 </para>
         /// </summary>
-        public void SetDecay(int value) => Module.SetControllerValue(2, value, ValueScalingType.Displayed);
+        public void SetDecay(int value) => ModuleHandle.SetControllerValue(2, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Decay curve
         /// <para> Possible values: Linear, Exp1, Exp2, Nexp1, Nexp2, Sin, Rect, SmoothRect, Bit2, Bit3, Bit4, Bit5 </para>
         /// </summary>
-        public ADSRCurveType GetDecayCurve() => (ADSRCurveType)Module.GetControllerValue(6, ValueScalingType.Displayed);
+        public ADSRCurveType GetDecayCurve() => (ADSRCurveType)ModuleHandle.GetControllerValue(6, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Decay curve
         /// <para> Possible values: Linear, Exp1, Exp2, Nexp1, Nexp2, Sin, Rect, SmoothRect, Bit2, Bit3, Bit4, Bit5 </para>
         /// </summary>
-        public void SetDecayCurve(ADSRCurveType value) => Module.SetControllerValue(6, (int)value, ValueScalingType.Displayed);
+        public void SetDecayCurve(ADSRCurveType value) => ModuleHandle.SetControllerValue(6, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Mode
         /// <para> Possible values: Generator, AmplitudeModulatorMono, AmplitudeModulatorStereo </para>
         /// </summary>
-        public ADSRMode GetMode() => (ADSRMode)Module.GetControllerValue(13, ValueScalingType.Displayed);
+        public ADSRMode GetMode() => (ADSRMode)ModuleHandle.GetControllerValue(13, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Mode
         /// <para> Possible values: Generator, AmplitudeModulatorMono, AmplitudeModulatorStereo </para>
         /// </summary>
-        public void SetMode(ADSRMode value) => Module.SetControllerValue(13, (int)value, ValueScalingType.Displayed);
+        public void SetMode(ADSRMode value) => ModuleHandle.SetControllerValue(13, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: On NoteOFF
         /// <para> Possible values: DoNothing, StopOnLastNote, Stop </para>
         /// </summary>
-        public ADSROnNoteOffBehaviour GetOnNoteOff() => (ADSROnNoteOffBehaviour)Module.GetControllerValue(12, ValueScalingType.Displayed);
+        public ADSROnNoteOffBehaviour GetOnNoteOff() => (ADSROnNoteOffBehaviour)ModuleHandle.GetControllerValue(12, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: On NoteOFF
         /// <para> Possible values: DoNothing, StopOnLastNote, Stop </para>
         /// </summary>
-        public void SetOnNoteOff(ADSROnNoteOffBehaviour value) => Module.SetControllerValue(12, (int)value, ValueScalingType.Displayed);
+        public void SetOnNoteOff(ADSROnNoteOffBehaviour value) => ModuleHandle.SetControllerValue(12, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: On NoteON
         /// <para> Possible values: DoNothing, StartOnFirstNote, Start </para>
         /// </summary>
-        public ADSROnNoteOnBehaviour GetOnNoteOn() => (ADSROnNoteOnBehaviour)Module.GetControllerValue(11, ValueScalingType.Displayed);
+        public ADSROnNoteOnBehaviour GetOnNoteOn() => (ADSROnNoteOnBehaviour)ModuleHandle.GetControllerValue(11, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: On NoteON
         /// <para> Possible values: DoNothing, StartOnFirstNote, Start </para>
         /// </summary>
-        public void SetOnNoteOn(ADSROnNoteOnBehaviour value) => Module.SetControllerValue(11, (int)value, ValueScalingType.Displayed);
+        public void SetOnNoteOn(ADSROnNoteOnBehaviour value) => ModuleHandle.SetControllerValue(11, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Release
         /// <para> Value range: 0 to 10000 </para>
         /// </summary>
-        public int GetRelease() => Module.GetControllerValue(4, ValueScalingType.Displayed);
+        public int GetRelease() => ModuleHandle.GetControllerValue(4, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Release
         /// <para> Value range: 0 to 10000 </para>
         /// </summary>
-        public void SetRelease(int value) => Module.SetControllerValue(4, value, ValueScalingType.Displayed);
+        public void SetRelease(int value) => ModuleHandle.SetControllerValue(4, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Release curve
         /// <para> Possible values: Linear, Exp1, Exp2, Nexp1, Nexp2, Sin, Rect, SmoothRect, Bit2, Bit3, Bit4, Bit5 </para>
         /// </summary>
-        public ADSRCurveType GetReleaseCurve() => (ADSRCurveType)Module.GetControllerValue(7, ValueScalingType.Displayed);
+        public ADSRCurveType GetReleaseCurve() => (ADSRCurveType)ModuleHandle.GetControllerValue(7, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Release curve
         /// <para> Possible values: Linear, Exp1, Exp2, Nexp1, Nexp2, Sin, Rect, SmoothRect, Bit2, Bit3, Bit4, Bit5 </para>
         /// </summary>
-        public void SetReleaseCurve(ADSRCurveType value) => Module.SetControllerValue(7, (int)value, ValueScalingType.Displayed);
+        public void SetReleaseCurve(ADSRCurveType value) => ModuleHandle.SetControllerValue(7, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Smooth transitions
         /// <para> Possible values: Off, RestartAndVolumeChange, RestartAndVolumeChangeSmooth, VolumeChange </para>
         /// </summary>
-        public ADSRSmoothTransitions GetSmoothTransitions() => (ADSRSmoothTransitions)Module.GetControllerValue(14, ValueScalingType.Displayed);
+        public ADSRSmoothTransitions GetSmoothTransitions() => (ADSRSmoothTransitions)ModuleHandle.GetControllerValue(14, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Smooth transitions
         /// <para> Possible values: Off, RestartAndVolumeChange, RestartAndVolumeChangeSmooth, VolumeChange </para>
         /// </summary>
-        public void SetSmoothTransitions(ADSRSmoothTransitions value) => Module.SetControllerValue(14, (int)value, ValueScalingType.Displayed);
+        public void SetSmoothTransitions(ADSRSmoothTransitions value) => ModuleHandle.SetControllerValue(14, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: State
         /// <para> Possible values: Off, On </para>
         /// </summary>
-        public Toggle GetState() => (Toggle)Module.GetControllerValue(10, ValueScalingType.Displayed);
+        public Toggle GetState() => (Toggle)ModuleHandle.GetControllerValue(10, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: State
         /// <para> Possible values: Off, On </para>
         /// </summary>
-        public void SetState(Toggle value) => Module.SetControllerValue(10, (int)value, ValueScalingType.Displayed);
+        public void SetState(Toggle value) => ModuleHandle.SetControllerValue(10, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Sustain
         /// <para> Possible values: Off, On, Repeat </para>
         /// </summary>
-        public ADSRSustainMode GetSustain() => (ADSRSustainMode)Module.GetControllerValue(8, ValueScalingType.Displayed);
+        public ADSRSustainMode GetSustain() => (ADSRSustainMode)ModuleHandle.GetControllerValue(8, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Sustain
         /// <para> Possible values: Off, On, Repeat </para>
         /// </summary>
-        public void SetSustain(ADSRSustainMode value) => Module.SetControllerValue(8, (int)value, ValueScalingType.Displayed);
+        public void SetSustain(ADSRSustainMode value) => ModuleHandle.SetControllerValue(8, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Sustain level
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public int GetSustainLevel() => Module.GetControllerValue(3, ValueScalingType.Displayed);
+        public int GetSustainLevel() => ModuleHandle.GetControllerValue(3, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Sustain level
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public void SetSustainLevel(int value) => Module.SetControllerValue(3, value, ValueScalingType.Displayed);
+        public void SetSustainLevel(int value) => ModuleHandle.SetControllerValue(3, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Sustain pedal
         /// <para> Possible values: Off, On </para>
         /// </summary>
-        public Toggle GetSustainPedal() => (Toggle)Module.GetControllerValue(9, ValueScalingType.Displayed);
+        public Toggle GetSustainPedal() => (Toggle)ModuleHandle.GetControllerValue(9, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Sustain pedal
         /// <para> Possible values: Off, On </para>
         /// </summary>
-        public void SetSustainPedal(Toggle value) => Module.SetControllerValue(9, (int)value, ValueScalingType.Displayed);
+        public void SetSustainPedal(Toggle value) => ModuleHandle.SetControllerValue(9, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Volume
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public int GetVolume() => Module.GetControllerValue(0, ValueScalingType.Displayed);
+        public int GetVolume() => ModuleHandle.GetControllerValue(0, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Volume
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public void SetVolume(int value) => Module.SetControllerValue(0, value, ValueScalingType.Displayed);
+        public void SetVolume(int value) => ModuleHandle.SetControllerValue(0, value, ValueScalingType.Displayed);
 
         #endregion controllers
     }
 
     public struct AmplifierModuleHandle : IModuleHandleWrapper
     {
-        public ModuleHandle Module { get; private set; }
+        public ModuleHandle ModuleHandle { get; private set; }
 
         public AmplifierModuleHandle(ModuleHandle module)
         {
-            Module = module;
+            ModuleHandle = module;
         }
 
 
@@ -914,120 +914,120 @@ namespace SunSharp.ObjectWrapper.Modules
         /// Original name: Absolute
         /// <para> Possible values: Off, On </para>
         /// </summary>
-        public Toggle GetAbsolute() => (Toggle)Module.GetControllerValue(5, ValueScalingType.Displayed);
+        public Toggle GetAbsolute() => (Toggle)ModuleHandle.GetControllerValue(5, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Absolute
         /// <para> Possible values: Off, On </para>
         /// </summary>
-        public void SetAbsolute(Toggle value) => Module.SetControllerValue(5, (int)value, ValueScalingType.Displayed);
+        public void SetAbsolute(Toggle value) => ModuleHandle.SetControllerValue(5, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Balance
         /// <para> Value range: -128 to 128 </para>
         /// </summary>
-        public int GetBalance() => Module.GetControllerValue(1, ValueScalingType.Displayed);
+        public int GetBalance() => ModuleHandle.GetControllerValue(1, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Balance
         /// <para> Value range: -128 to 128 </para>
         /// </summary>
-        public void SetBalance(int value) => Module.SetControllerValue(1, value, ValueScalingType.Displayed);
+        public void SetBalance(int value) => ModuleHandle.SetControllerValue(1, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Bipolar DC Offset
         /// <para> Value range: -16384 to 16384 </para>
         /// </summary>
-        public int GetBipolarDCOffset() => Module.GetControllerValue(8, ValueScalingType.Displayed);
+        public int GetBipolarDCOffset() => ModuleHandle.GetControllerValue(8, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Bipolar DC Offset
         /// <para> Value range: -16384 to 16384 </para>
         /// </summary>
-        public void SetBipolarDCOffset(int value) => Module.SetControllerValue(8, value, ValueScalingType.Displayed);
+        public void SetBipolarDCOffset(int value) => ModuleHandle.SetControllerValue(8, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: DC Offset
         /// <para> Value range: -128 to 128 </para>
         /// </summary>
-        public int GetDCOffset() => Module.GetControllerValue(2, ValueScalingType.Displayed);
+        public int GetDCOffset() => ModuleHandle.GetControllerValue(2, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: DC Offset
         /// <para> Value range: -128 to 128 </para>
         /// </summary>
-        public void SetDCOffset(int value) => Module.SetControllerValue(2, value, ValueScalingType.Displayed);
+        public void SetDCOffset(int value) => ModuleHandle.SetControllerValue(2, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Fine volume
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public int GetFineVolume() => Module.GetControllerValue(6, ValueScalingType.Displayed);
+        public int GetFineVolume() => ModuleHandle.GetControllerValue(6, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Fine volume
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public void SetFineVolume(int value) => Module.SetControllerValue(6, value, ValueScalingType.Displayed);
+        public void SetFineVolume(int value) => ModuleHandle.SetControllerValue(6, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Gain
         /// <para> Value range: 0 to 5000 </para>
         /// </summary>
-        public int GetGain() => Module.GetControllerValue(7, ValueScalingType.Displayed);
+        public int GetGain() => ModuleHandle.GetControllerValue(7, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Gain
         /// <para> Value range: 0 to 5000 </para>
         /// </summary>
-        public void SetGain(int value) => Module.SetControllerValue(7, value, ValueScalingType.Displayed);
+        public void SetGain(int value) => ModuleHandle.SetControllerValue(7, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Inverse
         /// <para> Possible values: Off, On </para>
         /// </summary>
-        public Toggle GetInverse() => (Toggle)Module.GetControllerValue(3, ValueScalingType.Displayed);
+        public Toggle GetInverse() => (Toggle)ModuleHandle.GetControllerValue(3, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Inverse
         /// <para> Possible values: Off, On </para>
         /// </summary>
-        public void SetInverse(Toggle value) => Module.SetControllerValue(3, (int)value, ValueScalingType.Displayed);
+        public void SetInverse(Toggle value) => ModuleHandle.SetControllerValue(3, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Stereo width
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public int GetStereoWidth() => Module.GetControllerValue(4, ValueScalingType.Displayed);
+        public int GetStereoWidth() => ModuleHandle.GetControllerValue(4, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Stereo width
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public void SetStereoWidth(int value) => Module.SetControllerValue(4, value, ValueScalingType.Displayed);
+        public void SetStereoWidth(int value) => ModuleHandle.SetControllerValue(4, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Volume
         /// <para> Value range: 0 to 1024 </para>
         /// </summary>
-        public int GetVolume() => Module.GetControllerValue(0, ValueScalingType.Displayed);
+        public int GetVolume() => ModuleHandle.GetControllerValue(0, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Volume
         /// <para> Value range: 0 to 1024 </para>
         /// </summary>
-        public void SetVolume(int value) => Module.SetControllerValue(0, value, ValueScalingType.Displayed);
+        public void SetVolume(int value) => ModuleHandle.SetControllerValue(0, value, ValueScalingType.Displayed);
 
         #endregion controllers
     }
 
     public struct AnalogGeneratorModuleHandle : IModuleHandleWrapper
     {
-        public ModuleHandle Module { get; private set; }
+        public ModuleHandle ModuleHandle { get; private set; }
 
         public AnalogGeneratorModuleHandle(ModuleHandle module)
         {
-            Module = module;
+            ModuleHandle = module;
         }
 
 
@@ -1037,265 +1037,265 @@ namespace SunSharp.ObjectWrapper.Modules
         /// Original name: Attack
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public int GetAttack() => Module.GetControllerValue(3, ValueScalingType.Displayed);
+        public int GetAttack() => ModuleHandle.GetControllerValue(3, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Attack
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public void SetAttack(int value) => Module.SetControllerValue(3, value, ValueScalingType.Displayed);
+        public void SetAttack(int value) => ModuleHandle.SetControllerValue(3, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Duty cycle
         /// <para> Value range: 0 to 1024 </para>
         /// </summary>
-        public int GetDutyCycle() => Module.GetControllerValue(7, ValueScalingType.Displayed);
+        public int GetDutyCycle() => ModuleHandle.GetControllerValue(7, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Duty cycle
         /// <para> Value range: 0 to 1024 </para>
         /// </summary>
-        public void SetDutyCycle(int value) => Module.SetControllerValue(7, value, ValueScalingType.Displayed);
+        public void SetDutyCycle(int value) => ModuleHandle.SetControllerValue(7, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Exponential envelope
         /// <para> Possible values: Off, On </para>
         /// </summary>
-        public Toggle GetExponentialEnvelope() => (Toggle)Module.GetControllerValue(6, ValueScalingType.Displayed);
+        public Toggle GetExponentialEnvelope() => (Toggle)ModuleHandle.GetControllerValue(6, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Exponential envelope
         /// <para> Possible values: Off, On </para>
         /// </summary>
-        public void SetExponentialEnvelope(Toggle value) => Module.SetControllerValue(6, (int)value, ValueScalingType.Displayed);
+        public void SetExponentialEnvelope(Toggle value) => ModuleHandle.SetControllerValue(6, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: F.attack
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public int GetFAttack() => Module.GetControllerValue(13, ValueScalingType.Displayed);
+        public int GetFAttack() => ModuleHandle.GetControllerValue(13, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: F.attack
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public void SetFAttack(int value) => Module.SetControllerValue(13, value, ValueScalingType.Displayed);
+        public void SetFAttack(int value) => ModuleHandle.SetControllerValue(13, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: F.envelope
         /// <para> Possible values: Off, SustainOff, SustainOn </para>
         /// </summary>
-        public AnalogGeneratorEnvelopeMode GetFEnvelope() => (AnalogGeneratorEnvelopeMode)Module.GetControllerValue(15, ValueScalingType.Displayed);
+        public AnalogGeneratorEnvelopeMode GetFEnvelope() => (AnalogGeneratorEnvelopeMode)ModuleHandle.GetControllerValue(15, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: F.envelope
         /// <para> Possible values: Off, SustainOff, SustainOn </para>
         /// </summary>
-        public void SetFEnvelope(AnalogGeneratorEnvelopeMode value) => Module.SetControllerValue(15, (int)value, ValueScalingType.Displayed);
+        public void SetFEnvelope(AnalogGeneratorEnvelopeMode value) => ModuleHandle.SetControllerValue(15, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: F.exponential freq
         /// <para> Possible values: Off, On </para>
         /// </summary>
-        public Toggle GetFExponentialFreq() => (Toggle)Module.GetControllerValue(12, ValueScalingType.Displayed);
+        public Toggle GetFExponentialFreq() => (Toggle)ModuleHandle.GetControllerValue(12, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: F.exponential freq
         /// <para> Possible values: Off, On </para>
         /// </summary>
-        public void SetFExponentialFreq(Toggle value) => Module.SetControllerValue(12, (int)value, ValueScalingType.Displayed);
+        public void SetFExponentialFreq(Toggle value) => ModuleHandle.SetControllerValue(12, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: F.freq
         /// <para> Value range: 0 to 14000 </para>
         /// </summary>
-        public int GetFFreq() => Module.GetControllerValue(10, ValueScalingType.Displayed);
+        public int GetFFreq() => ModuleHandle.GetControllerValue(10, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: F.freq
         /// <para> Value range: 0 to 14000 </para>
         /// </summary>
-        public void SetFFreq(int value) => Module.SetControllerValue(10, value, ValueScalingType.Displayed);
+        public void SetFFreq(int value) => ModuleHandle.SetControllerValue(10, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Filter
         /// <para> Possible values: Off, LP12dB, HP12dB, BP12dB, BR12dB, LP24dB, HP24dB, BP24dB, BR24dB </para>
         /// </summary>
-        public AnalogGeneratorFilterType GetFilter() => (AnalogGeneratorFilterType)Module.GetControllerValue(9, ValueScalingType.Displayed);
+        public AnalogGeneratorFilterType GetFilter() => (AnalogGeneratorFilterType)ModuleHandle.GetControllerValue(9, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Filter
         /// <para> Possible values: Off, LP12dB, HP12dB, BP12dB, BR12dB, LP24dB, HP24dB, BP24dB, BR24dB </para>
         /// </summary>
-        public void SetFilter(AnalogGeneratorFilterType value) => Module.SetControllerValue(9, (int)value, ValueScalingType.Displayed);
+        public void SetFilter(AnalogGeneratorFilterType value) => ModuleHandle.SetControllerValue(9, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: F.release
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public int GetFRelease() => Module.GetControllerValue(14, ValueScalingType.Displayed);
+        public int GetFRelease() => ModuleHandle.GetControllerValue(14, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: F.release
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public void SetFRelease(int value) => Module.SetControllerValue(14, value, ValueScalingType.Displayed);
+        public void SetFRelease(int value) => ModuleHandle.SetControllerValue(14, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: F.resonance
         /// <para> Value range: 0 to 1530 </para>
         /// </summary>
-        public int GetFResonance() => Module.GetControllerValue(11, ValueScalingType.Displayed);
+        public int GetFResonance() => ModuleHandle.GetControllerValue(11, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: F.resonance
         /// <para> Value range: 0 to 1530 </para>
         /// </summary>
-        public void SetFResonance(int value) => Module.SetControllerValue(11, value, ValueScalingType.Displayed);
+        public void SetFResonance(int value) => ModuleHandle.SetControllerValue(11, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Mode
         /// <para> Possible values: HQ, HQMono, LQ, LQMono </para>
         /// </summary>
-        public Quality GetMode() => (Quality)Module.GetControllerValue(17, ValueScalingType.Displayed);
+        public Quality GetMode() => (Quality)ModuleHandle.GetControllerValue(17, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Mode
         /// <para> Possible values: HQ, HQMono, LQ, LQMono </para>
         /// </summary>
-        public void SetMode(Quality value) => Module.SetControllerValue(17, (int)value, ValueScalingType.Displayed);
+        public void SetMode(Quality value) => ModuleHandle.SetControllerValue(17, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Noise
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public int GetNoise() => Module.GetControllerValue(18, ValueScalingType.Displayed);
+        public int GetNoise() => ModuleHandle.GetControllerValue(18, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Noise
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public void SetNoise(int value) => Module.SetControllerValue(18, value, ValueScalingType.Displayed);
+        public void SetNoise(int value) => ModuleHandle.SetControllerValue(18, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Osc2
         /// <para> Value range: -1000 to 1000 </para>
         /// </summary>
-        public int GetOsc2() => Module.GetControllerValue(8, ValueScalingType.Displayed);
+        public int GetOsc2() => ModuleHandle.GetControllerValue(8, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Osc2
         /// <para> Value range: -1000 to 1000 </para>
         /// </summary>
-        public void SetOsc2(int value) => Module.SetControllerValue(8, value, ValueScalingType.Displayed);
+        public void SetOsc2(int value) => ModuleHandle.SetControllerValue(8, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Osc2 mode
         /// <para> Possible values: Add, Sub, Mul, Min, Max, BitwiseAnd, BitwiseXor </para>
         /// </summary>
-        public AnalogGeneratorOsc2Mode GetOsc2Mode() => (AnalogGeneratorOsc2Mode)Module.GetControllerValue(20, ValueScalingType.Displayed);
+        public AnalogGeneratorOsc2Mode GetOsc2Mode() => (AnalogGeneratorOsc2Mode)ModuleHandle.GetControllerValue(20, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Osc2 mode
         /// <para> Possible values: Add, Sub, Mul, Min, Max, BitwiseAnd, BitwiseXor </para>
         /// </summary>
-        public void SetOsc2Mode(AnalogGeneratorOsc2Mode value) => Module.SetControllerValue(20, (int)value, ValueScalingType.Displayed);
+        public void SetOsc2Mode(AnalogGeneratorOsc2Mode value) => ModuleHandle.SetControllerValue(20, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Osc2 phase
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public int GetOsc2Phase() => Module.GetControllerValue(21, ValueScalingType.Displayed);
+        public int GetOsc2Phase() => ModuleHandle.GetControllerValue(21, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Osc2 phase
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public void SetOsc2Phase(int value) => Module.SetControllerValue(21, value, ValueScalingType.Displayed);
+        public void SetOsc2Phase(int value) => ModuleHandle.SetControllerValue(21, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Osc2 volume
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public int GetOsc2Volume() => Module.GetControllerValue(19, ValueScalingType.Displayed);
+        public int GetOsc2Volume() => ModuleHandle.GetControllerValue(19, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Osc2 volume
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public void SetOsc2Volume(int value) => Module.SetControllerValue(19, value, ValueScalingType.Displayed);
+        public void SetOsc2Volume(int value) => ModuleHandle.SetControllerValue(19, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Panning
         /// <para> Value range: -128 to 128 </para>
         /// </summary>
-        public int GetPanning() => Module.GetControllerValue(2, ValueScalingType.Displayed);
+        public int GetPanning() => ModuleHandle.GetControllerValue(2, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Panning
         /// <para> Value range: -128 to 128 </para>
         /// </summary>
-        public void SetPanning(int value) => Module.SetControllerValue(2, value, ValueScalingType.Displayed);
+        public void SetPanning(int value) => ModuleHandle.SetControllerValue(2, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Polyphony
         /// <para> Value range: 1 to 32 </para>
         /// </summary>
-        public int GetPolyphony() => Module.GetControllerValue(16, ValueScalingType.Displayed);
+        public int GetPolyphony() => ModuleHandle.GetControllerValue(16, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Polyphony
         /// <para> Value range: 1 to 32 </para>
         /// </summary>
-        public void SetPolyphony(int value) => Module.SetControllerValue(16, value, ValueScalingType.Displayed);
+        public void SetPolyphony(int value) => ModuleHandle.SetControllerValue(16, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Release
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public int GetRelease() => Module.GetControllerValue(4, ValueScalingType.Displayed);
+        public int GetRelease() => ModuleHandle.GetControllerValue(4, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Release
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public void SetRelease(int value) => Module.SetControllerValue(4, value, ValueScalingType.Displayed);
+        public void SetRelease(int value) => ModuleHandle.SetControllerValue(4, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Sustain
         /// <para> Possible values: Off, On </para>
         /// </summary>
-        public Toggle GetSustain() => (Toggle)Module.GetControllerValue(5, ValueScalingType.Displayed);
+        public Toggle GetSustain() => (Toggle)ModuleHandle.GetControllerValue(5, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Sustain
         /// <para> Possible values: Off, On </para>
         /// </summary>
-        public void SetSustain(Toggle value) => Module.SetControllerValue(5, (int)value, ValueScalingType.Displayed);
+        public void SetSustain(Toggle value) => ModuleHandle.SetControllerValue(5, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Volume
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public int GetVolume() => Module.GetControllerValue(0, ValueScalingType.Displayed);
+        public int GetVolume() => ModuleHandle.GetControllerValue(0, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Volume
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public void SetVolume(int value) => Module.SetControllerValue(0, value, ValueScalingType.Displayed);
+        public void SetVolume(int value) => ModuleHandle.SetControllerValue(0, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Waveform
         /// <para> Possible values: Triangle, Saw, Square, NoiseSampler, Drawn, Sin, Hsin, Asin, DrawnSpline, NoiseSamplerSpline, WhiteNoise, PinkNoise, RedNoise, BlueNosie, VioletNoise, GreyNoise, Harmonics </para>
         /// </summary>
-        public AnalogGeneratorWaveform GetWaveform() => (AnalogGeneratorWaveform)Module.GetControllerValue(1, ValueScalingType.Displayed);
+        public AnalogGeneratorWaveform GetWaveform() => (AnalogGeneratorWaveform)ModuleHandle.GetControllerValue(1, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Waveform
         /// <para> Possible values: Triangle, Saw, Square, NoiseSampler, Drawn, Sin, Hsin, Asin, DrawnSpline, NoiseSamplerSpline, WhiteNoise, PinkNoise, RedNoise, BlueNosie, VioletNoise, GreyNoise, Harmonics </para>
         /// </summary>
-        public void SetWaveform(AnalogGeneratorWaveform value) => Module.SetControllerValue(1, (int)value, ValueScalingType.Displayed);
+        public void SetWaveform(AnalogGeneratorWaveform value) => ModuleHandle.SetControllerValue(1, (int)value, ValueScalingType.Displayed);
 
         #endregion controllers
 
@@ -1311,7 +1311,7 @@ namespace SunSharp.ObjectWrapper.Modules
             if (buffer.Length < 32)
                 throw new System.ArgumentException("Buffer must be at least of size 32");
 
-            Module.ReadCurve(0, buffer);
+            ModuleHandle.ReadCurve(0, buffer);
         }
 
         /// <summary>
@@ -1324,7 +1324,7 @@ namespace SunSharp.ObjectWrapper.Modules
             if (buffer.Length < 32)
                 throw new System.ArgumentException("Buffer must be at least of size 32");
 
-            Module.WriteCurve(0, buffer);
+            ModuleHandle.WriteCurve(0, buffer);
         }
 
         #endregion curves
@@ -1332,11 +1332,11 @@ namespace SunSharp.ObjectWrapper.Modules
 
     public struct CompressorModuleHandle : IModuleHandleWrapper
     {
-        public ModuleHandle Module { get; private set; }
+        public ModuleHandle ModuleHandle { get; private set; }
 
         public CompressorModuleHandle(ModuleHandle module)
         {
-            Module = module;
+            ModuleHandle = module;
         }
 
 
@@ -1346,96 +1346,96 @@ namespace SunSharp.ObjectWrapper.Modules
         /// Original name: Attack
         /// <para> Value range: 0 to 500 </para>
         /// </summary>
-        public int GetAttack() => Module.GetControllerValue(3, ValueScalingType.Displayed);
+        public int GetAttack() => ModuleHandle.GetControllerValue(3, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Attack
         /// <para> Value range: 0 to 500 </para>
         /// </summary>
-        public void SetAttack(int value) => Module.SetControllerValue(3, value, ValueScalingType.Displayed);
+        public void SetAttack(int value) => ModuleHandle.SetControllerValue(3, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Mode
         /// <para> Possible values: Peak, RMS, PeakZeroLatency </para>
         /// </summary>
-        public CompressorMode GetMode() => (CompressorMode)Module.GetControllerValue(5, ValueScalingType.Displayed);
+        public CompressorMode GetMode() => (CompressorMode)ModuleHandle.GetControllerValue(5, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Mode
         /// <para> Possible values: Peak, RMS, PeakZeroLatency </para>
         /// </summary>
-        public void SetMode(CompressorMode value) => Module.SetControllerValue(5, (int)value, ValueScalingType.Displayed);
+        public void SetMode(CompressorMode value) => ModuleHandle.SetControllerValue(5, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Release
         /// <para> Value range: 1 to 1000 </para>
         /// </summary>
-        public int GetRelease() => Module.GetControllerValue(4, ValueScalingType.Displayed);
+        public int GetRelease() => ModuleHandle.GetControllerValue(4, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Release
         /// <para> Value range: 1 to 1000 </para>
         /// </summary>
-        public void SetRelease(int value) => Module.SetControllerValue(4, value, ValueScalingType.Displayed);
+        public void SetRelease(int value) => ModuleHandle.SetControllerValue(4, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Side-chain input
         /// <para> Value range: 0 to 32 </para>
         /// </summary>
-        public int GetSideChainInput() => Module.GetControllerValue(6, ValueScalingType.Displayed);
+        public int GetSideChainInput() => ModuleHandle.GetControllerValue(6, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Side-chain input
         /// <para> Value range: 0 to 32 </para>
         /// </summary>
-        public void SetSideChainInput(int value) => Module.SetControllerValue(6, value, ValueScalingType.Displayed);
+        public void SetSideChainInput(int value) => ModuleHandle.SetControllerValue(6, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Slope
         /// <para> Value range: 0 to 200 </para>
         /// </summary>
-        public int GetSlope() => Module.GetControllerValue(2, ValueScalingType.Displayed);
+        public int GetSlope() => ModuleHandle.GetControllerValue(2, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Slope
         /// <para> Value range: 0 to 200 </para>
         /// </summary>
-        public void SetSlope(int value) => Module.SetControllerValue(2, value, ValueScalingType.Displayed);
+        public void SetSlope(int value) => ModuleHandle.SetControllerValue(2, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Threshold
         /// <para> Value range: 0 to 512 </para>
         /// </summary>
-        public int GetThreshold() => Module.GetControllerValue(1, ValueScalingType.Displayed);
+        public int GetThreshold() => ModuleHandle.GetControllerValue(1, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Threshold
         /// <para> Value range: 0 to 512 </para>
         /// </summary>
-        public void SetThreshold(int value) => Module.SetControllerValue(1, value, ValueScalingType.Displayed);
+        public void SetThreshold(int value) => ModuleHandle.SetControllerValue(1, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Volume
         /// <para> Value range: 0 to 512 </para>
         /// </summary>
-        public int GetVolume() => Module.GetControllerValue(0, ValueScalingType.Displayed);
+        public int GetVolume() => ModuleHandle.GetControllerValue(0, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Volume
         /// <para> Value range: 0 to 512 </para>
         /// </summary>
-        public void SetVolume(int value) => Module.SetControllerValue(0, value, ValueScalingType.Displayed);
+        public void SetVolume(int value) => ModuleHandle.SetControllerValue(0, value, ValueScalingType.Displayed);
 
         #endregion controllers
     }
 
     public struct ControlToNoteModuleHandle : IModuleHandleWrapper
     {
-        public ModuleHandle Module { get; private set; }
+        public ModuleHandle ModuleHandle { get; private set; }
 
         public ControlToNoteModuleHandle(ModuleHandle module)
         {
-            Module = module;
+            ModuleHandle = module;
         }
 
 
@@ -1445,132 +1445,132 @@ namespace SunSharp.ObjectWrapper.Modules
         /// Original name: Finetune
         /// <para> Value range: -256 to 256 </para>
         /// </summary>
-        public int GetFinetune() => Module.GetControllerValue(4, ValueScalingType.Displayed);
+        public int GetFinetune() => ModuleHandle.GetControllerValue(4, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Finetune
         /// <para> Value range: -256 to 256 </para>
         /// </summary>
-        public void SetFinetune(int value) => Module.SetControllerValue(4, value, ValueScalingType.Displayed);
+        public void SetFinetune(int value) => ModuleHandle.SetControllerValue(4, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: First note
         /// <para> Value range: 0 to 120 </para>
         /// </summary>
-        public int GetFirstNote() => Module.GetControllerValue(1, ValueScalingType.Displayed);
+        public int GetFirstNote() => ModuleHandle.GetControllerValue(1, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: First note
         /// <para> Value range: 0 to 120 </para>
         /// </summary>
-        public void SetFirstNote(int value) => Module.SetControllerValue(1, value, ValueScalingType.Displayed);
+        public void SetFirstNote(int value) => ModuleHandle.SetControllerValue(1, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: NoteOFF
         /// <para> Possible values: Nothing, OnMinPitch, OnMaxPitch </para>
         /// </summary>
-        public ControlToNoteOffBehaviour GetNoteOff() => (ControlToNoteOffBehaviour)Module.GetControllerValue(8, ValueScalingType.Displayed);
+        public ControlToNoteOffBehaviour GetNoteOff() => (ControlToNoteOffBehaviour)ModuleHandle.GetControllerValue(8, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: NoteOFF
         /// <para> Possible values: Nothing, OnMinPitch, OnMaxPitch </para>
         /// </summary>
-        public void SetNoteOff(ControlToNoteOffBehaviour value) => Module.SetControllerValue(8, (int)value, ValueScalingType.Displayed);
+        public void SetNoteOff(ControlToNoteOffBehaviour value) => ModuleHandle.SetControllerValue(8, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: NoteON
         /// <para> Possible values: Nothing, OnPitchChange </para>
         /// </summary>
-        public ControlToNoteOnBehaviour GetNoteOn() => (ControlToNoteOnBehaviour)Module.GetControllerValue(7, ValueScalingType.Displayed);
+        public ControlToNoteOnBehaviour GetNoteOn() => (ControlToNoteOnBehaviour)ModuleHandle.GetControllerValue(7, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: NoteON
         /// <para> Possible values: Nothing, OnPitchChange </para>
         /// </summary>
-        public void SetNoteOn(ControlToNoteOnBehaviour value) => Module.SetControllerValue(7, (int)value, ValueScalingType.Displayed);
+        public void SetNoteOn(ControlToNoteOnBehaviour value) => ModuleHandle.SetControllerValue(7, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Pitch
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public int GetPitch() => Module.GetControllerValue(0, ValueScalingType.Displayed);
+        public int GetPitch() => ModuleHandle.GetControllerValue(0, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Pitch
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public void SetPitch(int value) => Module.SetControllerValue(0, value, ValueScalingType.Displayed);
+        public void SetPitch(int value) => ModuleHandle.SetControllerValue(0, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Range (number of semitones)
         /// <para> Value range: 0 to 120 </para>
         /// </summary>
-        public int GetRangeNumberOfSemitones() => Module.GetControllerValue(2, ValueScalingType.Displayed);
+        public int GetRangeNumberOfSemitones() => ModuleHandle.GetControllerValue(2, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Range (number of semitones)
         /// <para> Value range: 0 to 120 </para>
         /// </summary>
-        public void SetRangeNumberOfSemitones(int value) => Module.SetControllerValue(2, value, ValueScalingType.Displayed);
+        public void SetRangeNumberOfSemitones(int value) => ModuleHandle.SetControllerValue(2, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Record notes
         /// <para> Possible values: Off, On </para>
         /// </summary>
-        public Toggle GetRecordNotes() => (Toggle)Module.GetControllerValue(9, ValueScalingType.Displayed);
+        public Toggle GetRecordNotes() => (Toggle)ModuleHandle.GetControllerValue(9, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Record notes
         /// <para> Possible values: Off, On </para>
         /// </summary>
-        public void SetRecordNotes(Toggle value) => Module.SetControllerValue(9, (int)value, ValueScalingType.Displayed);
+        public void SetRecordNotes(Toggle value) => ModuleHandle.SetControllerValue(9, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: State
         /// <para> Possible values: Off, On </para>
         /// </summary>
-        public Toggle GetState() => (Toggle)Module.GetControllerValue(6, ValueScalingType.Displayed);
+        public Toggle GetState() => (Toggle)ModuleHandle.GetControllerValue(6, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: State
         /// <para> Possible values: Off, On </para>
         /// </summary>
-        public void SetState(Toggle value) => Module.SetControllerValue(6, (int)value, ValueScalingType.Displayed);
+        public void SetState(Toggle value) => ModuleHandle.SetControllerValue(6, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Transpose
         /// <para> Value range: -128 to 128 </para>
         /// </summary>
-        public int GetTranspose() => Module.GetControllerValue(3, ValueScalingType.Displayed);
+        public int GetTranspose() => ModuleHandle.GetControllerValue(3, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Transpose
         /// <para> Value range: -128 to 128 </para>
         /// </summary>
-        public void SetTranspose(int value) => Module.SetControllerValue(3, value, ValueScalingType.Displayed);
+        public void SetTranspose(int value) => ModuleHandle.SetControllerValue(3, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Velocity
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public int GetVelocity() => Module.GetControllerValue(5, ValueScalingType.Displayed);
+        public int GetVelocity() => ModuleHandle.GetControllerValue(5, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Velocity
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public void SetVelocity(int value) => Module.SetControllerValue(5, value, ValueScalingType.Displayed);
+        public void SetVelocity(int value) => ModuleHandle.SetControllerValue(5, value, ValueScalingType.Displayed);
 
         #endregion controllers
     }
 
     public struct DcBlockerModuleHandle : IModuleHandleWrapper
     {
-        public ModuleHandle Module { get; private set; }
+        public ModuleHandle ModuleHandle { get; private set; }
 
         public DcBlockerModuleHandle(ModuleHandle module)
         {
-            Module = module;
+            ModuleHandle = module;
         }
 
 
@@ -1580,24 +1580,24 @@ namespace SunSharp.ObjectWrapper.Modules
         /// Original name: Channels
         /// <para> Possible values: Stereo, Mono </para>
         /// </summary>
-        public Channels GetChannels() => (Channels)Module.GetControllerValue(0, ValueScalingType.Displayed);
+        public Channels GetChannels() => (Channels)ModuleHandle.GetControllerValue(0, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Channels
         /// <para> Possible values: Stereo, Mono </para>
         /// </summary>
-        public void SetChannels(Channels value) => Module.SetControllerValue(0, (int)value, ValueScalingType.Displayed);
+        public void SetChannels(Channels value) => ModuleHandle.SetControllerValue(0, (int)value, ValueScalingType.Displayed);
 
         #endregion controllers
     }
 
     public struct DelayModuleHandle : IModuleHandleWrapper
     {
-        public ModuleHandle Module { get; private set; }
+        public ModuleHandle ModuleHandle { get; private set; }
 
         public DelayModuleHandle(ModuleHandle module)
         {
-            Module = module;
+            ModuleHandle = module;
         }
 
 
@@ -1607,144 +1607,144 @@ namespace SunSharp.ObjectWrapper.Modules
         /// Original name: Channels
         /// <para> Possible values: Stereo, Mono </para>
         /// </summary>
-        public Channels GetChannels() => (Channels)Module.GetControllerValue(6, ValueScalingType.Displayed);
+        public Channels GetChannels() => (Channels)ModuleHandle.GetControllerValue(6, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Channels
         /// <para> Possible values: Stereo, Mono </para>
         /// </summary>
-        public void SetChannels(Channels value) => Module.SetControllerValue(6, (int)value, ValueScalingType.Displayed);
+        public void SetChannels(Channels value) => ModuleHandle.SetControllerValue(6, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Delay L
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public int GetDelayL() => Module.GetControllerValue(2, ValueScalingType.Displayed);
+        public int GetDelayL() => ModuleHandle.GetControllerValue(2, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Delay L
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public void SetDelayL(int value) => Module.SetControllerValue(2, value, ValueScalingType.Displayed);
+        public void SetDelayL(int value) => ModuleHandle.SetControllerValue(2, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Delay multiplier
         /// <para> Value range: 1 to 15 </para>
         /// </summary>
-        public int GetDelayMultiplier() => Module.GetControllerValue(9, ValueScalingType.Displayed);
+        public int GetDelayMultiplier() => ModuleHandle.GetControllerValue(9, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Delay multiplier
         /// <para> Value range: 1 to 15 </para>
         /// </summary>
-        public void SetDelayMultiplier(int value) => Module.SetControllerValue(9, value, ValueScalingType.Displayed);
+        public void SetDelayMultiplier(int value) => ModuleHandle.SetControllerValue(9, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Delay R
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public int GetDelayR() => Module.GetControllerValue(3, ValueScalingType.Displayed);
+        public int GetDelayR() => ModuleHandle.GetControllerValue(3, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Delay R
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public void SetDelayR(int value) => Module.SetControllerValue(3, value, ValueScalingType.Displayed);
+        public void SetDelayR(int value) => ModuleHandle.SetControllerValue(3, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Delay unit
         /// <para> Possible values: SecondDivBy16384, Millisecond, Hz, Tick, Line, HalfLine, OneThirdLine, SecondDivBy44100, SecondDivBy48000, Sample </para>
         /// </summary>
-        public DelayUnit GetDelayUnit() => (DelayUnit)Module.GetControllerValue(8, ValueScalingType.Displayed);
+        public DelayUnit GetDelayUnit() => (DelayUnit)ModuleHandle.GetControllerValue(8, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Delay unit
         /// <para> Possible values: SecondDivBy16384, Millisecond, Hz, Tick, Line, HalfLine, OneThirdLine, SecondDivBy44100, SecondDivBy48000, Sample </para>
         /// </summary>
-        public void SetDelayUnit(DelayUnit value) => Module.SetControllerValue(8, (int)value, ValueScalingType.Displayed);
+        public void SetDelayUnit(DelayUnit value) => ModuleHandle.SetControllerValue(8, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Dry
         /// <para> Value range: 0 to 512 </para>
         /// </summary>
-        public int GetDry() => Module.GetControllerValue(0, ValueScalingType.Displayed);
+        public int GetDry() => ModuleHandle.GetControllerValue(0, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Dry
         /// <para> Value range: 0 to 512 </para>
         /// </summary>
-        public void SetDry(int value) => Module.SetControllerValue(0, value, ValueScalingType.Displayed);
+        public void SetDry(int value) => ModuleHandle.SetControllerValue(0, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Feedback
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public int GetFeedback() => Module.GetControllerValue(10, ValueScalingType.Displayed);
+        public int GetFeedback() => ModuleHandle.GetControllerValue(10, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Feedback
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public void SetFeedback(int value) => Module.SetControllerValue(10, value, ValueScalingType.Displayed);
+        public void SetFeedback(int value) => ModuleHandle.SetControllerValue(10, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Inverse
         /// <para> Possible values: Off, On </para>
         /// </summary>
-        public Toggle GetInverse() => (Toggle)Module.GetControllerValue(7, ValueScalingType.Displayed);
+        public Toggle GetInverse() => (Toggle)ModuleHandle.GetControllerValue(7, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Inverse
         /// <para> Possible values: Off, On </para>
         /// </summary>
-        public void SetInverse(Toggle value) => Module.SetControllerValue(7, (int)value, ValueScalingType.Displayed);
+        public void SetInverse(Toggle value) => ModuleHandle.SetControllerValue(7, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Volume L
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public int GetVolumeL() => Module.GetControllerValue(4, ValueScalingType.Displayed);
+        public int GetVolumeL() => ModuleHandle.GetControllerValue(4, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Volume L
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public void SetVolumeL(int value) => Module.SetControllerValue(4, value, ValueScalingType.Displayed);
+        public void SetVolumeL(int value) => ModuleHandle.SetControllerValue(4, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Volume R
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public int GetVolumeR() => Module.GetControllerValue(5, ValueScalingType.Displayed);
+        public int GetVolumeR() => ModuleHandle.GetControllerValue(5, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Volume R
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public void SetVolumeR(int value) => Module.SetControllerValue(5, value, ValueScalingType.Displayed);
+        public void SetVolumeR(int value) => ModuleHandle.SetControllerValue(5, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Wet
         /// <para> Value range: 0 to 512 </para>
         /// </summary>
-        public int GetWet() => Module.GetControllerValue(1, ValueScalingType.Displayed);
+        public int GetWet() => ModuleHandle.GetControllerValue(1, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Wet
         /// <para> Value range: 0 to 512 </para>
         /// </summary>
-        public void SetWet(int value) => Module.SetControllerValue(1, value, ValueScalingType.Displayed);
+        public void SetWet(int value) => ModuleHandle.SetControllerValue(1, value, ValueScalingType.Displayed);
 
         #endregion controllers
     }
 
     public struct DistortionModuleHandle : IModuleHandleWrapper
     {
-        public ModuleHandle Module { get; private set; }
+        public ModuleHandle ModuleHandle { get; private set; }
 
         public DistortionModuleHandle(ModuleHandle module)
         {
-            Module = module;
+            ModuleHandle = module;
         }
 
 
@@ -1754,84 +1754,84 @@ namespace SunSharp.ObjectWrapper.Modules
         /// Original name: Bit depth
         /// <para> Value range: 1 to 16 </para>
         /// </summary>
-        public int GetBitDepth() => Module.GetControllerValue(3, ValueScalingType.Displayed);
+        public int GetBitDepth() => ModuleHandle.GetControllerValue(3, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Bit depth
         /// <para> Value range: 1 to 16 </para>
         /// </summary>
-        public void SetBitDepth(int value) => Module.SetControllerValue(3, value, ValueScalingType.Displayed);
+        public void SetBitDepth(int value) => ModuleHandle.SetControllerValue(3, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Type
         /// <para> Possible values: Clipping, Foldback, Foldback2, Foldback3, Overflow, Overflow2, SaturationFoldback, SaturationFoldbackSin, Saturation3, Saturation4, Saturation5 </para>
         /// </summary>
-        public DistortionType GetDistortionType() => (DistortionType)Module.GetControllerValue(1, ValueScalingType.Displayed);
+        public DistortionType GetDistortionType() => (DistortionType)ModuleHandle.GetControllerValue(1, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Type
         /// <para> Possible values: Clipping, Foldback, Foldback2, Foldback3, Overflow, Overflow2, SaturationFoldback, SaturationFoldbackSin, Saturation3, Saturation4, Saturation5 </para>
         /// </summary>
-        public void SetDistortionType(DistortionType value) => Module.SetControllerValue(1, (int)value, ValueScalingType.Displayed);
+        public void SetDistortionType(DistortionType value) => ModuleHandle.SetControllerValue(1, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Freq
         /// <para> Value range: 0 to 44100 </para>
         /// </summary>
-        public int GetFreq() => Module.GetControllerValue(4, ValueScalingType.Displayed);
+        public int GetFreq() => ModuleHandle.GetControllerValue(4, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Freq
         /// <para> Value range: 0 to 44100 </para>
         /// </summary>
-        public void SetFreq(int value) => Module.SetControllerValue(4, value, ValueScalingType.Displayed);
+        public void SetFreq(int value) => ModuleHandle.SetControllerValue(4, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Noise
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public int GetNoise() => Module.GetControllerValue(5, ValueScalingType.Displayed);
+        public int GetNoise() => ModuleHandle.GetControllerValue(5, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Noise
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public void SetNoise(int value) => Module.SetControllerValue(5, value, ValueScalingType.Displayed);
+        public void SetNoise(int value) => ModuleHandle.SetControllerValue(5, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Power
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public int GetPower() => Module.GetControllerValue(2, ValueScalingType.Displayed);
+        public int GetPower() => ModuleHandle.GetControllerValue(2, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Power
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public void SetPower(int value) => Module.SetControllerValue(2, value, ValueScalingType.Displayed);
+        public void SetPower(int value) => ModuleHandle.SetControllerValue(2, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Volume
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public int GetVolume() => Module.GetControllerValue(0, ValueScalingType.Displayed);
+        public int GetVolume() => ModuleHandle.GetControllerValue(0, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Volume
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public void SetVolume(int value) => Module.SetControllerValue(0, value, ValueScalingType.Displayed);
+        public void SetVolume(int value) => ModuleHandle.SetControllerValue(0, value, ValueScalingType.Displayed);
 
         #endregion controllers
     }
 
     public struct DrumSynthModuleHandle : IModuleHandleWrapper
     {
-        public ModuleHandle Module { get; private set; }
+        public ModuleHandle ModuleHandle { get; private set; }
 
         public DrumSynthModuleHandle(ModuleHandle module)
         {
-            Module = module;
+            ModuleHandle = module;
         }
 
 
@@ -1841,192 +1841,192 @@ namespace SunSharp.ObjectWrapper.Modules
         /// Original name: Bass length
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public int GetBassLength() => Module.GetControllerValue(6, ValueScalingType.Displayed);
+        public int GetBassLength() => ModuleHandle.GetControllerValue(6, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Bass length
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public void SetBassLength(int value) => Module.SetControllerValue(6, value, ValueScalingType.Displayed);
+        public void SetBassLength(int value) => ModuleHandle.SetControllerValue(6, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Bass panning
         /// <para> Value range: -128 to 128 </para>
         /// </summary>
-        public int GetBassPanning() => Module.GetControllerValue(12, ValueScalingType.Displayed);
+        public int GetBassPanning() => ModuleHandle.GetControllerValue(12, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Bass panning
         /// <para> Value range: -128 to 128 </para>
         /// </summary>
-        public void SetBassPanning(int value) => Module.SetControllerValue(12, value, ValueScalingType.Displayed);
+        public void SetBassPanning(int value) => ModuleHandle.SetControllerValue(12, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Bass power
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public int GetBassPower() => Module.GetControllerValue(4, ValueScalingType.Displayed);
+        public int GetBassPower() => ModuleHandle.GetControllerValue(4, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Bass power
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public void SetBassPower(int value) => Module.SetControllerValue(4, value, ValueScalingType.Displayed);
+        public void SetBassPower(int value) => ModuleHandle.SetControllerValue(4, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Bass tone
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public int GetBassTone() => Module.GetControllerValue(5, ValueScalingType.Displayed);
+        public int GetBassTone() => ModuleHandle.GetControllerValue(5, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Bass tone
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public void SetBassTone(int value) => Module.SetControllerValue(5, value, ValueScalingType.Displayed);
+        public void SetBassTone(int value) => ModuleHandle.SetControllerValue(5, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Bass volume
         /// <para> Value range: 0 to 512 </para>
         /// </summary>
-        public int GetBassVolume() => Module.GetControllerValue(3, ValueScalingType.Displayed);
+        public int GetBassVolume() => ModuleHandle.GetControllerValue(3, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Bass volume
         /// <para> Value range: 0 to 512 </para>
         /// </summary>
-        public void SetBassVolume(int value) => Module.SetControllerValue(3, value, ValueScalingType.Displayed);
+        public void SetBassVolume(int value) => ModuleHandle.SetControllerValue(3, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Hihat length
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public int GetHihatLength() => Module.GetControllerValue(8, ValueScalingType.Displayed);
+        public int GetHihatLength() => ModuleHandle.GetControllerValue(8, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Hihat length
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public void SetHihatLength(int value) => Module.SetControllerValue(8, value, ValueScalingType.Displayed);
+        public void SetHihatLength(int value) => ModuleHandle.SetControllerValue(8, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Hihat panning
         /// <para> Value range: -128 to 128 </para>
         /// </summary>
-        public int GetHihatPanning() => Module.GetControllerValue(13, ValueScalingType.Displayed);
+        public int GetHihatPanning() => ModuleHandle.GetControllerValue(13, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Hihat panning
         /// <para> Value range: -128 to 128 </para>
         /// </summary>
-        public void SetHihatPanning(int value) => Module.SetControllerValue(13, value, ValueScalingType.Displayed);
+        public void SetHihatPanning(int value) => ModuleHandle.SetControllerValue(13, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Hihat volume
         /// <para> Value range: 0 to 512 </para>
         /// </summary>
-        public int GetHihatVolume() => Module.GetControllerValue(7, ValueScalingType.Displayed);
+        public int GetHihatVolume() => ModuleHandle.GetControllerValue(7, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Hihat volume
         /// <para> Value range: 0 to 512 </para>
         /// </summary>
-        public void SetHihatVolume(int value) => Module.SetControllerValue(7, value, ValueScalingType.Displayed);
+        public void SetHihatVolume(int value) => ModuleHandle.SetControllerValue(7, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Panning
         /// <para> Value range: -128 to 128 </para>
         /// </summary>
-        public int GetPanning() => Module.GetControllerValue(1, ValueScalingType.Displayed);
+        public int GetPanning() => ModuleHandle.GetControllerValue(1, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Panning
         /// <para> Value range: -128 to 128 </para>
         /// </summary>
-        public void SetPanning(int value) => Module.SetControllerValue(1, value, ValueScalingType.Displayed);
+        public void SetPanning(int value) => ModuleHandle.SetControllerValue(1, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Polyphony
         /// <para> Value range: 1 to 8 </para>
         /// </summary>
-        public int GetPolyphony() => Module.GetControllerValue(2, ValueScalingType.Displayed);
+        public int GetPolyphony() => ModuleHandle.GetControllerValue(2, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Polyphony
         /// <para> Value range: 1 to 8 </para>
         /// </summary>
-        public void SetPolyphony(int value) => Module.SetControllerValue(2, value, ValueScalingType.Displayed);
+        public void SetPolyphony(int value) => ModuleHandle.SetControllerValue(2, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Snare length
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public int GetSnareLength() => Module.GetControllerValue(11, ValueScalingType.Displayed);
+        public int GetSnareLength() => ModuleHandle.GetControllerValue(11, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Snare length
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public void SetSnareLength(int value) => Module.SetControllerValue(11, value, ValueScalingType.Displayed);
+        public void SetSnareLength(int value) => ModuleHandle.SetControllerValue(11, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Snare panning
         /// <para> Value range: -128 to 128 </para>
         /// </summary>
-        public int GetSnarePanning() => Module.GetControllerValue(14, ValueScalingType.Displayed);
+        public int GetSnarePanning() => ModuleHandle.GetControllerValue(14, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Snare panning
         /// <para> Value range: -128 to 128 </para>
         /// </summary>
-        public void SetSnarePanning(int value) => Module.SetControllerValue(14, value, ValueScalingType.Displayed);
+        public void SetSnarePanning(int value) => ModuleHandle.SetControllerValue(14, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Snare tone
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public int GetSnareTone() => Module.GetControllerValue(10, ValueScalingType.Displayed);
+        public int GetSnareTone() => ModuleHandle.GetControllerValue(10, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Snare tone
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public void SetSnareTone(int value) => Module.SetControllerValue(10, value, ValueScalingType.Displayed);
+        public void SetSnareTone(int value) => ModuleHandle.SetControllerValue(10, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Snare volume
         /// <para> Value range: 0 to 512 </para>
         /// </summary>
-        public int GetSnareVolume() => Module.GetControllerValue(9, ValueScalingType.Displayed);
+        public int GetSnareVolume() => ModuleHandle.GetControllerValue(9, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Snare volume
         /// <para> Value range: 0 to 512 </para>
         /// </summary>
-        public void SetSnareVolume(int value) => Module.SetControllerValue(9, value, ValueScalingType.Displayed);
+        public void SetSnareVolume(int value) => ModuleHandle.SetControllerValue(9, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Volume
         /// <para> Value range: 0 to 512 </para>
         /// </summary>
-        public int GetVolume() => Module.GetControllerValue(0, ValueScalingType.Displayed);
+        public int GetVolume() => ModuleHandle.GetControllerValue(0, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Volume
         /// <para> Value range: 0 to 512 </para>
         /// </summary>
-        public void SetVolume(int value) => Module.SetControllerValue(0, value, ValueScalingType.Displayed);
+        public void SetVolume(int value) => ModuleHandle.SetControllerValue(0, value, ValueScalingType.Displayed);
 
         #endregion controllers
     }
 
     public struct EchoModuleHandle : IModuleHandleWrapper
     {
-        public ModuleHandle Module { get; private set; }
+        public ModuleHandle ModuleHandle { get; private set; }
 
         public EchoModuleHandle(ModuleHandle module)
         {
-            Module = module;
+            ModuleHandle = module;
         }
 
 
@@ -2036,122 +2036,122 @@ namespace SunSharp.ObjectWrapper.Modules
         /// Original name: Delay
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public int GetDelay() => Module.GetControllerValue(3, ValueScalingType.Displayed);
+        public int GetDelay() => ModuleHandle.GetControllerValue(3, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Delay
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public void SetDelay(int value) => Module.SetControllerValue(3, value, ValueScalingType.Displayed);
+        public void SetDelay(int value) => ModuleHandle.SetControllerValue(3, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Delay unit
         /// <para> Possible values: SecondDivBy256, Millisecond, Hz, Tick, Line, HalfLine, OneThirdLine </para>
         /// </summary>
-        public EchoDelayUnit GetDelayUnit() => (EchoDelayUnit)Module.GetControllerValue(5, ValueScalingType.Displayed);
+        public EchoDelayUnit GetDelayUnit() => (EchoDelayUnit)ModuleHandle.GetControllerValue(5, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Delay unit
         /// <para> Possible values: SecondDivBy256, Millisecond, Hz, Tick, Line, HalfLine, OneThirdLine </para>
         /// </summary>
-        public void SetDelayUnit(EchoDelayUnit value) => Module.SetControllerValue(5, (int)value, ValueScalingType.Displayed);
+        public void SetDelayUnit(EchoDelayUnit value) => ModuleHandle.SetControllerValue(5, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Dry
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public int GetDry() => Module.GetControllerValue(0, ValueScalingType.Displayed);
+        public int GetDry() => ModuleHandle.GetControllerValue(0, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Dry
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public void SetDry(int value) => Module.SetControllerValue(0, value, ValueScalingType.Displayed);
+        public void SetDry(int value) => ModuleHandle.SetControllerValue(0, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Feedback
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public int GetFeedback() => Module.GetControllerValue(2, ValueScalingType.Displayed);
+        public int GetFeedback() => ModuleHandle.GetControllerValue(2, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Feedback
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public void SetFeedback(int value) => Module.SetControllerValue(2, value, ValueScalingType.Displayed);
+        public void SetFeedback(int value) => ModuleHandle.SetControllerValue(2, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: F.freq
         /// <para> Value range: 0 to 22000 </para>
         /// </summary>
-        public int GetFFreq() => Module.GetControllerValue(8, ValueScalingType.Displayed);
+        public int GetFFreq() => ModuleHandle.GetControllerValue(8, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: F.freq
         /// <para> Value range: 0 to 22000 </para>
         /// </summary>
-        public void SetFFreq(int value) => Module.SetControllerValue(8, value, ValueScalingType.Displayed);
+        public void SetFFreq(int value) => ModuleHandle.SetControllerValue(8, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Filter
         /// <para> Possible values: Off, LP6dB, HP6dB </para>
         /// </summary>
-        public EchoFilter GetFilter() => (EchoFilter)Module.GetControllerValue(7, ValueScalingType.Displayed);
+        public EchoFilter GetFilter() => (EchoFilter)ModuleHandle.GetControllerValue(7, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Filter
         /// <para> Possible values: Off, LP6dB, HP6dB </para>
         /// </summary>
-        public void SetFilter(EchoFilter value) => Module.SetControllerValue(7, (int)value, ValueScalingType.Displayed);
+        public void SetFilter(EchoFilter value) => ModuleHandle.SetControllerValue(7, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Right channel offset
         /// <para> Possible values: Off, On </para>
         /// </summary>
-        public Toggle GetRightChannelOffset() => (Toggle)Module.GetControllerValue(4, ValueScalingType.Displayed);
+        public Toggle GetRightChannelOffset() => (Toggle)ModuleHandle.GetControllerValue(4, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Right channel offset
         /// <para> Possible values: Off, On </para>
         /// </summary>
-        public void SetRightChannelOffset(Toggle value) => Module.SetControllerValue(4, (int)value, ValueScalingType.Displayed);
+        public void SetRightChannelOffset(Toggle value) => ModuleHandle.SetControllerValue(4, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Right channel offset
         /// <para> Value range: 0 to 32768 </para>
         /// <para> Delay/32768 </para>
         /// </summary>
-        public int GetRightChannelOffsetDelay() => Module.GetControllerValue(6, ValueScalingType.Displayed);
+        public int GetRightChannelOffsetDelay() => ModuleHandle.GetControllerValue(6, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Right channel offset
         /// <para> Value range: 0 to 32768 </para>
         /// <para> Delay/32768 </para>
         /// </summary>
-        public void SetRightChannelOffsetDelay(int value) => Module.SetControllerValue(6, value, ValueScalingType.Displayed);
+        public void SetRightChannelOffsetDelay(int value) => ModuleHandle.SetControllerValue(6, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Wet
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public int GetWet() => Module.GetControllerValue(1, ValueScalingType.Displayed);
+        public int GetWet() => ModuleHandle.GetControllerValue(1, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Wet
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public void SetWet(int value) => Module.SetControllerValue(1, value, ValueScalingType.Displayed);
+        public void SetWet(int value) => ModuleHandle.SetControllerValue(1, value, ValueScalingType.Displayed);
 
         #endregion controllers
     }
 
     public struct EQModuleHandle : IModuleHandleWrapper
     {
-        public ModuleHandle Module { get; private set; }
+        public ModuleHandle ModuleHandle { get; private set; }
 
         public EQModuleHandle(ModuleHandle module)
         {
-            Module = module;
+            ModuleHandle = module;
         }
 
 
@@ -2161,60 +2161,60 @@ namespace SunSharp.ObjectWrapper.Modules
         /// Original name: Channels
         /// <para> Possible values: Stereo, Mono </para>
         /// </summary>
-        public Channels GetChannels() => (Channels)Module.GetControllerValue(3, ValueScalingType.Displayed);
+        public Channels GetChannels() => (Channels)ModuleHandle.GetControllerValue(3, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Channels
         /// <para> Possible values: Stereo, Mono </para>
         /// </summary>
-        public void SetChannels(Channels value) => Module.SetControllerValue(3, (int)value, ValueScalingType.Displayed);
+        public void SetChannels(Channels value) => ModuleHandle.SetControllerValue(3, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: High
         /// <para> Value range: 0 to 512 </para>
         /// </summary>
-        public int GetHigh() => Module.GetControllerValue(2, ValueScalingType.Displayed);
+        public int GetHigh() => ModuleHandle.GetControllerValue(2, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: High
         /// <para> Value range: 0 to 512 </para>
         /// </summary>
-        public void SetHigh(int value) => Module.SetControllerValue(2, value, ValueScalingType.Displayed);
+        public void SetHigh(int value) => ModuleHandle.SetControllerValue(2, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Low
         /// <para> Value range: 0 to 512 </para>
         /// </summary>
-        public int GetLow() => Module.GetControllerValue(0, ValueScalingType.Displayed);
+        public int GetLow() => ModuleHandle.GetControllerValue(0, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Low
         /// <para> Value range: 0 to 512 </para>
         /// </summary>
-        public void SetLow(int value) => Module.SetControllerValue(0, value, ValueScalingType.Displayed);
+        public void SetLow(int value) => ModuleHandle.SetControllerValue(0, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Middle
         /// <para> Value range: 0 to 512 </para>
         /// </summary>
-        public int GetMiddle() => Module.GetControllerValue(1, ValueScalingType.Displayed);
+        public int GetMiddle() => ModuleHandle.GetControllerValue(1, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Middle
         /// <para> Value range: 0 to 512 </para>
         /// </summary>
-        public void SetMiddle(int value) => Module.SetControllerValue(1, value, ValueScalingType.Displayed);
+        public void SetMiddle(int value) => ModuleHandle.SetControllerValue(1, value, ValueScalingType.Displayed);
 
         #endregion controllers
     }
 
     public struct FeedbackModuleHandle : IModuleHandleWrapper
     {
-        public ModuleHandle Module { get; private set; }
+        public ModuleHandle ModuleHandle { get; private set; }
 
         public FeedbackModuleHandle(ModuleHandle module)
         {
-            Module = module;
+            ModuleHandle = module;
         }
 
 
@@ -2224,36 +2224,36 @@ namespace SunSharp.ObjectWrapper.Modules
         /// Original name: Channels
         /// <para> Possible values: Stereo, Mono </para>
         /// </summary>
-        public Channels GetChannels() => (Channels)Module.GetControllerValue(1, ValueScalingType.Displayed);
+        public Channels GetChannels() => (Channels)ModuleHandle.GetControllerValue(1, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Channels
         /// <para> Possible values: Stereo, Mono </para>
         /// </summary>
-        public void SetChannels(Channels value) => Module.SetControllerValue(1, (int)value, ValueScalingType.Displayed);
+        public void SetChannels(Channels value) => ModuleHandle.SetControllerValue(1, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Volume
         /// <para> Value range: 0 to 10000 </para>
         /// </summary>
-        public int GetVolume() => Module.GetControllerValue(0, ValueScalingType.Displayed);
+        public int GetVolume() => ModuleHandle.GetControllerValue(0, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Volume
         /// <para> Value range: 0 to 10000 </para>
         /// </summary>
-        public void SetVolume(int value) => Module.SetControllerValue(0, value, ValueScalingType.Displayed);
+        public void SetVolume(int value) => ModuleHandle.SetControllerValue(0, value, ValueScalingType.Displayed);
 
         #endregion controllers
     }
 
     public struct FFTModuleHandle : IModuleHandleWrapper
     {
-        public ModuleHandle Module { get; private set; }
+        public ModuleHandle ModuleHandle { get; private set; }
 
         public FFTModuleHandle(ModuleHandle module)
         {
-            Module = module;
+            ModuleHandle = module;
         }
 
 
@@ -2263,216 +2263,216 @@ namespace SunSharp.ObjectWrapper.Modules
         /// Original name: All-pass filter
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public int GetAllPassFilter() => Module.GetControllerValue(7, ValueScalingType.Displayed);
+        public int GetAllPassFilter() => ModuleHandle.GetControllerValue(7, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: All-pass filter
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public void SetAllPassFilter(int value) => Module.SetControllerValue(7, value, ValueScalingType.Displayed);
+        public void SetAllPassFilter(int value) => ModuleHandle.SetControllerValue(7, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Buffer (samples)
         /// <para> Possible values: x64, x128, x256, x512, x1024, x2048, x4096, x8192 </para>
         /// </summary>
-        public FFTBufferSize GetBufferSamples() => (FFTBufferSize)Module.GetControllerValue(2, ValueScalingType.Displayed);
+        public FFTBufferSize GetBufferSamples() => (FFTBufferSize)ModuleHandle.GetControllerValue(2, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Buffer (samples)
         /// <para> Possible values: x64, x128, x256, x512, x1024, x2048, x4096, x8192 </para>
         /// </summary>
-        public void SetBufferSamples(FFTBufferSize value) => Module.SetControllerValue(2, (int)value, ValueScalingType.Displayed);
+        public void SetBufferSamples(FFTBufferSize value) => ModuleHandle.SetControllerValue(2, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Buf overlap
         /// <para> Possible values: None, x2, x4 </para>
         /// </summary>
-        public FFTBufferOverlap GetBufOverlap() => (FFTBufferOverlap)Module.GetControllerValue(3, ValueScalingType.Displayed);
+        public FFTBufferOverlap GetBufOverlap() => (FFTBufferOverlap)ModuleHandle.GetControllerValue(3, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Buf overlap
         /// <para> Possible values: None, x2, x4 </para>
         /// </summary>
-        public void SetBufOverlap(FFTBufferOverlap value) => Module.SetControllerValue(3, (int)value, ValueScalingType.Displayed);
+        public void SetBufOverlap(FFTBufferOverlap value) => ModuleHandle.SetControllerValue(3, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Channels
         /// <para> Possible values: Mono, Stereo </para>
         /// </summary>
-        public ChannelsInverted GetChannels() => (ChannelsInverted)Module.GetControllerValue(1, ValueScalingType.Displayed);
+        public ChannelsInverted GetChannels() => (ChannelsInverted)ModuleHandle.GetControllerValue(1, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Channels
         /// <para> Possible values: Mono, Stereo </para>
         /// </summary>
-        public void SetChannels(ChannelsInverted value) => Module.SetControllerValue(1, (int)value, ValueScalingType.Displayed);
+        public void SetChannels(ChannelsInverted value) => ModuleHandle.SetControllerValue(1, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Deform1
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public int GetDeform1() => Module.GetControllerValue(12, ValueScalingType.Displayed);
+        public int GetDeform1() => ModuleHandle.GetControllerValue(12, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Deform1
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public void SetDeform1(int value) => Module.SetControllerValue(12, value, ValueScalingType.Displayed);
+        public void SetDeform1(int value) => ModuleHandle.SetControllerValue(12, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Deform2
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public int GetDeform2() => Module.GetControllerValue(13, ValueScalingType.Displayed);
+        public int GetDeform2() => ModuleHandle.GetControllerValue(13, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Deform2
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public void SetDeform2(int value) => Module.SetControllerValue(13, value, ValueScalingType.Displayed);
+        public void SetDeform2(int value) => ModuleHandle.SetControllerValue(13, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Feedback
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public int GetFeedback() => Module.GetControllerValue(4, ValueScalingType.Displayed);
+        public int GetFeedback() => ModuleHandle.GetControllerValue(4, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Feedback
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public void SetFeedback(int value) => Module.SetControllerValue(4, value, ValueScalingType.Displayed);
+        public void SetFeedback(int value) => ModuleHandle.SetControllerValue(4, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Freq shift
         /// <para> Value range: -4096 to 4096 </para>
         /// </summary>
-        public int GetFreqShift() => Module.GetControllerValue(11, ValueScalingType.Displayed);
+        public int GetFreqShift() => ModuleHandle.GetControllerValue(11, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Freq shift
         /// <para> Value range: -4096 to 4096 </para>
         /// </summary>
-        public void SetFreqShift(int value) => Module.SetControllerValue(11, value, ValueScalingType.Displayed);
+        public void SetFreqShift(int value) => ModuleHandle.SetControllerValue(11, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Frequency spread
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public int GetFrequencySpread() => Module.GetControllerValue(8, ValueScalingType.Displayed);
+        public int GetFrequencySpread() => ModuleHandle.GetControllerValue(8, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Frequency spread
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public void SetFrequencySpread(int value) => Module.SetControllerValue(8, value, ValueScalingType.Displayed);
+        public void SetFrequencySpread(int value) => ModuleHandle.SetControllerValue(8, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: HP cutoff
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public int GetHPCutoff() => Module.GetControllerValue(14, ValueScalingType.Displayed);
+        public int GetHPCutoff() => ModuleHandle.GetControllerValue(14, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: HP cutoff
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public void SetHPCutoff(int value) => Module.SetControllerValue(14, value, ValueScalingType.Displayed);
+        public void SetHPCutoff(int value) => ModuleHandle.SetControllerValue(14, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: LP cutoff
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public int GetLPCutoff() => Module.GetControllerValue(15, ValueScalingType.Displayed);
+        public int GetLPCutoff() => ModuleHandle.GetControllerValue(15, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: LP cutoff
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public void SetLPCutoff(int value) => Module.SetControllerValue(15, value, ValueScalingType.Displayed);
+        public void SetLPCutoff(int value) => ModuleHandle.SetControllerValue(15, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Noise reduction
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public int GetNoiseReduction() => Module.GetControllerValue(5, ValueScalingType.Displayed);
+        public int GetNoiseReduction() => ModuleHandle.GetControllerValue(5, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Noise reduction
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public void SetNoiseReduction(int value) => Module.SetControllerValue(5, value, ValueScalingType.Displayed);
+        public void SetNoiseReduction(int value) => ModuleHandle.SetControllerValue(5, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Phase gain (norm=16384)
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public int GetPhaseGainNorm16384() => Module.GetControllerValue(6, ValueScalingType.Displayed);
+        public int GetPhaseGainNorm16384() => ModuleHandle.GetControllerValue(6, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Phase gain (norm=16384)
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public void SetPhaseGainNorm16384(int value) => Module.SetControllerValue(6, value, ValueScalingType.Displayed);
+        public void SetPhaseGainNorm16384(int value) => ModuleHandle.SetControllerValue(6, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Random phase
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public int GetRandomPhase() => Module.GetControllerValue(9, ValueScalingType.Displayed);
+        public int GetRandomPhase() => ModuleHandle.GetControllerValue(9, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Random phase
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public void SetRandomPhase(int value) => Module.SetControllerValue(9, value, ValueScalingType.Displayed);
+        public void SetRandomPhase(int value) => ModuleHandle.SetControllerValue(9, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Random phase (lite)
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public int GetRandomPhaseLite() => Module.GetControllerValue(10, ValueScalingType.Displayed);
+        public int GetRandomPhaseLite() => ModuleHandle.GetControllerValue(10, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Random phase (lite)
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public void SetRandomPhaseLite(int value) => Module.SetControllerValue(10, value, ValueScalingType.Displayed);
+        public void SetRandomPhaseLite(int value) => ModuleHandle.SetControllerValue(10, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Sample rate
         /// <para> Possible values: Hz8000, Hz11025, Hz16000, Hz22050, Hz32000, Hz44100, Hz48000, Hz88200, Hz96000, Hz192000 </para>
         /// </summary>
-        public FFTSampleRate GetSampleRate() => (FFTSampleRate)Module.GetControllerValue(0, ValueScalingType.Displayed);
+        public FFTSampleRate GetSampleRate() => (FFTSampleRate)ModuleHandle.GetControllerValue(0, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Sample rate
         /// <para> Possible values: Hz8000, Hz11025, Hz16000, Hz22050, Hz32000, Hz44100, Hz48000, Hz88200, Hz96000, Hz192000 </para>
         /// </summary>
-        public void SetSampleRate(FFTSampleRate value) => Module.SetControllerValue(0, (int)value, ValueScalingType.Displayed);
+        public void SetSampleRate(FFTSampleRate value) => ModuleHandle.SetControllerValue(0, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Volume
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public int GetVolume() => Module.GetControllerValue(16, ValueScalingType.Displayed);
+        public int GetVolume() => ModuleHandle.GetControllerValue(16, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Volume
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public void SetVolume(int value) => Module.SetControllerValue(16, value, ValueScalingType.Displayed);
+        public void SetVolume(int value) => ModuleHandle.SetControllerValue(16, value, ValueScalingType.Displayed);
 
         #endregion controllers
     }
 
     public struct FilterModuleHandle : IModuleHandleWrapper
     {
-        public ModuleHandle Module { get; private set; }
+        public ModuleHandle ModuleHandle { get; private set; }
 
         public FilterModuleHandle(ModuleHandle module)
         {
-            Module = module;
+            ModuleHandle = module;
         }
 
 
@@ -2482,192 +2482,192 @@ namespace SunSharp.ObjectWrapper.Modules
         /// Original name: Exponential freq
         /// <para> Possible values: Off, On </para>
         /// </summary>
-        public Toggle GetExponentialFreq() => (Toggle)Module.GetControllerValue(11, ValueScalingType.Displayed);
+        public Toggle GetExponentialFreq() => (Toggle)ModuleHandle.GetControllerValue(11, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Exponential freq
         /// <para> Possible values: Off, On </para>
         /// </summary>
-        public void SetExponentialFreq(Toggle value) => Module.SetControllerValue(11, (int)value, ValueScalingType.Displayed);
+        public void SetExponentialFreq(Toggle value) => ModuleHandle.SetControllerValue(11, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Type
         /// <para> Possible values: LP, HP, BP, Notch </para>
         /// </summary>
-        public FilterType GetFilterType() => (FilterType)Module.GetControllerValue(3, ValueScalingType.Displayed);
+        public FilterType GetFilterType() => (FilterType)ModuleHandle.GetControllerValue(3, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Type
         /// <para> Possible values: LP, HP, BP, Notch </para>
         /// </summary>
-        public void SetFilterType(FilterType value) => Module.SetControllerValue(3, (int)value, ValueScalingType.Displayed);
+        public void SetFilterType(FilterType value) => ModuleHandle.SetControllerValue(3, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Freq
         /// <para> Value range: 0 to 14000 </para>
         /// </summary>
-        public int GetFrequency() => Module.GetControllerValue(1, ValueScalingType.Displayed);
+        public int GetFrequency() => ModuleHandle.GetControllerValue(1, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Freq
         /// <para> Value range: 0 to 14000 </para>
         /// </summary>
-        public void SetFrequency(int value) => Module.SetControllerValue(1, value, ValueScalingType.Displayed);
+        public void SetFrequency(int value) => ModuleHandle.SetControllerValue(1, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Impulse
         /// <para> Value range: 0 to 14000 </para>
         /// </summary>
-        public int GetImpulse() => Module.GetControllerValue(6, ValueScalingType.Displayed);
+        public int GetImpulse() => ModuleHandle.GetControllerValue(6, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Impulse
         /// <para> Value range: 0 to 14000 </para>
         /// </summary>
-        public void SetImpulse(int value) => Module.SetControllerValue(6, value, ValueScalingType.Displayed);
+        public void SetImpulse(int value) => ModuleHandle.SetControllerValue(6, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: LFO amp
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public int GetLFOAmp() => Module.GetControllerValue(9, ValueScalingType.Displayed);
+        public int GetLFOAmp() => ModuleHandle.GetControllerValue(9, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: LFO amp
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public void SetLFOAmp(int value) => Module.SetControllerValue(9, value, ValueScalingType.Displayed);
+        public void SetLFOAmp(int value) => ModuleHandle.SetControllerValue(9, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: LFO freq
         /// <para> Value range: 0 to 1024 </para>
         /// </summary>
-        public int GetLFOFreq() => Module.GetControllerValue(8, ValueScalingType.Displayed);
+        public int GetLFOFreq() => ModuleHandle.GetControllerValue(8, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: LFO freq
         /// <para> Value range: 0 to 1024 </para>
         /// </summary>
-        public void SetLFOFreq(int value) => Module.SetControllerValue(8, value, ValueScalingType.Displayed);
+        public void SetLFOFreq(int value) => ModuleHandle.SetControllerValue(8, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: LFO freq unit
         /// <para> Possible values: FiveHundredthHz, Millisecond, Hz, Tick, Line, HalfLine, OneThirdLine </para>
         /// </summary>
-        public FilterLFOFrequencyUnit GetLFOFreqUnit() => (FilterLFOFrequencyUnit)Module.GetControllerValue(13, ValueScalingType.Displayed);
+        public FilterLFOFrequencyUnit GetLFOFreqUnit() => (FilterLFOFrequencyUnit)ModuleHandle.GetControllerValue(13, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: LFO freq unit
         /// <para> Possible values: FiveHundredthHz, Millisecond, Hz, Tick, Line, HalfLine, OneThirdLine </para>
         /// </summary>
-        public void SetLFOFreqUnit(FilterLFOFrequencyUnit value) => Module.SetControllerValue(13, (int)value, ValueScalingType.Displayed);
+        public void SetLFOFreqUnit(FilterLFOFrequencyUnit value) => ModuleHandle.SetControllerValue(13, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: LFO waveform
         /// <para> Possible values: Sin, Saw, Saw2, Square, Random </para>
         /// </summary>
-        public FilterLFOWaveform GetLFOWaveform() => (FilterLFOWaveform)Module.GetControllerValue(14, ValueScalingType.Displayed);
+        public FilterLFOWaveform GetLFOWaveform() => (FilterLFOWaveform)ModuleHandle.GetControllerValue(14, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: LFO waveform
         /// <para> Possible values: Sin, Saw, Saw2, Square, Random </para>
         /// </summary>
-        public void SetLFOWaveform(FilterLFOWaveform value) => Module.SetControllerValue(14, (int)value, ValueScalingType.Displayed);
+        public void SetLFOWaveform(FilterLFOWaveform value) => ModuleHandle.SetControllerValue(14, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Mix
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public int GetMix() => Module.GetControllerValue(7, ValueScalingType.Displayed);
+        public int GetMix() => ModuleHandle.GetControllerValue(7, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Mix
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public void SetMix(int value) => Module.SetControllerValue(7, value, ValueScalingType.Displayed);
+        public void SetMix(int value) => ModuleHandle.SetControllerValue(7, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Mode
         /// <para> Possible values: HQ, HQMono, LQ, LQMono </para>
         /// </summary>
-        public Quality GetMode() => (Quality)Module.GetControllerValue(5, ValueScalingType.Displayed);
+        public Quality GetMode() => (Quality)ModuleHandle.GetControllerValue(5, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Mode
         /// <para> Possible values: HQ, HQMono, LQ, LQMono </para>
         /// </summary>
-        public void SetMode(Quality value) => Module.SetControllerValue(5, (int)value, ValueScalingType.Displayed);
+        public void SetMode(Quality value) => ModuleHandle.SetControllerValue(5, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Resonance
         /// <para> Value range: 0 to 1530 </para>
         /// </summary>
-        public int GetResonance() => Module.GetControllerValue(2, ValueScalingType.Displayed);
+        public int GetResonance() => ModuleHandle.GetControllerValue(2, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Resonance
         /// <para> Value range: 0 to 1530 </para>
         /// </summary>
-        public void SetResonance(int value) => Module.SetControllerValue(2, value, ValueScalingType.Displayed);
+        public void SetResonance(int value) => ModuleHandle.SetControllerValue(2, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Response
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public int GetResponse() => Module.GetControllerValue(4, ValueScalingType.Displayed);
+        public int GetResponse() => ModuleHandle.GetControllerValue(4, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Response
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public void SetResponse(int value) => Module.SetControllerValue(4, value, ValueScalingType.Displayed);
+        public void SetResponse(int value) => ModuleHandle.SetControllerValue(4, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Roll-off
         /// <para> Possible values: dB12, dB24, dB36, dB48 </para>
         /// </summary>
-        public FilterRollOff GetRollOff() => (FilterRollOff)Module.GetControllerValue(12, ValueScalingType.Displayed);
+        public FilterRollOff GetRollOff() => (FilterRollOff)ModuleHandle.GetControllerValue(12, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Roll-off
         /// <para> Possible values: dB12, dB24, dB36, dB48 </para>
         /// </summary>
-        public void SetRollOff(FilterRollOff value) => Module.SetControllerValue(12, (int)value, ValueScalingType.Displayed);
+        public void SetRollOff(FilterRollOff value) => ModuleHandle.SetControllerValue(12, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Set LFO phase
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public int GetSetLFOPhase() => Module.GetControllerValue(10, ValueScalingType.Displayed);
+        public int GetSetLFOPhase() => ModuleHandle.GetControllerValue(10, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Set LFO phase
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public void SetSetLFOPhase(int value) => Module.SetControllerValue(10, value, ValueScalingType.Displayed);
+        public void SetSetLFOPhase(int value) => ModuleHandle.SetControllerValue(10, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Volume
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public int GetVolume() => Module.GetControllerValue(0, ValueScalingType.Displayed);
+        public int GetVolume() => ModuleHandle.GetControllerValue(0, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Volume
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public void SetVolume(int value) => Module.SetControllerValue(0, value, ValueScalingType.Displayed);
+        public void SetVolume(int value) => ModuleHandle.SetControllerValue(0, value, ValueScalingType.Displayed);
 
         #endregion controllers
     }
 
     public struct FilterProModuleHandle : IModuleHandleWrapper
     {
-        public ModuleHandle Module { get; private set; }
+        public ModuleHandle ModuleHandle { get; private set; }
 
         public FilterProModuleHandle(ModuleHandle module)
         {
-            Module = module;
+            ModuleHandle = module;
         }
 
 
@@ -2677,216 +2677,216 @@ namespace SunSharp.ObjectWrapper.Modules
         /// Original name: Exponential freq
         /// <para> Possible values: Off, On </para>
         /// </summary>
-        public Toggle GetExponentialFreq() => (Toggle)Module.GetControllerValue(5, ValueScalingType.Displayed);
+        public Toggle GetExponentialFreq() => (Toggle)ModuleHandle.GetControllerValue(5, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Exponential freq
         /// <para> Possible values: Off, On </para>
         /// </summary>
-        public void SetExponentialFreq(Toggle value) => Module.SetControllerValue(5, (int)value, ValueScalingType.Displayed);
+        public void SetExponentialFreq(Toggle value) => ModuleHandle.SetControllerValue(5, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Type
         /// <para> Possible values: LP, HP, BPConstSkirtGain, BPConstPeakGain, Notch, AllPass, Peaking, LowShelf, HighShelf, LP6dB, HP6dB </para>
         /// </summary>
-        public FilterProType GetFilterType() => (FilterProType)Module.GetControllerValue(1, ValueScalingType.Displayed);
+        public FilterProType GetFilterType() => (FilterProType)ModuleHandle.GetControllerValue(1, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Type
         /// <para> Possible values: LP, HP, BPConstSkirtGain, BPConstPeakGain, Notch, AllPass, Peaking, LowShelf, HighShelf, LP6dB, HP6dB </para>
         /// </summary>
-        public void SetFilterType(FilterProType value) => Module.SetControllerValue(1, (int)value, ValueScalingType.Displayed);
+        public void SetFilterType(FilterProType value) => ModuleHandle.SetControllerValue(1, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Freq
         /// <para> Value range: 0 to 22000 </para>
         /// </summary>
-        public int GetFreq() => Module.GetControllerValue(2, ValueScalingType.Displayed);
+        public int GetFreq() => ModuleHandle.GetControllerValue(2, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Freq
         /// <para> Value range: 0 to 22000 </para>
         /// </summary>
-        public void SetFreq(int value) => Module.SetControllerValue(2, value, ValueScalingType.Displayed);
+        public void SetFreq(int value) => ModuleHandle.SetControllerValue(2, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Freq finetune
         /// <para> Value range: -1000 to 1000 </para>
         /// </summary>
-        public int GetFreqFinetune() => Module.GetControllerValue(3, ValueScalingType.Displayed);
+        public int GetFreqFinetune() => ModuleHandle.GetControllerValue(3, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Freq finetune
         /// <para> Value range: -1000 to 1000 </para>
         /// </summary>
-        public void SetFreqFinetune(int value) => Module.SetControllerValue(3, value, ValueScalingType.Displayed);
+        public void SetFreqFinetune(int value) => ModuleHandle.SetControllerValue(3, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Freq scale
         /// <para> Value range: 0 to 200 </para>
         /// </summary>
-        public int GetFreqScale() => Module.GetControllerValue(4, ValueScalingType.Displayed);
+        public int GetFreqScale() => ModuleHandle.GetControllerValue(4, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Freq scale
         /// <para> Value range: 0 to 200 </para>
         /// </summary>
-        public void SetFreqScale(int value) => Module.SetControllerValue(4, value, ValueScalingType.Displayed);
+        public void SetFreqScale(int value) => ModuleHandle.SetControllerValue(4, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Gain
         /// <para> Value range: -16384 to 16384 </para>
         /// </summary>
-        public int GetGain() => Module.GetControllerValue(7, ValueScalingType.Displayed);
+        public int GetGain() => ModuleHandle.GetControllerValue(7, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Gain
         /// <para> Value range: -16384 to 16384 </para>
         /// </summary>
-        public void SetGain(int value) => Module.SetControllerValue(7, value, ValueScalingType.Displayed);
+        public void SetGain(int value) => ModuleHandle.SetControllerValue(7, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: LFO amp
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public int GetLFOAmp() => Module.GetControllerValue(13, ValueScalingType.Displayed);
+        public int GetLFOAmp() => ModuleHandle.GetControllerValue(13, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: LFO amp
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public void SetLFOAmp(int value) => Module.SetControllerValue(13, value, ValueScalingType.Displayed);
+        public void SetLFOAmp(int value) => ModuleHandle.SetControllerValue(13, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: LFO freq
         /// <para> Value range: 0 to 1024 </para>
         /// </summary>
-        public int GetLFOFreq() => Module.GetControllerValue(12, ValueScalingType.Displayed);
+        public int GetLFOFreq() => ModuleHandle.GetControllerValue(12, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: LFO freq
         /// <para> Value range: 0 to 1024 </para>
         /// </summary>
-        public void SetLFOFreq(int value) => Module.SetControllerValue(12, value, ValueScalingType.Displayed);
+        public void SetLFOFreq(int value) => ModuleHandle.SetControllerValue(12, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: LFO freq unit
         /// <para> Possible values: FiveHundredthHz, Millisecond, Hz, Tick, Line, HalfLine, OneThirdLine </para>
         /// </summary>
-        public FilterLFOFrequencyUnit GetLFOFreqUnit() => (FilterLFOFrequencyUnit)Module.GetControllerValue(16, ValueScalingType.Displayed);
+        public FilterLFOFrequencyUnit GetLFOFreqUnit() => (FilterLFOFrequencyUnit)ModuleHandle.GetControllerValue(16, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: LFO freq unit
         /// <para> Possible values: FiveHundredthHz, Millisecond, Hz, Tick, Line, HalfLine, OneThirdLine </para>
         /// </summary>
-        public void SetLFOFreqUnit(FilterLFOFrequencyUnit value) => Module.SetControllerValue(16, (int)value, ValueScalingType.Displayed);
+        public void SetLFOFreqUnit(FilterLFOFrequencyUnit value) => ModuleHandle.SetControllerValue(16, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: LFO waveform
         /// <para> Possible values: Sin, Saw, Saw2, Square, Random </para>
         /// </summary>
-        public FilterLFOWaveform GetLFOWaveform() => (FilterLFOWaveform)Module.GetControllerValue(14, ValueScalingType.Displayed);
+        public FilterLFOWaveform GetLFOWaveform() => (FilterLFOWaveform)ModuleHandle.GetControllerValue(14, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: LFO waveform
         /// <para> Possible values: Sin, Saw, Saw2, Square, Random </para>
         /// </summary>
-        public void SetLFOWaveform(FilterLFOWaveform value) => Module.SetControllerValue(14, (int)value, ValueScalingType.Displayed);
+        public void SetLFOWaveform(FilterLFOWaveform value) => ModuleHandle.SetControllerValue(14, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Mix
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public int GetMix() => Module.GetControllerValue(11, ValueScalingType.Displayed);
+        public int GetMix() => ModuleHandle.GetControllerValue(11, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Mix
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public void SetMix(int value) => Module.SetControllerValue(11, value, ValueScalingType.Displayed);
+        public void SetMix(int value) => ModuleHandle.SetControllerValue(11, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Mode
         /// <para> Possible values: Stereo, Mono, StereoSmoothing, MonoSmoothing </para>
         /// </summary>
-        public FilterProMode GetMode() => (FilterProMode)Module.GetControllerValue(10, ValueScalingType.Displayed);
+        public FilterProMode GetMode() => (FilterProMode)ModuleHandle.GetControllerValue(10, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Mode
         /// <para> Possible values: Stereo, Mono, StereoSmoothing, MonoSmoothing </para>
         /// </summary>
-        public void SetMode(FilterProMode value) => Module.SetControllerValue(10, (int)value, ValueScalingType.Displayed);
+        public void SetMode(FilterProMode value) => ModuleHandle.SetControllerValue(10, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Q
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public int GetQ() => Module.GetControllerValue(6, ValueScalingType.Displayed);
+        public int GetQ() => ModuleHandle.GetControllerValue(6, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Q
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public void SetQ(int value) => Module.SetControllerValue(6, value, ValueScalingType.Displayed);
+        public void SetQ(int value) => ModuleHandle.SetControllerValue(6, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Response
         /// <para> Value range: 0 to 1000 </para>
         /// </summary>
-        public int GetResponse() => Module.GetControllerValue(9, ValueScalingType.Displayed);
+        public int GetResponse() => ModuleHandle.GetControllerValue(9, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Response
         /// <para> Value range: 0 to 1000 </para>
         /// </summary>
-        public void SetResponse(int value) => Module.SetControllerValue(9, value, ValueScalingType.Displayed);
+        public void SetResponse(int value) => ModuleHandle.SetControllerValue(9, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Roll-off
         /// <para> Possible values: dB12, dB24, dB36, dB48 </para>
         /// </summary>
-        public FilterProRollOff GetRollOff() => (FilterProRollOff)Module.GetControllerValue(8, ValueScalingType.Displayed);
+        public FilterProRollOff GetRollOff() => (FilterProRollOff)ModuleHandle.GetControllerValue(8, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Roll-off
         /// <para> Possible values: dB12, dB24, dB36, dB48 </para>
         /// </summary>
-        public void SetRollOff(FilterProRollOff value) => Module.SetControllerValue(8, (int)value, ValueScalingType.Displayed);
+        public void SetRollOff(FilterProRollOff value) => ModuleHandle.SetControllerValue(8, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Set LFO phase
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public int GetSetLFOPhase() => Module.GetControllerValue(15, ValueScalingType.Displayed);
+        public int GetSetLFOPhase() => ModuleHandle.GetControllerValue(15, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Set LFO phase
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public void SetSetLFOPhase(int value) => Module.SetControllerValue(15, value, ValueScalingType.Displayed);
+        public void SetSetLFOPhase(int value) => ModuleHandle.SetControllerValue(15, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Volume
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public int GetVolume() => Module.GetControllerValue(0, ValueScalingType.Displayed);
+        public int GetVolume() => ModuleHandle.GetControllerValue(0, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Volume
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public void SetVolume(int value) => Module.SetControllerValue(0, value, ValueScalingType.Displayed);
+        public void SetVolume(int value) => ModuleHandle.SetControllerValue(0, value, ValueScalingType.Displayed);
 
         #endregion controllers
     }
 
     public struct FlangerModuleHandle : IModuleHandleWrapper
     {
-        public ModuleHandle Module { get; private set; }
+        public ModuleHandle ModuleHandle { get; private set; }
 
         public FlangerModuleHandle(ModuleHandle module)
         {
-            Module = module;
+            ModuleHandle = module;
         }
 
 
@@ -2896,132 +2896,132 @@ namespace SunSharp.ObjectWrapper.Modules
         /// Original name: Delay
         /// <para> Value range: 8 to 1000 </para>
         /// </summary>
-        public int GetDelay() => Module.GetControllerValue(3, ValueScalingType.Displayed);
+        public int GetDelay() => ModuleHandle.GetControllerValue(3, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Delay
         /// <para> Value range: 8 to 1000 </para>
         /// </summary>
-        public void SetDelay(int value) => Module.SetControllerValue(3, value, ValueScalingType.Displayed);
+        public void SetDelay(int value) => ModuleHandle.SetControllerValue(3, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Dry
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public int GetDry() => Module.GetControllerValue(0, ValueScalingType.Displayed);
+        public int GetDry() => ModuleHandle.GetControllerValue(0, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Dry
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public void SetDry(int value) => Module.SetControllerValue(0, value, ValueScalingType.Displayed);
+        public void SetDry(int value) => ModuleHandle.SetControllerValue(0, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Feedback
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public int GetFeedback() => Module.GetControllerValue(2, ValueScalingType.Displayed);
+        public int GetFeedback() => ModuleHandle.GetControllerValue(2, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Feedback
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public void SetFeedback(int value) => Module.SetControllerValue(2, value, ValueScalingType.Displayed);
+        public void SetFeedback(int value) => ModuleHandle.SetControllerValue(2, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: LFO amp
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public int GetLFOAmp() => Module.GetControllerValue(6, ValueScalingType.Displayed);
+        public int GetLFOAmp() => ModuleHandle.GetControllerValue(6, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: LFO amp
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public void SetLFOAmp(int value) => Module.SetControllerValue(6, value, ValueScalingType.Displayed);
+        public void SetLFOAmp(int value) => ModuleHandle.SetControllerValue(6, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: LFO freq
         /// <para> Value range: 0 to 512 </para>
         /// </summary>
-        public int GetLFOFreq() => Module.GetControllerValue(5, ValueScalingType.Displayed);
+        public int GetLFOFreq() => ModuleHandle.GetControllerValue(5, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: LFO freq
         /// <para> Value range: 0 to 512 </para>
         /// </summary>
-        public void SetLFOFreq(int value) => Module.SetControllerValue(5, value, ValueScalingType.Displayed);
+        public void SetLFOFreq(int value) => ModuleHandle.SetControllerValue(5, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: LFO freq unit
         /// <para> Possible values: FiveHundredthHz, Millisecond, Hz, Tick, Line, HalfLine, OneThirdLine </para>
         /// </summary>
-        public FlangerLFOFrequencyUnit GetLFOFreqUnit() => (FlangerLFOFrequencyUnit)Module.GetControllerValue(9, ValueScalingType.Displayed);
+        public FlangerLFOFrequencyUnit GetLFOFreqUnit() => (FlangerLFOFrequencyUnit)ModuleHandle.GetControllerValue(9, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: LFO freq unit
         /// <para> Possible values: FiveHundredthHz, Millisecond, Hz, Tick, Line, HalfLine, OneThirdLine </para>
         /// </summary>
-        public void SetLFOFreqUnit(FlangerLFOFrequencyUnit value) => Module.SetControllerValue(9, (int)value, ValueScalingType.Displayed);
+        public void SetLFOFreqUnit(FlangerLFOFrequencyUnit value) => ModuleHandle.SetControllerValue(9, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: LFO waveform
         /// <para> Possible values: Hsin, Sin </para>
         /// </summary>
-        public FlangerLFOWaveform GetLFOWaveform() => (FlangerLFOWaveform)Module.GetControllerValue(7, ValueScalingType.Displayed);
+        public FlangerLFOWaveform GetLFOWaveform() => (FlangerLFOWaveform)ModuleHandle.GetControllerValue(7, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: LFO waveform
         /// <para> Possible values: Hsin, Sin </para>
         /// </summary>
-        public void SetLFOWaveform(FlangerLFOWaveform value) => Module.SetControllerValue(7, (int)value, ValueScalingType.Displayed);
+        public void SetLFOWaveform(FlangerLFOWaveform value) => ModuleHandle.SetControllerValue(7, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Response
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public int GetResponse() => Module.GetControllerValue(4, ValueScalingType.Displayed);
+        public int GetResponse() => ModuleHandle.GetControllerValue(4, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Response
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public void SetResponse(int value) => Module.SetControllerValue(4, value, ValueScalingType.Displayed);
+        public void SetResponse(int value) => ModuleHandle.SetControllerValue(4, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Set LFO phase
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public int GetSetLFOPhase() => Module.GetControllerValue(8, ValueScalingType.Displayed);
+        public int GetSetLFOPhase() => ModuleHandle.GetControllerValue(8, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Set LFO phase
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public void SetSetLFOPhase(int value) => Module.SetControllerValue(8, value, ValueScalingType.Displayed);
+        public void SetSetLFOPhase(int value) => ModuleHandle.SetControllerValue(8, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Wet
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public int GetWet() => Module.GetControllerValue(1, ValueScalingType.Displayed);
+        public int GetWet() => ModuleHandle.GetControllerValue(1, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Wet
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public void SetWet(int value) => Module.SetControllerValue(1, value, ValueScalingType.Displayed);
+        public void SetWet(int value) => ModuleHandle.SetControllerValue(1, value, ValueScalingType.Displayed);
 
         #endregion controllers
     }
 
     public struct FMModuleHandle : IModuleHandleWrapper
     {
-        public ModuleHandle Module { get; private set; }
+        public ModuleHandle ModuleHandle { get; private set; }
 
         public FMModuleHandle(ModuleHandle module)
         {
-            Module = module;
+            ModuleHandle = module;
         }
 
 
@@ -3031,216 +3031,216 @@ namespace SunSharp.ObjectWrapper.Modules
         /// Original name: C.Attack
         /// <para> Value range: 0 to 512 </para>
         /// </summary>
-        public int GetCAttack() => Module.GetControllerValue(6, ValueScalingType.Displayed);
+        public int GetCAttack() => ModuleHandle.GetControllerValue(6, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: C.Attack
         /// <para> Value range: 0 to 512 </para>
         /// </summary>
-        public void SetCAttack(int value) => Module.SetControllerValue(6, value, ValueScalingType.Displayed);
+        public void SetCAttack(int value) => ModuleHandle.SetControllerValue(6, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: C.Decay
         /// <para> Value range: 0 to 512 </para>
         /// </summary>
-        public int GetCDecay() => Module.GetControllerValue(7, ValueScalingType.Displayed);
+        public int GetCDecay() => ModuleHandle.GetControllerValue(7, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: C.Decay
         /// <para> Value range: 0 to 512 </para>
         /// </summary>
-        public void SetCDecay(int value) => Module.SetControllerValue(7, value, ValueScalingType.Displayed);
+        public void SetCDecay(int value) => ModuleHandle.SetControllerValue(7, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: C.Freq ratio
         /// <para> Value range: 0 to 16 </para>
         /// </summary>
-        public int GetCFreqRatio() => Module.GetControllerValue(3, ValueScalingType.Displayed);
+        public int GetCFreqRatio() => ModuleHandle.GetControllerValue(3, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: C.Freq ratio
         /// <para> Value range: 0 to 16 </para>
         /// </summary>
-        public void SetCFreqRatio(int value) => Module.SetControllerValue(3, value, ValueScalingType.Displayed);
+        public void SetCFreqRatio(int value) => ModuleHandle.SetControllerValue(3, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: C.Release
         /// <para> Value range: 0 to 512 </para>
         /// </summary>
-        public int GetCRelease() => Module.GetControllerValue(9, ValueScalingType.Displayed);
+        public int GetCRelease() => ModuleHandle.GetControllerValue(9, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: C.Release
         /// <para> Value range: 0 to 512 </para>
         /// </summary>
-        public void SetCRelease(int value) => Module.SetControllerValue(9, value, ValueScalingType.Displayed);
+        public void SetCRelease(int value) => ModuleHandle.SetControllerValue(9, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: C.Sustain
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public int GetCSustain() => Module.GetControllerValue(8, ValueScalingType.Displayed);
+        public int GetCSustain() => ModuleHandle.GetControllerValue(8, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: C.Sustain
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public void SetCSustain(int value) => Module.SetControllerValue(8, value, ValueScalingType.Displayed);
+        public void SetCSustain(int value) => ModuleHandle.SetControllerValue(8, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: C.Volume
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public int GetCVolume() => Module.GetControllerValue(0, ValueScalingType.Displayed);
+        public int GetCVolume() => ModuleHandle.GetControllerValue(0, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: C.Volume
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public void SetCVolume(int value) => Module.SetControllerValue(0, value, ValueScalingType.Displayed);
+        public void SetCVolume(int value) => ModuleHandle.SetControllerValue(0, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: M.Attack
         /// <para> Value range: 0 to 512 </para>
         /// </summary>
-        public int GetMAttack() => Module.GetControllerValue(10, ValueScalingType.Displayed);
+        public int GetMAttack() => ModuleHandle.GetControllerValue(10, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: M.Attack
         /// <para> Value range: 0 to 512 </para>
         /// </summary>
-        public void SetMAttack(int value) => Module.SetControllerValue(10, value, ValueScalingType.Displayed);
+        public void SetMAttack(int value) => ModuleHandle.SetControllerValue(10, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: M.Decay
         /// <para> Value range: 0 to 512 </para>
         /// </summary>
-        public int GetMDecay() => Module.GetControllerValue(11, ValueScalingType.Displayed);
+        public int GetMDecay() => ModuleHandle.GetControllerValue(11, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: M.Decay
         /// <para> Value range: 0 to 512 </para>
         /// </summary>
-        public void SetMDecay(int value) => Module.SetControllerValue(11, value, ValueScalingType.Displayed);
+        public void SetMDecay(int value) => ModuleHandle.SetControllerValue(11, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: M.Freq ratio
         /// <para> Value range: 0 to 16 </para>
         /// </summary>
-        public int GetMFreqRatio() => Module.GetControllerValue(4, ValueScalingType.Displayed);
+        public int GetMFreqRatio() => ModuleHandle.GetControllerValue(4, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: M.Freq ratio
         /// <para> Value range: 0 to 16 </para>
         /// </summary>
-        public void SetMFreqRatio(int value) => Module.SetControllerValue(4, value, ValueScalingType.Displayed);
+        public void SetMFreqRatio(int value) => ModuleHandle.SetControllerValue(4, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Mode
         /// <para> Possible values: HQ, HQMono, LQ, LQMono </para>
         /// </summary>
-        public Quality GetMode() => (Quality)Module.GetControllerValue(16, ValueScalingType.Displayed);
+        public Quality GetMode() => (Quality)ModuleHandle.GetControllerValue(16, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Mode
         /// <para> Possible values: HQ, HQMono, LQ, LQMono </para>
         /// </summary>
-        public void SetMode(Quality value) => Module.SetControllerValue(16, (int)value, ValueScalingType.Displayed);
+        public void SetMode(Quality value) => ModuleHandle.SetControllerValue(16, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: M.Release
         /// <para> Value range: 0 to 512 </para>
         /// </summary>
-        public int GetMRelease() => Module.GetControllerValue(13, ValueScalingType.Displayed);
+        public int GetMRelease() => ModuleHandle.GetControllerValue(13, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: M.Release
         /// <para> Value range: 0 to 512 </para>
         /// </summary>
-        public void SetMRelease(int value) => Module.SetControllerValue(13, value, ValueScalingType.Displayed);
+        public void SetMRelease(int value) => ModuleHandle.SetControllerValue(13, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: M.Scaling per key
         /// <para> Value range: 0 to 4 </para>
         /// </summary>
-        public int GetMScalingPerKey() => Module.GetControllerValue(14, ValueScalingType.Displayed);
+        public int GetMScalingPerKey() => ModuleHandle.GetControllerValue(14, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: M.Scaling per key
         /// <para> Value range: 0 to 4 </para>
         /// </summary>
-        public void SetMScalingPerKey(int value) => Module.SetControllerValue(14, value, ValueScalingType.Displayed);
+        public void SetMScalingPerKey(int value) => ModuleHandle.SetControllerValue(14, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: M.Self-modulation
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public int GetMSelfModulation() => Module.GetControllerValue(5, ValueScalingType.Displayed);
+        public int GetMSelfModulation() => ModuleHandle.GetControllerValue(5, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: M.Self-modulation
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public void SetMSelfModulation(int value) => Module.SetControllerValue(5, value, ValueScalingType.Displayed);
+        public void SetMSelfModulation(int value) => ModuleHandle.SetControllerValue(5, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: M.Sustain
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public int GetMSustain() => Module.GetControllerValue(12, ValueScalingType.Displayed);
+        public int GetMSustain() => ModuleHandle.GetControllerValue(12, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: M.Sustain
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public void SetMSustain(int value) => Module.SetControllerValue(12, value, ValueScalingType.Displayed);
+        public void SetMSustain(int value) => ModuleHandle.SetControllerValue(12, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: M.Volume
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public int GetMVolume() => Module.GetControllerValue(1, ValueScalingType.Displayed);
+        public int GetMVolume() => ModuleHandle.GetControllerValue(1, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: M.Volume
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public void SetMVolume(int value) => Module.SetControllerValue(1, value, ValueScalingType.Displayed);
+        public void SetMVolume(int value) => ModuleHandle.SetControllerValue(1, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Panning
         /// <para> Value range: -128 to 128 </para>
         /// </summary>
-        public int GetPanning() => Module.GetControllerValue(2, ValueScalingType.Displayed);
+        public int GetPanning() => ModuleHandle.GetControllerValue(2, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Panning
         /// <para> Value range: -128 to 128 </para>
         /// </summary>
-        public void SetPanning(int value) => Module.SetControllerValue(2, value, ValueScalingType.Displayed);
+        public void SetPanning(int value) => ModuleHandle.SetControllerValue(2, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Polyphony
         /// <para> Value range: 1 to 16 </para>
         /// </summary>
-        public int GetPolyphony() => Module.GetControllerValue(15, ValueScalingType.Displayed);
+        public int GetPolyphony() => ModuleHandle.GetControllerValue(15, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Polyphony
         /// <para> Value range: 1 to 16 </para>
         /// </summary>
-        public void SetPolyphony(int value) => Module.SetControllerValue(15, value, ValueScalingType.Displayed);
+        public void SetPolyphony(int value) => ModuleHandle.SetControllerValue(15, value, ValueScalingType.Displayed);
 
         #endregion controllers
     }
 
     public struct FMXModuleHandle : IModuleHandleWrapper
     {
-        public ModuleHandle Module { get; private set; }
+        public ModuleHandle ModuleHandle { get; private set; }
 
         public FMXModuleHandle(ModuleHandle module)
         {
-            Module = module;
+            ModuleHandle = module;
         }
 
 
@@ -3255,7 +3255,7 @@ namespace SunSharp.ObjectWrapper.Modules
             if (index < 1 || index > 5)
                 throw new System.ArgumentOutOfRangeException(nameof(index));
 
-            return Module.GetControllerValue(9 + index - 1, ValueScalingType.Displayed);
+            return ModuleHandle.GetControllerValue(9 + index - 1, ValueScalingType.Displayed);
         }
 
         /// <summary>
@@ -3267,7 +3267,7 @@ namespace SunSharp.ObjectWrapper.Modules
             if (index < 1 || index > 5)
                 throw new System.ArgumentOutOfRangeException(nameof(index));
 
-            Module.SetControllerValue(9 + index - 1, value, ValueScalingType.Displayed);
+            ModuleHandle.SetControllerValue(9 + index - 1, value, ValueScalingType.Displayed);
         }
 
         /// <summary>
@@ -3279,7 +3279,7 @@ namespace SunSharp.ObjectWrapper.Modules
             if (index < 1 || index > 5)
                 throw new System.ArgumentOutOfRangeException(nameof(index));
 
-            return Module.GetControllerValue(14 + index - 1, ValueScalingType.Displayed);
+            return ModuleHandle.GetControllerValue(14 + index - 1, ValueScalingType.Displayed);
         }
 
         /// <summary>
@@ -3291,7 +3291,7 @@ namespace SunSharp.ObjectWrapper.Modules
             if (index < 1 || index > 5)
                 throw new System.ArgumentOutOfRangeException(nameof(index));
 
-            Module.SetControllerValue(14 + index - 1, value, ValueScalingType.Displayed);
+            ModuleHandle.SetControllerValue(14 + index - 1, value, ValueScalingType.Displayed);
         }
 
         /// <summary>
@@ -3303,7 +3303,7 @@ namespace SunSharp.ObjectWrapper.Modules
             if (index < 1 || index > 5)
                 throw new System.ArgumentOutOfRangeException(nameof(index));
 
-            return Module.GetControllerValue(19 + index - 1, ValueScalingType.Displayed);
+            return ModuleHandle.GetControllerValue(19 + index - 1, ValueScalingType.Displayed);
         }
 
         /// <summary>
@@ -3315,7 +3315,7 @@ namespace SunSharp.ObjectWrapper.Modules
             if (index < 1 || index > 5)
                 throw new System.ArgumentOutOfRangeException(nameof(index));
 
-            Module.SetControllerValue(19 + index - 1, value, ValueScalingType.Displayed);
+            ModuleHandle.SetControllerValue(19 + index - 1, value, ValueScalingType.Displayed);
         }
 
         /// <summary>
@@ -3327,7 +3327,7 @@ namespace SunSharp.ObjectWrapper.Modules
             if (index < 1 || index > 5)
                 throw new System.ArgumentOutOfRangeException(nameof(index));
 
-            return Module.GetControllerValue(24 + index - 1, ValueScalingType.Displayed);
+            return ModuleHandle.GetControllerValue(24 + index - 1, ValueScalingType.Displayed);
         }
 
         /// <summary>
@@ -3339,7 +3339,7 @@ namespace SunSharp.ObjectWrapper.Modules
             if (index < 1 || index > 5)
                 throw new System.ArgumentOutOfRangeException(nameof(index));
 
-            Module.SetControllerValue(24 + index - 1, value, ValueScalingType.Displayed);
+            ModuleHandle.SetControllerValue(24 + index - 1, value, ValueScalingType.Displayed);
         }
 
         /// <summary>
@@ -3351,7 +3351,7 @@ namespace SunSharp.ObjectWrapper.Modules
             if (index < 1 || index > 5)
                 throw new System.ArgumentOutOfRangeException(nameof(index));
 
-            return Module.GetControllerValue(29 + index - 1, ValueScalingType.Displayed);
+            return ModuleHandle.GetControllerValue(29 + index - 1, ValueScalingType.Displayed);
         }
 
         /// <summary>
@@ -3363,7 +3363,7 @@ namespace SunSharp.ObjectWrapper.Modules
             if (index < 1 || index > 5)
                 throw new System.ArgumentOutOfRangeException(nameof(index));
 
-            Module.SetControllerValue(29 + index - 1, value, ValueScalingType.Displayed);
+            ModuleHandle.SetControllerValue(29 + index - 1, value, ValueScalingType.Displayed);
         }
 
         /// <summary>
@@ -3375,7 +3375,7 @@ namespace SunSharp.ObjectWrapper.Modules
             if (index < 1 || index > 5)
                 throw new System.ArgumentOutOfRangeException(nameof(index));
 
-            return (ADSRCurveType)Module.GetControllerValue(34 + index - 1, ValueScalingType.Displayed);
+            return (ADSRCurveType)ModuleHandle.GetControllerValue(34 + index - 1, ValueScalingType.Displayed);
         }
 
         /// <summary>
@@ -3387,7 +3387,7 @@ namespace SunSharp.ObjectWrapper.Modules
             if (index < 1 || index > 5)
                 throw new System.ArgumentOutOfRangeException(nameof(index));
 
-            Module.SetControllerValue(34 + index - 1, (int)value, ValueScalingType.Displayed);
+            ModuleHandle.SetControllerValue(34 + index - 1, (int)value, ValueScalingType.Displayed);
         }
 
         /// <summary>
@@ -3399,7 +3399,7 @@ namespace SunSharp.ObjectWrapper.Modules
             if (index < 1 || index > 5)
                 throw new System.ArgumentOutOfRangeException(nameof(index));
 
-            return (ADSRCurveType)Module.GetControllerValue(39 + index - 1, ValueScalingType.Displayed);
+            return (ADSRCurveType)ModuleHandle.GetControllerValue(39 + index - 1, ValueScalingType.Displayed);
         }
 
         /// <summary>
@@ -3411,7 +3411,7 @@ namespace SunSharp.ObjectWrapper.Modules
             if (index < 1 || index > 5)
                 throw new System.ArgumentOutOfRangeException(nameof(index));
 
-            Module.SetControllerValue(39 + index - 1, (int)value, ValueScalingType.Displayed);
+            ModuleHandle.SetControllerValue(39 + index - 1, (int)value, ValueScalingType.Displayed);
         }
 
         /// <summary>
@@ -3423,7 +3423,7 @@ namespace SunSharp.ObjectWrapper.Modules
             if (index < 1 || index > 5)
                 throw new System.ArgumentOutOfRangeException(nameof(index));
 
-            return (ADSRCurveType)Module.GetControllerValue(44 + index - 1, ValueScalingType.Displayed);
+            return (ADSRCurveType)ModuleHandle.GetControllerValue(44 + index - 1, ValueScalingType.Displayed);
         }
 
         /// <summary>
@@ -3435,7 +3435,7 @@ namespace SunSharp.ObjectWrapper.Modules
             if (index < 1 || index > 5)
                 throw new System.ArgumentOutOfRangeException(nameof(index));
 
-            Module.SetControllerValue(44 + index - 1, (int)value, ValueScalingType.Displayed);
+            ModuleHandle.SetControllerValue(44 + index - 1, (int)value, ValueScalingType.Displayed);
         }
 
         /// <summary>
@@ -3447,7 +3447,7 @@ namespace SunSharp.ObjectWrapper.Modules
             if (index < 1 || index > 5)
                 throw new System.ArgumentOutOfRangeException(nameof(index));
 
-            return Module.GetControllerValue(24 + index - 1, ValueScalingType.Displayed);
+            return ModuleHandle.GetControllerValue(24 + index - 1, ValueScalingType.Displayed);
         }
 
         /// <summary>
@@ -3459,7 +3459,7 @@ namespace SunSharp.ObjectWrapper.Modules
             if (index < 1 || index > 5)
                 throw new System.ArgumentOutOfRangeException(nameof(index));
 
-            Module.SetControllerValue(24 + index - 1, value, ValueScalingType.Displayed);
+            ModuleHandle.SetControllerValue(24 + index - 1, value, ValueScalingType.Displayed);
         }
 
         /// <summary>
@@ -3471,7 +3471,7 @@ namespace SunSharp.ObjectWrapper.Modules
             if (index < 1 || index > 5)
                 throw new System.ArgumentOutOfRangeException(nameof(index));
 
-            return (Toggle)Module.GetControllerValue(54 + index - 1, ValueScalingType.Displayed);
+            return (Toggle)ModuleHandle.GetControllerValue(54 + index - 1, ValueScalingType.Displayed);
         }
 
         /// <summary>
@@ -3483,7 +3483,7 @@ namespace SunSharp.ObjectWrapper.Modules
             if (index < 1 || index > 5)
                 throw new System.ArgumentOutOfRangeException(nameof(index));
 
-            Module.SetControllerValue(54 + index - 1, (int)value, ValueScalingType.Displayed);
+            ModuleHandle.SetControllerValue(54 + index - 1, (int)value, ValueScalingType.Displayed);
         }
 
         /// <summary>
@@ -3495,7 +3495,7 @@ namespace SunSharp.ObjectWrapper.Modules
             if (index < 1 || index > 5)
                 throw new System.ArgumentOutOfRangeException(nameof(index));
 
-            return Module.GetControllerValue(59 + index - 1, ValueScalingType.Displayed);
+            return ModuleHandle.GetControllerValue(59 + index - 1, ValueScalingType.Displayed);
         }
 
         /// <summary>
@@ -3507,7 +3507,7 @@ namespace SunSharp.ObjectWrapper.Modules
             if (index < 1 || index > 5)
                 throw new System.ArgumentOutOfRangeException(nameof(index));
 
-            Module.SetControllerValue(59 + index - 1, value, ValueScalingType.Displayed);
+            ModuleHandle.SetControllerValue(59 + index - 1, value, ValueScalingType.Displayed);
         }
 
         /// <summary>
@@ -3519,7 +3519,7 @@ namespace SunSharp.ObjectWrapper.Modules
             if (index < 1 || index > 5)
                 throw new System.ArgumentOutOfRangeException(nameof(index));
 
-            return Module.GetControllerValue(64 + index - 1, ValueScalingType.Displayed);
+            return ModuleHandle.GetControllerValue(64 + index - 1, ValueScalingType.Displayed);
         }
 
         /// <summary>
@@ -3531,7 +3531,7 @@ namespace SunSharp.ObjectWrapper.Modules
             if (index < 1 || index > 5)
                 throw new System.ArgumentOutOfRangeException(nameof(index));
 
-            Module.SetControllerValue(64 + index - 1, value, ValueScalingType.Displayed);
+            ModuleHandle.SetControllerValue(64 + index - 1, value, ValueScalingType.Displayed);
         }
 
         /// <summary>
@@ -3543,7 +3543,7 @@ namespace SunSharp.ObjectWrapper.Modules
             if (index < 1 || index > 5)
                 throw new System.ArgumentOutOfRangeException(nameof(index));
 
-            return Module.GetControllerValue(69 + index - 1, ValueScalingType.Displayed);
+            return ModuleHandle.GetControllerValue(69 + index - 1, ValueScalingType.Displayed);
         }
 
         /// <summary>
@@ -3555,7 +3555,7 @@ namespace SunSharp.ObjectWrapper.Modules
             if (index < 1 || index > 5)
                 throw new System.ArgumentOutOfRangeException(nameof(index));
 
-            Module.SetControllerValue(69 + index - 1, value, ValueScalingType.Displayed);
+            ModuleHandle.SetControllerValue(69 + index - 1, value, ValueScalingType.Displayed);
         }
 
         /// <summary>
@@ -3567,7 +3567,7 @@ namespace SunSharp.ObjectWrapper.Modules
             if (index < 1 || index > 5)
                 throw new System.ArgumentOutOfRangeException(nameof(index));
 
-            return (FMXWaveform)Module.GetControllerValue(74 + index - 1, ValueScalingType.Displayed);
+            return (FMXWaveform)ModuleHandle.GetControllerValue(74 + index - 1, ValueScalingType.Displayed);
         }
 
         /// <summary>
@@ -3579,7 +3579,7 @@ namespace SunSharp.ObjectWrapper.Modules
             if (index < 1 || index > 5)
                 throw new System.ArgumentOutOfRangeException(nameof(index));
 
-            Module.SetControllerValue(74 + index - 1, (int)value, ValueScalingType.Displayed);
+            ModuleHandle.SetControllerValue(74 + index - 1, (int)value, ValueScalingType.Displayed);
         }
 
         /// <summary>
@@ -3591,7 +3591,7 @@ namespace SunSharp.ObjectWrapper.Modules
             if (index < 1 || index > 5)
                 throw new System.ArgumentOutOfRangeException(nameof(index));
 
-            return Module.GetControllerValue(79 + index - 1, ValueScalingType.Displayed);
+            return ModuleHandle.GetControllerValue(79 + index - 1, ValueScalingType.Displayed);
         }
 
         /// <summary>
@@ -3603,7 +3603,7 @@ namespace SunSharp.ObjectWrapper.Modules
             if (index < 1 || index > 5)
                 throw new System.ArgumentOutOfRangeException(nameof(index));
 
-            Module.SetControllerValue(79 + index - 1, value, ValueScalingType.Displayed);
+            ModuleHandle.SetControllerValue(79 + index - 1, value, ValueScalingType.Displayed);
         }
 
         /// <summary>
@@ -3615,7 +3615,7 @@ namespace SunSharp.ObjectWrapper.Modules
             if (index < 1 || index > 5)
                 throw new System.ArgumentOutOfRangeException(nameof(index));
 
-            return Module.GetControllerValue(84 + index - 1, ValueScalingType.Displayed);
+            return ModuleHandle.GetControllerValue(84 + index - 1, ValueScalingType.Displayed);
         }
 
         /// <summary>
@@ -3627,7 +3627,7 @@ namespace SunSharp.ObjectWrapper.Modules
             if (index < 1 || index > 5)
                 throw new System.ArgumentOutOfRangeException(nameof(index));
 
-            Module.SetControllerValue(84 + index - 1, value, ValueScalingType.Displayed);
+            ModuleHandle.SetControllerValue(84 + index - 1, value, ValueScalingType.Displayed);
         }
 
         /// <summary>
@@ -3639,7 +3639,7 @@ namespace SunSharp.ObjectWrapper.Modules
             if (index < 1 || index > 5)
                 throw new System.ArgumentOutOfRangeException(nameof(index));
 
-            return Module.GetControllerValue(89 + index - 1, ValueScalingType.Displayed);
+            return ModuleHandle.GetControllerValue(89 + index - 1, ValueScalingType.Displayed);
         }
 
         /// <summary>
@@ -3651,7 +3651,7 @@ namespace SunSharp.ObjectWrapper.Modules
             if (index < 1 || index > 5)
                 throw new System.ArgumentOutOfRangeException(nameof(index));
 
-            Module.SetControllerValue(89 + index - 1, value, ValueScalingType.Displayed);
+            ModuleHandle.SetControllerValue(89 + index - 1, value, ValueScalingType.Displayed);
         }
 
         /// <summary>
@@ -3663,7 +3663,7 @@ namespace SunSharp.ObjectWrapper.Modules
             if (index < 1 || index > 5)
                 throw new System.ArgumentOutOfRangeException(nameof(index));
 
-            return Module.GetControllerValue(94 + index - 1, ValueScalingType.Displayed);
+            return ModuleHandle.GetControllerValue(94 + index - 1, ValueScalingType.Displayed);
         }
 
         /// <summary>
@@ -3675,7 +3675,7 @@ namespace SunSharp.ObjectWrapper.Modules
             if (index < 1 || index > 5)
                 throw new System.ArgumentOutOfRangeException(nameof(index));
 
-            Module.SetControllerValue(94 + index - 1, value, ValueScalingType.Displayed);
+            ModuleHandle.SetControllerValue(94 + index - 1, value, ValueScalingType.Displayed);
         }
 
         /// <summary>
@@ -3687,7 +3687,7 @@ namespace SunSharp.ObjectWrapper.Modules
             if (index < 1 || index > 5)
                 throw new System.ArgumentOutOfRangeException(nameof(index));
 
-            return Module.GetControllerValue(99 + index - 1, ValueScalingType.Displayed);
+            return ModuleHandle.GetControllerValue(99 + index - 1, ValueScalingType.Displayed);
         }
 
         /// <summary>
@@ -3699,7 +3699,7 @@ namespace SunSharp.ObjectWrapper.Modules
             if (index < 1 || index > 5)
                 throw new System.ArgumentOutOfRangeException(nameof(index));
 
-            Module.SetControllerValue(99 + index - 1, value, ValueScalingType.Displayed);
+            ModuleHandle.SetControllerValue(99 + index - 1, value, ValueScalingType.Displayed);
         }
 
         /// <summary>
@@ -3711,7 +3711,7 @@ namespace SunSharp.ObjectWrapper.Modules
             if (index < 1 || index > 5)
                 throw new System.ArgumentOutOfRangeException(nameof(index));
 
-            return Module.GetControllerValue(104 + index - 1, ValueScalingType.Displayed);
+            return ModuleHandle.GetControllerValue(104 + index - 1, ValueScalingType.Displayed);
         }
 
         /// <summary>
@@ -3723,7 +3723,7 @@ namespace SunSharp.ObjectWrapper.Modules
             if (index < 1 || index > 5)
                 throw new System.ArgumentOutOfRangeException(nameof(index));
 
-            Module.SetControllerValue(104 + index - 1, value, ValueScalingType.Displayed);
+            ModuleHandle.SetControllerValue(104 + index - 1, value, ValueScalingType.Displayed);
         }
 
         /// <summary>
@@ -3735,7 +3735,7 @@ namespace SunSharp.ObjectWrapper.Modules
             if (index < 1 || index > 5)
                 throw new System.ArgumentOutOfRangeException(nameof(index));
 
-            return (FMXModulationType)Module.GetControllerValue(109 + index - 1, ValueScalingType.Displayed);
+            return (FMXModulationType)ModuleHandle.GetControllerValue(109 + index - 1, ValueScalingType.Displayed);
         }
 
         /// <summary>
@@ -3747,7 +3747,7 @@ namespace SunSharp.ObjectWrapper.Modules
             if (index < 1 || index > 5)
                 throw new System.ArgumentOutOfRangeException(nameof(index));
 
-            Module.SetControllerValue(109 + index - 1, (int)value, ValueScalingType.Displayed);
+            ModuleHandle.SetControllerValue(109 + index - 1, (int)value, ValueScalingType.Displayed);
         }
 
         #endregion module type-specific methods
@@ -3759,1429 +3759,1429 @@ namespace SunSharp.ObjectWrapper.Modules
         /// Original name: ADSR smooth transitions
         /// <para> Possible values: Off, RestartAndVolumeChange, RestartAndVolumeChangeSmooth, VolumeChange </para>
         /// </summary>
-        public ADSRSmoothTransitions GetADSRSmoothTransitions() => (ADSRSmoothTransitions)Module.GetControllerValue(7, ValueScalingType.Displayed);
+        public ADSRSmoothTransitions GetADSRSmoothTransitions() => (ADSRSmoothTransitions)ModuleHandle.GetControllerValue(7, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: ADSR smooth transitions
         /// <para> Possible values: Off, RestartAndVolumeChange, RestartAndVolumeChangeSmooth, VolumeChange </para>
         /// </summary>
-        public void SetADSRSmoothTransitions(ADSRSmoothTransitions value) => Module.SetControllerValue(7, (int)value, ValueScalingType.Displayed);
+        public void SetADSRSmoothTransitions(ADSRSmoothTransitions value) => ModuleHandle.SetControllerValue(7, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 1 Attack
         /// <para> Value range: 0 to 10000 </para>
         /// </summary>
-        public int GetAttack1() => Module.GetControllerValue(14, ValueScalingType.Displayed);
+        public int GetAttack1() => ModuleHandle.GetControllerValue(14, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 1 Attack
         /// <para> Value range: 0 to 10000 </para>
         /// </summary>
-        public void SetAttack1(int value) => Module.SetControllerValue(14, value, ValueScalingType.Displayed);
+        public void SetAttack1(int value) => ModuleHandle.SetControllerValue(14, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 2 Attack
         /// <para> Value range: 0 to 10000 </para>
         /// </summary>
-        public int GetAttack2() => Module.GetControllerValue(15, ValueScalingType.Displayed);
+        public int GetAttack2() => ModuleHandle.GetControllerValue(15, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 2 Attack
         /// <para> Value range: 0 to 10000 </para>
         /// </summary>
-        public void SetAttack2(int value) => Module.SetControllerValue(15, value, ValueScalingType.Displayed);
+        public void SetAttack2(int value) => ModuleHandle.SetControllerValue(15, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 3 Attack
         /// <para> Value range: 0 to 10000 </para>
         /// </summary>
-        public int GetAttack3() => Module.GetControllerValue(16, ValueScalingType.Displayed);
+        public int GetAttack3() => ModuleHandle.GetControllerValue(16, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 3 Attack
         /// <para> Value range: 0 to 10000 </para>
         /// </summary>
-        public void SetAttack3(int value) => Module.SetControllerValue(16, value, ValueScalingType.Displayed);
+        public void SetAttack3(int value) => ModuleHandle.SetControllerValue(16, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 4 Attack
         /// <para> Value range: 0 to 10000 </para>
         /// </summary>
-        public int GetAttack4() => Module.GetControllerValue(17, ValueScalingType.Displayed);
+        public int GetAttack4() => ModuleHandle.GetControllerValue(17, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 4 Attack
         /// <para> Value range: 0 to 10000 </para>
         /// </summary>
-        public void SetAttack4(int value) => Module.SetControllerValue(17, value, ValueScalingType.Displayed);
+        public void SetAttack4(int value) => ModuleHandle.SetControllerValue(17, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 5 Attack
         /// <para> Value range: 0 to 10000 </para>
         /// </summary>
-        public int GetAttack5() => Module.GetControllerValue(18, ValueScalingType.Displayed);
+        public int GetAttack5() => ModuleHandle.GetControllerValue(18, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 5 Attack
         /// <para> Value range: 0 to 10000 </para>
         /// </summary>
-        public void SetAttack5(int value) => Module.SetControllerValue(18, value, ValueScalingType.Displayed);
+        public void SetAttack5(int value) => ModuleHandle.SetControllerValue(18, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 1 Attack curve
         /// <para> Possible values: Linear, Exp1, Exp2, Nexp1, Nexp2, Sin, Rect, SmoothRect, Bit2, Bit3, Bit4, Bit5 </para>
         /// </summary>
-        public ADSRCurveType GetAttackCurve1() => (ADSRCurveType)Module.GetControllerValue(34, ValueScalingType.Displayed);
+        public ADSRCurveType GetAttackCurve1() => (ADSRCurveType)ModuleHandle.GetControllerValue(34, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 1 Attack curve
         /// <para> Possible values: Linear, Exp1, Exp2, Nexp1, Nexp2, Sin, Rect, SmoothRect, Bit2, Bit3, Bit4, Bit5 </para>
         /// </summary>
-        public void SetAttackCurve1(ADSRCurveType value) => Module.SetControllerValue(34, (int)value, ValueScalingType.Displayed);
+        public void SetAttackCurve1(ADSRCurveType value) => ModuleHandle.SetControllerValue(34, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 2 Attack curve
         /// <para> Possible values: Linear, Exp1, Exp2, Nexp1, Nexp2, Sin, Rect, SmoothRect, Bit2, Bit3, Bit4, Bit5 </para>
         /// </summary>
-        public ADSRCurveType GetAttackCurve2() => (ADSRCurveType)Module.GetControllerValue(35, ValueScalingType.Displayed);
+        public ADSRCurveType GetAttackCurve2() => (ADSRCurveType)ModuleHandle.GetControllerValue(35, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 2 Attack curve
         /// <para> Possible values: Linear, Exp1, Exp2, Nexp1, Nexp2, Sin, Rect, SmoothRect, Bit2, Bit3, Bit4, Bit5 </para>
         /// </summary>
-        public void SetAttackCurve2(ADSRCurveType value) => Module.SetControllerValue(35, (int)value, ValueScalingType.Displayed);
+        public void SetAttackCurve2(ADSRCurveType value) => ModuleHandle.SetControllerValue(35, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 3 Attack curve
         /// <para> Possible values: Linear, Exp1, Exp2, Nexp1, Nexp2, Sin, Rect, SmoothRect, Bit2, Bit3, Bit4, Bit5 </para>
         /// </summary>
-        public ADSRCurveType GetAttackCurve3() => (ADSRCurveType)Module.GetControllerValue(36, ValueScalingType.Displayed);
+        public ADSRCurveType GetAttackCurve3() => (ADSRCurveType)ModuleHandle.GetControllerValue(36, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 3 Attack curve
         /// <para> Possible values: Linear, Exp1, Exp2, Nexp1, Nexp2, Sin, Rect, SmoothRect, Bit2, Bit3, Bit4, Bit5 </para>
         /// </summary>
-        public void SetAttackCurve3(ADSRCurveType value) => Module.SetControllerValue(36, (int)value, ValueScalingType.Displayed);
+        public void SetAttackCurve3(ADSRCurveType value) => ModuleHandle.SetControllerValue(36, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 4 Attack curve
         /// <para> Possible values: Linear, Exp1, Exp2, Nexp1, Nexp2, Sin, Rect, SmoothRect, Bit2, Bit3, Bit4, Bit5 </para>
         /// </summary>
-        public ADSRCurveType GetAttackCurve4() => (ADSRCurveType)Module.GetControllerValue(37, ValueScalingType.Displayed);
+        public ADSRCurveType GetAttackCurve4() => (ADSRCurveType)ModuleHandle.GetControllerValue(37, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 4 Attack curve
         /// <para> Possible values: Linear, Exp1, Exp2, Nexp1, Nexp2, Sin, Rect, SmoothRect, Bit2, Bit3, Bit4, Bit5 </para>
         /// </summary>
-        public void SetAttackCurve4(ADSRCurveType value) => Module.SetControllerValue(37, (int)value, ValueScalingType.Displayed);
+        public void SetAttackCurve4(ADSRCurveType value) => ModuleHandle.SetControllerValue(37, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 5 Attack curve
         /// <para> Possible values: Linear, Exp1, Exp2, Nexp1, Nexp2, Sin, Rect, SmoothRect, Bit2, Bit3, Bit4, Bit5 </para>
         /// </summary>
-        public ADSRCurveType GetAttackCurve5() => (ADSRCurveType)Module.GetControllerValue(38, ValueScalingType.Displayed);
+        public ADSRCurveType GetAttackCurve5() => (ADSRCurveType)ModuleHandle.GetControllerValue(38, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 5 Attack curve
         /// <para> Possible values: Linear, Exp1, Exp2, Nexp1, Nexp2, Sin, Rect, SmoothRect, Bit2, Bit3, Bit4, Bit5 </para>
         /// </summary>
-        public void SetAttackCurve5(ADSRCurveType value) => Module.SetControllerValue(38, (int)value, ValueScalingType.Displayed);
+        public void SetAttackCurve5(ADSRCurveType value) => ModuleHandle.SetControllerValue(38, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Channels
         /// <para> Possible values: Mono, Stereo </para>
         /// </summary>
-        public ChannelsInverted GetChannels() => (ChannelsInverted)Module.GetControllerValue(4, ValueScalingType.Displayed);
+        public ChannelsInverted GetChannels() => (ChannelsInverted)ModuleHandle.GetControllerValue(4, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Channels
         /// <para> Possible values: Mono, Stereo </para>
         /// </summary>
-        public void SetChannels(ChannelsInverted value) => Module.SetControllerValue(4, (int)value, ValueScalingType.Displayed);
+        public void SetChannels(ChannelsInverted value) => ModuleHandle.SetControllerValue(4, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 1 Constant pitch
         /// <para> Value range: -8192 to 8192 </para>
         /// </summary>
-        public int GetConstantPitch1() => Module.GetControllerValue(94, ValueScalingType.Displayed);
+        public int GetConstantPitch1() => ModuleHandle.GetControllerValue(94, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 1 Constant pitch
         /// <para> Value range: -8192 to 8192 </para>
         /// </summary>
-        public void SetConstantPitch1(int value) => Module.SetControllerValue(94, value, ValueScalingType.Displayed);
+        public void SetConstantPitch1(int value) => ModuleHandle.SetControllerValue(94, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 2 Constant pitch
         /// <para> Value range: -8192 to 8192 </para>
         /// </summary>
-        public int GetConstantPitch2() => Module.GetControllerValue(95, ValueScalingType.Displayed);
+        public int GetConstantPitch2() => ModuleHandle.GetControllerValue(95, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 2 Constant pitch
         /// <para> Value range: -8192 to 8192 </para>
         /// </summary>
-        public void SetConstantPitch2(int value) => Module.SetControllerValue(95, value, ValueScalingType.Displayed);
+        public void SetConstantPitch2(int value) => ModuleHandle.SetControllerValue(95, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 3 Constant pitch
         /// <para> Value range: -8192 to 8192 </para>
         /// </summary>
-        public int GetConstantPitch3() => Module.GetControllerValue(96, ValueScalingType.Displayed);
+        public int GetConstantPitch3() => ModuleHandle.GetControllerValue(96, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 3 Constant pitch
         /// <para> Value range: -8192 to 8192 </para>
         /// </summary>
-        public void SetConstantPitch3(int value) => Module.SetControllerValue(96, value, ValueScalingType.Displayed);
+        public void SetConstantPitch3(int value) => ModuleHandle.SetControllerValue(96, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 4 Constant pitch
         /// <para> Value range: -8192 to 8192 </para>
         /// </summary>
-        public int GetConstantPitch4() => Module.GetControllerValue(97, ValueScalingType.Displayed);
+        public int GetConstantPitch4() => ModuleHandle.GetControllerValue(97, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 4 Constant pitch
         /// <para> Value range: -8192 to 8192 </para>
         /// </summary>
-        public void SetConstantPitch4(int value) => Module.SetControllerValue(97, value, ValueScalingType.Displayed);
+        public void SetConstantPitch4(int value) => ModuleHandle.SetControllerValue(97, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 5 Constant pitch
         /// <para> Value range: -8192 to 8192 </para>
         /// </summary>
-        public int GetConstantPitch5() => Module.GetControllerValue(98, ValueScalingType.Displayed);
+        public int GetConstantPitch5() => ModuleHandle.GetControllerValue(98, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 5 Constant pitch
         /// <para> Value range: -8192 to 8192 </para>
         /// </summary>
-        public void SetConstantPitch5(int value) => Module.SetControllerValue(98, value, ValueScalingType.Displayed);
+        public void SetConstantPitch5(int value) => ModuleHandle.SetControllerValue(98, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 1 Decay
         /// <para> Value range: 0 to 10000 </para>
         /// </summary>
-        public int GetDecay1() => Module.GetControllerValue(19, ValueScalingType.Displayed);
+        public int GetDecay1() => ModuleHandle.GetControllerValue(19, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 1 Decay
         /// <para> Value range: 0 to 10000 </para>
         /// </summary>
-        public void SetDecay1(int value) => Module.SetControllerValue(19, value, ValueScalingType.Displayed);
+        public void SetDecay1(int value) => ModuleHandle.SetControllerValue(19, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 2 Decay
         /// <para> Value range: 0 to 10000 </para>
         /// </summary>
-        public int GetDecay2() => Module.GetControllerValue(20, ValueScalingType.Displayed);
+        public int GetDecay2() => ModuleHandle.GetControllerValue(20, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 2 Decay
         /// <para> Value range: 0 to 10000 </para>
         /// </summary>
-        public void SetDecay2(int value) => Module.SetControllerValue(20, value, ValueScalingType.Displayed);
+        public void SetDecay2(int value) => ModuleHandle.SetControllerValue(20, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 3 Decay
         /// <para> Value range: 0 to 10000 </para>
         /// </summary>
-        public int GetDecay3() => Module.GetControllerValue(21, ValueScalingType.Displayed);
+        public int GetDecay3() => ModuleHandle.GetControllerValue(21, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 3 Decay
         /// <para> Value range: 0 to 10000 </para>
         /// </summary>
-        public void SetDecay3(int value) => Module.SetControllerValue(21, value, ValueScalingType.Displayed);
+        public void SetDecay3(int value) => ModuleHandle.SetControllerValue(21, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 4 Decay
         /// <para> Value range: 0 to 10000 </para>
         /// </summary>
-        public int GetDecay4() => Module.GetControllerValue(22, ValueScalingType.Displayed);
+        public int GetDecay4() => ModuleHandle.GetControllerValue(22, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 4 Decay
         /// <para> Value range: 0 to 10000 </para>
         /// </summary>
-        public void SetDecay4(int value) => Module.SetControllerValue(22, value, ValueScalingType.Displayed);
+        public void SetDecay4(int value) => ModuleHandle.SetControllerValue(22, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 5 Decay
         /// <para> Value range: 0 to 10000 </para>
         /// </summary>
-        public int GetDecay5() => Module.GetControllerValue(23, ValueScalingType.Displayed);
+        public int GetDecay5() => ModuleHandle.GetControllerValue(23, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 5 Decay
         /// <para> Value range: 0 to 10000 </para>
         /// </summary>
-        public void SetDecay5(int value) => Module.SetControllerValue(23, value, ValueScalingType.Displayed);
+        public void SetDecay5(int value) => ModuleHandle.SetControllerValue(23, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 1 Decay curve
         /// <para> Possible values: Linear, Exp1, Exp2, Nexp1, Nexp2, Sin, Rect, SmoothRect, Bit2, Bit3, Bit4, Bit5 </para>
         /// </summary>
-        public ADSRCurveType GetDecayCurve1() => (ADSRCurveType)Module.GetControllerValue(39, ValueScalingType.Displayed);
+        public ADSRCurveType GetDecayCurve1() => (ADSRCurveType)ModuleHandle.GetControllerValue(39, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 1 Decay curve
         /// <para> Possible values: Linear, Exp1, Exp2, Nexp1, Nexp2, Sin, Rect, SmoothRect, Bit2, Bit3, Bit4, Bit5 </para>
         /// </summary>
-        public void SetDecayCurve1(ADSRCurveType value) => Module.SetControllerValue(39, (int)value, ValueScalingType.Displayed);
+        public void SetDecayCurve1(ADSRCurveType value) => ModuleHandle.SetControllerValue(39, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 2 Decay curve
         /// <para> Possible values: Linear, Exp1, Exp2, Nexp1, Nexp2, Sin, Rect, SmoothRect, Bit2, Bit3, Bit4, Bit5 </para>
         /// </summary>
-        public ADSRCurveType GetDecayCurve2() => (ADSRCurveType)Module.GetControllerValue(40, ValueScalingType.Displayed);
+        public ADSRCurveType GetDecayCurve2() => (ADSRCurveType)ModuleHandle.GetControllerValue(40, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 2 Decay curve
         /// <para> Possible values: Linear, Exp1, Exp2, Nexp1, Nexp2, Sin, Rect, SmoothRect, Bit2, Bit3, Bit4, Bit5 </para>
         /// </summary>
-        public void SetDecayCurve2(ADSRCurveType value) => Module.SetControllerValue(40, (int)value, ValueScalingType.Displayed);
+        public void SetDecayCurve2(ADSRCurveType value) => ModuleHandle.SetControllerValue(40, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 3 Decay curve
         /// <para> Possible values: Linear, Exp1, Exp2, Nexp1, Nexp2, Sin, Rect, SmoothRect, Bit2, Bit3, Bit4, Bit5 </para>
         /// </summary>
-        public ADSRCurveType GetDecayCurve3() => (ADSRCurveType)Module.GetControllerValue(41, ValueScalingType.Displayed);
+        public ADSRCurveType GetDecayCurve3() => (ADSRCurveType)ModuleHandle.GetControllerValue(41, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 3 Decay curve
         /// <para> Possible values: Linear, Exp1, Exp2, Nexp1, Nexp2, Sin, Rect, SmoothRect, Bit2, Bit3, Bit4, Bit5 </para>
         /// </summary>
-        public void SetDecayCurve3(ADSRCurveType value) => Module.SetControllerValue(41, (int)value, ValueScalingType.Displayed);
+        public void SetDecayCurve3(ADSRCurveType value) => ModuleHandle.SetControllerValue(41, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 4 Decay curve
         /// <para> Possible values: Linear, Exp1, Exp2, Nexp1, Nexp2, Sin, Rect, SmoothRect, Bit2, Bit3, Bit4, Bit5 </para>
         /// </summary>
-        public ADSRCurveType GetDecayCurve4() => (ADSRCurveType)Module.GetControllerValue(42, ValueScalingType.Displayed);
+        public ADSRCurveType GetDecayCurve4() => (ADSRCurveType)ModuleHandle.GetControllerValue(42, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 4 Decay curve
         /// <para> Possible values: Linear, Exp1, Exp2, Nexp1, Nexp2, Sin, Rect, SmoothRect, Bit2, Bit3, Bit4, Bit5 </para>
         /// </summary>
-        public void SetDecayCurve4(ADSRCurveType value) => Module.SetControllerValue(42, (int)value, ValueScalingType.Displayed);
+        public void SetDecayCurve4(ADSRCurveType value) => ModuleHandle.SetControllerValue(42, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 5 Decay curve
         /// <para> Possible values: Linear, Exp1, Exp2, Nexp1, Nexp2, Sin, Rect, SmoothRect, Bit2, Bit3, Bit4, Bit5 </para>
         /// </summary>
-        public ADSRCurveType GetDecayCurve5() => (ADSRCurveType)Module.GetControllerValue(43, ValueScalingType.Displayed);
+        public ADSRCurveType GetDecayCurve5() => (ADSRCurveType)ModuleHandle.GetControllerValue(43, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 5 Decay curve
         /// <para> Possible values: Linear, Exp1, Exp2, Nexp1, Nexp2, Sin, Rect, SmoothRect, Bit2, Bit3, Bit4, Bit5 </para>
         /// </summary>
-        public void SetDecayCurve5(ADSRCurveType value) => Module.SetControllerValue(43, (int)value, ValueScalingType.Displayed);
+        public void SetDecayCurve5(ADSRCurveType value) => ModuleHandle.SetControllerValue(43, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Envelope gain
         /// <para> Value range: 0 to 8000 </para>
         /// </summary>
-        public int GetEnvelopeGain() => Module.GetControllerValue(118, ValueScalingType.Displayed);
+        public int GetEnvelopeGain() => ModuleHandle.GetControllerValue(118, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Envelope gain
         /// <para> Value range: 0 to 8000 </para>
         /// </summary>
-        public void SetEnvelopeGain(int value) => Module.SetControllerValue(118, value, ValueScalingType.Displayed);
+        public void SetEnvelopeGain(int value) => ModuleHandle.SetControllerValue(118, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 1 Envelope scaling per key
         /// <para> Value range: -128 to 128 </para>
         /// </summary>
-        public int GetEnvelopeScalingPerKey1() => Module.GetControllerValue(59, ValueScalingType.Displayed);
+        public int GetEnvelopeScalingPerKey1() => ModuleHandle.GetControllerValue(59, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 1 Envelope scaling per key
         /// <para> Value range: -128 to 128 </para>
         /// </summary>
-        public void SetEnvelopeScalingPerKey1(int value) => Module.SetControllerValue(59, value, ValueScalingType.Displayed);
+        public void SetEnvelopeScalingPerKey1(int value) => ModuleHandle.SetControllerValue(59, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 2 Envelope scaling per key
         /// <para> Value range: -128 to 128 </para>
         /// </summary>
-        public int GetEnvelopeScalingPerKey2() => Module.GetControllerValue(60, ValueScalingType.Displayed);
+        public int GetEnvelopeScalingPerKey2() => ModuleHandle.GetControllerValue(60, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 2 Envelope scaling per key
         /// <para> Value range: -128 to 128 </para>
         /// </summary>
-        public void SetEnvelopeScalingPerKey2(int value) => Module.SetControllerValue(60, value, ValueScalingType.Displayed);
+        public void SetEnvelopeScalingPerKey2(int value) => ModuleHandle.SetControllerValue(60, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 3 Envelope scaling per key
         /// <para> Value range: -128 to 128 </para>
         /// </summary>
-        public int GetEnvelopeScalingPerKey3() => Module.GetControllerValue(61, ValueScalingType.Displayed);
+        public int GetEnvelopeScalingPerKey3() => ModuleHandle.GetControllerValue(61, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 3 Envelope scaling per key
         /// <para> Value range: -128 to 128 </para>
         /// </summary>
-        public void SetEnvelopeScalingPerKey3(int value) => Module.SetControllerValue(61, value, ValueScalingType.Displayed);
+        public void SetEnvelopeScalingPerKey3(int value) => ModuleHandle.SetControllerValue(61, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 4 Envelope scaling per key
         /// <para> Value range: -128 to 128 </para>
         /// </summary>
-        public int GetEnvelopeScalingPerKey4() => Module.GetControllerValue(62, ValueScalingType.Displayed);
+        public int GetEnvelopeScalingPerKey4() => ModuleHandle.GetControllerValue(62, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 4 Envelope scaling per key
         /// <para> Value range: -128 to 128 </para>
         /// </summary>
-        public void SetEnvelopeScalingPerKey4(int value) => Module.SetControllerValue(62, value, ValueScalingType.Displayed);
+        public void SetEnvelopeScalingPerKey4(int value) => ModuleHandle.SetControllerValue(62, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 5 Envelope scaling per key
         /// <para> Value range: -128 to 128 </para>
         /// </summary>
-        public int GetEnvelopeScalingPerKey5() => Module.GetControllerValue(63, ValueScalingType.Displayed);
+        public int GetEnvelopeScalingPerKey5() => ModuleHandle.GetControllerValue(63, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 5 Envelope scaling per key
         /// <para> Value range: -128 to 128 </para>
         /// </summary>
-        public void SetEnvelopeScalingPerKey5(int value) => Module.SetControllerValue(63, value, ValueScalingType.Displayed);
+        public void SetEnvelopeScalingPerKey5(int value) => ModuleHandle.SetControllerValue(63, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 1 Feedback
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public int GetFeedback1() => Module.GetControllerValue(104, ValueScalingType.Displayed);
+        public int GetFeedback1() => ModuleHandle.GetControllerValue(104, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 1 Feedback
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public void SetFeedback1(int value) => Module.SetControllerValue(104, value, ValueScalingType.Displayed);
+        public void SetFeedback1(int value) => ModuleHandle.SetControllerValue(104, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 2 Feedback
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public int GetFeedback2() => Module.GetControllerValue(105, ValueScalingType.Displayed);
+        public int GetFeedback2() => ModuleHandle.GetControllerValue(105, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 2 Feedback
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public void SetFeedback2(int value) => Module.SetControllerValue(105, value, ValueScalingType.Displayed);
+        public void SetFeedback2(int value) => ModuleHandle.SetControllerValue(105, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 3 Feedback
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public int GetFeedback3() => Module.GetControllerValue(106, ValueScalingType.Displayed);
+        public int GetFeedback3() => ModuleHandle.GetControllerValue(106, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 3 Feedback
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public void SetFeedback3(int value) => Module.SetControllerValue(106, value, ValueScalingType.Displayed);
+        public void SetFeedback3(int value) => ModuleHandle.SetControllerValue(106, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 4 Feedback
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public int GetFeedback4() => Module.GetControllerValue(107, ValueScalingType.Displayed);
+        public int GetFeedback4() => ModuleHandle.GetControllerValue(107, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 4 Feedback
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public void SetFeedback4(int value) => Module.SetControllerValue(107, value, ValueScalingType.Displayed);
+        public void SetFeedback4(int value) => ModuleHandle.SetControllerValue(107, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 5 Feedback
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public int GetFeedback5() => Module.GetControllerValue(108, ValueScalingType.Displayed);
+        public int GetFeedback5() => ModuleHandle.GetControllerValue(108, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 5 Feedback
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public void SetFeedback5(int value) => Module.SetControllerValue(108, value, ValueScalingType.Displayed);
+        public void SetFeedback5(int value) => ModuleHandle.SetControllerValue(108, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 1 Freq multiply
         /// <para> Value range: 0 to 32000 </para>
         /// </summary>
-        public int GetFreqMultiply1() => Module.GetControllerValue(89, ValueScalingType.Displayed);
+        public int GetFreqMultiply1() => ModuleHandle.GetControllerValue(89, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 1 Freq multiply
         /// <para> Value range: 0 to 32000 </para>
         /// </summary>
-        public void SetFreqMultiply1(int value) => Module.SetControllerValue(89, value, ValueScalingType.Displayed);
+        public void SetFreqMultiply1(int value) => ModuleHandle.SetControllerValue(89, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 2 Freq multiply
         /// <para> Value range: 0 to 32000 </para>
         /// </summary>
-        public int GetFreqMultiply2() => Module.GetControllerValue(90, ValueScalingType.Displayed);
+        public int GetFreqMultiply2() => ModuleHandle.GetControllerValue(90, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 2 Freq multiply
         /// <para> Value range: 0 to 32000 </para>
         /// </summary>
-        public void SetFreqMultiply2(int value) => Module.SetControllerValue(90, value, ValueScalingType.Displayed);
+        public void SetFreqMultiply2(int value) => ModuleHandle.SetControllerValue(90, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 3 Freq multiply
         /// <para> Value range: 0 to 32000 </para>
         /// </summary>
-        public int GetFreqMultiply3() => Module.GetControllerValue(91, ValueScalingType.Displayed);
+        public int GetFreqMultiply3() => ModuleHandle.GetControllerValue(91, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 3 Freq multiply
         /// <para> Value range: 0 to 32000 </para>
         /// </summary>
-        public void SetFreqMultiply3(int value) => Module.SetControllerValue(91, value, ValueScalingType.Displayed);
+        public void SetFreqMultiply3(int value) => ModuleHandle.SetControllerValue(91, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 4 Freq multiply
         /// <para> Value range: 0 to 32000 </para>
         /// </summary>
-        public int GetFreqMultiply4() => Module.GetControllerValue(92, ValueScalingType.Displayed);
+        public int GetFreqMultiply4() => ModuleHandle.GetControllerValue(92, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 4 Freq multiply
         /// <para> Value range: 0 to 32000 </para>
         /// </summary>
-        public void SetFreqMultiply4(int value) => Module.SetControllerValue(92, value, ValueScalingType.Displayed);
+        public void SetFreqMultiply4(int value) => ModuleHandle.SetControllerValue(92, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 5 Freq multiply
         /// <para> Value range: 0 to 32000 </para>
         /// </summary>
-        public int GetFreqMultiply5() => Module.GetControllerValue(93, ValueScalingType.Displayed);
+        public int GetFreqMultiply5() => ModuleHandle.GetControllerValue(93, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 5 Freq multiply
         /// <para> Value range: 0 to 32000 </para>
         /// </summary>
-        public void SetFreqMultiply5(int value) => Module.SetControllerValue(93, value, ValueScalingType.Displayed);
+        public void SetFreqMultiply5(int value) => ModuleHandle.SetControllerValue(93, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Input -> Custom waveform
         /// <para> Possible values: Off, SingleCycle, Continuous </para>
         /// </summary>
-        public FMXCustomWaveform GetInputCustomWaveform() => (FMXCustomWaveform)Module.GetControllerValue(6, ValueScalingType.Displayed);
+        public FMXCustomWaveform GetInputCustomWaveform() => (FMXCustomWaveform)ModuleHandle.GetControllerValue(6, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Input -> Custom waveform
         /// <para> Possible values: Off, SingleCycle, Continuous </para>
         /// </summary>
-        public void SetInputCustomWaveform(FMXCustomWaveform value) => Module.SetControllerValue(6, (int)value, ValueScalingType.Displayed);
+        public void SetInputCustomWaveform(FMXCustomWaveform value) => ModuleHandle.SetControllerValue(6, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Input -> Operator #
         /// <para> Value range: 0 to 5 </para>
         /// </summary>
-        public int GetInputOperatorNum() => Module.GetControllerValue(5, ValueScalingType.Displayed);
+        public int GetInputOperatorNum() => ModuleHandle.GetControllerValue(5, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Input -> Operator #
         /// <para> Value range: 0 to 5 </para>
         /// </summary>
-        public void SetInputOperatorNum(int value) => Module.SetControllerValue(5, value, ValueScalingType.Displayed);
+        public void SetInputOperatorNum(int value) => ModuleHandle.SetControllerValue(5, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 1 Modulation type
         /// <para> Possible values: Phase, Frequency, Amplitude, Add, Sub, Min, Max, And, Xor, PhasePlus </para>
         /// </summary>
-        public FMXModulationType GetModulationType1() => (FMXModulationType)Module.GetControllerValue(109, ValueScalingType.Displayed);
+        public FMXModulationType GetModulationType1() => (FMXModulationType)ModuleHandle.GetControllerValue(109, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 1 Modulation type
         /// <para> Possible values: Phase, Frequency, Amplitude, Add, Sub, Min, Max, And, Xor, PhasePlus </para>
         /// </summary>
-        public void SetModulationType1(FMXModulationType value) => Module.SetControllerValue(109, (int)value, ValueScalingType.Displayed);
+        public void SetModulationType1(FMXModulationType value) => ModuleHandle.SetControllerValue(109, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 2 Modulation type
         /// <para> Possible values: Phase, Frequency, Amplitude, Add, Sub, Min, Max, And, Xor, PhasePlus </para>
         /// </summary>
-        public FMXModulationType GetModulationType2() => (FMXModulationType)Module.GetControllerValue(110, ValueScalingType.Displayed);
+        public FMXModulationType GetModulationType2() => (FMXModulationType)ModuleHandle.GetControllerValue(110, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 2 Modulation type
         /// <para> Possible values: Phase, Frequency, Amplitude, Add, Sub, Min, Max, And, Xor, PhasePlus </para>
         /// </summary>
-        public void SetModulationType2(FMXModulationType value) => Module.SetControllerValue(110, (int)value, ValueScalingType.Displayed);
+        public void SetModulationType2(FMXModulationType value) => ModuleHandle.SetControllerValue(110, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 3 Modulation type
         /// <para> Possible values: Phase, Frequency, Amplitude, Add, Sub, Min, Max, And, Xor, PhasePlus </para>
         /// </summary>
-        public FMXModulationType GetModulationType3() => (FMXModulationType)Module.GetControllerValue(111, ValueScalingType.Displayed);
+        public FMXModulationType GetModulationType3() => (FMXModulationType)ModuleHandle.GetControllerValue(111, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 3 Modulation type
         /// <para> Possible values: Phase, Frequency, Amplitude, Add, Sub, Min, Max, And, Xor, PhasePlus </para>
         /// </summary>
-        public void SetModulationType3(FMXModulationType value) => Module.SetControllerValue(111, (int)value, ValueScalingType.Displayed);
+        public void SetModulationType3(FMXModulationType value) => ModuleHandle.SetControllerValue(111, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 4 Modulation type
         /// <para> Possible values: Phase, Frequency, Amplitude, Add, Sub, Min, Max, And, Xor, PhasePlus </para>
         /// </summary>
-        public FMXModulationType GetModulationType4() => (FMXModulationType)Module.GetControllerValue(112, ValueScalingType.Displayed);
+        public FMXModulationType GetModulationType4() => (FMXModulationType)ModuleHandle.GetControllerValue(112, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 4 Modulation type
         /// <para> Possible values: Phase, Frequency, Amplitude, Add, Sub, Min, Max, And, Xor, PhasePlus </para>
         /// </summary>
-        public void SetModulationType4(FMXModulationType value) => Module.SetControllerValue(112, (int)value, ValueScalingType.Displayed);
+        public void SetModulationType4(FMXModulationType value) => ModuleHandle.SetControllerValue(112, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 5 Modulation type
         /// <para> Possible values: Phase, Frequency, Amplitude, Add, Sub, Min, Max, And, Xor, PhasePlus </para>
         /// </summary>
-        public FMXModulationType GetModulationType5() => (FMXModulationType)Module.GetControllerValue(113, ValueScalingType.Displayed);
+        public FMXModulationType GetModulationType5() => (FMXModulationType)ModuleHandle.GetControllerValue(113, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 5 Modulation type
         /// <para> Possible values: Phase, Frequency, Amplitude, Add, Sub, Min, Max, And, Xor, PhasePlus </para>
         /// </summary>
-        public void SetModulationType5(FMXModulationType value) => Module.SetControllerValue(113, (int)value, ValueScalingType.Displayed);
+        public void SetModulationType5(FMXModulationType value) => ModuleHandle.SetControllerValue(113, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 1 Noise
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public int GetNoise1() => Module.GetControllerValue(79, ValueScalingType.Displayed);
+        public int GetNoise1() => ModuleHandle.GetControllerValue(79, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 1 Noise
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public void SetNoise1(int value) => Module.SetControllerValue(79, value, ValueScalingType.Displayed);
+        public void SetNoise1(int value) => ModuleHandle.SetControllerValue(79, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 2 Noise
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public int GetNoise2() => Module.GetControllerValue(80, ValueScalingType.Displayed);
+        public int GetNoise2() => ModuleHandle.GetControllerValue(80, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 2 Noise
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public void SetNoise2(int value) => Module.SetControllerValue(80, value, ValueScalingType.Displayed);
+        public void SetNoise2(int value) => ModuleHandle.SetControllerValue(80, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 3 Noise
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public int GetNoise3() => Module.GetControllerValue(81, ValueScalingType.Displayed);
+        public int GetNoise3() => ModuleHandle.GetControllerValue(81, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 3 Noise
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public void SetNoise3(int value) => Module.SetControllerValue(81, value, ValueScalingType.Displayed);
+        public void SetNoise3(int value) => ModuleHandle.SetControllerValue(81, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 4 Noise
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public int GetNoise4() => Module.GetControllerValue(82, ValueScalingType.Displayed);
+        public int GetNoise4() => ModuleHandle.GetControllerValue(82, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 4 Noise
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public void SetNoise4(int value) => Module.SetControllerValue(82, value, ValueScalingType.Displayed);
+        public void SetNoise4(int value) => ModuleHandle.SetControllerValue(82, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 5 Noise
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public int GetNoise5() => Module.GetControllerValue(83, ValueScalingType.Displayed);
+        public int GetNoise5() => ModuleHandle.GetControllerValue(83, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 5 Noise
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public void SetNoise5(int value) => Module.SetControllerValue(83, value, ValueScalingType.Displayed);
+        public void SetNoise5(int value) => ModuleHandle.SetControllerValue(83, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Noise filter (32768 - OFF)
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public int GetNoiseFilter() => Module.GetControllerValue(8, ValueScalingType.Displayed);
+        public int GetNoiseFilter() => ModuleHandle.GetControllerValue(8, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Noise filter (32768 - OFF)
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public void SetNoiseFilter(int value) => Module.SetControllerValue(8, value, ValueScalingType.Displayed);
+        public void SetNoiseFilter(int value) => ModuleHandle.SetControllerValue(8, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 1 Output mode
         /// <para> Value range: 0 to 31 </para>
         /// </summary>
-        public int GetOutputMode1() => Module.GetControllerValue(114, ValueScalingType.Displayed);
+        public int GetOutputMode1() => ModuleHandle.GetControllerValue(114, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 1 Output mode
         /// <para> Value range: 0 to 31 </para>
         /// </summary>
-        public void SetOutputMode1(int value) => Module.SetControllerValue(114, value, ValueScalingType.Displayed);
+        public void SetOutputMode1(int value) => ModuleHandle.SetControllerValue(114, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 2 Output mode
         /// <para> Value range: 0 to 15 </para>
         /// </summary>
-        public int GetOutputMode2() => Module.GetControllerValue(115, ValueScalingType.Displayed);
+        public int GetOutputMode2() => ModuleHandle.GetControllerValue(115, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 2 Output mode
         /// <para> Value range: 0 to 15 </para>
         /// </summary>
-        public void SetOutputMode2(int value) => Module.SetControllerValue(115, value, ValueScalingType.Displayed);
+        public void SetOutputMode2(int value) => ModuleHandle.SetControllerValue(115, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 3 Output mode
         /// <para> Value range: 0 to 7 </para>
         /// </summary>
-        public int GetOutputMode3() => Module.GetControllerValue(116, ValueScalingType.Displayed);
+        public int GetOutputMode3() => ModuleHandle.GetControllerValue(116, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 3 Output mode
         /// <para> Value range: 0 to 7 </para>
         /// </summary>
-        public void SetOutputMode3(int value) => Module.SetControllerValue(116, value, ValueScalingType.Displayed);
+        public void SetOutputMode3(int value) => ModuleHandle.SetControllerValue(116, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 4 Output mode
         /// <para> Value range: 0 to 3 </para>
         /// </summary>
-        public int GetOutputMode4() => Module.GetControllerValue(117, ValueScalingType.Displayed);
+        public int GetOutputMode4() => ModuleHandle.GetControllerValue(117, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 4 Output mode
         /// <para> Value range: 0 to 3 </para>
         /// </summary>
-        public void SetOutputMode4(int value) => Module.SetControllerValue(117, value, ValueScalingType.Displayed);
+        public void SetOutputMode4(int value) => ModuleHandle.SetControllerValue(117, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Panning
         /// <para> Value range: -128 to 128 </para>
         /// </summary>
-        public int GetPanning() => Module.GetControllerValue(1, ValueScalingType.Displayed);
+        public int GetPanning() => ModuleHandle.GetControllerValue(1, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Panning
         /// <para> Value range: -128 to 128 </para>
         /// </summary>
-        public void SetPanning(int value) => Module.SetControllerValue(1, value, ValueScalingType.Displayed);
+        public void SetPanning(int value) => ModuleHandle.SetControllerValue(1, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 1 Phase
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public int GetPhase1() => Module.GetControllerValue(84, ValueScalingType.Displayed);
+        public int GetPhase1() => ModuleHandle.GetControllerValue(84, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 1 Phase
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public void SetPhase1(int value) => Module.SetControllerValue(84, value, ValueScalingType.Displayed);
+        public void SetPhase1(int value) => ModuleHandle.SetControllerValue(84, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 2 Phase
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public int GetPhase2() => Module.GetControllerValue(85, ValueScalingType.Displayed);
+        public int GetPhase2() => ModuleHandle.GetControllerValue(85, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 2 Phase
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public void SetPhase2(int value) => Module.SetControllerValue(85, value, ValueScalingType.Displayed);
+        public void SetPhase2(int value) => ModuleHandle.SetControllerValue(85, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 3 Phase
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public int GetPhase3() => Module.GetControllerValue(86, ValueScalingType.Displayed);
+        public int GetPhase3() => ModuleHandle.GetControllerValue(86, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 3 Phase
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public void SetPhase3(int value) => Module.SetControllerValue(86, value, ValueScalingType.Displayed);
+        public void SetPhase3(int value) => ModuleHandle.SetControllerValue(86, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 4 Phase
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public int GetPhase4() => Module.GetControllerValue(87, ValueScalingType.Displayed);
+        public int GetPhase4() => ModuleHandle.GetControllerValue(87, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 4 Phase
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public void SetPhase4(int value) => Module.SetControllerValue(87, value, ValueScalingType.Displayed);
+        public void SetPhase4(int value) => ModuleHandle.SetControllerValue(87, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 5 Phase
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public int GetPhase5() => Module.GetControllerValue(88, ValueScalingType.Displayed);
+        public int GetPhase5() => ModuleHandle.GetControllerValue(88, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 5 Phase
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public void SetPhase5(int value) => Module.SetControllerValue(88, value, ValueScalingType.Displayed);
+        public void SetPhase5(int value) => ModuleHandle.SetControllerValue(88, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Polyphony
         /// <para> Value range: 1 to 32 </para>
         /// </summary>
-        public int GetPolyphony() => Module.GetControllerValue(3, ValueScalingType.Displayed);
+        public int GetPolyphony() => ModuleHandle.GetControllerValue(3, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Polyphony
         /// <para> Value range: 1 to 32 </para>
         /// </summary>
-        public void SetPolyphony(int value) => Module.SetControllerValue(3, value, ValueScalingType.Displayed);
+        public void SetPolyphony(int value) => ModuleHandle.SetControllerValue(3, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 1 Release
         /// <para> Value range: 0 to 10000 </para>
         /// </summary>
-        public int GetRelease1() => Module.GetControllerValue(29, ValueScalingType.Displayed);
+        public int GetRelease1() => ModuleHandle.GetControllerValue(29, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 1 Release
         /// <para> Value range: 0 to 10000 </para>
         /// </summary>
-        public void SetRelease1(int value) => Module.SetControllerValue(29, value, ValueScalingType.Displayed);
+        public void SetRelease1(int value) => ModuleHandle.SetControllerValue(29, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 2 Release
         /// <para> Value range: 0 to 10000 </para>
         /// </summary>
-        public int GetRelease2() => Module.GetControllerValue(30, ValueScalingType.Displayed);
+        public int GetRelease2() => ModuleHandle.GetControllerValue(30, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 2 Release
         /// <para> Value range: 0 to 10000 </para>
         /// </summary>
-        public void SetRelease2(int value) => Module.SetControllerValue(30, value, ValueScalingType.Displayed);
+        public void SetRelease2(int value) => ModuleHandle.SetControllerValue(30, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 3 Release
         /// <para> Value range: 0 to 10000 </para>
         /// </summary>
-        public int GetRelease3() => Module.GetControllerValue(31, ValueScalingType.Displayed);
+        public int GetRelease3() => ModuleHandle.GetControllerValue(31, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 3 Release
         /// <para> Value range: 0 to 10000 </para>
         /// </summary>
-        public void SetRelease3(int value) => Module.SetControllerValue(31, value, ValueScalingType.Displayed);
+        public void SetRelease3(int value) => ModuleHandle.SetControllerValue(31, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 4 Release
         /// <para> Value range: 0 to 10000 </para>
         /// </summary>
-        public int GetRelease4() => Module.GetControllerValue(32, ValueScalingType.Displayed);
+        public int GetRelease4() => ModuleHandle.GetControllerValue(32, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 4 Release
         /// <para> Value range: 0 to 10000 </para>
         /// </summary>
-        public void SetRelease4(int value) => Module.SetControllerValue(32, value, ValueScalingType.Displayed);
+        public void SetRelease4(int value) => ModuleHandle.SetControllerValue(32, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 5 Release
         /// <para> Value range: 0 to 10000 </para>
         /// </summary>
-        public int GetRelease5() => Module.GetControllerValue(33, ValueScalingType.Displayed);
+        public int GetRelease5() => ModuleHandle.GetControllerValue(33, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 5 Release
         /// <para> Value range: 0 to 10000 </para>
         /// </summary>
-        public void SetRelease5(int value) => Module.SetControllerValue(33, value, ValueScalingType.Displayed);
+        public void SetRelease5(int value) => ModuleHandle.SetControllerValue(33, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 1 Release curve
         /// <para> Possible values: Linear, Exp1, Exp2, Nexp1, Nexp2, Sin, Rect, SmoothRect, Bit2, Bit3, Bit4, Bit5 </para>
         /// </summary>
-        public ADSRCurveType GetReleaseCurve1() => (ADSRCurveType)Module.GetControllerValue(44, ValueScalingType.Displayed);
+        public ADSRCurveType GetReleaseCurve1() => (ADSRCurveType)ModuleHandle.GetControllerValue(44, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 1 Release curve
         /// <para> Possible values: Linear, Exp1, Exp2, Nexp1, Nexp2, Sin, Rect, SmoothRect, Bit2, Bit3, Bit4, Bit5 </para>
         /// </summary>
-        public void SetReleaseCurve1(ADSRCurveType value) => Module.SetControllerValue(44, (int)value, ValueScalingType.Displayed);
+        public void SetReleaseCurve1(ADSRCurveType value) => ModuleHandle.SetControllerValue(44, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 2 Release curve
         /// <para> Possible values: Linear, Exp1, Exp2, Nexp1, Nexp2, Sin, Rect, SmoothRect, Bit2, Bit3, Bit4, Bit5 </para>
         /// </summary>
-        public ADSRCurveType GetReleaseCurve2() => (ADSRCurveType)Module.GetControllerValue(45, ValueScalingType.Displayed);
+        public ADSRCurveType GetReleaseCurve2() => (ADSRCurveType)ModuleHandle.GetControllerValue(45, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 2 Release curve
         /// <para> Possible values: Linear, Exp1, Exp2, Nexp1, Nexp2, Sin, Rect, SmoothRect, Bit2, Bit3, Bit4, Bit5 </para>
         /// </summary>
-        public void SetReleaseCurve2(ADSRCurveType value) => Module.SetControllerValue(45, (int)value, ValueScalingType.Displayed);
+        public void SetReleaseCurve2(ADSRCurveType value) => ModuleHandle.SetControllerValue(45, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 3 Release curve
         /// <para> Possible values: Linear, Exp1, Exp2, Nexp1, Nexp2, Sin, Rect, SmoothRect, Bit2, Bit3, Bit4, Bit5 </para>
         /// </summary>
-        public ADSRCurveType GetReleaseCurve3() => (ADSRCurveType)Module.GetControllerValue(46, ValueScalingType.Displayed);
+        public ADSRCurveType GetReleaseCurve3() => (ADSRCurveType)ModuleHandle.GetControllerValue(46, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 3 Release curve
         /// <para> Possible values: Linear, Exp1, Exp2, Nexp1, Nexp2, Sin, Rect, SmoothRect, Bit2, Bit3, Bit4, Bit5 </para>
         /// </summary>
-        public void SetReleaseCurve3(ADSRCurveType value) => Module.SetControllerValue(46, (int)value, ValueScalingType.Displayed);
+        public void SetReleaseCurve3(ADSRCurveType value) => ModuleHandle.SetControllerValue(46, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 4 Release curve
         /// <para> Possible values: Linear, Exp1, Exp2, Nexp1, Nexp2, Sin, Rect, SmoothRect, Bit2, Bit3, Bit4, Bit5 </para>
         /// </summary>
-        public ADSRCurveType GetReleaseCurve4() => (ADSRCurveType)Module.GetControllerValue(47, ValueScalingType.Displayed);
+        public ADSRCurveType GetReleaseCurve4() => (ADSRCurveType)ModuleHandle.GetControllerValue(47, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 4 Release curve
         /// <para> Possible values: Linear, Exp1, Exp2, Nexp1, Nexp2, Sin, Rect, SmoothRect, Bit2, Bit3, Bit4, Bit5 </para>
         /// </summary>
-        public void SetReleaseCurve4(ADSRCurveType value) => Module.SetControllerValue(47, (int)value, ValueScalingType.Displayed);
+        public void SetReleaseCurve4(ADSRCurveType value) => ModuleHandle.SetControllerValue(47, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 5 Release curve
         /// <para> Possible values: Linear, Exp1, Exp2, Nexp1, Nexp2, Sin, Rect, SmoothRect, Bit2, Bit3, Bit4, Bit5 </para>
         /// </summary>
-        public ADSRCurveType GetReleaseCurve5() => (ADSRCurveType)Module.GetControllerValue(48, ValueScalingType.Displayed);
+        public ADSRCurveType GetReleaseCurve5() => (ADSRCurveType)ModuleHandle.GetControllerValue(48, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 5 Release curve
         /// <para> Possible values: Linear, Exp1, Exp2, Nexp1, Nexp2, Sin, Rect, SmoothRect, Bit2, Bit3, Bit4, Bit5 </para>
         /// </summary>
-        public void SetReleaseCurve5(ADSRCurveType value) => Module.SetControllerValue(48, (int)value, ValueScalingType.Displayed);
+        public void SetReleaseCurve5(ADSRCurveType value) => ModuleHandle.SetControllerValue(48, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Sample rate
         /// <para> Possible values: Hz8000, Hz11025, Hz16000, Hz22050, Hz32000, Hz44100, Native </para>
         /// </summary>
-        public FMXSampleRate GetSampleRate() => (FMXSampleRate)Module.GetControllerValue(2, ValueScalingType.Displayed);
+        public FMXSampleRate GetSampleRate() => (FMXSampleRate)ModuleHandle.GetControllerValue(2, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Sample rate
         /// <para> Possible values: Hz8000, Hz11025, Hz16000, Hz22050, Hz32000, Hz44100, Native </para>
         /// </summary>
-        public void SetSampleRate(FMXSampleRate value) => Module.SetControllerValue(2, (int)value, ValueScalingType.Displayed);
+        public void SetSampleRate(FMXSampleRate value) => ModuleHandle.SetControllerValue(2, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 1 Self-modulation
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public int GetSelfModulation1() => Module.GetControllerValue(99, ValueScalingType.Displayed);
+        public int GetSelfModulation1() => ModuleHandle.GetControllerValue(99, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 1 Self-modulation
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public void SetSelfModulation1(int value) => Module.SetControllerValue(99, value, ValueScalingType.Displayed);
+        public void SetSelfModulation1(int value) => ModuleHandle.SetControllerValue(99, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 2 Self-modulation
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public int GetSelfModulation2() => Module.GetControllerValue(100, ValueScalingType.Displayed);
+        public int GetSelfModulation2() => ModuleHandle.GetControllerValue(100, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 2 Self-modulation
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public void SetSelfModulation2(int value) => Module.SetControllerValue(100, value, ValueScalingType.Displayed);
+        public void SetSelfModulation2(int value) => ModuleHandle.SetControllerValue(100, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 3 Self-modulation
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public int GetSelfModulation3() => Module.GetControllerValue(101, ValueScalingType.Displayed);
+        public int GetSelfModulation3() => ModuleHandle.GetControllerValue(101, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 3 Self-modulation
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public void SetSelfModulation3(int value) => Module.SetControllerValue(101, value, ValueScalingType.Displayed);
+        public void SetSelfModulation3(int value) => ModuleHandle.SetControllerValue(101, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 4 Self-modulation
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public int GetSelfModulation4() => Module.GetControllerValue(102, ValueScalingType.Displayed);
+        public int GetSelfModulation4() => ModuleHandle.GetControllerValue(102, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 4 Self-modulation
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public void SetSelfModulation4(int value) => Module.SetControllerValue(102, value, ValueScalingType.Displayed);
+        public void SetSelfModulation4(int value) => ModuleHandle.SetControllerValue(102, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 5 Self-modulation
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public int GetSelfModulation5() => Module.GetControllerValue(103, ValueScalingType.Displayed);
+        public int GetSelfModulation5() => ModuleHandle.GetControllerValue(103, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 5 Self-modulation
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public void SetSelfModulation5(int value) => Module.SetControllerValue(103, value, ValueScalingType.Displayed);
+        public void SetSelfModulation5(int value) => ModuleHandle.SetControllerValue(103, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 1 Sustain
         /// <para> Possible values: Off, On, Repeat </para>
         /// </summary>
-        public ADSRSustainMode GetSustain1() => (ADSRSustainMode)Module.GetControllerValue(49, ValueScalingType.Displayed);
+        public ADSRSustainMode GetSustain1() => (ADSRSustainMode)ModuleHandle.GetControllerValue(49, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 1 Sustain
         /// <para> Possible values: Off, On, Repeat </para>
         /// </summary>
-        public void SetSustain1(ADSRSustainMode value) => Module.SetControllerValue(49, (int)value, ValueScalingType.Displayed);
+        public void SetSustain1(ADSRSustainMode value) => ModuleHandle.SetControllerValue(49, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 2 Sustain
         /// <para> Possible values: Off, On, Repeat </para>
         /// </summary>
-        public ADSRSustainMode GetSustain2() => (ADSRSustainMode)Module.GetControllerValue(50, ValueScalingType.Displayed);
+        public ADSRSustainMode GetSustain2() => (ADSRSustainMode)ModuleHandle.GetControllerValue(50, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 2 Sustain
         /// <para> Possible values: Off, On, Repeat </para>
         /// </summary>
-        public void SetSustain2(ADSRSustainMode value) => Module.SetControllerValue(50, (int)value, ValueScalingType.Displayed);
+        public void SetSustain2(ADSRSustainMode value) => ModuleHandle.SetControllerValue(50, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 3 Sustain
         /// <para> Possible values: Off, On, Repeat </para>
         /// </summary>
-        public ADSRSustainMode GetSustain3() => (ADSRSustainMode)Module.GetControllerValue(51, ValueScalingType.Displayed);
+        public ADSRSustainMode GetSustain3() => (ADSRSustainMode)ModuleHandle.GetControllerValue(51, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 3 Sustain
         /// <para> Possible values: Off, On, Repeat </para>
         /// </summary>
-        public void SetSustain3(ADSRSustainMode value) => Module.SetControllerValue(51, (int)value, ValueScalingType.Displayed);
+        public void SetSustain3(ADSRSustainMode value) => ModuleHandle.SetControllerValue(51, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 4 Sustain
         /// <para> Possible values: Off, On, Repeat </para>
         /// </summary>
-        public ADSRSustainMode GetSustain4() => (ADSRSustainMode)Module.GetControllerValue(52, ValueScalingType.Displayed);
+        public ADSRSustainMode GetSustain4() => (ADSRSustainMode)ModuleHandle.GetControllerValue(52, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 4 Sustain
         /// <para> Possible values: Off, On, Repeat </para>
         /// </summary>
-        public void SetSustain4(ADSRSustainMode value) => Module.SetControllerValue(52, (int)value, ValueScalingType.Displayed);
+        public void SetSustain4(ADSRSustainMode value) => ModuleHandle.SetControllerValue(52, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 5 Sustain
         /// <para> Possible values: Off, On, Repeat </para>
         /// </summary>
-        public ADSRSustainMode GetSustain5() => (ADSRSustainMode)Module.GetControllerValue(53, ValueScalingType.Displayed);
+        public ADSRSustainMode GetSustain5() => (ADSRSustainMode)ModuleHandle.GetControllerValue(53, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 5 Sustain
         /// <para> Possible values: Off, On, Repeat </para>
         /// </summary>
-        public void SetSustain5(ADSRSustainMode value) => Module.SetControllerValue(53, (int)value, ValueScalingType.Displayed);
+        public void SetSustain5(ADSRSustainMode value) => ModuleHandle.SetControllerValue(53, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 1 Sustain level
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public int GetSustainLevel1() => Module.GetControllerValue(24, ValueScalingType.Displayed);
+        public int GetSustainLevel1() => ModuleHandle.GetControllerValue(24, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 1 Sustain level
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public void SetSustainLevel1(int value) => Module.SetControllerValue(24, value, ValueScalingType.Displayed);
+        public void SetSustainLevel1(int value) => ModuleHandle.SetControllerValue(24, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 2 Sustain level
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public int GetSustainLevel2() => Module.GetControllerValue(25, ValueScalingType.Displayed);
+        public int GetSustainLevel2() => ModuleHandle.GetControllerValue(25, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 2 Sustain level
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public void SetSustainLevel2(int value) => Module.SetControllerValue(25, value, ValueScalingType.Displayed);
+        public void SetSustainLevel2(int value) => ModuleHandle.SetControllerValue(25, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 3 Sustain level
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public int GetSustainLevel3() => Module.GetControllerValue(26, ValueScalingType.Displayed);
+        public int GetSustainLevel3() => ModuleHandle.GetControllerValue(26, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 3 Sustain level
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public void SetSustainLevel3(int value) => Module.SetControllerValue(26, value, ValueScalingType.Displayed);
+        public void SetSustainLevel3(int value) => ModuleHandle.SetControllerValue(26, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 4 Sustain level
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public int GetSustainLevel4() => Module.GetControllerValue(27, ValueScalingType.Displayed);
+        public int GetSustainLevel4() => ModuleHandle.GetControllerValue(27, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 4 Sustain level
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public void SetSustainLevel4(int value) => Module.SetControllerValue(27, value, ValueScalingType.Displayed);
+        public void SetSustainLevel4(int value) => ModuleHandle.SetControllerValue(27, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 5 Sustain level
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public int GetSustainLevel5() => Module.GetControllerValue(28, ValueScalingType.Displayed);
+        public int GetSustainLevel5() => ModuleHandle.GetControllerValue(28, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 5 Sustain level
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public void SetSustainLevel5(int value) => Module.SetControllerValue(28, value, ValueScalingType.Displayed);
+        public void SetSustainLevel5(int value) => ModuleHandle.SetControllerValue(28, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 1 Sustain pedal
         /// <para> Possible values: Off, On </para>
         /// </summary>
-        public Toggle GetSustainPedal1() => (Toggle)Module.GetControllerValue(54, ValueScalingType.Displayed);
+        public Toggle GetSustainPedal1() => (Toggle)ModuleHandle.GetControllerValue(54, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 1 Sustain pedal
         /// <para> Possible values: Off, On </para>
         /// </summary>
-        public void SetSustainPedal1(Toggle value) => Module.SetControllerValue(54, (int)value, ValueScalingType.Displayed);
+        public void SetSustainPedal1(Toggle value) => ModuleHandle.SetControllerValue(54, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 2 Sustain pedal
         /// <para> Possible values: Off, On </para>
         /// </summary>
-        public Toggle GetSustainPedal2() => (Toggle)Module.GetControllerValue(55, ValueScalingType.Displayed);
+        public Toggle GetSustainPedal2() => (Toggle)ModuleHandle.GetControllerValue(55, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 2 Sustain pedal
         /// <para> Possible values: Off, On </para>
         /// </summary>
-        public void SetSustainPedal2(Toggle value) => Module.SetControllerValue(55, (int)value, ValueScalingType.Displayed);
+        public void SetSustainPedal2(Toggle value) => ModuleHandle.SetControllerValue(55, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 3 Sustain pedal
         /// <para> Possible values: Off, On </para>
         /// </summary>
-        public Toggle GetSustainPedal3() => (Toggle)Module.GetControllerValue(56, ValueScalingType.Displayed);
+        public Toggle GetSustainPedal3() => (Toggle)ModuleHandle.GetControllerValue(56, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 3 Sustain pedal
         /// <para> Possible values: Off, On </para>
         /// </summary>
-        public void SetSustainPedal3(Toggle value) => Module.SetControllerValue(56, (int)value, ValueScalingType.Displayed);
+        public void SetSustainPedal3(Toggle value) => ModuleHandle.SetControllerValue(56, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 4 Sustain pedal
         /// <para> Possible values: Off, On </para>
         /// </summary>
-        public Toggle GetSustainPedal4() => (Toggle)Module.GetControllerValue(57, ValueScalingType.Displayed);
+        public Toggle GetSustainPedal4() => (Toggle)ModuleHandle.GetControllerValue(57, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 4 Sustain pedal
         /// <para> Possible values: Off, On </para>
         /// </summary>
-        public void SetSustainPedal4(Toggle value) => Module.SetControllerValue(57, (int)value, ValueScalingType.Displayed);
+        public void SetSustainPedal4(Toggle value) => ModuleHandle.SetControllerValue(57, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 5 Sustain pedal
         /// <para> Possible values: Off, On </para>
         /// </summary>
-        public Toggle GetSustainPedal5() => (Toggle)Module.GetControllerValue(58, ValueScalingType.Displayed);
+        public Toggle GetSustainPedal5() => (Toggle)ModuleHandle.GetControllerValue(58, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 5 Sustain pedal
         /// <para> Possible values: Off, On </para>
         /// </summary>
-        public void SetSustainPedal5(Toggle value) => Module.SetControllerValue(58, (int)value, ValueScalingType.Displayed);
+        public void SetSustainPedal5(Toggle value) => ModuleHandle.SetControllerValue(58, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 1 Velocity sensitivity
         /// <para> Value range: -128 to 128 </para>
         /// </summary>
-        public int GetVelocitySensitivity1() => Module.GetControllerValue(69, ValueScalingType.Displayed);
+        public int GetVelocitySensitivity1() => ModuleHandle.GetControllerValue(69, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 1 Velocity sensitivity
         /// <para> Value range: -128 to 128 </para>
         /// </summary>
-        public void SetVelocitySensitivity1(int value) => Module.SetControllerValue(69, value, ValueScalingType.Displayed);
+        public void SetVelocitySensitivity1(int value) => ModuleHandle.SetControllerValue(69, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 2 Velocity sensitivity
         /// <para> Value range: -128 to 128 </para>
         /// </summary>
-        public int GetVelocitySensitivity2() => Module.GetControllerValue(70, ValueScalingType.Displayed);
+        public int GetVelocitySensitivity2() => ModuleHandle.GetControllerValue(70, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 2 Velocity sensitivity
         /// <para> Value range: -128 to 128 </para>
         /// </summary>
-        public void SetVelocitySensitivity2(int value) => Module.SetControllerValue(70, value, ValueScalingType.Displayed);
+        public void SetVelocitySensitivity2(int value) => ModuleHandle.SetControllerValue(70, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 3 Velocity sensitivity
         /// <para> Value range: -128 to 128 </para>
         /// </summary>
-        public int GetVelocitySensitivity3() => Module.GetControllerValue(71, ValueScalingType.Displayed);
+        public int GetVelocitySensitivity3() => ModuleHandle.GetControllerValue(71, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 3 Velocity sensitivity
         /// <para> Value range: -128 to 128 </para>
         /// </summary>
-        public void SetVelocitySensitivity3(int value) => Module.SetControllerValue(71, value, ValueScalingType.Displayed);
+        public void SetVelocitySensitivity3(int value) => ModuleHandle.SetControllerValue(71, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 4 Velocity sensitivity
         /// <para> Value range: -128 to 128 </para>
         /// </summary>
-        public int GetVelocitySensitivity4() => Module.GetControllerValue(72, ValueScalingType.Displayed);
+        public int GetVelocitySensitivity4() => ModuleHandle.GetControllerValue(72, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 4 Velocity sensitivity
         /// <para> Value range: -128 to 128 </para>
         /// </summary>
-        public void SetVelocitySensitivity4(int value) => Module.SetControllerValue(72, value, ValueScalingType.Displayed);
+        public void SetVelocitySensitivity4(int value) => ModuleHandle.SetControllerValue(72, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 5 Velocity sensitivity
         /// <para> Value range: -128 to 128 </para>
         /// </summary>
-        public int GetVelocitySensitivity5() => Module.GetControllerValue(73, ValueScalingType.Displayed);
+        public int GetVelocitySensitivity5() => ModuleHandle.GetControllerValue(73, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 5 Velocity sensitivity
         /// <para> Value range: -128 to 128 </para>
         /// </summary>
-        public void SetVelocitySensitivity5(int value) => Module.SetControllerValue(73, value, ValueScalingType.Displayed);
+        public void SetVelocitySensitivity5(int value) => ModuleHandle.SetControllerValue(73, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Volume
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public int GetVolume() => Module.GetControllerValue(0, ValueScalingType.Displayed);
+        public int GetVolume() => ModuleHandle.GetControllerValue(0, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Volume
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public void SetVolume(int value) => Module.SetControllerValue(0, value, ValueScalingType.Displayed);
+        public void SetVolume(int value) => ModuleHandle.SetControllerValue(0, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 1 Volume
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public int GetVolume1() => Module.GetControllerValue(9, ValueScalingType.Displayed);
+        public int GetVolume1() => ModuleHandle.GetControllerValue(9, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 1 Volume
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public void SetVolume1(int value) => Module.SetControllerValue(9, value, ValueScalingType.Displayed);
+        public void SetVolume1(int value) => ModuleHandle.SetControllerValue(9, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 2 Volume
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public int GetVolume2() => Module.GetControllerValue(10, ValueScalingType.Displayed);
+        public int GetVolume2() => ModuleHandle.GetControllerValue(10, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 2 Volume
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public void SetVolume2(int value) => Module.SetControllerValue(10, value, ValueScalingType.Displayed);
+        public void SetVolume2(int value) => ModuleHandle.SetControllerValue(10, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 3 Volume
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public int GetVolume3() => Module.GetControllerValue(11, ValueScalingType.Displayed);
+        public int GetVolume3() => ModuleHandle.GetControllerValue(11, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 3 Volume
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public void SetVolume3(int value) => Module.SetControllerValue(11, value, ValueScalingType.Displayed);
+        public void SetVolume3(int value) => ModuleHandle.SetControllerValue(11, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 4 Volume
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public int GetVolume4() => Module.GetControllerValue(12, ValueScalingType.Displayed);
+        public int GetVolume4() => ModuleHandle.GetControllerValue(12, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 4 Volume
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public void SetVolume4(int value) => Module.SetControllerValue(12, value, ValueScalingType.Displayed);
+        public void SetVolume4(int value) => ModuleHandle.SetControllerValue(12, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 5 Volume
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public int GetVolume5() => Module.GetControllerValue(13, ValueScalingType.Displayed);
+        public int GetVolume5() => ModuleHandle.GetControllerValue(13, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 5 Volume
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public void SetVolume5(int value) => Module.SetControllerValue(13, value, ValueScalingType.Displayed);
+        public void SetVolume5(int value) => ModuleHandle.SetControllerValue(13, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 1 Volume scaling per key
         /// <para> Value range: -128 to 128 </para>
         /// </summary>
-        public int GetVolumeScalingPerKey1() => Module.GetControllerValue(64, ValueScalingType.Displayed);
+        public int GetVolumeScalingPerKey1() => ModuleHandle.GetControllerValue(64, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 1 Volume scaling per key
         /// <para> Value range: -128 to 128 </para>
         /// </summary>
-        public void SetVolumeScalingPerKey1(int value) => Module.SetControllerValue(64, value, ValueScalingType.Displayed);
+        public void SetVolumeScalingPerKey1(int value) => ModuleHandle.SetControllerValue(64, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 2 Volume scaling per key
         /// <para> Value range: -128 to 128 </para>
         /// </summary>
-        public int GetVolumeScalingPerKey2() => Module.GetControllerValue(65, ValueScalingType.Displayed);
+        public int GetVolumeScalingPerKey2() => ModuleHandle.GetControllerValue(65, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 2 Volume scaling per key
         /// <para> Value range: -128 to 128 </para>
         /// </summary>
-        public void SetVolumeScalingPerKey2(int value) => Module.SetControllerValue(65, value, ValueScalingType.Displayed);
+        public void SetVolumeScalingPerKey2(int value) => ModuleHandle.SetControllerValue(65, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 3 Volume scaling per key
         /// <para> Value range: -128 to 128 </para>
         /// </summary>
-        public int GetVolumeScalingPerKey3() => Module.GetControllerValue(66, ValueScalingType.Displayed);
+        public int GetVolumeScalingPerKey3() => ModuleHandle.GetControllerValue(66, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 3 Volume scaling per key
         /// <para> Value range: -128 to 128 </para>
         /// </summary>
-        public void SetVolumeScalingPerKey3(int value) => Module.SetControllerValue(66, value, ValueScalingType.Displayed);
+        public void SetVolumeScalingPerKey3(int value) => ModuleHandle.SetControllerValue(66, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 4 Volume scaling per key
         /// <para> Value range: -128 to 128 </para>
         /// </summary>
-        public int GetVolumeScalingPerKey4() => Module.GetControllerValue(67, ValueScalingType.Displayed);
+        public int GetVolumeScalingPerKey4() => ModuleHandle.GetControllerValue(67, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 4 Volume scaling per key
         /// <para> Value range: -128 to 128 </para>
         /// </summary>
-        public void SetVolumeScalingPerKey4(int value) => Module.SetControllerValue(67, value, ValueScalingType.Displayed);
+        public void SetVolumeScalingPerKey4(int value) => ModuleHandle.SetControllerValue(67, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 5 Volume scaling per key
         /// <para> Value range: -128 to 128 </para>
         /// </summary>
-        public int GetVolumeScalingPerKey5() => Module.GetControllerValue(68, ValueScalingType.Displayed);
+        public int GetVolumeScalingPerKey5() => ModuleHandle.GetControllerValue(68, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 5 Volume scaling per key
         /// <para> Value range: -128 to 128 </para>
         /// </summary>
-        public void SetVolumeScalingPerKey5(int value) => Module.SetControllerValue(68, value, ValueScalingType.Displayed);
+        public void SetVolumeScalingPerKey5(int value) => ModuleHandle.SetControllerValue(68, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 1 Waveform
         /// <para> Possible values: Custom, Triangle, Triangle3, Saw, Saw3, Square, Sin, Hsin, Asin, Sin3 </para>
         /// </summary>
-        public FMXWaveform GetWaveform1() => (FMXWaveform)Module.GetControllerValue(74, ValueScalingType.Displayed);
+        public FMXWaveform GetWaveform1() => (FMXWaveform)ModuleHandle.GetControllerValue(74, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 1 Waveform
         /// <para> Possible values: Custom, Triangle, Triangle3, Saw, Saw3, Square, Sin, Hsin, Asin, Sin3 </para>
         /// </summary>
-        public void SetWaveform1(FMXWaveform value) => Module.SetControllerValue(74, (int)value, ValueScalingType.Displayed);
+        public void SetWaveform1(FMXWaveform value) => ModuleHandle.SetControllerValue(74, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 2 Waveform
         /// <para> Possible values: Custom, Triangle, Triangle3, Saw, Saw3, Square, Sin, Hsin, Asin, Sin3 </para>
         /// </summary>
-        public FMXWaveform GetWaveform2() => (FMXWaveform)Module.GetControllerValue(75, ValueScalingType.Displayed);
+        public FMXWaveform GetWaveform2() => (FMXWaveform)ModuleHandle.GetControllerValue(75, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 2 Waveform
         /// <para> Possible values: Custom, Triangle, Triangle3, Saw, Saw3, Square, Sin, Hsin, Asin, Sin3 </para>
         /// </summary>
-        public void SetWaveform2(FMXWaveform value) => Module.SetControllerValue(75, (int)value, ValueScalingType.Displayed);
+        public void SetWaveform2(FMXWaveform value) => ModuleHandle.SetControllerValue(75, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 3 Waveform
         /// <para> Possible values: Custom, Triangle, Triangle3, Saw, Saw3, Square, Sin, Hsin, Asin, Sin3 </para>
         /// </summary>
-        public FMXWaveform GetWaveform3() => (FMXWaveform)Module.GetControllerValue(76, ValueScalingType.Displayed);
+        public FMXWaveform GetWaveform3() => (FMXWaveform)ModuleHandle.GetControllerValue(76, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 3 Waveform
         /// <para> Possible values: Custom, Triangle, Triangle3, Saw, Saw3, Square, Sin, Hsin, Asin, Sin3 </para>
         /// </summary>
-        public void SetWaveform3(FMXWaveform value) => Module.SetControllerValue(76, (int)value, ValueScalingType.Displayed);
+        public void SetWaveform3(FMXWaveform value) => ModuleHandle.SetControllerValue(76, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 4 Waveform
         /// <para> Possible values: Custom, Triangle, Triangle3, Saw, Saw3, Square, Sin, Hsin, Asin, Sin3 </para>
         /// </summary>
-        public FMXWaveform GetWaveform4() => (FMXWaveform)Module.GetControllerValue(77, ValueScalingType.Displayed);
+        public FMXWaveform GetWaveform4() => (FMXWaveform)ModuleHandle.GetControllerValue(77, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 4 Waveform
         /// <para> Possible values: Custom, Triangle, Triangle3, Saw, Saw3, Square, Sin, Hsin, Asin, Sin3 </para>
         /// </summary>
-        public void SetWaveform4(FMXWaveform value) => Module.SetControllerValue(77, (int)value, ValueScalingType.Displayed);
+        public void SetWaveform4(FMXWaveform value) => ModuleHandle.SetControllerValue(77, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 5 Waveform
         /// <para> Possible values: Custom, Triangle, Triangle3, Saw, Saw3, Square, Sin, Hsin, Asin, Sin3 </para>
         /// </summary>
-        public FMXWaveform GetWaveform5() => (FMXWaveform)Module.GetControllerValue(78, ValueScalingType.Displayed);
+        public FMXWaveform GetWaveform5() => (FMXWaveform)ModuleHandle.GetControllerValue(78, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: 5 Waveform
         /// <para> Possible values: Custom, Triangle, Triangle3, Saw, Saw3, Square, Sin, Hsin, Asin, Sin3 </para>
         /// </summary>
-        public void SetWaveform5(FMXWaveform value) => Module.SetControllerValue(78, (int)value, ValueScalingType.Displayed);
+        public void SetWaveform5(FMXWaveform value) => ModuleHandle.SetControllerValue(78, (int)value, ValueScalingType.Displayed);
 
         #endregion controllers
 
@@ -5197,7 +5197,7 @@ namespace SunSharp.ObjectWrapper.Modules
             if (buffer.Length < 256)
                 throw new System.ArgumentException("Buffer must be at least of size 256");
 
-            Module.ReadCurve(0, buffer);
+            ModuleHandle.ReadCurve(0, buffer);
         }
 
         /// <summary>
@@ -5210,7 +5210,7 @@ namespace SunSharp.ObjectWrapper.Modules
             if (buffer.Length < 256)
                 throw new System.ArgumentException("Buffer must be at least of size 256");
 
-            Module.WriteCurve(0, buffer);
+            ModuleHandle.WriteCurve(0, buffer);
         }
 
         #endregion curves
@@ -5219,11 +5219,11 @@ namespace SunSharp.ObjectWrapper.Modules
 
     public struct GeneratorModuleHandle : IModuleHandleWrapper
     {
-        public ModuleHandle Module { get; private set; }
+        public ModuleHandle ModuleHandle { get; private set; }
 
         public GeneratorModuleHandle(ModuleHandle module)
         {
-            Module = module;
+            ModuleHandle = module;
         }
 
 
@@ -5233,132 +5233,132 @@ namespace SunSharp.ObjectWrapper.Modules
         /// Original name: Attack
         /// <para> Value range: 0 to 512 </para>
         /// </summary>
-        public int GetAttack() => Module.GetControllerValue(3, ValueScalingType.Displayed);
+        public int GetAttack() => ModuleHandle.GetControllerValue(3, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Attack
         /// <para> Value range: 0 to 512 </para>
         /// </summary>
-        public void SetAttack(int value) => Module.SetControllerValue(3, value, ValueScalingType.Displayed);
+        public void SetAttack(int value) => ModuleHandle.SetControllerValue(3, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Duty cycle
         /// <para> Value range: 0 to 1022 </para>
         /// </summary>
-        public int GetDutyCycle() => Module.GetControllerValue(9, ValueScalingType.Displayed);
+        public int GetDutyCycle() => ModuleHandle.GetControllerValue(9, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Duty cycle
         /// <para> Value range: 0 to 1022 </para>
         /// </summary>
-        public void SetDutyCycle(int value) => Module.SetControllerValue(9, value, ValueScalingType.Displayed);
+        public void SetDutyCycle(int value) => ModuleHandle.SetControllerValue(9, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Freq.modulation by input
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public int GetFreqModulationByInput() => Module.GetControllerValue(8, ValueScalingType.Displayed);
+        public int GetFreqModulationByInput() => ModuleHandle.GetControllerValue(8, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Freq.modulation by input
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public void SetFreqModulationByInput(int value) => Module.SetControllerValue(8, value, ValueScalingType.Displayed);
+        public void SetFreqModulationByInput(int value) => ModuleHandle.SetControllerValue(8, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Mode
         /// <para> Possible values: Stereo, Mono </para>
         /// </summary>
-        public Channels GetMode() => (Channels)Module.GetControllerValue(6, ValueScalingType.Displayed);
+        public Channels GetMode() => (Channels)ModuleHandle.GetControllerValue(6, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Mode
         /// <para> Possible values: Stereo, Mono </para>
         /// </summary>
-        public void SetMode(Channels value) => Module.SetControllerValue(6, (int)value, ValueScalingType.Displayed);
+        public void SetMode(Channels value) => ModuleHandle.SetControllerValue(6, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Panning
         /// <para> Value range: -128 to 128 </para>
         /// </summary>
-        public int GetPanning() => Module.GetControllerValue(2, ValueScalingType.Displayed);
+        public int GetPanning() => ModuleHandle.GetControllerValue(2, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Panning
         /// <para> Value range: -128 to 128 </para>
         /// </summary>
-        public void SetPanning(int value) => Module.SetControllerValue(2, value, ValueScalingType.Displayed);
+        public void SetPanning(int value) => ModuleHandle.SetControllerValue(2, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Polyphony
         /// <para> Value range: 1 to 16 </para>
         /// </summary>
-        public int GetPolyphony() => Module.GetControllerValue(5, ValueScalingType.Displayed);
+        public int GetPolyphony() => ModuleHandle.GetControllerValue(5, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Polyphony
         /// <para> Value range: 1 to 16 </para>
         /// </summary>
-        public void SetPolyphony(int value) => Module.SetControllerValue(5, value, ValueScalingType.Displayed);
+        public void SetPolyphony(int value) => ModuleHandle.SetControllerValue(5, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Release
         /// <para> Value range: 0 to 512 </para>
         /// </summary>
-        public int GetRelease() => Module.GetControllerValue(4, ValueScalingType.Displayed);
+        public int GetRelease() => ModuleHandle.GetControllerValue(4, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Release
         /// <para> Value range: 0 to 512 </para>
         /// </summary>
-        public void SetRelease(int value) => Module.SetControllerValue(4, value, ValueScalingType.Displayed);
+        public void SetRelease(int value) => ModuleHandle.SetControllerValue(4, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Sustain
         /// <para> Possible values: Off, On </para>
         /// </summary>
-        public Toggle GetSustain() => (Toggle)Module.GetControllerValue(7, ValueScalingType.Displayed);
+        public Toggle GetSustain() => (Toggle)ModuleHandle.GetControllerValue(7, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Sustain
         /// <para> Possible values: Off, On </para>
         /// </summary>
-        public void SetSustain(Toggle value) => Module.SetControllerValue(7, (int)value, ValueScalingType.Displayed);
+        public void SetSustain(Toggle value) => ModuleHandle.SetControllerValue(7, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Volume
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public int GetVolume() => Module.GetControllerValue(0, ValueScalingType.Displayed);
+        public int GetVolume() => ModuleHandle.GetControllerValue(0, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Volume
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public void SetVolume(int value) => Module.SetControllerValue(0, value, ValueScalingType.Displayed);
+        public void SetVolume(int value) => ModuleHandle.SetControllerValue(0, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Waveform
         /// <para> Possible values: Triangle, Saw, Square, NoiseSampler, Drawn, Sin, Hsin, Asin, Rsin </para>
         /// </summary>
-        public GeneratorWaveform GetWaveform() => (GeneratorWaveform)Module.GetControllerValue(1, ValueScalingType.Displayed);
+        public GeneratorWaveform GetWaveform() => (GeneratorWaveform)ModuleHandle.GetControllerValue(1, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Waveform
         /// <para> Possible values: Triangle, Saw, Square, NoiseSampler, Drawn, Sin, Hsin, Asin, Rsin </para>
         /// </summary>
-        public void SetWaveform(GeneratorWaveform value) => Module.SetControllerValue(1, (int)value, ValueScalingType.Displayed);
+        public void SetWaveform(GeneratorWaveform value) => ModuleHandle.SetControllerValue(1, (int)value, ValueScalingType.Displayed);
 
         #endregion controllers
     }
 
     public struct GlideModuleHandle : IModuleHandleWrapper
     {
-        public ModuleHandle Module { get; private set; }
+        public ModuleHandle ModuleHandle { get; private set; }
 
         public GlideModuleHandle(ModuleHandle module)
         {
-            Module = module;
+            ModuleHandle = module;
         }
 
 
@@ -5368,96 +5368,96 @@ namespace SunSharp.ObjectWrapper.Modules
         /// Original name: Pitch
         /// <para> Value range: -600 to 600 </para>
         /// </summary>
-        public int GetPitch() => Module.GetControllerValue(4, ValueScalingType.Displayed);
+        public int GetPitch() => ModuleHandle.GetControllerValue(4, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Pitch
         /// <para> Value range: -600 to 600 </para>
         /// </summary>
-        public void SetPitch(int value) => Module.SetControllerValue(4, value, ValueScalingType.Displayed);
+        public void SetPitch(int value) => ModuleHandle.SetControllerValue(4, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Pitch scale
         /// <para> Value range: 0 to 200 </para>
         /// </summary>
-        public int GetPitchScale() => Module.GetControllerValue(5, ValueScalingType.Displayed);
+        public int GetPitchScale() => ModuleHandle.GetControllerValue(5, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Pitch scale
         /// <para> Value range: 0 to 200 </para>
         /// </summary>
-        public void SetPitchScale(int value) => Module.SetControllerValue(5, value, ValueScalingType.Displayed);
+        public void SetPitchScale(int value) => ModuleHandle.SetControllerValue(5, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Polyphony
         /// <para> Possible values: Off, On </para>
         /// </summary>
-        public Toggle GetPolyphony() => (Toggle)Module.GetControllerValue(3, ValueScalingType.Displayed);
+        public Toggle GetPolyphony() => (Toggle)ModuleHandle.GetControllerValue(3, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Polyphony
         /// <para> Possible values: Off, On </para>
         /// </summary>
-        public void SetPolyphony(Toggle value) => Module.SetControllerValue(3, (int)value, ValueScalingType.Displayed);
+        public void SetPolyphony(Toggle value) => ModuleHandle.SetControllerValue(3, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Reset
         /// <para> Possible values: Off, On </para>
         /// </summary>
-        public Toggle GetReset() => (Toggle)Module.GetControllerValue(6, ValueScalingType.Displayed);
+        public Toggle GetReset() => (Toggle)ModuleHandle.GetControllerValue(6, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Reset
         /// <para> Possible values: Off, On </para>
         /// </summary>
-        public void SetReset(Toggle value) => Module.SetControllerValue(6, (int)value, ValueScalingType.Displayed);
+        public void SetReset(Toggle value) => ModuleHandle.SetControllerValue(6, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Reset on 1st note
         /// <para> Possible values: Off, On </para>
         /// </summary>
-        public Toggle GetResetOnFirstNote() => (Toggle)Module.GetControllerValue(2, ValueScalingType.Displayed);
+        public Toggle GetResetOnFirstNote() => (Toggle)ModuleHandle.GetControllerValue(2, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Reset on 1st note
         /// <para> Possible values: Off, On </para>
         /// </summary>
-        public void SetResetOnFirstNote(Toggle value) => Module.SetControllerValue(2, (int)value, ValueScalingType.Displayed);
+        public void SetResetOnFirstNote(Toggle value) => ModuleHandle.SetControllerValue(2, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Response
         /// <para> Value range: 0 to 1000 </para>
         /// </summary>
-        public int GetResponse() => Module.GetControllerValue(0, ValueScalingType.Displayed);
+        public int GetResponse() => ModuleHandle.GetControllerValue(0, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Response
         /// <para> Value range: 0 to 1000 </para>
         /// </summary>
-        public void SetResponse(int value) => Module.SetControllerValue(0, value, ValueScalingType.Displayed);
+        public void SetResponse(int value) => ModuleHandle.SetControllerValue(0, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Sample rate
         /// <para> Value range: 1 to 32768 </para>
         /// </summary>
-        public int GetSampleRate() => Module.GetControllerValue(1, ValueScalingType.Displayed);
+        public int GetSampleRate() => ModuleHandle.GetControllerValue(1, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Sample rate
         /// <para> Value range: 1 to 32768 </para>
         /// </summary>
-        public void SetSampleRate(int value) => Module.SetControllerValue(1, value, ValueScalingType.Displayed);
+        public void SetSampleRate(int value) => ModuleHandle.SetControllerValue(1, value, ValueScalingType.Displayed);
 
         #endregion controllers
     }
 
     public struct GPIOModuleHandle : IModuleHandleWrapper
     {
-        public ModuleHandle Module { get; private set; }
+        public ModuleHandle ModuleHandle { get; private set; }
 
         public GPIOModuleHandle(ModuleHandle module)
         {
-            Module = module;
+            ModuleHandle = module;
         }
 
 
@@ -5467,96 +5467,96 @@ namespace SunSharp.ObjectWrapper.Modules
         /// Original name: In
         /// <para> Possible values: Off, On </para>
         /// </summary>
-        public Toggle GetIn() => (Toggle)Module.GetControllerValue(3, ValueScalingType.Displayed);
+        public Toggle GetIn() => (Toggle)ModuleHandle.GetControllerValue(3, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: In
         /// <para> Possible values: Off, On </para>
         /// </summary>
-        public void SetIn(Toggle value) => Module.SetControllerValue(3, (int)value, ValueScalingType.Displayed);
+        public void SetIn(Toggle value) => ModuleHandle.SetControllerValue(3, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: In amplitude
         /// <para> Value range: 0 to 100 </para>
         /// </summary>
-        public int GetInAmplitude() => Module.GetControllerValue(6, ValueScalingType.Displayed);
+        public int GetInAmplitude() => ModuleHandle.GetControllerValue(6, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: In amplitude
         /// <para> Value range: 0 to 100 </para>
         /// </summary>
-        public void SetInAmplitude(int value) => Module.SetControllerValue(6, value, ValueScalingType.Displayed);
+        public void SetInAmplitude(int value) => ModuleHandle.SetControllerValue(6, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: In note
         /// <para> Value range: 0 to 128 </para>
         /// </summary>
-        public int GetInNote() => Module.GetControllerValue(5, ValueScalingType.Displayed);
+        public int GetInNote() => ModuleHandle.GetControllerValue(5, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: In note
         /// <para> Value range: 0 to 128 </para>
         /// </summary>
-        public void SetInNote(int value) => Module.SetControllerValue(5, value, ValueScalingType.Displayed);
+        public void SetInNote(int value) => ModuleHandle.SetControllerValue(5, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: In pin
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public int GetInPin() => Module.GetControllerValue(4, ValueScalingType.Displayed);
+        public int GetInPin() => ModuleHandle.GetControllerValue(4, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: In pin
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public void SetInPin(int value) => Module.SetControllerValue(4, value, ValueScalingType.Displayed);
+        public void SetInPin(int value) => ModuleHandle.SetControllerValue(4, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Out
         /// <para> Possible values: Off, On </para>
         /// </summary>
-        public Toggle GetOut() => (Toggle)Module.GetControllerValue(0, ValueScalingType.Displayed);
+        public Toggle GetOut() => (Toggle)ModuleHandle.GetControllerValue(0, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Out
         /// <para> Possible values: Off, On </para>
         /// </summary>
-        public void SetOut(Toggle value) => Module.SetControllerValue(0, (int)value, ValueScalingType.Displayed);
+        public void SetOut(Toggle value) => ModuleHandle.SetControllerValue(0, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Out pin
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public int GetOutPin() => Module.GetControllerValue(1, ValueScalingType.Displayed);
+        public int GetOutPin() => ModuleHandle.GetControllerValue(1, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Out pin
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public void SetOutPin(int value) => Module.SetControllerValue(1, value, ValueScalingType.Displayed);
+        public void SetOutPin(int value) => ModuleHandle.SetControllerValue(1, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Out threshold
         /// <para> Value range: 0 to 100 </para>
         /// </summary>
-        public int GetOutThreshold() => Module.GetControllerValue(2, ValueScalingType.Displayed);
+        public int GetOutThreshold() => ModuleHandle.GetControllerValue(2, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Out threshold
         /// <para> Value range: 0 to 100 </para>
         /// </summary>
-        public void SetOutThreshold(int value) => Module.SetControllerValue(2, value, ValueScalingType.Displayed);
+        public void SetOutThreshold(int value) => ModuleHandle.SetControllerValue(2, value, ValueScalingType.Displayed);
 
         #endregion controllers
     }
 
     public struct InputModuleHandle : IModuleHandleWrapper
     {
-        public ModuleHandle Module { get; private set; }
+        public ModuleHandle ModuleHandle { get; private set; }
 
         public InputModuleHandle(ModuleHandle module)
         {
-            Module = module;
+            ModuleHandle = module;
         }
 
 
@@ -5566,36 +5566,36 @@ namespace SunSharp.ObjectWrapper.Modules
         /// Original name: Channels
         /// <para> Possible values: Mono, Stereo </para>
         /// </summary>
-        public ChannelsInverted GetChannels() => (ChannelsInverted)Module.GetControllerValue(1, ValueScalingType.Displayed);
+        public ChannelsInverted GetChannels() => (ChannelsInverted)ModuleHandle.GetControllerValue(1, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Channels
         /// <para> Possible values: Mono, Stereo </para>
         /// </summary>
-        public void SetChannels(ChannelsInverted value) => Module.SetControllerValue(1, (int)value, ValueScalingType.Displayed);
+        public void SetChannels(ChannelsInverted value) => ModuleHandle.SetControllerValue(1, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Volume
         /// <para> Value range: 0 to 1024 </para>
         /// </summary>
-        public int GetVolume() => Module.GetControllerValue(0, ValueScalingType.Displayed);
+        public int GetVolume() => ModuleHandle.GetControllerValue(0, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Volume
         /// <para> Value range: 0 to 1024 </para>
         /// </summary>
-        public void SetVolume(int value) => Module.SetControllerValue(0, value, ValueScalingType.Displayed);
+        public void SetVolume(int value) => ModuleHandle.SetControllerValue(0, value, ValueScalingType.Displayed);
 
         #endregion controllers
     }
 
     public struct KickerModuleHandle : IModuleHandleWrapper
     {
-        public ModuleHandle Module { get; private set; }
+        public ModuleHandle ModuleHandle { get; private set; }
 
         public KickerModuleHandle(ModuleHandle module)
         {
-            Module = module;
+            ModuleHandle = module;
         }
 
 
@@ -5605,120 +5605,120 @@ namespace SunSharp.ObjectWrapper.Modules
         /// Original name: Acceleration
         /// <para> Value range: 0 to 1024 </para>
         /// </summary>
-        public int GetAcceleration() => Module.GetControllerValue(6, ValueScalingType.Displayed);
+        public int GetAcceleration() => ModuleHandle.GetControllerValue(6, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Acceleration
         /// <para> Value range: 0 to 1024 </para>
         /// </summary>
-        public void SetAcceleration(int value) => Module.SetControllerValue(6, value, ValueScalingType.Displayed);
+        public void SetAcceleration(int value) => ModuleHandle.SetControllerValue(6, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Attack
         /// <para> Value range: 0 to 512 </para>
         /// </summary>
-        public int GetAttack() => Module.GetControllerValue(3, ValueScalingType.Displayed);
+        public int GetAttack() => ModuleHandle.GetControllerValue(3, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Attack
         /// <para> Value range: 0 to 512 </para>
         /// </summary>
-        public void SetAttack(int value) => Module.SetControllerValue(3, value, ValueScalingType.Displayed);
+        public void SetAttack(int value) => ModuleHandle.SetControllerValue(3, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Boost
         /// <para> Value range: 0 to 1024 </para>
         /// </summary>
-        public int GetBoost() => Module.GetControllerValue(5, ValueScalingType.Displayed);
+        public int GetBoost() => ModuleHandle.GetControllerValue(5, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Boost
         /// <para> Value range: 0 to 1024 </para>
         /// </summary>
-        public void SetBoost(int value) => Module.SetControllerValue(5, value, ValueScalingType.Displayed);
+        public void SetBoost(int value) => ModuleHandle.SetControllerValue(5, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: No click
         /// <para> Possible values: Off, On </para>
         /// </summary>
-        public Toggle GetNoClick() => (Toggle)Module.GetControllerValue(8, ValueScalingType.Displayed);
+        public Toggle GetNoClick() => (Toggle)ModuleHandle.GetControllerValue(8, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: No click
         /// <para> Possible values: Off, On </para>
         /// </summary>
-        public void SetNoClick(Toggle value) => Module.SetControllerValue(8, (int)value, ValueScalingType.Displayed);
+        public void SetNoClick(Toggle value) => ModuleHandle.SetControllerValue(8, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Panning
         /// <para> Value range: -128 to 128 </para>
         /// </summary>
-        public int GetPanning() => Module.GetControllerValue(2, ValueScalingType.Displayed);
+        public int GetPanning() => ModuleHandle.GetControllerValue(2, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Panning
         /// <para> Value range: -128 to 128 </para>
         /// </summary>
-        public void SetPanning(int value) => Module.SetControllerValue(2, value, ValueScalingType.Displayed);
+        public void SetPanning(int value) => ModuleHandle.SetControllerValue(2, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Polyphony
         /// <para> Value range: 1 to 4 </para>
         /// </summary>
-        public int GetPolyphony() => Module.GetControllerValue(7, ValueScalingType.Displayed);
+        public int GetPolyphony() => ModuleHandle.GetControllerValue(7, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Polyphony
         /// <para> Value range: 1 to 4 </para>
         /// </summary>
-        public void SetPolyphony(int value) => Module.SetControllerValue(7, value, ValueScalingType.Displayed);
+        public void SetPolyphony(int value) => ModuleHandle.SetControllerValue(7, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Release
         /// <para> Value range: 0 to 512 </para>
         /// </summary>
-        public int GetRelease() => Module.GetControllerValue(4, ValueScalingType.Displayed);
+        public int GetRelease() => ModuleHandle.GetControllerValue(4, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Release
         /// <para> Value range: 0 to 512 </para>
         /// </summary>
-        public void SetRelease(int value) => Module.SetControllerValue(4, value, ValueScalingType.Displayed);
+        public void SetRelease(int value) => ModuleHandle.SetControllerValue(4, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Volume
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public int GetVolume() => Module.GetControllerValue(0, ValueScalingType.Displayed);
+        public int GetVolume() => ModuleHandle.GetControllerValue(0, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Volume
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public void SetVolume(int value) => Module.SetControllerValue(0, value, ValueScalingType.Displayed);
+        public void SetVolume(int value) => ModuleHandle.SetControllerValue(0, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Waveform
         /// <para> Possible values: Triangle, Square, Sin </para>
         /// </summary>
-        public KickerWaveform GetWaveform() => (KickerWaveform)Module.GetControllerValue(1, ValueScalingType.Displayed);
+        public KickerWaveform GetWaveform() => (KickerWaveform)ModuleHandle.GetControllerValue(1, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Waveform
         /// <para> Possible values: Triangle, Square, Sin </para>
         /// </summary>
-        public void SetWaveform(KickerWaveform value) => Module.SetControllerValue(1, (int)value, ValueScalingType.Displayed);
+        public void SetWaveform(KickerWaveform value) => ModuleHandle.SetControllerValue(1, (int)value, ValueScalingType.Displayed);
 
         #endregion controllers
     }
 
     public struct LFOModuleHandle : IModuleHandleWrapper
     {
-        public ModuleHandle Module { get; private set; }
+        public ModuleHandle ModuleHandle { get; private set; }
 
         public LFOModuleHandle(ModuleHandle module)
         {
-            Module = module;
+            ModuleHandle = module;
         }
 
 
@@ -5728,168 +5728,168 @@ namespace SunSharp.ObjectWrapper.Modules
         /// Original name: Amplitude
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public int GetAmplitude() => Module.GetControllerValue(2, ValueScalingType.Displayed);
+        public int GetAmplitude() => ModuleHandle.GetControllerValue(2, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Amplitude
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public void SetAmplitude(int value) => Module.SetControllerValue(2, value, ValueScalingType.Displayed);
+        public void SetAmplitude(int value) => ModuleHandle.SetControllerValue(2, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Channels
         /// <para> Possible values: Stereo, Mono </para>
         /// </summary>
-        public Channels GetChannels() => (Channels)Module.GetControllerValue(6, ValueScalingType.Displayed);
+        public Channels GetChannels() => (Channels)ModuleHandle.GetControllerValue(6, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Channels
         /// <para> Possible values: Stereo, Mono </para>
         /// </summary>
-        public void SetChannels(Channels value) => Module.SetControllerValue(6, (int)value, ValueScalingType.Displayed);
+        public void SetChannels(Channels value) => ModuleHandle.SetControllerValue(6, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Duty cycle
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public int GetDutyCycle() => Module.GetControllerValue(8, ValueScalingType.Displayed);
+        public int GetDutyCycle() => ModuleHandle.GetControllerValue(8, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Duty cycle
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public void SetDutyCycle(int value) => Module.SetControllerValue(8, value, ValueScalingType.Displayed);
+        public void SetDutyCycle(int value) => ModuleHandle.SetControllerValue(8, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Freq
         /// <para> Value range: 1 to 256 </para>
         /// </summary>
-        public int GetFreq() => Module.GetControllerValue(3, ValueScalingType.Displayed);
+        public int GetFreq() => ModuleHandle.GetControllerValue(3, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Freq
         /// <para> Value range: 1 to 256 </para>
         /// </summary>
-        public void SetFreq(int value) => Module.SetControllerValue(3, value, ValueScalingType.Displayed);
+        public void SetFreq(int value) => ModuleHandle.SetControllerValue(3, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Freq scale
         /// <para> Value range: 0 to 200 </para>
         /// </summary>
-        public int GetFreqScale() => Module.GetControllerValue(10, ValueScalingType.Displayed);
+        public int GetFreqScale() => ModuleHandle.GetControllerValue(10, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Freq scale
         /// <para> Value range: 0 to 200 </para>
         /// </summary>
-        public void SetFreqScale(int value) => Module.SetControllerValue(10, value, ValueScalingType.Displayed);
+        public void SetFreqScale(int value) => ModuleHandle.SetControllerValue(10, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Frequency unit
         /// <para> Possible values: HzDividedBy64, Millisecond, Hz, Tick, Line, HalfLine, OneThirdLine </para>
         /// </summary>
-        public LFOFrequencyUnit GetFrequencyUnit() => (LFOFrequencyUnit)Module.GetControllerValue(7, ValueScalingType.Displayed);
+        public LFOFrequencyUnit GetFrequencyUnit() => (LFOFrequencyUnit)ModuleHandle.GetControllerValue(7, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Frequency unit
         /// <para> Possible values: HzDividedBy64, Millisecond, Hz, Tick, Line, HalfLine, OneThirdLine </para>
         /// </summary>
-        public void SetFrequencyUnit(LFOFrequencyUnit value) => Module.SetControllerValue(7, (int)value, ValueScalingType.Displayed);
+        public void SetFrequencyUnit(LFOFrequencyUnit value) => ModuleHandle.SetControllerValue(7, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Generator
         /// <para> Possible values: Off, On </para>
         /// </summary>
-        public Toggle GetGenerator() => (Toggle)Module.GetControllerValue(9, ValueScalingType.Displayed);
+        public Toggle GetGenerator() => (Toggle)ModuleHandle.GetControllerValue(9, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Generator
         /// <para> Possible values: Off, On </para>
         /// </summary>
-        public void SetGenerator(Toggle value) => Module.SetControllerValue(9, (int)value, ValueScalingType.Displayed);
+        public void SetGenerator(Toggle value) => ModuleHandle.SetControllerValue(9, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Type
         /// <para> Possible values: Amplitude, Panning </para>
         /// </summary>
-        public LFOType GetLfoType() => (LFOType)Module.GetControllerValue(1, ValueScalingType.Displayed);
+        public LFOType GetLfoType() => (LFOType)ModuleHandle.GetControllerValue(1, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Type
         /// <para> Possible values: Amplitude, Panning </para>
         /// </summary>
-        public void SetLfoType(LFOType value) => Module.SetControllerValue(1, (int)value, ValueScalingType.Displayed);
+        public void SetLfoType(LFOType value) => ModuleHandle.SetControllerValue(1, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Set phase
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public int GetSetPhase() => Module.GetControllerValue(5, ValueScalingType.Displayed);
+        public int GetSetPhase() => ModuleHandle.GetControllerValue(5, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Set phase
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public void SetSetPhase(int value) => Module.SetControllerValue(5, value, ValueScalingType.Displayed);
+        public void SetSetPhase(int value) => ModuleHandle.SetControllerValue(5, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Sine quality
         /// <para> Possible values: Auto, Low, Middle, High </para>
         /// </summary>
-        public LFOSineQuality GetSineQuality() => (LFOSineQuality)Module.GetControllerValue(12, ValueScalingType.Displayed);
+        public LFOSineQuality GetSineQuality() => (LFOSineQuality)ModuleHandle.GetControllerValue(12, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Sine quality
         /// <para> Possible values: Auto, Low, Middle, High </para>
         /// </summary>
-        public void SetSineQuality(LFOSineQuality value) => Module.SetControllerValue(12, (int)value, ValueScalingType.Displayed);
+        public void SetSineQuality(LFOSineQuality value) => ModuleHandle.SetControllerValue(12, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Smooth transitions
         /// <para> Possible values: Off, Waveform </para>
         /// </summary>
-        public LFOSmoothTransitions GetSmoothTransitions() => (LFOSmoothTransitions)Module.GetControllerValue(11, ValueScalingType.Displayed);
+        public LFOSmoothTransitions GetSmoothTransitions() => (LFOSmoothTransitions)ModuleHandle.GetControllerValue(11, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Smooth transitions
         /// <para> Possible values: Off, Waveform </para>
         /// </summary>
-        public void SetSmoothTransitions(LFOSmoothTransitions value) => Module.SetControllerValue(11, (int)value, ValueScalingType.Displayed);
+        public void SetSmoothTransitions(LFOSmoothTransitions value) => ModuleHandle.SetControllerValue(11, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Volume
         /// <para> Value range: 0 to 512 </para>
         /// </summary>
-        public int GetVolume() => Module.GetControllerValue(0, ValueScalingType.Displayed);
+        public int GetVolume() => ModuleHandle.GetControllerValue(0, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Volume
         /// <para> Value range: 0 to 512 </para>
         /// </summary>
-        public void SetVolume(int value) => Module.SetControllerValue(0, value, ValueScalingType.Displayed);
+        public void SetVolume(int value) => ModuleHandle.SetControllerValue(0, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Waveform
         /// <para> Possible values: Sin, Square, Sin2, Saw, Saw2, Random, Triangle, RandomInterpolated </para>
         /// </summary>
-        public LFOWaveform GetWaveform() => (LFOWaveform)Module.GetControllerValue(4, ValueScalingType.Displayed);
+        public LFOWaveform GetWaveform() => (LFOWaveform)ModuleHandle.GetControllerValue(4, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Waveform
         /// <para> Possible values: Sin, Square, Sin2, Saw, Saw2, Random, Triangle, RandomInterpolated </para>
         /// </summary>
-        public void SetWaveform(LFOWaveform value) => Module.SetControllerValue(4, (int)value, ValueScalingType.Displayed);
+        public void SetWaveform(LFOWaveform value) => ModuleHandle.SetControllerValue(4, (int)value, ValueScalingType.Displayed);
 
         #endregion controllers
     }
 
     public struct LoopModuleHandle : IModuleHandleWrapper
     {
-        public ModuleHandle Module { get; private set; }
+        public ModuleHandle ModuleHandle { get; private set; }
 
         public LoopModuleHandle(ModuleHandle module)
         {
-            Module = module;
+            ModuleHandle = module;
         }
 
 
@@ -5899,120 +5899,120 @@ namespace SunSharp.ObjectWrapper.Modules
         /// Original name: Channels
         /// <para> Possible values: Mono, Stereo </para>
         /// </summary>
-        public ChannelsInverted GetChannels() => (ChannelsInverted)Module.GetControllerValue(2, ValueScalingType.Displayed);
+        public ChannelsInverted GetChannels() => (ChannelsInverted)ModuleHandle.GetControllerValue(2, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Channels
         /// <para> Possible values: Mono, Stereo </para>
         /// </summary>
-        public void SetChannels(ChannelsInverted value) => Module.SetControllerValue(2, (int)value, ValueScalingType.Displayed);
+        public void SetChannels(ChannelsInverted value) => ModuleHandle.SetControllerValue(2, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Length
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public int GetDelay() => Module.GetControllerValue(1, ValueScalingType.Displayed);
+        public int GetDelay() => ModuleHandle.GetControllerValue(1, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Length
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public void SetDelay(int value) => Module.SetControllerValue(1, value, ValueScalingType.Displayed);
+        public void SetDelay(int value) => ModuleHandle.SetControllerValue(1, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Length unit
         /// <para> Possible values: LineDivBy128, Line, HalfLine, OneThirdLine, Tick, Millisecond, Hz </para>
         /// </summary>
-        public LoopTimeUnit GetLengthUnit() => (LoopTimeUnit)Module.GetControllerValue(5, ValueScalingType.Displayed);
+        public LoopTimeUnit GetLengthUnit() => (LoopTimeUnit)ModuleHandle.GetControllerValue(5, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Length unit
         /// <para> Possible values: LineDivBy128, Line, HalfLine, OneThirdLine, Tick, Millisecond, Hz </para>
         /// </summary>
-        public void SetLengthUnit(LoopTimeUnit value) => Module.SetControllerValue(5, (int)value, ValueScalingType.Displayed);
+        public void SetLengthUnit(LoopTimeUnit value) => ModuleHandle.SetControllerValue(5, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Max buffer size
         /// <para> Value range: 1 to 240 </para>
         /// <para> Max buffer size in seconds </para>
         /// </summary>
-        public int GetMaxBufferSize() => Module.GetControllerValue(6, ValueScalingType.Displayed);
+        public int GetMaxBufferSize() => ModuleHandle.GetControllerValue(6, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Max buffer size
         /// <para> Value range: 1 to 240 </para>
         /// <para> Max buffer size in seconds </para>
         /// </summary>
-        public void SetMaxBufferSize(int value) => Module.SetControllerValue(6, value, ValueScalingType.Displayed);
+        public void SetMaxBufferSize(int value) => ModuleHandle.SetControllerValue(6, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Mode
         /// <para> Possible values: Normal, PingPong </para>
         /// </summary>
-        public LoopMode GetMode() => (LoopMode)Module.GetControllerValue(4, ValueScalingType.Displayed);
+        public LoopMode GetMode() => (LoopMode)ModuleHandle.GetControllerValue(4, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Mode
         /// <para> Possible values: Normal, PingPong </para>
         /// </summary>
-        public void SetMode(LoopMode value) => Module.SetControllerValue(4, (int)value, ValueScalingType.Displayed);
+        public void SetMode(LoopMode value) => ModuleHandle.SetControllerValue(4, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: On NoteON
         /// <para> Possible values: Restart, RestartCurrentIteration </para>
         /// </summary>
-        public LoopOnNoteOn GetOnNoteOn() => (LoopOnNoteOn)Module.GetControllerValue(7, ValueScalingType.Displayed);
+        public LoopOnNoteOn GetOnNoteOn() => (LoopOnNoteOn)ModuleHandle.GetControllerValue(7, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: On NoteON
         /// <para> Possible values: Restart, RestartCurrentIteration </para>
         /// </summary>
-        public void SetOnNoteOn(LoopOnNoteOn value) => Module.SetControllerValue(7, (int)value, ValueScalingType.Displayed);
+        public void SetOnNoteOn(LoopOnNoteOn value) => ModuleHandle.SetControllerValue(7, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Repeat (128=endless)
         /// <para> Value range: 0 to 128 </para>
         /// </summary>
-        public int GetRepeats() => Module.GetControllerValue(3, ValueScalingType.Displayed);
+        public int GetRepeats() => ModuleHandle.GetControllerValue(3, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Repeat (128=endless)
         /// <para> Value range: 0 to 128 </para>
         /// </summary>
-        public void SetRepeats(int value) => Module.SetControllerValue(3, value, ValueScalingType.Displayed);
+        public void SetRepeats(int value) => ModuleHandle.SetControllerValue(3, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Volume
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public int GetVolume() => Module.GetControllerValue(0, ValueScalingType.Displayed);
+        public int GetVolume() => ModuleHandle.GetControllerValue(0, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Volume
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public void SetVolume(int value) => Module.SetControllerValue(0, value, ValueScalingType.Displayed);
+        public void SetVolume(int value) => ModuleHandle.SetControllerValue(0, value, ValueScalingType.Displayed);
 
         #endregion controllers
     }
 
     public struct MetaModuleModuleHandle : IModuleHandleWrapper
     {
-        public ModuleHandle Module { get; private set; }
+        public ModuleHandle ModuleHandle { get; private set; }
 
         public MetaModuleModuleHandle(ModuleHandle module)
         {
-            Module = module;
+            ModuleHandle = module;
         }
 
 
         #region module type-specific methods
 
         /// <inheritdoc cref="ModuleHandle.LoadIntoMetaModule(string)"/>
-        public void LoadFile(string path) => Module.LoadIntoMetaModule(path);
+        public void LoadFile(string path) => ModuleHandle.LoadIntoMetaModule(path);
 
         /// <inheritdoc cref="ModuleHandle.LoadIntoMetaModule(byte[])"/>
-        public void LoadFile(byte[] data) => Module.LoadIntoMetaModule(data);
+        public void LoadFile(byte[] data) => ModuleHandle.LoadIntoMetaModule(data);
         #endregion module type-specific methods
 
 
@@ -6022,72 +6022,72 @@ namespace SunSharp.ObjectWrapper.Modules
         /// Original name: BPM (Beats Per Minute)
         /// <para> Value range: 1 to 1000 </para>
         /// </summary>
-        public int GetBPM() => Module.GetControllerValue(3, ValueScalingType.Displayed);
+        public int GetBPM() => ModuleHandle.GetControllerValue(3, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: BPM (Beats Per Minute)
         /// <para> Value range: 1 to 1000 </para>
         /// </summary>
-        public void SetBPM(int value) => Module.SetControllerValue(3, value, ValueScalingType.Displayed);
+        public void SetBPM(int value) => ModuleHandle.SetControllerValue(3, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Input module
         /// <para> Value range: 1 to 256 </para>
         /// </summary>
-        public int GetInputModule() => Module.GetControllerValue(1, ValueScalingType.Displayed);
+        public int GetInputModule() => ModuleHandle.GetControllerValue(1, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Input module
         /// <para> Value range: 1 to 256 </para>
         /// </summary>
-        public void SetInputModule(int value) => Module.SetControllerValue(1, value, ValueScalingType.Displayed);
+        public void SetInputModule(int value) => ModuleHandle.SetControllerValue(1, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Play patterns
         /// <para> Possible values: Off, OnRepeat, OnNoRepeat, OnRepeatEndless, OnNoRepeatEndless </para>
         /// </summary>
-        public MetaModulePatternMode GetPlayPatterns() => (MetaModulePatternMode)Module.GetControllerValue(2, ValueScalingType.Displayed);
+        public MetaModulePatternMode GetPlayPatterns() => (MetaModulePatternMode)ModuleHandle.GetControllerValue(2, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Play patterns
         /// <para> Possible values: Off, OnRepeat, OnNoRepeat, OnRepeatEndless, OnNoRepeatEndless </para>
         /// </summary>
-        public void SetPlayPatterns(MetaModulePatternMode value) => Module.SetControllerValue(2, (int)value, ValueScalingType.Displayed);
+        public void SetPlayPatterns(MetaModulePatternMode value) => ModuleHandle.SetControllerValue(2, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: TPL (Ticks Per Line)
         /// <para> Value range: 1 to 31 </para>
         /// </summary>
-        public int GetTPL() => Module.GetControllerValue(4, ValueScalingType.Displayed);
+        public int GetTPL() => ModuleHandle.GetControllerValue(4, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: TPL (Ticks Per Line)
         /// <para> Value range: 1 to 31 </para>
         /// </summary>
-        public void SetTPL(int value) => Module.SetControllerValue(4, value, ValueScalingType.Displayed);
+        public void SetTPL(int value) => ModuleHandle.SetControllerValue(4, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Volume
         /// <para> Value range: 0 to 1024 </para>
         /// </summary>
-        public int GetVolume() => Module.GetControllerValue(0, ValueScalingType.Displayed);
+        public int GetVolume() => ModuleHandle.GetControllerValue(0, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Volume
         /// <para> Value range: 0 to 1024 </para>
         /// </summary>
-        public void SetVolume(int value) => Module.SetControllerValue(0, value, ValueScalingType.Displayed);
+        public void SetVolume(int value) => ModuleHandle.SetControllerValue(0, value, ValueScalingType.Displayed);
 
         #endregion controllers
     }
 
     public struct ModulatorModuleHandle : IModuleHandleWrapper
     {
-        public ModuleHandle Module { get; private set; }
+        public ModuleHandle ModuleHandle { get; private set; }
 
         public ModulatorModuleHandle(ModuleHandle module)
         {
-            Module = module;
+            ModuleHandle = module;
         }
 
 
@@ -6097,48 +6097,48 @@ namespace SunSharp.ObjectWrapper.Modules
         /// Original name: Channels
         /// <para> Possible values: Stereo, Mono </para>
         /// </summary>
-        public Channels GetChannels() => (Channels)Module.GetControllerValue(2, ValueScalingType.Displayed);
+        public Channels GetChannels() => (Channels)ModuleHandle.GetControllerValue(2, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Channels
         /// <para> Possible values: Stereo, Mono </para>
         /// </summary>
-        public void SetChannels(Channels value) => Module.SetControllerValue(2, (int)value, ValueScalingType.Displayed);
+        public void SetChannels(Channels value) => ModuleHandle.SetControllerValue(2, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Modulation type
         /// <para> Possible values: Amplitude, Phase, PhaseAbsolute </para>
         /// </summary>
-        public ModulationType GetModulationType() => (ModulationType)Module.GetControllerValue(1, ValueScalingType.Displayed);
+        public ModulationType GetModulationType() => (ModulationType)ModuleHandle.GetControllerValue(1, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Modulation type
         /// <para> Possible values: Amplitude, Phase, PhaseAbsolute </para>
         /// </summary>
-        public void SetModulationType(ModulationType value) => Module.SetControllerValue(1, (int)value, ValueScalingType.Displayed);
+        public void SetModulationType(ModulationType value) => ModuleHandle.SetControllerValue(1, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Volume
         /// <para> Value range: 0 to 512 </para>
         /// </summary>
-        public int GetVolume() => Module.GetControllerValue(0, ValueScalingType.Displayed);
+        public int GetVolume() => ModuleHandle.GetControllerValue(0, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Volume
         /// <para> Value range: 0 to 512 </para>
         /// </summary>
-        public void SetVolume(int value) => Module.SetControllerValue(0, value, ValueScalingType.Displayed);
+        public void SetVolume(int value) => ModuleHandle.SetControllerValue(0, value, ValueScalingType.Displayed);
 
         #endregion controllers
     }
 
     public struct MultiControlModuleHandle : IModuleHandleWrapper
     {
-        public ModuleHandle Module { get; private set; }
+        public ModuleHandle ModuleHandle { get; private set; }
 
         public MultiControlModuleHandle(ModuleHandle module)
         {
-            Module = module;
+            ModuleHandle = module;
         }
 
 
@@ -6148,73 +6148,73 @@ namespace SunSharp.ObjectWrapper.Modules
         /// Original name: Gain
         /// <para> Value range: 0 to 1024 </para>
         /// </summary>
-        public int GetGain() => Module.GetControllerValue(1, ValueScalingType.Displayed);
+        public int GetGain() => ModuleHandle.GetControllerValue(1, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Gain
         /// <para> Value range: 0 to 1024 </para>
         /// </summary>
-        public void SetGain(int value) => Module.SetControllerValue(1, value, ValueScalingType.Displayed);
+        public void SetGain(int value) => ModuleHandle.SetControllerValue(1, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: OUT offset
         /// <para> Value range: -16384 to 16384 </para>
         /// </summary>
-        public int GetOUTOffset() => Module.GetControllerValue(3, ValueScalingType.Displayed);
+        public int GetOUTOffset() => ModuleHandle.GetControllerValue(3, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: OUT offset
         /// <para> Value range: -16384 to 16384 </para>
         /// </summary>
-        public void SetOUTOffset(int value) => Module.SetControllerValue(3, value, ValueScalingType.Displayed);
+        public void SetOUTOffset(int value) => ModuleHandle.SetControllerValue(3, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Quantization
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public int GetQuantization() => Module.GetControllerValue(2, ValueScalingType.Displayed);
+        public int GetQuantization() => ModuleHandle.GetControllerValue(2, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Quantization
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public void SetQuantization(int value) => Module.SetControllerValue(2, value, ValueScalingType.Displayed);
+        public void SetQuantization(int value) => ModuleHandle.SetControllerValue(2, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Response
         /// <para> Value range: 0 to 1000 </para>
         /// </summary>
-        public int GetResponse() => Module.GetControllerValue(4, ValueScalingType.Displayed);
+        public int GetResponse() => ModuleHandle.GetControllerValue(4, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Response
         /// <para> Value range: 0 to 1000 </para>
         /// </summary>
-        public void SetResponse(int value) => Module.SetControllerValue(4, value, ValueScalingType.Displayed);
+        public void SetResponse(int value) => ModuleHandle.SetControllerValue(4, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Sample rate
         /// <para> Value range: 1 to 32768 </para>
         /// </summary>
-        public int GetSampleRate() => Module.GetControllerValue(5, ValueScalingType.Displayed);
+        public int GetSampleRate() => ModuleHandle.GetControllerValue(5, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Sample rate
         /// <para> Value range: 1 to 32768 </para>
         /// </summary>
-        public void SetSampleRate(int value) => Module.SetControllerValue(5, value, ValueScalingType.Displayed);
+        public void SetSampleRate(int value) => ModuleHandle.SetControllerValue(5, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Value
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public int GetValue() => Module.GetControllerValue(0, ValueScalingType.Displayed);
+        public int GetValue() => ModuleHandle.GetControllerValue(0, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Value
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public void SetValue(int value) => Module.SetControllerValue(0, value, ValueScalingType.Displayed);
+        public void SetValue(int value) => ModuleHandle.SetControllerValue(0, value, ValueScalingType.Displayed);
 
         #endregion controllers
 
@@ -6230,7 +6230,7 @@ namespace SunSharp.ObjectWrapper.Modules
             if (buffer.Length < 257)
                 throw new System.ArgumentException("Buffer must be at least of size 257");
 
-            Module.ReadCurve(0, buffer);
+            ModuleHandle.ReadCurve(0, buffer);
         }
 
         /// <summary>
@@ -6243,7 +6243,7 @@ namespace SunSharp.ObjectWrapper.Modules
             if (buffer.Length < 257)
                 throw new System.ArgumentException("Buffer must be at least of size 257");
 
-            Module.WriteCurve(0, buffer);
+            ModuleHandle.WriteCurve(0, buffer);
         }
 
         #endregion curves
@@ -6251,11 +6251,11 @@ namespace SunSharp.ObjectWrapper.Modules
 
     public struct MultiSynthModuleHandle : IModuleHandleWrapper
     {
-        public ModuleHandle Module { get; private set; }
+        public ModuleHandle ModuleHandle { get; private set; }
 
         public MultiSynthModuleHandle(ModuleHandle module)
         {
-            Module = module;
+            ModuleHandle = module;
         }
 
 
@@ -6265,97 +6265,97 @@ namespace SunSharp.ObjectWrapper.Modules
         /// Original name: Curve2 influence
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public int GetCurve2Influence() => Module.GetControllerValue(7, ValueScalingType.Displayed);
+        public int GetCurve2Influence() => ModuleHandle.GetControllerValue(7, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Curve2 influence
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public void SetCurve2Influence(int value) => Module.SetControllerValue(7, value, ValueScalingType.Displayed);
+        public void SetCurve2Influence(int value) => ModuleHandle.SetControllerValue(7, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Finetune
         /// <para> Value range: -256 to 256 </para>
         /// </summary>
-        public int GetFinetune() => Module.GetControllerValue(3, ValueScalingType.Displayed);
+        public int GetFinetune() => ModuleHandle.GetControllerValue(3, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Finetune
         /// <para> Value range: -256 to 256 </para>
         /// </summary>
-        public void SetFinetune(int value) => Module.SetControllerValue(3, value, ValueScalingType.Displayed);
+        public void SetFinetune(int value) => ModuleHandle.SetControllerValue(3, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Phase
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public int GetPhase() => Module.GetControllerValue(6, ValueScalingType.Displayed);
+        public int GetPhase() => ModuleHandle.GetControllerValue(6, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Phase
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public void SetPhase(int value) => Module.SetControllerValue(6, value, ValueScalingType.Displayed);
+        public void SetPhase(int value) => ModuleHandle.SetControllerValue(6, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Random phase
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public int GetRandomPhase() => Module.GetControllerValue(4, ValueScalingType.Displayed);
+        public int GetRandomPhase() => ModuleHandle.GetControllerValue(4, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Random phase
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public void SetRandomPhase(int value) => Module.SetControllerValue(4, value, ValueScalingType.Displayed);
+        public void SetRandomPhase(int value) => ModuleHandle.SetControllerValue(4, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Random pitch
         /// <para> Value range: 0 to 4096 </para>
         /// </summary>
-        public int GetRandomPitch() => Module.GetControllerValue(1, ValueScalingType.Displayed);
+        public int GetRandomPitch() => ModuleHandle.GetControllerValue(1, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Random pitch
         /// <para> Value range: 0 to 4096 </para>
         /// </summary>
-        public void SetRandomPitch(int value) => Module.SetControllerValue(1, value, ValueScalingType.Displayed);
+        public void SetRandomPitch(int value) => ModuleHandle.SetControllerValue(1, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Random velocity
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public int GetRandomVelocity() => Module.GetControllerValue(5, ValueScalingType.Displayed);
+        public int GetRandomVelocity() => ModuleHandle.GetControllerValue(5, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Random velocity
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public void SetRandomVelocity(int value) => Module.SetControllerValue(5, value, ValueScalingType.Displayed);
+        public void SetRandomVelocity(int value) => ModuleHandle.SetControllerValue(5, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Transpose
         /// <para> Value range: -128 to 128 </para>
         /// </summary>
-        public int GetTranspose() => Module.GetControllerValue(0, ValueScalingType.Displayed);
+        public int GetTranspose() => ModuleHandle.GetControllerValue(0, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Transpose
         /// <para> Value range: -128 to 128 </para>
         /// </summary>
-        public void SetTranspose(int value) => Module.SetControllerValue(0, value, ValueScalingType.Displayed);
+        public void SetTranspose(int value) => ModuleHandle.SetControllerValue(0, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Velocity
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public int GetVelocity() => Module.GetControllerValue(2, ValueScalingType.Displayed);
+        public int GetVelocity() => ModuleHandle.GetControllerValue(2, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Velocity
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public void SetVelocity(int value) => Module.SetControllerValue(2, value, ValueScalingType.Displayed);
+        public void SetVelocity(int value) => ModuleHandle.SetControllerValue(2, value, ValueScalingType.Displayed);
 
         #endregion controllers
 
@@ -6371,7 +6371,7 @@ namespace SunSharp.ObjectWrapper.Modules
             if (buffer.Length < 128)
                 throw new System.ArgumentException("Buffer must be at least of size 128");
 
-            Module.ReadCurve(0, buffer);
+            ModuleHandle.ReadCurve(0, buffer);
         }
 
         /// <summary>
@@ -6384,7 +6384,7 @@ namespace SunSharp.ObjectWrapper.Modules
             if (buffer.Length < 128)
                 throw new System.ArgumentException("Buffer must be at least of size 128");
 
-            Module.WriteCurve(0, buffer);
+            ModuleHandle.WriteCurve(0, buffer);
         }
 
         /// <summary>
@@ -6397,7 +6397,7 @@ namespace SunSharp.ObjectWrapper.Modules
             if (buffer.Length < 257)
                 throw new System.ArgumentException("Buffer must be at least of size 257");
 
-            Module.ReadCurve(1, buffer);
+            ModuleHandle.ReadCurve(1, buffer);
         }
 
         /// <summary>
@@ -6410,7 +6410,7 @@ namespace SunSharp.ObjectWrapper.Modules
             if (buffer.Length < 257)
                 throw new System.ArgumentException("Buffer must be at least of size 257");
 
-            Module.WriteCurve(1, buffer);
+            ModuleHandle.WriteCurve(1, buffer);
         }
 
         #endregion curves
@@ -6418,22 +6418,22 @@ namespace SunSharp.ObjectWrapper.Modules
 
     public struct OutputModuleHandle : IModuleHandleWrapper
     {
-        public ModuleHandle Module { get; private set; }
+        public ModuleHandle ModuleHandle { get; private set; }
 
         public OutputModuleHandle(ModuleHandle module)
         {
-            Module = module;
+            ModuleHandle = module;
         }
 
     }
 
     public struct PitchDetectorModuleHandle : IModuleHandleWrapper
     {
-        public ModuleHandle Module { get; private set; }
+        public ModuleHandle ModuleHandle { get; private set; }
 
         public PitchDetectorModuleHandle(ModuleHandle module)
         {
-            Module = module;
+            ModuleHandle = module;
         }
 
 
@@ -6443,156 +6443,156 @@ namespace SunSharp.ObjectWrapper.Modules
         /// Original name: Alg1 Sensitivity (absolute threshold)
         /// <para> Value range: 0 to 100 </para>
         /// </summary>
-        public int GetAlg1Sensitivity() => Module.GetControllerValue(10, ValueScalingType.Displayed);
+        public int GetAlg1Sensitivity() => ModuleHandle.GetControllerValue(10, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Alg1 Sensitivity (absolute threshold)
         /// <para> Value range: 0 to 100 </para>
         /// </summary>
-        public void SetAlg1Sensitivity(int value) => Module.SetControllerValue(10, value, ValueScalingType.Displayed);
+        public void SetAlg1Sensitivity(int value) => ModuleHandle.SetControllerValue(10, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Alg1-2 Buffer (ms)
         /// <para> Possible values: Ms5, Ms10, Ms21, Ms42, Ms85 </para>
         /// </summary>
-        public PitchDetectorBufferSize GetAlgBufferMs() => (PitchDetectorBufferSize)Module.GetControllerValue(8, ValueScalingType.Displayed);
+        public PitchDetectorBufferSize GetAlgBufferMs() => (PitchDetectorBufferSize)ModuleHandle.GetControllerValue(8, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Alg1-2 Buffer (ms)
         /// <para> Possible values: Ms5, Ms10, Ms21, Ms42, Ms85 </para>
         /// </summary>
-        public void SetAlgBufferMs(PitchDetectorBufferSize value) => Module.SetControllerValue(8, (int)value, ValueScalingType.Displayed);
+        public void SetAlgBufferMs(PitchDetectorBufferSize value) => ModuleHandle.SetControllerValue(8, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Alg1-2 Buf overlap
         /// <para> Value range: 0 to 100 </para>
         /// </summary>
-        public int GetAlgBufOverlap() => Module.GetControllerValue(9, ValueScalingType.Displayed);
+        public int GetAlgBufOverlap() => ModuleHandle.GetControllerValue(9, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Alg1-2 Buf overlap
         /// <para> Value range: 0 to 100 </para>
         /// </summary>
-        public void SetAlgBufOverlap(int value) => Module.SetControllerValue(9, value, ValueScalingType.Displayed);
+        public void SetAlgBufOverlap(int value) => ModuleHandle.SetControllerValue(9, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Algorithm
         /// <para> Possible values: FastZeroCrossing, Autocorrelation, Cepstrum </para>
         /// </summary>
-        public PitchDetectorAlgorithm GetAlgorithm() => (PitchDetectorAlgorithm)Module.GetControllerValue(0, ValueScalingType.Displayed);
+        public PitchDetectorAlgorithm GetAlgorithm() => (PitchDetectorAlgorithm)ModuleHandle.GetControllerValue(0, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Algorithm
         /// <para> Possible values: FastZeroCrossing, Autocorrelation, Cepstrum </para>
         /// </summary>
-        public void SetAlgorithm(PitchDetectorAlgorithm value) => Module.SetControllerValue(0, (int)value, ValueScalingType.Displayed);
+        public void SetAlgorithm(PitchDetectorAlgorithm value) => ModuleHandle.SetControllerValue(0, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Alg1-2 Sample rate (Hz)
         /// <para> Possible values: Hz12000, Hz24000, Hz44100 </para>
         /// </summary>
-        public PitchDetectorAlgSampleRate GetAlgSampleRateHz() => (PitchDetectorAlgSampleRate)Module.GetControllerValue(7, ValueScalingType.Displayed);
+        public PitchDetectorAlgSampleRate GetAlgSampleRateHz() => (PitchDetectorAlgSampleRate)ModuleHandle.GetControllerValue(7, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Alg1-2 Sample rate (Hz)
         /// <para> Possible values: Hz12000, Hz24000, Hz44100 </para>
         /// </summary>
-        public void SetAlgSampleRateHz(PitchDetectorAlgSampleRate value) => Module.SetControllerValue(7, (int)value, ValueScalingType.Displayed);
+        public void SetAlgSampleRateHz(PitchDetectorAlgSampleRate value) => ModuleHandle.SetControllerValue(7, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Detector finetune
         /// <para> Value range: -256 to 256 </para>
         /// </summary>
-        public int GetDetectorFinetune() => Module.GetControllerValue(4, ValueScalingType.Displayed);
+        public int GetDetectorFinetune() => ModuleHandle.GetControllerValue(4, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Detector finetune
         /// <para> Value range: -256 to 256 </para>
         /// </summary>
-        public void SetDetectorFinetune(int value) => Module.SetControllerValue(4, value, ValueScalingType.Displayed);
+        public void SetDetectorFinetune(int value) => ModuleHandle.SetControllerValue(4, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Gain
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public int GetGain() => Module.GetControllerValue(2, ValueScalingType.Displayed);
+        public int GetGain() => ModuleHandle.GetControllerValue(2, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Gain
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public void SetGain(int value) => Module.SetControllerValue(2, value, ValueScalingType.Displayed);
+        public void SetGain(int value) => ModuleHandle.SetControllerValue(2, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: LP filter freq (0 - OFF)
         /// <para> Value range: 0 to 4000 </para>
         /// </summary>
-        public int GetLPFilterFreq() => Module.GetControllerValue(5, ValueScalingType.Displayed);
+        public int GetLPFilterFreq() => ModuleHandle.GetControllerValue(5, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: LP filter freq (0 - OFF)
         /// <para> Value range: 0 to 4000 </para>
         /// </summary>
-        public void SetLPFilterFreq(int value) => Module.SetControllerValue(5, value, ValueScalingType.Displayed);
+        public void SetLPFilterFreq(int value) => ModuleHandle.SetControllerValue(5, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: LP filter roll-off
         /// <para> Possible values: dB12, dB24, dB36, dB48 </para>
         /// </summary>
-        public FilterRollOff GetLPFilterRollOff() => (FilterRollOff)Module.GetControllerValue(6, ValueScalingType.Displayed);
+        public FilterRollOff GetLPFilterRollOff() => (FilterRollOff)ModuleHandle.GetControllerValue(6, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: LP filter roll-off
         /// <para> Possible values: dB12, dB24, dB36, dB48 </para>
         /// </summary>
-        public void SetLPFilterRollOff(FilterRollOff value) => Module.SetControllerValue(6, (int)value, ValueScalingType.Displayed);
+        public void SetLPFilterRollOff(FilterRollOff value) => ModuleHandle.SetControllerValue(6, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Microtones
         /// <para> Possible values: Off, On </para>
         /// </summary>
-        public Toggle GetMicrotones() => (Toggle)Module.GetControllerValue(3, ValueScalingType.Displayed);
+        public Toggle GetMicrotones() => (Toggle)ModuleHandle.GetControllerValue(3, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Microtones
         /// <para> Possible values: Off, On </para>
         /// </summary>
-        public void SetMicrotones(Toggle value) => Module.SetControllerValue(3, (int)value, ValueScalingType.Displayed);
+        public void SetMicrotones(Toggle value) => ModuleHandle.SetControllerValue(3, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Record notes
         /// <para> Possible values: Off, On </para>
         /// </summary>
-        public Toggle GetRecordNotes() => (Toggle)Module.GetControllerValue(11, ValueScalingType.Displayed);
+        public Toggle GetRecordNotes() => (Toggle)ModuleHandle.GetControllerValue(11, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Record notes
         /// <para> Possible values: Off, On </para>
         /// </summary>
-        public void SetRecordNotes(Toggle value) => Module.SetControllerValue(11, (int)value, ValueScalingType.Displayed);
+        public void SetRecordNotes(Toggle value) => ModuleHandle.SetControllerValue(11, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Threshold
         /// <para> Value range: 0 to 10000 </para>
         /// </summary>
-        public int GetThreshold() => Module.GetControllerValue(1, ValueScalingType.Displayed);
+        public int GetThreshold() => ModuleHandle.GetControllerValue(1, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Threshold
         /// <para> Value range: 0 to 10000 </para>
         /// </summary>
-        public void SetThreshold(int value) => Module.SetControllerValue(1, value, ValueScalingType.Displayed);
+        public void SetThreshold(int value) => ModuleHandle.SetControllerValue(1, value, ValueScalingType.Displayed);
 
         #endregion controllers
     }
 
     public struct PitchShifterModuleHandle : IModuleHandleWrapper
     {
-        public ModuleHandle Module { get; private set; }
+        public ModuleHandle ModuleHandle { get; private set; }
 
         public PitchShifterModuleHandle(ModuleHandle module)
         {
-            Module = module;
+            ModuleHandle = module;
         }
 
 
@@ -6602,96 +6602,96 @@ namespace SunSharp.ObjectWrapper.Modules
         /// Original name: Bypass if pitch=0
         /// <para> Possible values: Off, SlowTransition, FastTransition </para>
         /// </summary>
-        public PitchShifterBypassMode GetBypassIfPitchZero() => (PitchShifterBypassMode)Module.GetControllerValue(6, ValueScalingType.Displayed);
+        public PitchShifterBypassMode GetBypassIfPitchZero() => (PitchShifterBypassMode)ModuleHandle.GetControllerValue(6, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Bypass if pitch=0
         /// <para> Possible values: Off, SlowTransition, FastTransition </para>
         /// </summary>
-        public void SetBypassIfPitchZero(PitchShifterBypassMode value) => Module.SetControllerValue(6, (int)value, ValueScalingType.Displayed);
+        public void SetBypassIfPitchZero(PitchShifterBypassMode value) => ModuleHandle.SetControllerValue(6, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Feedback
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public int GetFeedback() => Module.GetControllerValue(3, ValueScalingType.Displayed);
+        public int GetFeedback() => ModuleHandle.GetControllerValue(3, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Feedback
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public void SetFeedback(int value) => Module.SetControllerValue(3, value, ValueScalingType.Displayed);
+        public void SetFeedback(int value) => ModuleHandle.SetControllerValue(3, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Grain size
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public int GetGrainSize() => Module.GetControllerValue(4, ValueScalingType.Displayed);
+        public int GetGrainSize() => ModuleHandle.GetControllerValue(4, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Grain size
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public void SetGrainSize(int value) => Module.SetControllerValue(4, value, ValueScalingType.Displayed);
+        public void SetGrainSize(int value) => ModuleHandle.SetControllerValue(4, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Mode
         /// <para> Possible values: HQ, HQMono, LQ, LQMono </para>
         /// </summary>
-        public Quality GetMode() => (Quality)Module.GetControllerValue(5, ValueScalingType.Displayed);
+        public Quality GetMode() => (Quality)ModuleHandle.GetControllerValue(5, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Mode
         /// <para> Possible values: HQ, HQMono, LQ, LQMono </para>
         /// </summary>
-        public void SetMode(Quality value) => Module.SetControllerValue(5, (int)value, ValueScalingType.Displayed);
+        public void SetMode(Quality value) => ModuleHandle.SetControllerValue(5, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Pitch
         /// <para> Value range: -600 to 600 </para>
         /// </summary>
-        public int GetPitch() => Module.GetControllerValue(1, ValueScalingType.Displayed);
+        public int GetPitch() => ModuleHandle.GetControllerValue(1, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Pitch
         /// <para> Value range: -600 to 600 </para>
         /// </summary>
-        public void SetPitch(int value) => Module.SetControllerValue(1, value, ValueScalingType.Displayed);
+        public void SetPitch(int value) => ModuleHandle.SetControllerValue(1, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Pitch scale
         /// <para> Value range: 0 to 200 </para>
         /// </summary>
-        public int GetPitchScale() => Module.GetControllerValue(2, ValueScalingType.Displayed);
+        public int GetPitchScale() => ModuleHandle.GetControllerValue(2, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Pitch scale
         /// <para> Value range: 0 to 200 </para>
         /// </summary>
-        public void SetPitchScale(int value) => Module.SetControllerValue(2, value, ValueScalingType.Displayed);
+        public void SetPitchScale(int value) => ModuleHandle.SetControllerValue(2, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Volume
         /// <para> Value range: 0 to 512 </para>
         /// </summary>
-        public int GetVolume() => Module.GetControllerValue(0, ValueScalingType.Displayed);
+        public int GetVolume() => ModuleHandle.GetControllerValue(0, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Volume
         /// <para> Value range: 0 to 512 </para>
         /// </summary>
-        public void SetVolume(int value) => Module.SetControllerValue(0, value, ValueScalingType.Displayed);
+        public void SetVolume(int value) => ModuleHandle.SetControllerValue(0, value, ValueScalingType.Displayed);
 
         #endregion controllers
     }
 
     public struct PitchToControlModuleHandle : IModuleHandleWrapper
     {
-        public ModuleHandle Module { get; private set; }
+        public ModuleHandle ModuleHandle { get; private set; }
 
         public PitchToControlModuleHandle(ModuleHandle module)
         {
-            Module = module;
+            ModuleHandle = module;
         }
 
 
@@ -6701,96 +6701,96 @@ namespace SunSharp.ObjectWrapper.Modules
         /// Original name: First note
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public int GetFirstNote() => Module.GetControllerValue(2, ValueScalingType.Displayed);
+        public int GetFirstNote() => ModuleHandle.GetControllerValue(2, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: First note
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public void SetFirstNote(int value) => Module.SetControllerValue(2, value, ValueScalingType.Displayed);
+        public void SetFirstNote(int value) => ModuleHandle.SetControllerValue(2, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Mode
         /// <para> Possible values: FrequencyHz, Pitch </para>
         /// </summary>
-        public PitchToControlMode GetMode() => (PitchToControlMode)Module.GetControllerValue(0, ValueScalingType.Displayed);
+        public PitchToControlMode GetMode() => (PitchToControlMode)ModuleHandle.GetControllerValue(0, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Mode
         /// <para> Possible values: FrequencyHz, Pitch </para>
         /// </summary>
-        public void SetMode(PitchToControlMode value) => Module.SetControllerValue(0, (int)value, ValueScalingType.Displayed);
+        public void SetMode(PitchToControlMode value) => ModuleHandle.SetControllerValue(0, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: On NoteOFF
         /// <para> Possible values: DoNothing, PitchDown, PitchUp </para>
         /// </summary>
-        public PitchToControlOnNoteOff GetOnNoteOff() => (PitchToControlOnNoteOff)Module.GetControllerValue(1, ValueScalingType.Displayed);
+        public PitchToControlOnNoteOff GetOnNoteOff() => (PitchToControlOnNoteOff)ModuleHandle.GetControllerValue(1, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: On NoteOFF
         /// <para> Possible values: DoNothing, PitchDown, PitchUp </para>
         /// </summary>
-        public void SetOnNoteOff(PitchToControlOnNoteOff value) => Module.SetControllerValue(1, (int)value, ValueScalingType.Displayed);
+        public void SetOnNoteOff(PitchToControlOnNoteOff value) => ModuleHandle.SetControllerValue(1, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: OUT controller
         /// <para> Value range: 0 to 255 </para>
         /// </summary>
-        public int GetOUTController() => Module.GetControllerValue(6, ValueScalingType.Displayed);
+        public int GetOUTController() => ModuleHandle.GetControllerValue(6, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: OUT controller
         /// <para> Value range: 0 to 255 </para>
         /// </summary>
-        public void SetOUTController(int value) => Module.SetControllerValue(6, value, ValueScalingType.Displayed);
+        public void SetOUTController(int value) => ModuleHandle.SetControllerValue(6, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: OUT max
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public int GetOUTMax() => Module.GetControllerValue(5, ValueScalingType.Displayed);
+        public int GetOUTMax() => ModuleHandle.GetControllerValue(5, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: OUT max
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public void SetOUTMax(int value) => Module.SetControllerValue(5, value, ValueScalingType.Displayed);
+        public void SetOUTMax(int value) => ModuleHandle.SetControllerValue(5, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: OUT min
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public int GetOUTMin() => Module.GetControllerValue(4, ValueScalingType.Displayed);
+        public int GetOUTMin() => ModuleHandle.GetControllerValue(4, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: OUT min
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public void SetOUTMin(int value) => Module.SetControllerValue(4, value, ValueScalingType.Displayed);
+        public void SetOUTMin(int value) => ModuleHandle.SetControllerValue(4, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Range (number of semitones)
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public int GetRangeNumberOfSemitones() => Module.GetControllerValue(3, ValueScalingType.Displayed);
+        public int GetRangeNumberOfSemitones() => ModuleHandle.GetControllerValue(3, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Range (number of semitones)
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public void SetRangeNumberOfSemitones(int value) => Module.SetControllerValue(3, value, ValueScalingType.Displayed);
+        public void SetRangeNumberOfSemitones(int value) => ModuleHandle.SetControllerValue(3, value, ValueScalingType.Displayed);
 
         #endregion controllers
     }
 
     public struct ReverbModuleHandle : IModuleHandleWrapper
     {
-        public ModuleHandle Module { get; private set; }
+        public ModuleHandle ModuleHandle { get; private set; }
 
         public ReverbModuleHandle(ModuleHandle module)
         {
-            Module = module;
+            ModuleHandle = module;
         }
 
 
@@ -6800,142 +6800,142 @@ namespace SunSharp.ObjectWrapper.Modules
         /// Original name: All-pass filter
         /// <para> Possible values: Off, On </para>
         /// </summary>
-        public Toggle GetAllPassFilter() => (Toggle)Module.GetControllerValue(7, ValueScalingType.Displayed);
+        public Toggle GetAllPassFilter() => (Toggle)ModuleHandle.GetControllerValue(7, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: All-pass filter
         /// <para> Possible values: Off, On </para>
         /// </summary>
-        public void SetAllPassFilter(Toggle value) => Module.SetControllerValue(7, (int)value, ValueScalingType.Displayed);
+        public void SetAllPassFilter(Toggle value) => ModuleHandle.SetControllerValue(7, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Damp
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public int GetDamp() => Module.GetControllerValue(3, ValueScalingType.Displayed);
+        public int GetDamp() => ModuleHandle.GetControllerValue(3, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Damp
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public void SetDamp(int value) => Module.SetControllerValue(3, value, ValueScalingType.Displayed);
+        public void SetDamp(int value) => ModuleHandle.SetControllerValue(3, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Dry
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public int GetDry() => Module.GetControllerValue(0, ValueScalingType.Displayed);
+        public int GetDry() => ModuleHandle.GetControllerValue(0, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Dry
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public void SetDry(int value) => Module.SetControllerValue(0, value, ValueScalingType.Displayed);
+        public void SetDry(int value) => ModuleHandle.SetControllerValue(0, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Feedback
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public int GetFeedback() => Module.GetControllerValue(2, ValueScalingType.Displayed);
+        public int GetFeedback() => ModuleHandle.GetControllerValue(2, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Feedback
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public void SetFeedback(int value) => Module.SetControllerValue(2, value, ValueScalingType.Displayed);
+        public void SetFeedback(int value) => ModuleHandle.SetControllerValue(2, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Freeze
         /// <para> Possible values: Off, On </para>
         /// </summary>
-        public Toggle GetFreeze() => (Toggle)Module.GetControllerValue(5, ValueScalingType.Displayed);
+        public Toggle GetFreeze() => (Toggle)ModuleHandle.GetControllerValue(5, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Freeze
         /// <para> Possible values: Off, On </para>
         /// </summary>
-        public void SetFreeze(Toggle value) => Module.SetControllerValue(5, (int)value, ValueScalingType.Displayed);
+        public void SetFreeze(Toggle value) => ModuleHandle.SetControllerValue(5, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Mode
         /// <para> Possible values: HQ, HQMono, LQ, LQMono </para>
         /// </summary>
-        public Quality GetMode() => (Quality)Module.GetControllerValue(6, ValueScalingType.Displayed);
+        public Quality GetMode() => (Quality)ModuleHandle.GetControllerValue(6, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Mode
         /// <para> Possible values: HQ, HQMono, LQ, LQMono </para>
         /// </summary>
-        public void SetMode(Quality value) => Module.SetControllerValue(6, (int)value, ValueScalingType.Displayed);
+        public void SetMode(Quality value) => ModuleHandle.SetControllerValue(6, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Random seed
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public int GetRandomSeed() => Module.GetControllerValue(9, ValueScalingType.Displayed);
+        public int GetRandomSeed() => ModuleHandle.GetControllerValue(9, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Random seed
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public void SetRandomSeed(int value) => Module.SetControllerValue(9, value, ValueScalingType.Displayed);
+        public void SetRandomSeed(int value) => ModuleHandle.SetControllerValue(9, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Room size
         /// <para> Value range: 0 to 128 </para>
         /// </summary>
-        public int GetRoomSize() => Module.GetControllerValue(8, ValueScalingType.Displayed);
+        public int GetRoomSize() => ModuleHandle.GetControllerValue(8, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Room size
         /// <para> Value range: 0 to 128 </para>
         /// </summary>
-        public void SetRoomSize(int value) => Module.SetControllerValue(8, value, ValueScalingType.Displayed);
+        public void SetRoomSize(int value) => ModuleHandle.SetControllerValue(8, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Stereo width
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public int GetStereoWidth() => Module.GetControllerValue(4, ValueScalingType.Displayed);
+        public int GetStereoWidth() => ModuleHandle.GetControllerValue(4, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Stereo width
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public void SetStereoWidth(int value) => Module.SetControllerValue(4, value, ValueScalingType.Displayed);
+        public void SetStereoWidth(int value) => ModuleHandle.SetControllerValue(4, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Wet
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public int GetWet() => Module.GetControllerValue(1, ValueScalingType.Displayed);
+        public int GetWet() => ModuleHandle.GetControllerValue(1, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Wet
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public void SetWet(int value) => Module.SetControllerValue(1, value, ValueScalingType.Displayed);
+        public void SetWet(int value) => ModuleHandle.SetControllerValue(1, value, ValueScalingType.Displayed);
 
         #endregion controllers
     }
 
     public struct SamplerModuleHandle : IModuleHandleWrapper
     {
-        public ModuleHandle Module { get; private set; }
+        public ModuleHandle ModuleHandle { get; private set; }
 
         public SamplerModuleHandle(ModuleHandle module)
         {
-            Module = module;
+            ModuleHandle = module;
         }
 
 
         #region module type-specific methods
 
         /// <inheritdoc cref="ModuleHandle.LoadSamplerSample(byte[], int)"/>
-        public void LoadSample(byte[] data, int sampleSlot = -1) => Module.LoadSamplerSample(data, sampleSlot);
+        public void LoadSample(byte[] data, int sampleSlot = -1) => ModuleHandle.LoadSamplerSample(data, sampleSlot);
 
         /// <inheritdoc cref="ModuleHandle.LoadSamplerSample(string, int)"/>
-        public void LoadSample(string path, int sampleSlot = -1) => Module.LoadSamplerSample(path, sampleSlot);
+        public void LoadSample(string path, int sampleSlot = -1) => ModuleHandle.LoadSamplerSample(path, sampleSlot);
         #endregion module type-specific methods
 
 
@@ -6945,84 +6945,84 @@ namespace SunSharp.ObjectWrapper.Modules
         /// Original name: Envelope interpolation
         /// <para> Possible values: Off, Linear </para>
         /// </summary>
-        public SamplerEnvelopeInterpolation GetEnvelopeInterpolation() => (SamplerEnvelopeInterpolation)Module.GetControllerValue(3, ValueScalingType.Displayed);
+        public SamplerEnvelopeInterpolation GetEnvelopeInterpolation() => (SamplerEnvelopeInterpolation)ModuleHandle.GetControllerValue(3, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Envelope interpolation
         /// <para> Possible values: Off, Linear </para>
         /// </summary>
-        public void SetEnvelopeInterpolation(SamplerEnvelopeInterpolation value) => Module.SetControllerValue(3, (int)value, ValueScalingType.Displayed);
+        public void SetEnvelopeInterpolation(SamplerEnvelopeInterpolation value) => ModuleHandle.SetControllerValue(3, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Panning
         /// <para> Value range: -128 to 128 </para>
         /// </summary>
-        public int GetPanning() => Module.GetControllerValue(1, ValueScalingType.Displayed);
+        public int GetPanning() => ModuleHandle.GetControllerValue(1, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Panning
         /// <para> Value range: -128 to 128 </para>
         /// </summary>
-        public void SetPanning(int value) => Module.SetControllerValue(1, value, ValueScalingType.Displayed);
+        public void SetPanning(int value) => ModuleHandle.SetControllerValue(1, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Polyphony
         /// <para> Value range: 1 to 32 </para>
         /// </summary>
-        public int GetPolyphony() => Module.GetControllerValue(4, ValueScalingType.Displayed);
+        public int GetPolyphony() => ModuleHandle.GetControllerValue(4, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Polyphony
         /// <para> Value range: 1 to 32 </para>
         /// </summary>
-        public void SetPolyphony(int value) => Module.SetControllerValue(4, value, ValueScalingType.Displayed);
+        public void SetPolyphony(int value) => ModuleHandle.SetControllerValue(4, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Rec threshold
         /// <para> Value range: 0 to 10000 </para>
         /// </summary>
-        public int GetRecThreshold() => Module.GetControllerValue(5, ValueScalingType.Displayed);
+        public int GetRecThreshold() => ModuleHandle.GetControllerValue(5, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Rec threshold
         /// <para> Value range: 0 to 10000 </para>
         /// </summary>
-        public void SetRecThreshold(int value) => Module.SetControllerValue(5, value, ValueScalingType.Displayed);
+        public void SetRecThreshold(int value) => ModuleHandle.SetControllerValue(5, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Sample interpolation
         /// <para> Possible values: Off, Linear, Spline </para>
         /// </summary>
-        public SamplerInterpolation GetSampleInterpolation() => (SamplerInterpolation)Module.GetControllerValue(2, ValueScalingType.Displayed);
+        public SamplerInterpolation GetSampleInterpolation() => (SamplerInterpolation)ModuleHandle.GetControllerValue(2, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Sample interpolation
         /// <para> Possible values: Off, Linear, Spline </para>
         /// </summary>
-        public void SetSampleInterpolation(SamplerInterpolation value) => Module.SetControllerValue(2, (int)value, ValueScalingType.Displayed);
+        public void SetSampleInterpolation(SamplerInterpolation value) => ModuleHandle.SetControllerValue(2, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Volume
         /// <para> Value range: 0 to 512 </para>
         /// </summary>
-        public int GetVolume() => Module.GetControllerValue(0, ValueScalingType.Displayed);
+        public int GetVolume() => ModuleHandle.GetControllerValue(0, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Volume
         /// <para> Value range: 0 to 512 </para>
         /// </summary>
-        public void SetVolume(int value) => Module.SetControllerValue(0, value, ValueScalingType.Displayed);
+        public void SetVolume(int value) => ModuleHandle.SetControllerValue(0, value, ValueScalingType.Displayed);
 
         #endregion controllers
     }
 
     public struct SoundToControlModuleHandle : IModuleHandleWrapper
     {
-        public ModuleHandle Module { get; private set; }
+        public ModuleHandle ModuleHandle { get; private set; }
 
         public SoundToControlModuleHandle(ModuleHandle module)
         {
-            Module = module;
+            ModuleHandle = module;
         }
 
 
@@ -7032,120 +7032,120 @@ namespace SunSharp.ObjectWrapper.Modules
         /// Original name: Absolute
         /// <para> Possible values: Off, On </para>
         /// </summary>
-        public Toggle GetAbsolute() => (Toggle)Module.GetControllerValue(2, ValueScalingType.Displayed);
+        public Toggle GetAbsolute() => (Toggle)ModuleHandle.GetControllerValue(2, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Absolute
         /// <para> Possible values: Off, On </para>
         /// </summary>
-        public void SetAbsolute(Toggle value) => Module.SetControllerValue(2, (int)value, ValueScalingType.Displayed);
+        public void SetAbsolute(Toggle value) => ModuleHandle.SetControllerValue(2, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Channels
         /// <para> Possible values: Mono, Stereo </para>
         /// </summary>
-        public ChannelsInverted GetChannels() => (ChannelsInverted)Module.GetControllerValue(1, ValueScalingType.Displayed);
+        public ChannelsInverted GetChannels() => (ChannelsInverted)ModuleHandle.GetControllerValue(1, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Channels
         /// <para> Possible values: Mono, Stereo </para>
         /// </summary>
-        public void SetChannels(ChannelsInverted value) => Module.SetControllerValue(1, (int)value, ValueScalingType.Displayed);
+        public void SetChannels(ChannelsInverted value) => ModuleHandle.SetControllerValue(1, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Gain
         /// <para> Value range: 0 to 1024 </para>
         /// </summary>
-        public int GetGain() => Module.GetControllerValue(3, ValueScalingType.Displayed);
+        public int GetGain() => ModuleHandle.GetControllerValue(3, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Gain
         /// <para> Value range: 0 to 1024 </para>
         /// </summary>
-        public void SetGain(int value) => Module.SetControllerValue(3, value, ValueScalingType.Displayed);
+        public void SetGain(int value) => ModuleHandle.SetControllerValue(3, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Mode
         /// <para> Possible values: LQ, HQ </para>
         /// </summary>
-        public SoundToControlMode GetMode() => (SoundToControlMode)Module.GetControllerValue(5, ValueScalingType.Displayed);
+        public SoundToControlMode GetMode() => (SoundToControlMode)ModuleHandle.GetControllerValue(5, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Mode
         /// <para> Possible values: LQ, HQ </para>
         /// </summary>
-        public void SetMode(SoundToControlMode value) => Module.SetControllerValue(5, (int)value, ValueScalingType.Displayed);
+        public void SetMode(SoundToControlMode value) => ModuleHandle.SetControllerValue(5, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: OUT controller
         /// <para> Value range: 0 to 255 </para>
         /// </summary>
-        public int GetOUTController() => Module.GetControllerValue(8, ValueScalingType.Displayed);
+        public int GetOUTController() => ModuleHandle.GetControllerValue(8, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: OUT controller
         /// <para> Value range: 0 to 255 </para>
         /// </summary>
-        public void SetOUTController(int value) => Module.SetControllerValue(8, value, ValueScalingType.Displayed);
+        public void SetOUTController(int value) => ModuleHandle.SetControllerValue(8, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: OUT max
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public int GetOutMax() => Module.GetControllerValue(7, ValueScalingType.Displayed);
+        public int GetOutMax() => ModuleHandle.GetControllerValue(7, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: OUT max
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public void SetOutMax(int value) => Module.SetControllerValue(7, value, ValueScalingType.Displayed);
+        public void SetOutMax(int value) => ModuleHandle.SetControllerValue(7, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: OUT min
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public int GetOutMin() => Module.GetControllerValue(6, ValueScalingType.Displayed);
+        public int GetOutMin() => ModuleHandle.GetControllerValue(6, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: OUT min
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public void SetOutMin(int value) => Module.SetControllerValue(6, value, ValueScalingType.Displayed);
+        public void SetOutMin(int value) => ModuleHandle.SetControllerValue(6, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Sample rate
         /// <para> Value range: 1 to 32768 </para>
         /// </summary>
-        public int GetSampleRate() => Module.GetControllerValue(0, ValueScalingType.Displayed);
+        public int GetSampleRate() => ModuleHandle.GetControllerValue(0, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Sample rate
         /// <para> Value range: 1 to 32768 </para>
         /// </summary>
-        public void SetSampleRate(int value) => Module.SetControllerValue(0, value, ValueScalingType.Displayed);
+        public void SetSampleRate(int value) => ModuleHandle.SetControllerValue(0, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Smooth
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public int GetSmooth() => Module.GetControllerValue(4, ValueScalingType.Displayed);
+        public int GetSmooth() => ModuleHandle.GetControllerValue(4, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Smooth
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public void SetSmooth(int value) => Module.SetControllerValue(4, value, ValueScalingType.Displayed);
+        public void SetSmooth(int value) => ModuleHandle.SetControllerValue(4, value, ValueScalingType.Displayed);
 
         #endregion controllers
     }
 
     public struct SpectraVoiceModuleHandle : IModuleHandleWrapper
     {
-        public ModuleHandle Module { get; private set; }
+        public ModuleHandle ModuleHandle { get; private set; }
 
         public SpectraVoiceModuleHandle(ModuleHandle module)
         {
-            Module = module;
+            ModuleHandle = module;
         }
 
 
@@ -7155,168 +7155,168 @@ namespace SunSharp.ObjectWrapper.Modules
         /// Original name: Attack
         /// <para> Value range: 0 to 512 </para>
         /// </summary>
-        public int GetAttack() => Module.GetControllerValue(2, ValueScalingType.Displayed);
+        public int GetAttack() => ModuleHandle.GetControllerValue(2, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Attack
         /// <para> Value range: 0 to 512 </para>
         /// </summary>
-        public void SetAttack(int value) => Module.SetControllerValue(2, value, ValueScalingType.Displayed);
+        public void SetAttack(int value) => ModuleHandle.SetControllerValue(2, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Harmonic
         /// <para> Value range: 0 to 15 </para>
         /// </summary>
-        public int GetHarmonic() => Module.GetControllerValue(8, ValueScalingType.Displayed);
+        public int GetHarmonic() => ModuleHandle.GetControllerValue(8, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Harmonic
         /// <para> Value range: 0 to 15 </para>
         /// </summary>
-        public void SetHarmonic(int value) => Module.SetControllerValue(8, value, ValueScalingType.Displayed);
+        public void SetHarmonic(int value) => ModuleHandle.SetControllerValue(8, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: H.freq
         /// <para> Value range: 0 to 22050 </para>
         /// </summary>
-        public int GetHarmonicFreq() => Module.GetControllerValue(9, ValueScalingType.Displayed);
+        public int GetHarmonicFreq() => ModuleHandle.GetControllerValue(9, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: H.freq
         /// <para> Value range: 0 to 22050 </para>
         /// </summary>
-        public void SetHarmonicFreq(int value) => Module.SetControllerValue(9, value, ValueScalingType.Displayed);
+        public void SetHarmonicFreq(int value) => ModuleHandle.SetControllerValue(9, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: H.type
         /// <para> Possible values: Hsin, Rect, Org1, Org2, Org3, Org4, Sin, Random, Triangle1, Triangle2, Overtones1, Overtones2, Overtones3, Overtones4, Overtones1Plus, Overtones2Plus, Overtones3Plus, Overtones4Plus, Metal </para>
         /// </summary>
-        public SpectraVoiceHarmonicType GetHarmonicType() => (SpectraVoiceHarmonicType)Module.GetControllerValue(12, ValueScalingType.Displayed);
+        public SpectraVoiceHarmonicType GetHarmonicType() => (SpectraVoiceHarmonicType)ModuleHandle.GetControllerValue(12, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: H.type
         /// <para> Possible values: Hsin, Rect, Org1, Org2, Org3, Org4, Sin, Random, Triangle1, Triangle2, Overtones1, Overtones2, Overtones3, Overtones4, Overtones1Plus, Overtones2Plus, Overtones3Plus, Overtones4Plus, Metal </para>
         /// </summary>
-        public void SetHarmonicType(SpectraVoiceHarmonicType value) => Module.SetControllerValue(12, (int)value, ValueScalingType.Displayed);
+        public void SetHarmonicType(SpectraVoiceHarmonicType value) => ModuleHandle.SetControllerValue(12, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: H.volume
         /// <para> Value range: 0 to 255 </para>
         /// </summary>
-        public int GetHarmonicVolume() => Module.GetControllerValue(10, ValueScalingType.Displayed);
+        public int GetHarmonicVolume() => ModuleHandle.GetControllerValue(10, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: H.volume
         /// <para> Value range: 0 to 255 </para>
         /// </summary>
-        public void SetHarmonicVolume(int value) => Module.SetControllerValue(10, value, ValueScalingType.Displayed);
+        public void SetHarmonicVolume(int value) => ModuleHandle.SetControllerValue(10, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: H.width
         /// <para> Value range: 0 to 255 </para>
         /// </summary>
-        public int GetHarmonicWidth() => Module.GetControllerValue(11, ValueScalingType.Displayed);
+        public int GetHarmonicWidth() => ModuleHandle.GetControllerValue(11, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: H.width
         /// <para> Value range: 0 to 255 </para>
         /// </summary>
-        public void SetHarmonicWidth(int value) => Module.SetControllerValue(11, value, ValueScalingType.Displayed);
+        public void SetHarmonicWidth(int value) => ModuleHandle.SetControllerValue(11, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Mode
         /// <para> Possible values: HQ, HQMono, LQ, LQMono, HQSpline </para>
         /// </summary>
-        public SpectraVoiceMode GetMode() => (SpectraVoiceMode)Module.GetControllerValue(5, ValueScalingType.Displayed);
+        public SpectraVoiceMode GetMode() => (SpectraVoiceMode)ModuleHandle.GetControllerValue(5, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Mode
         /// <para> Possible values: HQ, HQMono, LQ, LQMono, HQSpline </para>
         /// </summary>
-        public void SetMode(SpectraVoiceMode value) => Module.SetControllerValue(5, (int)value, ValueScalingType.Displayed);
+        public void SetMode(SpectraVoiceMode value) => ModuleHandle.SetControllerValue(5, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Panning
         /// <para> Value range: -128 to 128 </para>
         /// </summary>
-        public int GetPanning() => Module.GetControllerValue(1, ValueScalingType.Displayed);
+        public int GetPanning() => ModuleHandle.GetControllerValue(1, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Panning
         /// <para> Value range: -128 to 128 </para>
         /// </summary>
-        public void SetPanning(int value) => Module.SetControllerValue(1, value, ValueScalingType.Displayed);
+        public void SetPanning(int value) => ModuleHandle.SetControllerValue(1, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Polyphony
         /// <para> Value range: 1 to 32 </para>
         /// </summary>
-        public int GetPolyphony() => Module.GetControllerValue(4, ValueScalingType.Displayed);
+        public int GetPolyphony() => ModuleHandle.GetControllerValue(4, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Polyphony
         /// <para> Value range: 1 to 32 </para>
         /// </summary>
-        public void SetPolyphony(int value) => Module.SetControllerValue(4, value, ValueScalingType.Displayed);
+        public void SetPolyphony(int value) => ModuleHandle.SetControllerValue(4, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Release
         /// <para> Value range: 0 to 512 </para>
         /// </summary>
-        public int GetRelease() => Module.GetControllerValue(3, ValueScalingType.Displayed);
+        public int GetRelease() => ModuleHandle.GetControllerValue(3, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Release
         /// <para> Value range: 0 to 512 </para>
         /// </summary>
-        public void SetRelease(int value) => Module.SetControllerValue(3, value, ValueScalingType.Displayed);
+        public void SetRelease(int value) => ModuleHandle.SetControllerValue(3, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Spectrum resolution
         /// <para> Possible values: Size4096, Size8192, Size16384, Size32768, Size65536, Size131072 </para>
         /// </summary>
-        public SpectraVoiceResolution GetSpectrumResolution() => (SpectraVoiceResolution)Module.GetControllerValue(7, ValueScalingType.Displayed);
+        public SpectraVoiceResolution GetSpectrumResolution() => (SpectraVoiceResolution)ModuleHandle.GetControllerValue(7, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Spectrum resolution
         /// <para> Possible values: Size4096, Size8192, Size16384, Size32768, Size65536, Size131072 </para>
         /// </summary>
-        public void SetSpectrumResolution(SpectraVoiceResolution value) => Module.SetControllerValue(7, (int)value, ValueScalingType.Displayed);
+        public void SetSpectrumResolution(SpectraVoiceResolution value) => ModuleHandle.SetControllerValue(7, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Sustain
         /// <para> Possible values: Off, On </para>
         /// </summary>
-        public Toggle GetSustain() => (Toggle)Module.GetControllerValue(6, ValueScalingType.Displayed);
+        public Toggle GetSustain() => (Toggle)ModuleHandle.GetControllerValue(6, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Sustain
         /// <para> Possible values: Off, On </para>
         /// </summary>
-        public void SetSustain(Toggle value) => Module.SetControllerValue(6, (int)value, ValueScalingType.Displayed);
+        public void SetSustain(Toggle value) => ModuleHandle.SetControllerValue(6, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Volume
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public int GetVolume() => Module.GetControllerValue(0, ValueScalingType.Displayed);
+        public int GetVolume() => ModuleHandle.GetControllerValue(0, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Volume
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public void SetVolume(int value) => Module.SetControllerValue(0, value, ValueScalingType.Displayed);
+        public void SetVolume(int value) => ModuleHandle.SetControllerValue(0, value, ValueScalingType.Displayed);
 
         #endregion controllers
     }
 
     public struct VelocityToControlModuleHandle : IModuleHandleWrapper
     {
-        public ModuleHandle Module { get; private set; }
+        public ModuleHandle ModuleHandle { get; private set; }
 
         public VelocityToControlModuleHandle(ModuleHandle module)
         {
-            Module = module;
+            ModuleHandle = module;
         }
 
 
@@ -7326,72 +7326,72 @@ namespace SunSharp.ObjectWrapper.Modules
         /// Original name: On NoteOFF
         /// <para> Possible values: DoNothing, VelocityDown, VelocityUp </para>
         /// </summary>
-        public VelocityToControlOnNoteOff GetOnNoteOff() => (VelocityToControlOnNoteOff)Module.GetControllerValue(0, ValueScalingType.Displayed);
+        public VelocityToControlOnNoteOff GetOnNoteOff() => (VelocityToControlOnNoteOff)ModuleHandle.GetControllerValue(0, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: On NoteOFF
         /// <para> Possible values: DoNothing, VelocityDown, VelocityUp </para>
         /// </summary>
-        public void SetOnNoteOff(VelocityToControlOnNoteOff value) => Module.SetControllerValue(0, (int)value, ValueScalingType.Displayed);
+        public void SetOnNoteOff(VelocityToControlOnNoteOff value) => ModuleHandle.SetControllerValue(0, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: OUT controller
         /// <para> Value range: 0 to 255 </para>
         /// </summary>
-        public int GetOutController() => Module.GetControllerValue(4, ValueScalingType.Displayed);
+        public int GetOutController() => ModuleHandle.GetControllerValue(4, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: OUT controller
         /// <para> Value range: 0 to 255 </para>
         /// </summary>
-        public void SetOutController(int value) => Module.SetControllerValue(4, value, ValueScalingType.Displayed);
+        public void SetOutController(int value) => ModuleHandle.SetControllerValue(4, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: OUT max
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public int GetOutMax() => Module.GetControllerValue(2, ValueScalingType.Displayed);
+        public int GetOutMax() => ModuleHandle.GetControllerValue(2, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: OUT max
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public void SetOutMax(int value) => Module.SetControllerValue(2, value, ValueScalingType.Displayed);
+        public void SetOutMax(int value) => ModuleHandle.SetControllerValue(2, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: OUT min
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public int GetOutMin() => Module.GetControllerValue(1, ValueScalingType.Displayed);
+        public int GetOutMin() => ModuleHandle.GetControllerValue(1, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: OUT min
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public void SetOutMin(int value) => Module.SetControllerValue(1, value, ValueScalingType.Displayed);
+        public void SetOutMin(int value) => ModuleHandle.SetControllerValue(1, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: OUT offset
         /// <para> Value range: -16384 to 16384 </para>
         /// </summary>
-        public int GetOutOffset() => Module.GetControllerValue(3, ValueScalingType.Displayed);
+        public int GetOutOffset() => ModuleHandle.GetControllerValue(3, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: OUT offset
         /// <para> Value range: -16384 to 16384 </para>
         /// </summary>
-        public void SetOutOffset(int value) => Module.SetControllerValue(3, value, ValueScalingType.Displayed);
+        public void SetOutOffset(int value) => ModuleHandle.SetControllerValue(3, value, ValueScalingType.Displayed);
 
         #endregion controllers
     }
 
     public struct VibratoModuleHandle : IModuleHandleWrapper
     {
-        public ModuleHandle Module { get; private set; }
+        public ModuleHandle ModuleHandle { get; private set; }
 
         public VibratoModuleHandle(ModuleHandle module)
         {
-            Module = module;
+            ModuleHandle = module;
         }
 
 
@@ -7401,96 +7401,96 @@ namespace SunSharp.ObjectWrapper.Modules
         /// Original name: Amplitude
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public int GetAmplitude() => Module.GetControllerValue(1, ValueScalingType.Displayed);
+        public int GetAmplitude() => ModuleHandle.GetControllerValue(1, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Amplitude
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public void SetAmplitude(int value) => Module.SetControllerValue(1, value, ValueScalingType.Displayed);
+        public void SetAmplitude(int value) => ModuleHandle.SetControllerValue(1, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Channels
         /// <para> Possible values: Stereo, Mono </para>
         /// </summary>
-        public Channels GetChannels() => (Channels)Module.GetControllerValue(3, ValueScalingType.Displayed);
+        public Channels GetChannels() => (Channels)ModuleHandle.GetControllerValue(3, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Channels
         /// <para> Possible values: Stereo, Mono </para>
         /// </summary>
-        public void SetChannels(Channels value) => Module.SetControllerValue(3, (int)value, ValueScalingType.Displayed);
+        public void SetChannels(Channels value) => ModuleHandle.SetControllerValue(3, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Exponential amplitude
         /// <para> Possible values: Off, On </para>
         /// </summary>
-        public Toggle GetExponentialAmplitude() => (Toggle)Module.GetControllerValue(6, ValueScalingType.Displayed);
+        public Toggle GetExponentialAmplitude() => (Toggle)ModuleHandle.GetControllerValue(6, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Exponential amplitude
         /// <para> Possible values: Off, On </para>
         /// </summary>
-        public void SetExponentialAmplitude(Toggle value) => Module.SetControllerValue(6, (int)value, ValueScalingType.Displayed);
+        public void SetExponentialAmplitude(Toggle value) => ModuleHandle.SetControllerValue(6, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Freq
         /// <para> Value range: 1 to 2048 </para>
         /// </summary>
-        public int GetFreq() => Module.GetControllerValue(2, ValueScalingType.Displayed);
+        public int GetFreq() => ModuleHandle.GetControllerValue(2, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Freq
         /// <para> Value range: 1 to 2048 </para>
         /// </summary>
-        public void SetFreq(int value) => Module.SetControllerValue(2, value, ValueScalingType.Displayed);
+        public void SetFreq(int value) => ModuleHandle.SetControllerValue(2, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Frequency unit
         /// <para> Possible values: HzDividedBy64, Millisecond, Hz, Tick, Line, HalfLine, OneThirdLine </para>
         /// </summary>
-        public VibratoFrequencyUnit GetFrequencyUnit() => (VibratoFrequencyUnit)Module.GetControllerValue(5, ValueScalingType.Displayed);
+        public VibratoFrequencyUnit GetFrequencyUnit() => (VibratoFrequencyUnit)ModuleHandle.GetControllerValue(5, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Frequency unit
         /// <para> Possible values: HzDividedBy64, Millisecond, Hz, Tick, Line, HalfLine, OneThirdLine </para>
         /// </summary>
-        public void SetFrequencyUnit(VibratoFrequencyUnit value) => Module.SetControllerValue(5, (int)value, ValueScalingType.Displayed);
+        public void SetFrequencyUnit(VibratoFrequencyUnit value) => ModuleHandle.SetControllerValue(5, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Set phase
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public int GetSetPhase() => Module.GetControllerValue(4, ValueScalingType.Displayed);
+        public int GetSetPhase() => ModuleHandle.GetControllerValue(4, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Set phase
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public void SetSetPhase(int value) => Module.SetControllerValue(4, value, ValueScalingType.Displayed);
+        public void SetSetPhase(int value) => ModuleHandle.SetControllerValue(4, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Volume
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public int GetVolume() => Module.GetControllerValue(0, ValueScalingType.Displayed);
+        public int GetVolume() => ModuleHandle.GetControllerValue(0, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Volume
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public void SetVolume(int value) => Module.SetControllerValue(0, value, ValueScalingType.Displayed);
+        public void SetVolume(int value) => ModuleHandle.SetControllerValue(0, value, ValueScalingType.Displayed);
 
         #endregion controllers
     }
 
     public struct VocalFilterModuleHandle : IModuleHandleWrapper
     {
-        public ModuleHandle Module { get; private set; }
+        public ModuleHandle ModuleHandle { get; private set; }
 
         public VocalFilterModuleHandle(ModuleHandle module)
         {
-            Module = module;
+            ModuleHandle = module;
         }
 
 
@@ -7500,190 +7500,190 @@ namespace SunSharp.ObjectWrapper.Modules
         /// Original name: Channels
         /// <para> Possible values: Stereo, Mono </para>
         /// </summary>
-        public Channels GetChannels() => (Channels)Module.GetControllerValue(6, ValueScalingType.Displayed);
+        public Channels GetChannels() => (Channels)ModuleHandle.GetControllerValue(6, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Channels
         /// <para> Possible values: Stereo, Mono </para>
         /// </summary>
-        public void SetChannels(Channels value) => Module.SetControllerValue(6, (int)value, ValueScalingType.Displayed);
+        public void SetChannels(Channels value) => ModuleHandle.SetControllerValue(6, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Formants
         /// <para> Value range: 1 to 5 </para>
         /// </summary>
-        public int GetFormants() => Module.GetControllerValue(3, ValueScalingType.Displayed);
+        public int GetFormants() => ModuleHandle.GetControllerValue(3, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Formants
         /// <para> Value range: 1 to 5 </para>
         /// </summary>
-        public void SetFormants(int value) => Module.SetControllerValue(3, value, ValueScalingType.Displayed);
+        public void SetFormants(int value) => ModuleHandle.SetControllerValue(3, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Formant width
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public int GetFormantWidth() => Module.GetControllerValue(1, ValueScalingType.Displayed);
+        public int GetFormantWidth() => ModuleHandle.GetControllerValue(1, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Formant width
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public void SetFormantWidth(int value) => Module.SetControllerValue(1, value, ValueScalingType.Displayed);
+        public void SetFormantWidth(int value) => ModuleHandle.SetControllerValue(1, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Intensity
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public int GetIntensity() => Module.GetControllerValue(2, ValueScalingType.Displayed);
+        public int GetIntensity() => ModuleHandle.GetControllerValue(2, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Intensity
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public void SetIntensity(int value) => Module.SetControllerValue(2, value, ValueScalingType.Displayed);
+        public void SetIntensity(int value) => ModuleHandle.SetControllerValue(2, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Random frequency
         /// <para> Value range: 0 to 1024 </para>
         /// </summary>
-        public int GetRandomFrequency() => Module.GetControllerValue(7, ValueScalingType.Displayed);
+        public int GetRandomFrequency() => ModuleHandle.GetControllerValue(7, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Random frequency
         /// <para> Value range: 0 to 1024 </para>
         /// </summary>
-        public void SetRandomFrequency(int value) => Module.SetControllerValue(7, value, ValueScalingType.Displayed);
+        public void SetRandomFrequency(int value) => ModuleHandle.SetControllerValue(7, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Random seed
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public int GetRandomSeed() => Module.GetControllerValue(8, ValueScalingType.Displayed);
+        public int GetRandomSeed() => ModuleHandle.GetControllerValue(8, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Random seed
         /// <para> Value range: 0 to 32768 </para>
         /// </summary>
-        public void SetRandomSeed(int value) => Module.SetControllerValue(8, value, ValueScalingType.Displayed);
+        public void SetRandomSeed(int value) => ModuleHandle.SetControllerValue(8, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Voice type
         /// <para> Possible values: Soprano, Alto, Tenor, Bass </para>
         /// </summary>
-        public VocalFilterVoiceType GetVoiceType() => (VocalFilterVoiceType)Module.GetControllerValue(5, ValueScalingType.Displayed);
+        public VocalFilterVoiceType GetVoiceType() => (VocalFilterVoiceType)ModuleHandle.GetControllerValue(5, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Voice type
         /// <para> Possible values: Soprano, Alto, Tenor, Bass </para>
         /// </summary>
-        public void SetVoiceType(VocalFilterVoiceType value) => Module.SetControllerValue(5, (int)value, ValueScalingType.Displayed);
+        public void SetVoiceType(VocalFilterVoiceType value) => ModuleHandle.SetControllerValue(5, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Volume
         /// <para> Value range: 0 to 512 </para>
         /// </summary>
-        public int GetVolume() => Module.GetControllerValue(0, ValueScalingType.Displayed);
+        public int GetVolume() => ModuleHandle.GetControllerValue(0, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Volume
         /// <para> Value range: 0 to 512 </para>
         /// </summary>
-        public void SetVolume(int value) => Module.SetControllerValue(0, value, ValueScalingType.Displayed);
+        public void SetVolume(int value) => ModuleHandle.SetControllerValue(0, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Vowel (a,e,i,o,u)
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public int GetVowel() => Module.GetControllerValue(4, ValueScalingType.Displayed);
+        public int GetVowel() => ModuleHandle.GetControllerValue(4, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Vowel (a,e,i,o,u)
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public void SetVowel(int value) => Module.SetControllerValue(4, value, ValueScalingType.Displayed);
+        public void SetVowel(int value) => ModuleHandle.SetControllerValue(4, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Vowel1
         /// <para> Possible values: A, E, I, O, U </para>
         /// </summary>
-        public VocalFilterVowel GetVowel1() => (VocalFilterVowel)Module.GetControllerValue(9, ValueScalingType.Displayed);
+        public VocalFilterVowel GetVowel1() => (VocalFilterVowel)ModuleHandle.GetControllerValue(9, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Vowel1
         /// <para> Possible values: A, E, I, O, U </para>
         /// </summary>
-        public void SetVowel1(VocalFilterVowel value) => Module.SetControllerValue(9, (int)value, ValueScalingType.Displayed);
+        public void SetVowel1(VocalFilterVowel value) => ModuleHandle.SetControllerValue(9, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Vowel2
         /// <para> Possible values: A, E, I, O, U </para>
         /// </summary>
-        public VocalFilterVowel GetVowel2() => (VocalFilterVowel)Module.GetControllerValue(10, ValueScalingType.Displayed);
+        public VocalFilterVowel GetVowel2() => (VocalFilterVowel)ModuleHandle.GetControllerValue(10, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Vowel2
         /// <para> Possible values: A, E, I, O, U </para>
         /// </summary>
-        public void SetVowel2(VocalFilterVowel value) => Module.SetControllerValue(10, (int)value, ValueScalingType.Displayed);
+        public void SetVowel2(VocalFilterVowel value) => ModuleHandle.SetControllerValue(10, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Vowel3
         /// <para> Possible values: A, E, I, O, U </para>
         /// </summary>
-        public VocalFilterVowel GetVowel3() => (VocalFilterVowel)Module.GetControllerValue(11, ValueScalingType.Displayed);
+        public VocalFilterVowel GetVowel3() => (VocalFilterVowel)ModuleHandle.GetControllerValue(11, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Vowel3
         /// <para> Possible values: A, E, I, O, U </para>
         /// </summary>
-        public void SetVowel3(VocalFilterVowel value) => Module.SetControllerValue(11, (int)value, ValueScalingType.Displayed);
+        public void SetVowel3(VocalFilterVowel value) => ModuleHandle.SetControllerValue(11, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Vowel4
         /// <para> Possible values: A, E, I, O, U </para>
         /// </summary>
-        public VocalFilterVowel GetVowel4() => (VocalFilterVowel)Module.GetControllerValue(12, ValueScalingType.Displayed);
+        public VocalFilterVowel GetVowel4() => (VocalFilterVowel)ModuleHandle.GetControllerValue(12, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Vowel4
         /// <para> Possible values: A, E, I, O, U </para>
         /// </summary>
-        public void SetVowel4(VocalFilterVowel value) => Module.SetControllerValue(12, (int)value, ValueScalingType.Displayed);
+        public void SetVowel4(VocalFilterVowel value) => ModuleHandle.SetControllerValue(12, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Vowel5
         /// <para> Possible values: A, E, I, O, U </para>
         /// </summary>
-        public VocalFilterVowel GetVowel5() => (VocalFilterVowel)Module.GetControllerValue(13, ValueScalingType.Displayed);
+        public VocalFilterVowel GetVowel5() => (VocalFilterVowel)ModuleHandle.GetControllerValue(13, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Vowel5
         /// <para> Possible values: A, E, I, O, U </para>
         /// </summary>
-        public void SetVowel5(VocalFilterVowel value) => Module.SetControllerValue(13, (int)value, ValueScalingType.Displayed);
+        public void SetVowel5(VocalFilterVowel value) => ModuleHandle.SetControllerValue(13, (int)value, ValueScalingType.Displayed);
 
         #endregion controllers
     }
 
     public struct VorbisPlayerModuleHandle : IModuleHandleWrapper
     {
-        public ModuleHandle Module { get; private set; }
+        public ModuleHandle ModuleHandle { get; private set; }
 
         public VorbisPlayerModuleHandle(ModuleHandle module)
         {
-            Module = module;
+            ModuleHandle = module;
         }
 
 
         #region module type-specific methods
 
         /// <inheritdoc cref="ModuleHandle.LoadIntoVorbisPLayer(string)"/>
-        public void LoadVorbis(string path) => Module.LoadIntoVorbisPLayer(path);
+        public void LoadVorbis(string path) => ModuleHandle.LoadIntoVorbisPLayer(path);
 
         /// <inheritdoc cref="ModuleHandle.LoadIntoVorbisPLayer(byte[])"/>
-        public void LoadIntoVorbisPLayer(byte[] data) => Module.LoadIntoVorbisPLayer(data);
+        public void LoadIntoVorbisPLayer(byte[] data) => ModuleHandle.LoadIntoVorbisPLayer(data);
         #endregion module type-specific methods
 
 
@@ -7693,96 +7693,96 @@ namespace SunSharp.ObjectWrapper.Modules
         /// Original name: Finetune
         /// <para> Value range: -128 to 128 </para>
         /// </summary>
-        public int GetFinetune() => Module.GetControllerValue(2, ValueScalingType.Displayed);
+        public int GetFinetune() => ModuleHandle.GetControllerValue(2, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Finetune
         /// <para> Value range: -128 to 128 </para>
         /// </summary>
-        public void SetFinetune(int value) => Module.SetControllerValue(2, value, ValueScalingType.Displayed);
+        public void SetFinetune(int value) => ModuleHandle.SetControllerValue(2, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Interpolation
         /// <para> Possible values: Off, On </para>
         /// </summary>
-        public Toggle GetInterpolation() => (Toggle)Module.GetControllerValue(4, ValueScalingType.Displayed);
+        public Toggle GetInterpolation() => (Toggle)ModuleHandle.GetControllerValue(4, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Interpolation
         /// <para> Possible values: Off, On </para>
         /// </summary>
-        public void SetInterpolation(Toggle value) => Module.SetControllerValue(4, (int)value, ValueScalingType.Displayed);
+        public void SetInterpolation(Toggle value) => ModuleHandle.SetControllerValue(4, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Original speed
         /// <para> Possible values: Off, On </para>
         /// </summary>
-        public Toggle GetOriginalSpeed() => (Toggle)Module.GetControllerValue(1, ValueScalingType.Displayed);
+        public Toggle GetOriginalSpeed() => (Toggle)ModuleHandle.GetControllerValue(1, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Original speed
         /// <para> Possible values: Off, On </para>
         /// </summary>
-        public void SetOriginalSpeed(Toggle value) => Module.SetControllerValue(1, (int)value, ValueScalingType.Displayed);
+        public void SetOriginalSpeed(Toggle value) => ModuleHandle.SetControllerValue(1, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Polyphony
         /// <para> Value range: 1 to 4 </para>
         /// </summary>
-        public int GetPolyphony() => Module.GetControllerValue(5, ValueScalingType.Displayed);
+        public int GetPolyphony() => ModuleHandle.GetControllerValue(5, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Polyphony
         /// <para> Value range: 1 to 4 </para>
         /// </summary>
-        public void SetPolyphony(int value) => Module.SetControllerValue(5, value, ValueScalingType.Displayed);
+        public void SetPolyphony(int value) => ModuleHandle.SetControllerValue(5, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Repeat
         /// <para> Possible values: Off, On </para>
         /// </summary>
-        public Toggle GetRepeat() => (Toggle)Module.GetControllerValue(6, ValueScalingType.Displayed);
+        public Toggle GetRepeat() => (Toggle)ModuleHandle.GetControllerValue(6, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Repeat
         /// <para> Possible values: Off, On </para>
         /// </summary>
-        public void SetRepeat(Toggle value) => Module.SetControllerValue(6, (int)value, ValueScalingType.Displayed);
+        public void SetRepeat(Toggle value) => ModuleHandle.SetControllerValue(6, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Transpose
         /// <para> Value range: -128 to 128 </para>
         /// </summary>
-        public int GetTranspose() => Module.GetControllerValue(3, ValueScalingType.Displayed);
+        public int GetTranspose() => ModuleHandle.GetControllerValue(3, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Transpose
         /// <para> Value range: -128 to 128 </para>
         /// </summary>
-        public void SetTranspose(int value) => Module.SetControllerValue(3, value, ValueScalingType.Displayed);
+        public void SetTranspose(int value) => ModuleHandle.SetControllerValue(3, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Volume
         /// <para> Value range: 0 to 512 </para>
         /// </summary>
-        public int GetVolume() => Module.GetControllerValue(0, ValueScalingType.Displayed);
+        public int GetVolume() => ModuleHandle.GetControllerValue(0, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Volume
         /// <para> Value range: 0 to 512 </para>
         /// </summary>
-        public void SetVolume(int value) => Module.SetControllerValue(0, value, ValueScalingType.Displayed);
+        public void SetVolume(int value) => ModuleHandle.SetControllerValue(0, value, ValueScalingType.Displayed);
 
         #endregion controllers
     }
 
     public struct WaveShaperModuleHandle : IModuleHandleWrapper
     {
-        public ModuleHandle Module { get; private set; }
+        public ModuleHandle ModuleHandle { get; private set; }
 
         public WaveShaperModuleHandle(ModuleHandle module)
         {
-            Module = module;
+            ModuleHandle = module;
         }
 
 
@@ -7792,73 +7792,73 @@ namespace SunSharp.ObjectWrapper.Modules
         /// Original name: DC blocker
         /// <para> Possible values: Off, On </para>
         /// </summary>
-        public Toggle GetDCBlocker() => (Toggle)Module.GetControllerValue(5, ValueScalingType.Displayed);
+        public Toggle GetDCBlocker() => (Toggle)ModuleHandle.GetControllerValue(5, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: DC blocker
         /// <para> Possible values: Off, On </para>
         /// </summary>
-        public void SetDCBlocker(Toggle value) => Module.SetControllerValue(5, (int)value, ValueScalingType.Displayed);
+        public void SetDCBlocker(Toggle value) => ModuleHandle.SetControllerValue(5, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Input volume
         /// <para> Value range: 0 to 512 </para>
         /// </summary>
-        public int GetInputVolume() => Module.GetControllerValue(0, ValueScalingType.Displayed);
+        public int GetInputVolume() => ModuleHandle.GetControllerValue(0, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Input volume
         /// <para> Value range: 0 to 512 </para>
         /// </summary>
-        public void SetInputVolume(int value) => Module.SetControllerValue(0, value, ValueScalingType.Displayed);
+        public void SetInputVolume(int value) => ModuleHandle.SetControllerValue(0, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Mix
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public int GetMix() => Module.GetControllerValue(1, ValueScalingType.Displayed);
+        public int GetMix() => ModuleHandle.GetControllerValue(1, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Mix
         /// <para> Value range: 0 to 256 </para>
         /// </summary>
-        public void SetMix(int value) => Module.SetControllerValue(1, value, ValueScalingType.Displayed);
+        public void SetMix(int value) => ModuleHandle.SetControllerValue(1, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Mode
         /// <para> Possible values: HQ, HQMono, LQ, LQMono </para>
         /// </summary>
-        public Quality GetMode() => (Quality)Module.GetControllerValue(4, ValueScalingType.Displayed);
+        public Quality GetMode() => (Quality)ModuleHandle.GetControllerValue(4, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Mode
         /// <para> Possible values: HQ, HQMono, LQ, LQMono </para>
         /// </summary>
-        public void SetMode(Quality value) => Module.SetControllerValue(4, (int)value, ValueScalingType.Displayed);
+        public void SetMode(Quality value) => ModuleHandle.SetControllerValue(4, (int)value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Output volume
         /// <para> Value range: 0 to 512 </para>
         /// </summary>
-        public int GetOutputVolume() => Module.GetControllerValue(2, ValueScalingType.Displayed);
+        public int GetOutputVolume() => ModuleHandle.GetControllerValue(2, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Output volume
         /// <para> Value range: 0 to 512 </para>
         /// </summary>
-        public void SetOutputVolume(int value) => Module.SetControllerValue(2, value, ValueScalingType.Displayed);
+        public void SetOutputVolume(int value) => ModuleHandle.SetControllerValue(2, value, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Symmetric
         /// <para> Possible values: Off, On </para>
         /// </summary>
-        public Toggle GetSymmetric() => (Toggle)Module.GetControllerValue(3, ValueScalingType.Displayed);
+        public Toggle GetSymmetric() => (Toggle)ModuleHandle.GetControllerValue(3, ValueScalingType.Displayed);
 
         /// <summary>
         /// Original name: Symmetric
         /// <para> Possible values: Off, On </para>
         /// </summary>
-        public void SetSymmetric(Toggle value) => Module.SetControllerValue(3, (int)value, ValueScalingType.Displayed);
+        public void SetSymmetric(Toggle value) => ModuleHandle.SetControllerValue(3, (int)value, ValueScalingType.Displayed);
 
         #endregion controllers
 
@@ -7874,7 +7874,7 @@ namespace SunSharp.ObjectWrapper.Modules
             if (buffer.Length < 256)
                 throw new System.ArgumentException("Buffer must be at least of size 256");
 
-            Module.ReadCurve(0, buffer);
+            ModuleHandle.ReadCurve(0, buffer);
         }
 
         /// <summary>
@@ -7887,7 +7887,7 @@ namespace SunSharp.ObjectWrapper.Modules
             if (buffer.Length < 256)
                 throw new System.ArgumentException("Buffer must be at least of size 256");
 
-            Module.WriteCurve(0, buffer);
+            ModuleHandle.WriteCurve(0, buffer);
         }
 
         #endregion curves

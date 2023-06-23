@@ -17,7 +17,8 @@ namespace CodeGeneration.Generators.SpecificGenerators
         {
             AppendLine("/*");
             AppendLine(" * IMPORTANT!");
-            AppendLine(" * Do not modify this file manually. It was generated automatically by the CodeGeneration project.");
+            AppendLine(
+                " * Do not modify this file manually. It was generated automatically by the CodeGeneration project.");
             AppendLine("*/");
             AppendLine();
             AppendLine("namespace SunSharp.ObjectWrapper.Modules");
@@ -53,6 +54,7 @@ namespace CodeGeneration.Generators.SpecificGenerators
                 });
                 AppendLine("}");
             }
+
             AppendLine();
             AppendLine("#endregion enums");
         }
@@ -67,7 +69,8 @@ namespace CodeGeneration.Generators.SpecificGenerators
                 for (int i = 0; i < modules.Length; i++)
                 {
                     var module = modules[i];
-                    AppendLine($"public static {module.FriendlyName}ModuleHandle As{module.FriendlyName}(this ModuleHandle module) => new {module.FriendlyName}ModuleHandle(module);");
+                    AppendLine(
+                        $"public static {module.FriendlyName}ModuleHandle As{module.FriendlyName}(this ModuleHandle module) => new {module.FriendlyName}ModuleHandle(module);");
 
                     if (i != modules.Length - 1)
                         AppendLine();
@@ -87,14 +90,11 @@ namespace CodeGeneration.Generators.SpecificGenerators
                 AppendLine("{");
                 AddIndent(() =>
                 {
-                    AppendLine("public ModuleHandle Module { get; private set; }");
+                    AppendLine("public ModuleHandle ModuleHandle { get; private set; }");
                     AppendLine();
                     AppendLine($"public {m.FriendlyName}ModuleHandle(ModuleHandle module)");
                     AppendLine("{");
-                    AddIndent(() =>
-                    {
-                        AppendLine("Module = module;");
-                    });
+                    AddIndent(() => { AppendLine("ModuleHandle = module;"); });
                     AppendLine("}");
 
                     AppendLine();
@@ -121,6 +121,7 @@ namespace CodeGeneration.Generators.SpecificGenerators
                         GenerateCurves(m);
                         AppendLine("#endregion curves");
                     }
+
                     if (m.Curves.Any() && m.AdditionalCodeDescription != null)
                     {
                         AppendLine();
@@ -156,19 +157,23 @@ namespace CodeGeneration.Generators.SpecificGenerators
                     var @enum = _data.Enums.First(e => e.Name == c.EnumTypeName);
                     AppendLine("/// <summary>");
                     AppendLine($"/// Original name: {c.InternalName}");
-                    AppendLine($"/// <para> Possible values: {string.Join(", ", @enum.Values.Select(v => v.name))} </para>");
+                    AppendLine(
+                        $"/// <para> Possible values: {string.Join(", ", @enum.Values.Select(v => v.name))} </para>");
                     if (!string.IsNullOrWhiteSpace(c.Description))
                         AppendLine($"/// <para> {c.Description} </para>");
                     AppendLine("/// </summary>");
-                    AppendLine($"public {@enum.Name} Get{c.FriendlyName}() => ({@enum.Name})Module.GetControllerValue({c.Id}, {nameof(ValueScalingType)}.{ValueScalingType.Displayed});");
+                    AppendLine(
+                        $"public {@enum.Name} Get{c.FriendlyName}() => ({@enum.Name})ModuleHandle.GetControllerValue({c.Id}, {nameof(ValueScalingType)}.{ValueScalingType.Displayed});");
                     AppendLine();
                     AppendLine("/// <summary>");
                     AppendLine($"/// Original name: {c.InternalName}");
-                    AppendLine($"/// <para> Possible values: {string.Join(", ", @enum.Values.Select(v => v.name))} </para>");
+                    AppendLine(
+                        $"/// <para> Possible values: {string.Join(", ", @enum.Values.Select(v => v.name))} </para>");
                     if (!string.IsNullOrWhiteSpace(c.Description))
                         AppendLine($"/// <para> {c.Description} </para>");
                     AppendLine("/// </summary>");
-                    AppendLine($"public void Set{c.FriendlyName}({@enum.Name} value) => Module.SetControllerValue({c.Id}, (int)value, {nameof(ValueScalingType)}.{ValueScalingType.Displayed});");
+                    AppendLine(
+                        $"public void Set{c.FriendlyName}({@enum.Name} value) => ModuleHandle.SetControllerValue({c.Id}, (int)value, {nameof(ValueScalingType)}.{ValueScalingType.Displayed});");
                     AppendLine();
                 }
                 else
@@ -180,7 +185,8 @@ namespace CodeGeneration.Generators.SpecificGenerators
                     if (!string.IsNullOrWhiteSpace(c.Description))
                         AppendLine($"/// <para> {c.Description} </para>");
                     AppendLine("/// </summary>");
-                    AppendLine($"public int Get{c.FriendlyName}() => Module.GetControllerValue({c.Id}, {nameof(ValueScalingType)}.{ValueScalingType.Displayed});");
+                    AppendLine(
+                        $"public int Get{c.FriendlyName}() => ModuleHandle.GetControllerValue({c.Id}, {nameof(ValueScalingType)}.{ValueScalingType.Displayed});");
                     AppendLine();
                     AppendLine("/// <summary>");
                     AppendLine($"/// Original name: {c.InternalName}");
@@ -188,7 +194,8 @@ namespace CodeGeneration.Generators.SpecificGenerators
                     if (!string.IsNullOrWhiteSpace(c.Description))
                         AppendLine($"/// <para> {c.Description} </para>");
                     AppendLine("/// </summary>");
-                    AppendLine($"public void Set{c.FriendlyName}(int value) => Module.SetControllerValue({c.Id}, value, {nameof(ValueScalingType)}.{ValueScalingType.Displayed});");
+                    AppendLine(
+                        $"public void Set{c.FriendlyName}(int value) => ModuleHandle.SetControllerValue({c.Id}, value, {nameof(ValueScalingType)}.{ValueScalingType.Displayed});");
                     AppendLine();
                 }
             }
@@ -209,9 +216,11 @@ namespace CodeGeneration.Generators.SpecificGenerators
                 AddIndent(() =>
                 {
                     AppendLine($"if (buffer.Length < {curve.Size})");
-                    AddIndent(() => AppendLine($"throw new System.ArgumentException(\"Buffer must be at least of size {curve.Size}\");"));
+                    AddIndent(() =>
+                        AppendLine(
+                            $"throw new System.ArgumentException(\"Buffer must be at least of size {curve.Size}\");"));
                     AppendLine();
-                    AppendLine($"Module.ReadCurve({curve.Id}, buffer);");
+                    AppendLine($"ModuleHandle.ReadCurve({curve.Id}, buffer);");
                 });
                 AppendLine("}");
                 AppendLine();
@@ -226,9 +235,11 @@ namespace CodeGeneration.Generators.SpecificGenerators
                 AddIndent(() =>
                 {
                     AppendLine($"if (buffer.Length < {curve.Size})");
-                    AddIndent(() => AppendLine($"throw new System.ArgumentException(\"Buffer must be at least of size {curve.Size}\");"));
+                    AddIndent(() =>
+                        AppendLine(
+                            $"throw new System.ArgumentException(\"Buffer must be at least of size {curve.Size}\");"));
                     AppendLine();
-                    AppendLine($"Module.WriteCurve({curve.Id}, buffer);");
+                    AppendLine($"ModuleHandle.WriteCurve({curve.Id}, buffer);");
                 });
                 AppendLine("}");
                 AppendLine();

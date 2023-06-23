@@ -60,17 +60,15 @@ namespace SunSharp.ObjectWrapper
         /// <summary>
         /// Try to get and open a new slot.
         /// </summary>
-        /// <param name="slot"></param>
-        /// <returns><see langword="false"/> if failed to find an unused slot.</returns>
-        public bool TryOpenNewSlot(out Slot slot)
+        /// <returns><see langword="null" /> if opening a closed slot failed. Otherwise, an open slot is returned. </returns>
+        public Slot? TryOpenNewSlot()
         {
-            slot = RunInOpeningLock(() =>
+            return RunInOpeningLock(() =>
             {
-                var _slot = _slots.FirstOrDefault(s => !s.IsOpen);
-                _slot?.Open();
-                return _slot;
+                var slot = _slots.FirstOrDefault(s => !s.IsOpen);
+                slot?.Open();
+                return slot;
             });
-            return slot != null;
         }
 
         public IEnumerator<Slot> GetEnumerator() => ((IEnumerable<Slot>)_slots).GetEnumerator();

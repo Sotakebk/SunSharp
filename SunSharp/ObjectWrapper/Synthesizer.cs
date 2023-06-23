@@ -1,6 +1,6 @@
-﻿using SunSharp.ThinWrapper;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
+using SunSharp.ThinWrapper;
 
 namespace SunSharp.ObjectWrapper
 {
@@ -99,33 +99,26 @@ namespace SunSharp.ObjectWrapper
 
         public void RemoveModule(int moduleId)
         {
-            _slot.RunInLock(() =>
-            {
-                _lib.RemoveModule(_id, moduleId);
-            });
+            _slot.RunInLock(() => { _lib.RemoveModule(_id, moduleId); });
         }
 
         public void RemoveModule(ModuleHandle module) => RemoveModule(module.Id);
 
         public void ConnectModule(int sourceId, int destinationId)
         {
-            _slot.RunInLock(() =>
-            {
-                _lib.ConnectModule(_id, sourceId, destinationId);
-            });
+            _slot.RunInLock(() => { _lib.ConnectModule(_id, sourceId, destinationId); });
         }
 
-        public void ConnectModule(ModuleHandle source, ModuleHandle destination) => ConnectModule(source.Id, destination.Id);
+        public void ConnectModule(ModuleHandle source, ModuleHandle destination) =>
+            ConnectModule(source.Id, destination.Id);
 
         public void DisconnectModule(int sourceId, int destinationId)
         {
-            _slot.RunInLock(() =>
-            {
-                _lib.DisconnectModule(_id, sourceId, destinationId);
-            });
+            _slot.RunInLock(() => { _lib.DisconnectModule(_id, sourceId, destinationId); });
         }
 
-        public void DisconnectModule(ModuleHandle source, ModuleHandle destination) => DisconnectModule(source.Id, destination.Id);
+        public void DisconnectModule(ModuleHandle source, ModuleHandle destination) =>
+            DisconnectModule(source.Id, destination.Id);
 
         public IEnumerator<ModuleHandle> GetEnumerator()
         {

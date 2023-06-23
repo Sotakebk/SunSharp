@@ -3,7 +3,8 @@
 namespace SunSharp.ThinWrapper
 {
     [Flags]
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Naming", "CA1711:Identifiers should not have incorrect suffix", Justification = "Corresponds to SV_INIT_FLAG flags, this just makes sense.")]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Naming", "CA1711:Identifiers should not have incorrect suffix",
+        Justification = "Corresponds to SV_INIT_FLAG flags, this just makes sense.")]
     public enum InitFlags : uint
     {
         Default = 0,

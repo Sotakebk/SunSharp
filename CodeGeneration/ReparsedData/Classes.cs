@@ -11,7 +11,8 @@ namespace CodeGeneration.ReparsedData
         public ICollection<CurveDesc> Curves { get; set; }
         public AddCodeDesc AdditionalCodeDescription { get; set; }
 
-        public ModuleDesc(string friendlyName, string internalName, string description, ICollection<CtlDesc> controllers, ICollection<CurveDesc> curves, AddCodeDesc aditionalCodeDescription)
+        public ModuleDesc(string friendlyName, string internalName, string description,
+            ICollection<CtlDesc> controllers, ICollection<CurveDesc> curves, AddCodeDesc aditionalCodeDescription)
         {
             FriendlyName = friendlyName;
             InternalName = internalName;
@@ -45,7 +46,8 @@ namespace CodeGeneration.ReparsedData
         public bool IgnoreInternalEnum { get; set; }
         public string EnumTypeName { get; set; }
 
-        public CtlDesc(int id, string friendlyName, string internalName, string description, int min, int max, bool ignoreInternalEnum = false, string enumTypeName = null)
+        public CtlDesc(int id, string friendlyName, string internalName, string description, int min, int max,
+            bool ignoreInternalEnum = false, string enumTypeName = null)
         {
             Id = id;
             FriendlyName = friendlyName;
@@ -57,7 +59,8 @@ namespace CodeGeneration.ReparsedData
             IgnoreInternalEnum = ignoreInternalEnum;
         }
 
-        public CtlDesc(int id, string friendlyName, string internalname, string description, int min, int max, string enumTypeName)
+        public CtlDesc(int id, string friendlyName, string internalname, string description, int min, int max,
+            string enumTypeName)
         {
             Id = id;
             FriendlyName = friendlyName;

@@ -28,13 +28,13 @@ internal class ObjectWrapperSendEvents : BaseExample
         var ticksPerBeat = (int)(ticksPerSecond * 60f / 80f);
         var data = new (Note note, int time)[] // the lick, lol
         {
-            (new Note(NoteName.D, 3), ticksPerBeat/4), // note, and the time it should be held, in ticks
-            (new Note(NoteName.E, 3), ticksPerBeat/4),
-            (new Note(NoteName.F, 3), ticksPerBeat/4),
-            (new Note(NoteName.G, 3), ticksPerBeat/4),
-            (new Note(NoteName.E, 3), ticksPerBeat * 2/4),
-            (new Note(NoteName.C, 3), ticksPerBeat/4),
-            (new Note(NoteName.D, 3), ticksPerBeat/4),
+            (new Note(NoteName.D, 3), ticksPerBeat / 4), // note, and the time it should be held, in ticks
+            (new Note(NoteName.E, 3), ticksPerBeat / 4),
+            (new Note(NoteName.F, 3), ticksPerBeat / 4),
+            (new Note(NoteName.G, 3), ticksPerBeat / 4),
+            (new Note(NoteName.E, 3), ticksPerBeat * 2 / 4),
+            (new Note(NoteName.C, 3), ticksPerBeat / 4),
+            (new Note(NoteName.D, 3), ticksPerBeat / 4),
             (Note.Off, 0)
         };
 
@@ -46,6 +46,7 @@ internal class ObjectWrapperSendEvents : BaseExample
             vp.SendEvent(0, new PatternEvent(pair.note, 0x80, 2));
             accumulator += pair.time;
         }
+
         vp.ResetEventTiming();
 
         var wait = accumulator / (float)ticksPerSecond + 1;

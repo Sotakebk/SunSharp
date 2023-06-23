@@ -106,7 +106,8 @@ namespace CodeGeneration.Generators.SpecificGenerators
                         {
                             foreach (var cd in md.Curves.OrderBy(c => c.Id))
                             {
-                                AppendLine($"new {nameof(CurveDesc)}({cd.Id}, \"{cd.FriendlyName}\", \"{cd.Description}\", {cd.MinValue}, {cd.MaxValue}, {cd.Size}),");
+                                AppendLine(
+                                    $"new {nameof(CurveDesc)}({cd.Id}, \"{cd.FriendlyName}\", \"{cd.Description}\", {cd.MinValue}, {cd.MaxValue}, {cd.Size}),");
                             }
                         });
                         AppendLine("},");
@@ -128,15 +129,18 @@ namespace CodeGeneration.Generators.SpecificGenerators
         {
             if (cd.IgnoreInternalEnum)
             {
-                AppendLine($"new {nameof(CtlDesc)}({cd.Id}, \"{cd.FriendlyName}\", \"{cd.InternalName}\", \"{cd.Description}\", {cd.MinValue}, {cd.MaxValue}, ignoreInternalEnum: true),");
+                AppendLine(
+                    $"new {nameof(CtlDesc)}({cd.Id}, \"{cd.FriendlyName}\", \"{cd.InternalName}\", \"{cd.Description}\", {cd.MinValue}, {cd.MaxValue}, ignoreInternalEnum: true),");
             }
             else if (!string.IsNullOrWhiteSpace(cd.EnumTypeName))
             {
-                AppendLine($"new {nameof(CtlDesc)}({cd.Id}, \"{cd.FriendlyName}\", \"{cd.InternalName}\", \"{cd.Description}\", {cd.MinValue}, {cd.MaxValue}, enumTypeName: \"{cd.EnumTypeName}\"),");
+                AppendLine(
+                    $"new {nameof(CtlDesc)}({cd.Id}, \"{cd.FriendlyName}\", \"{cd.InternalName}\", \"{cd.Description}\", {cd.MinValue}, {cd.MaxValue}, enumTypeName: \"{cd.EnumTypeName}\"),");
             }
             else
             {
-                AppendLine($"new {nameof(CtlDesc)}({cd.Id}, \"{cd.FriendlyName}\", \"{cd.InternalName}\", \"{cd.Description}\", {cd.MinValue}, {cd.MaxValue}),");
+                AppendLine(
+                    $"new {nameof(CtlDesc)}({cd.Id}, \"{cd.FriendlyName}\", \"{cd.InternalName}\", \"{cd.Description}\", {cd.MinValue}, {cd.MaxValue}),");
             }
         }
     }

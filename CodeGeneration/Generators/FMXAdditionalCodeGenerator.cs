@@ -39,7 +39,8 @@ namespace CodeGeneration.Generators
             {
                 var module = Data.Modules.First(m => m.FriendlyName == "FMX");
                 var originalController = module.Controllers.First(c => c.FriendlyName.StartsWith(method)
-                                                                    && c.FriendlyName.EndsWith($"{SubGeneratorStart}"));
+                                                                       && c.FriendlyName.EndsWith(
+                                                                           $"{SubGeneratorStart}"));
                 AppendGroupMethod(method, originalController);
             }
         }
@@ -53,7 +54,8 @@ namespace CodeGeneration.Generators
 
                 AppendLine("/// <summary>");
                 AppendLine($"/// <para> index range: {SubGeneratorStart} to {SubGeneratorEnd} </para>");
-                AppendLine($"/// <para> Possible values: {string.Join(", ", @enum.Values.Select(v => v.name))} </para>");
+                AppendLine(
+                    $"/// <para> Possible values: {string.Join(", ", @enum.Values.Select(v => v.name))} </para>");
                 AppendLine("/// </summary>");
 
                 AppendLine($"public {@enum.Name} Get{name}(int index)");
@@ -63,14 +65,16 @@ namespace CodeGeneration.Generators
                     AppendLine($"if (index < {SubGeneratorStart} || index > {SubGeneratorEnd})");
                     AddIndent(() => AppendLine("throw new System.ArgumentOutOfRangeException(nameof(index));"));
                     AppendLine();
-                    AppendLine($"return ({@enum.Name})Module.GetControllerValue({c.Id} + index - 1, {nameof(ValueScalingType)}.{ValueScalingType.Displayed});");
+                    AppendLine(
+                        $"return ({@enum.Name})ModuleHandle.GetControllerValue({c.Id} + index - 1, {nameof(ValueScalingType)}.{ValueScalingType.Displayed});");
                 });
                 AppendLine("}");
                 AppendLine();
 
                 AppendLine("/// <summary>");
                 AppendLine($"/// <para> index range: {SubGeneratorStart} to {SubGeneratorEnd} </para>");
-                AppendLine($"/// <para> Possible values: {string.Join(", ", @enum.Values.Select(v => v.name))} </para>");
+                AppendLine(
+                    $"/// <para> Possible values: {string.Join(", ", @enum.Values.Select(v => v.name))} </para>");
                 AppendLine("/// </summary>");
 
                 AppendLine($"public void Set{name}(int index, {@enum.Name} value)");
@@ -80,7 +84,8 @@ namespace CodeGeneration.Generators
                     AppendLine($"if (index < {SubGeneratorStart} || index > {SubGeneratorEnd})");
                     AddIndent(() => AppendLine("throw new System.ArgumentOutOfRangeException(nameof(index));"));
                     AppendLine();
-                    AppendLine($"Module.SetControllerValue({c.Id} + index - 1, (int)value, {nameof(ValueScalingType)}.{ValueScalingType.Displayed});");
+                    AppendLine(
+                        $"ModuleHandle.SetControllerValue({c.Id} + index - 1, (int)value, {nameof(ValueScalingType)}.{ValueScalingType.Displayed});");
                 });
                 AppendLine("}");
                 AppendLine();
@@ -100,7 +105,8 @@ namespace CodeGeneration.Generators
                     AppendLine($"if (index < {SubGeneratorStart} || index > {SubGeneratorEnd})");
                     AddIndent(() => AppendLine("throw new System.ArgumentOutOfRangeException(nameof(index));"));
                     AppendLine();
-                    AppendLine($"return Module.GetControllerValue({c.Id} + index - 1, {nameof(ValueScalingType)}.{ValueScalingType.Displayed});");
+                    AppendLine(
+                        $"return ModuleHandle.GetControllerValue({c.Id} + index - 1, {nameof(ValueScalingType)}.{ValueScalingType.Displayed});");
                 });
                 AppendLine("}");
                 AppendLine();
@@ -117,7 +123,8 @@ namespace CodeGeneration.Generators
                     AppendLine($"if (index < {SubGeneratorStart} || index > {SubGeneratorEnd})");
                     AddIndent(() => AppendLine("throw new System.ArgumentOutOfRangeException(nameof(index));"));
                     AppendLine();
-                    AppendLine($"Module.SetControllerValue({c.Id} + index - 1, value, {nameof(ValueScalingType)}.{ValueScalingType.Displayed});");
+                    AppendLine(
+                        $"ModuleHandle.SetControllerValue({c.Id} + index - 1, value, {nameof(ValueScalingType)}.{ValueScalingType.Displayed});");
                 });
                 AppendLine("}");
                 AppendLine();

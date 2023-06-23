@@ -1,5 +1,5 @@
-﻿using SunSharp.ThinWrapper;
-using System;
+﻿using System;
+using SunSharp.ThinWrapper;
 
 namespace SunSharp.ObjectWrapper
 {
@@ -8,51 +8,43 @@ namespace SunSharp.ObjectWrapper
     /// </summary>
     public class Slot
     {
-        private readonly int _id;
-        private readonly ISunVoxLib _lib;
-        private readonly SunVox _sunVox;
         private readonly Slots _slots;
-        private readonly VirtualPattern _virtualPattern;
-        private readonly Timeline _timeline;
-        private readonly Synthesizer _synthesizer;
-        private readonly object _lock;
 
-        public int Id => _id;
+        public int Id { get; }
 
         /// <summary>
         /// Virtual, 16-track pattern for sending events to the engine.
         /// </summary>
-        public VirtualPattern VirtualPattern => _virtualPattern;
+        public VirtualPattern VirtualPattern { get; }
 
         /// <summary>
         /// Project timeline, containing all the existing patterns.
         /// </summary>
-        public Timeline Timeline => _timeline;
+        public Timeline Timeline { get; }
 
         /// <summary>
         /// Project synthesizer, containing all the existing modules.
         /// </summary>
-        public Synthesizer Synthesizer => _synthesizer;
+        public Synthesizer Synthesizer { get; }
 
-        public SunVox SunVox => _sunVox;
+        public SunVox SunVox { get; }
 
         /// <summary>
         /// Underlying library instance.
         /// </summary>
-        public ISunVoxLib Library => _lib;
+        public ISunVoxLib Library { get; }
 
         public bool IsOpen { get; private set; }
 
         internal Slot(int id, Slots slots, SunVox sunVox)
         {
-            _id = id;
-            _lock = new object();
+            Id = id;
             _slots = slots;
-            _sunVox = sunVox;
-            _lib = sunVox.Library;
-            _virtualPattern = new VirtualPattern(this);
-            _timeline = new Timeline(this);
-            _synthesizer = new Synthesizer(this);
+            SunVox = sunVox;
+            Library = sunVox.Library;
+            VirtualPattern = new VirtualPattern(this);
+            Timeline = new Timeline(this);
+            Synthesizer = new Synthesizer(this);
         }
 
         #region locks
@@ -66,7 +58,7 @@ namespace SunSharp.ObjectWrapper
             if (!IsOpen)
                 throw new InvalidOperationException("Slot is closed.");
 
-            _lib.RunInLock(_id, action);
+            Library.RunInLock(Id, action);
         }
 
         /// <inheritdoc cref="RunInLock(Action)"/>
@@ -75,12 +67,12 @@ namespace SunSharp.ObjectWrapper
             if (!IsOpen)
                 throw new InvalidOperationException("Slot is closed.");
 
-            return _lib.RunInLock(_id, function);
+            return Library.RunInLock(Id, function);
         }
 
-        protected void Lock() => _lib.LockSlot(_id);
+        protected void Lock() => Library.LockSlot(Id);
 
-        protected void Unlock() => _lib.UnlockSlot(_id);
+        protected void Unlock() => Library.UnlockSlot(Id);
 
         #endregion locks
 
@@ -92,9 +84,9 @@ namespace SunSharp.ObjectWrapper
             {
                 if (!IsOpen)
                 {
-                    _lib.OpenSlot(Id);
+                    Library.OpenSlot(Id);
                     IsOpen = true;
-                    RunInLock(() => _virtualPattern.ResetEventTiming());
+                    RunInLock(() => VirtualPattern.ResetEventTiming());
                 }
             });
         }
@@ -106,7 +98,7 @@ namespace SunSharp.ObjectWrapper
                 if (IsOpen)
                 {
                     IsOpen = false;
-                    _lib.CloseSlot(_id);
+                    Library.CloseSlot(Id);
                 }
             });
         }
@@ -119,19 +111,19 @@ namespace SunSharp.ObjectWrapper
         /// Load a project from file.
         /// </summary>
         /// <param name="path"></param>
-        public void Load(string path) => RunInLock(() => _lib.Load(_id, path));
+        public void Load(string path) => RunInLock(() => Library.Load(Id, path));
 
         /// <summary>
         /// load a project from memory.
         /// </summary>
         /// <param name="data"></param>
-        public void Load(byte[] data) => RunInLock(() => _lib.Load(_id, data));
+        public void Load(byte[] data) => RunInLock(() => Library.Load(Id, data));
 
         /// <summary>
         /// Save a project to file.
         /// </summary>
         /// <param name="path"></param>
-        public void Save(string path) => RunInLock(() => _lib.Save(_id, path));
+        public void Save(string path) => RunInLock(() => Library.Save(Id, path));
 
         #endregion loading, saving
 
@@ -139,57 +131,57 @@ namespace SunSharp.ObjectWrapper
 
         public void Play()
         {
-            RunInLock(() => _lib.Play(_id));
+            RunInLock(() => Library.Play(Id));
         }
 
         public void PlayFromBeginning()
         {
-            RunInLock(() => _lib.PlayFromBeginning(_id));
+            RunInLock(() => Library.PlayFromBeginning(Id));
         }
 
         public void Stop()
         {
-            RunInLock(() => _lib.Stop(_id));
+            RunInLock(() => Library.Stop(Id));
         }
 
         public void ResumeOnSyncEffect()
         {
-            RunInLock(() => _lib.ResumeOnSyncEffect(_id));
+            RunInLock(() => Library.ResumeOnSyncEffect(Id));
         }
 
         public void PauseAudio()
         {
-            RunInLock(() => _lib.Pause(_id));
+            RunInLock(() => Library.Pause(Id));
         }
 
         public void ResumeAudio()
         {
-            RunInLock(() => _lib.Resume(_id));
+            RunInLock(() => Library.Resume(Id));
         }
 
         public void SetAutostop(bool enable)
         {
-            RunInLock(() => _lib.SetAutostop(_id, enable));
+            RunInLock(() => Library.SetAutoStop(Id, enable));
         }
 
         public bool GetAutostop()
         {
-            return _lib.GetAutostop(_id);
+            return Library.GetAutostop(Id);
         }
 
         public bool IsPlaying()
         {
-            return _lib.IsPlaying(_id);
+            return Library.IsPlaying(Id);
         }
 
         public void Rewind(int lineNumber)
         {
-            RunInLock(() => _lib.Rewind(_id, lineNumber));
+            RunInLock(() => Library.Rewind(Id, lineNumber));
         }
 
         public int GetCurrentLine()
         {
-            return _lib.GetCurrentLine(_id);
+            return Library.GetCurrentLine(Id);
         }
 
         /// <summary>
@@ -197,12 +189,12 @@ namespace SunSharp.ObjectWrapper
         /// </summary>
         public int GetCurrentLineHundreds()
         {
-            return _lib.GetCurrentLine2(_id);
+            return Library.GetCurrentLine2(Id);
         }
 
         public int GetCurrentSignalLevel(AudioChannel channel = AudioChannel.Mono)
         {
-            return _lib.GetCurrentSignalLevel(_id, (int)channel);
+            return Library.GetCurrentSignalLevel(Id, (int)channel);
         }
 
         #endregion playing, stopping
@@ -211,54 +203,54 @@ namespace SunSharp.ObjectWrapper
 
         public int GetVolume()
         {
-            return _lib.Volume(_id, -1);
+            return Library.Volume(Id, -1);
         }
 
         public void SetVolume(int value)
         {
-            _lib.Volume(_id, value);
+            Library.Volume(Id, value);
         }
 
         public int GetSongBpm()
         {
-            return _lib.GetSongBpm(_id);
+            return Library.GetSongBpm(Id);
         }
 
         public void SetSongBpm(int value)
         {
             var xxyy = (ushort)Math.Min(Math.Max(0, value), 800);
-            _virtualPattern.SendEventImmediately(0, new PatternEvent(Effect.SetBpm, xxyy));
+            VirtualPattern.SendEventImmediately(0, new PatternEvent(Effect.SetBpm, xxyy));
         }
 
         public int GetSongTpl()
         {
-            return _lib.GetSongTpl(_id);
+            return Library.GetSongTpl(Id);
         }
 
         public void SetSongTpl(int value)
         {
             var xxyy = (ushort)Math.Min(Math.Max(1, value), 31);
-            _virtualPattern.SendEventImmediately(0, new PatternEvent(Effect.SetPlayingSpeed, xxyy));
+            VirtualPattern.SendEventImmediately(0, new PatternEvent(Effect.SetPlayingSpeed, xxyy));
         }
 
         public int GetSongLengthInLines()
         {
-            return _lib.GetSongLengthInLines(_id);
+            return Library.GetSongLengthInLines(Id);
         }
 
         public int GetSongLengthInFrames()
         {
-            return _lib.GetSongLengthInFrames(_id);
+            return Library.GetSongLengthInFrames(Id);
         }
 
-        public string GetSongName()
+        public string? GetSongName()
         {
-            return _lib.GetSongName(_id);
+            return Library.GetSongName(Id);
         }
 
         public void SetSongName(string name)
         {
-            _lib.SetSongName(_id, name);
+            Library.SetSongName(Id, name);
         }
 
         /// <summary>
@@ -272,7 +264,7 @@ namespace SunSharp.ObjectWrapper
         /// <returns></returns>
         public uint[] GetTimeMap(int startLine, int length, TimeMapType type)
         {
-            return _lib.GetTimeMap(_id, startLine, length, type);
+            return Library.GetTimeMap(Id, startLine, length, type);
         }
 
         #endregion song properties

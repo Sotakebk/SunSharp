@@ -1,7 +1,7 @@
-﻿using CodeGeneration.Generators.SpecificGenerators;
+﻿using System.Runtime.CompilerServices;
+using CodeGeneration.Generators.SpecificGenerators;
 using CodeGeneration.ReparsedData;
 using SunSharp.ObjectWrapper;
-using System.Runtime.CompilerServices;
 
 namespace CodeGeneration
 {
@@ -9,7 +9,8 @@ namespace CodeGeneration
     {
         internal static SunVox _sunVox;
 
-        internal static string GetSourceFilePathName([CallerFilePath] string callerFilePath = null) => Path.GetDirectoryName(callerFilePath) ?? "";
+        internal static string GetSourceFilePathName([CallerFilePath] string callerFilePath = null) =>
+            Path.GetDirectoryName(callerFilePath) ?? "";
 
         private static float[] buffer = new float[32];
 

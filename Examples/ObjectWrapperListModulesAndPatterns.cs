@@ -54,6 +54,7 @@ internal class ObjectWrapperListModulesAndPatterns : BaseExample
                     if (t < tracks - 1)
                         Write(" ");
                 }
+
                 Write(Environment.NewLine);
             }
         }

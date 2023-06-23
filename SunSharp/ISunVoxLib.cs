@@ -36,7 +36,8 @@ namespace SunSharp
         /// <summary>
         /// int sv_audio_callback2(void* buf, int frames, int latency, uint32_t out_time, int in_type, int in_channels, void* in_buf) SUNVOX_FN_ATTR;
         /// </summary>
-        int sv_audio_callback2(IntPtr buf, int frames, int latency, uint out_time, int in_type, int in_channels, IntPtr in_buf);
+        int sv_audio_callback2(IntPtr buf, int frames, int latency, uint out_time, int in_type, int in_channels,
+            IntPtr in_buf);
 
         /// <summary>
         /// int sv_open_slot(int slot) SUNVOX_FN_ATTR;
@@ -446,7 +447,8 @@ namespace SunSharp
         /// <summary>
         /// int sv_set_pattern_event(int slot, int pat_num, int track, int line, int nn, int vv, int mm, int ccee, int xxyy) SUNVOX_FN_ATTR;
         /// </summary>
-        int sv_set_pattern_event(int slot, int pat_num, int track, int line, int nn, int vv, int mm, int ccee, int xxyy);
+        int sv_set_pattern_event(int slot, int pat_num, int track, int line, int nn, int vv, int mm, int ccee,
+            int xxyy);
 
         /// <summary>
         /// int sv_get_pattern_event(int slot, int pat_num, int track, int line, int column) SUNVOX_FN_ATTR;

@@ -54,24 +54,24 @@
         public static bool IsNonLinear(this Effect effect)
         {
             return effect == Effect.Jump
-                || effect == Effect.SetJumpMode
-                || effect == Effect.StopPlaying;
+                   || effect == Effect.SetJumpMode
+                   || effect == Effect.StopPlaying;
         }
 
         public static bool IsDestructive(this Effect effect)
         {
             return effect == Effect.DeleteEventOnTrackWithProbability
-                || effect == Effect.CyclicShiftTrackLines
-                || effect == Effect.GeneratePolyrhythm
-                || effect == Effect.CopyTrackToPattern
-                || effect == Effect.CopyTrackFromPattern
-                || effect == Effect.WriteRandomValue;
+                   || effect == Effect.CyclicShiftTrackLines
+                   || effect == Effect.GeneratePolyrhythm
+                   || effect == Effect.CopyTrackToPattern
+                   || effect == Effect.CopyTrackFromPattern
+                   || effect == Effect.WriteRandomValue;
         }
 
         public static bool ModifiesTime(this Effect effect)
         {
             return effect == Effect.SetBpm
-                || effect == Effect.SetPlayingSpeed;
+                   || effect == Effect.SetPlayingSpeed;
         }
     }
 }

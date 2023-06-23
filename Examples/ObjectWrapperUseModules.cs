@@ -32,10 +32,11 @@ internal class ObjectWrapperUseModules : BaseExample
             foreach (var f in buffer)
                 WriteLine($"{f}");
             WriteLine($"Changing drawn values");
-            for(int i = 0; i < 32; i++)
+            for (int i = 0; i < 32; i++)
             {
-                buffer[i] = MathF.Sin(i * MathF.PI*2/32f);
+                buffer[i] = MathF.Sin(i * MathF.PI * 2 / 32f);
             }
+
             analogGenerator.WriteDrawnValues(buffer);
             WriteLine($"Reading drawn values");
             analogGenerator.ReadDrawnValues(buffer);
@@ -50,14 +51,16 @@ internal class ObjectWrapperUseModules : BaseExample
             while (line != slot.GetSongLengthInLines() - 1 || slot.IsPlaying())
             {
                 var currentLine = slot.GetCurrentLine();
-                analogGenerator.SetPanning((int)(128 * MathF.Sin(currentLine/32f*4f)));
+                analogGenerator.SetPanning((int)(128 * MathF.Sin(currentLine / 32f * 4f)));
                 if (currentLine != line)
                 {
                     line = currentLine;
                     WriteLine($"Current line: {line}");
                 }
+
                 Thread.Sleep(10);
             }
+
             WriteLine("Song finished");
             Thread.Sleep(1000); // wait a second, so the reverb may fade out a bit...
             slot.Close();

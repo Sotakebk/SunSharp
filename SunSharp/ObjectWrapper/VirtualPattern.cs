@@ -9,8 +9,8 @@ namespace SunSharp.ObjectWrapper
         private readonly ISunVoxLib _lib;
         private readonly Slot _slot;
         private readonly int _id;
-        private int? lastSetTimeStamp;
-        private object _lock;
+        private int? _lastSetTimeStamp;
+        private readonly object _lock;
 
         internal VirtualPattern(Slot slot)
         {
@@ -34,10 +34,10 @@ namespace SunSharp.ObjectWrapper
         {
             lock (_lock)
             {
-                if (lastSetTimeStamp != null)
+                if (_lastSetTimeStamp != null)
                 {
-                    var previous = lastSetTimeStamp;
-                    _lib.SetSendEventTimestamp(_id, true);
+                    var previous = _lastSetTimeStamp;
+                    _lib.SetSendEventTimestamp(_id, reset: true);
                     _lib.SendEvent(_id, track, e);
                     _lib.SetSendEventTimestamp(_id, false, previous.Value);
                 }
@@ -58,7 +58,7 @@ namespace SunSharp.ObjectWrapper
             lock (_lock)
             {
                 _lib.SetSendEventTimestamp(_id, false, timestamp);
-                lastSetTimeStamp = timestamp;
+                _lastSetTimeStamp = timestamp;
             }
         }
 
@@ -71,7 +71,7 @@ namespace SunSharp.ObjectWrapper
             lock (_lock)
             {
                 _lib.SetSendEventTimestamp(_id, true);
-                lastSetTimeStamp = null;
+                _lastSetTimeStamp = null;
             }
         }
 
@@ -93,11 +93,11 @@ namespace SunSharp.ObjectWrapper
         /// </summary>
         /// <param name="track"></param>
         /// <param name="e"></param>
-        public void SendEvent(int track, int NN = 0, int VV = 0, int MM = 0, int CCEE = 0, int XXYY = 0)
+        public void SendEvent(int track, int nn = 0, int vv = 0, int mm = 0, int ccee = 0, int xxyy = 0)
         {
             lock (_lock)
             {
-                _lib.SendEvent(_id, track, NN, VV, MM, CCEE, XXYY);
+                _lib.SendEvent(_id, track, nn, vv, mm, ccee, xxyy);
             }
         }
     }

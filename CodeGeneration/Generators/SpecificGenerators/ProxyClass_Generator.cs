@@ -1,5 +1,5 @@
-﻿using SunSharp;
-using System.Reflection;
+﻿using System.Reflection;
+using SunSharp;
 
 namespace CodeGeneration.Generators.SpecificGenerators
 {
@@ -7,15 +7,15 @@ namespace CodeGeneration.Generators.SpecificGenerators
     {
         private static Dictionary<string, string> StrictTypeToType = new Dictionary<string, string>()
         {
-            {"Int32", "int"},
-            {"UInt32", "uint"},
-            {"Void", "void"}
+            { "Int32", "int" },
+            { "UInt32", "uint" },
+            { "Void", "void" }
         };
 
         private static Dictionary<string, string> StrictTypeToName = new Dictionary<string, string>()
         {
-            {"Int32", "Int"},
-            {"UInt32", "Uint"}
+            { "Int32", "Int" },
+            { "UInt32", "Uint" }
         };
 
         private static string Translate(object o, Dictionary<string, string> d)
@@ -60,6 +60,7 @@ namespace CodeGeneration.Generators.SpecificGenerators
                         AppendLine(d);
                         AppendLine();
                     }
+
                     AppendLine("#endregion delegate definitions");
                     AppendLine();
                     AppendLine("#region delegates");
@@ -71,6 +72,7 @@ namespace CodeGeneration.Generators.SpecificGenerators
                         AppendLine(d);
                         AppendLine();
                     }
+
                     AppendLineNoTab("#pragma warning restore CS0649");
                     AppendLine();
                     AppendLine("#endregion delegates");
@@ -82,6 +84,7 @@ namespace CodeGeneration.Generators.SpecificGenerators
                         AppendLine(d);
                         AppendLine();
                     }
+
                     AppendLine($"#endregion interface");
                 });
                 AppendLine("}");
@@ -107,10 +110,7 @@ namespace CodeGeneration.Generators.SpecificGenerators
                 {
                     AppendLine("if (typeof(Delegate).IsAssignableFrom(field.FieldType))");
                     AppendLine("{");
-                    AddIndent(() =>
-                    {
-                        AppendLine("field.SetValue(this, GetDelegate(field.Name, field.FieldType));");
-                    });
+                    AddIndent(() => { AppendLine("field.SetValue(this, GetDelegate(field.Name, field.FieldType));"); });
                     AppendLine("}");
                 });
                 AppendLine("}");
@@ -118,7 +118,8 @@ namespace CodeGeneration.Generators.SpecificGenerators
             AppendLine("}");
         }
 
-        private static (ICollection<string> delegateDefinitions, ICollection<string> delegates, ICollection<string> delegateCalls) ReadData(Type t)
+        private static (ICollection<string> delegateDefinitions, ICollection<string> delegates, ICollection<string>
+            delegateCalls) ReadData(Type t)
         {
             HashSet<string> delegateDefinitions = new();
             HashSet<string> delegates = new();
@@ -131,7 +132,8 @@ namespace CodeGeneration.Generators.SpecificGenerators
                 delegateCalls.Add(delegateCall);
             }
 
-            return (delegateDefinitions.OrderBy(s => s).ToList(), delegates.OrderBy(s => s).ToList(), delegateCalls.OrderBy(s => s).ToList());
+            return (delegateDefinitions.OrderBy(s => s).ToList(), delegates.OrderBy(s => s).ToList(),
+                delegateCalls.OrderBy(s => s).ToList());
         }
 
         private static (string delegateDefinition, string @delegate, string delegateCall) ParseMethod(MethodInfo info)
@@ -154,10 +156,13 @@ namespace CodeGeneration.Generators.SpecificGenerators
                 foreach (var parameter in info.GetParameters())
                 {
                     int count = namedPars.Count(p => p.Item1 == parameter.ParameterType);
-                    var parameterName = $"_{TranslateToType(parameter.ParameterType.Name)}{(count != 0 ? count : "")}"; // int, int2, int3...
+                    var parameterName =
+                        $"_{TranslateToType(parameter.ParameterType.Name)}{(count != 0 ? count : "")}"; // int, int2, int3...
                     namedPars.Add((parameter.ParameterType, parameterName));
                 }
-                delegateTypeArgs = string.Join(", ", namedPars.Select(p => $"{TranslateToType(p.Item1.Name)} {p.Item2}"));
+
+                delegateTypeArgs =
+                    string.Join(", ", namedPars.Select(p => $"{TranslateToType(p.Item1.Name)} {p.Item2}"));
             }
 
             string delegateInstanceName = $"{info.Name}";
@@ -167,9 +172,11 @@ namespace CodeGeneration.Generators.SpecificGenerators
             string delegateCall;
             // call
             {
-                var pars = string.Join(", ", info.GetParameters().Select(p => $"{TranslateToType(p.ParameterType.Name)} {p.Name}"));
+                var pars = string.Join(", ",
+                    info.GetParameters().Select(p => $"{TranslateToType(p.ParameterType.Name)} {p.Name}"));
                 var forwardedPars = string.Join(", ", info.GetParameters().Select(p => p.Name));
-                delegateCall = $"{returnsTypeName} {info.DeclaringType?.Name}.{info.Name}({pars}) => {delegateInstanceName}({forwardedPars});";
+                delegateCall =
+                    $"{returnsTypeName} {info.DeclaringType?.Name}.{info.Name}({pars}) => {delegateInstanceName}({forwardedPars});";
             }
 
             return (delegateDefinition, @delegate, delegateCall);

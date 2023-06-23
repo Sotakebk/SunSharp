@@ -28,6 +28,7 @@
                 file.Flush();
                 file.Close();
             }
+
             return true;
         }
 

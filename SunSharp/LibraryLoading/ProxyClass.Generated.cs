@@ -20,61 +20,61 @@ namespace SunSharp.LibraryLoading
 
         #region delegate definitions
 
-        private delegate int o_Int_i_Int(int _int);
-
-        private delegate int o_Int_i_Int_Int(int _int, int _int1);
-
-        private delegate int o_Int_i_Int_Int_Int(int _int, int _int1, int _int2);
-
-        private delegate int o_Int_i_Int_Int_Int_Int(int _int, int _int1, int _int2, int _int3);
-
-        private delegate int o_Int_i_Int_Int_Int_Int_Int(int _int, int _int1, int _int2, int _int3, int _int4);
-
-        private delegate int o_Int_i_Int_Int_Int_Int_Int_Int_Int(int _int, int _int1, int _int2, int _int3, int _int4, int _int5, int _int6);
-
         private delegate int o_Int_i_Int_Int_Int_Int_Int_Int_Int_Int_Int(int _int, int _int1, int _int2, int _int3, int _int4, int _int5, int _int6, int _int7, int _int8);
 
         private delegate int o_Int_i_Int_Int_Int_Int_Int_Int_Int_IntPtr(int _int, int _int1, int _int2, int _int3, int _int4, int _int5, int _int6, IntPtr _IntPtr);
 
-        private delegate int o_Int_i_Int_Int_Int_IntPtr_Int(int _int, int _int1, int _int2, IntPtr _IntPtr, int _int3);
+        private delegate int o_Int_i_Int_Int_Int_Int_Int_Int_Int(int _int, int _int1, int _int2, int _int3, int _int4, int _int5, int _int6);
+
+        private delegate int o_Int_i_Int_Int_Int_Int_Int(int _int, int _int1, int _int2, int _int3, int _int4);
+
+        private delegate int o_Int_i_Int_Int_Int_Int(int _int, int _int1, int _int2, int _int3);
 
         private delegate int o_Int_i_Int_Int_Int_IntPtr_Int_Int(int _int, int _int1, int _int2, IntPtr _IntPtr, int _int3, int _int4);
 
-        private delegate int o_Int_i_Int_Int_IntPtr(int _int, int _int1, IntPtr _IntPtr);
+        private delegate int o_Int_i_Int_Int_Int_IntPtr_Int(int _int, int _int1, int _int2, IntPtr _IntPtr, int _int3);
+
+        private delegate int o_Int_i_Int_Int_Int(int _int, int _int1, int _int2);
 
         private delegate int o_Int_i_Int_Int_IntPtr_Int(int _int, int _int1, IntPtr _IntPtr, int _int2);
 
-        private delegate int o_Int_i_Int_Int_IntPtr_Uint(int _int, int _int1, IntPtr _IntPtr, uint _uint);
-
         private delegate int o_Int_i_Int_Int_IntPtr_Uint_Int(int _int, int _int1, IntPtr _IntPtr, uint _uint, int _int2);
 
-        private delegate int o_Int_i_Int_IntPtr(int _int, IntPtr _IntPtr);
+        private delegate int o_Int_i_Int_Int_IntPtr_Uint(int _int, int _int1, IntPtr _IntPtr, uint _uint);
+
+        private delegate int o_Int_i_Int_Int_IntPtr(int _int, int _int1, IntPtr _IntPtr);
+
+        private delegate int o_Int_i_Int_Int(int _int, int _int1);
 
         private delegate int o_Int_i_Int_IntPtr_Int_Int_Int(int _int, IntPtr _IntPtr, int _int1, int _int2, int _int3);
 
         private delegate int o_Int_i_Int_IntPtr_IntPtr_Int_Int_Int(int _int, IntPtr _IntPtr, IntPtr _IntPtr1, int _int1, int _int2, int _int3);
 
-        private delegate int o_Int_i_Int_IntPtr_Uint(int _int, IntPtr _IntPtr, uint _uint);
-
         private delegate int o_Int_i_Int_IntPtr_Uint_Int_Int_Int(int _int, IntPtr _IntPtr, uint _uint, int _int1, int _int2, int _int3);
 
-        private delegate int o_Int_i_IntPtr_Int_Int_Uint(IntPtr _IntPtr, int _int, int _int1, uint _uint);
+        private delegate int o_Int_i_Int_IntPtr_Uint(int _int, IntPtr _IntPtr, uint _uint);
+
+        private delegate int o_Int_i_Int_IntPtr(int _int, IntPtr _IntPtr);
+
+        private delegate int o_Int_i_Int(int _int);
 
         private delegate int o_Int_i_IntPtr_Int_Int_Uint_Int_Int_IntPtr(IntPtr _IntPtr, int _int, int _int1, uint _uint, int _int2, int _int3, IntPtr _IntPtr1);
 
+        private delegate int o_Int_i_IntPtr_Int_Int_Uint(IntPtr _IntPtr, int _int, int _int1, uint _uint);
+
         private delegate int o_Int_i_Void();
-
-        private delegate IntPtr o_IntPtr_i_Int(int _int);
-
-        private delegate IntPtr o_IntPtr_i_Int_Int(int _int, int _int1);
 
         private delegate IntPtr o_IntPtr_i_Int_Int_Int(int _int, int _int1, int _int2);
 
-        private delegate uint o_Uint_i_Int(int _int);
+        private delegate IntPtr o_IntPtr_i_Int_Int(int _int, int _int1);
+
+        private delegate IntPtr o_IntPtr_i_Int(int _int);
+
+        private delegate uint o_Uint_i_Int_Int_Int_IntPtr_Uint(int _int, int _int1, int _int2, IntPtr _IntPtr, uint _uint);
 
         private delegate uint o_Uint_i_Int_Int(int _int, int _int1);
 
-        private delegate uint o_Uint_i_Int_Int_Int_IntPtr_Uint(int _int, int _int1, int _int2, IntPtr _IntPtr, uint _uint);
+        private delegate uint o_Uint_i_Int(int _int);
 
         private delegate uint o_Uint_i_Void();
 
@@ -108,9 +108,9 @@ namespace SunSharp.LibraryLoading
 
         private o_Int_i_Int sv_pause;
 
-        private o_Int_i_Int sv_play;
-
         private o_Int_i_Int sv_play_from_beginning;
+
+        private o_Int_i_Int sv_play;
 
         private o_Int_i_Int sv_resume;
 
@@ -266,9 +266,9 @@ namespace SunSharp.LibraryLoading
 
         private o_Uint_i_Int_Int_Int_IntPtr_Uint sv_get_module_scope2;
 
-        private o_Uint_i_Void sv_get_ticks;
-
         private o_Uint_i_Void sv_get_ticks_per_second;
+
+        private o_Uint_i_Void sv_get_ticks;
 
 #pragma warning restore CS0649
 
@@ -342,19 +342,19 @@ namespace SunSharp.LibraryLoading
 
         int ISunVoxLib.sv_init(IntPtr config, int freq, int channels, uint flags) => sv_init(config, freq, channels, flags);
 
-        int ISunVoxLib.sv_load(int slot, IntPtr name) => sv_load(slot, name);
-
         int ISunVoxLib.sv_load_from_memory(int slot, IntPtr data, uint data_size) => sv_load_from_memory(slot, data, data_size);
-
-        int ISunVoxLib.sv_load_module(int slot, IntPtr file_name, int x, int y, int z) => sv_load_module(slot, file_name, x, y, z);
 
         int ISunVoxLib.sv_load_module_from_memory(int slot, IntPtr data, uint data_size, int x, int y, int z) => sv_load_module_from_memory(slot, data, data_size, x, y, z);
 
+        int ISunVoxLib.sv_load_module(int slot, IntPtr file_name, int x, int y, int z) => sv_load_module(slot, file_name, x, y, z);
+
+        int ISunVoxLib.sv_load(int slot, IntPtr name) => sv_load(slot, name);
+
         int ISunVoxLib.sv_lock_slot(int slot) => sv_lock_slot(slot);
 
-        int ISunVoxLib.sv_metamodule_load(int slot, int mod_num, IntPtr file_name) => sv_metamodule_load(slot, mod_num, file_name);
-
         int ISunVoxLib.sv_metamodule_load_from_memory(int slot, int mod_num, IntPtr data, uint data_size) => sv_metamodule_load_from_memory(slot, mod_num, data, data_size);
+
+        int ISunVoxLib.sv_metamodule_load(int slot, int mod_num, IntPtr file_name) => sv_metamodule_load(slot, mod_num, file_name);
 
         int ISunVoxLib.sv_module_curve(int slot, int mod_num, int curve_num, IntPtr data, int len, int w) => sv_module_curve(slot, mod_num, curve_num, data, len, w);
 
@@ -368,9 +368,9 @@ namespace SunSharp.LibraryLoading
 
         int ISunVoxLib.sv_pause(int slot) => sv_pause(slot);
 
-        int ISunVoxLib.sv_play(int slot) => sv_play(slot);
-
         int ISunVoxLib.sv_play_from_beginning(int slot) => sv_play_from_beginning(slot);
+
+        int ISunVoxLib.sv_play(int slot) => sv_play(slot);
 
         int ISunVoxLib.sv_remove_module(int slot, int mod_num) => sv_remove_module(slot, mod_num);
 
@@ -380,9 +380,9 @@ namespace SunSharp.LibraryLoading
 
         int ISunVoxLib.sv_rewind(int slot, int line_num) => sv_rewind(slot, line_num);
 
-        int ISunVoxLib.sv_sampler_load(int slot, int sampler_module, IntPtr file_name, int sample_slot) => sv_sampler_load(slot, sampler_module, file_name, sample_slot);
-
         int ISunVoxLib.sv_sampler_load_from_memory(int slot, int sampler_module, IntPtr data, uint data_size, int sample_slot) => sv_sampler_load_from_memory(slot, sampler_module, data, data_size, sample_slot);
+
+        int ISunVoxLib.sv_sampler_load(int slot, int sampler_module, IntPtr file_name, int sample_slot) => sv_sampler_load(slot, sampler_module, file_name, sample_slot);
 
         int ISunVoxLib.sv_save(int slot, IntPtr name) => sv_save(slot, name);
 
@@ -424,9 +424,9 @@ namespace SunSharp.LibraryLoading
 
         int ISunVoxLib.sv_volume(int slot, int vol) => sv_volume(slot, vol);
 
-        int ISunVoxLib.sv_vplayer_load(int slot, int mod_num, IntPtr file_name) => sv_vplayer_load(slot, mod_num, file_name);
-
         int ISunVoxLib.sv_vplayer_load_from_memory(int slot, int mod_num, IntPtr data, uint data_size) => sv_vplayer_load_from_memory(slot, mod_num, data, data_size);
+
+        int ISunVoxLib.sv_vplayer_load(int slot, int mod_num, IntPtr file_name) => sv_vplayer_load(slot, mod_num, file_name);
 
         IntPtr ISunVoxLib.sv_get_log(int size) => sv_get_log(size);
 
@@ -458,9 +458,9 @@ namespace SunSharp.LibraryLoading
 
         uint ISunVoxLib.sv_get_song_length_lines(int slot) => sv_get_song_length_lines(slot);
 
-        uint ISunVoxLib.sv_get_ticks() => sv_get_ticks();
-
         uint ISunVoxLib.sv_get_ticks_per_second() => sv_get_ticks_per_second();
+
+        uint ISunVoxLib.sv_get_ticks() => sv_get_ticks();
 
         #endregion interface
     }

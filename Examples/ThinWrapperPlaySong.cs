@@ -13,7 +13,7 @@ internal class ThinWrapperPlaySong : BaseExample
         lib.OpenSlot(0);
         lib.Load(0, "the_lick.sunvox");
         WriteLine($"Loaded song: {lib.GetSongName(0)}");
-        lib.SetAutostop(0, autostop: true);
+        lib.SetAutoStop(0, autoStop: true);
         lib.Rewind(0, line: 0);
         WriteLine("Playing the song");
         lib.Play(0);
@@ -27,8 +27,10 @@ internal class ThinWrapperPlaySong : BaseExample
                 line = currentLine;
                 WriteLine($"Current line: {line}");
             }
+
             Thread.Sleep(10);
         }
+
         WriteLine("Song finished");
         Thread.Sleep(1000); // wait a second, so the reverb may fade out a bit...
 

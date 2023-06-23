@@ -59,7 +59,8 @@ internal class ThinWrapperListModulesAndPatterns : BaseExample
                 var tracks = lib.GetPatternTracks(0, i);
                 var lines = lib.GetPatternLines(0, i);
                 var data = lib.GetPatternData(0, i);
-                WriteLine($"{i}. \"{name}\" at position (x: {position.x}, y: {position.y}), length: ({tracks}x{lines})");
+                WriteLine(
+                    $"{i}. \"{name}\" at position (x: {position.x}, y: {position.y}), length: ({tracks}x{lines})");
 
                 WriteLine("Data:");
                 WriteLine(string.Join(" ", Enumerable.Repeat("NNVVMMMMCCEEXXYY", tracks)));
@@ -72,6 +73,7 @@ internal class ThinWrapperListModulesAndPatterns : BaseExample
                         if (t < tracks - 1)
                             Write(" ");
                     }
+
                     Write(Environment.NewLine);
                 }
             }

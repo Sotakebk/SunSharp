@@ -1,6 +1,6 @@
-﻿using SunSharp.ThinWrapper;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using SunSharp.ThinWrapper;
 
 namespace SunSharp.ObjectWrapper
 {
@@ -10,26 +10,23 @@ namespace SunSharp.ObjectWrapper
     /// </summary>
     public class SunVox : System.IDisposable
     {
-        private readonly int _sampleRate;
         private readonly ISunVoxLib _lib;
-        private readonly Slots _slots;
         private readonly OutputType? _outputType;
-        private readonly Version _version;
-        private readonly bool _singleThreaded;
-        private readonly AudioChannels _channels;
 
         /// <summary>
         /// The underlying library. Direct use is potentially dangerous and may break existing abstractions.
         /// </summary>
         public ISunVoxLib Library => _lib;
 
-        public Slots Slots => _slots;
+        public Slots Slots { get; }
+
         public bool NeedsUserCallback => OutputType != null;
-        public bool SingleThreaded => _singleThreaded;
+        public bool SingleThreaded { get; }
+
         public OutputType? OutputType => _outputType;
-        public Version Version => _version;
-        public int SampleRate => _sampleRate;
-        public AudioChannels Channels => _channels;
+        public Version Version { get; }
+        public int SampleRate { get; }
+        public AudioChannels Channels { get; }
 
         /// <summary>
         /// Create an instance of the engine with own audio stream and threading.
@@ -42,7 +39,7 @@ namespace SunSharp.ObjectWrapper
         /// <param name="driver">Leave <see langword="null"/> for the value to be assigned by the engine.</param>
         /// <param name="noDebugOutput">Limit information sent to Standard Output.</param>
         public SunVox(ISunVoxLib lib, AudioChannels channels = AudioChannels.Stereo, uint? bufferSize = null,
-            string deviceIn = null, string deviceOut = null, string driver = null, bool noDebugOutput = true)
+            string? deviceIn = null, string? deviceOut = null, string? driver = null, bool noDebugOutput = true)
         {
             var flags = InitFlags.Default;
             if (noDebugOutput)
@@ -56,12 +53,12 @@ namespace SunSharp.ObjectWrapper
             var configuration = @params.Any() ? string.Join("|", @params) : null;
 
             _lib = lib;
-            _version = _lib.Init(sampleRate: -1, config: configuration, channels: channels, flags: flags);
-            _sampleRate = _lib.GetSampleRate();
-            _singleThreaded = false;
+            Version = _lib.Init(sampleRate: -1, config: configuration, channels: channels, flags: flags);
+            SampleRate = _lib.GetSampleRate();
+            SingleThreaded = false;
             _outputType = null;
-            _channels = channels;
-            _slots = new Slots(this);
+            Channels = channels;
+            Slots = new Slots(this);
         }
 
         /// <summary>
@@ -74,7 +71,8 @@ namespace SunSharp.ObjectWrapper
         /// <param name="singleThreaded">Use to promise that audio callback and other methods will be called from one thread.</param>
         /// <param name="noDebugOutput">Limit information sent to Standard Output.</param>
         /// <exception cref="System.ArgumentException"></exception>
-        public SunVox(ISunVoxLib lib, int sampleRate, OutputType outputType, AudioChannels channels = AudioChannels.Stereo,
+        public SunVox(ISunVoxLib lib, int sampleRate, OutputType outputType,
+            AudioChannels channels = AudioChannels.Stereo,
             bool singleThreaded = false, bool noDebugOutput = true)
         {
             var flags = InitFlags.UserAudioCallback;
@@ -96,12 +94,12 @@ namespace SunSharp.ObjectWrapper
                 throw new System.ArgumentException($"Invalid value: {sampleRate}", nameof(sampleRate));
 
             _lib = lib;
-            _version = _lib.Init(sampleRate: sampleRate, channels: channels, flags: flags);
-            _sampleRate = _lib.GetSampleRate();
-            _singleThreaded = false;
-            _channels = channels;
+            Version = _lib.Init(sampleRate: sampleRate, channels: channels, flags: flags);
+            SampleRate = _lib.GetSampleRate();
+            SingleThreaded = false;
+            Channels = channels;
             _outputType = outputType;
-            _slots = new Slots(this);
+            Slots = new Slots(this);
         }
 
         #region disposable
@@ -149,12 +147,13 @@ namespace SunSharp.ObjectWrapper
             if (_outputType == null)
                 throw new System.InvalidOperationException("SunVox was not initialized in user callback mode.");
 
-            if ((_outputType == ObjectWrapper.OutputType.Float32) == !@float)
-            {
-                var expected = @float ? ObjectWrapper.OutputType.Float32 : ObjectWrapper.OutputType.Int16;
-                var msg = $"SunVox was initialized with output type \"{OutputType}\", but callback was called expecting output type \"{expected}\"";
-                throw new System.InvalidOperationException(msg);
-            }
+            if (_outputType == ObjectWrapper.OutputType.Float32 != !@float)
+                return;
+
+            var expected = @float ? ObjectWrapper.OutputType.Float32 : ObjectWrapper.OutputType.Int16;
+            var msg =
+                $"SunVox was initialized with output type \"{OutputType}\", but callback was called expecting output type \"{expected}\"";
+            throw new System.InvalidOperationException(msg);
         }
 
         /// <summary>
@@ -167,14 +166,14 @@ namespace SunSharp.ObjectWrapper
         public bool AudioCallback(float[] outputBuffer, int latency, uint outTime)
         {
             AudioGuard(true);
-            return _lib.AudioCallback(outputBuffer, _channels, latency, outTime);
+            return _lib.AudioCallback(outputBuffer, Channels, latency, outTime);
         }
 
         /// <inheritdoc cref="AudioCallback(float[], int, uint)"/>
         public bool AudioCallback(short[] outputBuffer, int latency, uint outTime)
         {
             AudioGuard(false);
-            return _lib.AudioCallback(outputBuffer, _channels, latency, outTime);
+            return _lib.AudioCallback(outputBuffer, Channels, latency, outTime);
         }
 
         /// <summary>
@@ -187,31 +186,35 @@ namespace SunSharp.ObjectWrapper
         /// <param name="inputChannels">Input data channels.</param>
         /// <param name="latency">Audio latency (in frames).</param>
         /// <param name="outTime">Buffer output time (in system ticks).</param>
-        public bool AudioCallback(float[] outputBuffer, float[] inputBuffer, AudioChannels inputChannels, int latency, uint outTime)
+        public bool AudioCallback(float[] outputBuffer, float[] inputBuffer, AudioChannels inputChannels, int latency,
+            uint outTime)
         {
             AudioGuard(true);
-            return _lib.AudioCallback(outputBuffer, _channels, inputBuffer, inputChannels, latency, outTime);
+            return _lib.AudioCallback(outputBuffer, Channels, inputBuffer, inputChannels, latency, outTime);
         }
 
         /// <inheritdoc cref="AudioCallback(float[], float[], AudioChannels, int, uint)"/>
-        public bool AudioCallback(float[] outputBuffer, short[] inputBuffer, AudioChannels inputChannels, int latency, uint outTime)
+        public bool AudioCallback(float[] outputBuffer, short[] inputBuffer, AudioChannels inputChannels, int latency,
+            uint outTime)
         {
             AudioGuard(true);
-            return _lib.AudioCallback(outputBuffer, _channels, inputBuffer, inputChannels, latency, outTime);
+            return _lib.AudioCallback(outputBuffer, Channels, inputBuffer, inputChannels, latency, outTime);
         }
 
         /// <inheritdoc cref="AudioCallback(float[], float[], AudioChannels, int, uint)"/>
-        public bool AudioCallback(short[] outputBuffer, float[] inputBuffer, AudioChannels inputChannels, int latency, uint outTime)
+        public bool AudioCallback(short[] outputBuffer, float[] inputBuffer, AudioChannels inputChannels, int latency,
+            uint outTime)
         {
             AudioGuard(false);
-            return _lib.AudioCallback(outputBuffer, _channels, inputBuffer, inputChannels, latency, outTime);
+            return _lib.AudioCallback(outputBuffer, Channels, inputBuffer, inputChannels, latency, outTime);
         }
 
         /// <inheritdoc cref="AudioCallback(float[], float[], AudioChannels, int, uint)"/>
-        public bool AudioCallback(short[] outputBuffer, short[] inputBuffer, AudioChannels inputChannels, int latency, uint outTime)
+        public bool AudioCallback(short[] outputBuffer, short[] inputBuffer, AudioChannels inputChannels, int latency,
+            uint outTime)
         {
             AudioGuard(false);
-            return _lib.AudioCallback(outputBuffer, _channels, inputBuffer, inputChannels, latency, outTime);
+            return _lib.AudioCallback(outputBuffer, Channels, inputBuffer, inputChannels, latency, outTime);
         }
 
         #endregion audio I/O

@@ -1,7 +1,7 @@
-﻿using SunSharp.LibraryLoading;
-using System;
+﻿using System;
 using System.IO;
 using System.Runtime.InteropServices;
+using SunSharp.LibraryLoading;
 
 namespace SunSharp.Redistribution
 {
@@ -101,6 +101,7 @@ namespace SunSharp.Redistribution
                 if (RuntimeInformation.ProcessArchitecture == Architecture.X86)
                     return Path.Combine("lib", "windows", "lib_x86", "sunvox.dll");
             }
+
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
             {
                 if (RuntimeInformation.ProcessArchitecture == Architecture.Arm64)
@@ -110,6 +111,7 @@ namespace SunSharp.Redistribution
                 if (RuntimeInformation.ProcessArchitecture == Architecture.X86)
                     return Path.Combine("lib", "linux", "lib_x86", "sunvox.so");
             }
+
             if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
             {
                 if (RuntimeInformation.ProcessArchitecture == Architecture.Arm64)
@@ -117,59 +119,56 @@ namespace SunSharp.Redistribution
                 if (RuntimeInformation.ProcessArchitecture == Architecture.X64)
                     return Path.Combine("lib", "macos", "lib_x86_64", "sunvox.dylib");
             }
+
             throw new InvalidOperationException("Unsupported OS.");
         }
 
         #endregion platform invoke
 
-        private static readonly object _lock = new object();
-        private static IntPtr LoadedLibraryHandle;
-        private static ProxyClass proxyClass;
+        private static readonly object Lock = new object();
+        private static IntPtr _loadedLibraryHandle = IntPtr.Zero;
+        private static ProxyClass? _proxyClass;
 
         public static void LoadLibrary()
         {
-            lock (_lock)
+            lock (Lock)
             {
-                if (LoadedLibraryHandle == IntPtr.Zero)
-                {
-                    var path = GetLibraryPath();
-                    if (!File.Exists(path))
-                        throw new InvalidOperationException($"Library at location \"{path}\" does not exist.");
+                if (_loadedLibraryHandle != IntPtr.Zero)
+                    return;
 
-                    LoadedLibraryHandle = LoadLibrary(path);
-                    if (LoadedLibraryHandle == IntPtr.Zero)
-                        throw new InvalidOperationException("LoadLibrary failed.");
-                }
+                var path = GetLibraryPath();
+                if (!File.Exists(path))
+                    throw new InvalidOperationException($"Library at location \"{path}\" does not exist.");
+
+                _loadedLibraryHandle = LoadLibrary(path);
+                if (_loadedLibraryHandle == IntPtr.Zero)
+                    throw new InvalidOperationException("LoadLibrary failed.");
             }
         }
 
         public static ISunVoxLib GetLibrary()
         {
-            lock (_lock)
+            lock (Lock)
             {
-                if (LoadedLibraryHandle == IntPtr.Zero)
+                if (_loadedLibraryHandle == IntPtr.Zero)
                     throw new InvalidOperationException("Library is not loaded yet.");
 
-                if (proxyClass == null)
-                {
-                    proxyClass = new ProxyClass(GetDelegateFromName);
-                }
-                return proxyClass;
+                return _proxyClass ??= new ProxyClass(GetDelegateFromName);
             }
         }
 
         public static void UnloadLibrary()
         {
-            lock (_lock)
+            lock (Lock)
             {
-                if (LoadedLibraryHandle != IntPtr.Zero)
-                    UnloadLibrary(LoadedLibraryHandle);
+                if (_loadedLibraryHandle != IntPtr.Zero)
+                    UnloadLibrary(_loadedLibraryHandle);
             }
         }
 
         private static Delegate GetDelegateFromName(string name, Type delegateType)
         {
-            var ptr = FindFunction(LoadedLibraryHandle, name);
+            var ptr = FindFunction(_loadedLibraryHandle, name);
             if (ptr == IntPtr.Zero)
                 throw new InvalidOperationException($"Symbol {name} not found! Library: {GetLibraryPath()}.");
             return Marshal.GetDelegateForFunctionPointer(ptr, delegateType);

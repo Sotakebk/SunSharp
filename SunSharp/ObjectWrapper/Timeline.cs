@@ -1,6 +1,6 @@
-﻿using SunSharp.ThinWrapper;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
+using SunSharp.ThinWrapper;
 
 namespace SunSharp.ObjectWrapper
 {
@@ -55,7 +55,8 @@ namespace SunSharp.ObjectWrapper
 
         public PatternHandle CreatePattern(string name, int lines, int tracks, int x, int y, int? iconSeed = null)
         {
-            return Slot.RunInLock(() => {
+            return Slot.RunInLock(() =>
+            {
                 var id = _lib.CreatePattern(_id, null, x, y, tracks, lines, iconSeed, name);
                 return new PatternHandle(this, id);
             });
@@ -65,14 +66,14 @@ namespace SunSharp.ObjectWrapper
         {
             return Slot.RunInLock(() =>
             {
-                var id = _lib.CreatePattern(_id, original.Id, x, y, -1, -1, null, null);
+                var id = _lib.CreatePattern(_id, original.Id, x, y, -1, -1, null, original.GetName());
                 return new PatternHandle(this, id);
             });
         }
 
         public IEnumerator<PatternHandle> GetEnumerator()
         {
-            for (int i = 0; i < GetUpperPatternCount(); i++)
+            for (var i = 0; i < GetUpperPatternCount(); i++)
                 if (TryGetPattern(i, out var p))
                     yield return p;
         }

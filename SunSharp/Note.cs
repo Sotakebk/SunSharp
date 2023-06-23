@@ -33,8 +33,7 @@ namespace SunSharp
     [StructLayout(LayoutKind.Explicit, Size = 1)]
     public readonly struct Note
     {
-        [FieldOffset(0)]
-        public readonly byte Value;
+        [FieldOffset(0)] public readonly byte Value;
 
         private const byte NOTECMD_NOTE_OFF = 128;
         private const byte NOTECMD_ALL_NOTES_OFF = 129;

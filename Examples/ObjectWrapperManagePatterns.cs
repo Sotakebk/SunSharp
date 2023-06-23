@@ -31,10 +31,9 @@ internal class ObjectWrapperManagePatterns : BaseExample
             var data = pattern.GetData2D();
             var newData = new PatternEvent[lines, tracks];
 
-
-            for(int l = 0; l < lines; l++)
+            for (int l = 0; l < lines; l++)
             {
-                for(int t = 0; t < tracks; t++)
+                for (int t = 0; t < tracks; t++)
                 {
                     newData[l, t] = data[lines - 1 - l, tracks - t - 1];
                 }
@@ -56,8 +55,10 @@ internal class ObjectWrapperManagePatterns : BaseExample
                     line = currentLine;
                     WriteLine($"Current line: {line}");
                 }
+
                 Thread.Sleep(10);
             }
+
             WriteLine("Song finished");
             Thread.Sleep(1000); // wait a second, so the reverb may fade out a bit...
             slot.Close();
