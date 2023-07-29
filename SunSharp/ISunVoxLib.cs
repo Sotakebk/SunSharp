@@ -1,482 +1,305 @@
-﻿using System;
-
-namespace SunSharp
+﻿namespace SunSharp
 {
-    public interface ISunVoxLib
+    public partial interface ISunVoxLib
     {
-#pragma warning disable CA1707 // Identifiers should not contain underscores
-#pragma warning disable CA1716 // Identifiers should not match keywords
-#pragma warning disable IDE1006 // Naming Styles
-
-        /// <summary>
-        /// int sv_init(const char* config, int freq, int channels, uint32_t flags) SUNVOX_FN_ATTR;
-        /// </summary>
-        int sv_init(IntPtr config, int freq, int channels, uint flags);
-
-        /// <summary>
-        /// int sv_deinit(void) SUNVOX_FN_ATTR;
-        /// </summary>
-        int sv_deinit();
-
-        /// <summary>
-        /// int sv_get_sample_rate(void) SUNVOX_FN_ATTR;
-        /// </summary>
-        int sv_get_sample_rate();
-
-        /// <summary>
-        /// int sv_update_input(void) SUNVOX_FN_ATTR;
-        /// </summary>
-        int sv_update_input();
-
-        /// <summary>
-        /// int sv_audio_callback(void* buf, int frames, int latency, uint32_t out_time);
-        /// </summary>
-        int sv_audio_callback(IntPtr buf, int frames, int latency, uint out_time);
-
-        /// <summary>
-        /// int sv_audio_callback2(void* buf, int frames, int latency, uint32_t out_time, int in_type, int in_channels, void* in_buf) SUNVOX_FN_ATTR;
-        /// </summary>
-        int sv_audio_callback2(IntPtr buf, int frames, int latency, uint out_time, int in_type, int in_channels,
-            IntPtr in_buf);
-
-        /// <summary>
-        /// int sv_open_slot(int slot) SUNVOX_FN_ATTR;
-        /// </summary>
-        int sv_open_slot(int slot);
-
-        /// <summary>
-        /// int sv_close_slot(int slot) SUNVOX_FN_ATTR;
-        /// </summary>
-        int sv_close_slot(int slot);
-
-        /// <summary>
-        /// int sv_lock_slot(int slot) SUNVOX_FN_ATTR;
-        /// </summary>
-        int sv_lock_slot(int slot);
-
-        /// <summary>
-        /// int sv_unlock_slot(int slot) SUNVOX_FN_ATTR;
-        /// </summary>
-        int sv_unlock_slot(int slot);
-
-        /// <summary>
-        /// int sv_load(int slot, const char* name) SUNVOX_FN_ATTR;
-        /// </summary>
-        int sv_load(int slot, IntPtr name);
-
-        /// <summary>
-        /// int sv_load_from_memory(int slot, void* data, uint32_t data_size) SUNVOX_FN_ATTR;
-        /// </summary>
-        int sv_load_from_memory(int slot, IntPtr data, uint data_size);
-
-        /// <summary>
-        /// int sv_save(int slot, const char* name) SUNVOX_FN_ATTR;
-        /// </summary>
-        int sv_save(int slot, IntPtr name);
-
-        /// <summary>
-        /// int sv_play(int slot);
-        /// </summary>
-        int sv_play(int slot);
-
-        /// <summary>
-        /// int sv_play_from_beginning(int slot);
-        /// </summary>
-        int sv_play_from_beginning(int slot);
-
-        /// <summary>
-        /// int sv_stop(int slot);
-        /// </summary>
-        int sv_stop(int slot);
-
-        /// <summary>
-        /// int sv_pause(int slot);
-        /// </summary>
-        int sv_pause(int slot);
-
-        /// <summary>
-        /// int sv_resume(int slot);
-        /// </summary>
-        int sv_resume(int slot);
-
-        /// <summary>
-        /// int sv_sync_resume(int slot);
-        /// </summary>
-        int sv_sync_resume(int slot);
-
-        /// <summary>
-        /// int sv_set_autostop(int slot, int autostop) SUNVOX_FN_ATTR;
-        /// </summary>
-        int sv_set_autostop(int slot, int autostop);
-
-        /// <summary>
-        /// int sv_get_autostop(int slot) SUNVOX_FN_ATTR;
-        /// </summary>
-        int sv_get_autostop(int slot);
-
-        /// <summary>
-        /// int sv_end_of_song( int slot) SUNVOX_FN_ATTR;
-        /// </summary>
-        int sv_end_of_song(int slot);
-
-        /// <summary>
-        /// int sv_rewind( int slot, int line_num) SUNVOX_FN_ATTR;
-        /// </summary>
-        int sv_rewind(int slot, int line_num);
-
-        /// <summary>
-        /// int sv_volume(int slot, int vol) SUNVOX_FN_ATTR;
-        /// </summary>
-        int sv_volume(int slot, int vol);
-
-        /// <summary>
-        /// int sv_set_event_t( int slot, int set, int t) SUNVOX_FN_ATTR;
-        /// </summary>
-        int sv_set_event_t(int slot, int set, int t);
-
-        /// <summary>
-        /// int sv_send_event(int slot, int track_num, int note, int vel, int module, int ctl, int ctl_val) SUNVOX_FN_ATTR;
-        /// </summary>
-        int sv_send_event(int slot, int track_num, int note, int vel, int module, int ctl, int ctl_val);
-
-        /// <summary>
-        /// int sv_get_current_line(int slot) SUNVOX_FN_ATTR;
-        /// </summary>
-        int sv_get_current_line(int slot);
-
-        /// <summary>
-        /// int sv_get_current_line2(int slot) SUNVOX_FN_ATTR;
-        /// </summary>
-        int sv_get_current_line2(int slot);
-
-        /// <summary>
-        /// int sv_get_current_signal_level(int slot, int channel) SUNVOX_FN_ATTR;
-        /// </summary>
-        int sv_get_current_signal_level(int slot, int channel);
-
-        /// <summary>
-        /// const char* sv_get_song_name( int slot ) SUNVOX_FN_ATTR;
-        /// </summary>
-        IntPtr sv_get_song_name(int slot);
-
-        /// <summary>
-        /// int sv_set_song_name( int slot, const char* name ) SUNVOX_FN_ATTR;
-        /// </summary>
-        int sv_set_song_name(int slot, IntPtr name);
-
-        /// <summary>
-        /// int sv_get_song_bpm(int slot) SUNVOX_FN_ATTR;
-        /// </summary>
-        int sv_get_song_bpm(int slot);
-
-        /// <summary>
-        /// int sv_get_song_tpl(int slot) SUNVOX_FN_ATTR;
-        /// </summary>
-        int sv_get_song_tpl(int slot);
-
-        /// <summary>
-        /// uint32_t sv_get_song_length_frames(int slot) SUNVOX_FN_ATTR;
-        /// </summary>
-        uint sv_get_song_length_frames(int slot);
-
-        /// <summary>
-        /// uint32_t sv_get_song_length_lines(int slot) SUNVOX_FN_ATTR;
-        /// </summary>
-        uint sv_get_song_length_lines(int slot);
-
-        /// <summary>
-        /// int sv_get_time_map(int slot, int start_line, int len, uint32_t* dest, int flags) SUNVOX_FN_ATTR;
-        /// </summary>
-        int sv_get_time_map(int slot, int start_line, int len, IntPtr dest, int flags);
-
-        /// <summary>
-        /// int sv_new_module(int slot, const char* type, const char* name, int x, int y, int z) SUNVOX_FN_ATTR;
-        /// </summary>
-        int sv_new_module(int slot, IntPtr type, IntPtr name, int x, int y, int z);
-
-        /// <summary>
-        /// int sv_remove_module(int slot, int mod_num) SUNVOX_FN_ATTR;
-        /// </summary>
-        int sv_remove_module(int slot, int mod_num);
-
-        /// <summary>
-        /// int sv_connect_module(int slot, int source, int destination) SUNVOX_FN_ATTR;
-        /// </summary>
-        int sv_connect_module(int slot, int source, int destination);
-
-        /// <summary>
-        /// int sv_disconnect_module(int slot, int source, int destination) SUNVOX_FN_ATTR;
-        /// </summary>
-        int sv_disconnect_module(int slot, int source, int destination);
-
-        /// <summary>
-        /// int sv_load_module(int slot, const char* file_name, int x, int y, int z ) SUNVOX_FN_ATTR;
-        /// </summary>
-        int sv_load_module(int slot, IntPtr file_name, int x, int y, int z);
-
-        /// <summary>
-        /// int sv_load_module_from_memory(int slot, void* data, uint32_t data_size, int x, int y, int z) SUNVOX_FN_ATTR;
-        /// </summary>
-        int sv_load_module_from_memory(int slot, IntPtr data, uint data_size, int x, int y, int z);
-
-        /// <summary>
-        /// int sv_sampler_load(int slot, int sampler_module, const char* file_name, int sample_slot) SUNVOX_FN_ATTR;
-        /// </summary>
-        int sv_sampler_load(int slot, int sampler_module, IntPtr file_name, int sample_slot);
-
         /// <summary>
-        /// int sv_sampler_load_from_memory(int slot, int sampler_module, void* data, uint32_t data_size, int sample_slot) SUNVOX_FN_ATTR;
+        /// Initialize the engine. May be called again to re-initialize the engine.
         /// </summary>
-        int sv_sampler_load_from_memory(int slot, int sampler_module, IntPtr data, uint data_size, int sample_slot);
+        /// <param name="sampleRate">Sample rate. If not using audio callback, may be set to -1.</param>
+        /// <param name="config">Configuration, which may include input and output devices. See SunVox Lib documentation for details.</param>
+        /// <param name="channels">Channels to be used.</param>
+        /// <param name="flags">Initialization flags.</param>
+        /// <returns>The version of underlying library.</returns>
+        LibraryVersion Initialize(int sampleRate, string? config = null, AudioChannels channels = AudioChannels.Stereo, InitFlags flags = InitFlags.Default);
 
         /// <summary>
-        /// int sv_metamodule_load(int slot, int mod_num, const char* file_name) SUNVOX_FN_ATTR;
+        /// Deinitializes the library, frees resources.
         /// </summary>
-        int sv_metamodule_load(int slot, int mod_num, IntPtr file_name);
+        void Deinitialize();
 
         /// <summary>
-        /// int sv_metamodule_load_from_memory(int slot, int mod_num, void* data, uint32_t data_size) SUNVOX_FN_ATTR;
+        /// Get first <paramref name="size"/> characters of engine logs.
         /// </summary>
-        int sv_metamodule_load_from_memory(int slot, int mod_num, IntPtr data, uint data_size);
+        /// <param name="size">Character count to be read.</param>
+        /// <returns></returns>
+        string? GetLog(int size);
 
         /// <summary>
-        /// int sv_vplayer_load(int slot, int mod_num, const char* file_name) SUNVOX_FN_ATTR;
+        /// Use this method to get the current tick counter (from 0 to 0xFFFFFFFF). <br/>
+        /// SunVox engine uses system-provided time space, measured in system ticks (don't confuse it with the project ticks).
         /// </summary>
-        int sv_vplayer_load(int slot, int mod_num, IntPtr file_name);
+        /// <returns></returns>
+        uint GetTicks();
 
         /// <summary>
-        /// int sv_vplayer_load_from_memory(int slot, int mod_num, void* data, uint32_t data_size) SUNVOX_FN_ATTR;
+        /// Use this method to get the number of system ticks per second. <br/>
+        /// SunVox engine uses system-provided time space, measured in system ticks (don't confuse it with the project ticks).
         /// </summary>
-        int sv_vplayer_load_from_memory(int slot, int mod_num, IntPtr data, uint data_size);
+        /// <returns></returns>
+        uint GetTicksPerSecond();
 
-        /// <summary>
-        /// int sv_get_number_of_modules(int slot) SUNVOX_FN_ATTR;
-        /// </summary>
-        int sv_get_number_of_modules(int slot);
+        int GetSampleRate();
 
         /// <summary>
-        /// int sv_find_module(int slot, const char* name) SUNVOX_FN_ATTR;
+        /// Handle input ON/OFF requests to enable/disable input ports of the sound card (for example, after the module creation). <br/>
+        /// Call it from the main thread only, where the SunVox sound stream is not locked.
         /// </summary>
-        int sv_find_module(int slot, IntPtr name);
+        /// <exception cref="SunVoxException"></exception>
+        void UpdateInputDevices();
 
         /// <summary>
-        /// uint32_t sv_get_module_flags(int slot, int mod_num) SUNVOX_FN_ATTR;
+        /// Get the next piece of audio. <br/>
+        /// If audio is stereo, the samples will be interlaced, and the buffer size must be a multiple of two.
         /// </summary>
-        uint sv_get_module_flags(int slot, int mod_num);
+        /// <param name="outputBuffer">Buffer to write sound data to.</param>
+        /// <param name="channels">Channels the library was initialized with.</param>
+        /// <param name="latency">Audio latency (in frames).</param>
+        /// <param name="outTime">Buffer output time (in system ticks).</param>
+        /// <returns><see langword="false"/> if buffer was filled with zeros.</returns>
+        bool AudioCallback(float[] outputBuffer, AudioChannels channels, int latency, uint outTime);
 
-        /// <summary>
-        /// int* sv_get_module_inputs( int slot, int mod_num) SUNVOX_FN_ATTR;
-        /// </summary>
-        IntPtr sv_get_module_inputs(int slot, int mod_num);
+        /// <inheritdoc cref="AudioCallback(float[], AudioChannels, int, uint)"/>
+        bool AudioCallback(short[] outputBuffer, AudioChannels channels, int latency, uint outTime);
 
         /// <summary>
-        /// int* sv_get_module_outputs( int slot, int mod_num ) SUNVOX_FN_ATTR;
+        /// Get the next piece of audio. <br/>
+        /// If audio is stereo, the samples will be interlaced, and the buffer size must be a multiple of two.
+        /// Sends equal size buffer of an input device, which will be applied to any modules.
         /// </summary>
-        IntPtr sv_get_module_outputs(int slot, int mod_num);
+        /// <param name="outputBuffer">Buffer to write sound data to.</param>
+        /// <param name="outputChannels">Channels the library was initialized with.</param>
+        /// <param name="inputBuffer">Buffer to read sound data from.</param>
+        /// <param name="inputChannels">Input data channels.</param>
+        /// <param name="latency">Audio latency (in frames).</param>
+        /// <param name="outTime">Buffer output time (in system ticks).</param>
+        /// <returns><see langword="false"/> if buffer was filled with zeros.</returns>
+        bool AudioCallback(float[] outputBuffer, AudioChannels outputChannels,
+            float[] inputBuffer, AudioChannels inputChannels, int latency, uint outTime);
 
-        /// <summary>
-        /// const char* sv_get_module_name( int slot, int mod_num) SUNVOX_FN_ATTR;
-        /// </summary>
-        IntPtr sv_get_module_name(int slot, int mod_num);
+        /// <inheritdoc cref="AudioCallback(float[], AudioChannels, float[], AudioChannels, int, uint)"/>
+        bool AudioCallback(float[] outputBuffer, AudioChannels outputChannels,
+            short[] inputBuffer, AudioChannels inputChannels, int latency, uint outTime);
 
-        /// <summary>
-        /// int sv_set_module_name( int slot, int mod_num, const char* name ) SUNVOX_FN_ATTR;
-        /// </summary>
-        int sv_set_module_name(int slot, int mod_num, IntPtr name);
+        /// <inheritdoc cref="AudioCallback(float[], AudioChannels, float[], AudioChannels, int, uint)"/>
+        bool AudioCallback(short[] outputBuffer, AudioChannels outputChannels,
+            float[] inputBuffer, AudioChannels inputChannels, int latency, uint outTime);
 
-        /// <summary>
-        /// const char* sv_get_module_type( int slot, int mod_num) SUNVOX_FN_ATTR;
-        /// </summary>
-        IntPtr sv_get_module_type(int slot, int mod_num);
+        /// <inheritdoc cref="AudioCallback(float[], AudioChannels, float[], AudioChannels, int, uint)"/>
+        bool AudioCallback(short[] outputBuffer, AudioChannels outputChannels,
+            short[] inputBuffer, AudioChannels inputChannels, int latency, uint outTime);
 
-        /// <summary>
-        /// uint32_t sv_get_module_xy(int slot, int mod_num) SUNVOX_FN_ATTR;
-        /// </summary>
-        uint sv_get_module_xy(int slot, int mod_num);
+        bool IsPlaying(int slotId);
 
         /// <summary>
-        /// int sv_set_module_xy(int slot, int mod_num, int x, int y) SUNVOX_FN_ATTR;
+        /// Get current behaviour for reaching the end of project timeline.
         /// </summary>
-        int sv_set_module_xy(int slot, int mod_num, int x, int y);
+        /// <returns><see langword="true"/> if project is stopped after reaching the end.</returns>
+        /// <exception cref="SunVoxException"></exception>
+        bool GetAutostop(int slotId);
 
         /// <summary>
-        /// int sv_get_module_color( int slot, int mod_num) SUNVOX_FN_ATTR;
+        /// Get current line number on the timeline.
         /// </summary>
-        int sv_get_module_color(int slot, int mod_num);
+        /// <param name="slotId"></param>
+        /// <returns></returns>
+        int GetCurrentLine(int slotId);
 
         /// <summary>
-        /// int sv_set_module_color(int slot, int mod_num, int color) SUNVOX_FN_ATTR;
+        /// Get current line in fixed point format (with tenth part).
         /// </summary>
-        int sv_set_module_color(int slot, int mod_num, int color);
+        int GetCurrentLineWithTenthPart(int slotId);
 
         /// <summary>
-        /// uint32_t sv_get_module_finetune(int slot, int mod_num) SUNVOX_FN_ATTR;
+        /// Get current signal level from the output module.
         /// </summary>
-        uint sv_get_module_finetune(int slot, int mod_num);
+        /// <param name="slotId"></param>
+        /// <param name="channel"></param>
+        /// <returns></returns>
+        int GetCurrentSignalLevel(int slotId, int channel);
 
         /// <summary>
-        /// int sv_set_module_finetune(int slot, int mod_num, int finetune) SUNVOX_FN_ATTR;
+        /// Get the project BPM (Beats Per Minute).
         /// </summary>
-        int sv_set_module_finetune(int slot, int mod_num, int finetune);
+        /// <param name="slotId"></param>
+        /// <returns></returns>
+        int GetSongBpm(int slotId);
 
         /// <summary>
-        /// int sv_set_module_relnote(int slot, int mod_num, int relative_note) SUNVOX_FN_ATTR;
+        /// Get the the project length in frames. <br/>
+        /// A frame is a pair of audio signal samples (left and right channel amplitudes).
+        /// The sample rate 44100 Hz means that you hear 44100 frames per second.
         /// </summary>
-        int sv_set_module_relnote(int slot, int mod_num, int relative_note);
+        /// <param name="slotId"></param>
+        /// <returns></returns>
+        int GetSongLengthInFrames(int slotId);
 
         /// <summary>
-        /// uint32_t sv_get_module_scope2(int slot, int mod_num, int channel, int16_t* dest_buf, uint32_t samples_to_read) SUNVOX_FN_ATTR;
+        /// Get the the project length in frames or lines.
         /// </summary>
-        uint sv_get_module_scope2(int slot, int mod_num, int channel, IntPtr dest_buf, uint samples_to_read);
+        /// <param name="slotId"></param>
+        /// <returns></returns>
+        int GetSongLengthInLines(int slotId);
 
-        /// <summary>
-        /// int sv_module_curve(int slot, int mod_num, int curve_num, float* data, int len, int w) SUNVOX_FN_ATTR;
-        /// </summary>
-        int sv_module_curve(int slot, int mod_num, int curve_num, IntPtr data, int len, int w);
+        string? GetSongName(int slotId);
 
-        /// <summary>
-        /// int sv_get_number_of_module_ctls(int slot, int mod_num) SUNVOX_FN_ATTR;
-        /// </summary>
-        int sv_get_number_of_module_ctls(int slot, int mod_num);
+        void SetSongName(int slotId, string newName);
 
         /// <summary>
-        /// const char* sv_get_module_ctl_name(int slot, int mod_num, int ctl_num) SUNVOX_FN_ATTR;
+        /// Get the project TPL (Ticks Per Line).
         /// </summary>
-        IntPtr sv_get_module_ctl_name(int slot, int mod_num, int ctl_num);
+        /// <param name="slotId"></param>
+        /// <returns></returns>
+        int GetSongTpl(int slotId);
 
         /// <summary>
-        /// int sv_get_module_ctl_value(int slot, int mod_num, int ctl_num, int scaled) SUNVOX_FN_ATTR;
+        /// Save the SunVox project.
         /// </summary>
-        int sv_get_module_ctl_value(int slot, int mod_num, int ctl_num, int scaled);
+        /// <param name="slotId"></param>
+        /// <param name="path"></param>
+        void Save(int slotId, string path);
 
         /// <summary>
-        /// int sv_set_module_ctl_value(int slot, int mod_num, int ctl_num, int val, int scaled) SUNVOX_FN_ATTR;
+        ///
         /// </summary>
-        int sv_set_module_ctl_value(int slot, int mod_num, int ctl_num, int val, int scaled);
+        /// <param name="slotId"></param>
+        /// <param name="track"></param>
+        /// <param name="data"></param>
+        void SendEvent(int slotId, int track, PatternEvent data);
 
-        /// <summary>
-        /// int sv_get_module_ctl_min(int slot, int mod_num, int ctl_num, int scaled) SUNVOX_FN_ATTR;
-        /// </summary>
-        int sv_get_module_ctl_min(int slot, int mod_num, int ctl_num, int scaled);
+        void SendEvent(int slotId, int track, int nn = 0, int vv = 0, int mm = 0, int ccee = 0, int xxyy = 0);
 
         /// <summary>
-        /// int sv_get_module_ctl_max(int slot, int mod_num, int ctl_num, int scaled) SUNVOX_FN_ATTR;
+        /// Set the timestamp of events to be sent. <br/>
+        /// Every event you send has a timestamp - this is the time when the event was generated (for example, when a key was pressed). <br/>
+        /// If <paramref name="t"/> is zero, the event will be heard as soon as possible, which is delayed by double the sound latency. <br/>
+        /// If <paramref name="t"/> is nonzero, the event will be additionally delayed by this many ticks. <br/>
+        /// See also: <seealso cref="GetTicksPerSecond"/>.
         /// </summary>
-        int sv_get_module_ctl_max(int slot, int mod_num, int ctl_num, int scaled);
+        /// <param name="slotId"></param>
+        /// <param name="reset"></param>
+        /// <param name="t"></param>
+        void SetSendEventTimestamp(int slotId, bool reset = true, int t = 0);
 
         /// <summary>
-        /// int sv_get_module_ctl_offset(int slot, int mod_num, int ctl_num) SUNVOX_FN_ATTR;
+        /// Get and set volume. Call with <paramref name="volume"/> = -1 to only get the value.
         /// </summary>
-        int sv_get_module_ctl_offset(int slot, int mod_num, int ctl_num);
+        /// <param name="slotId"></param>
+        /// <param name="volume">Value in range 0-256.</param>
+        /// <returns>Previous volume in range 0-256.</returns>
+        /// <exception cref="SunVoxException"></exception>
+        int Volume(int slotId, int volume);
 
         /// <summary>
-        /// int sv_get_module_ctl_type(int slot, int mod_num, int ctl_num) SUNVOX_FN_ATTR;
+        /// Get the project time map.
+        /// <para>For <paramref name="type"/> = <see cref="TimeMapType.Speed"/>, Nth value equals speed at the beginning of Nth line (Bpm | Tpl &lt;&lt; 16). </para>
+        /// <para>For <paramref name="type"/> = <see cref="TimeMapType.FrameCount"/>, Nth value equals frame counter at the beginning of Nth line. </para>
         /// </summary>
-        int sv_get_module_ctl_type(int slot, int mod_num, int ctl_num);
+        /// <exception cref="SunVoxException"></exception>
+        uint[] GetTimeMap(int slotId, int startLine, int length, TimeMapType type);
 
         /// <summary>
-        /// int sv_get_module_ctl_group(int slot, int mod_num, int ctl_num) SUNVOX_FN_ATTR;
+        /// Load a project from file.
         /// </summary>
-        int sv_get_module_ctl_group(int slot, int mod_num, int ctl_num);
+        /// <param name="slotId">Target slot ID.</param>
+        /// <param name="path">Path to the file; may be relative or absolute.</param>
+        void Load(int slotId, string path);
 
         /// <summary>
-        /// int sv_get_number_of_patterns(int slot) SUNVOX_FN_ATTR;
+        /// Load a project from memory.
         /// </summary>
-        int sv_get_number_of_patterns(int slot);
+        /// <exception cref="SunVoxException"></exception>
+        void Load(int slotId, byte[] data);
 
         /// <summary>
-        /// int sv_new_pattern(int slot, int clone, int x, int y, int tracks, int lines, int icon_seed, const char* name ) SUNVOX_FN_ATTR;
+        /// Open sound slot. Each slot can contain one independent implementation of the SunVox engine.
+        /// You can use several slots simultaneously (for example, one slot for music and another for effects).
+        /// Max number of slots = 16.
         /// </summary>
-        int sv_new_pattern(int slot, int clone, int x, int y, int tracks, int lines, int icon_seed, IntPtr name);
+        /// <param name="slotId">A value between 0 and 15.</param>
+        void OpenSlot(int slotId);
 
         /// <summary>
-        /// int sv_remove_pattern(int slot, int pat_num) SUNVOX_FN_ATTR;
+        /// Close sound slot.
         /// </summary>
-        int sv_remove_pattern(int slot, int pat_num);
+        /// <param name="slotId"></param>
+        void CloseSlot(int slotId);
 
         /// <summary>
-        /// int sv_find_pattern(int slot, const char* name ) SUNVOX_FN_ATTR;
+        /// Enter a lock block.
+        /// Use to send multiple events at the same time, read or write data from multiple threads.
+        /// Remember to call <see cref="ISunVoxLib.UnlockSlot"/>!
         /// </summary>
-        int sv_find_pattern(int slot, IntPtr name);
+        /// <exception cref="SunVoxException"></exception>
+        void LockSlot(int slotId);
 
         /// <summary>
-        /// int sv_get_pattern_x(int slot, int pat_num) SUNVOX_FN_ATTR;
+        /// Leave a lock block.
         /// </summary>
-        int sv_get_pattern_x(int slot, int pat_num);
+        /// <exception cref="SunVoxException"></exception>
+        void UnlockSlot(int slotId);
 
         /// <summary>
-        /// int sv_get_pattern_y(int slot, int pat_num) SUNVOX_FN_ATTR;
+        /// Set/get autostop mode. When autostop is off, the project plays endlessly in a loop.
         /// </summary>
-        int sv_get_pattern_y(int slot, int pat_num);
+        /// <param name="slotId"></param>
+        /// <param name="autoStop"></param>
+        void SetAutoStop(int slotId, bool autoStop);
 
         /// <summary>
-        /// int sv_set_pattern_xy(int slot, int pat_num, int x, int y) SUNVOX_FN_ATTR;
+        /// First call - stop playing; second call - reset all SunVox activity and switch the engine to standby mode.
         /// </summary>
-        int sv_set_pattern_xy(int slot, int pat_num, int x, int y);
+        /// <param name="slotId"></param>
+        void StopPlayback(int slotId);
 
-        /// <summary>
-        /// int sv_get_pattern_tracks(int slot, int pat_num) SUNVOX_FN_ATTR;
-        /// </summary>
-        int sv_get_pattern_tracks(int slot, int pat_num);
+        // TODO confirm name
 
         /// <summary>
-        /// int sv_get_pattern_lines(int slot, int pat_num) SUNVOX_FN_ATTR;
+        /// Start playing the project from the current position.
         /// </summary>
-        int sv_get_pattern_lines(int slot, int pat_num);
+        /// <param name="slotId"></param>
+        void StartPlayback(int slotId);
 
-        /// <summary>
-        /// int sv_set_pattern_size(int slot, int pat_num, int tracks, int lines) SUNVOX_FN_ATTR;
-        /// </summary>
-        int sv_set_pattern_size(int slot, int pat_num, int tracks, int lines);
+        // TODO confirm name
 
         /// <summary>
-        /// const char* sv_get_pattern_name( int slot, int pat_num) SUNVOX_FN_ATTR;
+        /// Start playing the project from the beginning (line 0).
         /// </summary>
-        IntPtr sv_get_pattern_name(int slot, int pat_num);
+        /// <param name="slotId"></param>
+        void StartPlaybackFromBeginning(int slotId);
 
-        /// <summary>
-        /// int sv_set_pattern_name( int slot, int pat_num, const char* name ) SUNVOX_FN_ATTR;
-        /// </summary>
-        int sv_set_pattern_name(int slot, int pat_num, IntPtr name);
+        // TODO confirm name
 
         /// <summary>
-        /// sunvox_note* sv_get_pattern_data(int slot, int pat_num) SUNVOX_FN_ATTR;
+        /// Jump to the specified position (line number on the timeline).
         /// </summary>
-        IntPtr sv_get_pattern_data(int slot, int pat_num);
+        /// <param name="slotId"></param>
+        /// <param name="line"></param>
+        void Rewind(int slotId, int line);
 
-        /// <summary>
-        /// int sv_set_pattern_event(int slot, int pat_num, int track, int line, int nn, int vv, int mm, int ccee, int xxyy) SUNVOX_FN_ATTR;
-        /// </summary>
-        int sv_set_pattern_event(int slot, int pat_num, int track, int line, int nn, int vv, int mm, int ccee,
-            int xxyy);
+        // TODO confirm name
 
         /// <summary>
-        /// int sv_get_pattern_event(int slot, int pat_num, int track, int line, int column) SUNVOX_FN_ATTR;
+        /// Pause the audio stream on the specified slot.
         /// </summary>
-        int sv_get_pattern_event(int slot, int pat_num, int track, int line, int column);
+        /// <param name="slotId"></param>
+        void PauseStream(int slotId);
 
-        /// <summary>
-        /// int sv_pattern_mute(int slot, int pat_num, int mute) SUNVOX_FN_ATTR;
-        /// </summary>
-        int sv_pattern_mute(int slot, int pat_num, int mute);
+        // TODO confirm name
 
         /// <summary>
-        /// uint32_t sv_get_ticks(void) SUNVOX_FN_ATTR;
+        /// Resume the audio stream on the specified slot.
         /// </summary>
-        uint sv_get_ticks();
+        /// <param name="slotId"></param>
+        void ResumeStream(int slotId);
 
-        /// <summary>
-        /// uint32_t sv_get_ticks_per_second(void) SUNVOX_FN_ATTR;
-        /// </summary>
-        uint sv_get_ticks_per_second();
+        // TODO confirm name
 
         /// <summary>
-        /// const char* sv_get_log(int size) SUNVOX_FN_ATTR;
+        /// Wait for sync (pattern effect 0x33 on any slot) and resume the audio stream on the specified slot.
         /// </summary>
-        IntPtr sv_get_log(int size);
+        /// <param name="slotId"></param>
+        void ResumeStreamOnSyncEffect(int slotId);
 
-#pragma warning restore CA1716 // Identifiers should not match keywords
-#pragma warning restore IDE1006 // Naming Styles
-#pragma warning restore CA1707 // Identifiers should not contain underscores
+        // TODO confirm name
     }
 }

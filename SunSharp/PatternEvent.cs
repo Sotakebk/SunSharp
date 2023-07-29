@@ -28,14 +28,14 @@ namespace SunSharp
 
         public Effect Effect
         {
-            get => (Effect)EE;
+            readonly get => (Effect)EE;
             set => EE = (byte)value;
         }
 
         public Note Note
         {
-            get => (Note)NN;
-            set => NN = (byte)value;
+            readonly get => NN;
+            set => NN = value;
         }
 
         public PatternEvent(ulong value) : this()
@@ -43,16 +43,16 @@ namespace SunSharp
             Data = value;
         }
 
-        public PatternEvent(Note note, byte velocity, ushort module) : this()
+        public PatternEvent(Note nn, byte vv, ushort mm) : this()
         {
-            NN = note;
-            VV = velocity;
-            MM = module;
+            NN = nn;
+            VV = vv;
+            MM = mm;
         }
 
-        public PatternEvent(Effect effect, ushort xxyy) : this()
+        public PatternEvent(Effect ee, ushort xxyy) : this()
         {
-            EE = (byte)effect;
+            EE = (byte)ee;
             XXYY = xxyy;
         }
 
@@ -65,14 +65,13 @@ namespace SunSharp
             XXYY = xxyy;
         }
 
-        public PatternEvent(Note note, byte velocity, ushort module, byte controller, Effect effect,
-            ushort xxyy) : this()
+        public PatternEvent(Note nn, byte vv, ushort mm, byte cc, Effect ee, ushort xxyy) : this()
         {
-            NN = note;
-            VV = velocity;
-            MM = module;
-            CC = controller;
-            EE = (byte)effect;
+            NN = nn;
+            VV = vv;
+            MM = mm;
+            CC = cc;
+            EE = (byte)ee;
             XXYY = xxyy;
         }
 
@@ -86,16 +85,16 @@ namespace SunSharp
             return @event.Data;
         }
 
-        public override string ToString() => $"{(Note)NN}{VV:X2}{MM:X4}{CC:X2}{EE:X2}{XX:X2}{YY:X2}";
+        public readonly override string ToString() => $"{(Note)NN}{VV:X2}{MM:X4}{CC:X2}{EE:X2}{XX:X2}{YY:X2}";
 
         public static bool operator ==(PatternEvent a, PatternEvent b) => a.Data == b.Data;
 
         public static bool operator !=(PatternEvent a, PatternEvent b) => a.Data != b.Data;
 
-        public override bool Equals(object obj) => obj is PatternEvent e && this == e;
+        public readonly override bool Equals(object obj) => obj is PatternEvent e && this == e;
 
-        public bool Equals(PatternEvent other) => this == other;
+        public readonly bool Equals(PatternEvent other) => this == other;
 
-        public override int GetHashCode() => -1945990370 + Data.GetHashCode();
+        public readonly override int GetHashCode() => -1945990370 + Data.GetHashCode();
     }
 }

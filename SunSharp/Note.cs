@@ -5,16 +5,16 @@ namespace SunSharp
     public enum NoteName
     {
         C = 0,
-        CS = 1,
+        Cs = 1,
         D = 2,
-        DS = 3,
+        Ds = 3,
         E = 4,
         F = 5,
-        FS = 6,
+        Fs = 6,
         G = 7,
-        GS = 8,
+        Gs = 8,
         A = 9,
-        AS = 10,
+        As = 10,
         B = 11,
         Other = 12
     }
@@ -23,10 +23,11 @@ namespace SunSharp
     {
         public static char GetNoteNameCharacter(this NoteName noteName)
         {
+            const string notes = "CcDdEFfGgAaB";
             var i = (int)noteName;
             if (i < 0 || i > 11)
                 return '?';
-            return "CcDdEFfGgAaB"[i];
+            return notes[i];
         }
     }
 
@@ -49,27 +50,32 @@ namespace SunSharp
         /// <summary>
         /// Send "note off" to all modules.
         /// </summary>
-        public static Note AllNotesOff => new Note(NOTECMD_ALL_NOTES_OFF);
+        public static Note AllNotesOff => NOTECMD_ALL_NOTES_OFF;
 
         /// <summary>
-        /// Stop all modules, clear their internal buffers and put them into standby mode.
+        /// StopPlayback all modules, clear their internal buffers and put them into standby mode.
         /// </summary>
-        public static Note CleanSynths => new Note(NOTECMD_CLEAN_SYNTHS);
+        public static Note CleanSynths => NOTECMD_CLEAN_SYNTHS;
 
         /// <summary>
-        /// Stop playing the project.
+        /// StopPlayback playing the project.
         /// </summary>
-        public static Note Stop => new Note(NOTECMD_STOP);
+        public static Note Stop => NOTECMD_STOP;
 
         /// <summary>
         /// Start playing the project.
         /// </summary>
-        public static Note Play => new Note(NOTECMD_PLAY);
+        public static Note Play => NOTECMD_PLAY;
 
         /// <summary>
         /// Set the pitch specified in column XXYY, where 0x0000 - highest possible pitch, 0x7800 - lowest pitch (note C0); one semitone = 0x100.
         /// </summary>
-        public static Note SetPitch => new Note(NOTECMD_SET_PITCH);
+        public static Note SetPitch => NOTECMD_SET_PITCH;
+
+        /// <summary>
+        /// StopPlayback the module: clear its internal buffers and put it into standby mode.one semitone = 0x100.
+        /// </summary>
+        public static Note CleanModule => NOTECMD_CLEAN_MODULE;
 
         public NoteName Name => Value > 0 || Value < 128 ? (NoteName)((Value - 1) % 12) : NoteName.Other;
         public int Octave => Value > 0 || Value < 128 ? (Value - 1) / 12 : 0;
@@ -102,17 +108,17 @@ namespace SunSharp
 
         public override string ToString()
         {
-            switch (Value)
+            return Value switch
             {
-                case 0: return "__";
-                case NOTECMD_NOTE_OFF: return "--";
-                case NOTECMD_ALL_NOTES_OFF: return "-!";
-                case NOTECMD_CLEAN_SYNTHS: return "C!";
-                case NOTECMD_STOP: return "S!";
-                case NOTECMD_PLAY: return "P!";
-                case NOTECMD_SET_PITCH: return "SP";
-                default: return Value < 128 ? $"{Name.GetNoteNameCharacter()}{Octave}".Substring(0, 2) : "??";
-            }
+                0 => "__",
+                NOTECMD_NOTE_OFF => "--",
+                NOTECMD_ALL_NOTES_OFF => "-!",
+                NOTECMD_CLEAN_SYNTHS => "C!",
+                NOTECMD_STOP => "S!",
+                NOTECMD_PLAY => "P!",
+                NOTECMD_SET_PITCH => "SP",
+                _ => Value < 128 ? $"{Name.GetNoteNameCharacter()}{Octave}" : "??",
+            };
         }
     }
 }
