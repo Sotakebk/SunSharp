@@ -3,9 +3,9 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using NUnit.Framework;
 
-namespace SunSharp.UnitTests;
+namespace SunSharp.Tests;
 
-internal class HelperTests
+public class HelperTests
 {
     [TestCase(-1)]
     [TestCase(0)]
@@ -59,39 +59,35 @@ internal class HelperTests
             originalArrayHandle.Free();
         }
 
-        Assert.That(array, Is.EqualTo(originalArray.Where(i => i != -1).ToArray()));
+        Assert.That(array, Is.EqualTo(originalArray.Where(static i => i != -1).ToArray()));
     }
 
-    [TestCase(0, 0)]
-    [TestCase(-1, -1)]
-    [TestCase(1, 1)]
-    [TestCase(short.MaxValue, short.MaxValue)]
-    [TestCase(short.MinValue, short.MaxValue)]
-    [TestCase(short.MaxValue, short.MinValue)]
-    [TestCase(short.MinValue, short.MinValue)]
-    public void SplitValueTo2DPositionShouldReturnExpectedValues(short x, short y)
+    [TestCase(0, 0, 0u)]
+    [TestCase(-1, -1, 0xFFFFFFFFu)]
+    [TestCase(1, 1, 0x00010001u)]
+    [TestCase(short.MaxValue, short.MaxValue, 0x7FFF7FFFu)]
+    [TestCase(short.MinValue, short.MaxValue, 0x7FFF8000u)]
+    [TestCase(short.MaxValue, short.MinValue, 0x80007FFFu)]
+    [TestCase(short.MinValue, short.MinValue, 0x80008000u)]
+    public void UnpackTwoSignedShortsShouldReturnExpectedValue(short lowerBytes, short upperBytes, uint value)
     {
-        var value = unchecked((ushort)x)
-                    | ((uint)(unchecked((ushort)y)) << 16);
-        var result = Helper.SplitValueTo2DPosition(value);
+        var result = Helper.UnpackTwoSignedShorts(value);
 
-        Assert.That(result, Is.EqualTo((x, y)));
+        Assert.That(result, Is.EqualTo((lowerBytes, upperBytes)));
     }
 
-    [TestCase(0, 0)]
-    [TestCase(-1, -1)]
-    [TestCase(1, 1)]
-    [TestCase(short.MaxValue, short.MaxValue)]
-    [TestCase(short.MinValue, short.MaxValue)]
-    [TestCase(short.MaxValue, short.MinValue)]
-    [TestCase(short.MinValue, short.MinValue)]
-    public void SplitValueToFineTuneShouldReturnExpectedValues(short fineTune, short relativeNote)
+    [TestCase(0, 0, 0u)]
+    [TestCase(-1, -1, 0xFFFFFFFFu)]
+    [TestCase(1, 1, 0x00010001u)]
+    [TestCase(short.MaxValue, short.MaxValue, 0x7FFF7FFFu)]
+    [TestCase(short.MinValue, short.MaxValue, 0x7FFF8000u)]
+    [TestCase(short.MaxValue, short.MinValue, 0x80007FFFu)]
+    [TestCase(short.MinValue, short.MinValue, 0x80008000u)]
+    public void PackTwoSignedShortsShouldReturnExpectedValue(short lowerBytes, short upperBytes, uint value)
     {
-        var value = unchecked((ushort)fineTune)
-                    | ((uint)(unchecked((ushort)relativeNote)) << 16);
-        var result = Helper.SplitValueToFineTune(value);
+        var result = Helper.PackTwoSignedShorts(lowerBytes, upperBytes);
 
-        Assert.That(result, Is.EqualTo((fineTune, relativeNote)));
+        Assert.That(result, Is.EqualTo(value));
     }
 
     [TestCase(0x7800, 16.35)] // C0

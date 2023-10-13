@@ -46,7 +46,7 @@
         GeneratePolyrhythm = 0x3A,
         CopyTrackToPattern = 0x3B,
         CopyTrackFromPattern = 0x3C,
-        WriteRandomValue = 0x3D,
+        WriteRandomValue = 0x3D
     }
 
     public static class EffectExtensions
@@ -68,7 +68,7 @@
                    || effect == Effect.WriteRandomValue;
         }
 
-        public static bool ModifiesTime(this Effect effect)
+        public static bool ChangesTempo(this Effect effect)
         {
             return effect == Effect.SetBpm
                    || effect == Effect.SetPlayingSpeed;

@@ -1,47 +1,47 @@
 ﻿using System;
 using System.Text;
 
-namespace SunSharp.CodeGeneration.CodeGenerationTools
+namespace SunSharp.CodeGeneration.CodeGenerationTools;
+
+public class CodeGenerationContext
 {
-    public class CodeGenerationContext
+    private const int SpacesPerTab = 4;
+
+    private readonly StringBuilder _sb;
+    private int _tabs;
+
+    public CodeGenerationContext()
     {
-        private const int SpacesPerTab = 4;
+        _sb = new StringBuilder();
+    }
 
-        private readonly StringBuilder _sb;
-        private int _tabs;
+    public string GetTabs()
+    {
+        return new string(' ', _tabs * SpacesPerTab);
+    }
 
-        public CodeGenerationContext()
-        {
-            _sb = new StringBuilder();
-        }
+    public void AddIndent(Action action)
+    {
+        _tabs++;
+        action();
+        _tabs--;
+    }
 
-        public string GetTabs() => new(' ', _tabs * SpacesPerTab);
+    public void AppendLine(string value = "")
+    {
+        if (string.IsNullOrWhiteSpace(value))
+            _sb.AppendLine();
+        else
+            _sb.AppendLine(GetTabs() + value);
+    }
 
-        public void AddIndent(Action action)
-        {
-            _tabs++;
-            action();
-            _tabs--;
-        }
+    public void AppendLineNoTab(string value = "")
+    {
+        _sb.AppendLine(value);
+    }
 
-        public void AppendLine(string value = "")
-        {
-            if (string.IsNullOrWhiteSpace(value))
-                _sb.AppendLine();
-            else
-                _sb.AppendLine(GetTabs() + value);
-        }
-
-        public void AppendLineNoTab(string value = "")
-        {
-            if (string.IsNullOrWhiteSpace(value))
-                _sb.AppendLine();
-            else
-                _sb.AppendLine(value);
-        }
-
-        public void Append(string value = "") => _sb.Append(value);
-
-        public string GetBuiltString() => _sb.ToString();
+    public string GetBuiltString()
+    {
+        return _sb.ToString();
     }
 }

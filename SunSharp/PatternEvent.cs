@@ -16,15 +16,15 @@ namespace SunSharp
 
         [field: FieldOffset(4)] public ushort CCEE { get; set; }
 
-        [field: FieldOffset(5)] public byte CC { get; set; }
-
         [field: FieldOffset(4)] public byte EE { get; set; }
+
+        [field: FieldOffset(5)] public byte CC { get; set; }
 
         [field: FieldOffset(6)] public ushort XXYY { get; set; }
 
-        [field: FieldOffset(6)] public byte YY { get; set; }
+        [field: FieldOffset(7)] public byte YY { get; set; }
 
-        [field: FieldOffset(7)] public byte XX { get; set; }
+        [field: FieldOffset(6)] public byte XX { get; set; }
 
         public Effect Effect
         {
@@ -75,6 +75,16 @@ namespace SunSharp
             XXYY = xxyy;
         }
 
+        public PatternEvent(Note nn, byte vv, ushort mm, byte cc, byte ee, ushort xxyy) : this()
+        {
+            NN = nn;
+            VV = vv;
+            MM = mm;
+            CC = cc;
+            EE = ee;
+            XXYY = xxyy;
+        }
+
         public static implicit operator PatternEvent(ulong value)
         {
             return new PatternEvent(value);
@@ -85,16 +95,39 @@ namespace SunSharp
             return @event.Data;
         }
 
-        public readonly override string ToString() => $"{(Note)NN}{VV:X2}{MM:X4}{CC:X2}{EE:X2}{XX:X2}{YY:X2}";
+        public readonly override string ToString()
+        {
+            return $"{(Note)NN}" +
+                   $"{(VV != 0 ? $"{VV:X2}" : "__")}" +
+                   $"{(MM != 0 ? $"{MM:X4}" : "__")}" +
+                   $"{(CC != 0 ? $"{CC:X2}" : "__")}" +
+                   $"{(EE != 0 ? $"{EE:X2}" : "__")}" +
+                   $"{(XXYY != 0 ? $"{XXYY:X4}" : "__")}";
+        }
 
-        public static bool operator ==(PatternEvent a, PatternEvent b) => a.Data == b.Data;
+        public static bool operator ==(PatternEvent a, PatternEvent b)
+        {
+            return a.Data == b.Data;
+        }
 
-        public static bool operator !=(PatternEvent a, PatternEvent b) => a.Data != b.Data;
+        public static bool operator !=(PatternEvent a, PatternEvent b)
+        {
+            return a.Data != b.Data;
+        }
 
-        public readonly override bool Equals(object obj) => obj is PatternEvent e && this == e;
+        public readonly override bool Equals(object? obj)
+        {
+            return obj is PatternEvent e && this == e;
+        }
 
-        public readonly bool Equals(PatternEvent other) => this == other;
+        public readonly bool Equals(PatternEvent other)
+        {
+            return this == other;
+        }
 
-        public readonly override int GetHashCode() => -1945990370 + Data.GetHashCode();
+        public readonly override int GetHashCode()
+        {
+            return -1945990370 + Data.GetHashCode();
+        }
     }
 }

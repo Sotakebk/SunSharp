@@ -34,7 +34,8 @@ namespace SunSharp.Native
         int sv_audio_callback(IntPtr buf, int frames, int latency, uint out_time);
 
         /// <summary>
-        /// int sv_audio_callback2(void* buf, int frames, int latency, uint32_t out_time, int in_type, int in_channels, void* in_buf) SUNVOX_FN_ATTR;
+        /// int sv_audio_callback2(void* buf, int frames, int latency, uint32_t out_time, int in_type, int in_channels, void*
+        /// in_buf) SUNVOX_FN_ATTR;
         /// </summary>
         int sv_audio_callback2(IntPtr buf, int frames, int latency, uint out_time, int in_type, int in_channels,
             IntPtr in_buf);
@@ -225,7 +226,8 @@ namespace SunSharp.Native
         int sv_sampler_load(int slot, int sampler_module, IntPtr file_name, int sample_slot);
 
         /// <summary>
-        /// int sv_sampler_load_from_memory(int slot, int sampler_module, void* data, uint32_t data_size, int sample_slot) SUNVOX_FN_ATTR;
+        /// int sv_sampler_load_from_memory(int slot, int sampler_module, void* data, uint32_t data_size, int sample_slot)
+        /// SUNVOX_FN_ATTR;
         /// </summary>
         int sv_sampler_load_from_memory(int slot, int sampler_module, IntPtr data, uint data_size, int sample_slot);
 
@@ -325,7 +327,8 @@ namespace SunSharp.Native
         int sv_set_module_relnote(int slot, int mod_num, int relative_note);
 
         /// <summary>
-        /// uint32_t sv_get_module_scope2(int slot, int mod_num, int channel, int16_t* dest_buf, uint32_t samples_to_read) SUNVOX_FN_ATTR;
+        /// uint32_t sv_get_module_scope2(int slot, int mod_num, int channel, int16_t* dest_buf, uint32_t samples_to_read)
+        /// SUNVOX_FN_ATTR;
         /// </summary>
         uint sv_get_module_scope2(int slot, int mod_num, int channel, IntPtr dest_buf, uint samples_to_read);
 
@@ -385,7 +388,8 @@ namespace SunSharp.Native
         int sv_get_number_of_patterns(int slot);
 
         /// <summary>
-        /// int sv_new_pattern(int slot, int clone, int x, int y, int tracks, int lines, int icon_seed, const char* name ) SUNVOX_FN_ATTR;
+        /// int sv_new_pattern(int slot, int clone, int x, int y, int tracks, int lines, int icon_seed, const char* name )
+        /// SUNVOX_FN_ATTR;
         /// </summary>
         int sv_new_pattern(int slot, int clone, int x, int y, int tracks, int lines, int icon_seed, IntPtr name);
 
@@ -445,7 +449,8 @@ namespace SunSharp.Native
         IntPtr sv_get_pattern_data(int slot, int pat_num);
 
         /// <summary>
-        /// int sv_set_pattern_event(int slot, int pat_num, int track, int line, int nn, int vv, int mm, int ccee, int xxyy) SUNVOX_FN_ATTR;
+        /// int sv_set_pattern_event(int slot, int pat_num, int track, int line, int nn, int vv, int mm, int ccee, int xxyy)
+        /// SUNVOX_FN_ATTR;
         /// </summary>
         int sv_set_pattern_event(int slot, int pat_num, int track, int line, int nn, int vv, int mm, int ccee,
             int xxyy);

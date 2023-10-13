@@ -6,8 +6,6 @@ namespace SunSharp.Redistribution
 {
     internal sealed class WindowsLibraryHandler : ILibraryHandler
     {
-        public bool IsLibraryLoaded => _ptr != IntPtr.Zero;
-
         private readonly object _lock = new object();
         private readonly string _path;
         private volatile IntPtr _ptr = IntPtr.Zero;
@@ -17,6 +15,8 @@ namespace SunSharp.Redistribution
             _path = path;
         }
 
+        public bool IsLibraryLoaded => _ptr != IntPtr.Zero;
+
         public void LoadLibrary()
         {
             lock (_lock)
@@ -24,9 +24,13 @@ namespace SunSharp.Redistribution
                 if (IsLibraryLoaded)
                     throw new LibraryLoadingException("SunVoxLib is already loaded.");
 
-                var ptr = WindowsLibraryHandler.LoadLibrary(_path);
+                var ptr = LoadLibrary(_path);
                 if (ptr == IntPtr.Zero)
-                    throw new LibraryLoadingException($"Failed to load SunVoxLib from path '{_path}'.");
+                {
+                    var error = Marshal.GetHRForLastWin32Error();
+                    throw new LibraryLoadingException(
+                        $"Failed to load SunVoxLib from path '{_path}' with error '{error:X8}'.");
+                }
 
                 _ptr = ptr;
             }
@@ -41,7 +45,12 @@ namespace SunSharp.Redistribution
 
                 var ptr = _ptr;
                 _ptr = IntPtr.Zero;
-                WindowsLibraryHandler.FreeLibrary(ptr);
+                var value = FreeLibrary(ptr);
+                if (value == 0)
+                {
+                    var error = Marshal.GetHRForLastWin32Error();
+                    throw new LibraryLoadingException($"Failed to unload SunVoxLib with error error '{error:X8}'.");
+                }
             }
         }
 
@@ -55,21 +64,28 @@ namespace SunSharp.Redistribution
                 if (!IsLibraryLoaded)
                     throw new LibraryLoadingException("SunVoxLib is not loaded.");
 
-                var ptr = WindowsLibraryHandler.GetProcAddress(_ptr, name);
+                var ptr = GetProcAddress(_ptr, name);
                 if (ptr == IntPtr.Zero)
-                    throw new LibraryLoadingException($"Failed to load SunVoxLib from path '{_path}'.");
+                {
+                    var error = Marshal.GetHRForLastWin32Error();
+                    throw new LibraryLoadingException(
+                        $"Failed to load SunVoxLib function '{name}' with error '{error:X8}'.");
+                }
 
                 return Marshal.GetDelegateForFunctionPointer(ptr, delegateType);
             }
         }
 
-        [DllImport("kernel32.dll", SetLastError = true, BestFitMapping = false, ThrowOnUnmappableChar = true, CharSet = CharSet.Ansi)]
+        [DllImport("kernel32.dll", SetLastError = true, BestFitMapping = false, ThrowOnUnmappableChar = true,
+            CharSet = CharSet.Ansi)]
         private static extern IntPtr LoadLibrary([MarshalAs(UnmanagedType.LPStr)] string dllToLoad);
 
-        [DllImport("kernel32.dll", SetLastError = true, BestFitMapping = false, ThrowOnUnmappableChar = true, CharSet = CharSet.Ansi)]
-        private static extern IntPtr GetProcAddress(IntPtr hModule, [MarshalAs(UnmanagedType.LPStr)] string procedureName);
+        [DllImport("kernel32.dll", SetLastError = true, BestFitMapping = false, ThrowOnUnmappableChar = true,
+            CharSet = CharSet.Ansi)]
+        private static extern IntPtr GetProcAddress(IntPtr hModule,
+            [MarshalAs(UnmanagedType.LPStr)] string procedureName);
 
         [DllImport("kernel32.dll")]
-        private static extern bool FreeLibrary(IntPtr hModule);
+        private static extern int FreeLibrary(IntPtr hModule);
     }
 }

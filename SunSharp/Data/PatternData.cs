@@ -19,18 +19,18 @@ namespace SunSharp.Data
 
         public PatternData DeepCopy()
         {
-            var copy = new PatternData()
+            var copy = new PatternData
             {
-                Id = this.Id,
-                Name = this.Name,
-                Position = this.Position,
-                Lines = this.Lines,
-                Tracks = this.Tracks,
-                IsMuted = this.IsMuted,
-                IsLinear = this.IsLinear,
-                IsDestructive = this.IsDestructive,
-                HasDynamicTempo = this.HasDynamicTempo,
-                Data = this.Data.Select(e => e).ToArray()
+                Id = Id,
+                Name = Name,
+                Position = Position,
+                Lines = Lines,
+                Tracks = Tracks,
+                IsMuted = IsMuted,
+                IsLinear = IsLinear,
+                IsDestructive = IsDestructive,
+                HasDynamicTempo = HasDynamicTempo,
+                Data = Data.Select(e => e).ToArray()
             };
             return copy;
         }

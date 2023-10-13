@@ -7,23 +7,35 @@ using SunSharp.Native.Loader;
 namespace SunSharp.Redistribution
 {
     /// <summary>
-    /// Use this class to access a locally loaded SunVoxLib instance. <br/>
-    /// <see cref="Load"/> the library once, then <see cref="GetLibraryInstance"/>. Construct a <see cref="SunSharp.Objective.SunVox"/> if necessary. <br/>
-    /// You may also call <see cref="Unload"/> to unload the library, which should also deinitialize the library, to avoid any memory leaks.
+    /// Use this class to access a locally loaded SunVoxLib instance. <br />
+    /// <see cref="Load" /> the library once, then <see cref="GetLibraryInstance" />. Construct a
+    /// <see cref="SunSharp.Objective.SunVox" /> if necessary. <br />
+    /// You may also call <see cref="Unload" /> to unload the library, which should also deinitialize the library, to avoid
+    /// any memory leaks.
     /// You should keep the same library instance loaded in most use-cases.
     /// </summary>
     public static class LibraryLoader
     {
+        private static readonly object Lock = new object();
+
+        private static NativeProxy? _proxy;
+        private static ISunVoxLib? _lib;
+
+        public static bool IsLoaded => _proxy?.IsLoaded ?? false;
+
         private static ILibraryHandler GetPlatformSpecificLibraryHandler()
         {
-            var errorMessage = $"Current platform and architecture not supported. Architecture: '{RuntimeInformation.ProcessArchitecture}', platform: '{RuntimeInformation.OSDescription}'";
+            var errorMessage =
+                $"Current platform and architecture not supported. Architecture: '{RuntimeInformation.ProcessArchitecture}', platform: '{RuntimeInformation.OSDescription}'";
 
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {
                 var path = RuntimeInformation.ProcessArchitecture switch
                 {
-                    Architecture.X64 => Path.Combine("runtimes", "/win-x64/native/sunvox.dll"),
-                    Architecture.X86 => Path.Combine("runtimes", "sunvox_win_x86.dll"),
+                    Architecture.X64 => Path.Combine(Environment.CurrentDirectory,
+                        "runtimes/win-x64/native/sunvox.dll"),
+                    Architecture.X86 => Path.Combine(Environment.CurrentDirectory,
+                        "runtimes/win-x86-64/native/sunvox.dll"),
                     _ => throw new PlatformNotSupportedException(errorMessage)
                 };
 
@@ -34,9 +46,12 @@ namespace SunSharp.Redistribution
             {
                 var path = RuntimeInformation.ProcessArchitecture switch
                 {
-                    Architecture.X64 => Path.Combine("lib", "linux", "lib_x86_64", "sunvox.so"),
-                    Architecture.X86 => Path.Combine("lib", "linux", "lib_x86", "sunvox.so"),
-                    Architecture.Arm64 => Path.Combine("lib", "linux", "lib_arm64", "sunvox.so"),
+                    Architecture.X64 => Path.Combine(Environment.CurrentDirectory,
+                        "runtimes/linux-x86-64/native/sunvox.so"),
+                    Architecture.X86 => Path.Combine(Environment.CurrentDirectory,
+                        "runtimes/linux-x86/native/sunvox.so"),
+                    Architecture.Arm64 => Path.Combine(Environment.CurrentDirectory,
+                        "runtimes/linux-arm64/native/sunvox.so"),
                     _ => throw new PlatformNotSupportedException(errorMessage)
                 };
 
@@ -47,8 +62,10 @@ namespace SunSharp.Redistribution
             {
                 var path = RuntimeInformation.ProcessArchitecture switch
                 {
-                    Architecture.X64 => Path.Combine("lib", "osx", "lib_x86_64", "sunvox.dylib"),
-                    Architecture.Arm64 => Path.Combine("lib", "osx", "lib_arm64", "sunvox.dylib"),
+                    Architecture.X64 => Path.Combine(Environment.CurrentDirectory,
+                        "runtimes/macos-x86-64/native/sunvox.so"),
+                    Architecture.Arm64 => Path.Combine(Environment.CurrentDirectory,
+                        "runtimes/macos-arm64/native/sunvox.so"),
                     _ => throw new PlatformNotSupportedException(errorMessage)
                 };
 
@@ -57,13 +74,6 @@ namespace SunSharp.Redistribution
 
             throw new PlatformNotSupportedException(errorMessage);
         }
-
-        private static readonly object Lock = new object();
-
-        private static NativeProxy? _proxy;
-        private static ISunVoxLib? _lib;
-
-        public static bool IsLoaded => _proxy?.IsLoaded ?? false;
 
         public static void Load()
         {
@@ -86,7 +96,7 @@ namespace SunSharp.Redistribution
                 if (!IsLoaded || _proxy == null)
                     throw new InvalidOperationException("The library was not loaded yet.");
 
-                return _lib ??= new SunVoxLibNative(_proxy);
+                return _lib ??= new SunVoxLibNativeWrapper(_proxy);
             }
         }
 

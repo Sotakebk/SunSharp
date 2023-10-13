@@ -4,66 +4,124 @@ namespace SunSharp.Native.Loader
 {
     public sealed partial class NativeProxy
     {
-        public bool IsLoaded { get; private set; }
+        private readonly ILibraryHandler _handler;
 
         private readonly object _lock = new object();
-        private readonly ILibraryHandler _handler;
 
         public NativeProxy(ILibraryHandler handler)
         {
             _handler = handler;
-
-            if (handler.IsLibraryLoaded)
-                Load();
         }
 
+        public bool IsLoaded { get; private set; }
+
+        public bool IsLibraryLoaded
+        {
+            get
+            {
+                lock (_lock)
+                {
+                    return _handler.IsLibraryLoaded;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Loads the library if necessary.
+        /// Loads the library functions and sets the IsLoaded flag.
+        /// Nothing will be done if the library and proxy were already loaded.
+        /// </summary>
         public void Load()
         {
             lock (_lock)
             {
+                if (IsLoaded && _handler.IsLibraryLoaded)
+                    return;
+
                 try
                 {
                     if (!_handler.IsLibraryLoaded)
+                    {
+                        // make sure that all delegates are null, do so ASAP so we don't hard fail for any reason
+                        // this should never matter... probably
+                        UnloadInternal();
+
+                        // library is loaded, so we need to reload those delegates
                         _handler.LoadLibrary();
+                        LoadInternal();
+                    }
+                    else if (!IsLoaded)
+                    {
+                        LoadInternal();
+                    }
                 }
                 catch (Exception)
                 {
                     _handler.UnloadLibrary();
+                    UnloadInternal();
                     throw;
                 }
 
-                LoadInternal();
                 IsLoaded = true;
             }
         }
 
+        /// <summary>
+        /// Unloads the SunVox engine if possible.
+        /// Unloads the library functions and sets the IsLoaded flag.
+        /// Unloads the library if possible.
+        /// If an unexpected exception is thrown, it will be rethrown, as this is a potentially dangerous situation where
+        /// memory was probably leaked.
+        /// </summary>
         public void Unload()
         {
             lock (_lock)
             {
-                UnloadInternal();
-                _handler.UnloadLibrary();
-                IsLoaded = false;
+                var handlerIsLibraryLoader = _handler.IsLibraryLoaded;
+
+                // nothing to unload
+                if (!IsLoaded && !handlerIsLibraryLoader)
+                    return;
+
+                // sunvox might need to be unloaded
+                if (IsLoaded && handlerIsLibraryLoader)
+                {
+                    if (sv_deinit == null)
+                        throw new InvalidOperationException(
+                            $"{nameof(sv_deinit)} was null, but library and proxy are both loaded.");
+
+                    sv_deinit.Invoke();
+                }
+
+                // unload delegates if applies
+                if (IsLoaded)
+                {
+                    UnloadInternal();
+                    IsLoaded = false;
+                }
+
+                // unload library if applies
+                if (handlerIsLibraryLoader)
+                    _handler.UnloadLibrary();
             }
         }
 
-        private Exception GetNoDelegateException()
+        internal Exception GetNoDelegateException()
         {
             string message;
             try
             {
                 lock (_lock)
                 {
-                    if (_handler.IsLibraryLoaded && IsLoaded)
-                        message = "Missing delegate. Library is loaded, proxy is loaded.";
-                    else if (_handler.IsLibraryLoaded && !IsLoaded)
-                        message = "Missing delegate. Library is loaded, proxy is not loaded.";
-                    else if (!_handler.IsLibraryLoaded && IsLoaded)
-                        message = "Missing delegate. Library is not loaded, proxy is loaded.";
-                    else if (!_handler.IsLibraryLoaded && !IsLoaded)
-                        message = "Missing delegate. Library is not loaded, proxy is not loaded.";
-                    else
-                        message = "Missing delegate, and library status is unknown.";
+                    var isLibraryLoaded = _handler.IsLibraryLoaded;
+                    var isProxyLoaded = IsLoaded;
+                    message = (isLibraryLoaded, isProxyLoaded) switch
+                    {
+                        (true, true) => "Missing delegate. Library is loaded, proxy is loaded.",
+                        (true, false) => "Missing delegate. Library is loaded, proxy is not loaded.",
+                        (false, true) => "Missing delegate. Library is not loaded, proxy is loaded.",
+                        (false, false) => "Missing delegate. Library is not loaded, proxy is not loaded."
+                    };
                 }
             }
             catch (Exception ex)

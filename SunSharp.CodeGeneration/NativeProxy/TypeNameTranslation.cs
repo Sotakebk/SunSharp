@@ -11,14 +11,14 @@ public class TypeNameTranslation
         {
             { "Int32", "int" },
             { "UInt32", "uint" },
-            { "Void", "void" },
+            { "Void", "void" }
         }.ToImmutableDictionary();
 
     private static readonly ImmutableDictionary<string, string> StrictTypeNameToCapitalizedName =
         new Dictionary<string, string>
         {
             { "Int32", "Int" },
-            { "UInt32", "Uint" },
+            { "UInt32", "Uint" }
         }.ToImmutableDictionary();
 
     public static string TranslateToFriendlyName(Type type)

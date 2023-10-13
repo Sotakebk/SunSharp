@@ -18,89 +18,94 @@ namespace SunSharp.Data
             return lib.RunInLock(slotId, () => ReadSongDataInternal(lib, slotId));
         }
 
-        internal static SongData ReadSongDataInternal(ISunVoxLib lib, int slot)
+        internal static SongData ReadSongDataInternal(ISunVoxLib lib, int slotId)
         {
-            var modules = ReadModules(lib, slot);
-            var patterns = ReadPatterns(lib, slot);
+            var modules = ReadModules(lib, slotId);
+            var patterns = ReadPatterns(lib, slotId);
 
             var songData = new SongData
             {
+                Name = lib.GetSongName(slotId),
+                TPL = lib.GetSongTpl(slotId),
+                BPM = lib.GetSongBpm(slotId),
+
+                Lines = lib.GetSongLengthInLines(slotId),
+                CurrentLine = lib.GetCurrentLine(slotId),
+                FirstLine = patterns.Length == 0 ? 0 : patterns.Min(p => p.Position.X),
+                LastLine = patterns.Length == 0 ? 0 : patterns.Max(p => p.Position.X + p.Lines),
+
                 Modules = modules,
-                Patterns = patterns,
-                BPM = lib.GetSongBpm(slot),
-                CurrentLine = lib.GetCurrentLine(slot),
-                FirstLine = patterns.Min(p => p.Position.X),
-                Frames = lib.GetSongLengthInFrames(slot),
-                HasDynamicTempo = patterns.Any(p => p.HasDynamicTempo),
-                IsDestructive = patterns.Any(p => p.IsDestructive),
-                IsLinear = patterns.All(p => p.IsLinear),
-                LastLine = patterns.Max(p => p.Position.X + p.Lines),
-                Lines = lib.GetSongLengthInLines(slot),
-                Name = lib.GetSongName(slot),
-                TPL = lib.GetSongTpl(slot)
+                Patterns = patterns
             };
             return songData;
         }
 
         #region module data
 
-        internal static ModuleData[] ReadModules(ISunVoxLib lib, int slot)
+        internal static ModuleData[] ReadModules(ISunVoxLib lib, int slotId)
         {
-            var moduleCount = lib.GetUpperModuleCount(slot);
+            var moduleCount = lib.GetUpperModuleCount(slotId);
             var modules = new List<ModuleData>(moduleCount);
 
             for (var i = 0; i < moduleCount; i++)
             {
-                if (!lib.GetModuleExists(slot, i))
+                if (!lib.GetModuleExists(slotId, i))
                     continue;
 
-                var m = ReadModule(lib, slot, i);
+                var m = ReadModule(lib, slotId, i);
                 modules.Add(m);
             }
 
             return modules.ToArray();
         }
 
-        internal static ModuleData ReadModule(ISunVoxLib lib, int slot, int moduleId)
+        internal static ModuleData ReadModule(ISunVoxLib lib, int slotId, int moduleId)
         {
-            var flags = lib.GetModuleFlags(slot, moduleId);
+            var flags = lib.GetModuleFlags(slotId, moduleId);
 
-            var controllerCount = lib.GetModuleControllerCount(slot, moduleId);
+            var controllerCount = lib.GetModuleControllerCount(slotId, moduleId);
             var controllers = new ControllerData[controllerCount];
 
             for (var controllerId = 0; controllerId < controllerCount; controllerId++)
             {
-                var controllerData = ReadControllerData(lib, slot, moduleId, controllerId);
+                var controllerData = ReadControllerData(lib, slotId, moduleId, controllerId);
                 controllers[controllerId] = controllerData;
             }
 
-            var moduleData = new ModuleData()
+            var moduleData = new ModuleData
             {
-                Bypass = flags.Bypass,
-                Color = lib.GetModuleColor(slot, moduleId),
-                Controllers = controllers,
-                FineTune = lib.GetModuleFineTune(slot, moduleId),
                 Id = moduleId,
-                Inputs = lib.GetModuleInputs(slot, moduleId),
-                Mute = flags.Mute,
-                Name = lib.GetModuleName(slot, moduleId),
-                Outputs = lib.GetModuleOutputs(slot, moduleId),
-                Position = lib.GetModulePosition(slot, moduleId),
-                Solo = flags.Solo
+                Name = lib.GetModuleName(slotId, moduleId),
+                Type = lib.GetModuleType(slotId, moduleId),
+
+                Position = lib.GetModulePosition(slotId, moduleId),
+                Color = lib.GetModuleColor(slotId, moduleId),
+                FineTune = lib.GetModuleFineTune(slotId, moduleId),
+                Flags = flags,
+                Controllers = controllers,
+
+                Inputs = lib.GetModuleInputs(slotId, moduleId),
+                Outputs = lib.GetModuleOutputs(slotId, moduleId)
             };
             return moduleData;
         }
 
         #region controller data
 
-        internal static ControllerData ReadControllerData(ISunVoxLib lib, int slot, int moduleId, int controllerId)
+        internal static ControllerData ReadControllerData(ISunVoxLib lib, int slotId, int moduleId, int controllerId)
         {
             var controllerData = new ControllerData
             {
                 Id = controllerId,
-                Name = lib.GetModuleControllerName(slot, moduleId, controllerId) ?? "undefined",
-                Value = lib.GetModuleControllerValue(slot, moduleId, controllerId, ValueScalingMode.Real),
-                ControllerType = lib.GetModuleControllerType(slot, moduleId, controllerId)
+                Name = lib.GetModuleControllerName(slotId, moduleId, controllerId) ?? "undefined",
+
+                Value = lib.GetModuleControllerValue(slotId, moduleId, controllerId, ValueScalingMode.Real),
+                MinValue = lib.GetModuleControllerMinValue(slotId, moduleId, controllerId, ValueScalingMode.Real),
+                MaxValue = lib.GetModuleControllerMaxValue(slotId, moduleId, controllerId, ValueScalingMode.Real),
+                Offset = lib.GetModuleControllerOffset(slotId, moduleId, controllerId),
+
+                ControllerType = lib.GetModuleControllerType(slotId, moduleId, controllerId),
+                Group = lib.GetModuleControllerGroup(slotId, moduleId, controllerId)
             };
             return controllerData;
         }
@@ -111,26 +116,27 @@ namespace SunSharp.Data
 
         #region pattern data
 
-        internal static PatternData[] ReadPatterns(ISunVoxLib lib, int slot)
+        internal static PatternData[] ReadPatterns(ISunVoxLib lib, int slotId)
         {
-            var patternCount = lib.GetUpperPatternCount(slot);
+            var patternCount = lib.GetUpperPatternCount(slotId);
             var patterns = new List<PatternData>(patternCount);
 
             for (var i = 0; i < patternCount; i++)
             {
-                if (!lib.GetPatternExists(slot, i))
+                if (!lib.GetPatternExists(slotId, i))
                     continue;
 
-                var p = ReadPatternData(lib, slot, i);
+                var p = ReadPattern(lib, slotId, i);
                 patterns.Add(p);
             }
 
             return patterns.ToArray();
         }
 
-        internal static PatternData ReadPatternData(ISunVoxLib lib, int slot, int patternId)
+        internal static PatternData ReadPattern(ISunVoxLib lib, int slotId, int patternId)
         {
-            var data = lib.GetPatternData(slot, patternId) ?? Array.Empty<PatternEvent>();
+            var (data, tracks, lines) = lib.GetPatternData(slotId, patternId) ??
+                                        throw new ArgumentException($"The slot {slotId} does not exist.");
             var isDestructive = false;
             var isLinear = true;
             var hasDynamicTempo = false;
@@ -139,24 +145,24 @@ namespace SunSharp.Data
             {
                 isDestructive = @event.Effect.IsDestructive() || isDestructive;
                 isLinear = isLinear && !@event.Effect.IsNonLinear();
-                hasDynamicTempo = hasDynamicTempo || @event.Effect.ModifiesTime();
+                hasDynamicTempo = hasDynamicTempo || @event.Effect.ChangesTempo();
             }
 
-            var muted = lib.SetPatternMute(slot, patternId, false);
-            lib.SetPatternMute(slot, patternId, muted);
-
-            var patternData = new PatternData()
+            var patternData = new PatternData
             {
-                Data = data,
-                HasDynamicTempo = hasDynamicTempo,
                 Id = patternId,
+                Name = lib.GetPatternName(slotId, patternId),
+
+                HasDynamicTempo = hasDynamicTempo,
                 IsDestructive = isDestructive,
                 IsLinear = isLinear,
-                IsMuted = muted,
-                Lines = lib.GetPatternLines(slot, patternId),
-                Name = lib.GetPatternName(slot, patternId),
-                Position = lib.GetPatternPosition(slot, patternId),
-                Tracks = lib.GetPatternTracks(slot, patternId)
+                IsMuted = lib.GetPatternMuted(slotId, patternId),
+
+                Position = lib.GetPatternPosition(slotId, patternId),
+                Lines = lines,
+                Tracks = tracks,
+
+                Data = data
             };
             return patternData;
         }

@@ -17,16 +17,12 @@ namespace SunSharp
         public static int[] CopyIntArraySkipNegativeOnes(IntPtr address, int count)
         {
             if (address == IntPtr.Zero)
-            {
                 return Array.Empty<int>();
-            }
 
             var nonZeroValues = 0;
             for (var i = 0; i < count; i++)
-            {
                 if (Marshal.ReadInt32(address, i * sizeof(int)) != -1)
                     nonZeroValues++;
-            }
 
             var arr = new int[nonZeroValues];
 
@@ -46,26 +42,19 @@ namespace SunSharp
 
         #region macros
 
-        // this code is translated from sunvox.h
+        // this code is translated from sunvox.h, adapted to C#
 
-        /// <summary>
-        /// Get x, y position from one xy value received from sv_get_module_xy(int, int).
-        /// </summary>
-        public static (short x, short y) SplitValueTo2DPosition(uint xy)
+        // use to split position and fine-tune
+        public static (short lowerBytes, short upperBytes) UnpackTwoSignedShorts(uint value)
         {
-            var x = xy & 0xFFFF;
-            var y = (xy >> 16) & 0xFFFF;
-            return (ToShortBitwise(x), ToShortBitwise(y));
+            var x = value & 0xFFFF;
+            var y = (value >> 16) & 0xFFFF;
+            return (unchecked((short)x), unchecked((short)y));
         }
 
-        /// <summary>
-        /// Get fine-tune and relative note value from packed fine-tune value received from sv_get_module_finetune(int, int).
-        /// </summary>
-        public static (short fineTune, short relativeNote) SplitValueToFineTune(uint packedFineTune)
+        public static uint PackTwoSignedShorts(short lowerBytes, short upperBytes)
         {
-            var outFineTune = packedFineTune & 0xFFFF;
-            var outRelativeNote = (packedFineTune >> 16) & 0xFFFF;
-            return (ToShortBitwise(outFineTune), ToShortBitwise(outRelativeNote));
+            return unchecked((ushort)lowerBytes) | ((uint)upperBytes << 16);
         }
 
         public static float PitchToFrequency(float pitch)

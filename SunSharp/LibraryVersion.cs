@@ -22,6 +22,9 @@
             Minor2 = (byte)(code & 255);
         }
 
-        public override string ToString() => $"SunVox Lib v{Major}.{Minor}.{Minor2}";
+        public override string ToString()
+        {
+            return $"SunVox Lib v{Major}.{Minor}.{Minor2}";
+        }
     }
 }

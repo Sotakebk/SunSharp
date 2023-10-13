@@ -10,9 +10,6 @@ namespace SunSharp.CodeGeneration.NativeProxy;
 
 public sealed class NativeProxyGenerator : BaseGenerator
 {
-    private record DelegateDefinition(Type ReturnType, Type[] Parameters);
-    private record MethodDefinition(MethodInfo MethodInfo, DelegateDefinition CorrespondingDelegate);
-
     private DelegateDefinition[] delegateDefinitions = Array.Empty<DelegateDefinition>();
     private MethodDefinition[] methodDefinitions = Array.Empty<MethodDefinition>();
 
@@ -27,7 +24,8 @@ public sealed class NativeProxyGenerator : BaseGenerator
     private static string GetDelegateDefinitionCode(DelegateDefinition definition)
     {
         var returnType = TranslateToFriendlyName(definition.ReturnType);
-        var friendlyArguments = string.Join(", ", definition.Parameters.Select(static (t, i) => $"{TranslateToFriendlyName(t)} arg{i + 1}"));
+        var friendlyArguments = string.Join(", ",
+            definition.Parameters.Select(static (t, i) => $"{TranslateToFriendlyName(t)} arg{i + 1}"));
 
         return $"private delegate {returnType} {GetDelegateNameCode(definition)}({friendlyArguments});";
     }
@@ -42,12 +40,14 @@ public sealed class NativeProxyGenerator : BaseGenerator
         var joinedPars = string.Join(", ", pars);
         var forwardedPars = definition.MethodInfo.GetParameters().Select(static p => p.Name);
         var joinedForwardedPars = string.Join(", ", forwardedPars);
-        return $"{returnType} {nameof(ISunVoxLibC)}.{definition.MethodInfo.Name}({joinedPars}) => {definition.MethodInfo.Name}?.Invoke({joinedForwardedPars}) ?? throw GetNoDelegateException();";
+        return
+            $"{returnType} {nameof(ISunVoxLibC)}.{definition.MethodInfo.Name}({joinedPars}) => {definition.MethodInfo.Name}?.Invoke({joinedForwardedPars}) ?? throw GetNoDelegateException();";
     }
 
     private static string GetDelegateForMethodDefinitionCode(MethodDefinition methodDefinition)
     {
-        return $"private {GetDelegateNameCode(methodDefinition.CorrespondingDelegate)}? {methodDefinition.MethodInfo.Name};";
+        return
+            $"private {GetDelegateNameCode(methodDefinition.CorrespondingDelegate)}? {methodDefinition.MethodInfo.Name};";
     }
 
     private void ReadData()
@@ -61,7 +61,8 @@ public sealed class NativeProxyGenerator : BaseGenerator
             .ToArray();
 
         methodDefinitions = type.GetMethods()
-            .Select(static m => new MethodDefinition(m, new DelegateDefinition(m.ReturnType, m.GetParameters().Select(static p => p.ParameterType).ToArray())))
+            .Select(static m => new MethodDefinition(m,
+                new DelegateDefinition(m.ReturnType, m.GetParameters().Select(static p => p.ParameterType).ToArray())))
             .ToArray();
     }
 
@@ -100,10 +101,7 @@ public sealed class NativeProxyGenerator : BaseGenerator
                 AppendLine();
                 AppendLine("#region interface");
                 AppendLine();
-                foreach (var m in methodDefinitions.OrderBy(static m => m.MethodInfo.Name))
-                {
-                    AppendMethodDefinition(m);
-                }
+                foreach (var m in methodDefinitions.OrderBy(static m => m.MethodInfo.Name)) AppendMethodDefinition(m);
 
                 AppendLine("#endregion interface");
                 AppendLine();
@@ -118,6 +116,18 @@ public sealed class NativeProxyGenerator : BaseGenerator
         return Context.GetBuiltString();
     }
 
+    private void AppendUnloadMethod()
+    {
+        AppendLine("private void UnloadInternal()");
+        AppendLine("{");
+        AddIndent(() =>
+        {
+            foreach (var methodDefinition in methodDefinitions.OrderBy(static m => m.MethodInfo.Name))
+                AppendLine($"{methodDefinition.MethodInfo.Name} = null;");
+        });
+        AppendLine("}");
+    }
+
     private void AppendLoadMethod()
     {
         AppendLine("private void LoadInternal()");
@@ -126,23 +136,10 @@ public sealed class NativeProxyGenerator : BaseGenerator
         {
             foreach (var methodDefinition in methodDefinitions.OrderBy(static m => m.MethodInfo.Name))
             {
-                AppendLine($"{methodDefinition.MethodInfo.Name} = null;");
-            }
-        });
-        AppendLine("}");
-    }
-
-    private void AppendUnloadMethod()
-    {
-        AppendLine("private void UnloadInternal()");
-        AppendLine("{");
-        AddIndent(() =>
-        {
-            foreach (var methodDefinition in methodDefinitions.OrderBy(static m => m.MethodInfo.Name))
-            {
                 var name = methodDefinition.MethodInfo.Name;
                 var delegateName = GetDelegateNameCode(methodDefinition.CorrespondingDelegate);
-                AppendLine($"{name} = ({delegateName})_handler.{nameof(ILibraryHandler.GetFunctionByName)}(\"{name}\", typeof({delegateName}));");
+                AppendLine(
+                    $"{name} = ({delegateName})_handler.{nameof(ILibraryHandler.GetFunctionByName)}(\"{name}\", typeof({delegateName}));");
             }
         });
         AppendLine("}");
@@ -165,4 +162,8 @@ public sealed class NativeProxyGenerator : BaseGenerator
         AppendLine(GetDelegateDefinitionCode(delegateDefinition));
         AppendLine();
     }
+
+    private record DelegateDefinition(Type ReturnType, Type[] Parameters);
+
+    private record MethodDefinition(MethodInfo MethodInfo, DelegateDefinition CorrespondingDelegate);
 }

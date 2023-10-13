@@ -6,8 +6,6 @@ namespace SunSharp.Redistribution
 {
     internal sealed class UnixLibraryHandler : ILibraryHandler
     {
-        public bool IsLibraryLoaded => _ptr != IntPtr.Zero;
-
         private readonly object _lock = new object();
         private readonly string _path;
         private volatile IntPtr _ptr = IntPtr.Zero;
@@ -17,16 +15,22 @@ namespace SunSharp.Redistribution
             _path = path;
         }
 
+        public bool IsLibraryLoaded => _ptr != IntPtr.Zero;
+
         public void LoadLibrary()
         {
             lock (_lock)
             {
                 if (IsLibraryLoaded)
-                    throw new LibraryLoadingException("SunVoxLib is already loaded.");
+                    return;
 
                 var ptr = dlopen(_path, 0);
                 if (ptr == IntPtr.Zero)
-                    throw new LibraryLoadingException($"Failed to load SunVoxLib from path '{_path}'.");
+                {
+                    var error = dlerror();
+                    throw new LibraryLoadingException(
+                        $"Failed to load SunVoxLib from path '{_path}' with error '{error}'.");
+                }
 
                 _ptr = ptr;
             }
@@ -37,11 +41,15 @@ namespace SunSharp.Redistribution
             lock (_lock)
             {
                 if (!IsLibraryLoaded)
-                    throw new LibraryLoadingException("SunVoxLib is not loaded.");
+                    return;
 
                 var code = dlclose(_ptr);
                 if (code != 0)
-                    throw new LibraryLoadingException("SunVoxLib failed to unload.");
+                {
+                    var error = dlerror();
+                    throw new LibraryLoadingException($"Failed to unload SunVoxLib with error '{error}'.");
+                }
+
                 _ptr = IntPtr.Zero;
             }
         }
@@ -58,7 +66,11 @@ namespace SunSharp.Redistribution
 
                 var ptr = dlsym(_ptr, name);
                 if (ptr == IntPtr.Zero)
-                    throw new LibraryLoadingException($"Failed to load SunVoxLib from path '{_path}'.");
+                {
+                    var error = dlerror();
+                    throw new LibraryLoadingException(
+                        $"Failed to load SunVoxLib function '{name}' with error '{error}'.");
+                }
 
                 return Marshal.GetDelegateForFunctionPointer(ptr, delegateType);
             }
@@ -72,5 +84,8 @@ namespace SunSharp.Redistribution
 
         [DllImport("libdl.so")]
         public static extern int dlclose(IntPtr handle);
+
+        [DllImport("libdl.so", CharSet = CharSet.Unicode)]
+        public static extern string dlerror();
     }
 }

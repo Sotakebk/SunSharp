@@ -2,17 +2,17 @@
 {
     public readonly struct ModuleFlags
     {
-        private const uint SV_MODULE_FLAG_EXISTS = 1 << 0;
-        private const uint SV_MODULE_FLAG_GENERATOR = 1 << 1;
-        private const uint SV_MODULE_FLAG_EFFECT = 1 << 2;
-        private const uint SV_MODULE_FLAG_MUTE = 1 << 3;
-        private const uint SV_MODULE_FLAG_SOLO = 1 << 4;
-        private const uint SV_MODULE_FLAG_BYPASS = 1 << 5;
+        internal const uint SV_MODULE_FLAG_EXISTS = 1 << 0;
+        internal const uint SV_MODULE_FLAG_GENERATOR = 1 << 1;
+        internal const uint SV_MODULE_FLAG_EFFECT = 1 << 2;
+        internal const uint SV_MODULE_FLAG_MUTE = 1 << 3;
+        internal const uint SV_MODULE_FLAG_SOLO = 1 << 4;
+        internal const uint SV_MODULE_FLAG_BYPASS = 1 << 5;
 
-        private const int SV_MODULE_INPUTS_OFF = 16;
-        private const uint SV_MODULE_INPUTS_MASK = 255u << 16;
-        private const int SV_MODULE_OUTPUTS_OFF = 16 + 8;
-        private const uint SV_MODULE_OUTPUTS_MASK = 255u << 16 + 8;
+        internal const int SV_MODULE_INPUTS_OFF = 16;
+        internal const uint SV_MODULE_INPUTS_MASK = 255u << 16;
+        internal const int SV_MODULE_OUTPUTS_OFF = 16 + 8;
+        internal const uint SV_MODULE_OUTPUTS_MASK = 255u << (16 + 8);
 
         public uint Value { get; }
 
