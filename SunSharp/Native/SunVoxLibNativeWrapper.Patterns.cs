@@ -167,13 +167,14 @@ namespace SunSharp.Native
 
             if (tracks * lines != data.Length)
                 throw new ArgumentException(
-                    $"Size of {nameof(data)} ({nameof(data)}.Length)  is not equal to {nameof(tracks)} * {nameof(lines)} ({tracks * lines}).");
+                    $"Size of {nameof(data)} ({nameof(data)}.Length) is not equal to {nameof(tracks)} * {nameof(lines)} ({tracks * lines}).");
 
+            // should throw an exception if the pattern in question does not exist
             SetPatternSize(slotId, patternId, tracks, lines);
 
             var ptr = _lib.sv_get_pattern_data(slotId, patternId);
             if (ptr == IntPtr.Zero)
-                return;
+                throw new SunVoxException(0, $"{nameof(_lib.sv_get_pattern_data)} returned nullptr.");
 
             for (var i = 0; i < lines * tracks; i++)
                 Marshal.WriteInt64(ptr, i * sizeof(long), unchecked((long)data[i].Data));

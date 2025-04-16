@@ -32,7 +32,7 @@
       <Output TaskParameter="Lines" ItemName="ReleaseNoteLines" />
     </ReadLinesFromFile>
     <PropertyGroup>
-      <PackageReleaseNotes>@(ReleaseNoteLines, '%0a')</PackageReleaseNotes>
+      <PackageReleaseNotes>@(ReleaseNoteLines, '%0a%0d')</PackageReleaseNotes>
     </PropertyGroup>
   </Target>
 

@@ -2,6 +2,13 @@
 
 namespace SunSharp
 {
+    /// <summary>
+    /// This exception signifies that SunVox returned an unexpected value,
+    /// which may be caused by being in the wrong state when calling methods.
+    /// In case of issues, please check STDOUT of the process hosting the SunVox library,
+    /// as more information may be provided there.
+    /// </summary>
+    /// <inheritdoc />
     public sealed class SunVoxException : Exception
     {
         private readonly uint _code;
