@@ -1,6 +1,4 @@
-﻿using NUnit.Framework;
-
-namespace SunSharp.Tests;
+﻿namespace SunSharp.Tests;
 
 public class SunVoxExceptionTests
 {
@@ -13,11 +11,8 @@ public class SunVoxExceptionTests
         var exceptionFromUint = new SunVoxException(code, methodName);
         var exceptionWithNoMethod = new SunVoxException(-1);
 
-        Assert.Multiple(() =>
-        {
-            Assert.That(exception.Message, Is.EqualTo($"Error code: {code:X}, method: '{methodName}'."));
-            Assert.That(exceptionFromUint.Message, Is.EqualTo($"Error code: {code:X}, method: '{methodName}'."));
-            Assert.That(exceptionWithNoMethod.Message, Is.EqualTo($"Error code: {code:X}, method: 'unknown'."));
-        });
+        exception.Message.Should().Be($"Error code: {code:X}, method: '{methodName}'.");
+        exceptionFromUint.Message.Should().Be($"Error code: {code:X}, method: '{methodName}'.");
+        exceptionWithNoMethod.Message.Should().Be($"Error code: {code:X}, method: 'unknown'.");
     }
 }

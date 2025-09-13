@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace SunSharp.CodeGeneration.CodeGenerationTools;
+﻿namespace SunSharp.CodeGeneration.CodeGenerationTools;
 
 public abstract class BaseGenerator
 {

@@ -13,8 +13,7 @@
         /// <param name="channels">Channels to be used.</param>
         /// <param name="flags">Initialization flags.</param>
         /// <returns>The version of underlying library.</returns>
-        LibraryVersion Initialize(int sampleRate, string? config = null, AudioChannels channels = AudioChannels.Stereo,
-            InitFlags flags = InitFlags.Default);
+        LibraryVersion Initialize(int sampleRate, string? config = null, AudioChannels channels = AudioChannels.Stereo, InitFlags flags = InitFlags.None);
 
         /// <summary>
         /// Deinitializes the library, frees resources.
@@ -132,7 +131,7 @@
         int GetSongBpm(int slotId);
 
         /// <summary>
-        /// Get the the project length in frames. <br />
+        /// Get the project length in frames. <br />
         /// A frame is a pair of audio signal samples (left and right channel amplitudes).
         /// The sample rate 44100 Hz means that you hear 44100 frames per second.
         /// </summary>
@@ -141,11 +140,11 @@
         uint GetSongLengthInFrames(int slotId);
 
         /// <summary>
-        /// Get the the project length in frames or lines.
+        /// Get the project length in frames or lines.
         /// </summary>
         /// <param name="slotId"></param>
         /// <returns></returns>
-        int GetSongLengthInLines(int slotId);
+        uint GetSongLengthInLines(int slotId);
 
         string? GetSongName(int slotId);
 
@@ -172,6 +171,15 @@
         /// <param name="data"></param>
         void SendEvent(int slotId, int track, PatternEvent data);
 
+        /// <summary>
+        /// </summary>
+        /// <param name="slotId"></param>
+        /// <param name="track"></param>
+        /// <param name="nn"></param>
+        /// <param name="vv"></param>
+        /// <param name="mm"></param>
+        /// <param name="ccee"></param>
+        /// <param name="xxyy"></param>
         void SendEvent(int slotId, int track, int nn = 0, int vv = 0, int mm = 0, int ccee = 0, int xxyy = 0);
 
         /// <summary>

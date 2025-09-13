@@ -1,6 +1,4 @@
-﻿using System;
-using System.Linq;
-using NUnit.Framework;
+﻿using System.Linq;
 
 namespace SunSharp.Tests;
 
@@ -38,12 +36,9 @@ public class EffectExtensionsTests
             var expectedToBeDestructive = destructiveEffects.Contains(effect);
             var expectedToBeTimeModifying = timeModifyingEffects.Contains(effect);
 
-            Assert.Multiple(() =>
-            {
-                Assert.That(effect.IsNonLinear(), Is.EqualTo(expectedToBeNonLinear));
-                Assert.That(effect.IsDestructive(), Is.EqualTo(expectedToBeDestructive));
-                Assert.That(effect.ChangesTempo(), Is.EqualTo(expectedToBeTimeModifying));
-            });
+            effect.IsNonLinear().Should().Be(expectedToBeNonLinear);
+            effect.IsDestructive().Should().Be(expectedToBeDestructive);
+            effect.ChangesTempo().Should().Be(expectedToBeTimeModifying);
         }
     }
 }

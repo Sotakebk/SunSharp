@@ -1,41 +1,33 @@
 ﻿using System.Linq;
-using FluentAssertions;
-using NUnit.Framework;
 using SunSharp.Data;
 using SunSharp.Tests.Mocks;
-using static TddXt.AnyRoot.Root;
 
 namespace SunSharp.Tests.Data;
 
 public class DataReaderTests
 {
-    private static ModuleData CreateValidModuleData()
+    private static ModuleData CreateValidModuleData(ModuleData moduleData)
     {
-        var moduleData = Any.Instance<ModuleData>();
-
         for (var i = 0; i < moduleData.Controllers.Count; i++)
+        {
             moduleData.Controllers.ElementAt(i).Id = i;
+        }
 
         return moduleData;
     }
 
-    private static PatternData CreateValidPatternData()
+    private static PatternData CreateValidPatternData(PatternData patternData)
     {
-        var patternData = Any.Instance<PatternData>();
-
         patternData.IsDestructive = patternData.Data.Any(static e => e.Effect.IsDestructive());
         patternData.IsLinear = patternData.Data.All(static e => !e.Effect.IsNonLinear());
         patternData.HasDynamicTempo = patternData.Data.Any(static e => e.Effect.ChangesTempo());
         patternData.Lines = patternData.Data.Count;
         patternData.Tracks = 1;
-
         return patternData;
     }
 
-    private static SongData CreateValidSongData()
+    private static SongData CreateValidSongData(SongData songData)
     {
-        var songData = Any.Instance<SongData>();
-
         foreach (var pattern in songData.Patterns)
         {
             pattern.IsDestructive = pattern.Data.Any(static e => e.Effect.IsDestructive());
@@ -46,54 +38,49 @@ public class DataReaderTests
         }
 
         foreach (var module in songData.Modules)
+        {
             for (var i = 0; i < module.Controllers.Count; i++)
+            {
                 module.Controllers.ElementAt(i).Id = i;
+            }
+        }
 
         songData.FirstLine = songData.Patterns.Min(static p => p.Position.X);
         songData.LastLine = songData.Patterns.Max(static p => p.Position.X + p.Lines);
-        songData.Lines = songData.LastLine - songData.FirstLine;
+        songData.Lines = (uint)(songData.LastLine - songData.FirstLine);
         return songData;
     }
 
-    [Test]
-    public void DataReaderReadSongDataShouldReturnEquivalentDataAsPutInMock()
+    [Test, AutoData]
+    public void DataReaderReadSongDataShouldReturnEquivalentDataAsPutInMock(SongData songData)
     {
-        var songData = CreateValidSongData();
-
+        var validSongData = CreateValidSongData(songData);
         var libraryMock = SunVoxLibMockProvider.BuildMock()
-            .WithSongData(0, songData)
+            .WithSongData(0, validSongData)
             .Build();
-
         var data = DataReader.ReadSongData(libraryMock, 0);
-
-        data.Should().BeEquivalentTo(songData);
+        data.Should().BeEquivalentTo(validSongData);
     }
 
-    [Test]
-    public void DataReaderReadModuleShouldReturnEquivalentDataAsPutInMock()
+    [Test, AutoData]
+    public void DataReaderReadModuleShouldReturnEquivalentDataAsPutInMock(ModuleData moduleData)
     {
-        var moduleData = CreateValidModuleData();
-
+        var validModuleData = CreateValidModuleData(moduleData);
         var libraryMock = SunVoxLibMockProvider.BuildMock()
-            .WithModuleData(0, new[] { moduleData })
+            .WithModuleData(0, [validModuleData])
             .Build();
-
-        var data = DataReader.ReadModule(libraryMock, 0, moduleData.Id);
-
-        data.Should().BeEquivalentTo(moduleData);
+        var data = DataReader.ReadModule(libraryMock, 0, validModuleData.Id);
+        data.Should().BeEquivalentTo(validModuleData);
     }
 
-    [Test]
-    public void DataReaderReadPatternShouldReturnEquivalentDataAsPutInMock()
+    [Test, AutoData]
+    public void DataReaderReadPatternShouldReturnEquivalentDataAsPutInMock(PatternData patternData)
     {
-        var moduleData = CreateValidPatternData();
-
+        var validPatternData = CreateValidPatternData(patternData);
         var libraryMock = SunVoxLibMockProvider.BuildMock()
-            .WithPatternData(0, new[] { moduleData })
+            .WithPatternData(0, [validPatternData])
             .Build();
-
-        var data = DataReader.ReadPattern(libraryMock, 0, moduleData.Id);
-
-        data.Should().BeEquivalentTo(moduleData);
+        var data = DataReader.ReadPattern(libraryMock, 0, validPatternData.Id);
+        data.Should().BeEquivalentTo(validPatternData);
     }
 }

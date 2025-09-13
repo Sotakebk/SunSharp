@@ -153,14 +153,19 @@ namespace SunSharp
         public Note(NoteName name, int octave)
         {
             if (name < NoteName.C || name > NoteName.B)
+            {
                 throw new ArgumentException($"Unsupported note '{name}'.");
+            }
 
             if (octave < 0 || octave > 10)
-                throw new ArgumentOutOfRangeException(nameof(octave), octave,
-                    "Only values in range of 0 to 10 are supported.");
+            {
+                throw new ArgumentOutOfRangeException(nameof(octave), octave, "Only values in range of 0 to 10 are supported.");
+            }
+
             if (octave == 10 && name > NoteName.Fs)
-                throw new ArgumentOutOfRangeException(nameof(name), name,
-                    "In the tenth octave, only notes up to F# are supported.");
+            {
+                throw new ArgumentOutOfRangeException(nameof(name), name, "In the tenth octave, only notes up to F# are supported.");
+            }
 
             Value = (byte)(1 + name + octave * 12);
         }

@@ -9,7 +9,7 @@ namespace SunSharp.Data
         public string? Name { get; set; }
         public int BPM { get; set; }
         public int TPL { get; set; }
-        public int Lines { get; set; }
+        public uint Lines { get; set; }
         public int CurrentLine { get; set; }
         public int FirstLine { get; set; }
         public int LastLine { get; set; }

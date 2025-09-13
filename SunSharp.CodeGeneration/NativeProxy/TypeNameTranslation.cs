@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.Immutable;
 
 namespace SunSharp.CodeGeneration.NativeProxy;
@@ -34,6 +33,6 @@ public class TypeNameTranslation
     public static string Translate(Type type, ImmutableDictionary<string, string> d)
     {
         var str = type.Name;
-        return d.TryGetValue(str, out var val) ? val : str;
+        return d.GetValueOrDefault(str, str);
     }
 }

@@ -7,6 +7,7 @@
     <PackageId>Sotakebk.SunSharp.Redistribution</PackageId>
     <Title>SunSharp.Redistribution</Title>
     <Version>2.0.0-alpha0</Version>
+    <AssemblyVersion>0.0.0.0</AssemblyVersion>
     <Authors>Sotakebk</Authors>
     <Product>SunSharp.Redistribution</Product>
     <Description>SunVox Library redistribution for SunSharp.</Description>
@@ -16,7 +17,7 @@
     <PackageTags>sunvox;music;wrapper</PackageTags>
     <AnalysisLevel>latest-recommended</AnalysisLevel>
     <PackageReadmeFile>README.md</PackageReadmeFile>
-    <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+    <PackageLicenseFile>license.txt</PackageLicenseFile>
     <IncludeSymbols>True</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     <Nullable>enable</Nullable>

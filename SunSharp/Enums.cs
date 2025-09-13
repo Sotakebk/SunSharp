@@ -54,10 +54,10 @@ namespace SunSharp
         Justification = "Corresponds to SV_INIT_FLAG flags, this just makes sense.")]
     public enum InitFlags : uint
     {
-        Default = 0,
+        None = 0,
 
         /// <summary>
-        /// Less data will be written to standard output.
+        /// Less information will be written to standard output.
         /// </summary>
         NoDebugOutput = Constants.SV_INIT_FLAG_NO_DEBUG_OUTPUT,
 

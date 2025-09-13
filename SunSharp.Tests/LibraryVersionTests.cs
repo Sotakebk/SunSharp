@@ -1,6 +1,4 @@
-﻿using NUnit.Framework;
-
-namespace SunSharp.Tests;
+﻿namespace SunSharp.Tests;
 
 public class LibraryVersionTests
 {
@@ -11,22 +9,16 @@ public class LibraryVersionTests
         const byte minor = 2;
         const byte minor2 = 3;
         var version = new LibraryVersion(major, minor, minor2);
-        Assert.Multiple(() =>
-        {
-            Assert.That(version.Major, Is.EqualTo(1));
-            Assert.That(version.Minor, Is.EqualTo(2));
-            Assert.That(version.Minor2, Is.EqualTo(3));
-        });
+        version.Major.Should().Be(1);
+        version.Minor.Should().Be(2);
+        version.Minor2.Should().Be(3);
         const int code = (major << 16)
                          | (minor << 8)
                          | minor2;
         var anotherVersion = new LibraryVersion(code);
-        Assert.Multiple(() =>
-        {
-            Assert.That(anotherVersion.Major, Is.EqualTo(1));
-            Assert.That(anotherVersion.Minor, Is.EqualTo(2));
-            Assert.That(anotherVersion.Minor2, Is.EqualTo(3));
-        });
+        anotherVersion.Major.Should().Be(1);
+        anotherVersion.Minor.Should().Be(2);
+        anotherVersion.Minor2.Should().Be(3);
     }
 
     [Test]
@@ -37,7 +29,6 @@ public class LibraryVersionTests
         const byte minor2 = 3;
         var version = new LibraryVersion(major, minor, minor2);
         var value = $"SunVox Lib v{major}.{minor}.{minor2}";
-
-        Assert.That(version.ToString(), Is.EqualTo(value));
+        version.ToString().Should().Be(value);
     }
 }

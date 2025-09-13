@@ -1,7 +1,5 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Runtime.InteropServices;
-using NUnit.Framework;
 
 namespace SunSharp.Tests;
 
@@ -15,10 +13,8 @@ public class HelperTests
     public void ToShortBitwiseShouldGiveSameValueForArgument(short testValue)
     {
         var value = (uint)unchecked((ushort)testValue);
-
         var result = Helper.ToShortBitwise(value);
-
-        Assert.That(result, Is.EqualTo(testValue));
+        result.Should().Be(testValue);
     }
 
     [TestCase(-1)]
@@ -29,18 +25,15 @@ public class HelperTests
     public void ToShortBitwiseShouldGiveSameValueForArgumentWithHighBits(short testValue)
     {
         var value = unchecked((ushort)testValue) | 0xFFFF0000;
-
         var result = Helper.ToShortBitwise(value);
-
-        Assert.That(result, Is.EqualTo(testValue));
+        result.Should().Be(testValue);
     }
 
     [Test]
     public void CopyIntArrayShouldSkipNegativeOnesReturnEmptyArrayForNullPtr()
     {
         var array = Helper.CopyIntArraySkipNegativeOnes(IntPtr.Zero, 10);
-
-        Assert.That(array, Is.EqualTo(Array.Empty<int>()));
+        array.Should().BeEmpty();
     }
 
     [Test]
@@ -58,8 +51,7 @@ public class HelperTests
         {
             originalArrayHandle.Free();
         }
-
-        Assert.That(array, Is.EqualTo(originalArray.Where(static i => i != -1).ToArray()));
+        array.Should().BeEquivalentTo(originalArray.Where(static i => i != -1).ToArray());
     }
 
     [TestCase(0, 0, 0u)]
@@ -72,8 +64,7 @@ public class HelperTests
     public void UnpackTwoSignedShortsShouldReturnExpectedValue(short lowerBytes, short upperBytes, uint value)
     {
         var result = Helper.UnpackTwoSignedShorts(value);
-
-        Assert.That(result, Is.EqualTo((lowerBytes, upperBytes)));
+        result.Should().Be((lowerBytes, upperBytes));
     }
 
     [TestCase(0, 0, 0u)]
@@ -86,8 +77,7 @@ public class HelperTests
     public void PackTwoSignedShortsShouldReturnExpectedValue(short lowerBytes, short upperBytes, uint value)
     {
         var result = Helper.PackTwoSignedShorts(lowerBytes, upperBytes);
-
-        Assert.That(result, Is.EqualTo(value));
+        result.Should().Be(value);
     }
 
     [TestCase(0x7800, 16.35)] // C0
@@ -97,12 +87,8 @@ public class HelperTests
     {
         var result = Helper.PitchToFrequency(input);
         var resultFloat = Helper.PitchToFrequency((float)input);
-
-        Assert.Multiple(() =>
-        {
-            Assert.That(result, Is.EqualTo(expected).Within(expected * 0.01));
-            Assert.That(resultFloat, Is.EqualTo(expected).Within(expected * 0.01));
-        });
+        result.Should().BeApproximately(expected, expected * 0.01);
+        resultFloat.Should().BeApproximately((float)expected, (float)(expected * 0.01));
     }
 
     [TestCase(16.35, 0x7800)] // C0
@@ -112,11 +98,7 @@ public class HelperTests
     {
         var result = Helper.FrequencyToPitch(input);
         var resultFloat = Helper.FrequencyToPitch((float)input);
-
-        Assert.Multiple(() =>
-        {
-            Assert.That(result, Is.EqualTo(expected).Within(expected * 0.01));
-            Assert.That(resultFloat, Is.EqualTo(expected).Within(expected * 0.01));
-        });
+        result.Should().BeApproximately(expected, expected * 0.01);
+        resultFloat.Should().BeApproximately((float)expected, (float)(expected * 0.01));
     }
 }

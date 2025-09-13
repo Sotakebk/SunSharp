@@ -9,7 +9,7 @@ namespace SunSharp.Redistribution
     /// <summary>
     /// Use this class to access a locally loaded SunVoxLib instance. <br />
     /// <see cref="Load" /> the library once, then <see cref="GetLibraryInstance" />. Construct a
-    /// <see cref="SunSharp.Objective.SunVox" /> if necessary. <br />
+    /// <see cref="SunSharp.Objects.SunVox" /> if necessary. <br />
     /// You may also call <see cref="Unload" /> to unload the library, which should also deinitialize the library, to avoid
     /// any memory leaks.
     /// You should keep the same library instance loaded in most use-cases.
@@ -32,10 +32,8 @@ namespace SunSharp.Redistribution
             {
                 var path = RuntimeInformation.ProcessArchitecture switch
                 {
-                    Architecture.X64 => Path.Combine(Environment.CurrentDirectory,
-                        "runtimes/win-x64/native/sunvox.dll"),
-                    Architecture.X86 => Path.Combine(Environment.CurrentDirectory,
-                        "runtimes/win-x86-64/native/sunvox.dll"),
+                    Architecture.X64 => Path.Combine(Environment.CurrentDirectory, "runtimes/win-x64/native/sunvox.dll"),
+                    Architecture.X86 => Path.Combine(Environment.CurrentDirectory, "runtimes/win-x86-64/native/sunvox.dll"),
                     _ => throw new PlatformNotSupportedException(errorMessage)
                 };
 
@@ -46,12 +44,9 @@ namespace SunSharp.Redistribution
             {
                 var path = RuntimeInformation.ProcessArchitecture switch
                 {
-                    Architecture.X64 => Path.Combine(Environment.CurrentDirectory,
-                        "runtimes/linux-x86-64/native/sunvox.so"),
-                    Architecture.X86 => Path.Combine(Environment.CurrentDirectory,
-                        "runtimes/linux-x86/native/sunvox.so"),
-                    Architecture.Arm64 => Path.Combine(Environment.CurrentDirectory,
-                        "runtimes/linux-arm64/native/sunvox.so"),
+                    Architecture.X64 => Path.Combine(Environment.CurrentDirectory, "runtimes/linux-x86-64/native/sunvox.so"),
+                    Architecture.X86 => Path.Combine(Environment.CurrentDirectory, "runtimes/linux-x86/native/sunvox.so"),
+                    Architecture.Arm64 => Path.Combine(Environment.CurrentDirectory, "runtimes/linux-arm64/native/sunvox.so"),
                     _ => throw new PlatformNotSupportedException(errorMessage)
                 };
 
@@ -62,10 +57,8 @@ namespace SunSharp.Redistribution
             {
                 var path = RuntimeInformation.ProcessArchitecture switch
                 {
-                    Architecture.X64 => Path.Combine(Environment.CurrentDirectory,
-                        "runtimes/macos-x86-64/native/sunvox.so"),
-                    Architecture.Arm64 => Path.Combine(Environment.CurrentDirectory,
-                        "runtimes/macos-arm64/native/sunvox.so"),
+                    Architecture.X64 => Path.Combine(Environment.CurrentDirectory, "runtimes/macos-x86-64/native/sunvox.so"),
+                    Architecture.Arm64 => Path.Combine(Environment.CurrentDirectory, "runtimes/macos-arm64/native/sunvox.so"),
                     _ => throw new PlatformNotSupportedException(errorMessage)
                 };
 

@@ -57,7 +57,9 @@ namespace SunSharp.Native
         {
             var ret = _lib.sv_close_slot(slotId);
             if (ret != 0)
+            {
                 throw new SunVoxException(ret, nameof(_lib.sv_close_slot));
+            }
         }
 
         /// <inheritdoc />
@@ -65,7 +67,9 @@ namespace SunSharp.Native
         {
             var retCode = _lib.sv_deinit();
             if (retCode != 0)
+            {
                 throw new SunVoxException(retCode, nameof(_lib.sv_deinit));
+            }
         }
 
         /// <inheritdoc />
@@ -135,10 +139,10 @@ namespace SunSharp.Native
         }
 
         /// <inheritdoc />
-        public int GetSongLengthInLines(int slotId)
+        public uint GetSongLengthInLines(int slotId)
         {
             var ret = _lib.sv_get_song_length_lines(slotId);
-            return (int)ret;
+            return ret;
         }
 
         /// <inheritdoc />
@@ -153,7 +157,10 @@ namespace SunSharp.Native
         {
             var ret = _lib.sv_get_song_tpl(slotId);
             if (ret < 0)
+            {
                 throw new SunVoxException(ret, nameof(_lib.sv_get_song_tpl));
+            }
+
             return ret;
         }
 
@@ -185,20 +192,26 @@ namespace SunSharp.Native
             }
 
             if (ret != 0)
+            {
                 throw new SunVoxException(ret, nameof(_lib.sv_get_time_map));
+            }
+
             return arr;
         }
 
         /// <inheritdoc />
         public LibraryVersion Initialize(int sampleRate, string? config = null,
-            AudioChannels channels = AudioChannels.Stereo, InitFlags flags = InitFlags.Default)
+            AudioChannels channels = AudioChannels.Stereo, InitFlags flags = InitFlags.None)
         {
             var ptr = Marshal.StringToHGlobalAnsi(config);
             try
             {
                 var ret = _lib.sv_init(ptr, sampleRate, (int)channels, (uint)flags);
                 if (ret < 0)
+                {
                     throw new SunVoxException(ret, nameof(_lib.sv_init));
+                }
+
                 return new LibraryVersion(ret);
             }
             finally
@@ -212,7 +225,10 @@ namespace SunSharp.Native
         {
             var ret = _lib.sv_end_of_song(slotId);
             if (ret != 0 && ret != 1)
+            {
                 throw new SunVoxException(ret, nameof(_lib.sv_end_of_song));
+            }
+
             return ret == 0;
         }
 
@@ -231,7 +247,9 @@ namespace SunSharp.Native
             }
 
             if (ret != 0)
+            {
                 throw new SunVoxException(ret, nameof(_lib.sv_load));
+            }
         }
 
         /// <inheritdoc />
@@ -249,7 +267,9 @@ namespace SunSharp.Native
             }
 
             if (ret != 0)
+            {
                 throw new SunVoxException(ret, nameof(_lib.sv_load));
+            }
         }
 
         /// <inheritdoc />
@@ -257,7 +277,9 @@ namespace SunSharp.Native
         {
             var ret = _lib.sv_lock_slot(slotId);
             if (ret != 0)
+            {
                 throw new SunVoxException(ret, nameof(_lib.sv_lock_slot));
+            }
         }
 
         /// <inheritdoc />
@@ -265,7 +287,9 @@ namespace SunSharp.Native
         {
             var ret = _lib.sv_open_slot(slotId);
             if (ret != 0)
+            {
                 throw new SunVoxException(ret, nameof(_lib.sv_open_slot));
+            }
         }
 
         /// <inheritdoc />
@@ -273,7 +297,9 @@ namespace SunSharp.Native
         {
             var ret = _lib.sv_pause(slotId);
             if (ret != 0)
+            {
                 throw new SunVoxException(ret, nameof(_lib.sv_pause));
+            }
         }
 
         /// <inheritdoc />
@@ -281,14 +307,18 @@ namespace SunSharp.Native
         {
             var ret = _lib.sv_resume(slotId);
             if (ret != 0)
+            {
                 throw new SunVoxException(ret, nameof(_lib.sv_resume));
+            }
         }
 
         public void ResumeStreamOnSyncEffect(int slotId)
         {
             var ret = _lib.sv_sync_resume(slotId);
             if (ret != 0)
+            {
                 throw new SunVoxException(ret, nameof(_lib.sv_sync_resume));
+            }
         }
 
         /// <inheritdoc />
@@ -296,7 +326,9 @@ namespace SunSharp.Native
         {
             var ret = _lib.sv_rewind(slotId, line);
             if (ret != 0)
+            {
                 throw new SunVoxException(ret, nameof(_lib.sv_rewind));
+            }
         }
 
         /// <inheritdoc />
@@ -314,7 +346,9 @@ namespace SunSharp.Native
             }
 
             if (ret != 0)
+            {
                 throw new SunVoxException(ret, nameof(_lib.sv_save));
+            }
         }
 
         public void SendEvent(int slotId, int track, PatternEvent data)
@@ -327,21 +361,27 @@ namespace SunSharp.Native
         {
             var ret = _lib.sv_send_event(slotId, track, nn, vv, mm, ccee, xxyy);
             if (ret != 0)
+            {
                 throw new SunVoxException(ret, nameof(_lib.sv_send_event));
+            }
         }
 
         public void SetAutoStop(int slotId, bool autoStop)
         {
             var ret = _lib.sv_set_autostop(slotId, autoStop ? 1 : 0);
             if (ret != 0)
+            {
                 throw new SunVoxException(ret, nameof(_lib.sv_set_autostop));
+            }
         }
 
         public void SetSendEventTimestamp(int slotId, bool reset = true, int t = 0)
         {
             var ret = _lib.sv_set_event_t(slotId, reset ? 0 : 1, t);
             if (ret != 0)
+            {
                 throw new SunVoxException(ret, nameof(_lib.sv_set_event_t));
+            }
         }
 
         /// <inheritdoc />
@@ -352,7 +392,9 @@ namespace SunSharp.Native
             {
                 var ret = _lib.sv_set_song_name(slotId, ptr);
                 if (ret != 0)
+                {
                     throw new SunVoxException(ret, nameof(_lib.sv_init));
+                }
             }
             finally
             {
@@ -365,7 +407,9 @@ namespace SunSharp.Native
         {
             var ret = _lib.sv_play(slotId);
             if (ret != 0)
+            {
                 throw new SunVoxException(ret, nameof(_lib.sv_play));
+            }
         }
 
         /// <inheritdoc />
@@ -373,7 +417,9 @@ namespace SunSharp.Native
         {
             var ret = _lib.sv_play_from_beginning(slotId);
             if (ret != 0)
+            {
                 throw new SunVoxException(ret, nameof(_lib.sv_play_from_beginning));
+            }
         }
 
         /// <inheritdoc />
@@ -381,7 +427,9 @@ namespace SunSharp.Native
         {
             var ret = _lib.sv_stop(slotId);
             if (ret != 0)
+            {
                 throw new SunVoxException(ret, nameof(_lib.sv_stop));
+            }
         }
 
         /// <inheritdoc />
@@ -389,7 +437,9 @@ namespace SunSharp.Native
         {
             var ret = _lib.sv_unlock_slot(slotId);
             if (ret != 0)
+            {
                 throw new SunVoxException(ret, nameof(_lib.sv_unlock_slot));
+            }
         }
 
         /// <inheritdoc />
@@ -397,7 +447,9 @@ namespace SunSharp.Native
         {
             var ret = _lib.sv_update_input();
             if (ret != 0)
+            {
                 throw new SunVoxException(ret, nameof(_lib.sv_update_input));
+            }
         }
 
         /// <inheritdoc />
@@ -405,18 +457,25 @@ namespace SunSharp.Native
         {
             var ret = _lib.sv_volume(slotId, volume);
             if (ret < 0 || ret > 256)
+            {
                 throw new SunVoxException(ret, nameof(_lib.sv_volume));
+            }
+
             return ret;
         }
 
         private bool AudioCallbackInternal<T>(T[] outputBuffer, AudioChannels channels, int latency, uint outTime)
         {
             if (channels == AudioChannels.Stereo && (outputBuffer.Length & 1) != 0)
+            {
                 throw new ArgumentException("Buffer size is not a multiple of two.");
+            }
 
             var frames = outputBuffer.Length;
             if (channels == AudioChannels.Stereo)
+            {
                 frames /= 2;
+            }
 
             var outHandle = GCHandle.Alloc(outputBuffer, GCHandleType.Pinned);
             var ptr = outHandle.AddrOfPinnedObject();
@@ -441,22 +500,31 @@ namespace SunSharp.Native
             int inputType)
         {
             if (outputChannels == AudioChannels.Stereo && (outputBuffer.Length & 1) != 0)
+            {
                 throw new ArgumentException("Output buffer size is not a multiple of two.");
+            }
 
             if (inputChannels == AudioChannels.Stereo && (inputBuffer.Length & 1) != 0)
+            {
                 throw new ArgumentException("Input buffer size is not a multiple of two.");
+            }
 
             var inputFrames = inputBuffer.Length;
             if (inputChannels == AudioChannels.Stereo)
+            {
                 inputFrames /= 2;
+            }
 
             var outputFrames = outputBuffer.Length;
             if (outputChannels == AudioChannels.Stereo)
+            {
                 outputFrames /= 2;
+            }
 
             if (inputFrames != outputFrames)
-                throw new ArgumentException(
-                    $"Input and output frame count is different (input: {inputFrames}, output: {outputFrames}).");
+            {
+                throw new ArgumentException($"Input and output frame count is different (input: {inputFrames}, output: {outputFrames}).");
+            }
 
             var outHandle = GCHandle.Alloc(outputBuffer, GCHandleType.Pinned);
             var inHandle = GCHandle.Alloc(inputBuffer, GCHandleType.Pinned);

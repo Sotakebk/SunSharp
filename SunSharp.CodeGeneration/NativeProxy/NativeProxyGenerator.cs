@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Reflection;
 using SunSharp.CodeGeneration.CodeGenerationTools;
 using SunSharp.Native;
@@ -10,8 +9,8 @@ namespace SunSharp.CodeGeneration.NativeProxy;
 
 public sealed class NativeProxyGenerator : BaseGenerator
 {
-    private DelegateDefinition[] delegateDefinitions = Array.Empty<DelegateDefinition>();
-    private MethodDefinition[] methodDefinitions = Array.Empty<MethodDefinition>();
+    private DelegateDefinition[] _delegateDefinitions = [];
+    private MethodDefinition[] _methodDefinitions = [];
 
     private static string GetDelegateNameCode(DelegateDefinition definition)
     {
@@ -54,16 +53,23 @@ public sealed class NativeProxyGenerator : BaseGenerator
     {
         var type = typeof(ISunVoxLibC);
 
-        delegateDefinitions = type.GetMethods()
+        _delegateDefinitions = [.. type.GetMethods()
             .Select(static m =>
-                new DelegateDefinition(m.ReturnType, m.GetParameters().Select(static p => p.ParameterType).ToArray()))
-            .DistinctBy(GetDelegateNameCode)
-            .ToArray();
+                new DelegateDefinition(m.ReturnType,
+                    [..
+                        m.GetParameters().Select(static p => p.ParameterType)
+                    ])
+            )
+            .DistinctBy(GetDelegateNameCode)];
 
-        methodDefinitions = type.GetMethods()
+        _methodDefinitions = [.. type.GetMethods()
             .Select(static m => new MethodDefinition(m,
-                new DelegateDefinition(m.ReturnType, m.GetParameters().Select(static p => p.ParameterType).ToArray())))
-            .ToArray();
+                new DelegateDefinition(m.ReturnType,
+                    [..
+                        m.GetParameters().Select(static p => p.ParameterType)]
+                    ))
+            )
+        ];
     }
 
     protected override string GenerateBody()
@@ -86,7 +92,7 @@ public sealed class NativeProxyGenerator : BaseGenerator
                 AppendLine("#region delegate definitions");
                 AppendLine();
 
-                foreach (var d in delegateDefinitions.OrderBy(static d => GetDelegateNameCode(d)))
+                foreach (var d in _delegateDefinitions.OrderBy(static d => GetDelegateNameCode(d)))
                     AppendDelegateDefinition(d);
 
                 AppendLine("#endregion delegate definitions");
@@ -94,14 +100,14 @@ public sealed class NativeProxyGenerator : BaseGenerator
                 AppendLine("#region delegates");
                 AppendLine();
 
-                foreach (var m in methodDefinitions.OrderBy(static m => m.MethodInfo.Name))
+                foreach (var m in _methodDefinitions.OrderBy(static m => m.MethodInfo.Name))
                     AppendDelegateForMethodDefinition(m);
 
                 AppendLine("#endregion delegates");
                 AppendLine();
                 AppendLine("#region interface");
                 AppendLine();
-                foreach (var m in methodDefinitions.OrderBy(static m => m.MethodInfo.Name)) AppendMethodDefinition(m);
+                foreach (var m in _methodDefinitions.OrderBy(static m => m.MethodInfo.Name)) AppendMethodDefinition(m);
 
                 AppendLine("#endregion interface");
                 AppendLine();
@@ -122,7 +128,7 @@ public sealed class NativeProxyGenerator : BaseGenerator
         AppendLine("{");
         AddIndent(() =>
         {
-            foreach (var methodDefinition in methodDefinitions.OrderBy(static m => m.MethodInfo.Name))
+            foreach (var methodDefinition in _methodDefinitions.OrderBy(static m => m.MethodInfo.Name))
                 AppendLine($"{methodDefinition.MethodInfo.Name} = null;");
         });
         AppendLine("}");
@@ -134,7 +140,7 @@ public sealed class NativeProxyGenerator : BaseGenerator
         AppendLine("{");
         AddIndent(() =>
         {
-            foreach (var methodDefinition in methodDefinitions.OrderBy(static m => m.MethodInfo.Name))
+            foreach (var methodDefinition in _methodDefinitions.OrderBy(static m => m.MethodInfo.Name))
             {
                 var name = methodDefinition.MethodInfo.Name;
                 var delegateName = GetDelegateNameCode(methodDefinition.CorrespondingDelegate);

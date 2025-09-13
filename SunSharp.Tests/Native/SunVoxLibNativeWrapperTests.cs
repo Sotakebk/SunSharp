@@ -1,26 +1,19 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Runtime.InteropServices;
-using FluentAssertions;
-using NSubstitute;
-using NUnit.Framework;
 using SunSharp.Native;
-using TddXt.AnyRoot.Collections;
-using TddXt.AnyRoot.Numbers;
-using TddXt.AnyRoot.Strings;
-using static TddXt.AnyRoot.Root;
 
 namespace SunSharp.Tests.Native;
 
 public class SunVoxLibNativeWrapperTests
 {
-    [Test]
-    public void CloseSlotShouldCallExpectedMethod()
+    public const int ErrorResponseCode = -1;
+
+    [Test, AutoData]
+    public void CloseSlotShouldCallExpectedMethod(int slotId)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
         library.sv_close_slot(Arg.Any<int>()).Returns(0);
-        var slotId = Any.Integer();
 
         // when
         wrapper.CloseSlot(slotId);
@@ -29,16 +22,15 @@ public class SunVoxLibNativeWrapperTests
         library.Received(1).sv_close_slot(slotId);
     }
 
-    [Test]
-    public void CloseSlotShouldThrowOnNonZeroReturnCode()
+    [Test, AutoData]
+    public void CloseSlotShouldThrowOnNonZeroReturnCode(int slotId)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
-        library.sv_close_slot(Arg.Any<int>()).Returns(-1);
-        var slotId = Any.Integer();
+        library.sv_close_slot(Arg.Any<int>()).Returns(ErrorResponseCode);
 
         // when - then
-        Assert.That(() => wrapper.CloseSlot(slotId), Throws.Exception.TypeOf<SunVoxException>());
+        wrapper.Invoking(w => w.CloseSlot(slotId)).Should().Throw<SunVoxException>();
 
         // then
         library.Received(1).sv_close_slot(slotId);
@@ -65,101 +57,91 @@ public class SunVoxLibNativeWrapperTests
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
 
-        library.sv_deinit().Returns(-1);
+        library.sv_deinit().Returns(ErrorResponseCode);
 
         // when - then
-        Assert.That(() => wrapper.Deinitialize(), Throws.Exception.TypeOf<SunVoxException>());
+        wrapper.Invoking(w => w.Deinitialize()).Should().Throw<SunVoxException>();
 
         // then
         library.Received(1).sv_deinit();
     }
 
-    [TestCase(true)]
-    [TestCase(false)]
-    public void GetAutostopShouldReturnValue(bool autostop)
+    [Test, AutoData]
+    public void GetAutostopShouldReturnValue(bool autostop, int slotId)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
         library.sv_get_autostop(Arg.Any<int>()).Returns(autostop ? 1 : 0);
-        var slotId = Any.Integer();
 
         // when
         var value = wrapper.GetAutostop(slotId);
 
         // then
         library.Received(1).sv_get_autostop(slotId);
-        Assert.That(value, Is.EqualTo(autostop));
+        value.Should().Be(autostop);
     }
 
-    [Test]
-    public void GetAutostopShouldThrowOnInvalidValue()
+    [Test, AutoData]
+    public void GetAutostopShouldThrowOnInvalidValue(int slotId)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
-        library.sv_get_autostop(Arg.Any<int>()).Returns(-1);
-        var slotId = Any.Integer();
+        library.sv_get_autostop(Arg.Any<int>()).Returns(ErrorResponseCode);
 
         // when - then
-        Assert.That(() => _ = wrapper.GetAutostop(slotId), Throws.Exception.TypeOf<SunVoxException>());
+        wrapper.Invoking(w => w.GetAutostop(slotId)).Should().Throw<SunVoxException>();
 
         // then
         library.Received(1).sv_get_autostop(slotId);
     }
 
-    [Test]
-    public void GetCurrentLineShouldReturnValue()
+    [Test, AutoData]
+    public void GetCurrentLineShouldReturnValue(int currentLine, int slotId)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
-        var currentLine = Any.Integer();
         library.sv_get_current_line(Arg.Any<int>()).Returns(currentLine);
-        var slotId = Any.Integer();
 
         // when
         var value = wrapper.GetCurrentLine(slotId);
 
         // then
         library.Received(1).sv_get_current_line(slotId);
-        Assert.That(value, Is.EqualTo(currentLine));
+        value.Should().Be(currentLine);
     }
 
-    [Test]
-    public void GetCurrentLineWithTenthPartShouldReturnValue()
+    [Test, AutoData]
+    public void GetCurrentLineWithTenthPartShouldReturnValue(int currentLineWithTenthPart, int slotId)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
-        var currentLineWithTenthPart = Any.Integer();
         library.sv_get_current_line2(Arg.Any<int>()).Returns(currentLineWithTenthPart);
-        var slotId = Any.Integer();
 
         // when
         var value = wrapper.GetCurrentLineWithTenthPart(slotId);
 
         // then
         library.Received(1).sv_get_current_line2(slotId);
-        Assert.That(value, Is.EqualTo(currentLineWithTenthPart));
+        value.Should().Be(currentLineWithTenthPart);
     }
 
-    [Test]
-    public void GetCurrentSignalLevelShouldReturnValue()
+    [Test, AutoData]
+    public void GetCurrentSignalLevelShouldReturnValue(int signalLevel, int slotId, int channelId)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
-        var signalLevel = Any.Integer();
         library.sv_get_current_signal_level(Arg.Any<int>(), Arg.Any<int>()).Returns(signalLevel);
-        var slotId = Any.Integer();
-        var channelId = Any.Integer();
 
         // when
         var value = wrapper.GetCurrentSignalLevel(slotId, channelId);
 
         // then
         library.Received(1).sv_get_current_signal_level(slotId, channelId);
-        Assert.That(value, Is.EqualTo(signalLevel));
+        value.Should().Be(signalLevel);
     }
 
-    [Test]
-    public void GetLogsShouldReturnNullForNullPtr()
+    [Test, AutoData]
+    public void GetLogsShouldReturnNullForNullPtr(int slotId)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
@@ -167,42 +149,39 @@ public class SunVoxLibNativeWrapperTests
         library.sv_get_log(Arg.Any<int>()).Returns(IntPtr.Zero);
 
         // when - then
-        var result = wrapper.GetLog(Any.Integer());
+        var result = wrapper.GetLog(slotId);
 
         // then
-        Assert.That(result, Is.EqualTo(null));
+        result.Should().BeNull();
     }
 
-    [Test]
-    public void GetLogsShouldReturnStringForValidPointer()
+    [Test, AutoData]
+    public void GetLogsShouldReturnStringForValidPointer(string log)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
-        const string log = "this is a bunch of logs\nplease pretend that it's sufficient";
         var logLength = log.Length;
-        // assuming that GetLog calls free()
-        library.sv_get_log(logLength).Returns(static _ => Marshal.StringToHGlobalAnsi(log));
+        library.sv_get_log(logLength).Returns(_ => Marshal.StringToHGlobalAnsi(log));
 
         // when
         var result = wrapper.GetLog(logLength);
 
         // then
-        Assert.That(result, Is.EqualTo(log));
+        result.Should().Be(log);
     }
 
-    [Test]
-    public void GetSampleRateShouldReturnValue()
+    [Test, AutoData]
+    public void GetSampleRateShouldReturnValue(int ticks)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
-        var ticks = Any.Integer();
         library.sv_get_sample_rate().Returns(ticks);
 
         // when
         var result = wrapper.GetSampleRate();
 
         // then
-        Assert.That(result, Is.EqualTo(ticks));
+        result.Should().Be(ticks);
     }
 
     [TestCase(0)]
@@ -214,81 +193,73 @@ public class SunVoxLibNativeWrapperTests
         library.sv_get_sample_rate().Returns(sampleRate);
 
         // when - then
-        Assert.That(() => _ = wrapper.GetSampleRate(), Throws.Exception.TypeOf<SunVoxException>());
+        wrapper.Invoking(w => w.GetSampleRate()).Should().Throw<SunVoxException>();
     }
 
-    [Test]
-    public void GetSongBpmShouldReturnValue()
+    [Test, AutoData]
+    public void GetSongBpmShouldReturnValue(int songBpm, int slotId)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
-        var songBpm = Any.Integer();
         library.sv_get_song_bpm(Arg.Any<int>()).Returns(songBpm);
-        var slotId = Any.Integer();
 
         // when
         var value = wrapper.GetSongBpm(slotId);
 
         // then
         library.Received(1).sv_get_song_bpm(slotId);
-        Assert.That(value, Is.EqualTo(songBpm));
+        value.Should().Be(songBpm);
     }
 
-    [Test]
-    public void GetSongBpmShouldThrowOnInvalidValue()
+    [Test, AutoData]
+    public void GetSongBpmShouldThrowOnInvalidValue(int slotId)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
-        library.sv_get_song_bpm(Arg.Any<int>()).Returns(-1);
-        var slotId = Any.Integer();
+        library.sv_get_song_bpm(Arg.Any<int>()).Returns(ErrorResponseCode);
 
         // when - then
-        Assert.That(() => _ = wrapper.GetSongBpm(slotId), Throws.Exception.TypeOf<SunVoxException>());
+        wrapper.Invoking(w => w.GetSongBpm(slotId)).Should().Throw<SunVoxException>();
 
         // then
         library.Received(1).sv_get_song_bpm(slotId);
     }
 
-    [Test]
-    public void GetSongLengthInFramesShouldReturnValue()
+    [Test, AutoData]
+    public void GetSongLengthInFramesShouldReturnValue(uint songLength, int slotId)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
-        var songLength = Any.UnsignedInt();
         library.sv_get_song_length_frames(Arg.Any<int>()).Returns(songLength);
-        var slotId = Any.Integer();
 
         // when
         var value = wrapper.GetSongLengthInFrames(slotId);
 
         // then
         library.Received(1).sv_get_song_length_frames(slotId);
-        Assert.That(value, Is.EqualTo(songLength));
+        value.Should().Be(songLength);
     }
 
-    [Test]
-    public void GetSongLengthInLinesShouldReturnValue()
+    [Test, AutoData]
+    public void GetSongLengthInLinesShouldReturnValue(uint songLength, int slotId)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
-        var songLength = Any.UnsignedInt();
         library.sv_get_song_length_lines(Arg.Any<int>()).Returns(songLength);
-        var slotId = Any.Integer();
 
         // when
         var value = wrapper.GetSongLengthInLines(slotId);
 
         // then
         library.Received(1).sv_get_song_length_lines(slotId);
-        Assert.That(value, Is.EqualTo(songLength));
+        value.Should().Be(songLength);
     }
 
-    [Test]
-    public void GetSongNameShouldReturnNullOnNullPtr()
+    [Test, AutoData]
+    public void GetSongNameShouldReturnNullOnNullPtr(int slotId)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
-        var slotId = Any.Integer();
 
         library.sv_get_song_name(Arg.Any<int>()).Returns(IntPtr.Zero);
 
@@ -296,18 +267,15 @@ public class SunVoxLibNativeWrapperTests
         var result = wrapper.GetSongName(slotId);
 
         // then
-        Assert.That(result, Is.EqualTo(null));
+        result.Should().BeNull();
         library.Received(1).sv_get_song_name(slotId);
     }
 
-    [Test]
-    public void GetSongNameShouldReturnValue()
+    [Test, AutoData]
+    public void GetSongNameShouldReturnValue(string songName, int slotId)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
-        const string songName = "epic song";
-        var slotId = Any.Integer();
-
         var ptr = Marshal.StringToHGlobalAnsi(songName);
         try
         {
@@ -317,7 +285,7 @@ public class SunVoxLibNativeWrapperTests
             var result = wrapper.GetSongName(slotId);
 
             // then
-            Assert.That(result, Is.EqualTo(songName));
+            result.Should().Be(songName);
             library.Received(1).sv_get_song_name(slotId);
         }
         finally
@@ -326,78 +294,70 @@ public class SunVoxLibNativeWrapperTests
         }
     }
 
-    [Test]
-    public void GetSongTplShouldReturnValue()
+    [Test, AutoData]
+    public void GetSongTplShouldReturnValue(int songTpl, int slotId)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
-        var songTpl = Any.Integer();
         library.sv_get_song_tpl(Arg.Any<int>()).Returns(songTpl);
-        var slotId = Any.Integer();
 
         // when
         var value = wrapper.GetSongTpl(slotId);
 
         // then
         library.Received(1).sv_get_song_tpl(slotId);
-        Assert.That(value, Is.EqualTo(songTpl));
+        value.Should().Be(songTpl);
     }
 
-    [Test]
-    public void GetSongTplShouldThrowOnInvalidValue()
+    [Test, AutoData]
+    public void GetSongTplShouldThrowOnInvalidValue(int slotId)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
-        library.sv_get_song_tpl(Arg.Any<int>()).Returns(-1);
-        var slotId = Any.Integer();
+        library.sv_get_song_tpl(Arg.Any<int>()).Returns(ErrorResponseCode);
 
         // when - then
-        Assert.That(() => _ = wrapper.GetSongTpl(slotId), Throws.Exception.TypeOf<SunVoxException>());
+        wrapper.Invoking(w => w.GetSongTpl(slotId)).Should().Throw<SunVoxException>();
 
         // then
         library.Received(1).sv_get_song_tpl(slotId);
     }
 
-    [Test]
-    public void GetTicksPerSecondShouldReturnValue()
+    [Test, AutoData]
+    public void GetTicksPerSecondShouldReturnValue(uint ticks)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
-        var ticks = Any.UnsignedInt();
         library.sv_get_ticks_per_second().Returns(ticks);
 
         // when
         var result = wrapper.GetTicksPerSecond();
 
         // then
-        Assert.That(result, Is.EqualTo(ticks));
+        result.Should().Be(ticks);
     }
 
-    [Test]
-    public void GetTicksShouldReturnValue()
+    [Test, AutoData]
+    public void GetTicksShouldReturnValue(uint ticks)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
-        var ticks = Any.UnsignedInt();
         library.sv_get_ticks().Returns(ticks);
 
         // when
         var result = wrapper.GetTicks();
 
         // then
-        Assert.That(result, Is.EqualTo(ticks));
+        result.Should().Be(ticks);
     }
 
-    [Test]
-    public void GetTimeMapShouldReturnExpectedValue()
+    [Test, AutoData]
+    public void GetTimeMapShouldReturnExpectedValue(int slotId, int startLine, TimeMapType mapType)
     {
+        const int length = 32;
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
-        var timeMap = Enumerable.Range(0, 64).ToArray();
-        var slotId = Any.Integer();
-        var startLine = Any.Integer();
-        var length = timeMap.Length;
-        var mapType = Any.Instance<TimeMapType>();
+        var timeMap = Enumerable.Range(0, length).ToArray();
 
         library
             .When(static l =>
@@ -406,7 +366,9 @@ public class SunVoxLibNativeWrapperTests
             {
                 var intPtr = callInfo.Arg<IntPtr>();
                 for (var i = 0; i < timeMap.Length; i++)
+                {
                     Marshal.WriteInt32(intPtr + i * 4, timeMap[i]);
+                }
             });
 
         // when
@@ -417,48 +379,38 @@ public class SunVoxLibNativeWrapperTests
         value.Should().BeEquivalentTo(timeMap);
     }
 
-    [Test]
-    public void GetTimeMapShouldThrowOnNonZeroReturnCode()
+    [Test, AutoData]
+    public void GetTimeMapShouldThrowOnNonZeroReturnCode(int slotId, int startLine, int length, TimeMapType mapType)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
-        var slotId = Any.Integer();
-        var startLine = Any.Integer();
-        var length = Any.Integer();
-        var mapType = Any.Instance<TimeMapType>();
-        library.sv_get_time_map(default, default, default, default, default).ReturnsForAnyArgs(-1);
+        library.sv_get_time_map(0, 0, 0, default, 0).ReturnsForAnyArgs(ErrorResponseCode);
 
         // when - then
-        Assert.That(() => _ = wrapper.GetTimeMap(slotId, startLine, length, mapType),
-            Throws.Exception.TypeOf<SunVoxException>());
+        wrapper.Invoking(w => w.GetTimeMap(slotId, startLine, length, mapType)).Should().Throw<SunVoxException>();
 
         // then
         library.Received(1).sv_get_time_map(slotId, startLine, length, Arg.Any<IntPtr>(), (int)mapType);
     }
 
-    [Test]
-    public void InitializeShouldCallInitAndThrowExceptionOnUnhandledValue()
+    [Test, AutoData]
+    public void InitializeShouldCallInitAndThrowExceptionOnUnhandledValue(int sampleRate, AudioChannels channels, InitFlags initFlags)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
 
-        var sampleRate = Any.Integer();
-        var channels = Any.Instance<AudioChannels>();
-        var initFlags = Any.Instance<InitFlags>();
-
         library.sv_init(Arg.Any<IntPtr>(), Arg.Any<int>(), Arg.Any<int>(), Arg.Any<uint>())
-            .Returns(-1);
+            .Returns(ErrorResponseCode);
 
         // when - then
-        Assert.That(() => _ = wrapper.Initialize(sampleRate, null, channels, initFlags),
-            Throws.Exception.TypeOf<SunVoxException>());
+        wrapper.Invoking(w => w.Initialize(sampleRate, null, channels, initFlags)).Should().Throw<SunVoxException>();
 
         // and then
         library.Received(1).sv_init(IntPtr.Zero, sampleRate, (int)channels, (uint)initFlags);
     }
 
-    [Test]
-    public void InitializeShouldCallInitAsExpected()
+    [Test, AutoData]
+    public void InitializeShouldCallInitAsExpected(int sampleRate, string config, AudioChannels channels, InitFlags initFlags)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
@@ -466,11 +418,6 @@ public class SunVoxLibNativeWrapperTests
         const int returnCode = 123454321;
         library.sv_init(Arg.Any<IntPtr>(), Arg.Any<int>(), Arg.Any<int>(), Arg.Any<uint>())
             .Returns(returnCode);
-
-        var sampleRate = Any.Integer();
-        var channels = Any.Instance<AudioChannels>();
-        var initFlags = Any.Instance<InitFlags>();
-        var config = Any.String();
 
         string? receivedString = null;
         library.When(static l => l.sv_init(Arg.Any<IntPtr>(), Arg.Any<int>(), Arg.Any<int>(), Arg.Any<uint>()))
@@ -481,12 +428,12 @@ public class SunVoxLibNativeWrapperTests
 
         // then
         library.Received(1).sv_init(Arg.Any<IntPtr>(), sampleRate, (int)channels, (uint)initFlags);
-        Assert.That(version, Is.EqualTo(new LibraryVersion(returnCode)));
-        Assert.That(receivedString, Is.EqualTo(config));
+        version.Should().Be(new LibraryVersion(returnCode));
+        receivedString.Should().Be(config);
     }
 
-    [Test]
-    public void InitializeShouldCallInitAsExpectedWithNullConfig()
+    [Test, AutoData]
+    public void InitializeShouldCallInitAsExpectedWithNullConfig(int sampleRate, AudioChannels channels, InitFlags initFlags)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
@@ -495,58 +442,48 @@ public class SunVoxLibNativeWrapperTests
         library.sv_init(Arg.Any<IntPtr>(), Arg.Any<int>(), Arg.Any<int>(), Arg.Any<uint>())
             .Returns(returnCode);
 
-        var sampleRate = Any.Instance<int>();
-        var channels = Any.Instance<AudioChannels>();
-        var initFlags = Any.Instance<InitFlags>();
-
         // when
         var version = wrapper.Initialize(sampleRate, null, channels, initFlags);
 
         // then
         library.Received(1).sv_init(IntPtr.Zero, sampleRate, (int)channels, (uint)initFlags);
-        Assert.That(version, Is.EqualTo(new LibraryVersion(returnCode)));
+        version.Should().Be(new LibraryVersion(returnCode));
     }
 
-    [TestCase(true)]
-    [TestCase(false)]
-    public void IsPlayingShouldReturnExpectedValue(bool isPlaying)
+    [Test, AutoData]
+    public void IsPlayingShouldReturnExpectedValue(bool isPlaying, int slotId)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
         library.sv_end_of_song(Arg.Any<int>()).Returns(isPlaying ? 0 : 1);
-        var slotId = Any.Integer();
 
         // when
         var value = wrapper.IsPlaying(slotId);
 
         // then
         library.Received(1).sv_end_of_song(slotId);
-        Assert.That(value, Is.EqualTo(isPlaying));
+        value.Should().Be(isPlaying);
     }
 
-    [TestCase(-1)]
-    [TestCase(2)]
-    public void IsPlayingShouldThrowOnUnexpectedValue(int returnCode)
+    [Test, AutoData]
+    public void IsPlayingShouldThrowOnUnexpectedValue(int slotId)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
-        library.sv_end_of_song(Arg.Any<int>()).Returns(returnCode);
-        var slotId = Any.Integer();
+        library.sv_end_of_song(Arg.Any<int>()).Returns(ErrorResponseCode);
 
         // when
-        Assert.That(() => _ = wrapper.IsPlaying(slotId), Throws.Exception.TypeOf<SunVoxException>());
+        wrapper.Invoking(w => w.IsPlaying(slotId)).Should().Throw<SunVoxException>();
 
         // then
         library.Received(1).sv_end_of_song(slotId);
     }
 
-    [Test]
-    public void LoadFromMemoryShouldCallExpectedMethods()
+    [Test, AutoData]
+    public void LoadFromMemoryShouldCallExpectedMethods(int slotId, byte[] data)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
-        var slotId = Any.Integer();
-        var data = Any.Array<byte>();
         var receivedArray = Array.Empty<byte>();
 
         library.When(static l => l.sv_load_from_memory(Arg.Any<int>(), Arg.Any<IntPtr>(), Arg.Any<uint>()))
@@ -560,35 +497,30 @@ public class SunVoxLibNativeWrapperTests
         wrapper.Load(slotId, data);
 
         // then
-        Assert.That(receivedArray, Is.EquivalentTo(data));
+        receivedArray.Should().BeEquivalentTo(data);
         library.Received(1).sv_load_from_memory(slotId, Arg.Any<IntPtr>(), (uint)data.Length);
     }
 
-    [Test]
-    public void LoadFromMemoryShouldThrowOnNonzeroReturnCode()
+    [Test, AutoData]
+    public void LoadFromMemoryShouldThrowOnNonzeroReturnCode(int slotId, byte[] data)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
-        var slotId = Any.Integer();
-        var data = Any.Array<byte>();
-
-        library.sv_load_from_memory(Arg.Any<int>(), Arg.Any<IntPtr>(), Arg.Any<uint>()).Returns(-1);
+        library.sv_load_from_memory(Arg.Any<int>(), Arg.Any<IntPtr>(), Arg.Any<uint>()).Returns(ErrorResponseCode);
 
         // when
-        Assert.That(() => wrapper.Load(slotId, data), Throws.Exception.TypeOf<SunVoxException>());
+        wrapper.Invoking(w => w.Load(slotId, data)).Should().Throw<SunVoxException>();
 
         // then
         library.Received(1).sv_load_from_memory(slotId, Arg.Any<IntPtr>(), Arg.Any<uint>());
     }
 
-    [Test]
-    public void LoadShouldCallExpectedMethods()
+    [Test, AutoData]
+    public void LoadShouldCallExpectedMethods(int slotId, string path)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
-        var slotId = Any.Integer();
         var receivedString = string.Empty;
-        var path = Any.String();
 
         library.When(static l => l.sv_load(Arg.Any<int>(), Arg.Any<IntPtr>()))
             .Do(callInfo => receivedString = Marshal.PtrToStringAnsi(callInfo.Arg<IntPtr>()));
@@ -597,34 +529,30 @@ public class SunVoxLibNativeWrapperTests
         wrapper.Load(slotId, path);
 
         // then
-        Assert.That(receivedString, Is.EqualTo(path));
+        receivedString.Should().Be(path);
         library.Received(1).sv_load(slotId, Arg.Any<IntPtr>());
     }
 
-    [Test]
-    public void LoadShouldThrowOnNonzeroReturnCode()
+    [Test, AutoData]
+    public void LoadShouldThrowOnNonzeroReturnCode(int slotId, string fileName)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
-        var slotId = Any.Integer();
-        var fileName = Any.String();
-
-        library.sv_load(Arg.Any<int>(), Arg.Any<IntPtr>()).Returns(-1);
+        library.sv_load(Arg.Any<int>(), Arg.Any<IntPtr>()).Returns(ErrorResponseCode);
 
         // when
-        Assert.That(() => wrapper.Load(slotId, fileName), Throws.Exception.TypeOf<SunVoxException>());
+        wrapper.Invoking(w => w.Load(slotId, fileName)).Should().Throw<SunVoxException>();
 
         // then
         library.Received(1).sv_load(slotId, Arg.Any<IntPtr>());
     }
 
-    [Test]
-    public void LockSlotShouldCallExpectedMethod()
+    [Test, AutoData]
+    public void LockSlotShouldCallExpectedMethod(int slotId)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
         library.sv_lock_slot(Arg.Any<int>()).Returns(0);
-        var slotId = Any.Integer();
 
         // when
         wrapper.LockSlot(slotId);
@@ -633,28 +561,26 @@ public class SunVoxLibNativeWrapperTests
         library.Received(1).sv_lock_slot(slotId);
     }
 
-    [Test]
-    public void LockSlotShouldThrowOnNonZeroReturnCode()
+    [Test, AutoData]
+    public void LockSlotShouldThrowOnNonZeroReturnCode(int slotId)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
-        library.sv_lock_slot(Arg.Any<int>()).Returns(-1);
-        var slotId = Any.Integer();
+        library.sv_lock_slot(Arg.Any<int>()).Returns(ErrorResponseCode);
 
         // when - then
-        Assert.That(() => wrapper.LockSlot(slotId), Throws.Exception.TypeOf<SunVoxException>());
+        wrapper.Invoking(w => w.LockSlot(slotId)).Should().Throw<SunVoxException>();
 
         // then
         library.Received(1).sv_lock_slot(slotId);
     }
 
-    [Test]
-    public void OpenSlotShouldCallExpectedMethod()
+    [Test, AutoData]
+    public void OpenSlotShouldCallExpectedMethod(int slotId)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
         library.sv_open_slot(Arg.Any<int>()).Returns(0);
-        var slotId = Any.Integer();
 
         // when
         wrapper.OpenSlot(slotId);
@@ -663,28 +589,26 @@ public class SunVoxLibNativeWrapperTests
         library.Received(1).sv_open_slot(slotId);
     }
 
-    [Test]
-    public void OpenSlotShouldThrowOnNonZeroReturnCode()
+    [Test, AutoData]
+    public void OpenSlotShouldThrowOnNonZeroReturnCode(int slotId)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
-        library.sv_open_slot(Arg.Any<int>()).Returns(-1);
-        var slotId = Any.Integer();
+        library.sv_open_slot(Arg.Any<int>()).Returns(ErrorResponseCode);
 
         // when - then
-        Assert.That(() => wrapper.OpenSlot(slotId), Throws.Exception.TypeOf<SunVoxException>());
+        wrapper.Invoking(w => w.OpenSlot(slotId)).Should().Throw<SunVoxException>();
 
         // then
         library.Received(1).sv_open_slot(slotId);
     }
 
-    [Test]
-    public void PauseStreamShouldCallExpectedMethod()
+    [Test, AutoData]
+    public void PauseStreamShouldCallExpectedMethod(int slotId)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
         library.sv_pause(Arg.Any<int>()).Returns(0);
-        var slotId = Any.Integer();
 
         // when
         wrapper.PauseStream(slotId);
@@ -693,28 +617,26 @@ public class SunVoxLibNativeWrapperTests
         library.Received(1).sv_pause(slotId);
     }
 
-    [Test]
-    public void PauseStreamShouldThrowOnNonZeroReturnCode()
+    [Test, AutoData]
+    public void PauseStreamShouldThrowOnNonZeroReturnCode(int slotId)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
-        library.sv_pause(Arg.Any<int>()).Returns(-1);
-        var slotId = Any.Integer();
+        library.sv_pause(Arg.Any<int>()).Returns(ErrorResponseCode);
 
         // when - then
-        Assert.That(() => wrapper.PauseStream(slotId), Throws.Exception.TypeOf<SunVoxException>());
+        wrapper.Invoking(w => w.PauseStream(slotId)).Should().Throw<SunVoxException>();
 
         // then
         library.Received(1).sv_pause(slotId);
     }
 
-    [Test]
-    public void ResumeStreamOnSyncEffectShouldCallMethod()
+    [Test, AutoData]
+    public void ResumeStreamOnSyncEffectShouldCallMethod(int slotId)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
         library.sv_sync_resume(Arg.Any<int>()).Returns(0);
-        var slotId = Any.Integer();
 
         // when
         wrapper.ResumeStreamOnSyncEffect(slotId);
@@ -723,28 +645,26 @@ public class SunVoxLibNativeWrapperTests
         library.Received(1).sv_sync_resume(slotId);
     }
 
-    [Test]
-    public void ResumeStreamOnSyncEffectShouldThrowOnNonZeroReturnCode()
+    [Test, AutoData]
+    public void ResumeStreamOnSyncEffectShouldThrowOnNonZeroReturnCode(int slotId)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
-        library.sv_sync_resume(Arg.Any<int>()).Returns(-1);
-        var slotId = Any.Integer();
+        library.sv_sync_resume(Arg.Any<int>()).Returns(ErrorResponseCode);
 
         // when - then
-        Assert.That(() => wrapper.ResumeStreamOnSyncEffect(slotId), Throws.Exception.TypeOf<SunVoxException>());
+        wrapper.Invoking(w => w.ResumeStreamOnSyncEffect(slotId)).Should().Throw<SunVoxException>();
 
         // then
         library.Received(1).sv_sync_resume(slotId);
     }
 
-    [Test]
-    public void ResumeStreamShouldCallExpectedMethod()
+    [Test, AutoData]
+    public void ResumeStreamShouldCallExpectedMethod(int slotId)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
         library.sv_resume(Arg.Any<int>()).Returns(0);
-        var slotId = Any.Integer();
 
         // when
         wrapper.ResumeStream(slotId);
@@ -753,29 +673,26 @@ public class SunVoxLibNativeWrapperTests
         library.Received(1).sv_resume(slotId);
     }
 
-    [Test]
-    public void ResumeStreamShouldThrowOnNonZeroReturnCode()
+    [Test, AutoData]
+    public void ResumeStreamShouldThrowOnNonZeroReturnCode(int slotId)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
-        library.sv_resume(Arg.Any<int>()).Returns(-1);
-        var slotId = Any.Integer();
+        library.sv_resume(Arg.Any<int>()).Returns(ErrorResponseCode);
 
         // when - then
-        Assert.That(() => wrapper.ResumeStream(slotId), Throws.Exception.TypeOf<SunVoxException>());
+        wrapper.Invoking(w => w.ResumeStream(slotId)).Should().Throw<SunVoxException>();
 
         // then
         library.Received(1).sv_resume(slotId);
     }
 
-    [Test]
-    public void RewindShouldCallExpectedMethod()
+    [Test, AutoData]
+    public void RewindShouldCallExpectedMethod(int slotId, int line)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
         library.sv_rewind(Arg.Any<int>(), Arg.Any<int>()).Returns(0);
-        var slotId = Any.Integer();
-        var line = Any.Integer();
 
         // when
         wrapper.Rewind(slotId, line);
@@ -784,30 +701,26 @@ public class SunVoxLibNativeWrapperTests
         library.Received(1).sv_rewind(slotId, line);
     }
 
-    [Test]
-    public void RewindShouldThrowOnNonZeroReturnCode()
+    [Test, AutoData]
+    public void RewindShouldThrowOnNonZeroReturnCode(int slotId, int line)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
-        library.sv_rewind(Arg.Any<int>(), Arg.Any<int>()).Returns(-1);
-        var slotId = Any.Integer();
-        var line = Any.Integer();
+        library.sv_rewind(Arg.Any<int>(), Arg.Any<int>()).Returns(ErrorResponseCode);
 
         // when - then
-        Assert.That(() => wrapper.Rewind(slotId, line), Throws.Exception.TypeOf<SunVoxException>());
+        wrapper.Invoking(w => w.Rewind(slotId, line)).Should().Throw<SunVoxException>();
 
         // then
         library.Received(1).sv_rewind(slotId, line);
     }
 
-    [Test]
-    public void SaveShouldCallExpectedMethods()
+    [Test, AutoData]
+    public void SaveShouldCallExpectedMethods(int slotId, string path)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
-        var slotId = Any.Integer();
         var receivedString = string.Empty;
-        var path = Any.String();
 
         library.When(static l => l.sv_save(Arg.Any<int>(), Arg.Any<IntPtr>()))
             .Do(callInfo => receivedString = Marshal.PtrToStringAnsi(callInfo.Arg<IntPtr>()));
@@ -816,95 +729,108 @@ public class SunVoxLibNativeWrapperTests
         wrapper.Save(slotId, path);
 
         // then
-        Assert.That(receivedString, Is.EqualTo(path));
+        receivedString.Should().Be(path);
         library.Received(1).sv_save(slotId, Arg.Any<IntPtr>());
     }
 
-    [Test]
-    public void SaveShouldThrowOnUnexpectedReturnCode()
+    [Test, AutoData]
+    public void SaveShouldThrowOnUnexpectedReturnCode(int slotId, string path)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
-        var slotId = Any.Integer();
-        var path = Any.String();
 
-        library.sv_save(Arg.Any<int>(), Arg.Any<IntPtr>()).Returns(-1);
+        library.sv_save(Arg.Any<int>(), Arg.Any<IntPtr>()).Returns(ErrorResponseCode);
 
         // when
-        Assert.That(() => wrapper.Save(slotId, path), Throws.Exception.TypeOf<SunVoxException>());
+        wrapper.Invoking(w => w.Save(slotId, path)).Should().Throw<SunVoxException>();
 
         // then
         library.Received(1).sv_save(slotId, Arg.Any<IntPtr>());
     }
 
-    [Test]
-    public void SendEventAllOverloadsShouldSendArgumentsAsExpectex()
+    [Test, AutoData]
+    public void SendEventWithPatternEventStructShouldSendArgumentsAsExpected(int slotId, int track, PatternEvent patternEvent)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
-        var slotId = Any.Integer();
-        var track = Any.Integer();
 
-        library.sv_send_event(default, default, default, default, default, default, default).ReturnsForAnyArgs(0);
-        var @event = new PatternEvent(Any.Byte(), Any.Byte(), Any.UnsignedShort(), Any.Byte(), Any.UnsignedShort());
+        library.sv_send_event(0, 0, 0, 0, 0, 0, 0).ReturnsForAnyArgs(0);
 
         // when
-        wrapper.SendEvent(slotId, track, @event.NN, @event.VV, @event.MM, @event.CCEE, @event.XXYY);
-        wrapper.SendEvent(slotId, track, @event);
+        wrapper.SendEvent(slotId, track, patternEvent);
 
         // then
-        library.Received(2).sv_send_event(slotId, track, @event.NN, @event.VV, @event.MM, @event.CCEE, @event.XXYY);
+        library.Received(1).sv_send_event(slotId, track, patternEvent.NN, patternEvent.VV, patternEvent.MM, patternEvent.CCEE, patternEvent.XXYY);
     }
 
-    [Test]
-    public void SendEventAllOverloadsShouldThrowException()
+    [Test, AutoData]
+    public void SendEventWithRawDataShouldSendArgumentsAsExpected(int slotId, int track, int nn, int vv, int mm, int ccee, int xxyy)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
-        var slotId = Any.Integer();
-        var track = Any.Integer();
 
-        library.sv_send_event(default, default, default, default, default, default, default).ReturnsForAnyArgs(-1);
-        var @event = new PatternEvent(Any.Byte(), Any.Byte(), Any.UnsignedShort(), Any.Byte(), Any.UnsignedShort());
+        library.sv_send_event(0, 0, 0, 0, 0, 0, 0).ReturnsForAnyArgs(0);
 
-        Assert.Multiple(() =>
-        {
-            Assert.That(
-                () => wrapper.SendEvent(slotId, track, @event.NN, @event.VV, @event.MM, @event.CCEE, @event.XXYY),
-                Throws.Exception.TypeOf<SunVoxException>());
-            Assert.That(() => wrapper.SendEvent(slotId, track, @event), Throws.Exception.TypeOf<SunVoxException>());
-        });
+        // when
+        wrapper.SendEvent(slotId, track, nn, vv, mm, ccee, xxyy);
 
         // then
-        library.Received(2).sv_send_event(slotId, track, @event.NN, @event.VV, @event.MM, @event.CCEE, @event.XXYY);
+        library.Received(1).sv_send_event(slotId, track, nn, vv, mm, ccee, xxyy);
+    }
+
+    [Test, AutoData]
+    public void SendEventWithPatternEventShouldThrowException(int slotId, int track, PatternEvent patternEvent)
+    {
+        var library = Substitute.For<ISunVoxLibC>();
+        var wrapper = new SunVoxLibNativeWrapper(library);
+
+        // when
+        library.sv_send_event(0, 0, 0, 0, 0, 0, 0).ReturnsForAnyArgs(ErrorResponseCode);
+
+        // then
+        wrapper.Invoking(w => w.SendEvent(slotId, track, patternEvent)).Should().Throw<SunVoxException>();
+        library.Received(1).sv_send_event(slotId, track, patternEvent.NN, patternEvent.VV, patternEvent.MM, patternEvent.CCEE, patternEvent.XXYY);
+    }
+
+    [Test, AutoData]
+    public void SendEventWithRawDataShouldThrowException(int slotId, int track, int nn, int vv, int mm, int ccee, int xxyy)
+    {
+        var library = Substitute.For<ISunVoxLibC>();
+        var wrapper = new SunVoxLibNativeWrapper(library);
+
+        library.sv_send_event(0, 0, 0, 0, 0, 0, 0).ReturnsForAnyArgs(-1);
+
+        // then
+        wrapper.Invoking(w => w.SendEvent(slotId, track, nn, vv, mm, ccee, xxyy)).Should().Throw<SunVoxException>();
+        library.Received(1).sv_send_event(slotId, track, nn, vv, mm, ccee, xxyy);
     }
 
     [TestCase(true)]
     [TestCase(false)]
-    public void SetAutostopShouldCallWithArgument(bool autostop)
+    public void SetAutoStopShouldCallWithArgument(bool autoStop)
     {
+        var fixture = new Fixture();
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
         library.sv_set_autostop(Arg.Any<int>(), Arg.Any<int>()).Returns(0);
-        var slotId = Any.Integer();
+        var slotId = fixture.Create<int>();
 
         // when
-        wrapper.SetAutoStop(slotId, autostop);
+        wrapper.SetAutoStop(slotId, autoStop);
 
         // then
-        library.Received(1).sv_set_autostop(slotId, autostop ? 1 : 0);
+        library.Received(1).sv_set_autostop(slotId, autoStop ? 1 : 0);
     }
 
-    [Test]
-    public void SetAutostopShouldThrowOnInvalidReturnCode()
+    [Test, AutoData]
+    public void SetAutoStopShouldThrowOnInvalidReturnCode(int slotId)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
         library.sv_set_autostop(Arg.Any<int>(), Arg.Any<int>()).Returns(-1);
-        var slotId = Any.Integer();
 
         // when - then
-        Assert.That(() => wrapper.SetAutoStop(slotId, false), Throws.Exception.TypeOf<SunVoxException>());
+        wrapper.Invoking(w => w.SetAutoStop(slotId, false)).Should().Throw<SunVoxException>();
 
         // then
         library.Received(1).sv_set_autostop(slotId, 0);
@@ -914,11 +840,12 @@ public class SunVoxLibNativeWrapperTests
     [TestCase(false)]
     public void SetSendEventTimestampShouldCallWithArgument(bool reset)
     {
+        var fixture = new Fixture();
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
         library.sv_set_event_t(Arg.Any<int>(), Arg.Any<int>(), Arg.Any<int>()).Returns(0);
-        var slotId = Any.Integer();
-        var t = Any.Integer();
+        var slotId = fixture.Create<int>();
+        var t = fixture.Create<int>();
 
         // when
         wrapper.SetSendEventTimestamp(slotId, reset, t);
@@ -927,30 +854,26 @@ public class SunVoxLibNativeWrapperTests
         library.Received(1).sv_set_event_t(slotId, reset ? 0 : 1, t);
     }
 
-    [Test]
-    public void SetSendEventTimestampShouldThrowOnInvalidReturnCode()
+    [Test, AutoData]
+    public void SetSendEventTimestampShouldThrowOnInvalidReturnCode(int slotId, int t)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
         library.sv_set_event_t(Arg.Any<int>(), Arg.Any<int>(), Arg.Any<int>()).Returns(-1);
-        var slotId = Any.Integer();
-        var t = Any.Integer();
 
         // when - then
-        Assert.That(() => wrapper.SetSendEventTimestamp(slotId, false, t), Throws.Exception.TypeOf<SunVoxException>());
+        wrapper.Invoking(w => w.SetSendEventTimestamp(slotId, false, t)).Should().Throw<SunVoxException>();
 
         // then
         library.Received(1).sv_set_event_t(slotId, 1, t);
     }
 
-    [Test]
-    public void SetSongNameShouldSendString()
+    [Test, AutoData]
+    public void SetSongNameShouldSendString(int slotId, string newSongName)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
-        var slotId = Any.Integer();
-        var receivedString = string.Empty;
-        var newSongName = Any.String();
+        string? receivedString = null;
 
         library.When(static l => l.sv_set_song_name(Arg.Any<int>(), Arg.Any<IntPtr>()))
             .Do(callInfo => receivedString = Marshal.PtrToStringAnsi(callInfo.Arg<IntPtr>()));
@@ -959,34 +882,31 @@ public class SunVoxLibNativeWrapperTests
         wrapper.SetSongName(slotId, newSongName);
 
         // then
-        Assert.That(receivedString, Is.EqualTo(newSongName));
+        receivedString.Should().Be(newSongName);
         library.Received(1).sv_set_song_name(slotId, Arg.Any<IntPtr>());
     }
 
-    [Test]
-    public void SetSongNameShouldThrowExceptionOnNonzeroReturnCode()
+    [Test, AutoData]
+    public void SetSongNameShouldThrowExceptionOnNonzeroReturnCode(int slotId, string newSongName)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
-        var slotId = Any.Integer();
-        var newSongName = Any.String();
 
         library.sv_set_song_name(Arg.Any<int>(), Arg.Any<IntPtr>()).Returns(-1);
 
         // when
-        Assert.That(() => wrapper.SetSongName(slotId, newSongName), Throws.Exception.TypeOf<SunVoxException>());
+        wrapper.Invoking(w => w.SetSongName(slotId, newSongName)).Should().Throw<SunVoxException>();
 
         // then
         library.Received(1).sv_set_song_name(slotId, Arg.Any<IntPtr>());
     }
 
-    [Test]
-    public void StartPlaybackFromBeginningShouldCallExpectedMethod()
+    [Test, AutoData]
+    public void StartPlaybackFromBeginningShouldCallExpectedMethod(int slotId)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
         library.sv_play_from_beginning(Arg.Any<int>()).Returns(0);
-        var slotId = Any.Integer();
 
         // when
         wrapper.StartPlaybackFromBeginning(slotId);
@@ -995,28 +915,26 @@ public class SunVoxLibNativeWrapperTests
         library.Received(1).sv_play_from_beginning(slotId);
     }
 
-    [Test]
-    public void StartPlaybackFromBeginningShouldThrowOnNonZeroReturnCode()
+    [Test, AutoData]
+    public void StartPlaybackFromBeginningShouldThrowOnNonZeroReturnCode(int slotId)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
-        library.sv_play_from_beginning(Arg.Any<int>()).Returns(-1);
-        var slotId = Any.Integer();
+        library.sv_play_from_beginning(Arg.Any<int>()).Returns(ErrorResponseCode);
 
         // when - then
-        Assert.That(() => wrapper.StartPlaybackFromBeginning(slotId), Throws.Exception.TypeOf<SunVoxException>());
+        wrapper.Invoking(w => w.StartPlaybackFromBeginning(slotId)).Should().Throw<SunVoxException>();
 
         // then
         library.Received(1).sv_play_from_beginning(slotId);
     }
 
-    [Test]
-    public void StartPlaybackShouldCallExpectedMethod()
+    [Test, AutoData]
+    public void StartPlaybackShouldCallExpectedMethod(int slotId)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
         library.sv_play(Arg.Any<int>()).Returns(0);
-        var slotId = Any.Integer();
 
         // when
         wrapper.StartPlayback(slotId);
@@ -1025,28 +943,26 @@ public class SunVoxLibNativeWrapperTests
         library.Received(1).sv_play(slotId);
     }
 
-    [Test]
-    public void StartPlaybackShouldThrowOnNonZeroReturnCode()
+    [Test, AutoData]
+    public void StartPlaybackShouldThrowOnNonZeroReturnCode(int slotId)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
-        library.sv_play(Arg.Any<int>()).Returns(-1);
-        var slotId = Any.Integer();
+        library.sv_play(Arg.Any<int>()).Returns(ErrorResponseCode);
 
         // when - then
-        Assert.That(() => wrapper.StartPlayback(slotId), Throws.Exception.TypeOf<SunVoxException>());
+        wrapper.Invoking(w => w.StartPlayback(slotId)).Should().Throw<SunVoxException>();
 
         // then
         library.Received(1).sv_play(slotId);
     }
 
-    [Test]
-    public void StopPlaybackShouldCallMethod()
+    [Test, AutoData]
+    public void StopPlaybackShouldCallMethod(int slotId)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
         library.sv_stop(Arg.Any<int>()).Returns(0);
-        var slotId = Any.Integer();
 
         // when
         wrapper.StopPlayback(slotId);
@@ -1055,28 +971,26 @@ public class SunVoxLibNativeWrapperTests
         library.Received(1).sv_stop(slotId);
     }
 
-    [Test]
-    public void StopPlaybackShouldThrowOnNonZeroReturnCode()
+    [Test, AutoData]
+    public void StopPlaybackShouldThrowOnNonZeroReturnCode(int slotId)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
-        library.sv_stop(Arg.Any<int>()).Returns(-1);
-        var slotId = Any.Integer();
+        library.sv_stop(Arg.Any<int>()).Returns(ErrorResponseCode);
 
         // when - then
-        Assert.That(() => wrapper.StopPlayback(slotId), Throws.Exception.TypeOf<SunVoxException>());
+        wrapper.Invoking(w => w.StopPlayback(slotId)).Should().Throw<SunVoxException>();
 
         // then
         library.Received(1).sv_stop(slotId);
     }
 
-    [Test]
-    public void UnlockSlotShouldCallExpectedMethod()
+    [Test, AutoData]
+    public void UnlockSlotShouldCallExpectedMethod(int slotId)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
         library.sv_unlock_slot(Arg.Any<int>()).Returns(0);
-        var slotId = Any.Integer();
 
         // when
         wrapper.UnlockSlot(slotId);
@@ -1085,16 +999,15 @@ public class SunVoxLibNativeWrapperTests
         library.Received(1).sv_unlock_slot(slotId);
     }
 
-    [Test]
-    public void UnlockSlotShouldThrowOnNonZeroReturnCode()
+    [Test, AutoData]
+    public void UnlockSlotShouldThrowOnNonZeroReturnCode(int slotId)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
-        library.sv_unlock_slot(Arg.Any<int>()).Returns(-1);
-        var slotId = Any.Integer();
+        library.sv_unlock_slot(Arg.Any<int>()).Returns(ErrorResponseCode);
 
         // when - then
-        Assert.That(() => wrapper.UnlockSlot(slotId), Throws.Exception.TypeOf<SunVoxException>());
+        wrapper.Invoking(w => w.UnlockSlot(slotId)).Should().Throw<SunVoxException>();
 
         // then
         library.Received(1).sv_unlock_slot(slotId);
@@ -1119,41 +1032,36 @@ public class SunVoxLibNativeWrapperTests
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
-        library.sv_update_input().Returns(-1);
+        library.sv_update_input().Returns(ErrorResponseCode);
 
         // when - then
-        Assert.That(() => wrapper.UpdateInputDevices(), Throws.Exception.TypeOf<SunVoxException>());
+        wrapper.Invoking(w => w.UpdateInputDevices()).Should().Throw<SunVoxException>();
     }
 
-    [Test]
-    public void VolumeShouldReturnExpectedValue()
+    [Test, AutoData]
+    public void VolumeShouldReturnExpectedValue(int slotId, int volume, int otherVolume)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
-        const int volume = 127;
-        const int otherVolume = 125;
         library.sv_volume(Arg.Any<int>(), Arg.Any<int>()).Returns(volume);
-        var slotId = Any.Integer();
 
         // when
         var value = wrapper.Volume(slotId, otherVolume);
 
         // then
         library.Received(1).sv_volume(slotId, otherVolume);
-        Assert.That(value, Is.EqualTo(volume));
+        value.Should().Be(volume);
     }
 
-    [Test]
-    public void VolumeShouldThrowOnNonZeroReturnCode()
+    [Test, AutoData]
+    public void VolumeShouldThrowOnNonZeroReturnCode(int slotId, int otherVolume)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
-        const int otherVolume = 125;
-        library.sv_volume(Arg.Any<int>(), Arg.Any<int>()).Returns(-1);
-        var slotId = Any.Integer();
+        library.sv_volume(Arg.Any<int>(), Arg.Any<int>()).Returns(ErrorResponseCode);
 
         // when - then
-        Assert.That(() => wrapper.Volume(slotId, otherVolume), Throws.Exception.TypeOf<SunVoxException>());
+        wrapper.Invoking(w => w.Volume(slotId, otherVolume)).Should().Throw<SunVoxException>();
 
         // then
         library.Received(1).sv_volume(slotId, otherVolume);

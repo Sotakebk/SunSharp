@@ -17,12 +17,18 @@ namespace SunSharp
         public static int[] CopyIntArraySkipNegativeOnes(IntPtr address, int count)
         {
             if (address == IntPtr.Zero)
+            {
                 return Array.Empty<int>();
+            }
 
             var nonZeroValues = 0;
             for (var i = 0; i < count; i++)
+            {
                 if (Marshal.ReadInt32(address, i * sizeof(int)) != -1)
+                {
                     nonZeroValues++;
+                }
+            }
 
             var arr = new int[nonZeroValues];
 

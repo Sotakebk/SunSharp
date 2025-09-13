@@ -1,42 +1,30 @@
-﻿using FluentAssertions;
-using NUnit.Framework;
-using SunSharp.Data;
-using static TddXt.AnyRoot.Root;
+﻿using SunSharp.Data;
 
 namespace SunSharp.Tests.Data;
 
 public class DataTests
 {
-    [Test]
-    public void SongDataDeepCopyShouldBeEquivalent()
+    [Test, AutoData]
+    public void SongDataDeepCopyShouldBeEquivalent(SongData songData, SongData anotherSongData)
     {
-        var songData = Any.Instance<SongData>();
-        var anotherSongData = Any.Instance<SongData>();
-
         var clone = songData.DeepCopy();
 
         clone.Should().BeEquivalentTo(songData);
         clone.Should().NotBeEquivalentTo(anotherSongData);
     }
 
-    [Test]
-    public void PatternDataDeepCopyShouldBeEquivalent()
+    [Test, AutoData]
+    public void PatternDataDeepCopyShouldBeEquivalent(PatternData patternData, PatternData anotherPatternData)
     {
-        var patternData = Any.Instance<PatternData>();
-        var anotherPatternData = Any.Instance<PatternData>();
-
         var clone = patternData.DeepCopy();
 
         clone.Should().BeEquivalentTo(patternData);
         clone.Should().NotBeEquivalentTo(anotherPatternData);
     }
 
-    [Test]
-    public void ModuleDataDeepCopyShouldBeEquivalent()
+    [Test, AutoData]
+    public void ModuleDataDeepCopyShouldBeEquivalent(ModuleData moduleData, ModuleData anotherModuleData)
     {
-        var moduleData = Any.Instance<ModuleData>();
-        var anotherModuleData = Any.Instance<ModuleData>();
-
         var clone = moduleData.DeepCopy();
 
         clone.Should().BeEquivalentTo(moduleData);

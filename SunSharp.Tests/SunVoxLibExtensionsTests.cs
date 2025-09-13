@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using NSubstitute;
-using NUnit.Framework;
 
 namespace SunSharp.Tests;
 
@@ -31,7 +28,7 @@ public class SunVoxLibExtensionsTests
             static (ISunVoxLib lib, Action<object[]?> action, object[]? args) =>
             {
                 ArgumentNullException.ThrowIfNull(args);
-                lib.RunInLock(0, arg => action(new[] { arg }), args[0]);
+                lib.RunInLock(0, arg => action([arg]), args[0]);
             }
         );
         yield return new TestCaseData(
@@ -39,7 +36,7 @@ public class SunVoxLibExtensionsTests
             static (ISunVoxLib lib, Action<object[]?> action, object[]? args) =>
             {
                 ArgumentNullException.ThrowIfNull(args);
-                lib.RunInLock(0, (arg1, arg2) => action(new[] { arg1, arg2 }), args[0], args[1]);
+                lib.RunInLock(0, (arg1, arg2) => action([arg1, arg2]), args[0], args[1]);
             }
         );
         yield return new TestCaseData(
@@ -47,7 +44,7 @@ public class SunVoxLibExtensionsTests
             static (ISunVoxLib lib, Action<object[]?> action, object[]? args) =>
             {
                 ArgumentNullException.ThrowIfNull(args);
-                lib.RunInLock(0, (arg1, arg2, arg3) => action(new[] { arg1, arg2, arg3 }), args[0], args[1], args[2]);
+                lib.RunInLock(0, (arg1, arg2, arg3) => action([arg1, arg2, arg3]), args[0], args[1], args[2]);
             }
         );
         yield return new TestCaseData(
@@ -55,7 +52,7 @@ public class SunVoxLibExtensionsTests
             static (ISunVoxLib lib, Action<object[]?> action, object[]? args) =>
             {
                 ArgumentNullException.ThrowIfNull(args);
-                lib.RunInLock(0, (arg1, arg2, arg3, arg4) => action(new[] { arg1, arg2, arg3, arg4 }), args[0], args[1],
+                lib.RunInLock(0, (arg1, arg2, arg3, arg4) => action([arg1, arg2, arg3, arg4]), args[0], args[1],
                     args[2], args[3]);
             }
         );
@@ -64,7 +61,7 @@ public class SunVoxLibExtensionsTests
             static (ISunVoxLib lib, Action<object[]?> action, object[]? args) =>
             {
                 ArgumentNullException.ThrowIfNull(args);
-                lib.RunInLock(0, (arg1, arg2, arg3, arg4, arg5) => action(new[] { arg1, arg2, arg3, arg4, arg5 }),
+                lib.RunInLock(0, (arg1, arg2, arg3, arg4, arg5) => action([arg1, arg2, arg3, arg4, arg5]),
                     args[0], args[1], args[2], args[3], args[4]);
             }
         );
@@ -84,7 +81,7 @@ public class SunVoxLibExtensionsTests
             static (ISunVoxLib lib, Func<object[]?, object> func, object[]? args) =>
             {
                 ArgumentNullException.ThrowIfNull(args);
-                return lib.RunInLock(0, arg => func(new[] { arg }), args[0]);
+                return lib.RunInLock(0, arg => func([arg]), args[0]);
             }
         );
         yield return new TestCaseData(
@@ -92,7 +89,7 @@ public class SunVoxLibExtensionsTests
             static (ISunVoxLib lib, Func<object[]?, object> func, object[]? args) =>
             {
                 ArgumentNullException.ThrowIfNull(args);
-                return lib.RunInLock(0, (arg1, arg2) => func(new[] { arg1, arg2 }), args[0], args[1]);
+                return lib.RunInLock(0, (arg1, arg2) => func([arg1, arg2]), args[0], args[1]);
             }
         );
         yield return new TestCaseData(
@@ -100,7 +97,7 @@ public class SunVoxLibExtensionsTests
             static (ISunVoxLib lib, Func<object[]?, object> func, object[]? args) =>
             {
                 ArgumentNullException.ThrowIfNull(args);
-                return lib.RunInLock(0, (arg1, arg2, arg3) => func(new[] { arg1, arg2, arg3 }), args[0], args[1],
+                return lib.RunInLock(0, (arg1, arg2, arg3) => func([arg1, arg2, arg3]), args[0], args[1],
                     args[2]);
             }
         );
@@ -109,7 +106,7 @@ public class SunVoxLibExtensionsTests
             static (ISunVoxLib lib, Func<object[]?, object> func, object[]? args) =>
             {
                 ArgumentNullException.ThrowIfNull(args);
-                return lib.RunInLock(0, (arg1, arg2, arg3, arg4) => func(new[] { arg1, arg2, arg3, arg4 }), args[0],
+                return lib.RunInLock(0, (arg1, arg2, arg3, arg4) => func([arg1, arg2, arg3, arg4]), args[0],
                     args[1], args[2], args[3]);
             }
         );
@@ -118,7 +115,7 @@ public class SunVoxLibExtensionsTests
             static (ISunVoxLib lib, Func<object[]?, object> func, object[]? args) =>
             {
                 ArgumentNullException.ThrowIfNull(args);
-                return lib.RunInLock(0, (arg1, arg2, arg3, arg4, arg5) => func(new[] { arg1, arg2, arg3, arg4, arg5 }),
+                return lib.RunInLock(0, (arg1, arg2, arg3, arg4, arg5) => func([arg1, arg2, arg3, arg4, arg5]),
                     args[0], args[1], args[2], args[3], args[4]);
             }
         );
@@ -159,7 +156,7 @@ public class SunVoxLibExtensionsTests
         // then
         lib.Received(1).LockSlot(0);
         mockFunction.Received(1).Invoke(Arg.Is<object[]?>(arr => IsNullableObjectArrayEqual(arr, mockData)));
-        Assert.That(result, Is.SameAs(mockResult));
+        result.Should().BeSameAs(mockResult);
         lib.Received(1).UnlockSlot(0);
     }
 
@@ -178,7 +175,7 @@ public class SunVoxLibExtensionsTests
             ? null
             : Enumerable.Range(0, argCount).Select(static i => (object)i.ToString()).ToArray();
         // when
-        Assert.Throws<Exception>(() => action(lib, mockAction, mockData));
+        ((Action)(() => action(lib, mockAction, mockData))).Should().Throw<Exception>();
 
         // then
         lib.Received(1).LockSlot(0);
@@ -201,7 +198,8 @@ public class SunVoxLibExtensionsTests
             ? null
             : Enumerable.Range(0, argCount).Select(static i => (object)i.ToString()).ToArray();
         // when
-        Assert.Throws<Exception>(() => function(lib, mockFunction, mockData));
+        var action = () => function(lib, mockFunction, mockData);
+        action.Invoking(a => a()).Should().Throw<Exception>();
 
         // then
         lib.Received(1).LockSlot(0);
@@ -220,7 +218,7 @@ public class SunVoxLibExtensionsTests
             ? null
             : Enumerable.Range(0, argCount).Select(static i => (object)i.ToString()).ToArray();
         // when
-        Assert.Throws<Exception>(() => action(lib, mockAction, mockData));
+        ((Action)(() => action(lib, mockAction, mockData))).Should().Throw<Exception>();
 
         // then
         lib.Received(1).LockSlot(0);
@@ -239,7 +237,7 @@ public class SunVoxLibExtensionsTests
             ? null
             : Enumerable.Range(0, argCount).Select(static i => (object)i.ToString()).ToArray();
         // when
-        Assert.Throws<Exception>(() => function(lib, mockFunction, mockData));
+        ((Action)(() => function(lib, mockFunction, mockData))).Should().Throw<Exception>();
 
         // then
         lib.Received(1).LockSlot(0);

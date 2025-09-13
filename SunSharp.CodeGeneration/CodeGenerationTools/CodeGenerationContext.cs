@@ -1,5 +1,4 @@
-﻿using System;
-using System.Text;
+﻿using System.Text;
 
 namespace SunSharp.CodeGeneration.CodeGenerationTools;
 
@@ -7,13 +6,8 @@ public class CodeGenerationContext
 {
     private const int SpacesPerTab = 4;
 
-    private readonly StringBuilder _sb;
+    private readonly StringBuilder _sb = new();
     private int _tabs;
-
-    public CodeGenerationContext()
-    {
-        _sb = new StringBuilder();
-    }
 
     public string GetTabs()
     {

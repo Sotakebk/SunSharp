@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using NSubstitute;
+using System.Threading.Tasks;
 using NSubstitute.ExceptionExtensions;
-using NUnit.Framework;
 using SunSharp.Native;
 using SunSharp.Native.Loader;
 
@@ -16,7 +14,9 @@ public class NativeProxyTests
         var methods = typeof(ISunVoxLibC).GetMethods();
 
         foreach (var method in methods)
+        {
             handler.Received(1).GetFunctionByName(method.Name, Arg.Any<Type>());
+        }
     }
 
     private static void AssertThatGetFunctionByNameWasCalledForNoMethods(ILibraryHandler handler)
@@ -30,7 +30,7 @@ public class NativeProxyTests
         handler.GetFunctionByName(Arg.Any<string>(), Arg.Any<Type>())
             .Returns(callInfo =>
             {
-                var @delegate = (Delegate)Substitute.For(new[] { callInfo.Arg<Type>() }, Array.Empty<object>());
+                var @delegate = (Delegate)Substitute.For([callInfo.Arg<Type>()], []);
                 delegates.Add(callInfo.Arg<string>(), @delegate);
                 return @delegate;
             });
@@ -96,7 +96,7 @@ public class NativeProxyTests
     }
 
     [Test]
-    public void NativProxyLoadShouldCallHandlerUnloadWhenHandlerLoadFails()
+    public void NativeProxyLoadShouldCallHandlerUnloadWhenHandlerLoadFails()
     {
         var handler = Substitute.For<ILibraryHandler>();
         handler.IsLibraryLoaded.Returns(false);
@@ -106,7 +106,9 @@ public class NativeProxyTests
         var proxy = new NativeProxy(handler);
 
         // when
-        Assert.That(() => proxy.Load(), Throws.Exception.EqualTo(innerException));
+        proxy.Invoking(p => p.Load())
+            .Should().Throw<Exception>()
+            .Which.Should().BeEquivalentTo(innerException);
         Received.InOrder(() =>
         {
             handler.Received(1).LoadLibrary();
@@ -153,12 +155,12 @@ public class NativeProxyTests
         else
             proxy.Unload();
 
-        Assert.That(proxy.IsLoaded, Is.EqualTo(proxyLoaded));
+        proxy.IsLoaded.Should().Be(proxyLoaded);
 
         handler.IsLibraryLoaded.Returns(libraryLoaded);
 
         var exception = proxy.GetNoDelegateException();
-        Assert.That(exception.Message, Is.EqualTo(message));
+        exception.Message.Should().Be(message);
     }
 
     [Test]
@@ -173,11 +175,8 @@ public class NativeProxyTests
 
         var exception = proxy.GetNoDelegateException();
 
-        Assert.Multiple(() =>
-        {
-            Assert.That(exception.Message, Is.EqualTo(message));
-            Assert.That(exception.InnerException, Is.EqualTo(innerException));
-        });
+        exception.Message.Should().Be(message);
+        exception.InnerException.Should().Be(innerException);
     }
 
     private static object? GetDefault(Type type)
@@ -194,7 +193,7 @@ public class NativeProxyTests
         libraryHandler.GetFunctionByName(Arg.Any<string>(), Arg.Any<Type>())
             .Returns(callInfo =>
             {
-                var @delegate = (Delegate)Substitute.For(new[] { callInfo.Arg<Type>() }, Array.Empty<object>());
+                var @delegate = (Delegate)Substitute.For([callInfo.Arg<Type>()], []);
                 delegates.Add(callInfo.Arg<string>(), @delegate);
                 return @delegate;
             });
@@ -203,7 +202,9 @@ public class NativeProxyTests
         proxy.Load();
 
         foreach (var methodName in typeof(ISunVoxLibC).GetMethods().Select(m => m.Name))
-            Assert.That(delegates.ContainsKey(methodName));
+        {
+            delegates.Should().ContainKey(methodName);
+        }
 
         foreach (var method in typeof(ISunVoxLibC).GetMethods())
         {
@@ -223,7 +224,7 @@ public class NativeProxyTests
         libraryHandler.GetFunctionByName(Arg.Any<string>(), Arg.Any<Type>())
             .Returns(callInfo =>
             {
-                var @delegate = (Delegate)Substitute.For(new[] { callInfo.Arg<Type>() }, Array.Empty<object>());
+                var @delegate = (Delegate)Substitute.For([callInfo.Arg<Type>()], []);
                 delegates.Add(callInfo.Arg<string>(), @delegate);
                 return @delegate;
             });
@@ -250,7 +251,7 @@ public class NativeProxyTests
         libraryHandler.GetFunctionByName(Arg.Any<string>(), Arg.Any<Type>())
             .Returns(callInfo =>
             {
-                var @delegate = (Delegate)Substitute.For(new[] { callInfo.Arg<Type>() }, Array.Empty<object>());
+                var @delegate = (Delegate)Substitute.For([callInfo.Arg<Type>()], []);
                 delegates.Add(callInfo.Arg<string>(), @delegate);
                 return @delegate;
             });
@@ -266,7 +267,9 @@ public class NativeProxyTests
         method.DynamicInvoke().Throws(exception);
 
         // WHEN - THEN
-        Assert.That(() => proxy.Unload(), Throws.Exception.EqualTo(exception));
+        proxy.Invoking(p => p.Unload())
+            .Should().Throw<Exception>()
+            .Which.Should().BeEquivalentTo(exception);
 
         // AND
         method.Received(1).DynamicInvoke();
@@ -282,7 +285,7 @@ public class NativeProxyTests
         libraryHandler.GetFunctionByName(Arg.Any<string>(), Arg.Any<Type>())
             .Returns(callInfo =>
             {
-                var @delegate = (Delegate)Substitute.For(new[] { callInfo.Arg<Type>() }, Array.Empty<object>());
+                var @delegate = (Delegate)Substitute.For([callInfo.Arg<Type>()], []);
                 delegates.Add(callInfo.Arg<string>(), @delegate);
                 return @delegate;
             });
@@ -298,7 +301,9 @@ public class NativeProxyTests
         libraryHandler.When(static handler => handler.UnloadLibrary()).Throw(exception);
 
         // WHEN - THEN
-        Assert.That(() => proxy.Unload(), Throws.Exception.EqualTo(exception));
+        proxy.Invoking(p => p.Unload())
+            .Should().Throw<Exception>()
+            .Which.Should().BeEquivalentTo(exception);
 
         // AND
         method.Received(1).DynamicInvoke();
@@ -322,12 +327,14 @@ public class NativeProxyTests
         method.DynamicInvoke().Throws(exception);
 
         // WHEN - THEN
-        Assert.That(() => proxy.Unload(), Throws.Exception.EqualTo(exception));
+        proxy.Invoking(p => p.Unload())
+            .Should().Throw<Exception>()
+            .Which.Should().BeEquivalentTo(exception);
 
         // AND
         method.Received(1).DynamicInvoke();
         libraryHandler.Received(0).UnloadLibrary();
-        Assert.That(proxy.IsLoaded, Is.True);
+        proxy.IsLoaded.Should().BeTrue();
     }
 
     [Test]
@@ -342,30 +349,32 @@ public class NativeProxyTests
         proxy.Load();
 
         // WHEN - THEN
-        Assert.That(() => proxy.Unload(),
-            Throws.InvalidOperationException
-                .With.Message
-                .EqualTo($"{nameof(ISunVoxLibC.sv_deinit)} was null, but library and proxy are both loaded."));
+        proxy.Invoking(p => p.Unload())
+            .Should().Throw<InvalidOperationException>()
+            .WithMessage($"{nameof(ISunVoxLibC.sv_deinit)} was null, but library and proxy are both loaded.");
 
         // AND
         libraryHandler.Received(0).UnloadLibrary();
-        Assert.That(proxy.IsLibraryLoaded);
+        proxy.IsLibraryLoaded.Should().BeTrue();
     }
 
     [Test]
-    public void NativeProxyInterfaceCallsShouldThrowInvalidOperationExceptionBeforeLoadCalled()
+    public async Task NativeProxyInterfaceCallsShouldThrowInvalidOperationExceptionBeforeLoadCalled()
     {
         var libraryHandler = Substitute.For<ILibraryHandler>();
         libraryHandler.IsLibraryLoaded.Returns(false);
         var proxy = new NativeProxy(libraryHandler);
 
-        foreach (var method in typeof(ISunVoxLibC).GetMethods())
+        var methods = typeof(ISunVoxLibC).GetMethods();
+
+        await Parallel.ForEachAsync(methods, (method, _) =>
         {
             var parameters = method.GetParameters().Select(static p => GetDefault(p.ParameterType)).ToArray();
-            Assert.That(() => method.Invoke(proxy, parameters),
-                Throws.Exception.With.InnerException.TypeOf<InvalidOperationException>()
-                    .And.InnerException.With.Message
-                    .EqualTo("Missing delegate. Library is not loaded, proxy is not loaded."));
-        }
+            method.Invoking(m => m.Invoke(proxy, parameters))
+                .Should().Throw<Exception>()
+                .WithInnerException<InvalidOperationException>()
+                .WithMessage("Missing delegate. Library is not loaded, proxy is not loaded.");
+            return ValueTask.CompletedTask;
+        });
     }
 }

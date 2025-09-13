@@ -22,14 +22,15 @@ namespace SunSharp.Redistribution
             lock (_lock)
             {
                 if (IsLibraryLoaded)
+                {
                     return;
+                }
 
                 var ptr = dlopen(_path, 0);
                 if (ptr == IntPtr.Zero)
                 {
                     var error = dlerror();
-                    throw new LibraryLoadingException(
-                        $"Failed to load SunVoxLib from path '{_path}' with error '{error}'.");
+                    throw new LibraryLoadingException($"Failed to load SunVoxLib from path '{_path}' with error '{error}'.");
                 }
 
                 _ptr = ptr;
@@ -41,7 +42,9 @@ namespace SunSharp.Redistribution
             lock (_lock)
             {
                 if (!IsLibraryLoaded)
+                {
                     return;
+                }
 
                 var code = dlclose(_ptr);
                 if (code != 0)
@@ -62,7 +65,9 @@ namespace SunSharp.Redistribution
             lock (_lock)
             {
                 if (!IsLibraryLoaded)
+                {
                     throw new LibraryLoadingException("SunVoxLib is not loaded.");
+                }
 
                 var ptr = dlsym(_ptr, name);
                 if (ptr == IntPtr.Zero)

@@ -1,11 +1,9 @@
-﻿using NUnit.Framework;
-
-namespace SunSharp.Tests;
+﻿namespace SunSharp.Tests;
 
 public class PatternEventTests
 {
-    public static TestCaseData[] TestCases => new[]
-    {
+    public static TestCaseData[] TestCases =>
+    [
         new TestCaseData(new PatternEvent(), "____________"),
         new TestCaseData(new PatternEvent(new Note(NoteName.C, 4), 0x80, 1), "C4800001______"),
         new TestCaseData(new PatternEvent(0, 1), "__________0001"),
@@ -13,7 +11,7 @@ public class PatternEventTests
         new TestCaseData(new PatternEvent(3, 0x01, 0xA9, 0x87, 0x65, 0x4321), "D00100A987654321"),
         new TestCaseData(new PatternEvent(Note.Off), "--__________"),
         new TestCaseData(new PatternEvent(Note.AllNotesOff), "-!__________")
-    };
+    ];
 
     private static ulong ConstructBinaryPatternEventValue(byte note = 0, byte velocity = 0, ushort module = 0,
         byte controller = 0, byte effect = 0, ushort xxyy = 0)
@@ -41,20 +39,17 @@ public class PatternEventTests
         var binaryValue = ConstructBinaryPatternEventValue(note, velocity, module, controller, effect, xxyy);
         var patternEvent = new PatternEvent(binaryValue);
 
-        Assert.Multiple(() =>
-        {
-            Assert.That(patternEvent.Data, Is.EqualTo(binaryValue), "Data");
-            Assert.That(patternEvent.NN, Is.EqualTo(note), "NN");
-            Assert.That(patternEvent.Note.Value, Is.EqualTo(note), "Note");
-            Assert.That(patternEvent.CC, Is.EqualTo(controller), "CC");
-            Assert.That(patternEvent.EE, Is.EqualTo(effect), "EE");
-            Assert.That(patternEvent.CCEE, Is.EqualTo((controller << 8) | effect), "CCEE");
-            Assert.That(patternEvent.MM, Is.EqualTo(module), "MM");
-            Assert.That(patternEvent.Effect, Is.EqualTo((Effect)effect), "Effect");
-            Assert.That(patternEvent.XXYY, Is.EqualTo(xxyy), "XXYY");
-            Assert.That(patternEvent.XX, Is.EqualTo(xx), "XX");
-            Assert.That(patternEvent.YY, Is.EqualTo(yy), "YY");
-        });
+        patternEvent.Data.Should().Be(binaryValue);
+        patternEvent.NN.Should().Be(note);
+        patternEvent.Note.Value.Should().Be(note);
+        patternEvent.CC.Should().Be(controller);
+        patternEvent.EE.Should().Be(effect);
+        patternEvent.CCEE.Should().Be((controller << 8) | effect);
+        patternEvent.MM.Should().Be(module);
+        patternEvent.Effect.Should().Be((Effect)effect);
+        patternEvent.XXYY.Should().Be(xxyy);
+        patternEvent.XX.Should().Be((byte)xx);
+        patternEvent.YY.Should().Be((byte)yy);
     }
 
     [Test]
@@ -68,20 +63,17 @@ public class PatternEventTests
         var binaryValue = ConstructBinaryPatternEventValue(effect: effect, xxyy: xxyy);
         var patternEvent = new PatternEvent((Effect)effect, xxyy);
 
-        Assert.Multiple(() =>
-        {
-            Assert.That(patternEvent.Data, Is.EqualTo(binaryValue), "Data");
-            Assert.That(patternEvent.NN, Is.EqualTo(0), "NN");
-            Assert.That(patternEvent.Note.Value, Is.EqualTo(0), "Note");
-            Assert.That(patternEvent.CC, Is.EqualTo(0), "CC");
-            Assert.That(patternEvent.EE, Is.EqualTo(effect), "EE");
-            Assert.That(patternEvent.CCEE, Is.EqualTo(effect), "CCEE");
-            Assert.That(patternEvent.MM, Is.EqualTo(0), "MM");
-            Assert.That(patternEvent.Effect, Is.EqualTo((Effect)effect), "Effect");
-            Assert.That(patternEvent.XXYY, Is.EqualTo(xxyy), "XXYY");
-            Assert.That(patternEvent.XX, Is.EqualTo(xx), "XX");
-            Assert.That(patternEvent.YY, Is.EqualTo(yy), "YY");
-        });
+        patternEvent.Data.Should().Be(binaryValue);
+        patternEvent.NN.Should().Be(0);
+        patternEvent.Note.Value.Should().Be(0);
+        patternEvent.CC.Should().Be(0);
+        patternEvent.EE.Should().Be(effect);
+        patternEvent.CCEE.Should().Be(effect);
+        patternEvent.MM.Should().Be(0);
+        patternEvent.Effect.Should().Be((Effect)effect);
+        patternEvent.XXYY.Should().Be(xxyy);
+        patternEvent.XX.Should().Be((byte)xx);
+        patternEvent.YY.Should().Be((byte)yy);
     }
 
     [Test]
@@ -94,20 +86,17 @@ public class PatternEventTests
         var binaryValue = ConstructBinaryPatternEventValue(note, velocity, module);
         var patternEvent = new PatternEvent(note, velocity, module);
 
-        Assert.Multiple(() =>
-        {
-            Assert.That(patternEvent.Data, Is.EqualTo(binaryValue), "Data");
-            Assert.That(patternEvent.NN, Is.EqualTo(note), "NN");
-            Assert.That(patternEvent.Note.Value, Is.EqualTo(note), "Note");
-            Assert.That(patternEvent.CC, Is.EqualTo(0), "CC");
-            Assert.That(patternEvent.EE, Is.EqualTo(0), "EE");
-            Assert.That(patternEvent.CCEE, Is.EqualTo(0), "CCEE");
-            Assert.That(patternEvent.MM, Is.EqualTo(module), "MM");
-            Assert.That(patternEvent.Effect, Is.EqualTo(Effect.None), "Effect");
-            Assert.That(patternEvent.XXYY, Is.EqualTo(0), "XXYY");
-            Assert.That(patternEvent.XX, Is.EqualTo(0), "XX");
-            Assert.That(patternEvent.YY, Is.EqualTo(0), "YY");
-        });
+        patternEvent.Data.Should().Be(binaryValue);
+        patternEvent.NN.Should().Be(note);
+        patternEvent.Note.Value.Should().Be(note);
+        patternEvent.CC.Should().Be(0);
+        patternEvent.EE.Should().Be(0);
+        patternEvent.CCEE.Should().Be(0);
+        patternEvent.MM.Should().Be(module);
+        patternEvent.Effect.Should().Be(Effect.None);
+        patternEvent.XXYY.Should().Be(0);
+        patternEvent.XX.Should().Be(0);
+        patternEvent.YY.Should().Be(0);
     }
 
     [Test]
@@ -125,20 +114,17 @@ public class PatternEventTests
         var binaryValue = ConstructBinaryPatternEventValue(note, velocity, module, controller, effect, xxyy);
         var patternEvent = new PatternEvent(note, velocity, module, controller, effect, xxyy);
 
-        Assert.Multiple(() =>
-        {
-            Assert.That(patternEvent.Data, Is.EqualTo(binaryValue), "Data");
-            Assert.That(patternEvent.NN, Is.EqualTo(note), "NN");
-            Assert.That(patternEvent.Note.Value, Is.EqualTo(note), "Note");
-            Assert.That(patternEvent.CC, Is.EqualTo(controller), "CC");
-            Assert.That(patternEvent.EE, Is.EqualTo(effect), "EE");
-            Assert.That(patternEvent.CCEE, Is.EqualTo((controller << 8) | effect), "CCEE");
-            Assert.That(patternEvent.MM, Is.EqualTo(module), "MM");
-            Assert.That(patternEvent.Effect, Is.EqualTo((Effect)effect), "Effect");
-            Assert.That(patternEvent.XXYY, Is.EqualTo(xxyy), "XXYY");
-            Assert.That(patternEvent.XX, Is.EqualTo(xx), "XX");
-            Assert.That(patternEvent.YY, Is.EqualTo(yy), "YY");
-        });
+        patternEvent.Data.Should().Be(binaryValue);
+        patternEvent.NN.Should().Be(note);
+        patternEvent.Note.Value.Should().Be(note);
+        patternEvent.CC.Should().Be(controller);
+        patternEvent.EE.Should().Be(effect);
+        patternEvent.CCEE.Should().Be((controller << 8) | effect);
+        patternEvent.MM.Should().Be(module);
+        patternEvent.Effect.Should().Be((Effect)effect);
+        patternEvent.XXYY.Should().Be(xxyy);
+        patternEvent.XX.Should().Be((byte)xx);
+        patternEvent.YY.Should().Be((byte)yy);
     }
 
     [Test]
@@ -156,20 +142,17 @@ public class PatternEventTests
         var binaryValue = ConstructBinaryPatternEventValue(note, velocity, module, controller, effect, xxyy);
         var patternEvent = new PatternEvent(note, velocity, module, controller, (Effect)effect, xxyy);
 
-        Assert.Multiple(() =>
-        {
-            Assert.That(patternEvent.Data, Is.EqualTo(binaryValue), "Data");
-            Assert.That(patternEvent.NN, Is.EqualTo(note), "NN");
-            Assert.That(patternEvent.Note.Value, Is.EqualTo(note), "Note");
-            Assert.That(patternEvent.CC, Is.EqualTo(controller), "CC");
-            Assert.That(patternEvent.EE, Is.EqualTo(effect), "EE");
-            Assert.That(patternEvent.CCEE, Is.EqualTo((controller << 8) | effect), "CCEE");
-            Assert.That(patternEvent.MM, Is.EqualTo(module), "MM");
-            Assert.That(patternEvent.Effect, Is.EqualTo((Effect)effect), "Effect");
-            Assert.That(patternEvent.XXYY, Is.EqualTo(xxyy), "XXYY");
-            Assert.That(patternEvent.XX, Is.EqualTo(xx), "XX");
-            Assert.That(patternEvent.YY, Is.EqualTo(yy), "YY");
-        });
+        patternEvent.Data.Should().Be(binaryValue);
+        patternEvent.NN.Should().Be(note);
+        patternEvent.Note.Value.Should().Be(note);
+        patternEvent.CC.Should().Be(controller);
+        patternEvent.EE.Should().Be(effect);
+        patternEvent.CCEE.Should().Be((controller << 8) | effect);
+        patternEvent.MM.Should().Be(module);
+        patternEvent.Effect.Should().Be((Effect)effect);
+        patternEvent.XXYY.Should().Be(xxyy);
+        patternEvent.XX.Should().Be((byte)xx);
+        patternEvent.YY.Should().Be((byte)yy);
     }
 
     [Test]
@@ -187,20 +170,17 @@ public class PatternEventTests
         var binaryValue = ConstructBinaryPatternEventValue(note, velocity, module, controller, effect, xxyy);
         var patternEvent = new PatternEvent(note, velocity, module, (controller << 8) | effect, xxyy);
 
-        Assert.Multiple(() =>
-        {
-            Assert.That(patternEvent.Data, Is.EqualTo(binaryValue), "Data");
-            Assert.That(patternEvent.NN, Is.EqualTo(note), "NN");
-            Assert.That(patternEvent.Note.Value, Is.EqualTo(note), "Note");
-            Assert.That(patternEvent.CC, Is.EqualTo(controller), "CC");
-            Assert.That(patternEvent.EE, Is.EqualTo(effect), "EE");
-            Assert.That(patternEvent.CCEE, Is.EqualTo((controller << 8) | effect), "CCEE");
-            Assert.That(patternEvent.MM, Is.EqualTo(module), "MM");
-            Assert.That(patternEvent.Effect, Is.EqualTo((Effect)effect), "Effect");
-            Assert.That(patternEvent.XXYY, Is.EqualTo(xxyy), "XXYY");
-            Assert.That(patternEvent.XX, Is.EqualTo(xx), "XX");
-            Assert.That(patternEvent.YY, Is.EqualTo(yy), "YY");
-        });
+        patternEvent.Data.Should().Be(binaryValue);
+        patternEvent.NN.Should().Be(note);
+        patternEvent.Note.Value.Should().Be(note);
+        patternEvent.CC.Should().Be(controller);
+        patternEvent.EE.Should().Be(effect);
+        patternEvent.CCEE.Should().Be((controller << 8) | effect);
+        patternEvent.MM.Should().Be(module);
+        patternEvent.Effect.Should().Be((Effect)effect);
+        patternEvent.XXYY.Should().Be(xxyy);
+        patternEvent.XX.Should().Be((byte)xx);
+        patternEvent.YY.Should().Be((byte)yy);
     }
 
     [Test]
@@ -210,129 +190,96 @@ public class PatternEventTests
         {
             NN = 1
         };
-        Assert.Multiple(() =>
-        {
-            Assert.That(patternEvent.Data, Is.EqualTo(ConstructBinaryPatternEventValue(1)));
-            Assert.That(patternEvent.NN, Is.EqualTo(1));
-            Assert.That(patternEvent.Note, Is.EqualTo((Note)1));
-        });
+        patternEvent.Data.Should().Be(ConstructBinaryPatternEventValue(1));
+        patternEvent.NN.Should().Be(1);
+        patternEvent.Note.Should().Be((Note)1);
 
         patternEvent = new PatternEvent
         {
             Note = 1
         };
-        Assert.Multiple(() =>
-        {
-            Assert.That(patternEvent.Data, Is.EqualTo(ConstructBinaryPatternEventValue(1)));
-            Assert.That(patternEvent.NN, Is.EqualTo(1));
-            Assert.That(patternEvent.Note, Is.EqualTo((Note)1));
-        });
+        patternEvent.Data.Should().Be(ConstructBinaryPatternEventValue(1));
+        patternEvent.NN.Should().Be(1);
+        patternEvent.Note.Should().Be((Note)1);
 
         patternEvent = new PatternEvent
         {
             MM = 1
         };
-        Assert.Multiple(() =>
-        {
-            Assert.That(patternEvent.Data, Is.EqualTo(ConstructBinaryPatternEventValue(module: 1)));
-            Assert.That(patternEvent.MM, Is.EqualTo(1));
-        });
+        patternEvent.Data.Should().Be(ConstructBinaryPatternEventValue(module: 1));
+        patternEvent.MM.Should().Be(1);
 
         patternEvent = new PatternEvent
         {
             VV = 1
         };
-        Assert.Multiple(() =>
-        {
-            Assert.That(patternEvent.Data, Is.EqualTo(ConstructBinaryPatternEventValue(velocity: 1)));
-            Assert.That(patternEvent.VV, Is.EqualTo(1));
-        });
+        patternEvent.Data.Should().Be(ConstructBinaryPatternEventValue(velocity: 1));
+        patternEvent.VV.Should().Be(1);
 
         patternEvent = new PatternEvent
         {
             CC = 1
         };
-        Assert.Multiple(() =>
-        {
-            Assert.That(patternEvent.Data, Is.EqualTo(ConstructBinaryPatternEventValue(controller: 1)));
-            Assert.That(patternEvent.CC, Is.EqualTo(1));
-        });
+        patternEvent.Data.Should().Be(ConstructBinaryPatternEventValue(controller: 1));
+        patternEvent.CC.Should().Be(1);
 
         patternEvent = new PatternEvent
         {
             EE = 1
         };
-        Assert.Multiple(() =>
-        {
-            Assert.That(patternEvent.Data, Is.EqualTo(ConstructBinaryPatternEventValue(effect: 1)));
-            Assert.That(patternEvent.EE, Is.EqualTo(1));
-            Assert.That(patternEvent.Effect, Is.EqualTo((Effect)1));
-        });
+        patternEvent.Data.Should().Be(ConstructBinaryPatternEventValue(effect: 1));
+        patternEvent.EE.Should().Be(1);
+        patternEvent.Effect.Should().Be((Effect)1);
 
         patternEvent = new PatternEvent
         {
             Effect = (Effect)1
         };
-        Assert.Multiple(() =>
-        {
-            Assert.That(patternEvent.Data, Is.EqualTo(ConstructBinaryPatternEventValue(effect: 1)));
-            Assert.That(patternEvent.EE, Is.EqualTo(1));
-            Assert.That(patternEvent.Effect, Is.EqualTo((Effect)1));
-        });
+        patternEvent.Data.Should().Be(ConstructBinaryPatternEventValue(effect: 1));
+        patternEvent.EE.Should().Be(1);
+        patternEvent.Effect.Should().Be((Effect)1);
 
         patternEvent = new PatternEvent
         {
             CCEE = 0x0101
         };
-        Assert.Multiple(() =>
-        {
-            Assert.That(patternEvent.Data, Is.EqualTo(ConstructBinaryPatternEventValue(effect: 1, controller: 1)));
-            Assert.That(patternEvent.EE, Is.EqualTo(1));
-            Assert.That(patternEvent.CC, Is.EqualTo(1));
-            Assert.That(patternEvent.CCEE, Is.EqualTo(0x0101));
-        });
+        patternEvent.Data.Should().Be(ConstructBinaryPatternEventValue(effect: 1, controller: 1));
+        patternEvent.EE.Should().Be(1);
+        patternEvent.CC.Should().Be(1);
+        patternEvent.CCEE.Should().Be(0x0101);
 
         patternEvent = new PatternEvent
         {
             XXYY = 0x0101
         };
-        Assert.Multiple(() =>
-        {
-            Assert.That(patternEvent.Data, Is.EqualTo(ConstructBinaryPatternEventValue(xxyy: 0x0101)));
-            Assert.That(patternEvent.XX, Is.EqualTo(1));
-            Assert.That(patternEvent.YY, Is.EqualTo(1));
-            Assert.That(patternEvent.XXYY, Is.EqualTo(0x0101));
-        });
+        patternEvent.Data.Should().Be(ConstructBinaryPatternEventValue(xxyy: 0x0101));
+        patternEvent.XX.Should().Be(1);
+        patternEvent.YY.Should().Be(1);
+        patternEvent.XXYY.Should().Be(0x0101);
 
         patternEvent = new PatternEvent
         {
             XX = 1
         };
-        Assert.Multiple(() =>
-        {
-            Assert.That(patternEvent.Data, Is.EqualTo(ConstructBinaryPatternEventValue(xxyy: 0x0001)));
-            Assert.That(patternEvent.XX, Is.EqualTo(1));
-            Assert.That(patternEvent.YY, Is.EqualTo(0));
-            Assert.That(patternEvent.XXYY, Is.EqualTo(0x0001));
-        });
+        patternEvent.Data.Should().Be(ConstructBinaryPatternEventValue(xxyy: 0x0001));
+        patternEvent.XX.Should().Be(1);
+        patternEvent.YY.Should().Be(0);
+        patternEvent.XXYY.Should().Be(0x0001);
 
         patternEvent = new PatternEvent
         {
             YY = 1
         };
-        Assert.Multiple(() =>
-        {
-            Assert.That(patternEvent.Data, Is.EqualTo(ConstructBinaryPatternEventValue(xxyy: 0x0100)));
-            Assert.That(patternEvent.XX, Is.EqualTo(0));
-            Assert.That(patternEvent.YY, Is.EqualTo(1));
-            Assert.That(patternEvent.XXYY, Is.EqualTo(0x0100));
-        });
+        patternEvent.Data.Should().Be(ConstructBinaryPatternEventValue(xxyy: 0x0100));
+        patternEvent.XX.Should().Be(0);
+        patternEvent.YY.Should().Be(1);
+        patternEvent.XXYY.Should().Be(0x0100);
     }
 
     [TestCaseSource(nameof(TestCases))]
     public void PatternEventToStringShouldReturnExpectedValue(PatternEvent patternEvent, string expectedValue)
     {
-        Assert.That(patternEvent.ToString(), Is.EqualTo(expectedValue));
+        patternEvent.ToString().Should().Be(expectedValue);
     }
 
     [Test]
@@ -342,29 +289,24 @@ public class PatternEventTests
         var b = new PatternEvent(1);
         var c = new PatternEvent(2);
 
-        Assert.Multiple(() =>
-        {
-#pragma warning disable NUnit2010 // Use EqualConstraint for better assertion messages in case of failure
-            Assert.That(a.Equals(b));
-            Assert.That(a.Equals(a));
-            Assert.That(a.Equals(1));
-            Assert.That(a.Equals(1));
-            Assert.That(a.Equals((object?)b));
-            Assert.That(a.Equals((object?)a));
-            Assert.That(a.Equals(null), Is.False);
-            Assert.That(a.Equals(new object()), Is.False);
-            Assert.That(b.Equals(c), Is.False);
-            Assert.That(b.Equals(2), Is.False);
-            Assert.That(new Note(1).Equals(2), Is.False);
+        a.Equals(b).Should().BeTrue();
+        a.Equals(a).Should().BeTrue();
+        a.Equals(1).Should().BeTrue();
+        a.Equals(1).Should().BeTrue();
+        a.Equals((object?)b).Should().BeTrue();
+        a.Equals((object?)a).Should().BeTrue();
+        a.Equals(null).Should().BeFalse();
+        a.Equals(new object()).Should().BeFalse();
+        b.Equals(c).Should().BeFalse();
+        b.Equals(2).Should().BeFalse();
+        new Note(1).Equals(2).Should().BeFalse();
 
-            Assert.That(a == b);
-            Assert.That(a != b, Is.False);
-            Assert.That(a == 1);
-            Assert.That(a != 2);
-            Assert.That(a != c);
-            Assert.That(a == c, Is.False);
-#pragma warning restore NUnit2010 // Use EqualConstraint for better assertion messages in case of failure
-        });
+        (a == b).Should().BeTrue();
+        (a != b).Should().BeFalse();
+        (a == 1).Should().BeTrue();
+        (a != 2).Should().BeTrue();
+        (a != c).Should().BeTrue();
+        (a == c).Should().BeFalse();
     }
 
     [Test]
@@ -374,11 +316,8 @@ public class PatternEventTests
         var b = new PatternEvent(1);
         var c = new PatternEvent(2);
 
-        Assert.Multiple(() =>
-        {
-            Assert.That(a.GetHashCode(), Is.EqualTo(b.GetHashCode()));
-            Assert.That(a.GetHashCode(), !Is.EqualTo(c.GetHashCode()));
-        });
+        a.GetHashCode().Should().Be(b.GetHashCode());
+        a.GetHashCode().Should().NotBe(c.GetHashCode());
     }
 
     [TestCase(0ul)]
@@ -388,11 +327,8 @@ public class PatternEventTests
     {
         var patternEvent = (PatternEvent)value;
         var extractedValue = (ulong)patternEvent;
-        Assert.Multiple(() =>
-        {
-            Assert.That(patternEvent.Data, Is.EqualTo(value));
-            Assert.That(extractedValue, Is.EqualTo(patternEvent.Data));
-            Assert.That(extractedValue, Is.EqualTo(value));
-        });
+        patternEvent.Data.Should().Be(value);
+        extractedValue.Should().Be(patternEvent.Data);
+        extractedValue.Should().Be(value);
     }
 }

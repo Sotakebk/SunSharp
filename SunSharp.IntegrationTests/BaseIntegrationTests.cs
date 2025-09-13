@@ -1,6 +1,4 @@
-﻿using System;
-using NUnit.Framework;
-using SunSharp.Redistribution;
+﻿using SunSharp.Redistribution;
 
 namespace SunSharp.IntegrationTests;
 
@@ -36,7 +34,7 @@ public class BaseIntegrationTests
         }
         catch (Exception e)
         {
-            TestContext.WriteLine(e);
+            TestContext.Out.WriteLine(e);
         }
     }
 
@@ -45,20 +43,13 @@ public class BaseIntegrationTests
     {
         try
         {
-            try
-            {
-                var log = _lib?.GetLog(0x10000);
-                TestContext.WriteLine(log);
-            }
-            finally
-            {
-                _lib?.Deinitialize();
-                _lib = null;
-            }
+            var log = _lib?.GetLog(0x10000);
+            TestContext.Out.WriteLine(log);
         }
-        catch (Exception e)
+        finally
         {
-            TestContext.WriteLine(e);
+            _lib?.Deinitialize();
+            _lib = null;
         }
     }
 }

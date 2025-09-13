@@ -161,13 +161,19 @@ namespace SunSharp.Native
         public void SetPatternData(int slotId, int patternId, PatternEvent[] data, int tracks, int lines)
         {
             if (tracks < 0)
+            {
                 throw new ArgumentOutOfRangeException(nameof(tracks), tracks, "Value cannot be negative.");
+            }
+
             if (lines < 0)
+            {
                 throw new ArgumentOutOfRangeException(nameof(lines), lines, "Value cannot be negative.");
+            }
 
             if (tracks * lines != data.Length)
-                throw new ArgumentException(
-                    $"Size of {nameof(data)} ({nameof(data)}.Length) is not equal to {nameof(tracks)} * {nameof(lines)} ({tracks * lines}).");
+            {
+                throw new ArgumentException($"Size of {nameof(data)} ({nameof(data)}.Length) is not equal to {nameof(tracks)} * {nameof(lines)} ({tracks * lines}).");
+            }
 
             // should throw an exception if the pattern in question does not exist
             SetPatternSize(slotId, patternId, tracks, lines);
@@ -186,34 +192,53 @@ namespace SunSharp.Native
             int? maxTracks = null, int? maxLines = null)
         {
             if (readOffsetLines < 0)
-                throw new ArgumentOutOfRangeException(nameof(readOffsetLines), readOffsetLines,
-                    "Value cannot be negative.");
+            {
+                throw new ArgumentOutOfRangeException(nameof(readOffsetLines), readOffsetLines, "Value cannot be negative.");
+            }
+
             if (readOffsetTracks < 0)
-                throw new ArgumentOutOfRangeException(nameof(readOffsetTracks), readOffsetTracks,
-                    "Value cannot be negative.");
+            {
+                throw new ArgumentOutOfRangeException(nameof(readOffsetTracks), readOffsetTracks, "Value cannot be negative.");
+            }
+
             if (bufferOffsetLines < 0)
-                throw new ArgumentOutOfRangeException(nameof(bufferOffsetLines), bufferOffsetLines,
-                    "Value cannot be negative.");
+            {
+                throw new ArgumentOutOfRangeException(nameof(bufferOffsetLines), bufferOffsetLines, "Value cannot be negative.");
+            }
+
             if (bufferOffsetTracks < 0)
-                throw new ArgumentOutOfRangeException(nameof(bufferOffsetTracks), bufferOffsetTracks,
-                    "Value cannot be negative.");
+            {
+                throw new ArgumentOutOfRangeException(nameof(bufferOffsetTracks), bufferOffsetTracks, "Value cannot be negative.");
+            }
+
             if (bufferTracks < 0)
+            {
                 throw new ArgumentOutOfRangeException(nameof(bufferTracks), bufferTracks, "Value cannot be negative.");
+            }
+
             if (bufferLines < 0)
+            {
                 throw new ArgumentOutOfRangeException(nameof(bufferLines), bufferLines, "Value cannot be negative.");
+            }
 
             if (bufferLines * bufferTracks != buffer.Length)
-                throw new ArgumentException(
-                    $"Size of {nameof(buffer)} ({nameof(buffer)}.Length) is not equal to {nameof(bufferTracks)} * {nameof(bufferLines)} ({bufferTracks * bufferLines}).");
+            {
+                throw new ArgumentException($"Size of {nameof(buffer)} ({nameof(buffer)}.Length) is not equal to {nameof(bufferTracks)} * {nameof(bufferLines)} ({bufferTracks * bufferLines}).");
+            }
 
             var realLines = GetPatternLines(slotId, patternId);
             if (realLines == 0)
+            {
                 return 0;
+            }
+
             var realTracks = GetPatternTracks(slotId, patternId);
 
             var ptr = _lib.sv_get_pattern_data(slotId, patternId);
             if (ptr == IntPtr.Zero)
+            {
                 return 0;
+            }
 
             var linesToIterate = Math.Min(bufferLines - bufferOffsetLines, realLines - readOffsetLines);
             linesToIterate = Math.Min(linesToIterate, maxLines ?? int.MaxValue);
@@ -222,13 +247,15 @@ namespace SunSharp.Native
 
             var readEventCount = 0;
             for (var l = 0; l < linesToIterate; l++)
-            for (var t = 0; t < tracksToIterate; t++)
             {
-                var realIndex = (l + readOffsetLines) * realTracks + t + readOffsetTracks;
-                var bufferIndex = (l + bufferOffsetLines) * bufferTracks + t + bufferOffsetTracks;
-                var value = Marshal.ReadInt64(ptr, realIndex * sizeof(ulong));
-                buffer[bufferIndex] = unchecked((ulong)value);
-                readEventCount++;
+                for (var t = 0; t < tracksToIterate; t++)
+                {
+                    var realIndex = (l + readOffsetLines) * realTracks + t + readOffsetTracks;
+                    var bufferIndex = (l + bufferOffsetLines) * bufferTracks + t + bufferOffsetTracks;
+                    var value = Marshal.ReadInt64(ptr, realIndex * sizeof(ulong));
+                    buffer[bufferIndex] = unchecked((ulong)value);
+                    readEventCount++;
+                }
             }
 
             return readEventCount;
@@ -240,34 +267,53 @@ namespace SunSharp.Native
             int? maxTracks = null, int? maxLines = null)
         {
             if (writeOffsetLines < 0)
-                throw new ArgumentOutOfRangeException(nameof(writeOffsetLines), writeOffsetLines,
-                    "Value cannot be negative.");
+            {
+                throw new ArgumentOutOfRangeException(nameof(writeOffsetLines), writeOffsetLines, "Value cannot be negative.");
+            }
+
             if (writeOffsetTracks < 0)
-                throw new ArgumentOutOfRangeException(nameof(writeOffsetTracks), writeOffsetTracks,
-                    "Value cannot be negative.");
+            {
+                throw new ArgumentOutOfRangeException(nameof(writeOffsetTracks), writeOffsetTracks, "Value cannot be negative.");
+            }
+
             if (bufferOffsetLines < 0)
-                throw new ArgumentOutOfRangeException(nameof(bufferOffsetLines), bufferOffsetLines,
-                    "Value cannot be negative.");
+            {
+                throw new ArgumentOutOfRangeException(nameof(bufferOffsetLines), bufferOffsetLines, "Value cannot be negative.");
+            }
+
             if (bufferOffsetTracks < 0)
-                throw new ArgumentOutOfRangeException(nameof(bufferOffsetTracks), bufferOffsetTracks,
-                    "Value cannot be negative.");
+            {
+                throw new ArgumentOutOfRangeException(nameof(bufferOffsetTracks), bufferOffsetTracks, "Value cannot be negative.");
+            }
+
             if (bufferTracks < 0)
+            {
                 throw new ArgumentOutOfRangeException(nameof(bufferTracks), bufferTracks, "Value cannot be negative.");
+            }
+
             if (bufferLines < 0)
+            {
                 throw new ArgumentOutOfRangeException(nameof(bufferLines), bufferLines, "Value cannot be negative.");
+            }
 
             if (bufferLines * bufferTracks != buffer.Length)
-                throw new ArgumentException(
-                    $"Size of {nameof(buffer)} ({buffer.Length}) is not equal to {nameof(bufferTracks)} * {nameof(bufferLines)} ({bufferTracks * bufferLines}).");
+            {
+                throw new ArgumentException($"Size of {nameof(buffer)} ({buffer.Length}) is not equal to {nameof(bufferTracks)} * {nameof(bufferLines)} ({bufferTracks * bufferLines}).");
+            }
 
             var realLines = GetPatternLines(slotId, patternId);
             if (realLines == 0)
+            {
                 return 0;
+            }
+
             var realTracks = GetPatternTracks(slotId, patternId);
 
             var ptr = _lib.sv_get_pattern_data(slotId, patternId);
             if (ptr == IntPtr.Zero)
+            {
                 return 0;
+            }
 
             var linesToIterate = Math.Min(bufferLines - bufferOffsetLines, realLines - writeOffsetLines);
             linesToIterate = Math.Min(linesToIterate, maxLines ?? int.MaxValue);
@@ -276,13 +322,15 @@ namespace SunSharp.Native
 
             var writeEventCount = 0;
             for (var l = 0; l < linesToIterate; l++)
-            for (var t = 0; t < tracksToIterate; t++)
             {
-                var realIndex = (l + writeOffsetLines) * realTracks + t + writeOffsetTracks;
-                var bufferIndex = (l + bufferOffsetLines) * bufferTracks + t + bufferOffsetTracks;
-                var value = buffer[bufferIndex].Data;
-                Marshal.WriteInt64(ptr, realIndex * sizeof(ulong), unchecked((long)value));
-                writeEventCount++;
+                for (var t = 0; t < tracksToIterate; t++)
+                {
+                    var realIndex = (l + writeOffsetLines) * realTracks + t + writeOffsetTracks;
+                    var bufferIndex = (l + bufferOffsetLines) * bufferTracks + t + bufferOffsetTracks;
+                    var value = buffer[bufferIndex].Data;
+                    Marshal.WriteInt64(ptr, realIndex * sizeof(ulong), unchecked((long)value));
+                    writeEventCount++;
+                }
             }
 
             return writeEventCount;

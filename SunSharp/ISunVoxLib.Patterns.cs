@@ -29,7 +29,7 @@
         /// <summary>
         /// Find pattern by name.
         /// </summary>
-        /// <returns>Pattern Id, or <see langword="null" /> if pattern was not found.</returns>
+        /// <returns>Pattern identifier, or <see langword="null" /> if pattern was not found.</returns>
         int? FindPattern(int slotId, string name);
 
         int GetPatternEventValue(int slotId, int patternId, int track, int line, Column column);
@@ -76,7 +76,7 @@
         void SetPatternData(int slotId, int patternId, PatternEvent[] data, int tracks, int lines);
 
         /// <summary>
-        /// Allows to read a section or all of pattern data into a buffer.
+        /// Allows to read a section or all pattern data into a buffer.
         /// <br />
         /// Use <see cref="ISunVoxLib.LockSlot" /> or an alternative!
         /// </summary>

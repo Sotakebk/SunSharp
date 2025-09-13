@@ -2,12 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 
-//using SunSharp.ObjectWrapper;
-
 namespace SunSharp.Data
 {
     public static class DataReader
     {
+        // TODO
         //public static SongData ReadSongData(Slot slot)
         //{
         //    return ReadSongData(slot.Library, slot.Id);
@@ -50,7 +49,9 @@ namespace SunSharp.Data
             for (var i = 0; i < moduleCount; i++)
             {
                 if (!lib.GetModuleExists(slotId, i))
+                {
                     continue;
+                }
 
                 var m = ReadModule(lib, slotId, i);
                 modules.Add(m);
@@ -124,7 +125,9 @@ namespace SunSharp.Data
             for (var i = 0; i < patternCount; i++)
             {
                 if (!lib.GetPatternExists(slotId, i))
+                {
                     continue;
+                }
 
                 var p = ReadPattern(lib, slotId, i);
                 patterns.Add(p);
@@ -141,14 +144,14 @@ namespace SunSharp.Data
             var isLinear = true;
             var hasDynamicTempo = false;
 
-            foreach (var @event in data)
+            foreach (var patternEvent in data)
             {
-                isDestructive = @event.Effect.IsDestructive() || isDestructive;
-                isLinear = isLinear && !@event.Effect.IsNonLinear();
-                hasDynamicTempo = hasDynamicTempo || @event.Effect.ChangesTempo();
+                isDestructive = isDestructive || patternEvent.Effect.IsDestructive();
+                isLinear = isLinear && !patternEvent.Effect.IsNonLinear();
+                hasDynamicTempo = hasDynamicTempo || patternEvent.Effect.ChangesTempo();
             }
 
-            var patternData = new PatternData
+            return new PatternData
             {
                 Id = patternId,
                 Name = lib.GetPatternName(slotId, patternId),
@@ -164,7 +167,6 @@ namespace SunSharp.Data
 
                 Data = data
             };
-            return patternData;
         }
 
         #endregion pattern data

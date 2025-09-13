@@ -1,9 +1,7 @@
 ﻿using System.Linq;
-using FluentAssertions;
-using NUnit.Framework;
+using AutoFixture;
+using AutoFixture.NUnit4;
 using SunSharp.Data;
-using TddXt.AnyRoot.Numbers;
-using static TddXt.AnyRoot.Root;
 
 namespace SunSharp.IntegrationTests.SunVoxLibTests;
 
@@ -26,25 +24,25 @@ internal class PatternTests : BaseIntegrationTests
         lib.UnlockSlot(slotId);
         lib.CloseSlot(slotId);
 
-        data.Patterns.Count.Should().Be(1);
-        data.Patterns.First().Data.All(e => e.Data.Equals(0)).Should().BeTrue();
+        data.Patterns.Should().ContainSingle();
+        data.Patterns.First().Data.Should().OnlyContain(e => e == 0);
     }
 
-    [Test]
-    public void PatternCreationCloningThenReadingPropertiesWorksAsExpected()
+    [Test, AutoData]
+    public void PatternCreationCloningThenReadingPropertiesWorksAsExpected(int x, int y)
     {
         const int slotId = 0;
 
         var firstPattern = new PatternData
         {
-            Data = new PatternEvent[]
-            {
+            Data =
+            [
                 1, 0, 0, 0,
                 2, 2, 0, 0,
                 0, 3, 3, 0,
                 0, 0, 4, 4,
                 0, 0, 0, 5
-            },
+            ],
             Lines = 5,
             Tracks = 4,
             Position = (0, 0),
@@ -53,20 +51,20 @@ internal class PatternTests : BaseIntegrationTests
 
         var secondPattern = new PatternData
         {
-            Data = new PatternEvent[]
-            {
+            Data =
+            [
                 0, 1,
                 2, 0,
                 0, 3,
                 4, 0
-            },
+            ],
             Lines = 4,
             Tracks = 2,
             Position = (5, 4),
             Name = "Another"
         };
 
-        var clonePosition = (X: Any.Integer(), Y: Any.Integer());
+        var fixture = new Fixture();
 
         var lib = GetLoadedLibrary();
 
@@ -75,12 +73,12 @@ internal class PatternTests : BaseIntegrationTests
 
         var onePatternId = lib.CreatePattern(slotId, firstPattern.Position.X, firstPattern.Position.Y,
             firstPattern.Tracks, firstPattern.Lines, name: firstPattern.Name);
-        lib.SetPatternData(slotId, onePatternId, firstPattern.Data.ToArray(), firstPattern.Tracks, firstPattern.Lines);
+        lib.SetPatternData(slotId, onePatternId, [.. firstPattern.Data], firstPattern.Tracks, firstPattern.Lines);
 
-        var clonePatternId = lib.ClonePattern(slotId, onePatternId, clonePosition.X, clonePosition.Y);
+        var clonePatternId = lib.ClonePattern(slotId, onePatternId, x, y);
         var anotherPatternId = lib.CreatePattern(slotId, secondPattern.Position.X, secondPattern.Position.Y,
             secondPattern.Tracks, secondPattern.Lines, name: secondPattern.Name);
-        lib.SetPatternData(slotId, anotherPatternId, secondPattern.Data.ToArray(), secondPattern.Tracks,
+        lib.SetPatternData(slotId, anotherPatternId, [.. secondPattern.Data], secondPattern.Tracks,
             secondPattern.Lines);
 
         var data = DataReader.ReadSongData(lib, slotId);
@@ -112,9 +110,9 @@ internal class PatternTests : BaseIntegrationTests
                 .Excluding(p => p.IsMuted)
                 .Excluding(p => p.HasDynamicTempo)
                 .Excluding(p => p.Position));
-        data.Patterns.FirstOrDefault(p => p.Id == clonePatternId)?.Position
-            .Should()
-            .BeEquivalentTo(clonePosition);
+        data.Patterns.Should()
+            .Contain(p => p.Position.X == x &&
+                          p.Position.Y == y);
 
         // clone doesn't exist
         dataAfterRemoval.Patterns.FirstOrDefault(p => p.Id == clonePatternId).Should().Be(null);

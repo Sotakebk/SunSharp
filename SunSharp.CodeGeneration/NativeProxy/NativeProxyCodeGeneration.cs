@@ -1,5 +1,4 @@
 ﻿using System.IO;
-using NUnit.Framework;
 using SunSharp.CodeGeneration.CodeGenerationTools;
 
 namespace SunSharp.CodeGeneration.NativeProxy;
@@ -18,6 +17,6 @@ internal class NativeProxyCodeGeneration
 
         TestContext.Out.Write(newSourceCode);
 
-        Assert.That(newSourceCode, Is.EqualTo(oldSourceCode));
+        newSourceCode.Should().BeEquivalentTo(oldSourceCode);
     }
 }

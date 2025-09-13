@@ -19,7 +19,7 @@
         FineSlideDown = 0x12,
         SetBypassSoloMute = 0x13,
         ResetBypassSoloMute = 0x14,
-        ChangeModuleFinetune = 0x15,
+        ChangeModuleFineTune = 0x15,
         Retrigger = 0x19,
         FineVelocitySlide = 0x1A,
         CutNote = 0x1C,

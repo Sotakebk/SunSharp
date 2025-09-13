@@ -17,7 +17,7 @@
         /// <summary>
         /// Find module by name.
         /// </summary>
-        /// <returns>Id of found module, or <see langword="null" /> if it was not found.</returns>
+        /// <returns>Identifier of found module, or <see langword="null" /> if it was not found.</returns>
         int? FindModule(int slotId, string name);
 
         (byte r, byte g, byte b) GetModuleColor(int slotId, int moduleId);
@@ -97,7 +97,7 @@
         /// <summary>
         /// load a module or a sample. Supported file formats: sunsynth, xi, wav, aiff.
         /// </summary>
-        /// <returns>CreatedmoduleId Id.</returns>
+        /// <returns>Created module identifier..</returns>
         int LoadModule(int slotId, string path, int x = 0, int y = 0, int z = 0);
 
         /// <summary>

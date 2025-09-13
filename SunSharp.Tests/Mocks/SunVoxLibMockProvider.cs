@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using NSubstitute;
 using SunSharp.Data;
 
 namespace SunSharp.Tests.Mocks;
@@ -22,9 +21,9 @@ public class SunVoxLibMockProvider
         _mock.GetCurrentLineWithTenthPart(slotId).Returns(songData.CurrentLine * 10);
         _mock.GetSongLengthInLines(slotId).Returns(songData.Lines);
 
-        WithModuleData(slotId, songData.Modules.ToArray());
+        WithModuleData(slotId, [.. songData.Modules]);
 
-        WithPatternData(slotId, songData.Patterns.ToArray());
+        WithPatternData(slotId, [.. songData.Patterns]);
 
         return this;
     }
@@ -62,8 +61,8 @@ public class SunVoxLibMockProvider
             _mock.GetModulePosition(slotId, module.Id).Returns(module.Position);
             _mock.GetModuleFlags(slotId, module.Id).Returns(new ModuleFlags(module.Flags));
             _mock.GetModuleType(slotId, module.Id).Returns(module.Type);
-            _mock.GetModuleInputs(slotId, module.Id).Returns(module.Inputs.ToArray());
-            _mock.GetModuleOutputs(slotId, module.Id).Returns(module.Outputs.ToArray());
+            _mock.GetModuleInputs(slotId, module.Id).Returns([.. module.Inputs]);
+            _mock.GetModuleOutputs(slotId, module.Id).Returns([.. module.Outputs]);
 
             _mock.GetModuleControllerCount(slotId, module.Id).Returns(module.Controllers.Count);
             foreach (var controller in module.Controllers)
