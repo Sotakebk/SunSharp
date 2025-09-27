@@ -1,7 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Collections.Immutable;
+﻿using System.Collections.Immutable;
 
-namespace SunSharp.CodeGeneration.NativeProxy;
+namespace SunSharp.CodeGeneration.Generators.NativeProxy;
 
 public class TypeNameTranslation
 {

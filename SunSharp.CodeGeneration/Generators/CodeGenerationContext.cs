@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace SunSharp.CodeGeneration.CodeGenerationTools;
+namespace SunSharp.CodeGeneration.Generators;
 
 public class CodeGenerationContext
 {

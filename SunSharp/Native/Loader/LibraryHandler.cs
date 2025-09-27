@@ -17,7 +17,7 @@ namespace SunSharp.Native.Loader
         void UnloadLibrary();
 
         /// <summary>
-        /// A method that returns a delegate from a function pointer, found in the loaded library by name. <br />
+        /// A method that returns a delegate from a function pointer, found in the loaded library by name.
         /// Should fail immediately if the method is not found.
         /// </summary>
         /// <param name="name"></param>

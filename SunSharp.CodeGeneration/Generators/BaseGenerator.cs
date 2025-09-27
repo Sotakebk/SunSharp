@@ -1,8 +1,10 @@
-﻿namespace SunSharp.CodeGeneration.CodeGenerationTools;
+﻿namespace SunSharp.CodeGeneration.Generators;
 
 public abstract class BaseGenerator
 {
     protected CodeGenerationContext Context = new();
+
+    public abstract string FilePath { get; }
 
     protected virtual void AddIndent(Action action)
     {

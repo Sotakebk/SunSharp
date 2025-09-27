@@ -10,8 +10,8 @@
 
   <ItemGroup>
     <PackageReference Include="AutoFixture.NUnit4" Version="4.19.0" />
-    <PackageReference Include="AwesomeAssertions" Version="9.1.0" />
-    <PackageReference Include="AwesomeAssertions.Analyzers" Version="9.0.3">
+    <PackageReference Include="AwesomeAssertions" Version="9.2.0" />
+    <PackageReference Include="AwesomeAssertions.Analyzers" Version="9.0.5">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>

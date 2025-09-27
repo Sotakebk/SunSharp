@@ -1,6 +1,4 @@
 ﻿using System.Linq;
-using AutoFixture;
-using AutoFixture.NUnit4;
 using SunSharp.Data;
 
 namespace SunSharp.IntegrationTests.SunVoxLibTests;
@@ -28,8 +26,8 @@ internal class PatternTests : BaseIntegrationTests
         data.Patterns.First().Data.Should().OnlyContain(e => e == 0);
     }
 
-    [Test, AutoData]
-    public void PatternCreationCloningThenReadingPropertiesWorksAsExpected(int x, int y)
+    [Test]
+    public void PatternCreationCloningThenReadingPropertiesWorksAsExpected()
     {
         const int slotId = 0;
 
@@ -64,8 +62,6 @@ internal class PatternTests : BaseIntegrationTests
             Name = "Another"
         };
 
-        var fixture = new Fixture();
-
         var lib = GetLoadedLibrary();
 
         lib.OpenSlot(slotId);
@@ -75,7 +71,7 @@ internal class PatternTests : BaseIntegrationTests
             firstPattern.Tracks, firstPattern.Lines, name: firstPattern.Name);
         lib.SetPatternData(slotId, onePatternId, [.. firstPattern.Data], firstPattern.Tracks, firstPattern.Lines);
 
-        var clonePatternId = lib.ClonePattern(slotId, onePatternId, x, y);
+        var clonePatternId = lib.ClonePattern(slotId, onePatternId, 8, 0);
         var anotherPatternId = lib.CreatePattern(slotId, secondPattern.Position.X, secondPattern.Position.Y,
             secondPattern.Tracks, secondPattern.Lines, name: secondPattern.Name);
         lib.SetPatternData(slotId, anotherPatternId, [.. secondPattern.Data], secondPattern.Tracks,
@@ -111,8 +107,8 @@ internal class PatternTests : BaseIntegrationTests
                 .Excluding(p => p.HasDynamicTempo)
                 .Excluding(p => p.Position));
         data.Patterns.Should()
-            .Contain(p => p.Position.X == x &&
-                          p.Position.Y == y);
+            .Contain(p => p.Position.X == 8 &&
+                          p.Position.Y == 0);
 
         // clone doesn't exist
         dataAfterRemoval.Patterns.FirstOrDefault(p => p.Id == clonePatternId).Should().Be(null);

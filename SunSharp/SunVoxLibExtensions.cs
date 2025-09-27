@@ -21,7 +21,9 @@ namespace SunSharp
             finally
             {
                 if (entered)
+                {
                     lib.UnlockSlot(slotId);
+                }
             }
         }
 
@@ -38,7 +40,9 @@ namespace SunSharp
             finally
             {
                 if (entered)
+                {
                     lib.UnlockSlot(slotId);
+                }
             }
         }
 
@@ -55,7 +59,9 @@ namespace SunSharp
             finally
             {
                 if (entered)
+                {
                     lib.UnlockSlot(slotId);
+                }
             }
         }
 
@@ -73,7 +79,9 @@ namespace SunSharp
             finally
             {
                 if (entered)
+                {
                     lib.UnlockSlot(slotId);
+                }
             }
         }
 
@@ -91,7 +99,9 @@ namespace SunSharp
             finally
             {
                 if (entered)
+                {
                     lib.UnlockSlot(slotId);
+                }
             }
         }
 

@@ -1,14 +1,14 @@
-﻿using System.Linq;
-using System.Reflection;
-using SunSharp.CodeGeneration.CodeGenerationTools;
+﻿using System.Reflection;
 using SunSharp.Native;
 using SunSharp.Native.Loader;
-using static SunSharp.CodeGeneration.NativeProxy.TypeNameTranslation;
+using static SunSharp.CodeGeneration.Generators.NativeProxy.TypeNameTranslation;
 
-namespace SunSharp.CodeGeneration.NativeProxy;
+namespace SunSharp.CodeGeneration.Generators.NativeProxy;
 
 public sealed class NativeProxyGenerator : BaseGenerator
 {
+    public override string FilePath => PathHelper.GetProjectFilePath("SunSharp/Native/Loader/NativeProxy.ISunVoxLibC.g.cs");
+
     private DelegateDefinition[] _delegateDefinitions = [];
     private MethodDefinition[] _methodDefinitions = [];
 

@@ -74,8 +74,8 @@ public class NoteTests
     public void NoteConstructorFromOctaveAndNameShouldThrowOnInvalidArguments(NoteName name, int octave)
     {
         var action = () => _ = new Note(name, octave);
-            action.Invoking(a => a())
-            .Should().Throw<ArgumentOutOfRangeException>();
+        action.Invoking(a => a())
+        .Should().Throw<ArgumentOutOfRangeException>();
     }
 
     [TestCase(NoteName.Other)]

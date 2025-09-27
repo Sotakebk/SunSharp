@@ -16,16 +16,14 @@ namespace SunSharp
 
         public SunVoxException()
         {
-
         }
 
         public SunVoxException(string message) : base(message)
         {
-
         }
+
         public SunVoxException(string message, Exception innerException) : base(message, innerException)
         {
-
         }
 
         public SunVoxException(uint code, string? method = null)

@@ -74,7 +74,7 @@ public class SunVoxLibNativeWrapperAudioCallbackTests
         returnedValue.Should().Be(expectedValue);
     }
 
-    #endregion
+    #endregion input float, output short
 
     #region input short, output float
 
@@ -109,7 +109,7 @@ public class SunVoxLibNativeWrapperAudioCallbackTests
         returnedValue.Should().Be(expectedValue);
     }
 
-    #endregion
+    #endregion input short, output float
 
     #region output only, float, mono
 

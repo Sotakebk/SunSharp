@@ -21,7 +21,7 @@ namespace SunSharp
             (FineTune, RelativeNote) = Helper.UnpackTwoSignedShorts(value);
         }
 
-        public readonly override bool Equals(object? obj)
+        public override readonly bool Equals(object? obj)
         {
             if (obj is FineTunePair other)
                 return Equals(other);
@@ -34,12 +34,12 @@ namespace SunSharp
             return FineTune == other.FineTune && RelativeNote == other.RelativeNote;
         }
 
-        public readonly override int GetHashCode()
+        public override readonly int GetHashCode()
         {
             return HashCode.Combine(FineTune, RelativeNote);
         }
 
-        public readonly override string ToString()
+        public override readonly string ToString()
         {
             return $"Fine-tune: {FineTune}, relative note: {RelativeNote}.";
         }
