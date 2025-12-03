@@ -7,8 +7,17 @@ namespace SunSharp.Data
     public class SongData : IDeepCopyable<SongData>
     {
         public string? Name { get; set; }
+
+        /// <summary>
+        /// Beats per minute.
+        /// </summary>
         public int BPM { get; set; }
+
+        /// <summary>
+        /// Ticks per line.
+        /// </summary>
         public int TPL { get; set; }
+
         public uint Lines { get; set; }
         public int CurrentLine { get; set; }
         public int FirstLine { get; set; }

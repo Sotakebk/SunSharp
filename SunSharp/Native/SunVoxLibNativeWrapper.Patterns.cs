@@ -63,6 +63,7 @@ namespace SunSharp.Native
 
             var tracks = GetPatternTracks(slotId, patternId);
 
+            // memory managed by SunVox
             var ptr = _lib.sv_get_pattern_data(slotId, patternId);
             if (ptr == IntPtr.Zero)
                 return null;
@@ -178,6 +179,7 @@ namespace SunSharp.Native
             // should throw an exception if the pattern in question does not exist
             SetPatternSize(slotId, patternId, tracks, lines);
 
+            // memory managed by SunVox
             var ptr = _lib.sv_get_pattern_data(slotId, patternId);
             if (ptr == IntPtr.Zero)
                 throw new SunVoxException(0, $"{nameof(_lib.sv_get_pattern_data)} returned nullptr.");
@@ -234,6 +236,7 @@ namespace SunSharp.Native
 
             var realTracks = GetPatternTracks(slotId, patternId);
 
+            // memory managed by SunVox
             var ptr = _lib.sv_get_pattern_data(slotId, patternId);
             if (ptr == IntPtr.Zero)
             {
@@ -309,6 +312,7 @@ namespace SunSharp.Native
 
             var realTracks = GetPatternTracks(slotId, patternId);
 
+            // memory managed by SunVox
             var ptr = _lib.sv_get_pattern_data(slotId, patternId);
             if (ptr == IntPtr.Zero)
             {

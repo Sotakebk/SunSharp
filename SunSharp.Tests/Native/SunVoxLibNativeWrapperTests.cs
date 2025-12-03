@@ -67,29 +67,29 @@ public class SunVoxLibNativeWrapperTests
     }
 
     [Test, AutoData]
-    public void GetAutostopShouldReturnValue(bool autostop, int slotId)
+    public void GetAutomaticStopShouldReturnValue(bool automaticStop, int slotId)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
-        library.sv_get_autostop(Arg.Any<int>()).Returns(autostop ? 1 : 0);
+        library.sv_get_autostop(Arg.Any<int>()).Returns(automaticStop ? 1 : 0);
 
         // when
-        var value = wrapper.GetAutostop(slotId);
+        var value = wrapper.GetAutomaticStop(slotId);
 
         // then
         library.Received(1).sv_get_autostop(slotId);
-        value.Should().Be(autostop);
+        value.Should().Be(automaticStop);
     }
 
     [Test, AutoData]
-    public void GetAutostopShouldThrowOnInvalidValue(int slotId)
+    public void GetAutomaticStopShouldThrowOnInvalidValue(int slotId)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
         library.sv_get_autostop(Arg.Any<int>()).Returns(ErrorResponseCode);
 
         // when - then
-        wrapper.Invoking(w => w.GetAutostop(slotId)).Should().Throw<SunVoxException>();
+        wrapper.Invoking(w => w.GetAutomaticStop(slotId)).Should().Throw<SunVoxException>();
 
         // then
         library.Received(1).sv_get_autostop(slotId);
@@ -611,7 +611,7 @@ public class SunVoxLibNativeWrapperTests
         library.sv_pause(Arg.Any<int>()).Returns(0);
 
         // when
-        wrapper.PauseStream(slotId);
+        wrapper.PauseAudioStream(slotId);
 
         // then
         library.Received(1).sv_pause(slotId);
@@ -625,7 +625,7 @@ public class SunVoxLibNativeWrapperTests
         library.sv_pause(Arg.Any<int>()).Returns(ErrorResponseCode);
 
         // when - then
-        wrapper.Invoking(w => w.PauseStream(slotId)).Should().Throw<SunVoxException>();
+        wrapper.Invoking(w => w.PauseAudioStream(slotId)).Should().Throw<SunVoxException>();
 
         // then
         library.Received(1).sv_pause(slotId);
@@ -667,7 +667,7 @@ public class SunVoxLibNativeWrapperTests
         library.sv_resume(Arg.Any<int>()).Returns(0);
 
         // when
-        wrapper.ResumeStream(slotId);
+        wrapper.ResumeAudioStream(slotId);
 
         // then
         library.Received(1).sv_resume(slotId);
@@ -681,7 +681,7 @@ public class SunVoxLibNativeWrapperTests
         library.sv_resume(Arg.Any<int>()).Returns(ErrorResponseCode);
 
         // when - then
-        wrapper.Invoking(w => w.ResumeStream(slotId)).Should().Throw<SunVoxException>();
+        wrapper.Invoking(w => w.ResumeAudioStream(slotId)).Should().Throw<SunVoxException>();
 
         // then
         library.Received(1).sv_resume(slotId);
@@ -816,7 +816,7 @@ public class SunVoxLibNativeWrapperTests
         var slotId = fixture.Create<int>();
 
         // when
-        wrapper.SetAutoStop(slotId, autoStop);
+        wrapper.SetAutomaticStop(slotId, autoStop);
 
         // then
         library.Received(1).sv_set_autostop(slotId, autoStop ? 1 : 0);
@@ -830,7 +830,7 @@ public class SunVoxLibNativeWrapperTests
         library.sv_set_autostop(Arg.Any<int>(), Arg.Any<int>()).Returns(-1);
 
         // when - then
-        wrapper.Invoking(w => w.SetAutoStop(slotId, false)).Should().Throw<SunVoxException>();
+        wrapper.Invoking(w => w.SetAutomaticStop(slotId, false)).Should().Throw<SunVoxException>();
 
         // then
         library.Received(1).sv_set_autostop(slotId, 0);

@@ -105,6 +105,7 @@ namespace SunSharp.Native
         /// <inheritdoc />
         public string? GetModuleControllerName(int slotId, int moduleId, int controllerId)
         {
+            // memory managed by SunVox
             var ptr = _lib.sv_get_module_ctl_name(slotId, moduleId, controllerId);
             return Marshal.PtrToStringAnsi(ptr);
         }
@@ -158,20 +159,15 @@ namespace SunSharp.Native
             if (!moduleFlags.Exists || inputCount == 0)
                 return Array.Empty<int>();
 
+            // memory managed by SunVox
             var ptr = _lib.sv_get_module_inputs(slotId, moduleId);
-            try
-            {
-                return Helper.CopyIntArraySkipNegativeOnes(ptr, inputCount);
-            }
-            finally
-            {
-                Marshal.FreeHGlobal(ptr);
-            }
+            return Helper.CopyIntArraySkipNegativeOnes(ptr, inputCount);
         }
 
         /// <inheritdoc />
         public string? GetModuleName(int slotId, int moduleId)
         {
+            // memory managed by SunVox
             var ptr = _lib.sv_get_module_name(slotId, moduleId);
             return Marshal.PtrToStringAnsi(ptr);
         }
@@ -184,15 +180,9 @@ namespace SunSharp.Native
             if (!moduleFlags.Exists || outputCount == 0)
                 return Array.Empty<int>();
 
+            // memory managed by SunVox
             var ptr = _lib.sv_get_module_outputs(slotId, moduleId);
-            try
-            {
-                return Helper.CopyIntArraySkipNegativeOnes(ptr, outputCount);
-            }
-            finally
-            {
-                Marshal.FreeHGlobal(ptr);
-            }
+            return Helper.CopyIntArraySkipNegativeOnes(ptr, outputCount);
         }
 
         /// <inheritdoc />

@@ -167,7 +167,7 @@ namespace SunSharp
                 throw new ArgumentOutOfRangeException(nameof(name), name, "In the tenth octave, only notes up to F# are supported.");
             }
 
-            Value = (byte)(1 + name + octave * 12);
+            Value = unchecked((byte)(1 + name + octave * 12));
         }
 
         public static implicit operator Note(byte value)

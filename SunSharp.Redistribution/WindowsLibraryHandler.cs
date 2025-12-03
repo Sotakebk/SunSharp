@@ -46,11 +46,13 @@ namespace SunSharp.Redistribution
                 var ptr = _ptr;
                 _ptr = IntPtr.Zero;
                 var value = FreeLibrary(ptr);
-                if (value == 0)
+                if (value != 0)
                 {
-                    var error = Marshal.GetHRForLastWin32Error();
-                    throw new LibraryLoadingException($"Failed to unload SunVoxLib with error error '{error:X8}'.");
+                    return;
                 }
+
+                var error = Marshal.GetHRForLastWin32Error();
+                throw new LibraryLoadingException($"Failed to unload SunVoxLib with error error '{error:X8}'.");
             }
         }
 
@@ -65,14 +67,13 @@ namespace SunSharp.Redistribution
                     throw new LibraryLoadingException("SunVoxLib is not loaded.");
 
                 var ptr = GetProcAddress(_ptr, name);
-                if (ptr == IntPtr.Zero)
+                if (ptr != IntPtr.Zero)
                 {
-                    var error = Marshal.GetHRForLastWin32Error();
-                    throw new LibraryLoadingException(
-                        $"Failed to load SunVoxLib function '{name}' with error '{error:X8}'.");
+                    return Marshal.GetDelegateForFunctionPointer(ptr, delegateType);
                 }
 
-                return Marshal.GetDelegateForFunctionPointer(ptr, delegateType);
+                var error = Marshal.GetHRForLastWin32Error();
+                throw new LibraryLoadingException($"Failed to load SunVoxLib function '{name}' with error '{error:X8}'.");
             }
         }
 

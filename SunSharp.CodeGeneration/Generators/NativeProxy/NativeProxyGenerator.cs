@@ -1,80 +1,44 @@
-﻿using System.Reflection;
-using SunSharp.Native;
+﻿using SunSharp.CodeGeneration.Logic;
 using SunSharp.Native.Loader;
-using static SunSharp.CodeGeneration.Generators.NativeProxy.TypeNameTranslation;
 
 namespace SunSharp.CodeGeneration.Generators.NativeProxy;
 
-public sealed class NativeProxyGenerator : BaseGenerator
+public sealed class NativeInterfaceGenerator : BaseGenerator
 {
     public override string FilePath => PathHelper.GetProjectFilePath("SunSharp/Native/Loader/NativeProxy.ISunVoxLibC.g.cs");
 
-    private DelegateDefinition[] _delegateDefinitions = [];
-    private MethodDefinition[] _methodDefinitions = [];
-
-    private static string GetDelegateNameCode(DelegateDefinition definition)
+    private static string GetDelegateNameCode(ParsedFunction function)
     {
-        var @out = TranslateToCapitalizedName(definition.ReturnType);
-        var @in = string.Join(null, definition.Parameters.Select(static t => TranslateToCapitalizedName(t)));
-        @in = @in.Length == 0 ? "Void" : @in;
-        return $"Returns{@out}Takes{@in}";
+        var outName = TypeTranslator.TypeToCode(function.CSharpReturnType);
+        var inName = string.Join(null, function.Parameters.Select(p => TypeTranslator.TypeToCode(p.CSharpType)));
+        if (inName.Length == 0) inName = "Void";
+        return $"Returns{outName}Takes{inName}";
     }
 
-    private static string GetDelegateDefinitionCode(DelegateDefinition definition)
-    {
-        var returnType = TranslateToFriendlyName(definition.ReturnType);
-        var friendlyArguments = string.Join(", ",
-            definition.Parameters.Select(static (t, i) => $"{TranslateToFriendlyName(t)} arg{i + 1}"));
+    private record DelegateDefinitionCode(string DelegateName, string Code);
 
-        return $"private delegate {returnType} {GetDelegateNameCode(definition)}({friendlyArguments});";
+    private static DelegateDefinitionCode GetDelegateDefinitionCode(ParsedFunction function)
+    {
+        var ret = TypeTranslator.TypeToCode(function.CSharpReturnType);
+        var args = string.Join(", ", function.Parameters.Select((p, i) => $"{TypeTranslator.TypeToCode(p.CSharpType)} arg{i + 1}"));
+        var name = GetDelegateNameCode(function);
+        return new DelegateDefinitionCode(name, $"private delegate {ret} {name}({args});");
     }
 
-    private static string GetMethodDefinitionCode(MethodDefinition definition)
+    private static string GetInterfaceMethodCode(ParsedFunction function)
     {
-        var returnType = TranslateToFriendlyName(definition.CorrespondingDelegate.ReturnType);
-
-        var pars = definition.MethodInfo.GetParameters()
-            .Select(static p => $"{TranslateToFriendlyName(p.ParameterType)} {p.Name}")
-            .ToArray();
-        var joinedPars = string.Join(", ", pars);
-        var forwardedPars = definition.MethodInfo.GetParameters().Select(static p => p.Name);
-        var joinedForwardedPars = string.Join(", ", forwardedPars);
-        return
-            $"{returnType} {nameof(ISunVoxLibC)}.{definition.MethodInfo.Name}({joinedPars}) => {definition.MethodInfo.Name}?.Invoke({joinedForwardedPars}) ?? throw GetNoDelegateException();";
-    }
-
-    private static string GetDelegateForMethodDefinitionCode(MethodDefinition methodDefinition)
-    {
-        return
-            $"private {GetDelegateNameCode(methodDefinition.CorrespondingDelegate)}? {methodDefinition.MethodInfo.Name};";
-    }
-
-    private void ReadData()
-    {
-        var type = typeof(ISunVoxLibC);
-
-        _delegateDefinitions = [.. type.GetMethods()
-            .Select(static m =>
-                new DelegateDefinition(m.ReturnType,
-                    [..
-                        m.GetParameters().Select(static p => p.ParameterType)
-                    ])
-            )
-            .DistinctBy(GetDelegateNameCode)];
-
-        _methodDefinitions = [.. type.GetMethods()
-            .Select(static m => new MethodDefinition(m,
-                new DelegateDefinition(m.ReturnType,
-                    [..
-                        m.GetParameters().Select(static p => p.ParameterType)]
-                    ))
-            )
-        ];
+        var ret = TypeTranslator.TypeToCode(function.CSharpReturnType);
+        var pars = string.Join(", ", function.Parameters.Select(p => $"{TypeTranslator.TypeToCode(p.CSharpType)} {p.Name}"));
+        var forwarded = string.Join(", ", function.Parameters.Select(p => p.Name));
+        return $"{ret} ISunVoxLibC.{function.Name}({pars}) => {function.Name}?.Invoke({forwarded}) ?? throw GetNoDelegateException();";
     }
 
     protected override string GenerateBody()
     {
-        ReadData();
+        var parsed = SunVoxHeaderParser.Parse();
+        var functions = parsed.Functions
+            .OrderBy(f => f.Name)
+            .ToArray();
 
         AppendLineNoTab("#pragma warning disable CS0649");
         AppendLineNoTab("#nullable enable");
@@ -85,91 +49,92 @@ public sealed class NativeProxyGenerator : BaseGenerator
         AppendLine("{");
         AddIndent(() =>
         {
-            AppendLine($"public sealed partial class {nameof(Native.Loader.NativeProxy)} : {nameof(ISunVoxLibC)}");
+            AppendLine($"public sealed partial class {nameof(Native.Loader.NativeProxy)} : ISunVoxLibC");
             AppendLine("{");
             AddIndent(() =>
             {
                 AppendLine("#region delegate definitions");
                 AppendLine();
-
-                foreach (var d in _delegateDefinitions.OrderBy(static d => GetDelegateNameCode(d)))
-                    AppendDelegateDefinition(d);
-
+                AppendDelegateDefinitions(functions);
+                AppendLine();
                 AppendLine("#endregion delegate definitions");
                 AppendLine();
                 AppendLine("#region delegates");
                 AppendLine();
-
-                foreach (var m in _methodDefinitions.OrderBy(static m => m.MethodInfo.Name))
-                    AppendDelegateForMethodDefinition(m);
-
+                foreach (var f in functions)
+                {
+                    AppendLine($"private {GetDelegateNameCode(f)}? {f.Name};");
+                    AppendLine();
+                }
                 AppendLine("#endregion delegates");
                 AppendLine();
                 AppendLine("#region interface");
                 AppendLine();
-                foreach (var m in _methodDefinitions.OrderBy(static m => m.MethodInfo.Name)) AppendMethodDefinition(m);
-
+                foreach (var f in functions)
+                {
+                    AppendLine(GetInterfaceMethodCode(f));
+                    AppendLine();
+                }
                 AppendLine("#endregion interface");
                 AppendLine();
-                AppendLoadMethod();
+                AppendLoadMethod(functions);
                 AppendLine();
-                AppendUnloadMethod();
+                AppendUnloadMethod(functions);
             });
             AppendLine("}");
         });
         AppendLine("}");
-
         return Context.GetBuiltString();
     }
 
-    private void AppendUnloadMethod()
+    private void AppendDelegateDefinitions(ParsedFunction[] functions)
     {
-        AppendLine("private void UnloadInternal()");
-        AppendLine("{");
-        AddIndent(() =>
+        var uniqueDefinitions = new Dictionary<string, DelegateDefinitionCode>();
+        foreach (var f in functions)
         {
-            foreach (var methodDefinition in _methodDefinitions.OrderBy(static m => m.MethodInfo.Name))
-                AppendLine($"{methodDefinition.MethodInfo.Name} = null;");
-        });
-        AppendLine("}");
+            var definition = GetDelegateDefinitionCode(f);
+            uniqueDefinitions[definition.DelegateName] = definition;
+        }
+
+        var orderedDefinitions = uniqueDefinitions.Values
+            .OrderBy(d => d.DelegateName)
+            .Select(d => d.Code)
+            .ToArray();
+
+        for (var i = 0; i < orderedDefinitions.Length; i++)
+        {
+            AppendLine(orderedDefinitions[i]);
+            if (i + 1 != orderedDefinitions.Length)
+            {
+                AppendLine();
+            }
+        }
     }
 
-    private void AppendLoadMethod()
+    private void AppendLoadMethod(ParsedFunction[] functions)
     {
         AppendLine("private void LoadInternal()");
         AppendLine("{");
         AddIndent(() =>
         {
-            foreach (var methodDefinition in _methodDefinitions.OrderBy(static m => m.MethodInfo.Name))
+            foreach (var f in functions.OrderBy(f => f.Name))
             {
-                var name = methodDefinition.MethodInfo.Name;
-                var delegateName = GetDelegateNameCode(methodDefinition.CorrespondingDelegate);
-                AppendLine(
-                    $"{name} = ({delegateName})_handler.{nameof(ILibraryHandler.GetFunctionByName)}(\"{name}\", typeof({delegateName}));");
+                var delegateName = GetDelegateNameCode(f);
+                AppendLine($"{f.Name} = ({delegateName})_handler.{nameof(ILibraryHandler.GetFunctionByName)}(\"{f.Name}\", typeof({delegateName}));");
             }
         });
         AppendLine("}");
     }
 
-    private void AppendMethodDefinition(MethodDefinition methodDefinition)
+    private void AppendUnloadMethod(ParsedFunction[] functions)
     {
-        AppendLine(GetMethodDefinitionCode(methodDefinition));
-        AppendLine();
+        AppendLine("private void UnloadInternal()");
+        AppendLine("{");
+        AddIndent(() =>
+        {
+            foreach (var f in functions.OrderBy(f => f.Name))
+                AppendLine($"{f.Name} = null;");
+        });
+        AppendLine("}");
     }
-
-    private void AppendDelegateForMethodDefinition(MethodDefinition methodDefinition)
-    {
-        AppendLine(GetDelegateForMethodDefinitionCode(methodDefinition));
-        AppendLine();
-    }
-
-    private void AppendDelegateDefinition(DelegateDefinition delegateDefinition)
-    {
-        AppendLine(GetDelegateDefinitionCode(delegateDefinition));
-        AppendLine();
-    }
-
-    private record DelegateDefinition(Type ReturnType, Type[] Parameters);
-
-    private record MethodDefinition(MethodInfo MethodInfo, DelegateDefinition CorrespondingDelegate);
 }

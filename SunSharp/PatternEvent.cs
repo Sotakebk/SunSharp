@@ -95,7 +95,7 @@ namespace SunSharp
             return @event.Data;
         }
 
-        public override readonly string ToString()
+        public readonly override string ToString()
         {
             return $"{(Note)NN}" +
                    $"{(VV != 0 ? $"{VV:X2}" : "__")}" +
@@ -115,7 +115,7 @@ namespace SunSharp
             return a.Data != b.Data;
         }
 
-        public override readonly bool Equals(object? obj)
+        public readonly override bool Equals(object? obj)
         {
             return obj is PatternEvent e && this == e;
         }
@@ -125,7 +125,7 @@ namespace SunSharp
             return this == other;
         }
 
-        public override readonly int GetHashCode()
+        public readonly override int GetHashCode()
         {
             return -1945990370 + Data.GetHashCode();
         }

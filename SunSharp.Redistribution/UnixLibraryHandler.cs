@@ -70,14 +70,13 @@ namespace SunSharp.Redistribution
                 }
 
                 var ptr = dlsym(_ptr, name);
-                if (ptr == IntPtr.Zero)
+                if (ptr != IntPtr.Zero)
                 {
-                    var error = dlerror();
-                    throw new LibraryLoadingException(
-                        $"Failed to load SunVoxLib function '{name}' with error '{error}'.");
+                    return Marshal.GetDelegateForFunctionPointer(ptr, delegateType);
                 }
 
-                return Marshal.GetDelegateForFunctionPointer(ptr, delegateType);
+                var error = dlerror();
+                throw new LibraryLoadingException($"Failed to load SunVoxLib function '{name}' with error '{error}'.");
             }
         }
 

@@ -14,6 +14,7 @@ internal class GeneratorTests
     {
         var result = await generator.GenerateAsync();
 
+        result.Exception.Should().BeNull();
         result.Successful.Should().BeTrue();
         result.ChangesNecessary.Should().BeFalse();
     }

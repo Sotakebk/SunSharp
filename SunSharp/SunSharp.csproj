@@ -38,10 +38,11 @@
   </Target>
 
   <ItemGroup>
-    <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
+    <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
       <_Parameter1>SunSharp.Tests</_Parameter1>
     </AssemblyAttribute>
   </ItemGroup>
+
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <WarningLevel>9999</WarningLevel>
@@ -54,12 +55,6 @@
     <NoWarn />
     <WarningsAsErrors>$(WarningsAsErrors);NU1605;Nullable</WarningsAsErrors>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Compile Remove="SunSharp\**" />
-    <EmbeddedResource Remove="SunSharp\**" />
-    <None Remove="SunSharp\**" />
-  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Roslynator.Analyzers" Version="4.14.0">

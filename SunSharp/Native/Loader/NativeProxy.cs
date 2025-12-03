@@ -79,21 +79,20 @@ namespace SunSharp.Native.Loader
             {
                 var handlerIsLibraryLoader = _handler.IsLibraryLoaded;
 
-                // nothing to unload
-                if (!IsLoaded && !handlerIsLibraryLoader)
+                switch (IsLoaded)
                 {
-                    return;
-                }
+                    // nothing to unload
+                    case false when !handlerIsLibraryLoader:
+                        return;
+                    // sunvox might need to be unloaded
+                    case true when handlerIsLibraryLoader:
+                        if (sv_deinit == null)
+                        {
+                            throw new InvalidOperationException($"{nameof(sv_deinit)} was null, but library and proxy are both loaded.");
+                        }
 
-                // sunvox might need to be unloaded
-                if (IsLoaded && handlerIsLibraryLoader)
-                {
-                    if (sv_deinit == null)
-                    {
-                        throw new InvalidOperationException($"{nameof(sv_deinit)} was null, but library and proxy are both loaded.");
-                    }
-
-                    sv_deinit.Invoke();
+                        sv_deinit.Invoke();
+                        break;
                 }
 
                 // unload delegates if applies

@@ -73,7 +73,7 @@ namespace SunSharp.Native
         }
 
         /// <inheritdoc />
-        public bool GetAutostop(int slotId)
+        public bool GetAutomaticStop(int slotId)
         {
             var ret = _lib.sv_get_autostop(slotId);
             if (ret != 0 && ret != 1)
@@ -148,6 +148,7 @@ namespace SunSharp.Native
         /// <inheritdoc />
         public string? GetSongName(int slotId)
         {
+            // memory managed by SunVox
             var ptr = _lib.sv_get_song_name(slotId);
             return Marshal.PtrToStringAnsi(ptr);
         }
@@ -293,7 +294,7 @@ namespace SunSharp.Native
         }
 
         /// <inheritdoc />
-        public void PauseStream(int slotId)
+        public void PauseAudioStream(int slotId)
         {
             var ret = _lib.sv_pause(slotId);
             if (ret != 0)
@@ -303,7 +304,7 @@ namespace SunSharp.Native
         }
 
         /// <inheritdoc />
-        public void ResumeStream(int slotId)
+        public void ResumeAudioStream(int slotId)
         {
             var ret = _lib.sv_resume(slotId);
             if (ret != 0)
@@ -366,7 +367,7 @@ namespace SunSharp.Native
             }
         }
 
-        public void SetAutoStop(int slotId, bool autoStop)
+        public void SetAutomaticStop(int slotId, bool autoStop)
         {
             var ret = _lib.sv_set_autostop(slotId, autoStop ? 1 : 0);
             if (ret != 0)

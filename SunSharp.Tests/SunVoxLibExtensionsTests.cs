@@ -129,7 +129,7 @@ public class SunVoxLibExtensionsTests
         var mockAction = Substitute.For<Action<object[]?>>();
         var mockData = argCount == 0
             ? null
-            : Enumerable.Range(0, argCount).Select(static i => (object)i.ToString()).ToArray();
+            : Enumerable.Range(0, argCount).Select(static object (i) => i.ToString()).ToArray();
         // when
         action(lib, mockAction, mockData);
 
@@ -149,7 +149,7 @@ public class SunVoxLibExtensionsTests
         mockFunction.Invoke(Arg.Any<object[]>()).Returns(mockResult);
         var mockData = argCount == 0
             ? null
-            : Enumerable.Range(0, argCount).Select(static i => (object)i.ToString()).ToArray();
+            : Enumerable.Range(0, argCount).Select(static object (i) => i.ToString()).ToArray();
         // when
         var result = function(lib, mockFunction, mockData);
 
@@ -173,7 +173,7 @@ public class SunVoxLibExtensionsTests
         });
         var mockData = argCount == 0
             ? null
-            : Enumerable.Range(0, argCount).Select(static i => (object)i.ToString()).ToArray();
+            : Enumerable.Range(0, argCount).Select(static object (i) => i.ToString()).ToArray();
         // when
         ((Action)(() => action(lib, mockAction, mockData))).Should().Throw<Exception>();
 
@@ -196,7 +196,7 @@ public class SunVoxLibExtensionsTests
         });
         var mockData = argCount == 0
             ? null
-            : Enumerable.Range(0, argCount).Select(static i => (object)i.ToString()).ToArray();
+            : Enumerable.Range(0, argCount).Select(static object (i) => i.ToString()).ToArray();
         // when
         var action = () => function(lib, mockFunction, mockData);
         action.Invoking(a => a()).Should().Throw<Exception>();
@@ -216,7 +216,7 @@ public class SunVoxLibExtensionsTests
         var mockAction = Substitute.For<Action<object[]?>>();
         var mockData = argCount == 0
             ? null
-            : Enumerable.Range(0, argCount).Select(static i => (object)i.ToString()).ToArray();
+            : Enumerable.Range(0, argCount).Select(static object (i) => i.ToString()).ToArray();
         // when
         ((Action)(() => action(lib, mockAction, mockData))).Should().Throw<Exception>();
 
@@ -235,7 +235,7 @@ public class SunVoxLibExtensionsTests
         var mockFunction = Substitute.For<Func<object[]?, object>>();
         var mockData = argCount == 0
             ? null
-            : Enumerable.Range(0, argCount).Select(static i => (object)i.ToString()).ToArray();
+            : Enumerable.Range(0, argCount).Select(static object (i) => i.ToString()).ToArray();
         // when
         ((Action)(() => function(lib, mockFunction, mockData))).Should().Throw<Exception>();
 

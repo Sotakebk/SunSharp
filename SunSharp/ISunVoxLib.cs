@@ -31,20 +31,17 @@
         /// Use this method to get the current tick counter (from 0 to 0xFFFFFFFF). <br />
         /// SunVox engine uses system-provided time space, measured in system ticks (don't confuse it with the project ticks).
         /// </summary>
-        /// <returns></returns>
         uint GetTicks();
 
         /// <summary>
         /// Use this method to get the number of system ticks per second. <br />
         /// SunVox engine uses system-provided time space, measured in system ticks (don't confuse it with the project ticks).
         /// </summary>
-        /// <returns></returns>
         uint GetTicksPerSecond();
 
         /// <summary>
         /// Get the current sample rate.
         /// </summary>
-        /// <returns></returns>
         int GetSampleRate();
 
         /// <summary>
@@ -101,7 +98,7 @@
         /// Get current behaviour for reaching the end of project timeline.
         /// </summary>
         /// <returns><see langword="true" /> if project is set to stop after reaching the end.</returns>
-        bool GetAutostop(int slotId);
+        bool GetAutomaticStop(int slotId);
 
         /// <summary>
         /// Get current line number on the timeline.
@@ -160,26 +157,10 @@
         /// <summary>
         /// Save the SunVox project.
         /// </summary>
-        /// <param name="slotId"></param>
-        /// <param name="path"></param>
         void Save(int slotId, string path);
 
-        /// <summary>
-        /// </summary>
-        /// <param name="slotId"></param>
-        /// <param name="track"></param>
-        /// <param name="data"></param>
         void SendEvent(int slotId, int track, PatternEvent data);
 
-        /// <summary>
-        /// </summary>
-        /// <param name="slotId"></param>
-        /// <param name="track"></param>
-        /// <param name="nn"></param>
-        /// <param name="vv"></param>
-        /// <param name="mm"></param>
-        /// <param name="ccee"></param>
-        /// <param name="xxyy"></param>
         void SendEvent(int slotId, int track, int nn = 0, int vv = 0, int mm = 0, int ccee = 0, int xxyy = 0);
 
         /// <summary>
@@ -195,9 +176,6 @@
         /// <br />
         /// See also: <seealso cref="GetTicksPerSecond" />.
         /// </summary>
-        /// <param name="slotId"></param>
-        /// <param name="reset"></param>
-        /// <param name="t"></param>
         void SetSendEventTimestamp(int slotId, bool reset = true, int t = 0);
 
         /// <summary>
@@ -212,7 +190,7 @@
         /// Get the project time map.
         /// <br />
         /// For <paramref name="type" /> = <see cref="TimeMapType.Speed" />, Nth value equals speed at the beginning of Nth
-        /// line (Bpm | Tpl &lt;&lt; 16).
+        /// line (BPM | TPL &lt;&lt; 16).
         /// <br />
         /// For <paramref name="type" /> = <see cref="TimeMapType.FrameCount" />, Nth value equals frame counter at the
         /// beginning of Nth line.
@@ -260,51 +238,41 @@
         /// <summary>
         /// Set/get autostop mode. When autostop is off, the project plays endlessly in a loop.
         /// </summary>
-        /// <param name="slotId"></param>
-        /// <param name="autoStop"></param>
-        void SetAutoStop(int slotId, bool autoStop);
+        void SetAutomaticStop(int slotId, bool autoStop);
 
         /// <summary>
         /// First call - stop playing; second call - reset all SunVox activity and switch the engine to standby mode.
         /// </summary>
-        /// <param name="slotId"></param>
-        void StopPlayback(int slotId); // TODO confirm name
+        void StopPlayback(int slotId);
 
         /// <summary>
         /// Start playing the project from the current position.
         /// </summary>
-        /// <param name="slotId"></param>
-        void StartPlayback(int slotId); // TODO confirm name
+        void StartPlayback(int slotId);
 
         /// <summary>
         /// Start playing the project from the beginning (line 0).
         /// </summary>
-        /// <param name="slotId"></param>
-        void StartPlaybackFromBeginning(int slotId); // TODO confirm name
+        void StartPlaybackFromBeginning(int slotId);
 
         /// <summary>
         /// Jump to the specified position (line number on the timeline).
         /// </summary>
-        /// <param name="slotId"></param>
-        /// <param name="line"></param>
-        void Rewind(int slotId, int line); // TODO confirm name
+        void Rewind(int slotId, int line);
 
         /// <summary>
         /// Pause the audio stream on the specified slot.
         /// </summary>
-        /// <param name="slotId"></param>
-        void PauseStream(int slotId); // TODO confirm name
+        void PauseAudioStream(int slotId);
 
         /// <summary>
         /// Resume the audio stream on the specified slot.
         /// </summary>
-        /// <param name="slotId"></param>
-        void ResumeStream(int slotId); // TODO confirm name
+        void ResumeAudioStream(int slotId);
 
         /// <summary>
         /// Wait for sync (pattern effect 0x33 on any slot) and resume the audio stream on the specified slot.
         /// </summary>
-        /// <param name="slotId"></param>
-        void ResumeStreamOnSyncEffect(int slotId); // TODO confirm name
+        void ResumeStreamOnSyncEffect(int slotId);
     }
 }
