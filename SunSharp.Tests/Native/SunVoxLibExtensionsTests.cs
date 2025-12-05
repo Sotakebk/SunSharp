@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using SunSharp.Native;
 
-namespace SunSharp.Tests;
+namespace SunSharp.Tests.Native;
 
 public class SunVoxLibExtensionsTests
 {
