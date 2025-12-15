@@ -4,7 +4,7 @@ using SunSharp.Tests.Mocks;
 
 namespace SunSharp.Tests.Data;
 
-public class DataReaderTests
+public class SongDataReaderTests
 {
     private static ModuleData CreateValidModuleData(ModuleData moduleData)
     {
@@ -58,7 +58,7 @@ public class DataReaderTests
         var libraryMock = SunVoxLibMockProvider.BuildMock()
             .WithSongData(0, validSongData)
             .Build();
-        var data = DataReader.ReadSongData(libraryMock, 0);
+        var data = SongDataReader.ReadSongData(libraryMock, 0);
         data.Should().BeEquivalentTo(validSongData);
     }
 
@@ -69,7 +69,7 @@ public class DataReaderTests
         var libraryMock = SunVoxLibMockProvider.BuildMock()
             .WithModuleData(0, [validModuleData])
             .Build();
-        var data = DataReader.ReadModule(libraryMock, 0, validModuleData.Id);
+        var data = SongDataReader.ReadModule(libraryMock, 0, validModuleData.Id);
         data.Should().BeEquivalentTo(validModuleData);
     }
 
@@ -80,7 +80,7 @@ public class DataReaderTests
         var libraryMock = SunVoxLibMockProvider.BuildMock()
             .WithPatternData(0, [validPatternData])
             .Build();
-        var data = DataReader.ReadPattern(libraryMock, 0, validPatternData.Id);
+        var data = SongDataReader.ReadPattern(libraryMock, 0, validPatternData.Id);
         data.Should().BeEquivalentTo(validPatternData);
     }
 }

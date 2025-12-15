@@ -6,6 +6,9 @@ namespace SunSharp
     [StructLayout(LayoutKind.Explicit, Size = 8)]
     public struct PatternEvent : IEquatable<PatternEvent>
     {
+        /// <summary>
+        /// Gets or sets the raw 64-bit data value.
+        /// </summary>
         [field: FieldOffset(0)] public ulong Data { get; set; }
 
         [field: FieldOffset(0)] public byte NN { get; set; }
@@ -127,7 +130,7 @@ namespace SunSharp
 
         public readonly override int GetHashCode()
         {
-            return -1945990370 + Data.GetHashCode();
+            return Data.GetHashCode();
         }
     }
 }

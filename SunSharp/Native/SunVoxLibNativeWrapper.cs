@@ -118,7 +118,10 @@ namespace SunSharp.Native
         {
             var ret = _lib.sv_get_sample_rate();
             if (ret < 1)
+            {
                 throw new SunVoxException(ret, nameof(_lib.sv_get_sample_rate));
+            }
+
             return ret;
         }
 
@@ -127,7 +130,10 @@ namespace SunSharp.Native
         {
             var ret = _lib.sv_get_song_bpm(slotId);
             if (ret < 0)
+            {
                 throw new SunVoxException(ret, nameof(_lib.sv_get_song_bpm));
+            }
+
             return ret;
         }
 
@@ -202,12 +208,12 @@ namespace SunSharp.Native
 
         /// <inheritdoc />
         public LibraryVersion Initialize(int sampleRate, string? config = null,
-            AudioChannels channels = AudioChannels.Stereo, InitFlags flags = InitFlags.None)
+            AudioChannels channels = AudioChannels.Stereo, SunVoxInitOptions options = SunVoxInitOptions.None)
         {
             var ptr = Marshal.StringToHGlobalAnsi(config);
             try
             {
-                var ret = _lib.sv_init(ptr, sampleRate, (int)channels, (uint)flags);
+                var ret = _lib.sv_init(ptr, sampleRate, (int)channels, (uint)options);
                 if (ret < 0)
                 {
                     throw new SunVoxException(ret, nameof(_lib.sv_init));
@@ -376,7 +382,7 @@ namespace SunSharp.Native
             }
         }
 
-        public void SetSendEventTimestamp(int slotId, bool reset = true, int t = 0)
+        public void SetSendEventTimestamp(int slotId, bool reset, int t)
         {
             var ret = _lib.sv_set_event_t(slotId, reset ? 0 : 1, t);
             if (ret != 0)

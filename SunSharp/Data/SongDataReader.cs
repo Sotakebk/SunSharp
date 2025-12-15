@@ -5,17 +5,24 @@ using SunSharp.Native;
 
 namespace SunSharp.Data
 {
-    public static class DataReader
+    public static class SongDataReader
     {
-        // TODO
-        //public static SongData ReadSongData(Slot slot)
-        //{
-        //    return ReadSongData(slot.Library, slot.Id);
-        //}
+        public static SongData ReadSongData(Slot slot)
+        {
+            return ReadSongData(slot.Library, slot.Id);
+        }
 
         public static SongData ReadSongData(ISunVoxLib lib, int slotId)
         {
-            return lib.RunInLock(slotId, () => ReadSongDataInternal(lib, slotId));
+            lib.LockSlot(slotId);
+            try
+            {
+                return ReadSongDataInternal(lib, slotId);
+            }
+            finally
+            {
+                lib.UnlockSlot(slotId);
+            }
         }
 
         internal static SongData ReadSongDataInternal(ISunVoxLib lib, int slotId)

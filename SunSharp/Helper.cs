@@ -82,7 +82,7 @@ namespace SunSharp
         // from Hz to SunVox pitch: pitch = 30720 - log2( freq / 16.333984375 ) * 3072
         public static double FrequencyToPitch(double frequency)
         {
-            return 30720.0 - Math.Log(frequency / 16.333984375, 2) * 3072.0;
+            return 30720.0 - (Math.Log(frequency / 16.333984375, 2) * 3072.0);
         }
 
         #endregion macros

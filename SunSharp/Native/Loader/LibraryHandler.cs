@@ -20,9 +20,6 @@ namespace SunSharp.Native.Loader
         /// A method that returns a delegate from a function pointer, found in the loaded library by name.
         /// Should fail immediately if the method is not found.
         /// </summary>
-        /// <param name="name"></param>
-        /// <param name="delegateType"></param>
-        /// <returns></returns>
         Delegate GetFunctionByName(string name, Type delegateType);
     }
 }

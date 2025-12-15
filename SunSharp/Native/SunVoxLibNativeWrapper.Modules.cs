@@ -320,13 +320,13 @@ namespace SunSharp.Native
         }
 
         /// <inheritdoc />
-        public void LoadSamplerSample(int slotId, int moduleId, string path, int sampleSlot = -1)
+        public void LoadSamplerSample(int slotId, int moduleId, string path, int? sampleSlot = null)
         {
             var ptr = Marshal.StringToHGlobalAnsi(path);
             int ret;
             try
             {
-                ret = _lib.sv_sampler_load(slotId, moduleId, ptr, sampleSlot);
+                ret = _lib.sv_sampler_load(slotId, moduleId, ptr, sampleSlot ?? -1);
             }
             finally
             {
@@ -338,14 +338,14 @@ namespace SunSharp.Native
         }
 
         /// <inheritdoc />
-        public void LoadSamplerSample(int slotId, int moduleId, byte[] data, int sampleSlot = -1)
+        public void LoadSamplerSample(int slotId, int moduleId, byte[] data, int? sampleSlot = null)
         {
             var handle = GCHandle.Alloc(data, GCHandleType.Pinned);
             int ret;
             try
             {
-                ret = _lib.sv_sampler_load_from_memory(slotId, moduleId, handle.AddrOfPinnedObject(), (uint)data.Length,
-                    sampleSlot);
+                var intPtr = handle.AddrOfPinnedObject();
+                ret = _lib.sv_sampler_load_from_memory(slotId, moduleId, intPtr, (uint)data.Length, sampleSlot ?? -1);
             }
             finally
             {

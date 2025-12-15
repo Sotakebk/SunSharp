@@ -1,8 +1,9 @@
-﻿using SunSharp.Redistribution;
+﻿using SunSharp.Native;
+using SunSharp.Redistribution;
 
 namespace SunSharp.IntegrationTests;
 
-public class BaseIntegrationTests
+public abstract class BaseIntegrationTests
 {
     private ISunVoxLib? _lib;
 
@@ -30,7 +31,7 @@ public class BaseIntegrationTests
         try
         {
             _lib = LibraryLoader.GetLibraryInstance();
-            _lib.Initialize(-1, flags: InitFlags.UserAudioCallback | InitFlags.AudioFloat32);
+            _lib.Initialize(-1, options: SunVoxInitOptions.UserAudioCallback | SunVoxInitOptions.AudioFloat32);
         }
         catch (Exception e)
         {

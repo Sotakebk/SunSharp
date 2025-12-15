@@ -36,7 +36,9 @@ namespace SunSharp.Native.Loader
             lock (_lock)
             {
                 if (IsLoaded && _handler.IsLibraryLoaded)
+                {
                     return;
+                }
 
                 try
                 {
@@ -77,15 +79,15 @@ namespace SunSharp.Native.Loader
         {
             lock (_lock)
             {
-                var handlerIsLibraryLoader = _handler.IsLibraryLoaded;
+                var handlerIsLibraryLoaded = _handler.IsLibraryLoaded;
 
                 switch (IsLoaded)
                 {
                     // nothing to unload
-                    case false when !handlerIsLibraryLoader:
+                    case false when !handlerIsLibraryLoaded:
                         return;
                     // sunvox might need to be unloaded
-                    case true when handlerIsLibraryLoader:
+                    case true when handlerIsLibraryLoaded:
                         if (sv_deinit == null)
                         {
                             throw new InvalidOperationException($"{nameof(sv_deinit)} was null, but library and proxy are both loaded.");
@@ -103,8 +105,10 @@ namespace SunSharp.Native.Loader
                 }
 
                 // unload library if applies
-                if (handlerIsLibraryLoader)
+                if (handlerIsLibraryLoaded)
+                {
                     _handler.UnloadLibrary();
+                }
             }
         }
 

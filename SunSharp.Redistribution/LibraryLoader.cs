@@ -7,13 +7,21 @@ using SunSharp.Native.Loader;
 namespace SunSharp.Redistribution
 {
     /// <summary>
-    /// Use this class to access a locally loaded SunVoxLib instance. <br />
-    /// <see cref="Load" /> the library once, then <see cref="GetLibraryInstance" />. Construct a
-    /// <see cref="SunSharp.Objects.SunVox" /> if necessary. <br />
-    /// You may also call <see cref="Unload" /> to unload the library, which should also deinitialize the library, to avoid
-    /// any memory leaks.
-    /// You should keep the same library instance loaded in most use-cases.
+    /// Use this class to load and manage a SunVoxLib instance.
     /// </summary>
+    /// <remarks>
+    /// <para>
+    /// <see cref="Load" /> the library once, then <see cref="GetLibraryInstance" />.
+    /// After that, you may either use the returned instance, or construct a <see cref="SunSharp.SunVox" /> instance with it.
+    /// </para>
+    /// <para>
+    /// If the library is already loaded, calling <see cref="Load" /> again will have no effect.
+    /// </para>
+    /// <para>
+    /// You may also call <see cref="Unload" /> to unload the library, which should also deinitialize the library to avoid
+    /// any memory leaks. You should keep the same library instance loaded in most use-cases.
+    /// </para>
+    /// </remarks>
     public static class LibraryLoader
     {
         private static readonly object Lock = new object();

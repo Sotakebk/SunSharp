@@ -10,7 +10,10 @@ namespace SunSharp.Native
             var ret = _lib.sv_new_pattern(slotId, originalPatternId, x, y, -1, -1, -1, IntPtr.Zero);
 
             if (ret < 0)
+            {
                 throw new SunVoxException(ret, nameof(_lib.sv_new_pattern));
+            }
+
             return ret;
         }
 
@@ -28,7 +31,10 @@ namespace SunSharp.Native
             }
 
             if (ret < 0)
+            {
                 throw new SunVoxException(ret, nameof(_lib.sv_new_pattern));
+            }
+
             return ret;
         }
 
@@ -47,10 +53,15 @@ namespace SunSharp.Native
             }
 
             if (ret < -1)
+            {
                 throw new SunVoxException(ret, nameof(_lib.sv_find_pattern));
+            }
 
             if (ret != -1)
+            {
                 return ret;
+            }
+
             return null;
         }
 
@@ -59,18 +70,25 @@ namespace SunSharp.Native
         {
             var lines = GetPatternLines(slotId, patternId);
             if (lines <= 0)
+            {
                 return null;
+            }
 
             var tracks = GetPatternTracks(slotId, patternId);
 
             // memory managed by SunVox
             var ptr = _lib.sv_get_pattern_data(slotId, patternId);
             if (ptr == IntPtr.Zero)
+            {
                 return null;
+            }
 
             var arr = new PatternEvent[lines * tracks];
             for (var i = 0; i < lines * tracks; i++)
+            {
                 arr[i] = (ulong)Marshal.ReadInt64(ptr, i * sizeof(ulong));
+            }
+
             return (arr, tracks, lines);
         }
 
@@ -79,7 +97,10 @@ namespace SunSharp.Native
         {
             var ret = _lib.sv_get_pattern_event(slotId, patternId, track, line, (int)column);
             if (ret < 0)
+            {
                 throw new SunVoxException(ret, nameof(_lib.sv_get_pattern_event));
+            }
+
             return ret;
         }
 
@@ -94,7 +115,10 @@ namespace SunSharp.Native
         {
             var ret = _lib.sv_get_pattern_lines(slotId, patternId);
             if (ret < 0)
+            {
                 throw new SunVoxException(ret, nameof(_lib.sv_get_pattern_lines));
+            }
+
             return ret;
         }
 
@@ -103,7 +127,10 @@ namespace SunSharp.Native
         {
             var ret = _lib.sv_pattern_mute(slotId, patternId, -1);
             if (ret < 0)
+            {
                 throw new SunVoxException(ret, nameof(_lib.sv_pattern_mute));
+            }
+
             return ret == 1;
         }
 
@@ -117,7 +144,9 @@ namespace SunSharp.Native
         /// <inheritdoc />
         public (int x, int y) GetPatternPosition(int slotId, int patternId)
         {
-            return (_lib.sv_get_pattern_x(slotId, patternId), _lib.sv_get_pattern_y(slotId, patternId));
+            var x = _lib.sv_get_pattern_x(slotId, patternId);
+            var y = _lib.sv_get_pattern_y(slotId, patternId);
+            return (x, y);
         }
 
         /// <inheritdoc />
@@ -125,7 +154,10 @@ namespace SunSharp.Native
         {
             var ret = _lib.sv_get_pattern_tracks(slotId, patternId);
             if (ret < 0)
+            {
                 throw new SunVoxException(ret, nameof(_lib.sv_get_pattern_tracks));
+            }
+
             return ret;
         }
 
@@ -146,7 +178,10 @@ namespace SunSharp.Native
         {
             var ret = _lib.sv_get_number_of_patterns(slotId);
             if (ret < 0)
+            {
                 throw new SunVoxException(ret, nameof(_lib.sv_get_number_of_patterns));
+            }
+
             return ret;
         }
 
@@ -155,7 +190,9 @@ namespace SunSharp.Native
         {
             var ret = _lib.sv_remove_pattern(slotId, patternId);
             if (ret != 0)
+            {
                 throw new SunVoxException(ret, nameof(_lib.sv_remove_pattern));
+            }
         }
 
         /// <inheritdoc />
@@ -173,7 +210,8 @@ namespace SunSharp.Native
 
             if (tracks * lines != data.Length)
             {
-                throw new ArgumentException($"Size of {nameof(data)} ({nameof(data)}.Length) is not equal to {nameof(tracks)} * {nameof(lines)} ({tracks * lines}).");
+                throw new ArgumentException(
+                    $"Size of {nameof(data)} ({nameof(data)}.Length) is not equal to {nameof(tracks)} * {nameof(lines)} ({tracks * lines}).");
             }
 
             // should throw an exception if the pattern in question does not exist
@@ -182,10 +220,14 @@ namespace SunSharp.Native
             // memory managed by SunVox
             var ptr = _lib.sv_get_pattern_data(slotId, patternId);
             if (ptr == IntPtr.Zero)
+            {
                 throw new SunVoxException(0, $"{nameof(_lib.sv_get_pattern_data)} returned nullptr.");
+            }
 
             for (var i = 0; i < lines * tracks; i++)
+            {
                 Marshal.WriteInt64(ptr, i * sizeof(long), unchecked((long)data[i].Data));
+            }
         }
 
         /// <inheritdoc />
@@ -253,8 +295,8 @@ namespace SunSharp.Native
             {
                 for (var t = 0; t < tracksToIterate; t++)
                 {
-                    var realIndex = (l + readOffsetLines) * realTracks + t + readOffsetTracks;
-                    var bufferIndex = (l + bufferOffsetLines) * bufferTracks + t + bufferOffsetTracks;
+                    var realIndex = ((l + readOffsetLines) * realTracks) + t + readOffsetTracks;
+                    var bufferIndex = ((l + bufferOffsetLines) * bufferTracks) + t + bufferOffsetTracks;
                     var value = Marshal.ReadInt64(ptr, realIndex * sizeof(ulong));
                     buffer[bufferIndex] = unchecked((ulong)value);
                     readEventCount++;
@@ -329,8 +371,8 @@ namespace SunSharp.Native
             {
                 for (var t = 0; t < tracksToIterate; t++)
                 {
-                    var realIndex = (l + writeOffsetLines) * realTracks + t + writeOffsetTracks;
-                    var bufferIndex = (l + bufferOffsetLines) * bufferTracks + t + bufferOffsetTracks;
+                    var realIndex = ((l + writeOffsetLines) * realTracks) + t + writeOffsetTracks;
+                    var bufferIndex = ((l + bufferOffsetLines) * bufferTracks) + t + bufferOffsetTracks;
                     var value = buffer[bufferIndex].Data;
                     Marshal.WriteInt64(ptr, realIndex * sizeof(ulong), unchecked((long)value));
                     writeEventCount++;
@@ -346,7 +388,9 @@ namespace SunSharp.Native
         {
             var ret = _lib.sv_set_pattern_event(slotId, patternId, track, line, nn, vv, mm, ccee, xxyy);
             if (ret != 0)
+            {
                 throw new SunVoxException(ret, nameof(_lib.sv_set_pattern_event));
+            }
         }
 
         /// <inheritdoc />
@@ -354,7 +398,9 @@ namespace SunSharp.Native
         {
             var ret = _lib.sv_set_pattern_event(slotId, patternId, track, line, ev.NN, ev.VV, ev.MM, ev.CCEE, ev.XXYY);
             if (ret != 0)
+            {
                 throw new SunVoxException(ret, nameof(_lib.sv_set_pattern_event));
+            }
         }
 
         /// <inheritdoc />
@@ -362,7 +408,9 @@ namespace SunSharp.Native
         {
             var ret = _lib.sv_pattern_mute(slotId, patternId, muted ? 1 : 0);
             if (ret < 0)
+            {
                 throw new SunVoxException(ret, nameof(_lib.sv_pattern_mute));
+            }
         }
 
         /// <inheritdoc />
@@ -373,7 +421,9 @@ namespace SunSharp.Native
             {
                 var ret = _lib.sv_set_pattern_name(slotId, patternId, ptr);
                 if (ret != 0)
+                {
                     throw new SunVoxException(ret, nameof(_lib.sv_set_pattern_name));
+                }
             }
             finally
             {
@@ -386,7 +436,9 @@ namespace SunSharp.Native
         {
             var ret = _lib.sv_set_pattern_xy(slotId, patternId, x, y);
             if (ret != 0)
+            {
                 throw new SunVoxException(ret, nameof(_lib.sv_set_pattern_xy));
+            }
         }
 
         /// <inheritdoc />
@@ -394,7 +446,9 @@ namespace SunSharp.Native
         {
             var ret = _lib.sv_set_pattern_size(slotId, patternId, tracks ?? -1, lines ?? -1);
             if (ret < 0)
+            {
                 throw new SunVoxException(ret, nameof(_lib.sv_set_pattern_size));
+            }
         }
     }
 }

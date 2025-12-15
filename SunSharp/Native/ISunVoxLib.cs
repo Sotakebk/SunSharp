@@ -1,4 +1,4 @@
-﻿namespace SunSharp
+﻿namespace SunSharp.Native
 {
     public partial interface ISunVoxLib
     {
@@ -11,9 +11,9 @@
         /// details.
         /// </param>
         /// <param name="channels">Channels to be used.</param>
-        /// <param name="flags">Initialization flags.</param>
+        /// <param name="options">Initialization options.</param>
         /// <returns>The version of underlying library.</returns>
-        LibraryVersion Initialize(int sampleRate, string? config = null, AudioChannels channels = AudioChannels.Stereo, InitFlags flags = InitFlags.None);
+        LibraryVersion Initialize(int sampleRate, string? config = null, AudioChannels channels = AudioChannels.Stereo, SunVoxInitOptions options = SunVoxInitOptions.None);
 
         /// <summary>
         /// Deinitializes the library, frees resources.
@@ -176,7 +176,7 @@
         /// <br />
         /// See also: <seealso cref="GetTicksPerSecond" />.
         /// </summary>
-        void SetSendEventTimestamp(int slotId, bool reset = true, int t = 0);
+        void SetSendEventTimestamp(int slotId, bool reset, int t);
 
         /// <summary>
         /// Get and set volume. Call with <paramref name="volume" /> = -1 to only get the value.

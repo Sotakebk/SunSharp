@@ -1,4 +1,4 @@
-﻿namespace SunSharp
+﻿namespace SunSharp.Native
 {
     public partial interface ISunVoxLib
     {

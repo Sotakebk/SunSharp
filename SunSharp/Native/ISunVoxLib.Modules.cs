@@ -1,4 +1,4 @@
-﻿namespace SunSharp
+﻿namespace SunSharp.Native
 {
     public partial interface ISunVoxLib
     {
@@ -125,15 +125,19 @@
 
         /// <summary>
         /// Load a sample (xi, wav, aiff) to an existing module from file.
-        /// Set <paramref name="sampleSlot" /> to -1 to apply the sample to all sample slots.
         /// </summary>
-        void LoadSamplerSample(int slotId, int moduleId, string path, int sampleSlot = -1);
+        /// <remarks>
+        /// Set <paramref name="sampleSlot"/> to <see langword="null"/> to apply the sample to all sample slots.
+        /// </remarks>
+        void LoadSamplerSample(int slotId, int moduleId, string path, int? sampleSlot = null);
 
         /// <summary>
         /// Load a sample (xi, wav, aiff) to an existing module from memory.
-        /// Set <paramref name="sampleSlot" /> to -1 to apply the sample to all sample slots.
         /// </summary>
-        void LoadSamplerSample(int slotId, int moduleId, byte[] data, int sampleSlot = -1);
+        /// <remarks>
+        /// Set <paramref name="sampleSlot"/> to <see langword="null"/> to apply the sample to all sample slots.
+        /// </remarks>
+        void LoadSamplerSample(int slotId, int moduleId, byte[] data, int? sampleSlot = null);
 
         /// <summary>
         /// load a file into the MetaModule. Supported file formats: sunvox, mod, xm, midi.

@@ -17,7 +17,7 @@ internal class PatternTests : BaseIntegrationTests
         lib.OpenSlot(slotId);
         lib.LockSlot(slotId);
 
-        var data = DataReader.ReadSongData(lib, slotId);
+        var data = SongDataReader.ReadSongData(lib, slotId);
 
         lib.UnlockSlot(slotId);
         lib.CloseSlot(slotId);
@@ -77,11 +77,11 @@ internal class PatternTests : BaseIntegrationTests
         lib.SetPatternData(slotId, anotherPatternId, [.. secondPattern.Data], secondPattern.Tracks,
             secondPattern.Lines);
 
-        var data = DataReader.ReadSongData(lib, slotId);
+        var data = SongDataReader.ReadSongData(lib, slotId);
 
         lib.RemovePattern(slotId, onePatternId);
 
-        var dataAfterRemoval = DataReader.ReadSongData(lib, slotId);
+        var dataAfterRemoval = SongDataReader.ReadSongData(lib, slotId);
 
         lib.UnlockSlot(slotId);
         lib.CloseSlot(slotId);

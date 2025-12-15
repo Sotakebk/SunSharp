@@ -394,7 +394,7 @@ public class SunVoxLibNativeWrapperTests
     }
 
     [Test, AutoData]
-    public void InitializeShouldCallInitAndThrowExceptionOnUnhandledValue(int sampleRate, AudioChannels channels, InitFlags initFlags)
+    public void InitializeShouldCallInitAndThrowExceptionOnUnhandledValue(int sampleRate, AudioChannels channels, SunVoxInitOptions sunVoxInitOptions)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
@@ -403,14 +403,14 @@ public class SunVoxLibNativeWrapperTests
             .Returns(ErrorResponseCode);
 
         // when - then
-        wrapper.Invoking(w => w.Initialize(sampleRate, null, channels, initFlags)).Should().Throw<SunVoxException>();
+        wrapper.Invoking(w => w.Initialize(sampleRate, null, channels, sunVoxInitOptions)).Should().Throw<SunVoxException>();
 
         // and then
-        library.Received(1).sv_init(IntPtr.Zero, sampleRate, (int)channels, (uint)initFlags);
+        library.Received(1).sv_init(IntPtr.Zero, sampleRate, (int)channels, (uint)sunVoxInitOptions);
     }
 
     [Test, AutoData]
-    public void InitializeShouldCallInitAsExpected(int sampleRate, string config, AudioChannels channels, InitFlags initFlags)
+    public void InitializeShouldCallInitAsExpected(int sampleRate, string config, AudioChannels channels, SunVoxInitOptions sunVoxInitOptions)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
@@ -424,16 +424,16 @@ public class SunVoxLibNativeWrapperTests
             .Do(callInfo => receivedString = Marshal.PtrToStringAnsi(callInfo.Arg<IntPtr>()));
 
         // when
-        var version = wrapper.Initialize(sampleRate, config, channels, initFlags);
+        var version = wrapper.Initialize(sampleRate, config, channels, sunVoxInitOptions);
 
         // then
-        library.Received(1).sv_init(Arg.Any<IntPtr>(), sampleRate, (int)channels, (uint)initFlags);
+        library.Received(1).sv_init(Arg.Any<IntPtr>(), sampleRate, (int)channels, (uint)sunVoxInitOptions);
         version.Should().Be(new LibraryVersion(returnCode));
         receivedString.Should().Be(config);
     }
 
     [Test, AutoData]
-    public void InitializeShouldCallInitAsExpectedWithNullConfig(int sampleRate, AudioChannels channels, InitFlags initFlags)
+    public void InitializeShouldCallInitAsExpectedWithNullConfig(int sampleRate, AudioChannels channels, SunVoxInitOptions sunVoxInitOptions)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
@@ -443,10 +443,10 @@ public class SunVoxLibNativeWrapperTests
             .Returns(returnCode);
 
         // when
-        var version = wrapper.Initialize(sampleRate, null, channels, initFlags);
+        var version = wrapper.Initialize(sampleRate, null, channels, sunVoxInitOptions);
 
         // then
-        library.Received(1).sv_init(IntPtr.Zero, sampleRate, (int)channels, (uint)initFlags);
+        library.Received(1).sv_init(IntPtr.Zero, sampleRate, (int)channels, (uint)sunVoxInitOptions);
         version.Should().Be(new LibraryVersion(returnCode));
     }
 
