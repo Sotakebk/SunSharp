@@ -1,11 +1,12 @@
-﻿using System.Collections;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using SunSharp.Native;
 
 namespace SunSharp
 {
-    public interface ISynthesizer : IEnumerable<IModuleHandle>
+    public interface ISynthesizer : IEnumerable<ISynthModuleHandle>
     {
         ISlot Slot { get; }
 
@@ -15,11 +16,11 @@ namespace SunSharp
 
         ModuleFlags GetModuleFlags(int moduleId);
 
-        bool TryGetModule(int moduleId, [NotNullWhen(true)] out IModuleHandle? moduleHandle);
+        bool TryGetModule(int moduleId, [NotNullWhen(true)] out ISynthModuleHandle? moduleHandle);
 
-        bool TryGetModule(string name, [NotNullWhen(true)] out IModuleHandle? moduleHandle);
+        bool TryGetModule(string name, [NotNullWhen(true)] out ISynthModuleHandle? moduleHandle);
 
-        IModuleHandle CreateModule(ModuleType type, string name, int x = 0, int y = 0, int z = 0);
+        ISynthModuleHandle CreateModule(SynthModuleType type, string name, int x = 0, int y = 0, int z = 0);
 
         /// <summary>
         /// load a module or sample. Supported file formats: sunsynth, xi, wav, aiff.
@@ -29,7 +30,7 @@ namespace SunSharp
         /// <param name="y"></param>
         /// <param name="z"></param>
         /// <returns></returns>
-        IModuleHandle LoadModule(byte[] data, int x = 0, int y = 0, int z = 0);
+        ISynthModuleHandle LoadModule(byte[] data, int x = 0, int y = 0, int z = 0);
 
         /// <summary>
         /// load a module or sample. Supported file formats: sunsynth, xi, wav, aiff.
@@ -39,22 +40,22 @@ namespace SunSharp
         /// <param name="y"></param>
         /// <param name="z"></param>
         /// <returns></returns>
-        IModuleHandle LoadModule(string path, int x = 0, int y = 0, int z = 0);
+        ISynthModuleHandle LoadModule(string path, int x = 0, int y = 0, int z = 0);
 
         void RemoveModule(int moduleId);
 
-        void RemoveModule(IModuleHandle moduleHandle);
+        void RemoveModule(ISynthModuleHandle moduleHandle);
 
         void ConnectModule(int sourceId, int destinationId);
 
-        void ConnectModule(IModuleHandle source, IModuleHandle destination);
+        void ConnectModule(ISynthModuleHandle source, ISynthModuleHandle destination);
 
         void DisconnectModule(int sourceId, int destinationId);
 
-        void DisconnectModule(IModuleHandle source, IModuleHandle destination);
+        void DisconnectModule(ISynthModuleHandle source, ISynthModuleHandle destination);
     }
 
-    public class Synthesizer : ISynthesizer, IEnumerable<ModuleHandle>
+    public class Synthesizer : ISynthesizer, IEnumerable<SynthModuleHandle>
     {
         private readonly ISunVoxLib _lib;
         private readonly int _id;
@@ -88,12 +89,12 @@ namespace SunSharp
             return _lib.GetModuleFlags(_id, moduleId);
         }
 
-        /// <inheritdoc cref="ISynthesizer.TryGetModule(int, out IModuleHandle?)"/>
-        public bool TryGetModule(int moduleId, [NotNullWhen(true)] out ModuleHandle? moduleHandle)
+        /// <inheritdoc cref="ISynthesizer.TryGetModule(int, out ISynthModuleHandle?)"/>
+        public bool TryGetModule(int moduleId, [NotNullWhen(true)] out SynthModuleHandle? moduleHandle)
         {
             if (_lib.GetModuleExists(_id, moduleId))
             {
-                moduleHandle = new ModuleHandle(this, moduleId);
+                moduleHandle = new SynthModuleHandle(Slot, moduleId);
                 return true;
             }
 
@@ -101,13 +102,13 @@ namespace SunSharp
             return false;
         }
 
-        /// <inheritdoc cref="ISynthesizer.TryGetModule(string, out IModuleHandle?)"/>
-        public bool TryGetModule(string name, [NotNullWhen(true)] out ModuleHandle? moduleHandle)
+        /// <inheritdoc cref="ISynthesizer.TryGetModule(string, out ISynthModuleHandle?)"/>
+        public bool TryGetModule(string name, [NotNullWhen(true)] out SynthModuleHandle? moduleHandle)
         {
             var moduleId = _lib.FindModule(_id, name);
             if (moduleId != null)
             {
-                moduleHandle = new ModuleHandle(this, moduleId.Value);
+                moduleHandle = new SynthModuleHandle(Slot, moduleId.Value);
                 return true;
             }
 
@@ -116,7 +117,7 @@ namespace SunSharp
         }
 
         /// <inheritdoc/>
-        bool ISynthesizer.TryGetModule(int moduleId, [NotNullWhen(true)] out IModuleHandle? moduleHandle)
+        bool ISynthesizer.TryGetModule(int moduleId, [NotNullWhen(true)] out ISynthModuleHandle? moduleHandle)
         {
             if (TryGetModule(moduleId, out var foundModuleHandle))
             {
@@ -129,7 +130,7 @@ namespace SunSharp
         }
 
         /// <inheritdoc/>
-        bool ISynthesizer.TryGetModule(string name, [NotNullWhen(true)] out IModuleHandle? moduleHandle)
+        bool ISynthesizer.TryGetModule(string name, [NotNullWhen(true)] out ISynthModuleHandle? moduleHandle)
         {
             if (TryGetModule(name, out var foundModuleHandle))
             {
@@ -142,49 +143,54 @@ namespace SunSharp
         }
 
         /// <inheritdoc cref="ISynthesizer.CreateModule"/>
-        public ModuleHandle CreateModule(ModuleType type, string name, int x = 0, int y = 0, int z = 0)
+        public SynthModuleHandle CreateModule(SynthModuleType type, string name, int x = 0, int y = 0, int z = 0)
         {
+            if (!Enum.IsDefined(typeof(SynthModuleType), type))
+            {
+                throw new ArgumentOutOfRangeException(nameof(type), "The specified ModuleType is not defined.");
+            }
+
             using (Slot.AcquireLock())
             {
-                var moduleId = _lib.CreateModule(_id, ModuleTypeHelper.InternalNameFromType(type), name, x, y, z);
-                return new ModuleHandle(this, moduleId);
+                var moduleId = _lib.CreateModule(_id, SynthModuleTypeHelper.InternalNameFromType(type), name, x, y, z);
+                return new SynthModuleHandle(Slot, moduleId);
             }
         }
 
         /// <inheritdoc/>
-        IModuleHandle ISynthesizer.CreateModule(ModuleType type, string name, int x, int y, int z)
+        ISynthModuleHandle ISynthesizer.CreateModule(SynthModuleType type, string name, int x, int y, int z)
         {
             return CreateModule(type, name, x, y, z);
         }
 
         /// <inheritdoc cref="ISynthesizer.LoadModule(byte[], int, int, int)"/>
-        public ModuleHandle LoadModule(byte[] data, int x = 0, int y = 0, int z = 0)
+        public SynthModuleHandle LoadModule(byte[] data, int x = 0, int y = 0, int z = 0)
         {
             using (Slot.AcquireLock())
             {
                 var moduleId = _lib.LoadModule(_id, data, x, y, z);
-                return new ModuleHandle(this, moduleId);
+                return new SynthModuleHandle(Slot, moduleId);
             }
         }
 
         /// <inheritdoc cref="ISynthesizer.LoadModule(string, int, int, int)"/>
-        public ModuleHandle LoadModule(string path, int x = 0, int y = 0, int z = 0)
+        public SynthModuleHandle LoadModule(string path, int x = 0, int y = 0, int z = 0)
         {
             using (Slot.AcquireLock())
             {
                 var moduleId = _lib.LoadModule(_id, path, x, y, z);
-                return new ModuleHandle(this, moduleId);
+                return new SynthModuleHandle(Slot, moduleId);
             }
         }
 
         /// <inheritdoc/>
-        IModuleHandle ISynthesizer.LoadModule(byte[] data, int x, int y, int z)
+        ISynthModuleHandle ISynthesizer.LoadModule(byte[] data, int x, int y, int z)
         {
             return LoadModule(data, x, y, z);
         }
 
         /// <inheritdoc/>
-        IModuleHandle ISynthesizer.LoadModule(string path, int x, int y, int z)
+        ISynthModuleHandle ISynthesizer.LoadModule(string path, int x, int y, int z)
         {
             return LoadModule(path, x, y, z);
         }
@@ -198,14 +204,14 @@ namespace SunSharp
             }
         }
 
-        /// <inheritdoc cref="ISynthesizer.RemoveModule(IModuleHandle)"/>
-        public void RemoveModule(ModuleHandle moduleHandle)
+        /// <inheritdoc cref="ISynthesizer.RemoveModule(ISynthModuleHandle)"/>
+        public void RemoveModule(SynthModuleHandle moduleHandle)
         {
             RemoveModule(moduleHandle.Id);
         }
 
         /// <inheritdoc/>
-        void ISynthesizer.RemoveModule(IModuleHandle moduleHandle)
+        void ISynthesizer.RemoveModule(ISynthModuleHandle moduleHandle)
         {
             RemoveModule(moduleHandle.Id);
         }
@@ -219,14 +225,14 @@ namespace SunSharp
             }
         }
 
-        /// <inheritdoc cref="ISynthesizer.ConnectModule(IModuleHandle, IModuleHandle)"/>
-        public void ConnectModule(ModuleHandle source, ModuleHandle destination)
+        /// <inheritdoc cref="ISynthesizer.ConnectModule(ISynthModuleHandle, ISynthModuleHandle)"/>
+        public void ConnectModule(SynthModuleHandle source, SynthModuleHandle destination)
         {
             ConnectModule(source.Id, destination.Id);
         }
 
         /// <inheritdoc/>
-        void ISynthesizer.ConnectModule(IModuleHandle source, IModuleHandle destination)
+        void ISynthesizer.ConnectModule(ISynthModuleHandle source, ISynthModuleHandle destination)
         {
             ConnectModule(source.Id, destination.Id);
         }
@@ -240,19 +246,19 @@ namespace SunSharp
             }
         }
 
-        /// <inheritdoc cref="ISynthesizer.DisconnectModule(IModuleHandle, IModuleHandle)"/>
-        public void DisconnectModule(ModuleHandle source, ModuleHandle destination)
+        /// <inheritdoc cref="ISynthesizer.DisconnectModule(ISynthModuleHandle, ISynthModuleHandle)"/>
+        public void DisconnectModule(SynthModuleHandle source, SynthModuleHandle destination)
         {
             DisconnectModule(source.Id, destination.Id);
         }
 
         /// <inheritdoc/>
-        void ISynthesizer.DisconnectModule(IModuleHandle source, IModuleHandle destination)
+        void ISynthesizer.DisconnectModule(ISynthModuleHandle source, ISynthModuleHandle destination)
         {
             DisconnectModule(source.Id, destination.Id);
         }
 
-        public IEnumerator<ModuleHandle> GetEnumerator()
+        public IEnumerator<SynthModuleHandle> GetEnumerator()
         {
             for (var i = 0; i < GetUpperModuleCount(); i++)
             {
@@ -263,7 +269,7 @@ namespace SunSharp
             }
         }
 
-        IEnumerator<IModuleHandle> IEnumerable<IModuleHandle>.GetEnumerator()
+        IEnumerator<ISynthModuleHandle> IEnumerable<ISynthModuleHandle>.GetEnumerator()
         {
             foreach (var moduleHandle in this)
             {

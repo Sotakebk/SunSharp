@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
@@ -11,14 +11,14 @@ namespace SunSharp
         /// <summary>
         /// Get a reference to a slot. There are 16 slots, so index must be in range 0-15.
         /// </summary>
-        /// <exception cref="ArgumentOutOfRangeException"></exception>
-        Slot this[int i] { get; }
+        /// <exception cref="ArgumentOutOfRangeException"> </exception>
+        ISlot this[int i] { get; }
 
         /// <summary>
         /// Try to get and open a new slot.
         /// </summary>
-        /// <returns><see langword="false"/> if failed to find an unused slot.</returns>
-        bool TryOpenNewSlot([NotNullWhen(true)] out Slot? slot);
+        /// <returns> <see langword="false"/> if failed to find an unused slot. </returns>
+        bool TryOpenNewSlot([NotNullWhen(true)] out ISlot? slot);
     }
 
     public readonly struct Slots : ISlots
@@ -52,6 +52,8 @@ namespace SunSharp
             }
         }
 
+        ISlot ISlots.this[int i] => this[i];
+
         /// <inheritdoc/>
         public bool TryOpenNewSlot([NotNullWhen(true)] out Slot? slot)
         {
@@ -61,6 +63,13 @@ namespace SunSharp
                 slot?.Open();
                 return slot != null;
             }
+        }
+
+        bool ISlots.TryOpenNewSlot([NotNullWhen(true)] out ISlot? slot)
+        {
+            var result = TryOpenNewSlot(out Slot? typedSlot);
+            slot = typedSlot;
+            return result;
         }
 
         public IEnumerator<Slot> GetEnumerator() => ((IEnumerable<Slot>)_slots).GetEnumerator();

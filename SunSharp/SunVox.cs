@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using SunSharp.Native;
 
@@ -174,8 +174,7 @@ namespace SunSharp
             {
                 arguments.Add($"audiodriver={driver}");
             }
-            var configuration = arguments.Count != 0 ? string.Join("|", arguments) : null;
-            return configuration;
+            return arguments.Count != 0 ? string.Join("|", arguments) : null;
         }
 
         private static SunVoxInitOptions ConstructInitFlags(SunVoxInitOptions initial, bool noDebugOutput, OutputType outputType, bool singleThreaded)

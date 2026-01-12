@@ -1,25 +1,28 @@
-﻿using System;
+using System;
 using System.Runtime.InteropServices;
 
 namespace SunSharp.Native
 {
     public partial class SunVoxLibNativeWrapper
     {
+        /// <inheritdoc />
         public int ClonePattern(int slotId, int originalPatternId, int x, int y)
         {
             var ret = _lib.sv_new_pattern(slotId, originalPatternId, x, y, -1, -1, -1, IntPtr.Zero);
 
             if (ret < 0)
             {
-                throw new SunVoxException(ret, nameof(_lib.sv_new_pattern));
+                var details = $"{nameof(slotId)}: {slotId}, {nameof(originalPatternId)}: {originalPatternId}, {nameof(x)}: {x}, {nameof(y)}: {y}.";
+                throw new SunVoxException(ret, nameof(_lib.sv_new_pattern), details);
             }
 
             return ret;
         }
 
+        /// <inheritdoc />
         public int CreatePattern(int slotId, int x, int y, int tracks, int lines, int iconSeed = 0, string? name = null)
         {
-            var ptr = Marshal.StringToHGlobalAnsi(name);
+            var ptr = Marshal.StringToCoTaskMemUTF8(name);
             int ret;
             try
             {
@@ -27,12 +30,13 @@ namespace SunSharp.Native
             }
             finally
             {
-                Marshal.FreeHGlobal(ptr);
+                Marshal.ZeroFreeCoTaskMemUTF8(ptr);
             }
 
             if (ret < 0)
             {
-                throw new SunVoxException(ret, nameof(_lib.sv_new_pattern));
+                var details = $"{nameof(slotId)}: {slotId}, {nameof(x)}: {x}, {nameof(y)}: {y}, {nameof(tracks)}: {tracks}, {nameof(lines)}: {lines}, {nameof(iconSeed)}: {iconSeed}, {nameof(name)}: '{name ?? "<null>"}'.";
+                throw new SunVoxException(ret, nameof(_lib.sv_new_pattern), details);
             }
 
             return ret;
@@ -41,7 +45,7 @@ namespace SunSharp.Native
         /// <inheritdoc />
         public int? FindPattern(int slotId, string name)
         {
-            var ptr = Marshal.StringToHGlobalAnsi(name);
+            var ptr = Marshal.StringToCoTaskMemUTF8(name);
             int ret;
             try
             {
@@ -49,12 +53,13 @@ namespace SunSharp.Native
             }
             finally
             {
-                Marshal.FreeHGlobal(ptr);
+                Marshal.ZeroFreeCoTaskMemUTF8(ptr);
             }
 
             if (ret < -1)
             {
-                throw new SunVoxException(ret, nameof(_lib.sv_find_pattern));
+                throw new SunVoxException(ret, nameof(_lib.sv_find_pattern),
+                    $"{nameof(slotId)}: {slotId}, {nameof(name)}: '{name ?? "<null>"}'.");
             }
 
             if (ret != -1)
@@ -98,7 +103,8 @@ namespace SunSharp.Native
             var ret = _lib.sv_get_pattern_event(slotId, patternId, track, line, (int)column);
             if (ret < 0)
             {
-                throw new SunVoxException(ret, nameof(_lib.sv_get_pattern_event));
+                var details = $"{nameof(slotId)}: {slotId}, {nameof(patternId)}: {patternId}, {nameof(track)}: {track}, {nameof(line)}: {line}, {nameof(column)}: {column}.";
+                throw new SunVoxException(ret, nameof(_lib.sv_get_pattern_event), details);
             }
 
             return ret;
@@ -116,7 +122,8 @@ namespace SunSharp.Native
             var ret = _lib.sv_get_pattern_lines(slotId, patternId);
             if (ret < 0)
             {
-                throw new SunVoxException(ret, nameof(_lib.sv_get_pattern_lines));
+                throw new SunVoxException(ret, nameof(_lib.sv_get_pattern_lines),
+                    $"{nameof(slotId)}: {slotId}, {nameof(patternId)}: {patternId}.");
             }
 
             return ret;
@@ -128,7 +135,8 @@ namespace SunSharp.Native
             var ret = _lib.sv_pattern_mute(slotId, patternId, -1);
             if (ret < 0)
             {
-                throw new SunVoxException(ret, nameof(_lib.sv_pattern_mute));
+                throw new SunVoxException(ret, nameof(_lib.sv_pattern_mute),
+                    $"{nameof(slotId)}: {slotId}, {nameof(patternId)}: {patternId}.");
             }
 
             return ret == 1;
@@ -138,7 +146,7 @@ namespace SunSharp.Native
         public string? GetPatternName(int slotId, int patternId)
         {
             var ptr = _lib.sv_get_pattern_name(slotId, patternId);
-            return Marshal.PtrToStringAnsi(ptr);
+            return Marshal.PtrToStringUTF8(ptr);
         }
 
         /// <inheritdoc />
@@ -155,7 +163,8 @@ namespace SunSharp.Native
             var ret = _lib.sv_get_pattern_tracks(slotId, patternId);
             if (ret < 0)
             {
-                throw new SunVoxException(ret, nameof(_lib.sv_get_pattern_tracks));
+                throw new SunVoxException(ret, nameof(_lib.sv_get_pattern_tracks),
+                    $"{nameof(slotId)}: {slotId}, {nameof(patternId)}: {patternId}.");
             }
 
             return ret;
@@ -179,7 +188,7 @@ namespace SunSharp.Native
             var ret = _lib.sv_get_number_of_patterns(slotId);
             if (ret < 0)
             {
-                throw new SunVoxException(ret, nameof(_lib.sv_get_number_of_patterns));
+                throw new SunVoxException(ret, nameof(_lib.sv_get_number_of_patterns), $"{nameof(slotId)}: {slotId}.");
             }
 
             return ret;
@@ -191,7 +200,8 @@ namespace SunSharp.Native
             var ret = _lib.sv_remove_pattern(slotId, patternId);
             if (ret != 0)
             {
-                throw new SunVoxException(ret, nameof(_lib.sv_remove_pattern));
+                throw new SunVoxException(ret, nameof(_lib.sv_remove_pattern),
+                    $"{nameof(slotId)}: {slotId}, {nameof(patternId)}: {patternId}.");
             }
         }
 
@@ -389,7 +399,8 @@ namespace SunSharp.Native
             var ret = _lib.sv_set_pattern_event(slotId, patternId, track, line, nn, vv, mm, ccee, xxyy);
             if (ret != 0)
             {
-                throw new SunVoxException(ret, nameof(_lib.sv_set_pattern_event));
+                var details = $"{nameof(slotId)}: {slotId}, {nameof(patternId)}: {patternId}, {nameof(track)}: {track}, {nameof(line)}: {line}, {nameof(nn)}: {nn}, {nameof(vv)}: {vv}, {nameof(mm)}: {mm}, {nameof(ccee)}: {ccee}, {nameof(xxyy)}: {xxyy}.";
+                throw new SunVoxException(ret, nameof(_lib.sv_set_pattern_event), details);
             }
         }
 
@@ -399,7 +410,8 @@ namespace SunSharp.Native
             var ret = _lib.sv_set_pattern_event(slotId, patternId, track, line, ev.NN, ev.VV, ev.MM, ev.CCEE, ev.XXYY);
             if (ret != 0)
             {
-                throw new SunVoxException(ret, nameof(_lib.sv_set_pattern_event));
+                var details = $"{nameof(slotId)}: {slotId}, {nameof(patternId)}: {patternId}, {nameof(track)}: {track}, {nameof(line)}: {line}.";
+                throw new SunVoxException(ret, nameof(_lib.sv_set_pattern_event), details);
             }
         }
 
@@ -409,25 +421,27 @@ namespace SunSharp.Native
             var ret = _lib.sv_pattern_mute(slotId, patternId, muted ? 1 : 0);
             if (ret < 0)
             {
-                throw new SunVoxException(ret, nameof(_lib.sv_pattern_mute));
+                throw new SunVoxException(ret, nameof(_lib.sv_pattern_mute),
+                    $"{nameof(slotId)}: {slotId}, {nameof(patternId)}: {patternId}, {nameof(muted)}: {muted}.");
             }
         }
 
         /// <inheritdoc />
         public void SetPatternName(int slotId, int patternId, string name)
         {
-            var ptr = Marshal.StringToHGlobalAnsi(name);
+            var ptr = Marshal.StringToCoTaskMemUTF8(name);
             try
             {
                 var ret = _lib.sv_set_pattern_name(slotId, patternId, ptr);
                 if (ret != 0)
                 {
-                    throw new SunVoxException(ret, nameof(_lib.sv_set_pattern_name));
+                    throw new SunVoxException(ret, nameof(_lib.sv_set_pattern_name),
+                        $"{nameof(slotId)}: {slotId}, {nameof(patternId)}: {patternId}, {nameof(name)}: '{name ?? "<null>"}'.");
                 }
             }
             finally
             {
-                Marshal.FreeHGlobal(ptr);
+                Marshal.ZeroFreeCoTaskMemUTF8(ptr);
             }
         }
 
@@ -437,7 +451,8 @@ namespace SunSharp.Native
             var ret = _lib.sv_set_pattern_xy(slotId, patternId, x, y);
             if (ret != 0)
             {
-                throw new SunVoxException(ret, nameof(_lib.sv_set_pattern_xy));
+                var details = $"{nameof(slotId)}: {slotId}, {nameof(patternId)}: {patternId}, {nameof(x)}: {x}, {nameof(y)}: {y}.";
+                throw new SunVoxException(ret, nameof(_lib.sv_set_pattern_xy), details);
             }
         }
 
@@ -447,7 +462,8 @@ namespace SunSharp.Native
             var ret = _lib.sv_set_pattern_size(slotId, patternId, tracks ?? -1, lines ?? -1);
             if (ret < 0)
             {
-                throw new SunVoxException(ret, nameof(_lib.sv_set_pattern_size));
+                throw new SunVoxException(ret, nameof(_lib.sv_set_pattern_size),
+                    $"{nameof(slotId)}: {slotId}, {nameof(patternId)}: {patternId}, {nameof(tracks)}: {tracks}, {nameof(lines)}: {lines}.");
             }
         }
     }

@@ -1,3 +1,9 @@
+/*
+ * Do not modify this file manually.
+*/
+
+#nullable enable
+
 #pragma warning disable CA1707 // Identifiers should not contain underscores
 #pragma warning disable CA1716 // Identifiers should not match keywords
 #pragma warning disable IDE1006 // Naming Styles

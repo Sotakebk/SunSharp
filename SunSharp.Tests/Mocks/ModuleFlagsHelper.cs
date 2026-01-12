@@ -1,4 +1,4 @@
-﻿namespace SunSharp.Tests.Mocks;
+namespace SunSharp.Tests.Mocks;
 
 public static class ModuleFlagsHelper
 {

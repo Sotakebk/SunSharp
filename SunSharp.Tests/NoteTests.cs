@@ -1,4 +1,4 @@
-﻿namespace SunSharp.Tests;
+namespace SunSharp.Tests;
 
 public class NoteTests
 {
@@ -12,7 +12,7 @@ public class NoteTests
         new(Note.Play, "P!"),
         new(Note.SetPitch, "SP"),
         new(Note.Stop, "S!"),
-        new(Note.Silence, "__"),
+        new(Note.Silence, "  "),
         new(Note.CleanSynths, "CS"),
         new(Note.CleanModule, "CM"),
         new(new Note(255), "??")

@@ -1,4 +1,4 @@
-﻿using System.Runtime.InteropServices;
+using System.Runtime.InteropServices;
 using SunSharp.Native;
 
 namespace SunSharp.Tests.Native;
@@ -381,7 +381,7 @@ public class SunVoxLibNativeWrapperModulesTests
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
-        library.sv_get_module_finetune(Arg.Any<int>(), Arg.Any<int>()).Returns(moduleFineTune.Value);
+        library.sv_get_module_finetune(Arg.Any<int>(), Arg.Any<int>()).Returns(moduleFineTune.RawValue);
 
         // when
         var receivedFineTune = wrapper.GetModuleFineTune(slotId, moduleId);

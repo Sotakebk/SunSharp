@@ -1,4 +1,4 @@
-﻿using SunSharp.Native;
+using SunSharp.Native;
 using SunSharp.Redistribution;
 
 namespace SunSharp.IntegrationTests;

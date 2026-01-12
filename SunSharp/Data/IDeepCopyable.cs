@@ -1,4 +1,4 @@
-﻿namespace SunSharp.Data
+namespace SunSharp.Data
 {
     public interface IDeepCopyable<out T>
     {

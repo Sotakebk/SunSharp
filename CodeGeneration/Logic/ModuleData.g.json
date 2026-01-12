@@ -1,0 +1,3516 @@
+{
+  "Modules": {
+    "Output": {
+      "Controllers": {},
+      "Curves": {}
+    },
+    "Analog generator": {
+      "Controllers": {
+        "0": {
+          "FriendlyName": "Volume",
+          "InternalName": "Volume",
+          "MinValue": 0,
+          "MaxValue": 256
+        },
+        "1": {
+          "FriendlyName": "Waveform",
+          "InternalName": "Waveform",
+          "MinValue": 0,
+          "MaxValue": 16,
+          "EnumName": "AnalogGeneratorWaveform"
+        },
+        "2": {
+          "FriendlyName": "Panning",
+          "InternalName": "Panning",
+          "MinValue": 0,
+          "MaxValue": 256,
+          "MinDisplayedValue": -128,
+          "MaxDisplayedValue": 128
+        },
+        "3": {
+          "FriendlyName": "Attack",
+          "InternalName": "Attack",
+          "MinValue": 0,
+          "MaxValue": 256
+        },
+        "4": {
+          "FriendlyName": "Release",
+          "InternalName": "Release",
+          "MinValue": 0,
+          "MaxValue": 256
+        },
+        "5": {
+          "FriendlyName": "Sustain",
+          "InternalName": "Sustain",
+          "MinValue": 0,
+          "MaxValue": 1,
+          "EnumName": "Toggle"
+        },
+        "6": {
+          "FriendlyName": "ExponentialEnvelope",
+          "InternalName": "Exponential envelope",
+          "MinValue": 0,
+          "MaxValue": 1,
+          "EnumName": "Toggle"
+        },
+        "7": {
+          "FriendlyName": "DutyCycle",
+          "InternalName": "Duty cycle",
+          "MinValue": 0,
+          "MaxValue": 1024
+        },
+        "8": {
+          "FriendlyName": "SecondaryOscillatorPitch",
+          "InternalName": "Osc2",
+          "Description": "Pitch deviation of the additional oscillator (off in the zero position).\nOne semitone = 64.",
+          "MinValue": 0,
+          "MaxValue": 2000,
+          "MinDisplayedValue": -1000,
+          "MaxDisplayedValue": 1000
+        },
+        "9": {
+          "FriendlyName": "Filter",
+          "InternalName": "Filter",
+          "MinValue": 0,
+          "MaxValue": 8,
+          "EnumName": "AnalogGeneratorFilterType"
+        },
+        "10": {
+          "FriendlyName": "FilterFrequency",
+          "InternalName": "F.freq",
+          "MinValue": 0,
+          "MaxValue": 14000
+        },
+        "11": {
+          "FriendlyName": "FilterResonance",
+          "InternalName": "F.resonance",
+          "MinValue": 0,
+          "MaxValue": 1530
+        },
+        "12": {
+          "FriendlyName": "FilterExponentialFrequency",
+          "InternalName": "F.exponential freq",
+          "MinValue": 0,
+          "MaxValue": 1,
+          "EnumName": "Toggle"
+        },
+        "13": {
+          "FriendlyName": "FilterAttack",
+          "InternalName": "F.attack",
+          "MinValue": 0,
+          "MaxValue": 256
+        },
+        "14": {
+          "FriendlyName": "FilterRelease",
+          "InternalName": "F.release",
+          "MinValue": 0,
+          "MaxValue": 256
+        },
+        "15": {
+          "FriendlyName": "FilterEnvelope",
+          "InternalName": "F.envelope",
+          "MinValue": 0,
+          "MaxValue": 2,
+          "EnumName": "AnalogGeneratorEnvelopeMode"
+        },
+        "16": {
+          "FriendlyName": "Polyphony",
+          "InternalName": "Polyphony",
+          "MinValue": 1,
+          "MaxValue": 32,
+          "IgnoreActualType": true
+        },
+        "17": {
+          "FriendlyName": "Mode",
+          "InternalName": "Mode",
+          "Description": "Quality mode of the module.",
+          "MinValue": 0,
+          "MaxValue": 3,
+          "EnumName": "Quality"
+        },
+        "18": {
+          "FriendlyName": "Noise",
+          "InternalName": "Noise",
+          "Description": "Amount of white noise added to the signal.",
+          "MinValue": 0,
+          "MaxValue": 256
+        },
+        "19": {
+          "FriendlyName": "SecondaryOscillatorVolume",
+          "InternalName": "Osc2 volume",
+          "MinValue": 0,
+          "MaxValue": 32768
+        },
+        "20": {
+          "FriendlyName": "SecondaryOscillatorMode",
+          "InternalName": "Osc2 mode",
+          "MinValue": 0,
+          "MaxValue": 6,
+          "EnumName": "AnalogGeneratorSecondaryOscillatorMode"
+        },
+        "21": {
+          "FriendlyName": "SecondaryOscillatorPhase",
+          "InternalName": "Osc2 phase",
+          "MinValue": 0,
+          "MaxValue": 32768
+        }
+      },
+      "Curves": {
+        "0": {
+          "FriendlyName": "Synth",
+          "Size": 32,
+          "MinValue": -1,
+          "MaxValue": 1,
+          "Description": "Used for \u0027Drawn\u0027, \u0027DrawnSpline\u0027 and \u0027Harmonics\u0027 waveforms."
+        }
+      }
+    },
+    "DrumSynth": {
+      "Controllers": {
+        "0": {
+          "FriendlyName": "Volume",
+          "InternalName": "Volume",
+          "MinValue": 0,
+          "MaxValue": 512
+        },
+        "1": {
+          "FriendlyName": "Panning",
+          "InternalName": "Panning",
+          "MinValue": 0,
+          "MaxValue": 256,
+          "MinDisplayedValue": -128,
+          "MaxDisplayedValue": 128
+        },
+        "2": {
+          "FriendlyName": "Polyphony",
+          "InternalName": "Polyphony",
+          "MinValue": 1,
+          "MaxValue": 8,
+          "IgnoreActualType": true
+        },
+        "3": {
+          "FriendlyName": "BassVolume",
+          "InternalName": "Bass volume",
+          "MinValue": 0,
+          "MaxValue": 512
+        },
+        "4": {
+          "FriendlyName": "BassPower",
+          "InternalName": "Bass power",
+          "MinValue": 0,
+          "MaxValue": 256
+        },
+        "5": {
+          "FriendlyName": "BassTone",
+          "InternalName": "Bass tone",
+          "MinValue": 0,
+          "MaxValue": 256
+        },
+        "6": {
+          "FriendlyName": "BassLength",
+          "InternalName": "Bass length",
+          "MinValue": 0,
+          "MaxValue": 256
+        },
+        "7": {
+          "FriendlyName": "HihatVolume",
+          "InternalName": "Hihat volume",
+          "MinValue": 0,
+          "MaxValue": 512
+        },
+        "8": {
+          "FriendlyName": "HihatLength",
+          "InternalName": "Hihat length",
+          "MinValue": 0,
+          "MaxValue": 256
+        },
+        "9": {
+          "FriendlyName": "SnareVolume",
+          "InternalName": "Snare volume",
+          "MinValue": 0,
+          "MaxValue": 512
+        },
+        "10": {
+          "FriendlyName": "SnareTone",
+          "InternalName": "Snare tone",
+          "MinValue": 0,
+          "MaxValue": 256
+        },
+        "11": {
+          "FriendlyName": "SnareLength",
+          "InternalName": "Snare length",
+          "MinValue": 0,
+          "MaxValue": 256
+        },
+        "12": {
+          "FriendlyName": "BassPanning",
+          "InternalName": "Bass panning",
+          "MinValue": 0,
+          "MaxValue": 256,
+          "MinDisplayedValue": -128,
+          "MaxDisplayedValue": 128
+        },
+        "13": {
+          "FriendlyName": "HihatPanning",
+          "InternalName": "Hihat panning",
+          "MinValue": 0,
+          "MaxValue": 256,
+          "MinDisplayedValue": -128,
+          "MaxDisplayedValue": 128
+        },
+        "14": {
+          "FriendlyName": "SnarePanning",
+          "InternalName": "Snare panning",
+          "MinValue": 0,
+          "MaxValue": 256,
+          "MinDisplayedValue": -128,
+          "MaxDisplayedValue": 128
+        }
+      },
+      "Curves": {}
+    },
+    "FM": {
+      "Controllers": {
+        "0": {
+          "FriendlyName": "CarrierVolume",
+          "InternalName": "C.Volume",
+          "MinValue": 0,
+          "MaxValue": 256
+        },
+        "1": {
+          "FriendlyName": "ModulatorVolume",
+          "InternalName": "M.Volume",
+          "MinValue": 0,
+          "MaxValue": 256
+        },
+        "2": {
+          "FriendlyName": "Panning",
+          "InternalName": "Panning",
+          "MinValue": 0,
+          "MaxValue": 256,
+          "MinDisplayedValue": -128,
+          "MaxDisplayedValue": 128
+        },
+        "3": {
+          "FriendlyName": "CarrierFrequencyRatio",
+          "InternalName": "C.Freq ratio",
+          "MinValue": 0,
+          "MaxValue": 16
+        },
+        "4": {
+          "FriendlyName": "ModulatorFrequencyRatio",
+          "InternalName": "M.Freq ratio",
+          "MinValue": 0,
+          "MaxValue": 16
+        },
+        "5": {
+          "FriendlyName": "ModulatorSelfModulation",
+          "InternalName": "M.Self-modulation",
+          "MinValue": 0,
+          "MaxValue": 256
+        },
+        "6": {
+          "FriendlyName": "CarrierAttack",
+          "InternalName": "C.Attack",
+          "MinValue": 0,
+          "MaxValue": 512
+        },
+        "7": {
+          "FriendlyName": "CarrierDecay",
+          "InternalName": "C.Decay",
+          "MinValue": 0,
+          "MaxValue": 512
+        },
+        "8": {
+          "FriendlyName": "CarrierSustain",
+          "InternalName": "C.Sustain",
+          "MinValue": 0,
+          "MaxValue": 256
+        },
+        "9": {
+          "FriendlyName": "CarrierRelease",
+          "InternalName": "C.Release",
+          "MinValue": 0,
+          "MaxValue": 512
+        },
+        "10": {
+          "FriendlyName": "ModulatorAttack",
+          "InternalName": "M.Attack",
+          "MinValue": 0,
+          "MaxValue": 512
+        },
+        "11": {
+          "FriendlyName": "ModulatorDecay",
+          "InternalName": "M.Decay",
+          "MinValue": 0,
+          "MaxValue": 512
+        },
+        "12": {
+          "FriendlyName": "ModulatorSustain",
+          "InternalName": "M.Sustain",
+          "MinValue": 0,
+          "MaxValue": 256
+        },
+        "13": {
+          "FriendlyName": "ModulatorRelease",
+          "InternalName": "M.Release",
+          "MinValue": 0,
+          "MaxValue": 512
+        },
+        "14": {
+          "FriendlyName": "ModulatorScalingPerKey",
+          "InternalName": "M.Scaling per key",
+          "MinValue": 0,
+          "MaxValue": 4
+        },
+        "15": {
+          "FriendlyName": "Polyphony",
+          "InternalName": "Polyphony",
+          "MinValue": 1,
+          "MaxValue": 16,
+          "IgnoreActualType": true
+        },
+        "16": {
+          "FriendlyName": "Mode",
+          "InternalName": "Mode",
+          "MinValue": 0,
+          "MaxValue": 3,
+          "EnumName": "Quality"
+        }
+      },
+      "Curves": {}
+    },
+    "FMX": {
+      "Controllers": {
+        "0": {
+          "FriendlyName": "Volume",
+          "InternalName": "Volume",
+          "MinValue": 0,
+          "MaxValue": 32768
+        },
+        "1": {
+          "FriendlyName": "Panning",
+          "InternalName": "Panning",
+          "MinValue": 0,
+          "MaxValue": 256,
+          "MinDisplayedValue": -128,
+          "MaxDisplayedValue": 128
+        },
+        "2": {
+          "FriendlyName": "SampleRate",
+          "InternalName": "Sample rate",
+          "MinValue": 0,
+          "MaxValue": 6,
+          "EnumName": "FmxSampleRate"
+        },
+        "3": {
+          "FriendlyName": "Polyphony",
+          "InternalName": "Polyphony",
+          "MinValue": 1,
+          "MaxValue": 32,
+          "IgnoreActualType": true
+        },
+        "4": {
+          "FriendlyName": "Channels",
+          "InternalName": "Channels",
+          "MinValue": 0,
+          "MaxValue": 1,
+          "EnumName": "ChannelsInverted"
+        },
+        "5": {
+          "FriendlyName": "InputOperator",
+          "InternalName": "Input -\u003E Operator #",
+          "MinValue": 0,
+          "MaxValue": 5,
+          "IgnoreActualType": true
+        },
+        "6": {
+          "FriendlyName": "InputCustomWaveform",
+          "InternalName": "Input -\u003E Custom waveform",
+          "MinValue": 0,
+          "MaxValue": 2,
+          "EnumName": "FmxCustomWaveform"
+        },
+        "7": {
+          "FriendlyName": "AdsrSmoothTransitions",
+          "InternalName": "ADSR smooth transitions",
+          "MinValue": 0,
+          "MaxValue": 3,
+          "EnumName": "AdsrSmoothTransitions"
+        },
+        "8": {
+          "FriendlyName": "NoiseFilterOff32768",
+          "InternalName": "Noise filter (32768 - OFF)",
+          "MinValue": 0,
+          "MaxValue": 32768
+        },
+        "9": {
+          "FriendlyName": "Volume1",
+          "InternalName": "1 Volume",
+          "MinValue": 0,
+          "MaxValue": 32768
+        },
+        "10": {
+          "FriendlyName": "Volume2",
+          "InternalName": "2 Volume",
+          "MinValue": 0,
+          "MaxValue": 32768
+        },
+        "11": {
+          "FriendlyName": "Volume3",
+          "InternalName": "3 Volume",
+          "MinValue": 0,
+          "MaxValue": 32768
+        },
+        "12": {
+          "FriendlyName": "Volume4",
+          "InternalName": "4 Volume",
+          "MinValue": 0,
+          "MaxValue": 32768
+        },
+        "13": {
+          "FriendlyName": "Volume5",
+          "InternalName": "5 Volume",
+          "MinValue": 0,
+          "MaxValue": 32768
+        },
+        "14": {
+          "FriendlyName": "Attack1",
+          "InternalName": "1 Attack",
+          "MinValue": 0,
+          "MaxValue": 10000
+        },
+        "15": {
+          "FriendlyName": "Attack2",
+          "InternalName": "2 Attack",
+          "MinValue": 0,
+          "MaxValue": 10000
+        },
+        "16": {
+          "FriendlyName": "Attack3",
+          "InternalName": "3 Attack",
+          "MinValue": 0,
+          "MaxValue": 10000
+        },
+        "17": {
+          "FriendlyName": "Attack4",
+          "InternalName": "4 Attack",
+          "MinValue": 0,
+          "MaxValue": 10000
+        },
+        "18": {
+          "FriendlyName": "Attack5",
+          "InternalName": "5 Attack",
+          "MinValue": 0,
+          "MaxValue": 10000
+        },
+        "19": {
+          "FriendlyName": "Decay1",
+          "InternalName": "1 Decay",
+          "MinValue": 0,
+          "MaxValue": 10000
+        },
+        "20": {
+          "FriendlyName": "Decay2",
+          "InternalName": "2 Decay",
+          "MinValue": 0,
+          "MaxValue": 10000
+        },
+        "21": {
+          "FriendlyName": "Decay3",
+          "InternalName": "3 Decay",
+          "MinValue": 0,
+          "MaxValue": 10000
+        },
+        "22": {
+          "FriendlyName": "Decay4",
+          "InternalName": "4 Decay",
+          "MinValue": 0,
+          "MaxValue": 10000
+        },
+        "23": {
+          "FriendlyName": "Decay5",
+          "InternalName": "5 Decay",
+          "MinValue": 0,
+          "MaxValue": 10000
+        },
+        "24": {
+          "FriendlyName": "SustainLevel1",
+          "InternalName": "1 Sustain level",
+          "MinValue": 0,
+          "MaxValue": 32768
+        },
+        "25": {
+          "FriendlyName": "SustainLevel2",
+          "InternalName": "2 Sustain level",
+          "MinValue": 0,
+          "MaxValue": 32768
+        },
+        "26": {
+          "FriendlyName": "SustainLevel3",
+          "InternalName": "3 Sustain level",
+          "MinValue": 0,
+          "MaxValue": 32768
+        },
+        "27": {
+          "FriendlyName": "SustainLevel4",
+          "InternalName": "4 Sustain level",
+          "MinValue": 0,
+          "MaxValue": 32768
+        },
+        "28": {
+          "FriendlyName": "SustainLevel5",
+          "InternalName": "5 Sustain level",
+          "MinValue": 0,
+          "MaxValue": 32768
+        },
+        "29": {
+          "FriendlyName": "Release1",
+          "InternalName": "1 Release",
+          "MinValue": 0,
+          "MaxValue": 10000
+        },
+        "30": {
+          "FriendlyName": "Release2",
+          "InternalName": "2 Release",
+          "MinValue": 0,
+          "MaxValue": 10000
+        },
+        "31": {
+          "FriendlyName": "Release3",
+          "InternalName": "3 Release",
+          "MinValue": 0,
+          "MaxValue": 10000
+        },
+        "32": {
+          "FriendlyName": "Release4",
+          "InternalName": "4 Release",
+          "MinValue": 0,
+          "MaxValue": 10000
+        },
+        "33": {
+          "FriendlyName": "Release5",
+          "InternalName": "5 Release",
+          "MinValue": 0,
+          "MaxValue": 10000
+        },
+        "34": {
+          "FriendlyName": "AttackCurve1",
+          "InternalName": "1 Attack curve",
+          "MinValue": 0,
+          "MaxValue": 11,
+          "EnumName": "AdsrCurveType"
+        },
+        "35": {
+          "FriendlyName": "AttackCurve2",
+          "InternalName": "2 Attack curve",
+          "MinValue": 0,
+          "MaxValue": 11,
+          "EnumName": "AdsrCurveType"
+        },
+        "36": {
+          "FriendlyName": "AttackCurve3",
+          "InternalName": "3 Attack curve",
+          "MinValue": 0,
+          "MaxValue": 11,
+          "EnumName": "AdsrCurveType"
+        },
+        "37": {
+          "FriendlyName": "AttackCurve4",
+          "InternalName": "4 Attack curve",
+          "MinValue": 0,
+          "MaxValue": 11,
+          "EnumName": "AdsrCurveType"
+        },
+        "38": {
+          "FriendlyName": "AttackCurve5",
+          "InternalName": "5 Attack curve",
+          "MinValue": 0,
+          "MaxValue": 11,
+          "EnumName": "AdsrCurveType"
+        },
+        "39": {
+          "FriendlyName": "DecayCurve1",
+          "InternalName": "1 Decay curve",
+          "MinValue": 0,
+          "MaxValue": 11,
+          "EnumName": "AdsrCurveType"
+        },
+        "40": {
+          "FriendlyName": "DecayCurve2",
+          "InternalName": "2 Decay curve",
+          "MinValue": 0,
+          "MaxValue": 11,
+          "EnumName": "AdsrCurveType"
+        },
+        "41": {
+          "FriendlyName": "DecayCurve3",
+          "InternalName": "3 Decay curve",
+          "MinValue": 0,
+          "MaxValue": 11,
+          "EnumName": "AdsrCurveType"
+        },
+        "42": {
+          "FriendlyName": "DecayCurve4",
+          "InternalName": "4 Decay curve",
+          "MinValue": 0,
+          "MaxValue": 11,
+          "EnumName": "AdsrCurveType"
+        },
+        "43": {
+          "FriendlyName": "DecayCurve5",
+          "InternalName": "5 Decay curve",
+          "MinValue": 0,
+          "MaxValue": 11,
+          "EnumName": "AdsrCurveType"
+        },
+        "44": {
+          "FriendlyName": "ReleaseCurve1",
+          "InternalName": "1 Release curve",
+          "MinValue": 0,
+          "MaxValue": 11,
+          "EnumName": "AdsrCurveType"
+        },
+        "45": {
+          "FriendlyName": "ReleaseCurve2",
+          "InternalName": "2 Release curve",
+          "MinValue": 0,
+          "MaxValue": 11,
+          "EnumName": "AdsrCurveType"
+        },
+        "46": {
+          "FriendlyName": "ReleaseCurve3",
+          "InternalName": "3 Release curve",
+          "MinValue": 0,
+          "MaxValue": 11,
+          "EnumName": "AdsrCurveType"
+        },
+        "47": {
+          "FriendlyName": "ReleaseCurve4",
+          "InternalName": "4 Release curve",
+          "MinValue": 0,
+          "MaxValue": 11,
+          "EnumName": "AdsrCurveType"
+        },
+        "48": {
+          "FriendlyName": "ReleaseCurve5",
+          "InternalName": "5 Release curve",
+          "MinValue": 0,
+          "MaxValue": 11,
+          "EnumName": "AdsrCurveType"
+        },
+        "49": {
+          "FriendlyName": "Sustain1",
+          "InternalName": "1 Sustain",
+          "MinValue": 0,
+          "MaxValue": 2,
+          "EnumName": "AdsrSustainMode"
+        },
+        "50": {
+          "FriendlyName": "Sustain2",
+          "InternalName": "2 Sustain",
+          "MinValue": 0,
+          "MaxValue": 2,
+          "EnumName": "AdsrSustainMode"
+        },
+        "51": {
+          "FriendlyName": "Sustain3",
+          "InternalName": "3 Sustain",
+          "MinValue": 0,
+          "MaxValue": 2,
+          "EnumName": "AdsrSustainMode"
+        },
+        "52": {
+          "FriendlyName": "Sustain4",
+          "InternalName": "4 Sustain",
+          "MinValue": 0,
+          "MaxValue": 2,
+          "EnumName": "AdsrSustainMode"
+        },
+        "53": {
+          "FriendlyName": "Sustain5",
+          "InternalName": "5 Sustain",
+          "MinValue": 0,
+          "MaxValue": 2,
+          "EnumName": "AdsrSustainMode"
+        },
+        "54": {
+          "FriendlyName": "SustainPedal1",
+          "InternalName": "1 Sustain pedal",
+          "MinValue": 0,
+          "MaxValue": 1,
+          "EnumName": "Toggle"
+        },
+        "55": {
+          "FriendlyName": "SustainPedal2",
+          "InternalName": "2 Sustain pedal",
+          "MinValue": 0,
+          "MaxValue": 1,
+          "EnumName": "Toggle"
+        },
+        "56": {
+          "FriendlyName": "SustainPedal3",
+          "InternalName": "3 Sustain pedal",
+          "MinValue": 0,
+          "MaxValue": 1,
+          "EnumName": "Toggle"
+        },
+        "57": {
+          "FriendlyName": "SustainPedal4",
+          "InternalName": "4 Sustain pedal",
+          "MinValue": 0,
+          "MaxValue": 1,
+          "EnumName": "Toggle"
+        },
+        "58": {
+          "FriendlyName": "SustainPedal5",
+          "InternalName": "5 Sustain pedal",
+          "MinValue": 0,
+          "MaxValue": 1,
+          "EnumName": "Toggle"
+        },
+        "59": {
+          "FriendlyName": "EnvelopeScalingPerKey1",
+          "InternalName": "1 Envelope scaling per key",
+          "MinValue": 0,
+          "MaxValue": 256,
+          "MinDisplayedValue": -128,
+          "MaxDisplayedValue": 128
+        },
+        "60": {
+          "FriendlyName": "EnvelopeScalingPerKey2",
+          "InternalName": "2 Envelope scaling per key",
+          "MinValue": 0,
+          "MaxValue": 256,
+          "MinDisplayedValue": -128,
+          "MaxDisplayedValue": 128
+        },
+        "61": {
+          "FriendlyName": "EnvelopeScalingPerKey3",
+          "InternalName": "3 Envelope scaling per key",
+          "MinValue": 0,
+          "MaxValue": 256,
+          "MinDisplayedValue": -128,
+          "MaxDisplayedValue": 128
+        },
+        "62": {
+          "FriendlyName": "EnvelopeScalingPerKey4",
+          "InternalName": "4 Envelope scaling per key",
+          "MinValue": 0,
+          "MaxValue": 256,
+          "MinDisplayedValue": -128,
+          "MaxDisplayedValue": 128
+        },
+        "63": {
+          "FriendlyName": "EnvelopeScalingPerKey5",
+          "InternalName": "5 Envelope scaling per key",
+          "MinValue": 0,
+          "MaxValue": 256,
+          "MinDisplayedValue": -128,
+          "MaxDisplayedValue": 128
+        },
+        "64": {
+          "FriendlyName": "VolumeScalingPerKey1",
+          "InternalName": "1 Volume scaling per key",
+          "MinValue": 0,
+          "MaxValue": 256,
+          "MinDisplayedValue": -128,
+          "MaxDisplayedValue": 128
+        },
+        "65": {
+          "FriendlyName": "VolumeScalingPerKey2",
+          "InternalName": "2 Volume scaling per key",
+          "MinValue": 0,
+          "MaxValue": 256,
+          "MinDisplayedValue": -128,
+          "MaxDisplayedValue": 128
+        },
+        "66": {
+          "FriendlyName": "VolumeScalingPerKey3",
+          "InternalName": "3 Volume scaling per key",
+          "MinValue": 0,
+          "MaxValue": 256,
+          "MinDisplayedValue": -128,
+          "MaxDisplayedValue": 128
+        },
+        "67": {
+          "FriendlyName": "VolumeScalingPerKey4",
+          "InternalName": "4 Volume scaling per key",
+          "MinValue": 0,
+          "MaxValue": 256,
+          "MinDisplayedValue": -128,
+          "MaxDisplayedValue": 128
+        },
+        "68": {
+          "FriendlyName": "VolumeScalingPerKey5",
+          "InternalName": "5 Volume scaling per key",
+          "MinValue": 0,
+          "MaxValue": 256,
+          "MinDisplayedValue": -128,
+          "MaxDisplayedValue": 128
+        },
+        "69": {
+          "FriendlyName": "VelocitySensitivity1",
+          "InternalName": "1 Velocity sensitivity",
+          "MinValue": 0,
+          "MaxValue": 256,
+          "MinDisplayedValue": -128,
+          "MaxDisplayedValue": 128
+        },
+        "70": {
+          "FriendlyName": "VelocitySensitivity2",
+          "InternalName": "2 Velocity sensitivity",
+          "MinValue": 0,
+          "MaxValue": 256,
+          "MinDisplayedValue": -128,
+          "MaxDisplayedValue": 128
+        },
+        "71": {
+          "FriendlyName": "VelocitySensitivity3",
+          "InternalName": "3 Velocity sensitivity",
+          "MinValue": 0,
+          "MaxValue": 256,
+          "MinDisplayedValue": -128,
+          "MaxDisplayedValue": 128
+        },
+        "72": {
+          "FriendlyName": "VelocitySensitivity4",
+          "InternalName": "4 Velocity sensitivity",
+          "MinValue": 0,
+          "MaxValue": 256,
+          "MinDisplayedValue": -128,
+          "MaxDisplayedValue": 128
+        },
+        "73": {
+          "FriendlyName": "VelocitySensitivity5",
+          "InternalName": "5 Velocity sensitivity",
+          "MinValue": 0,
+          "MaxValue": 256,
+          "MinDisplayedValue": -128,
+          "MaxDisplayedValue": 128
+        },
+        "74": {
+          "FriendlyName": "Waveform1",
+          "InternalName": "1 Waveform",
+          "MinValue": 0,
+          "MaxValue": 9,
+          "EnumName": "FmxWaveform"
+        },
+        "75": {
+          "FriendlyName": "Waveform2",
+          "InternalName": "2 Waveform",
+          "MinValue": 0,
+          "MaxValue": 9,
+          "EnumName": "FmxWaveform"
+        },
+        "76": {
+          "FriendlyName": "Waveform3",
+          "InternalName": "3 Waveform",
+          "MinValue": 0,
+          "MaxValue": 9,
+          "EnumName": "FmxWaveform"
+        },
+        "77": {
+          "FriendlyName": "Waveform4",
+          "InternalName": "4 Waveform",
+          "MinValue": 0,
+          "MaxValue": 9,
+          "EnumName": "FmxWaveform"
+        },
+        "78": {
+          "FriendlyName": "Waveform5",
+          "InternalName": "5 Waveform",
+          "MinValue": 0,
+          "MaxValue": 9,
+          "EnumName": "FmxWaveform"
+        },
+        "79": {
+          "FriendlyName": "Noise1",
+          "InternalName": "1 Noise",
+          "MinValue": 0,
+          "MaxValue": 32768
+        },
+        "80": {
+          "FriendlyName": "Noise2",
+          "InternalName": "2 Noise",
+          "MinValue": 0,
+          "MaxValue": 32768
+        },
+        "81": {
+          "FriendlyName": "Noise3",
+          "InternalName": "3 Noise",
+          "MinValue": 0,
+          "MaxValue": 32768
+        },
+        "82": {
+          "FriendlyName": "Noise4",
+          "InternalName": "4 Noise",
+          "MinValue": 0,
+          "MaxValue": 32768
+        },
+        "83": {
+          "FriendlyName": "Noise5",
+          "InternalName": "5 Noise",
+          "MinValue": 0,
+          "MaxValue": 32768
+        },
+        "84": {
+          "FriendlyName": "Phase1",
+          "InternalName": "1 Phase",
+          "MinValue": 0,
+          "MaxValue": 32768
+        },
+        "85": {
+          "FriendlyName": "Phase2",
+          "InternalName": "2 Phase",
+          "MinValue": 0,
+          "MaxValue": 32768
+        },
+        "86": {
+          "FriendlyName": "Phase3",
+          "InternalName": "3 Phase",
+          "MinValue": 0,
+          "MaxValue": 32768
+        },
+        "87": {
+          "FriendlyName": "Phase4",
+          "InternalName": "4 Phase",
+          "MinValue": 0,
+          "MaxValue": 32768
+        },
+        "88": {
+          "FriendlyName": "Phase5",
+          "InternalName": "5 Phase",
+          "MinValue": 0,
+          "MaxValue": 32768
+        },
+        "89": {
+          "FriendlyName": "FreqMultiply1",
+          "InternalName": "1 Freq multiply",
+          "MinValue": 0,
+          "MaxValue": 32000
+        },
+        "90": {
+          "FriendlyName": "FreqMultiply2",
+          "InternalName": "2 Freq multiply",
+          "MinValue": 0,
+          "MaxValue": 32000
+        },
+        "91": {
+          "FriendlyName": "FreqMultiply3",
+          "InternalName": "3 Freq multiply",
+          "MinValue": 0,
+          "MaxValue": 32000
+        },
+        "92": {
+          "FriendlyName": "FreqMultiply4",
+          "InternalName": "4 Freq multiply",
+          "MinValue": 0,
+          "MaxValue": 32000
+        },
+        "93": {
+          "FriendlyName": "FreqMultiply5",
+          "InternalName": "5 Freq multiply",
+          "MinValue": 0,
+          "MaxValue": 32000
+        },
+        "94": {
+          "FriendlyName": "ConstantPitch1",
+          "InternalName": "1 Constant pitch",
+          "MinValue": 0,
+          "MaxValue": 16384,
+          "MinDisplayedValue": -8192,
+          "MaxDisplayedValue": 8192
+        },
+        "95": {
+          "FriendlyName": "ConstantPitch2",
+          "InternalName": "2 Constant pitch",
+          "MinValue": 0,
+          "MaxValue": 16384,
+          "MinDisplayedValue": -8192,
+          "MaxDisplayedValue": 8192
+        },
+        "96": {
+          "FriendlyName": "ConstantPitch3",
+          "InternalName": "3 Constant pitch",
+          "MinValue": 0,
+          "MaxValue": 16384,
+          "MinDisplayedValue": -8192,
+          "MaxDisplayedValue": 8192
+        },
+        "97": {
+          "FriendlyName": "ConstantPitch4",
+          "InternalName": "4 Constant pitch",
+          "MinValue": 0,
+          "MaxValue": 16384,
+          "MinDisplayedValue": -8192,
+          "MaxDisplayedValue": 8192
+        },
+        "98": {
+          "FriendlyName": "ConstantPitch5",
+          "InternalName": "5 Constant pitch",
+          "MinValue": 0,
+          "MaxValue": 16384,
+          "MinDisplayedValue": -8192,
+          "MaxDisplayedValue": 8192
+        },
+        "99": {
+          "FriendlyName": "SelfModulation1",
+          "InternalName": "1 Self-modulation",
+          "MinValue": 0,
+          "MaxValue": 32768
+        },
+        "100": {
+          "FriendlyName": "SelfModulation2",
+          "InternalName": "2 Self-modulation",
+          "MinValue": 0,
+          "MaxValue": 32768
+        },
+        "101": {
+          "FriendlyName": "SelfModulation3",
+          "InternalName": "3 Self-modulation",
+          "MinValue": 0,
+          "MaxValue": 32768
+        },
+        "102": {
+          "FriendlyName": "SelfModulation4",
+          "InternalName": "4 Self-modulation",
+          "MinValue": 0,
+          "MaxValue": 32768
+        },
+        "103": {
+          "FriendlyName": "SelfModulation5",
+          "InternalName": "5 Self-modulation",
+          "MinValue": 0,
+          "MaxValue": 32768
+        },
+        "104": {
+          "FriendlyName": "Feedback1",
+          "InternalName": "1 Feedback",
+          "MinValue": 0,
+          "MaxValue": 32768
+        },
+        "105": {
+          "FriendlyName": "Feedback2",
+          "InternalName": "2 Feedback",
+          "MinValue": 0,
+          "MaxValue": 32768
+        },
+        "106": {
+          "FriendlyName": "Feedback3",
+          "InternalName": "3 Feedback",
+          "MinValue": 0,
+          "MaxValue": 32768
+        },
+        "107": {
+          "FriendlyName": "Feedback4",
+          "InternalName": "4 Feedback",
+          "MinValue": 0,
+          "MaxValue": 32768
+        },
+        "108": {
+          "FriendlyName": "Feedback5",
+          "InternalName": "5 Feedback",
+          "MinValue": 0,
+          "MaxValue": 32768
+        },
+        "109": {
+          "FriendlyName": "ModulationType1",
+          "InternalName": "1 Modulation type",
+          "MinValue": 0,
+          "MaxValue": 9,
+          "EnumName": "FmxModulationType"
+        },
+        "110": {
+          "FriendlyName": "ModulationType2",
+          "InternalName": "2 Modulation type",
+          "MinValue": 0,
+          "MaxValue": 9,
+          "EnumName": "FmxModulationType"
+        },
+        "111": {
+          "FriendlyName": "ModulationType3",
+          "InternalName": "3 Modulation type",
+          "MinValue": 0,
+          "MaxValue": 9,
+          "EnumName": "FmxModulationType"
+        },
+        "112": {
+          "FriendlyName": "ModulationType4",
+          "InternalName": "4 Modulation type",
+          "MinValue": 0,
+          "MaxValue": 9,
+          "EnumName": "FmxModulationType"
+        },
+        "113": {
+          "FriendlyName": "ModulationType5",
+          "InternalName": "5 Modulation type",
+          "MinValue": 0,
+          "MaxValue": 9,
+          "EnumName": "FmxModulationType"
+        },
+        "114": {
+          "FriendlyName": "OutputMode1",
+          "InternalName": "1 Output mode",
+          "MinValue": 0,
+          "MaxValue": 31,
+          "IgnoreActualType": true
+        },
+        "115": {
+          "FriendlyName": "OutputMode2",
+          "InternalName": "2 Output mode",
+          "MinValue": 0,
+          "MaxValue": 15,
+          "IgnoreActualType": true
+        },
+        "116": {
+          "FriendlyName": "OutputMode3",
+          "InternalName": "3 Output mode",
+          "MinValue": 0,
+          "MaxValue": 7,
+          "IgnoreActualType": true
+        },
+        "117": {
+          "FriendlyName": "OutputMode4",
+          "InternalName": "4 Output mode",
+          "MinValue": 0,
+          "MaxValue": 3,
+          "IgnoreActualType": true
+        },
+        "118": {
+          "FriendlyName": "EnvelopeGain",
+          "InternalName": "Envelope gain",
+          "MinValue": 0,
+          "MaxValue": 8000
+        }
+      },
+      "Curves": {
+        "0": {
+          "FriendlyName": "CustomWaveform",
+          "Size": 256,
+          "MinValue": -1,
+          "MaxValue": 1,
+          "Description": "Used as a waveform where \u0027Custom\u0027 waveform type was applied."
+        }
+      }
+    },
+    "Generator": {
+      "Controllers": {
+        "0": {
+          "FriendlyName": "Volume",
+          "InternalName": "Volume",
+          "MinValue": 0,
+          "MaxValue": 256
+        },
+        "1": {
+          "FriendlyName": "Waveform",
+          "InternalName": "Waveform",
+          "MinValue": 0,
+          "MaxValue": 8,
+          "EnumName": "GeneratorWaveform"
+        },
+        "2": {
+          "FriendlyName": "Panning",
+          "InternalName": "Panning",
+          "MinValue": 0,
+          "MaxValue": 256,
+          "MinDisplayedValue": -128,
+          "MaxDisplayedValue": 128
+        },
+        "3": {
+          "FriendlyName": "Attack",
+          "InternalName": "Attack",
+          "MinValue": 0,
+          "MaxValue": 512
+        },
+        "4": {
+          "FriendlyName": "Release",
+          "InternalName": "Release",
+          "MinValue": 0,
+          "MaxValue": 512
+        },
+        "5": {
+          "FriendlyName": "Polyphony",
+          "InternalName": "Polyphony",
+          "MinValue": 1,
+          "MaxValue": 16,
+          "IgnoreActualType": true
+        },
+        "6": {
+          "FriendlyName": "Mode",
+          "InternalName": "Mode",
+          "MinValue": 0,
+          "MaxValue": 1,
+          "EnumName": "Channels"
+        },
+        "7": {
+          "FriendlyName": "Sustain",
+          "InternalName": "Sustain",
+          "MinValue": 0,
+          "MaxValue": 1,
+          "EnumName": "Toggle"
+        },
+        "8": {
+          "FriendlyName": "FreqModulationByInput",
+          "InternalName": "Freq.modulation by input",
+          "MinValue": 0,
+          "MaxValue": 256
+        },
+        "9": {
+          "FriendlyName": "DutyCycle",
+          "InternalName": "Duty cycle",
+          "MinValue": 0,
+          "MaxValue": 1022
+        }
+      },
+      "Curves": {
+        "0": {
+          "FriendlyName": "Synth",
+          "Size": 32,
+          "MinValue": -1,
+          "MaxValue": 1,
+          "Description": "Used for \u0027Drawn\u0027, \u0027DrawnSpline\u0027 and \u0027Harmonics\u0027 waveforms."
+        }
+      }
+    },
+    "Input": {
+      "Controllers": {
+        "0": {
+          "FriendlyName": "Volume",
+          "InternalName": "Volume",
+          "MinValue": 0,
+          "MaxValue": 1024
+        },
+        "1": {
+          "FriendlyName": "Channels",
+          "InternalName": "Channels",
+          "MinValue": 0,
+          "MaxValue": 1,
+          "EnumName": "ChannelsInverted"
+        }
+      },
+      "Curves": {}
+    },
+    "Kicker": {
+      "Controllers": {
+        "0": {
+          "FriendlyName": "Volume",
+          "InternalName": "Volume",
+          "MinValue": 0,
+          "MaxValue": 256
+        },
+        "1": {
+          "FriendlyName": "Waveform",
+          "InternalName": "Waveform",
+          "MinValue": 0,
+          "MaxValue": 2,
+          "EnumName": "KickerWaveform"
+        },
+        "2": {
+          "FriendlyName": "Panning",
+          "InternalName": "Panning",
+          "MinValue": 0,
+          "MaxValue": 256,
+          "MinDisplayedValue": -128,
+          "MaxDisplayedValue": 128
+        },
+        "3": {
+          "FriendlyName": "Attack",
+          "InternalName": "Attack",
+          "MinValue": 0,
+          "MaxValue": 512
+        },
+        "4": {
+          "FriendlyName": "Release",
+          "InternalName": "Release",
+          "MinValue": 0,
+          "MaxValue": 512
+        },
+        "5": {
+          "FriendlyName": "Boost",
+          "InternalName": "Boost",
+          "MinValue": 0,
+          "MaxValue": 1024
+        },
+        "6": {
+          "FriendlyName": "Acceleration",
+          "InternalName": "Acceleration",
+          "MinValue": 0,
+          "MaxValue": 1024
+        },
+        "7": {
+          "FriendlyName": "Polyphony",
+          "InternalName": "Polyphony",
+          "MinValue": 1,
+          "MaxValue": 4,
+          "IgnoreActualType": true
+        },
+        "8": {
+          "FriendlyName": "NoClick",
+          "InternalName": "No click",
+          "MinValue": 0,
+          "MaxValue": 1,
+          "EnumName": "Toggle"
+        }
+      },
+      "Curves": {}
+    },
+    "Vorbis player": {
+      "Controllers": {
+        "0": {
+          "FriendlyName": "Volume",
+          "InternalName": "Volume",
+          "MinValue": 0,
+          "MaxValue": 512
+        },
+        "1": {
+          "FriendlyName": "OriginalSpeed",
+          "InternalName": "Original speed",
+          "MinValue": 0,
+          "MaxValue": 1,
+          "EnumName": "Toggle"
+        },
+        "2": {
+          "FriendlyName": "Finetune",
+          "InternalName": "Finetune",
+          "MinValue": -128,
+          "MaxValue": 128
+        },
+        "3": {
+          "FriendlyName": "Transpose",
+          "InternalName": "Transpose",
+          "MinValue": 0,
+          "MaxValue": 256,
+          "MinDisplayedValue": -128,
+          "MaxDisplayedValue": 128,
+          "IgnoreActualType": true
+        },
+        "4": {
+          "FriendlyName": "Interpolation",
+          "InternalName": "Interpolation",
+          "MinValue": 0,
+          "MaxValue": 1,
+          "EnumName": "Toggle"
+        },
+        "5": {
+          "FriendlyName": "Polyphony",
+          "InternalName": "Polyphony",
+          "MinValue": 1,
+          "MaxValue": 4,
+          "IgnoreActualType": true
+        },
+        "6": {
+          "FriendlyName": "Repeat",
+          "InternalName": "Repeat",
+          "MinValue": 0,
+          "MaxValue": 1,
+          "EnumName": "Toggle"
+        }
+      },
+      "Curves": {}
+    },
+    "Sampler": {
+      "Controllers": {
+        "0": {
+          "FriendlyName": "Volume",
+          "InternalName": "Volume",
+          "MinValue": 0,
+          "MaxValue": 512
+        },
+        "1": {
+          "FriendlyName": "Panning",
+          "InternalName": "Panning",
+          "MinValue": 0,
+          "MaxValue": 256,
+          "MinDisplayedValue": -128,
+          "MaxDisplayedValue": 128
+        },
+        "2": {
+          "FriendlyName": "SampleInterpolation",
+          "InternalName": "Sample interpolation",
+          "MinValue": 0,
+          "MaxValue": 2,
+          "EnumName": "SamplerInterpolation"
+        },
+        "3": {
+          "FriendlyName": "EnvelopeInterpolation",
+          "InternalName": "Envelope interpolation",
+          "MinValue": 0,
+          "MaxValue": 1,
+          "EnumName": "SamplerEnvelopeInterpolation"
+        },
+        "4": {
+          "FriendlyName": "Polyphony",
+          "InternalName": "Polyphony",
+          "MinValue": 1,
+          "MaxValue": 32,
+          "IgnoreActualType": true
+        },
+        "5": {
+          "FriendlyName": "RecThreshold",
+          "InternalName": "Rec threshold",
+          "MinValue": 0,
+          "MaxValue": 10000
+        }
+      },
+      "Curves": {}
+    },
+    "SpectraVoice": {
+      "Controllers": {
+        "0": {
+          "FriendlyName": "Volume",
+          "InternalName": "Volume",
+          "MinValue": 0,
+          "MaxValue": 256
+        },
+        "1": {
+          "FriendlyName": "Panning",
+          "InternalName": "Panning",
+          "MinValue": 0,
+          "MaxValue": 256,
+          "MinDisplayedValue": -128,
+          "MaxDisplayedValue": 128
+        },
+        "2": {
+          "FriendlyName": "Attack",
+          "InternalName": "Attack",
+          "MinValue": 0,
+          "MaxValue": 512
+        },
+        "3": {
+          "FriendlyName": "Release",
+          "InternalName": "Release",
+          "MinValue": 0,
+          "MaxValue": 512
+        },
+        "4": {
+          "FriendlyName": "Polyphony",
+          "InternalName": "Polyphony",
+          "MinValue": 1,
+          "MaxValue": 32,
+          "IgnoreActualType": true
+        },
+        "5": {
+          "FriendlyName": "Mode",
+          "InternalName": "Mode",
+          "MinValue": 0,
+          "MaxValue": 4,
+          "EnumName": "SpectraVoiceMode"
+        },
+        "6": {
+          "FriendlyName": "Sustain",
+          "InternalName": "Sustain",
+          "MinValue": 0,
+          "MaxValue": 1,
+          "EnumName": "Toggle"
+        },
+        "7": {
+          "FriendlyName": "SpectrumResolution",
+          "InternalName": "Spectrum resolution",
+          "MinValue": 0,
+          "MaxValue": 5,
+          "EnumName": "SpectraVoiceResolution"
+        },
+        "8": {
+          "FriendlyName": "Harmonic",
+          "InternalName": "Harmonic",
+          "MinValue": 0,
+          "MaxValue": 15,
+          "IgnoreActualType": true
+        },
+        "9": {
+          "FriendlyName": "HFreq",
+          "InternalName": "H.freq",
+          "MinValue": 0,
+          "MaxValue": 22050,
+          "IgnoreActualType": true
+        },
+        "10": {
+          "FriendlyName": "HVolume",
+          "InternalName": "H.volume",
+          "MinValue": 0,
+          "MaxValue": 255,
+          "IgnoreActualType": true
+        },
+        "11": {
+          "FriendlyName": "HWidth",
+          "InternalName": "H.width",
+          "MinValue": 0,
+          "MaxValue": 255,
+          "IgnoreActualType": true
+        },
+        "12": {
+          "FriendlyName": "HType",
+          "InternalName": "H.type",
+          "MinValue": 0,
+          "MaxValue": 18,
+          "EnumName": "SpectraVoiceHarmonicType"
+        }
+      },
+      "Curves": {}
+    },
+    "Amplifier": {
+      "Controllers": {
+        "0": {
+          "FriendlyName": "Volume",
+          "InternalName": "Volume",
+          "MinValue": 0,
+          "MaxValue": 1024
+        },
+        "1": {
+          "FriendlyName": "Balance",
+          "InternalName": "Balance",
+          "MinValue": 0,
+          "MaxValue": 256,
+          "MinDisplayedValue": -128,
+          "MaxDisplayedValue": 128
+        },
+        "2": {
+          "FriendlyName": "DcOffset",
+          "InternalName": "DC Offset",
+          "MinValue": 0,
+          "MaxValue": 256,
+          "MinDisplayedValue": -128,
+          "MaxDisplayedValue": 128
+        },
+        "3": {
+          "FriendlyName": "Inverse",
+          "InternalName": "Inverse",
+          "MinValue": 0,
+          "MaxValue": 1,
+          "EnumName": "Toggle"
+        },
+        "4": {
+          "FriendlyName": "StereoWidth",
+          "InternalName": "Stereo width",
+          "MinValue": 0,
+          "MaxValue": 256
+        },
+        "5": {
+          "FriendlyName": "Absolute",
+          "InternalName": "Absolute",
+          "MinValue": 0,
+          "MaxValue": 1,
+          "EnumName": "Toggle"
+        },
+        "6": {
+          "FriendlyName": "FineVolume",
+          "InternalName": "Fine volume",
+          "MinValue": 0,
+          "MaxValue": 32768
+        },
+        "7": {
+          "FriendlyName": "Gain",
+          "InternalName": "Gain",
+          "MinValue": 0,
+          "MaxValue": 5000
+        },
+        "8": {
+          "FriendlyName": "BipolarDcOffset",
+          "InternalName": "Bipolar DC Offset",
+          "MinValue": 0,
+          "MaxValue": 32768,
+          "MinDisplayedValue": -16384,
+          "MaxDisplayedValue": 16384
+        }
+      },
+      "Curves": {}
+    },
+    "Compressor": {
+      "Controllers": {
+        "0": {
+          "FriendlyName": "Volume",
+          "InternalName": "Volume",
+          "MinValue": 0,
+          "MaxValue": 512
+        },
+        "1": {
+          "FriendlyName": "Threshold",
+          "InternalName": "Threshold",
+          "MinValue": 0,
+          "MaxValue": 512
+        },
+        "2": {
+          "FriendlyName": "Slope",
+          "InternalName": "Slope",
+          "MinValue": 0,
+          "MaxValue": 200
+        },
+        "3": {
+          "FriendlyName": "Attack",
+          "InternalName": "Attack",
+          "MinValue": 0,
+          "MaxValue": 500
+        },
+        "4": {
+          "FriendlyName": "Release",
+          "InternalName": "Release",
+          "MinValue": 1,
+          "MaxValue": 1000
+        },
+        "5": {
+          "FriendlyName": "Mode",
+          "InternalName": "Mode",
+          "MinValue": 0,
+          "MaxValue": 2,
+          "EnumName": "CompressorMode"
+        },
+        "6": {
+          "FriendlyName": "SideChainInput",
+          "InternalName": "Side-chain input",
+          "MinValue": 0,
+          "MaxValue": 32,
+          "IgnoreActualType": true
+        }
+      },
+      "Curves": {}
+    },
+    "DC Blocker": {
+      "Controllers": {
+        "0": {
+          "FriendlyName": "Channels",
+          "InternalName": "Channels",
+          "MinValue": 0,
+          "MaxValue": 1,
+          "EnumName": "Channels"
+        }
+      },
+      "Curves": {}
+    },
+    "Delay": {
+      "Controllers": {
+        "0": {
+          "FriendlyName": "Dry",
+          "InternalName": "Dry",
+          "MinValue": 0,
+          "MaxValue": 512
+        },
+        "1": {
+          "FriendlyName": "Wet",
+          "InternalName": "Wet",
+          "MinValue": 0,
+          "MaxValue": 512
+        },
+        "2": {
+          "FriendlyName": "DelayL",
+          "InternalName": "Delay L",
+          "MinValue": 0,
+          "MaxValue": 256
+        },
+        "3": {
+          "FriendlyName": "DelayR",
+          "InternalName": "Delay R",
+          "MinValue": 0,
+          "MaxValue": 256
+        },
+        "4": {
+          "FriendlyName": "VolumeL",
+          "InternalName": "Volume L",
+          "MinValue": 0,
+          "MaxValue": 256
+        },
+        "5": {
+          "FriendlyName": "VolumeR",
+          "InternalName": "Volume R",
+          "MinValue": 0,
+          "MaxValue": 256
+        },
+        "6": {
+          "FriendlyName": "Channels",
+          "InternalName": "Channels",
+          "MinValue": 0,
+          "MaxValue": 1,
+          "EnumName": "Channels"
+        },
+        "7": {
+          "FriendlyName": "Inverse",
+          "InternalName": "Inverse",
+          "MinValue": 0,
+          "MaxValue": 1,
+          "EnumName": "Toggle"
+        },
+        "8": {
+          "FriendlyName": "DelayUnit",
+          "InternalName": "Delay unit",
+          "MinValue": 0,
+          "MaxValue": 9,
+          "EnumName": "DelayUnit"
+        },
+        "9": {
+          "FriendlyName": "DelayMultiplier",
+          "InternalName": "Delay multiplier",
+          "MinValue": 1,
+          "MaxValue": 15,
+          "IgnoreActualType": true
+        },
+        "10": {
+          "FriendlyName": "Feedback",
+          "InternalName": "Feedback",
+          "MinValue": 0,
+          "MaxValue": 32768
+        }
+      },
+      "Curves": {}
+    },
+    "Distortion": {
+      "Controllers": {
+        "0": {
+          "FriendlyName": "Volume",
+          "InternalName": "Volume",
+          "MinValue": 0,
+          "MaxValue": 256
+        },
+        "1": {
+          "FriendlyName": "DistortionType",
+          "InternalName": "Type",
+          "MinValue": 0,
+          "MaxValue": 10,
+          "EnumName": "DistortionType"
+        },
+        "2": {
+          "FriendlyName": "Power",
+          "InternalName": "Power",
+          "MinValue": 0,
+          "MaxValue": 256
+        },
+        "3": {
+          "FriendlyName": "BitDepth",
+          "InternalName": "Bit depth",
+          "MinValue": 1,
+          "MaxValue": 16,
+          "IgnoreActualType": true
+        },
+        "4": {
+          "FriendlyName": "Freq",
+          "InternalName": "Freq",
+          "MinValue": 0,
+          "MaxValue": 44100
+        },
+        "5": {
+          "FriendlyName": "Noise",
+          "InternalName": "Noise",
+          "MinValue": 0,
+          "MaxValue": 256
+        }
+      },
+      "Curves": {}
+    },
+    "Echo": {
+      "Controllers": {
+        "0": {
+          "FriendlyName": "Dry",
+          "InternalName": "Dry",
+          "MinValue": 0,
+          "MaxValue": 256
+        },
+        "1": {
+          "FriendlyName": "Wet",
+          "InternalName": "Wet",
+          "MinValue": 0,
+          "MaxValue": 256
+        },
+        "2": {
+          "FriendlyName": "Feedback",
+          "InternalName": "Feedback",
+          "MinValue": 0,
+          "MaxValue": 256
+        },
+        "3": {
+          "FriendlyName": "Delay",
+          "InternalName": "Delay",
+          "MinValue": 0,
+          "MaxValue": 256
+        },
+        "4": {
+          "FriendlyName": "RightChannelOffset",
+          "InternalName": "Right channel offset",
+          "MinValue": 0,
+          "MaxValue": 1,
+          "EnumName": "Toggle"
+        },
+        "5": {
+          "FriendlyName": "DelayUnit",
+          "InternalName": "Delay unit",
+          "MinValue": 0,
+          "MaxValue": 6,
+          "EnumName": "EchoDelayUnit"
+        },
+        "6": {
+          "FriendlyName": "RightChannelOffsetDelay",
+          "InternalName": "Right channel offset",
+          "Description": "Expressed as Delay/32768.",
+          "MinValue": 0,
+          "MaxValue": 32768
+        },
+        "7": {
+          "FriendlyName": "Filter",
+          "InternalName": "Filter",
+          "MinValue": 0,
+          "MaxValue": 2,
+          "EnumName": "EchoFilter"
+        },
+        "8": {
+          "FriendlyName": "FFreq",
+          "InternalName": "F.freq",
+          "MinValue": 0,
+          "MaxValue": 22000
+        }
+      },
+      "Curves": {}
+    },
+    "EQ": {
+      "Controllers": {
+        "0": {
+          "FriendlyName": "Low",
+          "InternalName": "Low",
+          "MinValue": 0,
+          "MaxValue": 512
+        },
+        "1": {
+          "FriendlyName": "Middle",
+          "InternalName": "Middle",
+          "MinValue": 0,
+          "MaxValue": 512
+        },
+        "2": {
+          "FriendlyName": "High",
+          "InternalName": "High",
+          "MinValue": 0,
+          "MaxValue": 512
+        },
+        "3": {
+          "FriendlyName": "Channels",
+          "InternalName": "Channels",
+          "MinValue": 0,
+          "MaxValue": 1,
+          "EnumName": "Channels"
+        }
+      },
+      "Curves": {}
+    },
+    "FFT": {
+      "Controllers": {
+        "0": {
+          "FriendlyName": "SampleRate",
+          "InternalName": "Sample rate",
+          "MinValue": 0,
+          "MaxValue": 9,
+          "EnumName": "FftSampleRate"
+        },
+        "1": {
+          "FriendlyName": "Channels",
+          "InternalName": "Channels",
+          "MinValue": 0,
+          "MaxValue": 1,
+          "EnumName": "ChannelsInverted"
+        },
+        "2": {
+          "FriendlyName": "BufferSamples",
+          "InternalName": "Buffer (samples)",
+          "MinValue": 0,
+          "MaxValue": 7,
+          "EnumName": "FftBufferSize"
+        },
+        "3": {
+          "FriendlyName": "BufOverlap",
+          "InternalName": "Buf overlap",
+          "MinValue": 0,
+          "MaxValue": 2,
+          "EnumName": "FftBufferOverlap"
+        },
+        "4": {
+          "FriendlyName": "Feedback",
+          "InternalName": "Feedback",
+          "MinValue": 0,
+          "MaxValue": 32768
+        },
+        "5": {
+          "FriendlyName": "NoiseReduction",
+          "InternalName": "Noise reduction",
+          "MinValue": 0,
+          "MaxValue": 32768
+        },
+        "6": {
+          "FriendlyName": "PhaseGainNorm16384",
+          "InternalName": "Phase gain (norm=16384)",
+          "MinValue": 0,
+          "MaxValue": 32768,
+          "IgnoreActualType": true
+        },
+        "7": {
+          "FriendlyName": "AllPassFilter",
+          "InternalName": "All-pass filter",
+          "MinValue": 0,
+          "MaxValue": 32768
+        },
+        "8": {
+          "FriendlyName": "FrequencySpread",
+          "InternalName": "Frequency spread",
+          "MinValue": 0,
+          "MaxValue": 32768
+        },
+        "9": {
+          "FriendlyName": "RandomPhase",
+          "InternalName": "Random phase",
+          "MinValue": 0,
+          "MaxValue": 32768
+        },
+        "10": {
+          "FriendlyName": "RandomPhaseLite",
+          "InternalName": "Random phase (lite)",
+          "MinValue": 0,
+          "MaxValue": 32768
+        },
+        "11": {
+          "FriendlyName": "FreqShift",
+          "InternalName": "Freq shift",
+          "MinValue": 0,
+          "MaxValue": 8192,
+          "MinDisplayedValue": -4096,
+          "MaxDisplayedValue": 4096
+        },
+        "12": {
+          "FriendlyName": "Deform1",
+          "InternalName": "Deform1",
+          "MinValue": 0,
+          "MaxValue": 32768
+        },
+        "13": {
+          "FriendlyName": "Deform2",
+          "InternalName": "Deform2",
+          "MinValue": 0,
+          "MaxValue": 32768
+        },
+        "14": {
+          "FriendlyName": "HpCutoff",
+          "InternalName": "HP cutoff",
+          "MinValue": 0,
+          "MaxValue": 32768
+        },
+        "15": {
+          "FriendlyName": "LpCutoff",
+          "InternalName": "LP cutoff",
+          "MinValue": 0,
+          "MaxValue": 32768
+        },
+        "16": {
+          "FriendlyName": "Volume",
+          "InternalName": "Volume",
+          "MinValue": 0,
+          "MaxValue": 32768
+        }
+      },
+      "Curves": {}
+    },
+    "Filter": {
+      "Controllers": {
+        "0": {
+          "FriendlyName": "Volume",
+          "InternalName": "Volume",
+          "MinValue": 0,
+          "MaxValue": 256
+        },
+        "1": {
+          "FriendlyName": "Freq",
+          "InternalName": "Freq",
+          "MinValue": 0,
+          "MaxValue": 14000
+        },
+        "2": {
+          "FriendlyName": "Resonance",
+          "InternalName": "Resonance",
+          "MinValue": 0,
+          "MaxValue": 1530
+        },
+        "3": {
+          "FriendlyName": "FilterType",
+          "InternalName": "Type",
+          "MinValue": 0,
+          "MaxValue": 3,
+          "EnumName": "FilterType"
+        },
+        "4": {
+          "FriendlyName": "Response",
+          "InternalName": "Response",
+          "MinValue": 0,
+          "MaxValue": 256
+        },
+        "5": {
+          "FriendlyName": "Mode",
+          "InternalName": "Mode",
+          "MinValue": 0,
+          "MaxValue": 3,
+          "EnumName": "Quality"
+        },
+        "6": {
+          "FriendlyName": "Impulse",
+          "InternalName": "Impulse",
+          "MinValue": 0,
+          "MaxValue": 14000
+        },
+        "7": {
+          "FriendlyName": "Mix",
+          "InternalName": "Mix",
+          "MinValue": 0,
+          "MaxValue": 256
+        },
+        "8": {
+          "FriendlyName": "LfoFreq",
+          "InternalName": "LFO freq",
+          "MinValue": 0,
+          "MaxValue": 1024
+        },
+        "9": {
+          "FriendlyName": "LfoAmp",
+          "InternalName": "LFO amp",
+          "MinValue": 0,
+          "MaxValue": 256
+        },
+        "10": {
+          "FriendlyName": "SetLfoPhase",
+          "InternalName": "Set LFO phase",
+          "MinValue": 0,
+          "MaxValue": 256
+        },
+        "11": {
+          "FriendlyName": "ExponentialFreq",
+          "InternalName": "Exponential freq",
+          "MinValue": 0,
+          "MaxValue": 1,
+          "EnumName": "Toggle"
+        },
+        "12": {
+          "FriendlyName": "RollOff",
+          "InternalName": "Roll-off",
+          "MinValue": 0,
+          "MaxValue": 3,
+          "EnumName": "FilterRollOff"
+        },
+        "13": {
+          "FriendlyName": "LfoFreqUnit",
+          "InternalName": "LFO freq unit",
+          "MinValue": 0,
+          "MaxValue": 6,
+          "EnumName": "FilterLfoFrequencyUnit"
+        },
+        "14": {
+          "FriendlyName": "LfoWaveform",
+          "InternalName": "LFO waveform",
+          "MinValue": 0,
+          "MaxValue": 4,
+          "EnumName": "FilterLfoWaveform"
+        }
+      },
+      "Curves": {}
+    },
+    "Filter Pro": {
+      "Controllers": {
+        "0": {
+          "FriendlyName": "Volume",
+          "InternalName": "Volume",
+          "MinValue": 0,
+          "MaxValue": 32768
+        },
+        "1": {
+          "FriendlyName": "FilterType",
+          "InternalName": "Type",
+          "MinValue": 0,
+          "MaxValue": 10,
+          "EnumName": "FilterProType"
+        },
+        "2": {
+          "FriendlyName": "Freq",
+          "InternalName": "Freq",
+          "MinValue": 0,
+          "MaxValue": 22000
+        },
+        "3": {
+          "FriendlyName": "FreqFinetune",
+          "InternalName": "Freq finetune",
+          "MinValue": 0,
+          "MaxValue": 2000,
+          "MinDisplayedValue": -1000,
+          "MaxDisplayedValue": 1000
+        },
+        "4": {
+          "FriendlyName": "FreqScale",
+          "InternalName": "Freq scale",
+          "MinValue": 0,
+          "MaxValue": 200
+        },
+        "5": {
+          "FriendlyName": "ExponentialFreq",
+          "InternalName": "Exponential freq",
+          "MinValue": 0,
+          "MaxValue": 1,
+          "EnumName": "Toggle"
+        },
+        "6": {
+          "FriendlyName": "Q",
+          "InternalName": "Q",
+          "MinValue": 0,
+          "MaxValue": 32768
+        },
+        "7": {
+          "FriendlyName": "Gain",
+          "InternalName": "Gain",
+          "MinValue": 0,
+          "MaxValue": 32768,
+          "MinDisplayedValue": -16384,
+          "MaxDisplayedValue": 16384
+        },
+        "8": {
+          "FriendlyName": "RollOff",
+          "InternalName": "Roll-off",
+          "MinValue": 0,
+          "MaxValue": 3,
+          "EnumName": "FilterProRollOff"
+        },
+        "9": {
+          "FriendlyName": "Response",
+          "InternalName": "Response",
+          "MinValue": 0,
+          "MaxValue": 1000
+        },
+        "10": {
+          "FriendlyName": "Mode",
+          "InternalName": "Mode",
+          "MinValue": 0,
+          "MaxValue": 3,
+          "EnumName": "FilterProMode"
+        },
+        "11": {
+          "FriendlyName": "Mix",
+          "InternalName": "Mix",
+          "MinValue": 0,
+          "MaxValue": 32768
+        },
+        "12": {
+          "FriendlyName": "LfoFreq",
+          "InternalName": "LFO freq",
+          "MinValue": 0,
+          "MaxValue": 1024
+        },
+        "13": {
+          "FriendlyName": "LfoAmp",
+          "InternalName": "LFO amp",
+          "MinValue": 0,
+          "MaxValue": 32768
+        },
+        "14": {
+          "FriendlyName": "LfoWaveform",
+          "InternalName": "LFO waveform",
+          "MinValue": 0,
+          "MaxValue": 4,
+          "EnumName": "FilterLfoWaveform"
+        },
+        "15": {
+          "FriendlyName": "SetLfoPhase",
+          "InternalName": "Set LFO phase",
+          "MinValue": 0,
+          "MaxValue": 256
+        },
+        "16": {
+          "FriendlyName": "LfoFreqUnit",
+          "InternalName": "LFO freq unit",
+          "MinValue": 0,
+          "MaxValue": 6,
+          "EnumName": "FilterLfoFrequencyUnit"
+        }
+      },
+      "Curves": {}
+    },
+    "Flanger": {
+      "Controllers": {
+        "0": {
+          "FriendlyName": "Dry",
+          "InternalName": "Dry",
+          "MinValue": 0,
+          "MaxValue": 256
+        },
+        "1": {
+          "FriendlyName": "Wet",
+          "InternalName": "Wet",
+          "MinValue": 0,
+          "MaxValue": 256
+        },
+        "2": {
+          "FriendlyName": "Feedback",
+          "InternalName": "Feedback",
+          "MinValue": 0,
+          "MaxValue": 256
+        },
+        "3": {
+          "FriendlyName": "Delay",
+          "InternalName": "Delay",
+          "MinValue": 8,
+          "MaxValue": 1000
+        },
+        "4": {
+          "FriendlyName": "Response",
+          "InternalName": "Response",
+          "MinValue": 0,
+          "MaxValue": 256
+        },
+        "5": {
+          "FriendlyName": "LfoFreq",
+          "InternalName": "LFO freq",
+          "MinValue": 0,
+          "MaxValue": 512
+        },
+        "6": {
+          "FriendlyName": "LfoAmp",
+          "InternalName": "LFO amp",
+          "MinValue": 0,
+          "MaxValue": 256
+        },
+        "7": {
+          "FriendlyName": "LfoWaveform",
+          "InternalName": "LFO waveform",
+          "MinValue": 0,
+          "MaxValue": 1,
+          "EnumName": "FlangerLfoWaveform"
+        },
+        "8": {
+          "FriendlyName": "SetLfoPhase",
+          "InternalName": "Set LFO phase",
+          "MinValue": 0,
+          "MaxValue": 256
+        },
+        "9": {
+          "FriendlyName": "LfoFreqUnit",
+          "InternalName": "LFO freq unit",
+          "MinValue": 0,
+          "MaxValue": 6,
+          "EnumName": "FlangerLfoFrequencyUnit"
+        }
+      },
+      "Curves": {}
+    },
+    "LFO": {
+      "Controllers": {
+        "0": {
+          "FriendlyName": "Volume",
+          "InternalName": "Volume",
+          "MinValue": 0,
+          "MaxValue": 512
+        },
+        "1": {
+          "FriendlyName": "FilterType",
+          "InternalName": "Type",
+          "MinValue": 0,
+          "MaxValue": 1,
+          "EnumName": "LfoType"
+        },
+        "2": {
+          "FriendlyName": "Amplitude",
+          "InternalName": "Amplitude",
+          "MinValue": 0,
+          "MaxValue": 256
+        },
+        "3": {
+          "FriendlyName": "Freq",
+          "InternalName": "Freq",
+          "MinValue": 1,
+          "MaxValue": 256
+        },
+        "4": {
+          "FriendlyName": "Waveform",
+          "InternalName": "Waveform",
+          "MinValue": 0,
+          "MaxValue": 7,
+          "EnumName": "LfoWaveform"
+        },
+        "5": {
+          "FriendlyName": "SetPhase",
+          "InternalName": "Set phase",
+          "MinValue": 0,
+          "MaxValue": 256
+        },
+        "6": {
+          "FriendlyName": "Channels",
+          "InternalName": "Channels",
+          "MinValue": 0,
+          "MaxValue": 1,
+          "EnumName": "Channels"
+        },
+        "7": {
+          "FriendlyName": "FrequencyUnit",
+          "InternalName": "Frequency unit",
+          "MinValue": 0,
+          "MaxValue": 6,
+          "EnumName": "LfoFrequencyUnit"
+        },
+        "8": {
+          "FriendlyName": "DutyCycle",
+          "InternalName": "Duty cycle",
+          "MinValue": 0,
+          "MaxValue": 256
+        },
+        "9": {
+          "FriendlyName": "Generator",
+          "InternalName": "Generator",
+          "MinValue": 0,
+          "MaxValue": 1,
+          "EnumName": "Toggle"
+        },
+        "10": {
+          "FriendlyName": "FreqScale",
+          "InternalName": "Freq scale",
+          "MinValue": 0,
+          "MaxValue": 200
+        },
+        "11": {
+          "FriendlyName": "SmoothTransitions",
+          "InternalName": "Smooth transitions",
+          "MinValue": 0,
+          "MaxValue": 1,
+          "EnumName": "LfoSmoothTransitions"
+        },
+        "12": {
+          "FriendlyName": "SineQuality",
+          "InternalName": "Sine quality",
+          "MinValue": 0,
+          "MaxValue": 3,
+          "EnumName": "LfoSineQuality"
+        }
+      },
+      "Curves": {}
+    },
+    "Loop": {
+      "Controllers": {
+        "0": {
+          "FriendlyName": "Volume",
+          "InternalName": "Volume",
+          "MinValue": 0,
+          "MaxValue": 256
+        },
+        "1": {
+          "FriendlyName": "Length",
+          "InternalName": "Length",
+          "MinValue": 0,
+          "MaxValue": 256
+        },
+        "2": {
+          "FriendlyName": "Channels",
+          "InternalName": "Channels",
+          "MinValue": 0,
+          "MaxValue": 1,
+          "EnumName": "ChannelsInverted"
+        },
+        "3": {
+          "FriendlyName": "RepeatEndless128",
+          "InternalName": "Repeat (128=endless)",
+          "MinValue": 0,
+          "MaxValue": 128,
+          "IgnoreActualType": true
+        },
+        "4": {
+          "FriendlyName": "Mode",
+          "InternalName": "Mode",
+          "MinValue": 0,
+          "MaxValue": 1,
+          "EnumName": "LoopMode"
+        },
+        "5": {
+          "FriendlyName": "LengthUnit",
+          "InternalName": "Length unit",
+          "MinValue": 0,
+          "MaxValue": 6,
+          "EnumName": "LoopTimeUnit"
+        },
+        "6": {
+          "FriendlyName": "MaxBufferSize",
+          "InternalName": "Max buffer size",
+          "Description": "Max buffer size in seconds",
+          "MinValue": 1,
+          "MaxValue": 240,
+          "IgnoreActualType": true
+        },
+        "7": {
+          "FriendlyName": "OnNoteon",
+          "InternalName": "On NoteON",
+          "MinValue": 0,
+          "MaxValue": 1,
+          "EnumName": "LoopOnNoteOn"
+        }
+      },
+      "Curves": {}
+    },
+    "Modulator": {
+      "Controllers": {
+        "0": {
+          "FriendlyName": "Volume",
+          "InternalName": "Volume",
+          "MinValue": 0,
+          "MaxValue": 512
+        },
+        "1": {
+          "FriendlyName": "ModulationType",
+          "InternalName": "Modulation type",
+          "MinValue": 0,
+          "MaxValue": 2,
+          "EnumName": "ModulationType"
+        },
+        "2": {
+          "FriendlyName": "Channels",
+          "InternalName": "Channels",
+          "MinValue": 0,
+          "MaxValue": 1,
+          "EnumName": "Channels"
+        }
+      },
+      "Curves": {}
+    },
+    "Pitch shifter": {
+      "Controllers": {
+        "0": {
+          "FriendlyName": "Volume",
+          "InternalName": "Volume",
+          "MinValue": 0,
+          "MaxValue": 512
+        },
+        "1": {
+          "FriendlyName": "Pitch",
+          "InternalName": "Pitch",
+          "MinValue": 0,
+          "MaxValue": 1200,
+          "MinDisplayedValue": -600,
+          "MaxDisplayedValue": 600
+        },
+        "2": {
+          "FriendlyName": "PitchScale",
+          "InternalName": "Pitch scale",
+          "MinValue": 0,
+          "MaxValue": 200
+        },
+        "3": {
+          "FriendlyName": "Feedback",
+          "InternalName": "Feedback",
+          "MinValue": 0,
+          "MaxValue": 256
+        },
+        "4": {
+          "FriendlyName": "GrainSize",
+          "InternalName": "Grain size",
+          "MinValue": 0,
+          "MaxValue": 256
+        },
+        "5": {
+          "FriendlyName": "Mode",
+          "InternalName": "Mode",
+          "MinValue": 0,
+          "MaxValue": 3,
+          "EnumName": "Quality"
+        },
+        "6": {
+          "FriendlyName": "BypassIfPitch0",
+          "InternalName": "Bypass if pitch=0",
+          "MinValue": 0,
+          "MaxValue": 2,
+          "EnumName": "PitchShifterBypassMode"
+        }
+      },
+      "Curves": {}
+    },
+    "Reverb": {
+      "Controllers": {
+        "0": {
+          "FriendlyName": "Dry",
+          "InternalName": "Dry",
+          "MinValue": 0,
+          "MaxValue": 256
+        },
+        "1": {
+          "FriendlyName": "Wet",
+          "InternalName": "Wet",
+          "MinValue": 0,
+          "MaxValue": 256
+        },
+        "2": {
+          "FriendlyName": "Feedback",
+          "InternalName": "Feedback",
+          "MinValue": 0,
+          "MaxValue": 256
+        },
+        "3": {
+          "FriendlyName": "Damp",
+          "InternalName": "Damp",
+          "MinValue": 0,
+          "MaxValue": 256
+        },
+        "4": {
+          "FriendlyName": "StereoWidth",
+          "InternalName": "Stereo width",
+          "MinValue": 0,
+          "MaxValue": 256
+        },
+        "5": {
+          "FriendlyName": "Freeze",
+          "InternalName": "Freeze",
+          "MinValue": 0,
+          "MaxValue": 1,
+          "EnumName": "Toggle"
+        },
+        "6": {
+          "FriendlyName": "Mode",
+          "InternalName": "Mode",
+          "MinValue": 0,
+          "MaxValue": 3,
+          "EnumName": "Quality"
+        },
+        "7": {
+          "FriendlyName": "AllPassFilter",
+          "InternalName": "All-pass filter",
+          "MinValue": 0,
+          "MaxValue": 1,
+          "EnumName": "Toggle"
+        },
+        "8": {
+          "FriendlyName": "RoomSize",
+          "InternalName": "Room size",
+          "MinValue": 0,
+          "MaxValue": 128
+        },
+        "9": {
+          "FriendlyName": "RandomSeed",
+          "InternalName": "Random seed",
+          "MinValue": 0,
+          "MaxValue": 32768,
+          "IgnoreActualType": true
+        }
+      },
+      "Curves": {}
+    },
+    "Vocal filter": {
+      "Controllers": {
+        "0": {
+          "FriendlyName": "Volume",
+          "InternalName": "Volume",
+          "MinValue": 0,
+          "MaxValue": 512
+        },
+        "1": {
+          "FriendlyName": "FormantWidth",
+          "InternalName": "Formant width",
+          "MinValue": 0,
+          "MaxValue": 256
+        },
+        "2": {
+          "FriendlyName": "Intensity",
+          "InternalName": "Intensity",
+          "MinValue": 0,
+          "MaxValue": 256
+        },
+        "3": {
+          "FriendlyName": "Formants",
+          "InternalName": "Formants",
+          "MinValue": 1,
+          "MaxValue": 5,
+          "IgnoreActualType": true
+        },
+        "4": {
+          "FriendlyName": "VowelAEIOU",
+          "InternalName": "Vowel (a,e,i,o,u)",
+          "MinValue": 0,
+          "MaxValue": 256
+        },
+        "5": {
+          "FriendlyName": "VoiceType",
+          "InternalName": "Voice type",
+          "MinValue": 0,
+          "MaxValue": 3,
+          "EnumName": "VocalFilterVoiceType"
+        },
+        "6": {
+          "FriendlyName": "Channels",
+          "InternalName": "Channels",
+          "MinValue": 0,
+          "MaxValue": 1,
+          "EnumName": "Channels"
+        },
+        "7": {
+          "FriendlyName": "RandomFrequency",
+          "InternalName": "Random frequency",
+          "MinValue": 0,
+          "MaxValue": 1024
+        },
+        "8": {
+          "FriendlyName": "RandomSeed",
+          "InternalName": "Random seed",
+          "MinValue": 0,
+          "MaxValue": 32768
+        },
+        "9": {
+          "FriendlyName": "Vowel1",
+          "InternalName": "Vowel1",
+          "MinValue": 0,
+          "MaxValue": 4,
+          "EnumName": "VocalFilterVowel"
+        },
+        "10": {
+          "FriendlyName": "Vowel2",
+          "InternalName": "Vowel2",
+          "MinValue": 0,
+          "MaxValue": 4,
+          "EnumName": "VocalFilterVowel"
+        },
+        "11": {
+          "FriendlyName": "Vowel3",
+          "InternalName": "Vowel3",
+          "MinValue": 0,
+          "MaxValue": 4,
+          "EnumName": "VocalFilterVowel"
+        },
+        "12": {
+          "FriendlyName": "Vowel4",
+          "InternalName": "Vowel4",
+          "MinValue": 0,
+          "MaxValue": 4,
+          "EnumName": "VocalFilterVowel"
+        },
+        "13": {
+          "FriendlyName": "Vowel5",
+          "InternalName": "Vowel5",
+          "MinValue": 0,
+          "MaxValue": 4,
+          "EnumName": "VocalFilterVowel"
+        }
+      },
+      "Curves": {}
+    },
+    "Vibrato": {
+      "Controllers": {
+        "0": {
+          "FriendlyName": "Volume",
+          "InternalName": "Volume",
+          "MinValue": 0,
+          "MaxValue": 256
+        },
+        "1": {
+          "FriendlyName": "Amplitude",
+          "InternalName": "Amplitude",
+          "MinValue": 0,
+          "MaxValue": 256
+        },
+        "2": {
+          "FriendlyName": "Freq",
+          "InternalName": "Freq",
+          "MinValue": 1,
+          "MaxValue": 2048
+        },
+        "3": {
+          "FriendlyName": "Channels",
+          "InternalName": "Channels",
+          "MinValue": 0,
+          "MaxValue": 1,
+          "EnumName": "Channels"
+        },
+        "4": {
+          "FriendlyName": "SetPhase",
+          "InternalName": "Set phase",
+          "MinValue": 0,
+          "MaxValue": 256
+        },
+        "5": {
+          "FriendlyName": "FrequencyUnit",
+          "InternalName": "Frequency unit",
+          "MinValue": 0,
+          "MaxValue": 6,
+          "EnumName": "VibratoFrequencyUnit"
+        },
+        "6": {
+          "FriendlyName": "ExponentialAmplitude",
+          "InternalName": "Exponential amplitude",
+          "MinValue": 0,
+          "MaxValue": 1,
+          "EnumName": "Toggle"
+        }
+      },
+      "Curves": {}
+    },
+    "WaveShaper": {
+      "Controllers": {
+        "0": {
+          "FriendlyName": "InputVolume",
+          "InternalName": "Input volume",
+          "MinValue": 0,
+          "MaxValue": 512
+        },
+        "1": {
+          "FriendlyName": "Mix",
+          "InternalName": "Mix",
+          "MinValue": 0,
+          "MaxValue": 256
+        },
+        "2": {
+          "FriendlyName": "OutputVolume",
+          "InternalName": "Output volume",
+          "MinValue": 0,
+          "MaxValue": 512
+        },
+        "3": {
+          "FriendlyName": "Symmetric",
+          "InternalName": "Symmetric",
+          "MinValue": 0,
+          "MaxValue": 1,
+          "EnumName": "Toggle"
+        },
+        "4": {
+          "FriendlyName": "Mode",
+          "InternalName": "Mode",
+          "MinValue": 0,
+          "MaxValue": 3,
+          "EnumName": "Quality"
+        },
+        "5": {
+          "FriendlyName": "DcBlocker",
+          "InternalName": "DC blocker",
+          "MinValue": 0,
+          "MaxValue": 1,
+          "EnumName": "Toggle"
+        }
+      },
+      "Curves": {
+        "0": {
+          "FriendlyName": "ValueMap",
+          "Size": 256,
+          "MinValue": 0,
+          "MaxValue": 1,
+          "Description": "Maps input to output."
+        }
+      }
+    },
+    "ADSR": {
+      "Controllers": {
+        "0": {
+          "FriendlyName": "Volume",
+          "InternalName": "Volume",
+          "MinValue": 0,
+          "MaxValue": 32768
+        },
+        "1": {
+          "FriendlyName": "Attack",
+          "InternalName": "Attack",
+          "MinValue": 0,
+          "MaxValue": 10000
+        },
+        "2": {
+          "FriendlyName": "Decay",
+          "InternalName": "Decay",
+          "MinValue": 0,
+          "MaxValue": 10000
+        },
+        "3": {
+          "FriendlyName": "SustainLevel",
+          "InternalName": "Sustain level",
+          "MinValue": 0,
+          "MaxValue": 32768
+        },
+        "4": {
+          "FriendlyName": "Release",
+          "InternalName": "Release",
+          "MinValue": 0,
+          "MaxValue": 10000
+        },
+        "5": {
+          "FriendlyName": "AttackCurve",
+          "InternalName": "Attack curve",
+          "MinValue": 0,
+          "MaxValue": 11,
+          "EnumName": "AdsrCurveType"
+        },
+        "6": {
+          "FriendlyName": "DecayCurve",
+          "InternalName": "Decay curve",
+          "MinValue": 0,
+          "MaxValue": 11,
+          "EnumName": "AdsrCurveType"
+        },
+        "7": {
+          "FriendlyName": "ReleaseCurve",
+          "InternalName": "Release curve",
+          "MinValue": 0,
+          "MaxValue": 11,
+          "EnumName": "AdsrCurveType"
+        },
+        "8": {
+          "FriendlyName": "Sustain",
+          "InternalName": "Sustain",
+          "MinValue": 0,
+          "MaxValue": 2,
+          "EnumName": "AdsrSustainMode"
+        },
+        "9": {
+          "FriendlyName": "SustainPedal",
+          "InternalName": "Sustain pedal",
+          "MinValue": 0,
+          "MaxValue": 1,
+          "EnumName": "Toggle"
+        },
+        "10": {
+          "FriendlyName": "State",
+          "InternalName": "State",
+          "MinValue": 0,
+          "MaxValue": 1,
+          "EnumName": "Toggle"
+        },
+        "11": {
+          "FriendlyName": "OnNoteon",
+          "InternalName": "On NoteON",
+          "MinValue": 0,
+          "MaxValue": 2,
+          "EnumName": "AdsrOnNoteOnBehaviour"
+        },
+        "12": {
+          "FriendlyName": "OnNoteoff",
+          "InternalName": "On NoteOFF",
+          "MinValue": 0,
+          "MaxValue": 2,
+          "EnumName": "AdsrOnNoteOffBehaviour"
+        },
+        "13": {
+          "FriendlyName": "Mode",
+          "InternalName": "Mode",
+          "MinValue": 0,
+          "MaxValue": 2,
+          "EnumName": "AdsrMode"
+        },
+        "14": {
+          "FriendlyName": "SmoothTransitions",
+          "InternalName": "Smooth transitions",
+          "MinValue": 0,
+          "MaxValue": 3,
+          "EnumName": "AdsrSmoothTransitions"
+        }
+      },
+      "Curves": {}
+    },
+    "Ctl2Note": {
+      "Controllers": {
+        "0": {
+          "FriendlyName": "Pitch",
+          "InternalName": "Pitch",
+          "MinValue": 0,
+          "MaxValue": 32768
+        },
+        "1": {
+          "FriendlyName": "FirstNote",
+          "InternalName": "First note",
+          "MinValue": 0,
+          "MaxValue": 120,
+          "IgnoreActualType": true
+        },
+        "2": {
+          "FriendlyName": "RangeNumberOfSemitones",
+          "InternalName": "Range (number of semitones)",
+          "MinValue": 0,
+          "MaxValue": 120,
+          "IgnoreActualType": true
+        },
+        "3": {
+          "FriendlyName": "Transpose",
+          "InternalName": "Transpose",
+          "MinValue": 0,
+          "MaxValue": 256,
+          "MinDisplayedValue": -128,
+          "MaxDisplayedValue": 128,
+          "IgnoreActualType": true
+        },
+        "4": {
+          "FriendlyName": "Finetune",
+          "InternalName": "Finetune",
+          "MinValue": 0,
+          "MaxValue": 512,
+          "MinDisplayedValue": -256,
+          "MaxDisplayedValue": 256
+        },
+        "5": {
+          "FriendlyName": "Velocity",
+          "InternalName": "Velocity",
+          "MinValue": 0,
+          "MaxValue": 256
+        },
+        "6": {
+          "FriendlyName": "State",
+          "InternalName": "State",
+          "MinValue": 0,
+          "MaxValue": 1,
+          "EnumName": "Toggle"
+        },
+        "7": {
+          "FriendlyName": "Noteon",
+          "InternalName": "NoteON",
+          "MinValue": 0,
+          "MaxValue": 1,
+          "EnumName": "ControlToNoteOnBehaviour"
+        },
+        "8": {
+          "FriendlyName": "Noteoff",
+          "InternalName": "NoteOFF",
+          "MinValue": 0,
+          "MaxValue": 2,
+          "EnumName": "ControlToNoteOffBehaviour"
+        },
+        "9": {
+          "FriendlyName": "RecordNotes",
+          "InternalName": "Record notes",
+          "MinValue": 0,
+          "MaxValue": 1,
+          "EnumName": "Toggle"
+        }
+      },
+      "Curves": {}
+    },
+    "Feedback": {
+      "Controllers": {
+        "0": {
+          "FriendlyName": "Volume",
+          "InternalName": "Volume",
+          "MinValue": 0,
+          "MaxValue": 10000
+        },
+        "1": {
+          "FriendlyName": "Channels",
+          "InternalName": "Channels",
+          "MinValue": 0,
+          "MaxValue": 1,
+          "EnumName": "Channels"
+        }
+      },
+      "Curves": {}
+    },
+    "Glide": {
+      "Controllers": {
+        "0": {
+          "FriendlyName": "Response",
+          "InternalName": "Response",
+          "MinValue": 0,
+          "MaxValue": 1000
+        },
+        "1": {
+          "FriendlyName": "SampleRate",
+          "InternalName": "Sample rate",
+          "MinValue": 1,
+          "MaxValue": 32768
+        },
+        "2": {
+          "FriendlyName": "ResetOnStNote1",
+          "InternalName": "Reset on 1st note",
+          "MinValue": 0,
+          "MaxValue": 1,
+          "EnumName": "Toggle"
+        },
+        "3": {
+          "FriendlyName": "Polyphony",
+          "InternalName": "Polyphony",
+          "MinValue": 0,
+          "MaxValue": 1,
+          "EnumName": "Toggle"
+        },
+        "4": {
+          "FriendlyName": "Pitch",
+          "InternalName": "Pitch",
+          "MinValue": 0,
+          "MaxValue": 1200,
+          "MinDisplayedValue": -600,
+          "MaxDisplayedValue": 600
+        },
+        "5": {
+          "FriendlyName": "PitchScale",
+          "InternalName": "Pitch scale",
+          "MinValue": 0,
+          "MaxValue": 200
+        },
+        "6": {
+          "FriendlyName": "Reset",
+          "InternalName": "Reset",
+          "MinValue": 0,
+          "MaxValue": 1,
+          "EnumName": "Toggle"
+        }
+      },
+      "Curves": {}
+    },
+    "GPIO": {
+      "Controllers": {
+        "0": {
+          "FriendlyName": "Out",
+          "InternalName": "Out",
+          "MinValue": 0,
+          "MaxValue": 1,
+          "EnumName": "Toggle"
+        },
+        "1": {
+          "FriendlyName": "OutPin",
+          "InternalName": "Out pin",
+          "MinValue": 0,
+          "MaxValue": 256,
+          "IgnoreActualType": true
+        },
+        "2": {
+          "FriendlyName": "OutThreshold",
+          "InternalName": "Out threshold",
+          "MinValue": 0,
+          "MaxValue": 100
+        },
+        "3": {
+          "FriendlyName": "In",
+          "InternalName": "In",
+          "MinValue": 0,
+          "MaxValue": 1,
+          "EnumName": "Toggle"
+        },
+        "4": {
+          "FriendlyName": "InPin",
+          "InternalName": "In pin",
+          "MinValue": 0,
+          "MaxValue": 256,
+          "IgnoreActualType": true
+        },
+        "5": {
+          "FriendlyName": "InNote",
+          "InternalName": "In note",
+          "MinValue": 0,
+          "MaxValue": 128,
+          "IgnoreActualType": true
+        },
+        "6": {
+          "FriendlyName": "InAmplitude",
+          "InternalName": "In amplitude",
+          "MinValue": 0,
+          "MaxValue": 100
+        }
+      },
+      "Curves": {}
+    },
+    "MetaModule": {
+      "Controllers": {
+        "0": {
+          "FriendlyName": "Volume",
+          "InternalName": "Volume",
+          "MinValue": 0,
+          "MaxValue": 1024
+        },
+        "1": {
+          "FriendlyName": "InputModule",
+          "InternalName": "Input module",
+          "MinValue": 1,
+          "MaxValue": 256,
+          "IgnoreActualType": true
+        },
+        "2": {
+          "FriendlyName": "PlayPatterns",
+          "InternalName": "Play patterns",
+          "MinValue": 0,
+          "MaxValue": 4,
+          "EnumName": "MetaModulePatternMode"
+        },
+        "3": {
+          "FriendlyName": "BeatsPerMinute",
+          "InternalName": "BPM (Beats Per Minute)",
+          "MinValue": 1,
+          "MaxValue": 1000,
+          "IgnoreActualType": true
+        },
+        "4": {
+          "FriendlyName": "TicksPerLine",
+          "InternalName": "TPL (Ticks Per Line)",
+          "MinValue": 1,
+          "MaxValue": 31,
+          "IgnoreActualType": true
+        },
+        "5": {
+          "FriendlyName": "",
+          "InternalName": "...",
+          "MinValue": 0,
+          "MaxValue": 256
+        },
+        "6": {
+          "FriendlyName": "",
+          "InternalName": "...",
+          "MinValue": 0,
+          "MaxValue": 256
+        },
+        "7": {
+          "FriendlyName": "",
+          "InternalName": "...",
+          "MinValue": 0,
+          "MaxValue": 256
+        }
+      },
+      "Curves": {}
+    },
+    "MultiCtl": {
+      "Controllers": {
+        "0": {
+          "FriendlyName": "Value",
+          "InternalName": "Value",
+          "MinValue": 0,
+          "MaxValue": 32768
+        },
+        "1": {
+          "FriendlyName": "Gain",
+          "InternalName": "Gain",
+          "MinValue": 0,
+          "MaxValue": 1024
+        },
+        "2": {
+          "FriendlyName": "Quantization",
+          "InternalName": "Quantization",
+          "MinValue": 0,
+          "MaxValue": 32768
+        },
+        "3": {
+          "FriendlyName": "OutOffset",
+          "InternalName": "OUT offset",
+          "MinValue": 0,
+          "MaxValue": 32768,
+          "MinDisplayedValue": -16384,
+          "MaxDisplayedValue": 16384
+        },
+        "4": {
+          "FriendlyName": "Response",
+          "InternalName": "Response",
+          "MinValue": 0,
+          "MaxValue": 1000
+        },
+        "5": {
+          "FriendlyName": "SampleRate",
+          "InternalName": "Sample rate",
+          "MinValue": 1,
+          "MaxValue": 32768
+        }
+      },
+      "Curves": {
+        "0": {
+          "FriendlyName": "ValueMap",
+          "Size": 257,
+          "MinValue": 0,
+          "MaxValue": 1,
+          "Description": "Modifies values."
+        }
+      }
+    },
+    "MultiSynth": {
+      "Controllers": {
+        "0": {
+          "FriendlyName": "Transpose",
+          "InternalName": "Transpose",
+          "MinValue": 0,
+          "MaxValue": 256,
+          "MinDisplayedValue": -128,
+          "MaxDisplayedValue": 128,
+          "IgnoreActualType": true
+        },
+        "1": {
+          "FriendlyName": "RandomPitch",
+          "InternalName": "Random pitch",
+          "MinValue": 0,
+          "MaxValue": 4096
+        },
+        "2": {
+          "FriendlyName": "Velocity",
+          "InternalName": "Velocity",
+          "MinValue": 0,
+          "MaxValue": 256
+        },
+        "3": {
+          "FriendlyName": "Finetune",
+          "InternalName": "Finetune",
+          "MinValue": 0,
+          "MaxValue": 512,
+          "MinDisplayedValue": -256,
+          "MaxDisplayedValue": 256
+        },
+        "4": {
+          "FriendlyName": "RandomPhase",
+          "InternalName": "Random phase",
+          "MinValue": 0,
+          "MaxValue": 32768
+        },
+        "5": {
+          "FriendlyName": "RandomVelocity",
+          "InternalName": "Random velocity",
+          "MinValue": 0,
+          "MaxValue": 32768
+        },
+        "6": {
+          "FriendlyName": "Phase",
+          "InternalName": "Phase",
+          "MinValue": 0,
+          "MaxValue": 32768
+        },
+        "7": {
+          "FriendlyName": "Curve2Influence",
+          "InternalName": "Curve2 influence",
+          "MinValue": 0,
+          "MaxValue": 256
+        }
+      },
+      "Curves": {
+        "0": {
+          "FriendlyName": "NoteToVelocity",
+          "Size": 128,
+          "MinValue": 0,
+          "MaxValue": 1,
+          "Description": "Velocity to apply to arriving note."
+        },
+        "1": {
+          "FriendlyName": "VelocityToVelocity",
+          "Size": 257,
+          "MinValue": 0,
+          "MaxValue": 1,
+          "Description": "Map velocity values."
+        },
+        "2": {
+          "FriendlyName": "NoteToPitch",
+          "Size": 128,
+          "MinValue": 0.2500038,
+          "MaxValue": 0.74610513,
+          "Description": "Map incoming note to a pitch value."
+        }
+      }
+    },
+    "Pitch2Ctl": {
+      "Controllers": {
+        "0": {
+          "FriendlyName": "Mode",
+          "InternalName": "Mode",
+          "MinValue": 0,
+          "MaxValue": 1,
+          "EnumName": "PitchToControlMode"
+        },
+        "1": {
+          "FriendlyName": "OnNoteoff",
+          "InternalName": "On NoteOFF",
+          "MinValue": 0,
+          "MaxValue": 2,
+          "EnumName": "PitchToControlOnNoteOff"
+        },
+        "2": {
+          "FriendlyName": "FirstNote",
+          "InternalName": "First note",
+          "MinValue": 0,
+          "MaxValue": 256,
+          "IgnoreActualType": true
+        },
+        "3": {
+          "FriendlyName": "Range",
+          "InternalName": "Range (number of semitones)",
+          "MinValue": 0,
+          "MaxValue": 256,
+          "IgnoreActualType": true
+        },
+        "4": {
+          "FriendlyName": "OutMin",
+          "InternalName": "OUT min",
+          "MinValue": 0,
+          "MaxValue": 32768
+        },
+        "5": {
+          "FriendlyName": "OutMax",
+          "InternalName": "OUT max",
+          "MinValue": 0,
+          "MaxValue": 32768
+        },
+        "6": {
+          "FriendlyName": "OutController",
+          "InternalName": "OUT controller",
+          "MinValue": 0,
+          "MaxValue": 255,
+          "IgnoreActualType": true
+        }
+      },
+      "Curves": {}
+    },
+    "Pitch Detector": {
+      "Controllers": {
+        "0": {
+          "FriendlyName": "Algorithm",
+          "InternalName": "Algorithm",
+          "MinValue": 0,
+          "MaxValue": 2,
+          "EnumName": "PitchDetectorAlgorithm"
+        },
+        "1": {
+          "FriendlyName": "Threshold",
+          "InternalName": "Threshold",
+          "MinValue": 0,
+          "MaxValue": 10000
+        },
+        "2": {
+          "FriendlyName": "Gain",
+          "InternalName": "Gain",
+          "MinValue": 0,
+          "MaxValue": 256
+        },
+        "3": {
+          "FriendlyName": "Microtones",
+          "InternalName": "Microtones",
+          "MinValue": 0,
+          "MaxValue": 1,
+          "EnumName": "Toggle"
+        },
+        "4": {
+          "FriendlyName": "DetectorFinetune",
+          "InternalName": "Detector finetune",
+          "MinValue": 0,
+          "MaxValue": 512,
+          "MinDisplayedValue": -256,
+          "MaxDisplayedValue": 256
+        },
+        "5": {
+          "FriendlyName": "LpFilterFreqOff0",
+          "InternalName": "LP filter freq (0 - OFF)",
+          "MinValue": 0,
+          "MaxValue": 4000
+        },
+        "6": {
+          "FriendlyName": "LpFilterRollOff",
+          "InternalName": "LP filter roll-off",
+          "MinValue": 0,
+          "MaxValue": 3,
+          "EnumName": "FilterRollOff"
+        },
+        "7": {
+          "FriendlyName": "AlgSampleRateHz12",
+          "InternalName": "Alg1-2 Sample rate (Hz)",
+          "MinValue": 0,
+          "MaxValue": 2,
+          "EnumName": "PitchDetectorAlgSampleRate"
+        },
+        "8": {
+          "FriendlyName": "AlgBufferMs12",
+          "InternalName": "Alg1-2 Buffer (ms)",
+          "MinValue": 0,
+          "MaxValue": 4,
+          "EnumName": "PitchDetectorBufferSize"
+        },
+        "9": {
+          "FriendlyName": "AlgBufOverlap12",
+          "InternalName": "Alg1-2 Buf overlap",
+          "MinValue": 0,
+          "MaxValue": 100
+        },
+        "10": {
+          "FriendlyName": "AlgSensitivityAbsoluteThreshold1",
+          "InternalName": "Alg1 Sensitivity (absolute threshold)",
+          "MinValue": 0,
+          "MaxValue": 100
+        },
+        "11": {
+          "FriendlyName": "RecordNotes",
+          "InternalName": "Record notes",
+          "MinValue": 0,
+          "MaxValue": 1,
+          "EnumName": "Toggle"
+        }
+      },
+      "Curves": {}
+    },
+    "Sound2Ctl": {
+      "Controllers": {
+        "0": {
+          "FriendlyName": "SampleRate",
+          "InternalName": "Sample rate",
+          "MinValue": 1,
+          "MaxValue": 32768
+        },
+        "1": {
+          "FriendlyName": "Channels",
+          "InternalName": "Channels",
+          "MinValue": 0,
+          "MaxValue": 1,
+          "EnumName": "ChannelsInverted"
+        },
+        "2": {
+          "FriendlyName": "Absolute",
+          "InternalName": "Absolute",
+          "MinValue": 0,
+          "MaxValue": 1,
+          "EnumName": "Toggle"
+        },
+        "3": {
+          "FriendlyName": "Gain",
+          "InternalName": "Gain",
+          "MinValue": 0,
+          "MaxValue": 1024
+        },
+        "4": {
+          "FriendlyName": "Smooth",
+          "InternalName": "Smooth",
+          "MinValue": 0,
+          "MaxValue": 256
+        },
+        "5": {
+          "FriendlyName": "Mode",
+          "InternalName": "Mode",
+          "MinValue": 0,
+          "MaxValue": 1,
+          "EnumName": "SoundToControlMode"
+        },
+        "6": {
+          "FriendlyName": "OutMin",
+          "InternalName": "OUT min",
+          "MinValue": 0,
+          "MaxValue": 32768
+        },
+        "7": {
+          "FriendlyName": "OutMax",
+          "InternalName": "OUT max",
+          "MinValue": 0,
+          "MaxValue": 32768
+        },
+        "8": {
+          "FriendlyName": "OutController",
+          "InternalName": "OUT controller",
+          "MinValue": 0,
+          "MaxValue": 255,
+          "IgnoreActualType": true
+        }
+      },
+      "Curves": {}
+    },
+    "Velocity2Ctl": {
+      "Controllers": {
+        "0": {
+          "FriendlyName": "OnNoteoff",
+          "InternalName": "On NoteOFF",
+          "MinValue": 0,
+          "MaxValue": 2,
+          "EnumName": "VelocityToControlOnNoteOff"
+        },
+        "1": {
+          "FriendlyName": "OutMin",
+          "InternalName": "OUT min",
+          "MinValue": 0,
+          "MaxValue": 32768
+        },
+        "2": {
+          "FriendlyName": "OutMax",
+          "InternalName": "OUT max",
+          "MinValue": 0,
+          "MaxValue": 32768
+        },
+        "3": {
+          "FriendlyName": "OutOffset",
+          "InternalName": "OUT offset",
+          "MinValue": 0,
+          "MaxValue": 32768,
+          "MinDisplayedValue": -16384,
+          "MaxDisplayedValue": 16384
+        },
+        "4": {
+          "FriendlyName": "OutController",
+          "InternalName": "OUT controller",
+          "MinValue": 0,
+          "MaxValue": 255,
+          "IgnoreActualType": true
+        }
+      },
+      "Curves": {}
+    }
+  },
+  "$schema": "./schema.g.json"
+}

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Runtime.InteropServices;
 using SunSharp.Native.Loader;
 
@@ -60,7 +60,9 @@ namespace SunSharp.Redistribution
         public Delegate GetFunctionByName(string name, Type delegateType)
         {
             if (delegateType.IsAssignableFrom(typeof(Delegate)))
+            {
                 throw new ArgumentException($"Type {delegateType.Name} is not a delegate type");
+            }
 
             lock (_lock)
             {

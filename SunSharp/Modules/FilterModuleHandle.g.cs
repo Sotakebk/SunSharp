@@ -1,0 +1,308 @@
+/*
+ * Do not modify this file manually.
+*/
+
+#nullable enable
+
+#if !GENERATION
+namespace SunSharp.Modules
+{
+    /// <summary>
+    /// IIR Filter that can remove some unwanted frequency ranges.
+    /// </summary>
+    public partial interface IFilterModuleHandle : ITypedModuleHandle
+    {
+
+        /// <summary>
+        /// Value range: 0-256
+        /// Original name: 0 'Volume'
+        /// </summary>
+        int GetVolume(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
+
+        /// <summary>
+        /// Value range: 0-256
+        /// Original name: 0 'Volume'
+        /// </summary>
+        void SetVolume(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
+
+        /// <summary>
+        /// Value range: 0-14000
+        /// Original name: 1 'Freq'
+        /// </summary>
+        int GetFreq(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
+
+        /// <summary>
+        /// Value range: 0-14000
+        /// Original name: 1 'Freq'
+        /// </summary>
+        void SetFreq(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
+
+        /// <summary>
+        /// Value range: 0-1530
+        /// Original name: 2 'Resonance'
+        /// </summary>
+        int GetResonance(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
+
+        /// <summary>
+        /// Value range: 0-1530
+        /// Original name: 2 'Resonance'
+        /// </summary>
+        void SetResonance(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
+
+        /// <summary>
+        /// Original name: 3 'Type'
+        /// </summary>
+        FilterType GetFilterType();
+
+        /// <summary>
+        /// Original name: 3 'Type'
+        /// </summary>
+        void SetFilterType(FilterType value);
+
+        /// <summary>
+        /// Value range: 0-256
+        /// Original name: 4 'Response'
+        /// </summary>
+        int GetResponse(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
+
+        /// <summary>
+        /// Value range: 0-256
+        /// Original name: 4 'Response'
+        /// </summary>
+        void SetResponse(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
+
+        /// <summary>
+        /// Original name: 5 'Mode'
+        /// </summary>
+        Quality GetMode();
+
+        /// <summary>
+        /// Original name: 5 'Mode'
+        /// </summary>
+        void SetMode(Quality value);
+
+        /// <summary>
+        /// Value range: 0-14000
+        /// Original name: 6 'Impulse'
+        /// </summary>
+        int GetImpulse(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
+
+        /// <summary>
+        /// Value range: 0-14000
+        /// Original name: 6 'Impulse'
+        /// </summary>
+        void SetImpulse(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
+
+        /// <summary>
+        /// Value range: 0-256
+        /// Original name: 7 'Mix'
+        /// </summary>
+        int GetMix(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
+
+        /// <summary>
+        /// Value range: 0-256
+        /// Original name: 7 'Mix'
+        /// </summary>
+        void SetMix(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
+
+        /// <summary>
+        /// Value range: 0-1024
+        /// Original name: 8 'LFO freq'
+        /// </summary>
+        int GetLfoFreq(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
+
+        /// <summary>
+        /// Value range: 0-1024
+        /// Original name: 8 'LFO freq'
+        /// </summary>
+        void SetLfoFreq(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
+
+        /// <summary>
+        /// Value range: 0-256
+        /// Original name: 9 'LFO amp'
+        /// </summary>
+        int GetLfoAmp(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
+
+        /// <summary>
+        /// Value range: 0-256
+        /// Original name: 9 'LFO amp'
+        /// </summary>
+        void SetLfoAmp(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
+
+        /// <summary>
+        /// Value range: 0-256
+        /// Original name: 10 'Set LFO phase'
+        /// </summary>
+        int GetSetLfoPhase(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
+
+        /// <summary>
+        /// Value range: 0-256
+        /// Original name: 10 'Set LFO phase'
+        /// </summary>
+        void SetSetLfoPhase(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
+
+        /// <summary>
+        /// Original name: 11 'Exponential freq'
+        /// </summary>
+        Toggle GetExponentialFreq();
+
+        /// <summary>
+        /// Original name: 11 'Exponential freq'
+        /// </summary>
+        void SetExponentialFreq(Toggle value);
+
+        /// <summary>
+        /// Original name: 12 'Roll-off'
+        /// </summary>
+        FilterRollOff GetRollOff();
+
+        /// <summary>
+        /// Original name: 12 'Roll-off'
+        /// </summary>
+        void SetRollOff(FilterRollOff value);
+
+        /// <summary>
+        /// Original name: 13 'LFO freq unit'
+        /// </summary>
+        FilterLfoFrequencyUnit GetLfoFreqUnit();
+
+        /// <summary>
+        /// Original name: 13 'LFO freq unit'
+        /// </summary>
+        void SetLfoFreqUnit(FilterLfoFrequencyUnit value);
+
+        /// <summary>
+        /// Original name: 14 'LFO waveform'
+        /// </summary>
+        FilterLfoWaveform GetLfoWaveform();
+
+        /// <summary>
+        /// Original name: 14 'LFO waveform'
+        /// </summary>
+        void SetLfoWaveform(FilterLfoWaveform value);
+    }
+
+    /// <inheritdoc cref="IFilterModuleHandle"/>
+    public readonly partial struct FilterModuleHandle : IFilterModuleHandle
+    {
+        public SynthModuleHandle ModuleHandle { get; }
+
+        public FilterModuleHandle(SynthModuleHandle moduleHandle)
+        {
+            ModuleHandle = moduleHandle;
+        }
+
+        public static implicit operator SynthModuleHandle(FilterModuleHandle handle)
+        {
+            return handle.ModuleHandle;
+        }
+
+        /// <inheritdoc/>
+        public bool IsCorrectHandleType()
+        {
+            return ModuleHandle.GetModuleType() == SynthModuleType.Filter;
+        }
+
+        /// <inheritdoc/>
+        public void AssertCorrectHandleType()
+        {
+            const SynthModuleType expected = SynthModuleType.Filter;
+            var actual = ModuleHandle.GetModuleType();
+            if(actual != expected)
+            {
+                throw new IncorrectSynthHandleTypeException(expected, actual);
+            }
+        }
+
+        /// <inheritdoc cref="IFilterModuleHandle.GetVolume" />
+        public int GetVolume(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(0, valueScalingMode);
+
+        /// <inheritdoc cref="IFilterModuleHandle.SetVolume" />
+        public void SetVolume(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(0, value, valueScalingMode);
+
+        /// <inheritdoc cref="IFilterModuleHandle.GetFreq" />
+        public int GetFreq(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(1, valueScalingMode);
+
+        /// <inheritdoc cref="IFilterModuleHandle.SetFreq" />
+        public void SetFreq(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(1, value, valueScalingMode);
+
+        /// <inheritdoc cref="IFilterModuleHandle.GetResonance" />
+        public int GetResonance(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(2, valueScalingMode);
+
+        /// <inheritdoc cref="IFilterModuleHandle.SetResonance" />
+        public void SetResonance(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(2, value, valueScalingMode);
+
+        /// <inheritdoc cref="IFilterModuleHandle.GetFilterType" />
+        public FilterType GetFilterType() => (FilterType)ModuleHandle.GetControllerValue(3, ValueScalingMode.Displayed);
+
+        /// <inheritdoc cref="IFilterModuleHandle.SetFilterType" />
+        public void SetFilterType(FilterType value) => ModuleHandle.SetControllerValue(3, (int)value, ValueScalingMode.Displayed);
+
+        /// <inheritdoc cref="IFilterModuleHandle.GetResponse" />
+        public int GetResponse(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(4, valueScalingMode);
+
+        /// <inheritdoc cref="IFilterModuleHandle.SetResponse" />
+        public void SetResponse(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(4, value, valueScalingMode);
+
+        /// <inheritdoc cref="IFilterModuleHandle.GetMode" />
+        public Quality GetMode() => (Quality)ModuleHandle.GetControllerValue(5, ValueScalingMode.Displayed);
+
+        /// <inheritdoc cref="IFilterModuleHandle.SetMode" />
+        public void SetMode(Quality value) => ModuleHandle.SetControllerValue(5, (int)value, ValueScalingMode.Displayed);
+
+        /// <inheritdoc cref="IFilterModuleHandle.GetImpulse" />
+        public int GetImpulse(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(6, valueScalingMode);
+
+        /// <inheritdoc cref="IFilterModuleHandle.SetImpulse" />
+        public void SetImpulse(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(6, value, valueScalingMode);
+
+        /// <inheritdoc cref="IFilterModuleHandle.GetMix" />
+        public int GetMix(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(7, valueScalingMode);
+
+        /// <inheritdoc cref="IFilterModuleHandle.SetMix" />
+        public void SetMix(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(7, value, valueScalingMode);
+
+        /// <inheritdoc cref="IFilterModuleHandle.GetLfoFreq" />
+        public int GetLfoFreq(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(8, valueScalingMode);
+
+        /// <inheritdoc cref="IFilterModuleHandle.SetLfoFreq" />
+        public void SetLfoFreq(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(8, value, valueScalingMode);
+
+        /// <inheritdoc cref="IFilterModuleHandle.GetLfoAmp" />
+        public int GetLfoAmp(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(9, valueScalingMode);
+
+        /// <inheritdoc cref="IFilterModuleHandle.SetLfoAmp" />
+        public void SetLfoAmp(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(9, value, valueScalingMode);
+
+        /// <inheritdoc cref="IFilterModuleHandle.GetSetLfoPhase" />
+        public int GetSetLfoPhase(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(10, valueScalingMode);
+
+        /// <inheritdoc cref="IFilterModuleHandle.SetSetLfoPhase" />
+        public void SetSetLfoPhase(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(10, value, valueScalingMode);
+
+        /// <inheritdoc cref="IFilterModuleHandle.GetExponentialFreq" />
+        public Toggle GetExponentialFreq() => (Toggle)ModuleHandle.GetControllerValue(11, ValueScalingMode.Displayed);
+
+        /// <inheritdoc cref="IFilterModuleHandle.SetExponentialFreq" />
+        public void SetExponentialFreq(Toggle value) => ModuleHandle.SetControllerValue(11, (int)value, ValueScalingMode.Displayed);
+
+        /// <inheritdoc cref="IFilterModuleHandle.GetRollOff" />
+        public FilterRollOff GetRollOff() => (FilterRollOff)ModuleHandle.GetControllerValue(12, ValueScalingMode.Displayed);
+
+        /// <inheritdoc cref="IFilterModuleHandle.SetRollOff" />
+        public void SetRollOff(FilterRollOff value) => ModuleHandle.SetControllerValue(12, (int)value, ValueScalingMode.Displayed);
+
+        /// <inheritdoc cref="IFilterModuleHandle.GetLfoFreqUnit" />
+        public FilterLfoFrequencyUnit GetLfoFreqUnit() => (FilterLfoFrequencyUnit)ModuleHandle.GetControllerValue(13, ValueScalingMode.Displayed);
+
+        /// <inheritdoc cref="IFilterModuleHandle.SetLfoFreqUnit" />
+        public void SetLfoFreqUnit(FilterLfoFrequencyUnit value) => ModuleHandle.SetControllerValue(13, (int)value, ValueScalingMode.Displayed);
+
+        /// <inheritdoc cref="IFilterModuleHandle.GetLfoWaveform" />
+        public FilterLfoWaveform GetLfoWaveform() => (FilterLfoWaveform)ModuleHandle.GetControllerValue(14, ValueScalingMode.Displayed);
+
+        /// <inheritdoc cref="IFilterModuleHandle.SetLfoWaveform" />
+        public void SetLfoWaveform(FilterLfoWaveform value) => ModuleHandle.SetControllerValue(14, (int)value, ValueScalingMode.Displayed);
+    }
+}
+#endif

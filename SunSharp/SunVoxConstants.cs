@@ -1,4 +1,4 @@
-﻿#pragma warning disable CA1707 // keep same naming as in official sunvox documentation
+#pragma warning disable CA1707 // keep same naming as in official sunvox documentation
 
 namespace SunSharp
 {

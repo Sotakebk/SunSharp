@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using SunSharp.Data;
 
 namespace SunSharp.IntegrationTests.SunVoxLibTests;

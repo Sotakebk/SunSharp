@@ -1,4 +1,4 @@
-﻿global using AutoFixture;
+global using AutoFixture;
 global using AutoFixture.NUnit4;
 
 global using AwesomeAssertions;

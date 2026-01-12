@@ -1,16 +1,16 @@
-﻿namespace SunSharp.Tests;
+namespace SunSharp.Tests;
 
 public class PatternEventTests
 {
     public static TestCaseData[] TestCases =>
     [
-        new(new PatternEvent(), "____________"),
-        new(new PatternEvent(new Note(NoteName.C, 4), 0x80, 1), "C4800001______"),
-        new(new PatternEvent(0, 1), "__________0001"),
-        new(new PatternEvent(Effect.Arpeggio, 0x0704), "________080704"),
+        new(new PatternEvent(),                                  "                "),
+        new(new PatternEvent(new Note(NoteName.C, 4), 0x80, 1),  "C4800001        "),
+        new(new PatternEvent(0, 1),                              "            0001"),
+        new(new PatternEvent(Effect.Arpeggio, 0x0704),           "          080704"),
         new(new PatternEvent(3, 0x01, 0xA9, 0x87, 0x65, 0x4321), "D00100A987654321"),
-        new(new PatternEvent(Note.Off), "--__________"),
-        new(new PatternEvent(Note.AllNotesOff), "-!__________")
+        new(new PatternEvent(Note.Off),                          "--              "),
+        new(new PatternEvent(Note.AllNotesOff),                  "-!              ")
     ];
 
     private static ulong ConstructBinaryPatternEventValue(byte note = 0, byte velocity = 0, ushort module = 0,

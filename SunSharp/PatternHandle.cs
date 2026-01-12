@@ -1,4 +1,4 @@
-﻿using SunSharp.Native;
+using SunSharp.Native;
 
 namespace SunSharp
 {
@@ -198,10 +198,7 @@ namespace SunSharp
             var lib = _lib;
             var slotId = Id;
             var id = Id;
-            using (_slot.AcquireLock())
-            {
-                return lib.GetPatternEventValue(slotId, id, track, line, column);
-            }
+            return lib.GetPatternEventValue(slotId, id, track, line, column);
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Runtime.InteropServices;
 
 namespace SunSharp
@@ -27,7 +27,9 @@ namespace SunSharp
             const string notes = "CcDdEFfGgAaB";
             var i = (int)noteName;
             if (i < 0 || i > 11)
+            {
                 return '?';
+            }
             return notes[i];
         }
     }
@@ -91,7 +93,10 @@ namespace SunSharp
         {
             get
             {
-                if (IsNormal) return (NoteName)((Value - 1) % 12);
+                if (IsNormal)
+                {
+                    return (NoteName)((Value - 1) % 12);
+                }
 
                 return NoteName.Other;
             }
@@ -184,7 +189,7 @@ namespace SunSharp
         {
             return Value switch
             {
-                0 => "__",
+                0 => "  ",
                 NOTECMD_NOTE_OFF => "--",
                 NOTECMD_ALL_NOTES_OFF => "-!",
                 NOTECMD_CLEAN_SYNTHS => "CS",

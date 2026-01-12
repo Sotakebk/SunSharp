@@ -1,11 +1,13 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
-    <Nullable>enable</Nullable>
-    <AssemblyVersion>0.0.0.0</AssemblyVersion>
+    <TargetFramework>net10.0</TargetFramework>
     <IsPackable>false</IsPackable>
     <IsTestProject>true</IsTestProject>
+    <Nullable>enable</Nullable>
+    <WarningLevel>9999</WarningLevel>
+    <WarningsAsErrors>Nullable</WarningsAsErrors>
+    <Configurations>Debug;Release;Generation</Configurations>
   </PropertyGroup>
 
   <ItemGroup>

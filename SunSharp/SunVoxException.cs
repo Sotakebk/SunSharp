@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace SunSharp
 {
@@ -12,31 +12,54 @@ namespace SunSharp
     /// </remarks>
     public sealed class SunVoxException : Exception
     {
-        private readonly uint _code;
-        private readonly string? _method;
+        public uint? Code { get; }
+        public string? Method { get; }
 
         public SunVoxException()
         {
         }
 
-        public SunVoxException(string message) : base(message)
+        public SunVoxException(string message)
+            : base(message)
         {
         }
 
-        public SunVoxException(string message, Exception innerException) : base(message, innerException)
+        public SunVoxException(string message, Exception innerException)
+            : base(message, innerException)
         {
         }
 
         public SunVoxException(uint code, string? method = null)
+            : base(ConstructMessage(code, method, null))
         {
-            _code = code;
-            _method = method;
+            Code = code;
+            Method = method;
         }
 
-        public SunVoxException(int code, string? method = null) : this((uint)code, method)
+        public SunVoxException(int code, string? method = null)
+            : base(ConstructMessage(unchecked((uint)code), method, null))
         {
+            Code = unchecked((uint)code);
+            Method = method;
         }
 
-        public override string Message => $"Error code: {_code:X}, method: '{_method ?? "unknown"}'.";
+        public SunVoxException(int code, string method, string message)
+            : base(ConstructMessage(unchecked((uint)code), method, message))
+        {
+            Code = unchecked((uint)code);
+            Method = method;
+        }
+
+        private static string ConstructMessage(uint code, string? method, string? details)
+        {
+            if (details == null)
+            {
+                return $"Received error code {code:X} from method: {method ?? "unknown"}.";
+            }
+            else
+            {
+                return $"Received error code {code:X} from method: {method ?? "unknown"}. {details}";
+            }
+        }
     }
 }

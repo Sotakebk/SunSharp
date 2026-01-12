@@ -1,10 +1,11 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using SunSharp.Native;
 
 namespace SunSharp
 {
-    public interface ITimeline : IEnumerable<PatternHandle>
+    public interface ITimeline : IEnumerable<IPatternHandle>
     {
         ISlot Slot { get; }
 
@@ -12,44 +13,51 @@ namespace SunSharp
 
         bool GetPatternExists(int patternId);
 
-        bool TryGetPattern(string name, out PatternHandle pattern);
+        bool TryGetPattern(string name, [NotNullWhen(true)] out IPatternHandle? pattern);
 
-        bool TryGetPattern(int id, out PatternHandle pattern);
+        bool TryGetPattern(int id, [NotNullWhen(true)] out IPatternHandle? pattern);
 
-        PatternHandle CreatePattern(int lines, int tracks, int x, int y, int iconSeed = 0, string? name = null);
+        IPatternHandle CreatePattern(int lines, int tracks, int x, int y, int iconSeed = 0, string? name = null);
 
-        PatternHandle ClonePattern(PatternHandle original, int x, int y);
+        int ClonePattern(int id, int x, int y);
+
+        IPatternHandle ClonePattern(IPatternHandle original, int x, int y);
     }
 
-    public sealed class Timeline : ITimeline
+    public sealed class Timeline : ITimeline, IEnumerable<PatternHandle>
     {
+        /// <inheritdoc cref="ITimeline.Slot" />
         public Slot Slot { get; }
 
+        /// <inheritdoc />
         ISlot ITimeline.Slot => Slot;
 
         private readonly ISunVoxLib _lib;
-        private readonly int _id;
+        private readonly int _slotId;
 
         internal Timeline(Slot slot)
         {
             Slot = slot;
             _lib = slot.SunVox.Library;
-            _id = slot.Id;
+            _slotId = slot.Id;
         }
 
+        /// <inheritdoc />
         public int GetUpperPatternCount()
         {
-            return _lib.GetUpperPatternCount(_id);
+            return _lib.GetUpperPatternCount(_slotId);
         }
 
+        /// <inheritdoc />
         public bool GetPatternExists(int patternId)
         {
-            return _lib.GetPatternExists(_id, patternId);
+            return _lib.GetPatternExists(_slotId, patternId);
         }
 
-        public bool TryGetPattern(string name, out PatternHandle pattern)
+        /// <inheritdoc />
+        public bool TryGetPattern(string name, [NotNullWhen(true)] out PatternHandle? pattern)
         {
-            var id = _lib.FindPattern(_id, name);
+            var id = _lib.FindPattern(_slotId, name);
 
             if (id != null)
             {
@@ -61,9 +69,10 @@ namespace SunSharp
             return false;
         }
 
-        public bool TryGetPattern(int id, out PatternHandle pattern)
+        /// <inheritdoc />
+        public bool TryGetPattern(int id, [NotNullWhen(true)] out PatternHandle? pattern)
         {
-            if (_lib.GetPatternExists(_id, id))
+            if (_lib.GetPatternExists(_slotId, id))
             {
                 pattern = new PatternHandle(this, id);
                 return true;
@@ -75,35 +84,93 @@ namespace SunSharp
             }
         }
 
+        public bool TryGetPattern(string name, [NotNullWhen(true)] out IPatternHandle? pattern)
+        {
+            if (TryGetPattern(name, out PatternHandle? p))
+            {
+                pattern = p;
+                return true;
+            }
+            else
+            {
+                pattern = default;
+                return false;
+            }
+        }
+
+        public bool TryGetPattern(int id, [NotNullWhen(true)] out IPatternHandle? pattern)
+        {
+            if (TryGetPattern(id, out PatternHandle? p))
+            {
+                pattern = p;
+                return true;
+            }
+            else
+            {
+                pattern = default;
+                return false;
+            }
+        }
+
+        /// <inheritdoc />
         public PatternHandle CreatePattern(int lines, int tracks, int x, int y, int iconSeed = 0, string? name = null)
         {
             using (Slot.AcquireLock())
             {
-                var id = _lib.CreatePattern(_id, x, y, tracks, lines, iconSeed, name);
+                var id = _lib.CreatePattern(_slotId, x, y, tracks, lines, iconSeed, name);
                 return new PatternHandle(this, id);
+            }
+        }
+
+        IPatternHandle ITimeline.CreatePattern(int lines, int tracks, int x, int y, int iconSeed, string? name)
+        {
+            return CreatePattern(lines, tracks, x, y, iconSeed, name);
+        }
+
+        public int ClonePattern(int id, int x, int y)
+        {
+            using (Slot.AcquireLock())
+            {
+                return _lib.ClonePattern(_slotId, id, x, y);
             }
         }
 
         public PatternHandle ClonePattern(PatternHandle original, int x, int y)
         {
-            using (Slot.AcquireLock())
-            {
-                var id = _lib.ClonePattern(_id, original.Id, x, y);
-                return new PatternHandle(this, id);
-            }
+            return new PatternHandle(this, ClonePattern(original.Id, x, y));
+        }
+
+        IPatternHandle ITimeline.ClonePattern(IPatternHandle original, int x, int y)
+        {
+            return new PatternHandle(this, ClonePattern(original.Id, x, y));
         }
 
         public IEnumerator<PatternHandle> GetEnumerator()
         {
             for (var i = 0; i < GetUpperPatternCount(); i++)
             {
-                if (TryGetPattern(i, out var p))
+                if (TryGetPattern(i, out PatternHandle? p))
                 {
-                    yield return p;
+                    if (p is null)
+                    {
+                        continue;
+                    }
+                    yield return p.Value;
                 }
             }
         }
 
-        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+        IEnumerator<IPatternHandle> IEnumerable<IPatternHandle>.GetEnumerator()
+        {
+            foreach (var pattern in this)
+            {
+                yield return pattern;
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
     }
 }

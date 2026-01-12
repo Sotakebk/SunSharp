@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using SunSharp.Native;
@@ -152,11 +152,12 @@ namespace SunSharp.Data
             var isLinear = true;
             var hasDynamicTempo = false;
 
-            foreach (var patternEvent in data)
+            for (var i = 0; i < data.Length; i++)
             {
-                isDestructive = isDestructive || patternEvent.Effect.IsDestructive();
-                isLinear = isLinear && !patternEvent.Effect.IsNonLinear();
-                hasDynamicTempo = hasDynamicTempo || patternEvent.Effect.ChangesTempo();
+                var e = data[i];
+                isDestructive = isDestructive || e.Effect.IsDestructive();
+                isLinear = isLinear && !e.Effect.IsNonLinear();
+                hasDynamicTempo = hasDynamicTempo || e.Effect.ChangesTempo();
             }
 
             return new PatternData

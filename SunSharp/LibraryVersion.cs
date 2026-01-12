@@ -1,4 +1,4 @@
-﻿namespace SunSharp
+namespace SunSharp
 {
     public readonly struct LibraryVersion
     {

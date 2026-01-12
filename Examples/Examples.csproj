@@ -1,9 +1,17 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFramework>net10.0</TargetFramework>
     <Nullable>enable</Nullable>
+    <WarningLevel>9999</WarningLevel>
+    <WarningsAsErrors>Nullable</WarningsAsErrors>
+    <Configurations>Debug;Release;Generation</Configurations>
   </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SunSharp.Redistribution\SunSharp.Redistribution.csproj" />
+    <ProjectReference Include="..\SunSharp\SunSharp.csproj" />
+  </ItemGroup>
 
 </Project>

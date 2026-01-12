@@ -1,4 +1,4 @@
-﻿using SunSharp.Data;
+using SunSharp.Data;
 
 namespace SunSharp.Tests.Data;
 

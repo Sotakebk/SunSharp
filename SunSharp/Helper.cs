@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Runtime.InteropServices;
 
 namespace SunSharp
@@ -8,7 +8,9 @@ namespace SunSharp
         public static short ToShortBitwise(uint value)
         {
             if ((value & 0x8000) == 0)
+            {
                 return (short)value;
+            }
 
             var val = (int)value;
             return (short)(val - 0x10000);

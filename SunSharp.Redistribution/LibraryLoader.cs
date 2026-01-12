@@ -1,6 +1,7 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Runtime.InteropServices;
+using SunSharp.Diagnostics;
 using SunSharp.Native;
 using SunSharp.Native.Loader;
 
@@ -95,9 +96,11 @@ namespace SunSharp.Redistribution
             lock (Lock)
             {
                 if (!IsLoaded || _proxy == null)
+                {
                     throw new InvalidOperationException("The library was not loaded yet.");
+                }
 
-                return _lib ??= new SunVoxLibNativeWrapper(_proxy);
+                return _lib ??= new SunVoxLibNativeWrapper(new SunVoxLibWithLogger(_proxy, new ConsoleLogger()));
             }
         }
 
@@ -106,7 +109,10 @@ namespace SunSharp.Redistribution
             lock (Lock)
             {
                 if (!IsLoaded)
+                {
                     throw new InvalidOperationException("The library was not loaded yet.");
+                }
+
                 _proxy?.Unload();
             }
         }

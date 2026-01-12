@@ -1,4 +1,4 @@
-﻿namespace SunSharp.Tests;
+namespace SunSharp.Tests;
 
 public class FineTunePairTests
 {
@@ -7,7 +7,7 @@ public class FineTunePairTests
     {
         var packedValue = Helper.PackTwoSignedShorts(fineTuneValue, relativeNoteValue);
         var fineTune = new FineTunePair(packedValue);
-        fineTune.Value.Should().Be(packedValue);
+        fineTune.RawValue.Should().Be(packedValue);
         fineTune.FineTune.Should().Be(fineTuneValue);
         fineTune.RelativeNote.Should().Be(relativeNoteValue);
     }

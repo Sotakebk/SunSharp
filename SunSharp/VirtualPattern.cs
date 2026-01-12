@@ -1,4 +1,4 @@
-﻿using SunSharp.Native;
+using SunSharp.Native;
 
 namespace SunSharp
 {
@@ -11,43 +11,44 @@ namespace SunSharp
         uint GetTicksPerSecond();
 
         /// <summary>
-        /// Send an event to be processed as fast as possible.
-        /// This ignores any previously set timing.
+        /// Send an event to be processed as fast as possible. This ignores any previously set timing.
         /// </summary>
         void SendEventImmediately(int track, PatternEvent e);
 
         /// <summary>
-        /// Set the tick timestamp of future events.
-        /// This will make future events be processed at the specified timestamp.
+        /// Set the tick timestamp of future events. This will make future events be processed at
+        /// the specified timestamp.
         /// </summary>
         void SetEventTiming(int timestamp);
 
         /// <summary>
-        /// Reset the tick timestamp of future events.
-        /// This will make future events be processed as soon as possible.
+        /// Reset the tick timestamp of future events. This will make future events be processed as
+        /// soon as possible.
         /// </summary>
         void ResetEventTiming();
 
         /// <summary>
-        /// Sends the specified pattern event to the given track.
-        /// The event will be processed according to the last set timing.
+        /// Sends the specified pattern event to the given track. The event will be processed
+        /// according to the last set timing.
         /// </summary>
         void SendEvent(int track, PatternEvent e);
 
         /// <summary>
-        /// Sends the specified pattern event to the given track.
-        /// The event will be processed according to the last set timing.
+        /// Sends the specified pattern event to the given track. The event will be processed
+        /// according to the last set timing.
         /// </summary>
         void SendEvent(int track, int nn = 0, int vv = 0, int mm = 0, int ccee = 0, int xxyy = 0);
     }
 
     public sealed class VirtualPattern : IVirtualPattern
     {
+        /// <inheritdoc cref="IVirtualPattern.Slot"/>
         public Slot Slot { get; }
 
-        public int? LastSetTimestamp { get; private set; }
-
+        /// <inheritdoc/>
         ISlot IVirtualPattern.Slot => Slot;
+
+        public int? LastSetTimestamp { get; private set; }
 
         private readonly ISunVoxLib _lib;
         private readonly int _id;

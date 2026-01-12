@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Runtime.InteropServices;
 using SunSharp.Native.Loader;
 
@@ -22,7 +22,9 @@ namespace SunSharp.Redistribution
             lock (_lock)
             {
                 if (IsLibraryLoaded)
+                {
                     throw new LibraryLoadingException("SunVoxLib is already loaded.");
+                }
 
                 var ptr = LoadLibrary(_path);
                 if (ptr == IntPtr.Zero)
@@ -41,7 +43,9 @@ namespace SunSharp.Redistribution
             lock (_lock)
             {
                 if (!IsLibraryLoaded)
+                {
                     throw new LibraryLoadingException("SunVoxLib is not loaded.");
+                }
 
                 var ptr = _ptr;
                 _ptr = IntPtr.Zero;
@@ -59,12 +63,16 @@ namespace SunSharp.Redistribution
         public Delegate GetFunctionByName(string name, Type delegateType)
         {
             if (delegateType.IsAssignableFrom(typeof(Delegate)))
+            {
                 throw new ArgumentException($"Type {delegateType.Name} is not a delegate type");
+            }
 
             lock (_lock)
             {
                 if (!IsLibraryLoaded)
+                {
                     throw new LibraryLoadingException("SunVoxLib is not loaded.");
+                }
 
                 var ptr = GetProcAddress(_ptr, name);
                 if (ptr != IntPtr.Zero)

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace SunSharp
 {
@@ -23,13 +23,15 @@ namespace SunSharp
         private void Dispose(bool disposing)
         {
             if (_disposed)
+            {
                 return;
+            }
 
             ReleaseUnmanagedResources();
 
             if (disposing)
             {
-                _instance.Dispose();
+                // release managed resources
             }
 
             _disposed = true;

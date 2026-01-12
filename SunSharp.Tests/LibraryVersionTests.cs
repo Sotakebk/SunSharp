@@ -1,4 +1,4 @@
-﻿namespace SunSharp.Tests;
+namespace SunSharp.Tests;
 
 public class LibraryVersionTests
 {

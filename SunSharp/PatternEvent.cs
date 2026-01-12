@@ -1,8 +1,9 @@
-﻿using System;
+using System;
 using System.Runtime.InteropServices;
 
 namespace SunSharp
 {
+    [Serializable]
     [StructLayout(LayoutKind.Explicit, Size = 8)]
     public struct PatternEvent : IEquatable<PatternEvent>
     {
@@ -98,14 +99,14 @@ namespace SunSharp
             return @event.Data;
         }
 
-        public readonly override string ToString()
+        public override readonly string ToString()
         {
             return $"{(Note)NN}" +
-                   $"{(VV != 0 ? $"{VV:X2}" : "__")}" +
-                   $"{(MM != 0 ? $"{MM:X4}" : "__")}" +
-                   $"{(CC != 0 ? $"{CC:X2}" : "__")}" +
-                   $"{(EE != 0 ? $"{EE:X2}" : "__")}" +
-                   $"{(XXYY != 0 ? $"{XXYY:X4}" : "__")}";
+                   $"{(VV != 0 ? $"{VV:X2}" : "  ")}" +
+                   $"{(MM != 0 ? $"{MM:X4}" : "    ")}" +
+                   $"{(CC != 0 ? $"{CC:X2}" : "  ")}" +
+                   $"{(EE != 0 ? $"{EE:X2}" : "  ")}" +
+                   $"{(XXYY != 0 ? $"{XXYY:X4}" : "    ")}";
         }
 
         public static bool operator ==(PatternEvent a, PatternEvent b)
@@ -118,7 +119,7 @@ namespace SunSharp
             return a.Data != b.Data;
         }
 
-        public readonly override bool Equals(object? obj)
+        public override readonly bool Equals(object? obj)
         {
             return obj is PatternEvent e && this == e;
         }
@@ -128,7 +129,7 @@ namespace SunSharp
             return this == other;
         }
 
-        public readonly override int GetHashCode()
+        public override readonly int GetHashCode()
         {
             return Data.GetHashCode();
         }

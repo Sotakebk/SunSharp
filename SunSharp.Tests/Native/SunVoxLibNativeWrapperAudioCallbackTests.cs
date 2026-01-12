@@ -1,4 +1,4 @@
-﻿using System.Runtime.InteropServices;
+using System.Runtime.InteropServices;
 using SunSharp.Native;
 
 namespace SunSharp.Tests.Native;

@@ -1,32 +1,30 @@
-﻿using System;
+using System;
+using System.Runtime.InteropServices;
 
 namespace SunSharp
 {
     [Serializable]
+    [StructLayout(LayoutKind.Explicit, Size = 4)]
     public struct FineTunePair : IEquatable<FineTunePair>
     {
-        public short FineTune { get; set; }
-        public short RelativeNote { get; set; }
+        [field: FieldOffset(0)] public uint RawValue { get; set; }
+        [field: FieldOffset(0)] public short FineTune { get; set; }
+        [field: FieldOffset(2)] public short RelativeNote { get; set; }
 
-        public readonly uint Value => Helper.PackTwoSignedShorts(FineTune, RelativeNote);
+        public FineTunePair(uint rawValue) : this()
+        {
+            RawValue = rawValue;
+        }
 
-        public FineTunePair(short fineTune, short relativeNote)
+        public FineTunePair(short fineTune, short relativeNote) : this()
         {
             FineTune = fineTune;
             RelativeNote = relativeNote;
         }
 
-        public FineTunePair(uint value)
+        public override readonly bool Equals(object? obj)
         {
-            (FineTune, RelativeNote) = Helper.UnpackTwoSignedShorts(value);
-        }
-
-        public readonly override bool Equals(object? obj)
-        {
-            if (obj is FineTunePair other)
-                return Equals(other);
-
-            return false;
+            return obj is FineTunePair other && Equals(other);
         }
 
         public readonly bool Equals(FineTunePair other)
@@ -34,12 +32,12 @@ namespace SunSharp
             return FineTune == other.FineTune && RelativeNote == other.RelativeNote;
         }
 
-        public readonly override int GetHashCode()
+        public override readonly int GetHashCode()
         {
             return HashCode.Combine(FineTune, RelativeNote);
         }
 
-        public readonly override string ToString()
+        public override readonly string ToString()
         {
             return $"Fine-tune: {FineTune}, relative note: {RelativeNote}.";
         }
