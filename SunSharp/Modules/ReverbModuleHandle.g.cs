@@ -96,12 +96,12 @@ namespace SunSharp.Modules
         /// <summary>
         /// Original name: 7 'All-pass filter'
         /// </summary>
-        Toggle GetAllPassFilter();
+        ReverbAllPassFilter GetAllPassFilter();
 
         /// <summary>
         /// Original name: 7 'All-pass filter'
         /// </summary>
-        void SetAllPassFilter(Toggle value);
+        void SetAllPassFilter(ReverbAllPassFilter value);
 
         /// <summary>
         /// Value range: 0-128
@@ -203,10 +203,10 @@ namespace SunSharp.Modules
         public void SetMode(Quality value) => ModuleHandle.SetControllerValue(6, (int)value, ValueScalingMode.Displayed);
 
         /// <inheritdoc cref="IReverbModuleHandle.GetAllPassFilter" />
-        public Toggle GetAllPassFilter() => (Toggle)ModuleHandle.GetControllerValue(7, ValueScalingMode.Displayed);
+        public ReverbAllPassFilter GetAllPassFilter() => (ReverbAllPassFilter)ModuleHandle.GetControllerValue(7, ValueScalingMode.Displayed);
 
         /// <inheritdoc cref="IReverbModuleHandle.SetAllPassFilter" />
-        public void SetAllPassFilter(Toggle value) => ModuleHandle.SetControllerValue(7, (int)value, ValueScalingMode.Displayed);
+        public void SetAllPassFilter(ReverbAllPassFilter value) => ModuleHandle.SetControllerValue(7, (int)value, ValueScalingMode.Displayed);
 
         /// <inheritdoc cref="IReverbModuleHandle.GetRoomSize" />
         public int GetRoomSize(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(8, valueScalingMode);

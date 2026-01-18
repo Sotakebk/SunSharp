@@ -111,6 +111,16 @@ namespace SunSharp.Diagnostics
         }
 
 
+        int ISunVoxLibC.sv_get_base_version(int slot)
+        {
+            FormattableString? parameters = $"slot={slot}";
+            Log("Starting call.", parameters, null);
+            var result = _lib.sv_get_base_version(slot);
+            Log("Finished call.", parameters, result);
+            return result;
+        }
+
+
         int ISunVoxLibC.sv_get_current_line(int slot)
         {
             FormattableString? parameters = $"slot={slot}";
@@ -721,12 +731,32 @@ namespace SunSharp.Diagnostics
         }
 
 
+        int ISunVoxLibC.sv_sampler_par(int slot, int mod_num, int sample_slot, int par, int par_val, int set)
+        {
+            FormattableString? parameters = $"slot={slot}, mod_num={mod_num}, sample_slot={sample_slot}, par={par}, par_val={par_val}, set={set}";
+            Log("Starting call.", parameters, null);
+            var result = _lib.sv_sampler_par(slot, mod_num, sample_slot, par, par_val, set);
+            Log("Finished call.", parameters, result);
+            return result;
+        }
+
+
         int ISunVoxLibC.sv_save(int slot, IntPtr name)
         {
             FormattableString? parameters = $"slot={slot}, name=0x{name.ToString("X")}";
             Log("Starting call.", parameters, null);
             var result = _lib.sv_save(slot, name);
             Log("Finished call.", parameters, result);
+            return result;
+        }
+
+
+        IntPtr ISunVoxLibC.sv_save_to_memory(int slot, IntPtr size)
+        {
+            FormattableString? parameters = $"slot={slot}, size=0x{size.ToString("X")}";
+            Log("Starting call.", parameters, null);
+            var result = _lib.sv_save_to_memory(slot, size);
+            Log("Finished call.", parameters, result.ToString("X"));
             return result;
         }
 

@@ -5,7 +5,7 @@ namespace SunSharp.Tests.Data;
 public class DataTests
 {
     [Test, AutoData]
-    public void SongDataDeepCopyShouldBeEquivalent(SongData songData, SongData anotherSongData)
+    public void SongData_DeepCopy_ShouldBeEquivalent(SongData songData, SongData anotherSongData)
     {
         var clone = songData.DeepCopy();
 
@@ -14,7 +14,7 @@ public class DataTests
     }
 
     [Test, AutoData]
-    public void PatternDataDeepCopyShouldBeEquivalent(PatternData patternData, PatternData anotherPatternData)
+    public void PatternData_DeepCopy_ShouldBeEquivalent(PatternData patternData, PatternData anotherPatternData)
     {
         var clone = patternData.DeepCopy();
 
@@ -23,7 +23,7 @@ public class DataTests
     }
 
     [Test, AutoData]
-    public void ModuleDataDeepCopyShouldBeEquivalent(ModuleData moduleData, ModuleData anotherModuleData)
+    public void ModuleData_DeepCopy_ShouldBeEquivalent(ModuleData moduleData, ModuleData anotherModuleData)
     {
         var clone = moduleData.DeepCopy();
 

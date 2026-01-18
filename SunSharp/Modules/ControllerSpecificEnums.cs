@@ -141,6 +141,10 @@ namespace SunSharp.Modules
         /// Samples will be converted to 16-bit integers for bitwise operations.
         /// </summary>
         BitwiseXor = 6,
+
+        MinAbs = 7,
+
+        MaxAbs = 8
     }
 
     public enum AnalogGeneratorWaveform
@@ -395,6 +399,10 @@ namespace SunSharp.Modules
         dB24 = 1,
         dB36 = 2,
         dB48 = 3,
+        dB60 = 4,
+        dB72 = 5,
+        dB84 = 6,
+        dB96 = 7,
     }
 
     /// <summary>
@@ -517,6 +525,10 @@ namespace SunSharp.Modules
         /// Phase modulation with envelope applied to self-modulation and feedback.
         /// </summary>
         PhasePlus = 9,
+
+        MinAbs = 10,
+
+        MaxAbs = 11,
     }
 
     /// <summary>
@@ -593,6 +605,8 @@ namespace SunSharp.Modules
         Line = 4,
         HalfLine = 5,
         OneThirdLine = 6,
+        Semitone = 7,
+        SemitoneDividedBy100 = 8,
     }
 
     /// <summary>
@@ -736,6 +750,15 @@ namespace SunSharp.Modules
         /// inputs are silent) = 0ms; delay range: 40ms (mod.amp >= 1) ... 0ms (mod.amp = 0) ...
         /// 40ms (mod.amp <= -1).</summary>
         PhaseAbsolute = 2,
+
+        Add = 3,
+        Sub = 4,
+        Min = 5,
+        Max = 6,
+        BitwiseAnd = 7,
+        BitwiseXor = 8,
+        MinAbs = 9,
+        MaxAbs = 10,
     }
 
     /// <summary>
@@ -758,6 +781,8 @@ namespace SunSharp.Modules
         /// low frequencies and better at high frequencies.
         /// </summary>
         Cepstrum = 2,
+
+        SpectralPeak = 3,
     }
 
     /// <summary>
@@ -962,5 +987,79 @@ namespace SunSharp.Modules
         I = 2,
         O = 3,
         U = 4,
+    }
+
+    public enum ModulatorMaxPhaseModulationDelay
+    {
+        /// <summary>
+        /// 0.04 seconds.
+        /// </summary>
+        FourHundredsOfSecond = 0,
+
+        /// <summary>
+        /// 0.08 seconds.
+        /// </summary>
+        EightHundredsOfSecond = 1,
+
+        /// <summary>
+        /// 0.2 seconds.
+        /// </summary>
+        TwoTenthsOfSecond = 2,
+
+        /// <summary>
+        /// 0.5 seconds.
+        /// </summary>
+        HalfOfSecond = 3,
+
+        /// <summary>
+        /// 1 second.
+        /// </summary>
+        OneSecond = 4,
+
+        /// <summary>
+        /// 2 seconds.
+        /// </summary>
+        TwoSeconds = 5,
+
+        /// <summary>
+        /// 4 seconds.
+        /// </summary>
+        FourSeconds = 6,
+
+        /// <summary>
+        /// 8 seconds.
+        /// </summary>
+        EightSeconds = 7,
+
+        /// <summary>
+        /// 16 seconds.
+        /// </summary>
+        SixteenSeconds = 8,
+
+        /// <summary>
+        /// 32 seconds.
+        /// </summary>
+        ThirtyTwoSeconds = 9,
+    }
+
+    public enum ModulatorPhaseModulationInterpolation
+    {
+        Off = 0,
+        Linear = 1,
+        Spline = 2,
+    }
+
+    public enum SamplerRecordState
+    {
+        Stop = 0,
+        Pause = 1,
+        Start = 2,
+    }
+
+    public enum ReverbAllPassFilter
+    {
+        Off,
+        On,
+        OnImproved
     }
 }

@@ -5,7 +5,7 @@ namespace SunSharp.Tests;
 public class EffectExtensionsTests
 {
     [Test]
-    public void ShouldReturnCorrectExtensionMethodValuesForDefinedEnumValues()
+    public void IsNonLinear_ShouldReturnTrue_ForNonLinearEffects()
     {
         var nonLinearEffects = new[]
         {
@@ -14,6 +14,30 @@ public class EffectExtensionsTests
             Effect.StopPlaying
         };
 
+        foreach (var effect in nonLinearEffects)
+        {
+            effect.IsNonLinear().Should().BeTrue();
+        }
+    }
+
+    [Test]
+    public void IsNonLinear_ShouldReturnFalse_ForLinearEffects()
+    {
+        var linearEffects = Enum.GetValues<Effect>().Except(new[]
+        {
+            Effect.Jump,
+            Effect.SetJumpMode,
+            Effect.StopPlaying
+        });
+        foreach (var effect in linearEffects)
+        {
+            effect.IsNonLinear().Should().BeFalse();
+        }
+    }
+
+    [Test]
+    public void IsDestructive_ShouldReturnTrue_ForDestructiveEffects()
+    {
         var destructiveEffects = new[]
         {
             Effect.DeleteEventOnTrackWithProbability,
@@ -23,22 +47,55 @@ public class EffectExtensionsTests
             Effect.CopyTrackFromPattern,
             Effect.WriteRandomValue
         };
+        foreach (var effect in destructiveEffects)
+        {
+            effect.IsDestructive().Should().BeTrue();
+        }
+    }
 
+    [Test]
+    public void IsDestructive_ShouldReturnFalse_ForNonDestructiveEffects()
+    {
+        var nonDestructiveEffects = Enum.GetValues<Effect>().Except(new[]
+        {
+            Effect.DeleteEventOnTrackWithProbability,
+            Effect.CyclicShiftTrackLines,
+            Effect.GeneratePolyrhythm,
+            Effect.CopyTrackToPattern,
+            Effect.CopyTrackFromPattern,
+            Effect.WriteRandomValue
+        });
+        foreach (var effect in nonDestructiveEffects)
+        {
+            effect.IsDestructive().Should().BeFalse();
+        }
+    }
+
+    [Test]
+    public void ChangesTempo_ShouldReturnTrue_ForTimeModifyingEffects()
+    {
         var timeModifyingEffects = new[]
         {
             Effect.SetBpm,
             Effect.SetPlayingSpeed
         };
-
-        foreach (var effect in Enum.GetValues<Effect>())
+        foreach (var effect in timeModifyingEffects)
         {
-            var expectedToBeNonLinear = nonLinearEffects.Contains(effect);
-            var expectedToBeDestructive = destructiveEffects.Contains(effect);
-            var expectedToBeTimeModifying = timeModifyingEffects.Contains(effect);
+            effect.ChangesTempo().Should().BeTrue();
+        }
+    }
 
-            effect.IsNonLinear().Should().Be(expectedToBeNonLinear);
-            effect.IsDestructive().Should().Be(expectedToBeDestructive);
-            effect.ChangesTempo().Should().Be(expectedToBeTimeModifying);
+    [Test]
+    public void ChangesTempo_ShouldReturnFalse_ForNonTimeModifyingEffects()
+    {
+        var nonTimeModifyingEffects = Enum.GetValues<Effect>().Except(new[]
+        {
+            Effect.SetBpm,
+            Effect.SetPlayingSpeed
+        });
+        foreach (var effect in nonTimeModifyingEffects)
+        {
+            effect.ChangesTempo().Should().BeFalse();
         }
     }
 }

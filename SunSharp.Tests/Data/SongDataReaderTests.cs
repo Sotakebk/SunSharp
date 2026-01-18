@@ -52,10 +52,10 @@ public class SongDataReaderTests
     }
 
     [Test, AutoData]
-    public void DataReaderReadSongDataShouldReturnEquivalentDataAsPutInMock(SongData songData)
+    public void ReadSongData_ShouldReturnEquivalentDataAsPutInMock(SongData songData)
     {
         var validSongData = CreateValidSongData(songData);
-        var libraryMock = SunVoxLibMockProvider.BuildMock()
+        var libraryMock = SunVoxLibMockBuilder.BuildMock()
             .WithSongData(0, validSongData)
             .Build();
         var data = SongDataReader.ReadSongData(libraryMock, 0);
@@ -63,10 +63,10 @@ public class SongDataReaderTests
     }
 
     [Test, AutoData]
-    public void DataReaderReadModuleShouldReturnEquivalentDataAsPutInMock(ModuleData moduleData)
+    public void ReadModule_ShouldReturnEquivalentDataAsPutInMock(ModuleData moduleData)
     {
         var validModuleData = CreateValidModuleData(moduleData);
-        var libraryMock = SunVoxLibMockProvider.BuildMock()
+        var libraryMock = SunVoxLibMockBuilder.BuildMock()
             .WithModuleData(0, [validModuleData])
             .Build();
         var data = SongDataReader.ReadModule(libraryMock, 0, validModuleData.Id);
@@ -74,10 +74,10 @@ public class SongDataReaderTests
     }
 
     [Test, AutoData]
-    public void DataReaderReadPatternShouldReturnEquivalentDataAsPutInMock(PatternData patternData)
+    public void ReadPattern_ShouldReturnEquivalentDataAsPutInMock(PatternData patternData)
     {
         var validPatternData = CreateValidPatternData(patternData);
-        var libraryMock = SunVoxLibMockProvider.BuildMock()
+        var libraryMock = SunVoxLibMockBuilder.BuildMock()
             .WithPatternData(0, [validPatternData])
             .Build();
         var data = SongDataReader.ReadPattern(libraryMock, 0, validPatternData.Id);

@@ -138,6 +138,26 @@ namespace SunSharp.Modules
         /// Original name: 10 'Feedback'
         /// </summary>
         void SetFeedback(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
+
+        /// <summary>
+        /// Original name: 11 'Negative feedback'
+        /// </summary>
+        Toggle GetNegativeFeedback();
+
+        /// <summary>
+        /// Original name: 11 'Negative feedback'
+        /// </summary>
+        void SetNegativeFeedback(Toggle value);
+
+        /// <summary>
+        /// Original name: 12 'All-pass filter'
+        /// </summary>
+        Toggle GetAllPassFilter();
+
+        /// <summary>
+        /// Original name: 12 'All-pass filter'
+        /// </summary>
+        void SetAllPassFilter(Toggle value);
     }
 
     /// <inheritdoc cref="IDelayModuleHandle"/>
@@ -237,6 +257,18 @@ namespace SunSharp.Modules
 
         /// <inheritdoc cref="IDelayModuleHandle.SetFeedback" />
         public void SetFeedback(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(10, value, valueScalingMode);
+
+        /// <inheritdoc cref="IDelayModuleHandle.GetNegativeFeedback" />
+        public Toggle GetNegativeFeedback() => (Toggle)ModuleHandle.GetControllerValue(11, ValueScalingMode.Displayed);
+
+        /// <inheritdoc cref="IDelayModuleHandle.SetNegativeFeedback" />
+        public void SetNegativeFeedback(Toggle value) => ModuleHandle.SetControllerValue(11, (int)value, ValueScalingMode.Displayed);
+
+        /// <inheritdoc cref="IDelayModuleHandle.GetAllPassFilter" />
+        public Toggle GetAllPassFilter() => (Toggle)ModuleHandle.GetControllerValue(12, ValueScalingMode.Displayed);
+
+        /// <inheritdoc cref="IDelayModuleHandle.SetAllPassFilter" />
+        public void SetAllPassFilter(Toggle value) => ModuleHandle.SetControllerValue(12, (int)value, ValueScalingMode.Displayed);
     }
 }
 #endif

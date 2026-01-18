@@ -6,7 +6,7 @@ namespace SunSharp.IntegrationTests.SunVoxLibTests;
 internal class PatternTests : BaseIntegrationTests
 {
     [Test]
-    public void EmptyProjectStartsWithOneEmptyPattern()
+    public void OpenSlot_ProjectStartsWithOneEmptyPattern()
     {
         // Should be reported as a possible bug
 
@@ -27,7 +27,7 @@ internal class PatternTests : BaseIntegrationTests
     }
 
     [Test]
-    public void PatternCreationCloningThenReadingPropertiesWorksAsExpected()
+    public void PatternCreation_CloningThenReadingPropertiesWorksAsExpected()
     {
         const int slotId = 0;
 

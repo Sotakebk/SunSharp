@@ -1,7 +1,5 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using AwesomeAssertions;
-using NUnit.Framework;
 
 namespace CodeGeneration.Tests;
 

@@ -133,7 +133,8 @@ public static partial class SunVoxHeaderParser
         { "float*", typeof(IntPtr) },
         { "int*", typeof(IntPtr) },
         { "uint32_t*", typeof(IntPtr) },
-        { "void", typeof(void) }
+        { "void", typeof(void) },
+        { "size_t*", typeof(IntPtr) }
     }.ToImmutableDictionary();
 
     private static Type MapCTypeToCSharp(string cType)

@@ -1,30 +1,59 @@
+using System;
+using System.Runtime.InteropServices;
+
 namespace SunSharp
 {
-    public readonly struct LibraryVersion
+    /// <summary>
+    /// Represents the version of the SunVox library.
+    /// </summary>
+    [StructLayout(LayoutKind.Explicit, Size = 4)]
+    public readonly struct LibraryVersion : IEquatable<LibraryVersion>
     {
-        public byte Major { get; }
+        [FieldOffset(0)] private readonly int _value;
+        [FieldOffset(2)] private readonly byte _major;
+        [FieldOffset(1)] private readonly byte _minor;
+        [FieldOffset(0)] private readonly byte _minor2;
 
-        public byte Minor { get; }
+        public byte Major => _major;
 
-        public byte Minor2 { get; }
+        public byte Minor => _minor;
 
-        public LibraryVersion(byte major, byte minor, byte minor2)
-        {
-            Major = major;
-            Minor = minor;
-            Minor2 = minor2;
-        }
+        public byte Minor2 => _minor2;
 
         public LibraryVersion(int code)
         {
-            Major = (byte)((code >> 16) & 255);
-            Minor = (byte)((code >> 8) & 255);
-            Minor2 = (byte)(code & 255);
+            _major = _minor = _minor2 = 0; // unfortunately required
+            _value = code;
         }
 
         public override string ToString()
         {
             return $"SunVox Lib v{Major}.{Minor}.{Minor2}";
+        }
+
+        public bool Equals(LibraryVersion other)
+        {
+            return _value == other._value;
+        }
+
+        public override bool Equals(object obj)
+        {
+            return obj is LibraryVersion other && Equals(other);
+        }
+
+        public override int GetHashCode()
+        {
+            return _value;
+        }
+
+        public static bool operator ==(LibraryVersion left, LibraryVersion right)
+        {
+            return left.Equals(right);
+        }
+
+        public static bool operator !=(LibraryVersion left, LibraryVersion right)
+        {
+            return !left.Equals(right);
         }
     }
 }

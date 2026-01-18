@@ -90,6 +90,16 @@ namespace SunSharp.Modules
         /// Original name: 6 'Repeat'
         /// </summary>
         void SetRepeat(Toggle value);
+
+        /// <summary>
+        /// Original name: 7 'Ignore Note OFF'
+        /// </summary>
+        Toggle GetIgnoreNoteOff();
+
+        /// <summary>
+        /// Original name: 7 'Ignore Note OFF'
+        /// </summary>
+        void SetIgnoreNoteOff(Toggle value);
     }
 
     /// <inheritdoc cref="IVorbisPlayerModuleHandle"/>
@@ -165,6 +175,12 @@ namespace SunSharp.Modules
 
         /// <inheritdoc cref="IVorbisPlayerModuleHandle.SetRepeat" />
         public void SetRepeat(Toggle value) => ModuleHandle.SetControllerValue(6, (int)value, ValueScalingMode.Displayed);
+
+        /// <inheritdoc cref="IVorbisPlayerModuleHandle.GetIgnoreNoteOff" />
+        public Toggle GetIgnoreNoteOff() => (Toggle)ModuleHandle.GetControllerValue(7, ValueScalingMode.Displayed);
+
+        /// <inheritdoc cref="IVorbisPlayerModuleHandle.SetIgnoreNoteOff" />
+        public void SetIgnoreNoteOff(Toggle value) => ModuleHandle.SetControllerValue(7, (int)value, ValueScalingMode.Displayed);
     }
 }
 #endif

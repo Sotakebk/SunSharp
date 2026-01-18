@@ -80,6 +80,62 @@ namespace SunSharp.Modules
         /// Original name: 5 'Rec threshold'
         /// </summary>
         void SetRecThreshold(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
+
+        /// <summary>
+        /// Value range: 0-2048
+        /// Original name: 6 'Tick length (norm=128)'
+        /// </summary>
+        int GetTickLengthNorm128(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
+
+        /// <summary>
+        /// Value range: 0-2048
+        /// Original name: 6 'Tick length (norm=128)'
+        /// </summary>
+        void SetTickLengthNorm128(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
+
+        /// <summary>
+        /// Original name: 7 'Record'
+        /// </summary>
+        SamplerRecordState GetRecord();
+
+        /// <summary>
+        /// Original name: 7 'Record'
+        /// </summary>
+        void SetRecord(SamplerRecordState value);
+
+        /// <summary>
+        /// Original name: 8 'Reverse'
+        /// </summary>
+        Toggle GetReverse();
+
+        /// <summary>
+        /// Original name: 8 'Reverse'
+        /// </summary>
+        void SetReverse(Toggle value);
+
+        /// <summary>
+        /// Value range: 0-32768
+        /// Original name: 9 'Attack'
+        /// </summary>
+        int GetAttack(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
+
+        /// <summary>
+        /// Value range: 0-32768
+        /// Original name: 9 'Attack'
+        /// </summary>
+        void SetAttack(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
+
+        /// <summary>
+        /// Value range: 0-32768
+        /// Original name: 10 'Release'
+        /// </summary>
+        int GetRelease(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
+
+        /// <summary>
+        /// Value range: 0-32768
+        /// Original name: 10 'Release'
+        /// </summary>
+        void SetRelease(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
     }
 
     /// <inheritdoc cref="ISamplerModuleHandle"/>
@@ -149,6 +205,36 @@ namespace SunSharp.Modules
 
         /// <inheritdoc cref="ISamplerModuleHandle.SetRecThreshold" />
         public void SetRecThreshold(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(5, value, valueScalingMode);
+
+        /// <inheritdoc cref="ISamplerModuleHandle.GetTickLengthNorm128" />
+        public int GetTickLengthNorm128(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(6, valueScalingMode);
+
+        /// <inheritdoc cref="ISamplerModuleHandle.SetTickLengthNorm128" />
+        public void SetTickLengthNorm128(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(6, value, valueScalingMode);
+
+        /// <inheritdoc cref="ISamplerModuleHandle.GetRecord" />
+        public SamplerRecordState GetRecord() => (SamplerRecordState)ModuleHandle.GetControllerValue(7, ValueScalingMode.Displayed);
+
+        /// <inheritdoc cref="ISamplerModuleHandle.SetRecord" />
+        public void SetRecord(SamplerRecordState value) => ModuleHandle.SetControllerValue(7, (int)value, ValueScalingMode.Displayed);
+
+        /// <inheritdoc cref="ISamplerModuleHandle.GetReverse" />
+        public Toggle GetReverse() => (Toggle)ModuleHandle.GetControllerValue(8, ValueScalingMode.Displayed);
+
+        /// <inheritdoc cref="ISamplerModuleHandle.SetReverse" />
+        public void SetReverse(Toggle value) => ModuleHandle.SetControllerValue(8, (int)value, ValueScalingMode.Displayed);
+
+        /// <inheritdoc cref="ISamplerModuleHandle.GetAttack" />
+        public int GetAttack(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(9, valueScalingMode);
+
+        /// <inheritdoc cref="ISamplerModuleHandle.SetAttack" />
+        public void SetAttack(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(9, value, valueScalingMode);
+
+        /// <inheritdoc cref="ISamplerModuleHandle.GetRelease" />
+        public int GetRelease(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(10, valueScalingMode);
+
+        /// <inheritdoc cref="ISamplerModuleHandle.SetRelease" />
+        public void SetRelease(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(10, value, valueScalingMode);
     }
 }
 #endif

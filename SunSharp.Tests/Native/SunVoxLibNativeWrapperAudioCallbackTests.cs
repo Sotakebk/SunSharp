@@ -10,7 +10,7 @@ public class SunVoxLibNativeWrapperAudioCallbackTests
     #region input short, output short
 
     [Test, AutoData]
-    public void ForOutputShortInStereoInputShortInStereoShouldCallExpectedMethodWithHalfFramesAndReturnsBooleanFromReturnCode(bool expectedValue, int latency, uint outTime)
+    public void AudioCallback_WithOutputShortInStereoInputShortInStereo_ShouldCallExpectedMethodWithHalfFramesAndReturnBoolean(bool expectedValue, int latency, uint outTime)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var outputBuffer = new short[256];
@@ -44,8 +44,7 @@ public class SunVoxLibNativeWrapperAudioCallbackTests
     #region input float, output short
 
     [Test, AutoData]
-    public void
-        ForOutputShortInStereoInputFloatInStereoShouldCallExpectedMethodWithHalfFramesAndReturnsBooleanFromReturnCode(bool expectedValue, int latency, uint outTime)
+    public void AudioCallback_WithOutputShortInStereoInputFloatInStereo_ShouldCallExpectedMethodWithHalfFramesAndReturnBoolean(bool expectedValue, int latency, uint outTime)
     {
         var outputBuffer = new short[256];
         var inputBuffer = new float[256];
@@ -79,8 +78,7 @@ public class SunVoxLibNativeWrapperAudioCallbackTests
     #region input short, output float
 
     [Test, AutoData]
-    public void
-        ForOutputFloatInStereoInputShortInStereoShouldCallExpectedMethodWithHalfFramesAndReturnsBooleanFromReturnCode(bool expectedValue, int latency, uint outTime)
+    public void AudioCallback_WithOutputFloatInStereoInputShortInStereo_ShouldCallExpectedMethodWithHalfFramesAndReturnBoolean(bool expectedValue, int latency, uint outTime)
     {
         var outputBuffer = new float[256];
         var inputBuffer = new short[256];
@@ -114,7 +112,7 @@ public class SunVoxLibNativeWrapperAudioCallbackTests
     #region output only, float, mono
 
     [Test, AutoData]
-    public void ForFloatInMonoShouldCallExpectedMethodAndReturnsBooleanFromReturnCode(bool expectedValue, int latency, uint outTime)
+    public void AudioCallback_WithFloatInMono_ShouldCallExpectedMethodAndReturnBoolean(bool expectedValue, int latency, uint outTime)
     {
         var buffer = new float[256];
         var library = Substitute.For<ISunVoxLibC>();
@@ -140,7 +138,7 @@ public class SunVoxLibNativeWrapperAudioCallbackTests
     }
 
     [Test, AutoData]
-    public void ForFloatInMonoShouldThrowIfReturnCodeNotOneOrZero(float[] buffer, int latency, uint outTime)
+    public void AudioCallback_WithFloatInMonoOnReturnCodeNotOneOrZero_ShouldThrow(float[] buffer, int latency, uint outTime)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
@@ -157,7 +155,7 @@ public class SunVoxLibNativeWrapperAudioCallbackTests
     #region output only, float, stereo
 
     [Test, AutoData]
-    public void ForFloatInStereoShouldCallExpectedMethodWithHalfFramesAndReturnsBooleanFromReturnCode(
+    public void AudioCallback_WithFloatInStereo_ShouldCallExpectedMethodWithHalfFramesAndReturnBoolean(
         bool expectedValue, int latency, uint outTime)
     {
         var buffer = new float[256];
@@ -184,7 +182,7 @@ public class SunVoxLibNativeWrapperAudioCallbackTests
     }
 
     [Test, AutoData]
-    public void ForFloatInStereoShouldThrowIfBufferSizeIsNotMultipleOfTwo(float[] buffer, int latency, uint outTime)
+    public void AudioCallback_WithFloatInStereoOnBufferSizeNotMultipleOfTwo_ShouldThrow(float[] buffer, int latency, uint outTime)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
@@ -196,7 +194,7 @@ public class SunVoxLibNativeWrapperAudioCallbackTests
     }
 
     [Test, AutoData]
-    public void ForFloatInStereoShouldThrowIfReturnCodeNotOneOrZero(int latency, uint outTime)
+    public void AudioCallback_WithFloatInStereoOnReturnCodeNotOneOrZero_ShouldThrow(int latency, uint outTime)
     {
         var buffer = new float[256];
         var library = Substitute.For<ISunVoxLibC>();
@@ -214,7 +212,7 @@ public class SunVoxLibNativeWrapperAudioCallbackTests
     #region output only, short, mono
 
     [Test, AutoData]
-    public void ForShortInMonoShouldCallExpectedMethodAndReturnsBooleanFromReturnCode(bool expectedValue, int latency, uint outTime)
+    public void AudioCallback_WithShortInMono_ShouldCallExpectedMethodAndReturnBoolean(bool expectedValue, int latency, uint outTime)
     {
         var buffer = new short[256];
         var library = Substitute.For<ISunVoxLibC>();
@@ -240,7 +238,7 @@ public class SunVoxLibNativeWrapperAudioCallbackTests
     }
 
     [Test, AutoData]
-    public void ForShortInMonoShouldThrowIfReturnCodeNotOneOrZero(int latency, uint outTime)
+    public void AudioCallback_WithShortInMonoOnReturnCodeNotOneOrZero_ShouldThrow(int latency, uint outTime)
     {
         var buffer = new short[256];
         var library = Substitute.For<ISunVoxLibC>();
@@ -258,7 +256,7 @@ public class SunVoxLibNativeWrapperAudioCallbackTests
     #region output only, short, stereo
 
     [Test, AutoData]
-    public void ForShortInStereoShouldCallExpectedMethodWithHalfFramesAndReturnsBooleanFromReturnCode(
+    public void AudioCallback_WithShortInStereo_ShouldCallExpectedMethodWithHalfFramesAndReturnBoolean(
         bool expectedValue, int latency, uint outTime)
     {
         var buffer = new short[256];
@@ -285,7 +283,7 @@ public class SunVoxLibNativeWrapperAudioCallbackTests
     }
 
     [Test, AutoData]
-    public void ForShortInStereoShouldThrowIfBufferSizeIsNotMultipleOfTwo(short[] buffer, int latency, uint outTime)
+    public void AudioCallback_WithShortInStereoOnBufferSizeNotMultipleOfTwo_ShouldThrow(short[] buffer, int latency, uint outTime)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
@@ -297,7 +295,7 @@ public class SunVoxLibNativeWrapperAudioCallbackTests
     }
 
     [Test, AutoData]
-    public void ForShortInStereoShouldThrowIfReturnCodeNotOneOrZero(int latency, uint outTime)
+    public void AudioCallback_WithShortInStereoOnReturnCodeNotOneOrZero_ShouldThrow(int latency, uint outTime)
     {
         var buffer = new short[256];
         var library = Substitute.For<ISunVoxLibC>();
@@ -315,7 +313,7 @@ public class SunVoxLibNativeWrapperAudioCallbackTests
     #region output float mono, input float mono
 
     [Test, AutoData]
-    public void ForOutputFloatInMonoInputFloatInMonoShouldCallExpectedMethodAndReturnsBooleanFromReturnCode(
+    public void AudioCallback_WithOutputFloatInMonoInputFloatInMono_ShouldCallExpectedMethodAndReturnBoolean(
         bool expectedValue, float[] outputBuffer, float[] inputBuffer, int latency, uint outTime)
     {
         var library = Substitute.For<ISunVoxLibC>();
@@ -344,7 +342,7 @@ public class SunVoxLibNativeWrapperAudioCallbackTests
     }
 
     [Test, AutoData]
-    public void ForOutputFloatInMonoInputFloatInMonoShouldThrowIfBufferSizeMismatched(int latency, uint outTime)
+    public void AudioCallback_WithOutputFloatInMonoInputFloatInMonoOnBufferSizeMismatch_ShouldThrow(int latency, uint outTime)
     {
         var outputBuffer = new float[10];
         var inputBuffer = new float[11];
@@ -360,7 +358,7 @@ public class SunVoxLibNativeWrapperAudioCallbackTests
     }
 
     [Test, AutoData]
-    public void ForOutputFloatInMonoInputFloatInMonoShouldThrowIfReturnCodeNotOneOrZero(float[] outputBuffer, float[] inputBuffer, int latency, uint outTime)
+    public void AudioCallback_WithOutputFloatInMonoInputFloatInMonoOnReturnCodeNotOneOrZero_ShouldThrow(float[] outputBuffer, float[] inputBuffer, int latency, uint outTime)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
@@ -377,8 +375,7 @@ public class SunVoxLibNativeWrapperAudioCallbackTests
     #region output float stereo, input float mono
 
     [Test, AutoData]
-    public void
-        ForOutputFloatInStereoInputFloatInMonoShouldCallExpectedMethodWithHalfInputFramesAndReturnsBooleanFromReturnCode(bool expectedValue, int latency, uint outTime)
+    public void AudioCallback_WithOutputFloatInStereoInputFloatInMono_ShouldCallExpectedMethodWithHalfInputFramesAndReturnBoolean(bool expectedValue, int latency, uint outTime)
     {
         var outputBuffer = new float[256];
         var inputBuffer = new float[128];
@@ -408,7 +405,7 @@ public class SunVoxLibNativeWrapperAudioCallbackTests
     }
 
     [Test, AutoData]
-    public void ForOutputFloatInStereoInputFloatInMonoShouldThrowDueToBufferSizeMismatch(float[] outputBuffer, float[] inputBuffer, int latency, uint outTime)
+    public void AudioCallback_WithOutputFloatInStereoInputFloatInMonoOnBufferSizeMismatch_ShouldThrow(float[] outputBuffer, float[] inputBuffer, int latency, uint outTime)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
@@ -428,8 +425,7 @@ public class SunVoxLibNativeWrapperAudioCallbackTests
     #region input float stereo, output float stereo
 
     [Test, AutoData]
-    public void
-        ForOutputFloatInStereoInputFloatInStereoShouldCallExpectedMethodWithHalfFramesAndReturnsBooleanFromReturnCode(bool expectedValue, int latency, uint outTime)
+    public void AudioCallback_WithOutputFloatInStereoInputFloatInStereo_ShouldCallExpectedMethodWithHalfFramesAndReturnBoolean(bool expectedValue, int latency, uint outTime)
     {
         var outputBuffer = new float[256];
         var inputBuffer = new float[256];
@@ -459,7 +455,7 @@ public class SunVoxLibNativeWrapperAudioCallbackTests
     }
 
     [Test, AutoData]
-    public void ForOutputFloatInStereoInputFloatInStereoShouldFailWhenInputBufferSizeNotDivisibleByTwo(int latency, uint outTime)
+    public void AudioCallback_WithOutputFloatInStereoInputFloatInStereoOnInputBufferSizeNotDivisibleByTwo_ShouldThrow(int latency, uint outTime)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
@@ -475,7 +471,7 @@ public class SunVoxLibNativeWrapperAudioCallbackTests
     }
 
     [Test, AutoData]
-    public void ForOutputFloatInStereoInputFloatInStereoShouldFailWhenOutputBufferSizeNotDivisibleByTwo(int latency, uint outTime)
+    public void AudioCallback_WithOutputFloatInStereoInputFloatInStereoOnOutputBufferSizeNotDivisibleByTwo_ShouldThrow(int latency, uint outTime)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);

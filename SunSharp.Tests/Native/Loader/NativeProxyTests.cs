@@ -9,7 +9,7 @@ namespace SunSharp.Tests.Native.Loader;
 
 public class NativeProxyTests
 {
-    private static void AssertThatGetFunctionByNameWasCalledForAllMethods(ILibraryHandler handler)
+    private static void AssertGetFunctionByNameWasCalledForAllMethods(ILibraryHandler handler)
     {
         var methods = typeof(ISunVoxLibC).GetMethods();
 
@@ -19,7 +19,7 @@ public class NativeProxyTests
         }
     }
 
-    private static void AssertThatGetFunctionByNameWasCalledForNoMethods(ILibraryHandler handler)
+    private static void AssertGetFunctionByNameWasCalledForNoMethods(ILibraryHandler handler)
     {
         handler.Received(0).GetFunctionByName(Arg.Any<string>(), Arg.Any<Type>());
     }
@@ -38,7 +38,7 @@ public class NativeProxyTests
     }
 
     [Test]
-    public void NativeProxyShouldCallExpectedMethodsInPositiveScenario()
+    public void Lifetime_ShouldCallExpectedMethodsInOptimisticScenario()
     {
         var handler = Substitute.For<ILibraryHandler>();
         handler.IsLibraryLoaded.Returns(false);
@@ -51,7 +51,7 @@ public class NativeProxyTests
         // then
         _ = handler.Received().IsLibraryLoaded;
         handler.Received(1).LoadLibrary();
-        AssertThatGetFunctionByNameWasCalledForAllMethods(handler);
+        AssertGetFunctionByNameWasCalledForAllMethods(handler);
 
         // setup
         handler.ClearReceivedCalls();
@@ -63,7 +63,7 @@ public class NativeProxyTests
         // then
         _ = handler.Received().IsLibraryLoaded;
         handler.Received(0).LoadLibrary();
-        AssertThatGetFunctionByNameWasCalledForNoMethods(handler);
+        AssertGetFunctionByNameWasCalledForNoMethods(handler);
 
         //setup
         handler.ClearReceivedCalls();
@@ -79,7 +79,7 @@ public class NativeProxyTests
     }
 
     [Test]
-    public void NativeProxyLoadShouldNotCallHandlerLoadIfLibraryLoadedButProxyIsNot()
+    public void Load_LibraryLoadedButProxyIsNot_ShouldNotCallHandlerLoad()
     {
         var handler = Substitute.For<ILibraryHandler>();
         handler.IsLibraryLoaded.Returns(true);
@@ -92,11 +92,11 @@ public class NativeProxyTests
         // then
         _ = handler.Received().IsLibraryLoaded;
         handler.Received(0).LoadLibrary();
-        AssertThatGetFunctionByNameWasCalledForAllMethods(handler);
+        AssertGetFunctionByNameWasCalledForAllMethods(handler);
     }
 
     [Test]
-    public void NativeProxyLoadShouldCallHandlerUnloadWhenHandlerLoadFails()
+    public void Load_HandlerLoadFails_ShouldCallHandlerUnload()
     {
         var handler = Substitute.For<ILibraryHandler>();
         handler.IsLibraryLoaded.Returns(false);
@@ -114,11 +114,11 @@ public class NativeProxyTests
             handler.Received(1).LoadLibrary();
             handler.Received(1).UnloadLibrary();
         });
-        AssertThatGetFunctionByNameWasCalledForNoMethods(handler);
+        AssertGetFunctionByNameWasCalledForNoMethods(handler);
     }
 
     [Test]
-    public void NativeProxyShouldCallUnloadLibraryWhenLibraryFailedAndRethrowException()
+    public void Unload_WhenLibraryFailed_ShouldCallUnloadLibraryAndRethrowException()
     {
         var handler = Substitute.For<ILibraryHandler>();
         var delegates = PrepareHandlerAndGetDelegateDictionary(handler);
@@ -145,15 +145,19 @@ public class NativeProxyTests
     [TestCase(true, false, "Missing delegate. Library is loaded, proxy is not loaded.")]
     [TestCase(false, false, "Missing delegate. Library is not loaded, proxy is not loaded.")]
     [TestCase(true, true, "Missing delegate. Library is loaded, proxy is loaded.")]
-    public void NativeProxyGetExceptionReturnsExpectedMessage(bool libraryLoaded, bool proxyLoaded, string message)
+    public void GetNoDelegateException_ShouldReturnExpectedMessage(bool libraryLoaded, bool proxyLoaded, string message)
     {
         var handler = Substitute.For<ILibraryHandler>();
         var proxy = new NativeProxy(handler);
 
         if (proxyLoaded)
+        {
             proxy.Load();
+        }
         else
+        {
             proxy.Unload();
+        }
 
         proxy.IsLoaded.Should().Be(proxyLoaded);
 
@@ -164,7 +168,7 @@ public class NativeProxyTests
     }
 
     [Test]
-    public void NativeProxyGetExceptionReturnsExpectedMessageOnFailWhenGettingLibraryStatus()
+    public void GetNoDelegateException_OnFailWhenGettingLibraryStatus_ShouldReturnExpectedMessage()
     {
         var handler = Substitute.For<ILibraryHandler>();
         var proxy = new NativeProxy(handler);
@@ -185,7 +189,7 @@ public class NativeProxyTests
     }
 
     [Test]
-    public void NativeProxyShouldAskForAndCallProvidedDelegates()
+    public void Load_ShouldAskForExpectedDelegates()
     {
         var libraryHandler = Substitute.For<ILibraryHandler>();
 
@@ -216,7 +220,7 @@ public class NativeProxyTests
     }
 
     [Test]
-    public void NativeProxyUnloadShouldCallDeinitWhenAvailable()
+    public void Unload_ShouldCallDeinitWhenAvailable()
     {
         var libraryHandler = Substitute.For<ILibraryHandler>();
 
@@ -243,7 +247,7 @@ public class NativeProxyTests
     }
 
     [Test]
-    public void NativeProxyUnloadShouldThrowExpectedExceptionAndCallExpectedMethodsWhenDeinitFails()
+    public void Unload_WhenDeinitFails_ShouldThrowExpectedExceptionAndCallExpectedMethods()
     {
         var libraryHandler = Substitute.For<ILibraryHandler>();
 
@@ -277,7 +281,7 @@ public class NativeProxyTests
     }
 
     [Test]
-    public void NativeProxyUnloadShouldThrowExpectedExceptionAndCallExpectedMethodsWhenUnloadLibraryFails()
+    public void Unload_WhenUnloadLibraryFails_ShouldThrowExpectedExceptionAndCallExpectedMethods()
     {
         var libraryHandler = Substitute.For<ILibraryHandler>();
 
@@ -311,7 +315,7 @@ public class NativeProxyTests
     }
 
     [Test]
-    public void NativeProxyUnloadShouldThrowBothExpectedExceptionsAndCallExpectedMethodsWhenUnloadLibraryAndDeinitFail()
+    public void Unload_WhenUnloadLibraryAndDeinitFail_ShouldThrowBothExpectedExceptionsAndCallExpectedMethods()
     {
         var libraryHandler = Substitute.For<ILibraryHandler>();
 
@@ -338,7 +342,7 @@ public class NativeProxyTests
     }
 
     [Test]
-    public void NativeProxyUnloadShouldThrowWhenDeinitDelegateWasNotProvided()
+    public void Unload_WhenDeinitDelegateWasNotProvided_ShouldThrow()
     {
         var libraryHandler = Substitute.For<ILibraryHandler>();
 
@@ -359,7 +363,7 @@ public class NativeProxyTests
     }
 
     [Test]
-    public async Task NativeProxyInterfaceCallsShouldThrowInvalidOperationExceptionBeforeLoadCalled()
+    public async Task InterfaceCalls_BeforeLoadCalled_ShouldThrowInvalidOperationException()
     {
         var libraryHandler = Substitute.For<ILibraryHandler>();
         libraryHandler.IsLibraryLoaded.Returns(false);

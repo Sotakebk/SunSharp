@@ -4,16 +4,16 @@ using SunSharp.Native;
 
 namespace SunSharp.Tests.Mocks;
 
-public class SunVoxLibMockProvider
+public class SunVoxLibMockBuilder
 {
     private readonly ISunVoxLib _mock = Substitute.For<ISunVoxLib>();
 
-    public static SunVoxLibMockProvider BuildMock()
+    public static SunVoxLibMockBuilder BuildMock()
     {
-        return new SunVoxLibMockProvider();
+        return new SunVoxLibMockBuilder();
     }
 
-    public SunVoxLibMockProvider WithSongData(int slotId, SongData songData)
+    public SunVoxLibMockBuilder WithSongData(int slotId, SongData songData)
     {
         _mock.GetSongName(slotId).Returns(songData.Name);
         _mock.GetSongBpm(slotId).Returns(songData.BPM);
@@ -29,7 +29,7 @@ public class SunVoxLibMockProvider
         return this;
     }
 
-    public SunVoxLibMockProvider WithPatternData(int slotId, PatternData[] patternData)
+    public SunVoxLibMockBuilder WithPatternData(int slotId, PatternData[] patternData)
     {
         _mock.GetPatternExists(Arg.Any<int>(), Arg.Any<int>()).ReturnsForAnyArgs(false);
         _mock.GetUpperPatternCount(slotId).Returns(patternData.Max(static p => p.Id) + 1);
@@ -48,7 +48,7 @@ public class SunVoxLibMockProvider
         return this;
     }
 
-    public SunVoxLibMockProvider WithModuleData(int slotId, ModuleData[] moduleData)
+    public SunVoxLibMockBuilder WithModuleData(int slotId, ModuleData[] moduleData)
     {
         _mock.GetModuleExists(Arg.Any<int>(), Arg.Any<int>()).ReturnsForAnyArgs(false);
         _mock.GetUpperModuleCount(slotId).Returns(moduleData.Max(static m => m.Id) + 1);

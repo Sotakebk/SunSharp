@@ -154,6 +154,30 @@ namespace SunSharp.Modules
         /// Original name: 12 'Sine quality'
         /// </summary>
         void SetSineQuality(LfoSineQuality value);
+
+        /// <summary>
+        /// Value range: displayed: -128-128, real: 0-256
+        /// Original name: 13 'Transpose'
+        /// </summary>
+        int GetTranspose(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
+
+        /// <summary>
+        /// Value range: displayed: -128-128, real: 0-256
+        /// Original name: 13 'Transpose'
+        /// </summary>
+        void SetTranspose(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
+
+        /// <summary>
+        /// Value range: displayed: -256-256, real: 0-512
+        /// Original name: 14 'Finetune'
+        /// </summary>
+        int GetFinetune(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
+
+        /// <summary>
+        /// Value range: displayed: -256-256, real: 0-512
+        /// Original name: 14 'Finetune'
+        /// </summary>
+        void SetFinetune(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
     }
 
     /// <inheritdoc cref="ILfoModuleHandle"/>
@@ -265,6 +289,18 @@ namespace SunSharp.Modules
 
         /// <inheritdoc cref="ILfoModuleHandle.SetSineQuality" />
         public void SetSineQuality(LfoSineQuality value) => ModuleHandle.SetControllerValue(12, (int)value, ValueScalingMode.Displayed);
+
+        /// <inheritdoc cref="ILfoModuleHandle.GetTranspose" />
+        public int GetTranspose(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(13, valueScalingMode);
+
+        /// <inheritdoc cref="ILfoModuleHandle.SetTranspose" />
+        public void SetTranspose(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(13, value, valueScalingMode);
+
+        /// <inheritdoc cref="ILfoModuleHandle.GetFinetune" />
+        public int GetFinetune(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(14, valueScalingMode);
+
+        /// <inheritdoc cref="ILfoModuleHandle.SetFinetune" />
+        public void SetFinetune(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(14, value, valueScalingMode);
     }
 }
 #endif

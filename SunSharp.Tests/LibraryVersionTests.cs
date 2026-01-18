@@ -3,15 +3,11 @@ namespace SunSharp.Tests;
 public class LibraryVersionTests
 {
     [Test]
-    public void LibraryVersionConstructorShouldSetPropertiesAsExpected()
+    public void Constructor_ShouldSetPropertiesAsExpected()
     {
         const byte major = 1;
         const byte minor = 2;
         const byte minor2 = 3;
-        var version = new LibraryVersion(major, minor, minor2);
-        version.Major.Should().Be(1);
-        version.Minor.Should().Be(2);
-        version.Minor2.Should().Be(3);
         const int code = (major << 16)
                          | (minor << 8)
                          | minor2;
@@ -22,12 +18,15 @@ public class LibraryVersionTests
     }
 
     [Test]
-    public void LibraryVersionToStringReturnsExpectedFormat()
+    public void ToString_ShouldReturnExpectedFormat()
     {
         const byte major = 1;
         const byte minor = 2;
         const byte minor2 = 3;
-        var version = new LibraryVersion(major, minor, minor2);
+        const int code = (major << 16)
+                         | (minor << 8)
+                         | minor2;
+        var version = new LibraryVersion(code);
         var value = $"SunVox Lib v{major}.{minor}.{minor2}";
         version.ToString().Should().Be(value);
     }

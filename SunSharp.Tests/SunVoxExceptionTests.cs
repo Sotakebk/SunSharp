@@ -3,10 +3,10 @@ namespace SunSharp.Tests;
 public class SunVoxExceptionTests
 {
     [Test]
-    public void ShouldHaveExpectedMessage()
+    public void Constructor_ShouldHaveExpectedMessage()
     {
         const uint code = unchecked((uint)-1);
-        const string methodName = nameof(ShouldHaveExpectedMessage);
+        const string methodName = nameof(Constructor_ShouldHaveExpectedMessage);
         var exception = new SunVoxException(-1, methodName);
         var exceptionFromUint = new SunVoxException(code, methodName);
         var exceptionWithNoMethod = new SunVoxException(-1);

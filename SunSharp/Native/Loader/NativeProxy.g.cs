@@ -18,6 +18,8 @@ namespace SunSharp.Native.Loader
 
         private delegate IntPtr ReturnsIntPtrTakesintintint(int arg1, int arg2, int arg3);
 
+        private delegate IntPtr ReturnsIntPtrTakesintIntPtr(int arg1, IntPtr arg2);
+
         private delegate int ReturnsintTakesint(int arg1);
 
         private delegate int ReturnsintTakesintint(int arg1, int arg2);
@@ -27,6 +29,8 @@ namespace SunSharp.Native.Loader
         private delegate int ReturnsintTakesintintintint(int arg1, int arg2, int arg3, int arg4);
 
         private delegate int ReturnsintTakesintintintintint(int arg1, int arg2, int arg3, int arg4, int arg5);
+
+        private delegate int ReturnsintTakesintintintintintint(int arg1, int arg2, int arg3, int arg4, int arg5, int arg6);
 
         private delegate int ReturnsintTakesintintintintintintint(int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7);
 
@@ -93,6 +97,8 @@ namespace SunSharp.Native.Loader
         private ReturnsintTakesintIntPtr? sv_find_pattern;
 
         private ReturnsintTakesint? sv_get_autostop;
+
+        private ReturnsintTakesint? sv_get_base_version;
 
         private ReturnsintTakesint? sv_get_current_line;
 
@@ -216,7 +222,11 @@ namespace SunSharp.Native.Loader
 
         private ReturnsintTakesintintIntPtruintint? sv_sampler_load_from_memory;
 
+        private ReturnsintTakesintintintintintint? sv_sampler_par;
+
         private ReturnsintTakesintIntPtr? sv_save;
+
+        private ReturnsIntPtrTakesintIntPtr? sv_save_to_memory;
 
         private ReturnsintTakesintintintintintintint? sv_send_event;
 
@@ -283,6 +293,8 @@ namespace SunSharp.Native.Loader
         int ISunVoxLibC.sv_find_pattern(int slot, IntPtr name) => sv_find_pattern?.Invoke(slot, name) ?? throw GetNoDelegateException();
 
         int ISunVoxLibC.sv_get_autostop(int slot) => sv_get_autostop?.Invoke(slot) ?? throw GetNoDelegateException();
+
+        int ISunVoxLibC.sv_get_base_version(int slot) => sv_get_base_version?.Invoke(slot) ?? throw GetNoDelegateException();
 
         int ISunVoxLibC.sv_get_current_line(int slot) => sv_get_current_line?.Invoke(slot) ?? throw GetNoDelegateException();
 
@@ -406,7 +418,11 @@ namespace SunSharp.Native.Loader
 
         int ISunVoxLibC.sv_sampler_load_from_memory(int slot, int mod_num, IntPtr data, uint data_size, int sample_slot) => sv_sampler_load_from_memory?.Invoke(slot, mod_num, data, data_size, sample_slot) ?? throw GetNoDelegateException();
 
+        int ISunVoxLibC.sv_sampler_par(int slot, int mod_num, int sample_slot, int par, int par_val, int set) => sv_sampler_par?.Invoke(slot, mod_num, sample_slot, par, par_val, set) ?? throw GetNoDelegateException();
+
         int ISunVoxLibC.sv_save(int slot, IntPtr name) => sv_save?.Invoke(slot, name) ?? throw GetNoDelegateException();
+
+        IntPtr ISunVoxLibC.sv_save_to_memory(int slot, IntPtr size) => sv_save_to_memory?.Invoke(slot, size) ?? throw GetNoDelegateException();
 
         int ISunVoxLibC.sv_send_event(int slot, int track_num, int note, int vel, int module, int ctl, int ctl_val) => sv_send_event?.Invoke(slot, track_num, note, vel, module, ctl, ctl_val) ?? throw GetNoDelegateException();
 
@@ -464,6 +480,7 @@ namespace SunSharp.Native.Loader
             sv_find_module = (ReturnsintTakesintIntPtr)_handler.GetFunctionByName("sv_find_module", typeof(ReturnsintTakesintIntPtr));
             sv_find_pattern = (ReturnsintTakesintIntPtr)_handler.GetFunctionByName("sv_find_pattern", typeof(ReturnsintTakesintIntPtr));
             sv_get_autostop = (ReturnsintTakesint)_handler.GetFunctionByName("sv_get_autostop", typeof(ReturnsintTakesint));
+            sv_get_base_version = (ReturnsintTakesint)_handler.GetFunctionByName("sv_get_base_version", typeof(ReturnsintTakesint));
             sv_get_current_line = (ReturnsintTakesint)_handler.GetFunctionByName("sv_get_current_line", typeof(ReturnsintTakesint));
             sv_get_current_line2 = (ReturnsintTakesint)_handler.GetFunctionByName("sv_get_current_line2", typeof(ReturnsintTakesint));
             sv_get_current_signal_level = (ReturnsintTakesintint)_handler.GetFunctionByName("sv_get_current_signal_level", typeof(ReturnsintTakesintint));
@@ -525,7 +542,9 @@ namespace SunSharp.Native.Loader
             sv_rewind = (ReturnsintTakesintint)_handler.GetFunctionByName("sv_rewind", typeof(ReturnsintTakesintint));
             sv_sampler_load = (ReturnsintTakesintintIntPtrint)_handler.GetFunctionByName("sv_sampler_load", typeof(ReturnsintTakesintintIntPtrint));
             sv_sampler_load_from_memory = (ReturnsintTakesintintIntPtruintint)_handler.GetFunctionByName("sv_sampler_load_from_memory", typeof(ReturnsintTakesintintIntPtruintint));
+            sv_sampler_par = (ReturnsintTakesintintintintintint)_handler.GetFunctionByName("sv_sampler_par", typeof(ReturnsintTakesintintintintintint));
             sv_save = (ReturnsintTakesintIntPtr)_handler.GetFunctionByName("sv_save", typeof(ReturnsintTakesintIntPtr));
+            sv_save_to_memory = (ReturnsIntPtrTakesintIntPtr)_handler.GetFunctionByName("sv_save_to_memory", typeof(ReturnsIntPtrTakesintIntPtr));
             sv_send_event = (ReturnsintTakesintintintintintintint)_handler.GetFunctionByName("sv_send_event", typeof(ReturnsintTakesintintintintintintint));
             sv_set_autostop = (ReturnsintTakesintint)_handler.GetFunctionByName("sv_set_autostop", typeof(ReturnsintTakesintint));
             sv_set_event_t = (ReturnsintTakesintintint)_handler.GetFunctionByName("sv_set_event_t", typeof(ReturnsintTakesintintint));
@@ -561,6 +580,7 @@ namespace SunSharp.Native.Loader
             sv_find_module = null;
             sv_find_pattern = null;
             sv_get_autostop = null;
+            sv_get_base_version = null;
             sv_get_current_line = null;
             sv_get_current_line2 = null;
             sv_get_current_signal_level = null;
@@ -622,7 +642,9 @@ namespace SunSharp.Native.Loader
             sv_rewind = null;
             sv_sampler_load = null;
             sv_sampler_load_from_memory = null;
+            sv_sampler_par = null;
             sv_save = null;
+            sv_save_to_memory = null;
             sv_send_event = null;
             sv_set_autostop = null;
             sv_set_event_t = null;

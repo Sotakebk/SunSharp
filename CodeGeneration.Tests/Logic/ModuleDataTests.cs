@@ -1,8 +1,6 @@
 using System.Linq;
-using AwesomeAssertions;
 using AwesomeAssertions.Execution;
 using CodeGeneration.Logic;
-using NUnit.Framework;
 using SunSharp;
 
 namespace CodeGeneration.Tests.Logic;
@@ -36,6 +34,7 @@ public class ModuleDataTests
             }
 
             var values = matchingEnum.GetEnumValues();
+            values.Length.Should().BeGreaterThan(0, $"Controller '{controller.InternalName}' in module '{moduleName}' references enum {enumName}, but enum does not have any values.");
             var intValues = values.Cast<int>().ToArray();
 
             var minEnumValue = intValues.Min(v => v);

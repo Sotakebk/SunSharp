@@ -80,6 +80,11 @@ namespace SunSharp.Native
         int sv_save(int slot, IntPtr name);
 
         /// <summary>
+        /// void* sv_save_to_memory( int slot, size_t* size ) ;
+        /// </summary>
+        IntPtr sv_save_to_memory(int slot, IntPtr size);
+
+        /// <summary>
         /// int sv_play( int slot ) ;
         /// </summary>
         int sv_play(int slot);
@@ -170,6 +175,11 @@ namespace SunSharp.Native
         int sv_set_song_name(int slot, IntPtr name);
 
         /// <summary>
+        /// int sv_get_base_version( int slot ) ;
+        /// </summary>
+        int sv_get_base_version(int slot);
+
+        /// <summary>
         /// int sv_get_song_bpm( int slot ) ;
         /// </summary>
         int sv_get_song_bpm(int slot);
@@ -233,6 +243,11 @@ namespace SunSharp.Native
         /// int sv_sampler_load_from_memory( int slot, int mod_num, void* data, uint32_t data_size, int sample_slot ) ;
         /// </summary>
         int sv_sampler_load_from_memory(int slot, int mod_num, IntPtr data, uint data_size, int sample_slot);
+
+        /// <summary>
+        /// int sv_sampler_par( int slot, int mod_num, int sample_slot, int par, int par_val, int set ) ;
+        /// </summary>
+        int sv_sampler_par(int slot, int mod_num, int sample_slot, int par, int par_val, int set);
 
         /// <summary>
         /// int sv_metamodule_load( int slot, int mod_num, const char* file_name ) ;

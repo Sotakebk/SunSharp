@@ -159,7 +159,7 @@ namespace SunSharp.Native
         /// <inheritdoc/>
         public FineTunePair GetModuleFineTune(int slotId, int moduleId)
         {
-            var (fineTune, relativeNote) = Helper.UnpackTwoSignedShorts(_lib.sv_get_module_finetune(slotId, moduleId));
+            var (fineTune, relativeNote) = UtilityHelper.UnpackTwoSignedShorts(_lib.sv_get_module_finetune(slotId, moduleId));
             return new FineTunePair(fineTune, relativeNote);
         }
 
@@ -181,7 +181,7 @@ namespace SunSharp.Native
 
             // memory managed by SunVox
             var ptr = _lib.sv_get_module_inputs(slotId, moduleId);
-            return Helper.CopyIntArraySkipNegativeOnes(ptr, inputCount);
+            return UtilityHelper.CopyIntArraySkipNegativeOnes(ptr, inputCount);
         }
 
         /// <inheritdoc/>
@@ -202,13 +202,13 @@ namespace SunSharp.Native
 
             // memory managed by SunVox
             var ptr = _lib.sv_get_module_outputs(slotId, moduleId);
-            return Helper.CopyIntArraySkipNegativeOnes(ptr, outputCount);
+            return UtilityHelper.CopyIntArraySkipNegativeOnes(ptr, outputCount);
         }
 
         /// <inheritdoc/>
         public (int x, int y) GetModulePosition(int slotId, int moduleId)
         {
-            return Helper.UnpackTwoSignedShorts(_lib.sv_get_module_xy(slotId, moduleId));
+            return UtilityHelper.UnpackTwoSignedShorts(_lib.sv_get_module_xy(slotId, moduleId));
         }
 
         /// <inheritdoc/>

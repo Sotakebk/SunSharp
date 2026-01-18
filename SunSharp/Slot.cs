@@ -449,7 +449,7 @@ namespace SunSharp
         public void SetSongBpm(int value)
         {
             var xxyy = (ushort)Math.Min(Math.Max(0, value), 800);
-            VirtualPattern.SendEventImmediately(0, new PatternEvent(Effect.SetBpm, xxyy));
+            VirtualPattern.SendEventImmediately(0, PatternEvent.EffectEvent(null, Effect.SetBpm, xxyy));
         }
 
         /// <inheritdoc/>
@@ -462,7 +462,7 @@ namespace SunSharp
         public void SetSongTpl(int value)
         {
             var xxyy = (ushort)Math.Min(Math.Max(1, value), 31);
-            VirtualPattern.SendEventImmediately(0, new PatternEvent(Effect.SetPlayingSpeed, xxyy));
+            VirtualPattern.SendEventImmediately(0, PatternEvent.EffectEvent(null, Effect.SetPlayingSpeed, xxyy));
         }
 
         /// <inheritdoc/>

@@ -14,7 +14,7 @@ public class SunVoxLibNativeWrapperModulesTests
     ];
 
     [Test, AutoData]
-    public void ConnectModuleShouldCallExpectedMethod(int slotId, int source, int destination)
+    public void ConnectModule_Default_ShouldCallExpectedMethod(int slotId, int source, int destination)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
@@ -28,7 +28,7 @@ public class SunVoxLibNativeWrapperModulesTests
     }
 
     [Test, AutoData]
-    public void ConnectModuleShouldThrowOnNonZeroReturnCode(int slotId, int source, int destination)
+    public void ConnectModule_NonZeroReturnCode_ShouldThrow(int slotId, int source, int destination)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
@@ -42,7 +42,7 @@ public class SunVoxLibNativeWrapperModulesTests
     }
 
     [Test, AutoData]
-    public void CreateModuleShouldCallExpectedMethod(int newModuleId, string moduleName, string moduleType, int slotId, int x, int y, int z)
+    public void CreateModule_Default_ShouldCallExpectedMethod(int newModuleId, string moduleName, string moduleType, int slotId, int x, int y, int z)
     {
         var receivedModuleName = string.Empty;
         var receivedModuleType = string.Empty;
@@ -68,7 +68,7 @@ public class SunVoxLibNativeWrapperModulesTests
     }
 
     [Test, AutoData]
-    public void CreateModuleShouldThrowOnNegativeReturnedValue(string moduleName, string moduleType, int slotId, int x, int y, int z)
+    public void CreateModule_NegativeReturnedValue_ShouldThrow(string moduleName, string moduleType, int slotId, int x, int y, int z)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
@@ -83,7 +83,7 @@ public class SunVoxLibNativeWrapperModulesTests
     }
 
     [Test, AutoData]
-    public void DisconnectModuleShouldCallExpectedMethod(int slotId, int source, int destination)
+    public void DisconnectModule_Default_ShouldCallExpectedMethod(int slotId, int source, int destination)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
@@ -97,7 +97,7 @@ public class SunVoxLibNativeWrapperModulesTests
     }
 
     [Test, AutoData]
-    public void DisconnectModuleShouldThrowOnNonZeroReturnCode(int slotId, int source, int destination)
+    public void DisconnectModule_NonZeroReturnCode_ShouldThrow(int slotId, int source, int destination)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
@@ -111,7 +111,7 @@ public class SunVoxLibNativeWrapperModulesTests
     }
 
     [Test, AutoData]
-    public void FindModuleShouldCallExpectedMethod(int foundModuleId, string moduleName, int slotId)
+    public void FindModule_Default_ShouldCallExpectedMethod(int foundModuleId, string moduleName, int slotId)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
@@ -130,7 +130,7 @@ public class SunVoxLibNativeWrapperModulesTests
     }
 
     [Test, AutoData]
-    public void FindModuleShouldCallExpectedMethodAndReturnNullWhenModuleNotFound(string moduleName, int slotId)
+    public void FindModule_ModuleNotFound_ShouldReturnNull(string moduleName, int slotId)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
@@ -149,7 +149,7 @@ public class SunVoxLibNativeWrapperModulesTests
     }
 
     [Test, AutoData]
-    public void FindModuleShouldThrowOnUnexpectedValue(string moduleName, int slotId)
+    public void FindModule_UnexpectedValue_ShouldThrow(string moduleName, int slotId)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
@@ -163,7 +163,7 @@ public class SunVoxLibNativeWrapperModulesTests
     }
 
     [Test, AutoData]
-    public void GetModuleColorShouldCallExpectedMethodAndReturnValue(byte r, byte g, byte b, int moduleId, int slotId)
+    public void GetModuleColor_Default_ShouldReturnValue(byte r, byte g, byte b, int moduleId, int slotId)
     {
         var code = r | (g << 8) | (b << 16);
 
@@ -180,7 +180,7 @@ public class SunVoxLibNativeWrapperModulesTests
     }
 
     [Test, AutoData]
-    public void GetModuleControllerCountShouldCallExpectedMethod(int moduleId, int slotId, int moduleCount)
+    public void GetModuleControllerCount_Default_ShouldReturnValue(int moduleId, int slotId, int moduleCount)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
@@ -195,7 +195,7 @@ public class SunVoxLibNativeWrapperModulesTests
     }
 
     [Test, AutoData]
-    public void GetModuleControllerCountShouldCallExpectedMethodAndThrowOnNegativeValue(int slotId, int moduleId)
+    public void GetModuleControllerCount_NegativeValue_ShouldThrow(int slotId, int moduleId)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
@@ -209,7 +209,7 @@ public class SunVoxLibNativeWrapperModulesTests
     }
 
     [Test, AutoData]
-    public void GetModuleControllerGroupShouldCallExpectedMethodAndReturnValue(int moduleId, int controllerId, int slotId, int returnedValue)
+    public void GetModuleControllerGroup_Default_ShouldReturnValue(int moduleId, int controllerId, int slotId, int returnedValue)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
@@ -224,7 +224,7 @@ public class SunVoxLibNativeWrapperModulesTests
     }
 
     [Test, AutoData]
-    public void GetModuleControllerMaxValueShouldCallExpectedMethodAndReturnValue(int moduleId, int controllerId, int slotId, int returnedValue, ValueScalingMode scalingMode)
+    public void GetModuleControllerMaxValue_Default_ShouldReturnValue(int moduleId, int controllerId, int slotId, int returnedValue, ValueScalingMode scalingMode)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
@@ -240,7 +240,7 @@ public class SunVoxLibNativeWrapperModulesTests
     }
 
     [Test, AutoData]
-    public void GetModuleControllerMinValueShouldCallExpectedMethodAndReturnValue(int moduleId, int controllerId, int slotId, int returnedValue, ValueScalingMode scalingMode)
+    public void GetModuleControllerMinValue_Default_ShouldReturnValue(int moduleId, int controllerId, int slotId, int returnedValue, ValueScalingMode scalingMode)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
@@ -256,7 +256,7 @@ public class SunVoxLibNativeWrapperModulesTests
     }
 
     [Test, AutoData]
-    public void GetModuleControllerNameShouldCallExpectedMethodAndReturnNull(int moduleId, int controllerId, int slotId)
+    public void GetModuleControllerName_NullPointer_ShouldReturnNull(int moduleId, int controllerId, int slotId)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
@@ -271,7 +271,7 @@ public class SunVoxLibNativeWrapperModulesTests
     }
 
     [Test, AutoData]
-    public void GetModuleControllerNameShouldCallExpectedMethodAndReturnString(string controllerName, int moduleId, int controllerId, int slotId)
+    public void GetModuleControllerName_Default_ShouldReturnString(string controllerName, int moduleId, int controllerId, int slotId)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
@@ -297,7 +297,7 @@ public class SunVoxLibNativeWrapperModulesTests
     }
 
     [Test, AutoData]
-    public void GetModuleControllerOffsetShouldCallExpectedMethodAndReturnValue(int moduleId, int controllerId, int slotId, int returnedValue)
+    public void GetModuleControllerOffset_Default_ShouldReturnValue(int moduleId, int controllerId, int slotId, int returnedValue)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
@@ -312,7 +312,7 @@ public class SunVoxLibNativeWrapperModulesTests
     }
 
     [Test, AutoData]
-    public void GetModuleControllerTypeShouldCallExpectedMethodAndReturnValue(int moduleId, int controllerId, int slotId, ControllerType returnedValue)
+    public void GetModuleControllerType_Default_ShouldReturnValue(int moduleId, int controllerId, int slotId, ControllerType returnedValue)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
@@ -327,7 +327,7 @@ public class SunVoxLibNativeWrapperModulesTests
     }
 
     [Test, AutoData]
-    public void GetModuleControllerTypeShouldCallExpectedMethodAndThrowOnUnexpectedValue(int moduleId, int controllerId, int slotId)
+    public void GetModuleControllerType_UnexpectedValue_ShouldThrow(int moduleId, int controllerId, int slotId)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
@@ -341,7 +341,7 @@ public class SunVoxLibNativeWrapperModulesTests
     }
 
     [Test, AutoData]
-    public void GetModuleControllerValueShouldCallExpectedMethodAndReturnValue(int moduleId, int controllerId, int slotId, int returnedValue, ValueScalingMode scalingMode)
+    public void GetModuleControllerValue_Default_ShouldReturnValue(int moduleId, int controllerId, int slotId, int returnedValue, ValueScalingMode scalingMode)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
@@ -358,7 +358,7 @@ public class SunVoxLibNativeWrapperModulesTests
 
     [TestCase(true)]
     [TestCase(false)]
-    public void GetModuleExistsShouldCallExpectedMethodAndReturnValue(bool exists)
+    public void GetModuleExists_Default_ShouldReturnValue(bool exists)
     {
         var fixture = new Fixture();
         var flagsValue = (uint)(ModuleFlags.SV_MODULE_FLAG_EXISTS * (exists ? 1 : 0));
@@ -377,7 +377,7 @@ public class SunVoxLibNativeWrapperModulesTests
     }
 
     [Test, AutoData]
-    public void GetModuleFineTuneShouldCallExpectedMethodAndReturnValue(FineTunePair moduleFineTune, int moduleId, int slotId)
+    public void GetModuleFineTune_Default_ShouldReturnValue(FineTunePair moduleFineTune, int moduleId, int slotId)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
@@ -392,7 +392,7 @@ public class SunVoxLibNativeWrapperModulesTests
     }
 
     [Test, AutoData]
-    public void GetModuleFlagsShouldCallExpectedMethodAndReturnValue(uint flagsValue, int moduleId, int slotId)
+    public void GetModuleFlags_Default_ShouldReturnValue(uint flagsValue, int moduleId, int slotId)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
@@ -407,7 +407,7 @@ public class SunVoxLibNativeWrapperModulesTests
     }
 
     [TestCaseSource(nameof(ModuleInputOutputAndResult))]
-    public void GetModuleInputsShouldCallExpectedMethodsAndReturnValue(int[] nativeData, int[] expectedOutput)
+    public void GetModuleInputs_Default_ShouldReturnValue(int[] nativeData, int[] expectedOutput)
     {
         var fixture = new Fixture();
         var flagsValue = unchecked((uint)((nativeData.Length << ModuleFlags.SV_MODULE_INPUTS_OFF) |
@@ -431,7 +431,7 @@ public class SunVoxLibNativeWrapperModulesTests
     }
 
     [Test]
-    public void GetModuleInputsShouldSkipCallsIfDoesNotExist()
+    public void GetModuleInputs_ModuleDoesNotExist_ShouldSkipCalls()
     {
         const uint flagsValue = 0u;
         var fixture = new Fixture();
@@ -453,7 +453,7 @@ public class SunVoxLibNativeWrapperModulesTests
     }
 
     [Test]
-    public void GetModuleInputsShouldSkipCallsIfZeroInputs()
+    public void GetModuleInputs_ZeroInputs_ShouldSkipCalls()
     {
         const uint flagsValue = ModuleFlags.SV_MODULE_FLAG_EXISTS;
         var fixture = new Fixture();
@@ -475,7 +475,7 @@ public class SunVoxLibNativeWrapperModulesTests
     }
 
     [Test, AutoData]
-    public void GetModuleNameShouldCallExpectedMethodAndReturnNullWhenNullPointer(int moduleId, int slotId)
+    public void GetModuleName_NullPointer_ShouldReturnNull(int moduleId, int slotId)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
@@ -489,7 +489,7 @@ public class SunVoxLibNativeWrapperModulesTests
     }
 
     [Test, AutoData]
-    public void GetModuleNameShouldCallExpectedMethodAndReturnString(int moduleId, int slotId, string moduleName)
+    public void GetModuleName_Default_ShouldReturnString(int moduleId, int slotId, string moduleName)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
@@ -515,7 +515,7 @@ public class SunVoxLibNativeWrapperModulesTests
     }
 
     [TestCaseSource(nameof(ModuleInputOutputAndResult))]
-    public void GetModuleOutputsShouldCallExpectedMethodsAndReturnValue(int[] nativeData, int[] expectedOutput)
+    public void GetModuleOutputs_Default_ShouldReturnValue(int[] nativeData, int[] expectedOutput)
     {
         var fixture = new Fixture();
         var flagsValue = (uint)((nativeData.Length << ModuleFlags.SV_MODULE_OUTPUTS_OFF) |
@@ -539,7 +539,7 @@ public class SunVoxLibNativeWrapperModulesTests
     }
 
     [Test, AutoData]
-    public void GetModuleOutputsShouldSkipCallsIfDoesNotExist(int moduleId, int slotId)
+    public void GetModuleOutputs_ModuleDoesNotExist_ShouldSkipCalls(int moduleId, int slotId)
     {
         const uint flagsValue = 0u;
         new ModuleFlags(flagsValue).Exists.Should().BeFalse();
@@ -558,7 +558,7 @@ public class SunVoxLibNativeWrapperModulesTests
     }
 
     [Test, AutoData]
-    public void GetModuleOutputsShouldSkipCallsIfZeroOutputs(int moduleId, int slotId)
+    public void GetModuleOutputs_ZeroOutputs_ShouldSkipCalls(int moduleId, int slotId)
     {
         const uint flagsValue = ModuleFlags.SV_MODULE_FLAG_EXISTS;
         new ModuleFlags(flagsValue).InputUpperCount.Should().Be(0);
@@ -577,11 +577,11 @@ public class SunVoxLibNativeWrapperModulesTests
     }
 
     [Test, AutoData]
-    public void GetModulePositionShouldCallExpectedMethodAndReturnValue(int moduleId, int slotId, short x, short y)
+    public void GetModulePosition_Default_ShouldReturnValue(int moduleId, int slotId, short x, short y)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
-        library.sv_get_module_xy(Arg.Any<int>(), Arg.Any<int>()).Returns(Helper.PackTwoSignedShorts(x, y));
+        library.sv_get_module_xy(Arg.Any<int>(), Arg.Any<int>()).Returns(UtilityHelper.PackTwoSignedShorts(x, y));
         // when
         var value = wrapper.GetModulePosition(slotId, moduleId);
 
@@ -591,7 +591,7 @@ public class SunVoxLibNativeWrapperModulesTests
     }
 
     [Test, AutoData]
-    public void GetModuleTypeShouldCallExpectedMethodAndReturnNullWhenNullPointer(int moduleId, int slotId)
+    public void GetModuleType_NullPointer_ShouldReturnNull(int moduleId, int slotId)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
@@ -605,7 +605,7 @@ public class SunVoxLibNativeWrapperModulesTests
     }
 
     [Test, AutoData]
-    public void GetModuleTypeShouldCallExpectedMethodAndReturnString(int moduleId, int slotId, string moduleType)
+    public void GetModuleType_Default_ShouldReturnString(int moduleId, int slotId, string moduleType)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
@@ -631,7 +631,7 @@ public class SunVoxLibNativeWrapperModulesTests
     }
 
     [Test, AutoData]
-    public void GetUpperModuleCountShouldCallExpectedMethod(int slotId, int moduleCount)
+    public void GetUpperModuleCount_Default_ShouldReturnValue(int slotId, int moduleCount)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
@@ -646,7 +646,7 @@ public class SunVoxLibNativeWrapperModulesTests
     }
 
     [Test, AutoData]
-    public void GetUpperModuleCountShouldCallExpectedMethodAndThrowOnNegativeValue(int slotId)
+    public void GetUpperModuleCount_NegativeValue_ShouldThrow(int slotId)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
@@ -660,7 +660,7 @@ public class SunVoxLibNativeWrapperModulesTests
     }
 
     [Test, AutoData]
-    public void LoadIntoMetaModuleFromMemoryShouldCallExpectedMethod(int slotId, int moduleId, byte[] buffer)
+    public void LoadIntoMetaModuleFromMemory_Default_ShouldCallExpectedMethod(int slotId, int moduleId, byte[] buffer)
     {
         var receivedBuffer = Array.Empty<byte>();
 
@@ -685,7 +685,7 @@ public class SunVoxLibNativeWrapperModulesTests
     }
 
     [Test, AutoData]
-    public void LoadIntoMetaModuleFromMemoryShouldThrowOnNonZeroReturnCode(int slotId, int moduleId, byte[] buffer)
+    public void LoadIntoMetaModuleFromMemory_NonZeroReturnCode_ShouldThrow(int slotId, int moduleId, byte[] buffer)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
@@ -700,7 +700,7 @@ public class SunVoxLibNativeWrapperModulesTests
     }
 
     [Test, AutoData]
-    public void LoadIntoMetaModuleShouldCallExpectedMethod(int slotId, int moduleId, string path)
+    public void LoadIntoMetaModule_Default_ShouldCallExpectedMethod(int slotId, int moduleId, string path)
     {
         var receivedString = string.Empty;
 
@@ -718,7 +718,7 @@ public class SunVoxLibNativeWrapperModulesTests
     }
 
     [Test, AutoData]
-    public void LoadIntoMetaModuleShouldCallExpectedMethodAndThrowOnNonZeroReturnCode(int slotId, int moduleId, string path)
+    public void LoadIntoMetaModule_NonZeroReturnCode_ShouldThrow(int slotId, int moduleId, string path)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
@@ -732,7 +732,7 @@ public class SunVoxLibNativeWrapperModulesTests
     }
 
     [Test, AutoData]
-    public void LoadIntoVorbisPLayerFromMemoryShouldCallExpectedMethod(int slotId, int moduleId, byte[] buffer)
+    public void LoadIntoVorbisPlayerFromMemory_Default_ShouldCallExpectedMethod(int slotId, int moduleId, byte[] buffer)
     {
         var receivedBuffer = Array.Empty<byte>();
 
@@ -757,7 +757,7 @@ public class SunVoxLibNativeWrapperModulesTests
     }
 
     [Test, AutoData]
-    public void LoadIntoVorbisPLayerFromMemoryShouldThrowOnNonZeroReturnCode(int slotId, int moduleId, byte[] buffer)
+    public void LoadIntoVorbisPlayerFromMemory_NonZeroReturnCode_ShouldThrow(int slotId, int moduleId, byte[] buffer)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
@@ -772,7 +772,7 @@ public class SunVoxLibNativeWrapperModulesTests
     }
 
     [Test, AutoData]
-    public void LoadIntoVorbisPLayerShouldCallExpectedMethod(int slotId, int moduleId, string path)
+    public void LoadIntoVorbisPlayer_Default_ShouldCallExpectedMethod(int slotId, int moduleId, string path)
     {
         var receivedString = string.Empty;
 
@@ -790,7 +790,7 @@ public class SunVoxLibNativeWrapperModulesTests
     }
 
     [Test, AutoData]
-    public void LoadIntoVorbisPLayerShouldCallExpectedMethodAndThrowOnNonZeroReturnCode(int slotId, int moduleId, string path)
+    public void LoadIntoVorbisPlayer_NonZeroReturnCode_ShouldThrow(int slotId, int moduleId, string path)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
@@ -804,7 +804,7 @@ public class SunVoxLibNativeWrapperModulesTests
     }
 
     [Test, AutoData]
-    public void LoadModuleFromMemoryShouldCallExpectedMethod(int x, int y, int z, int slotId, int newModuleId, byte[] buffer)
+    public void LoadModuleFromMemory_Default_ShouldCallExpectedMethod(int x, int y, int z, int slotId, int newModuleId, byte[] buffer)
     {
         var receivedBuffer = Array.Empty<byte>();
 
@@ -828,7 +828,7 @@ public class SunVoxLibNativeWrapperModulesTests
     }
 
     [Test, AutoData]
-    public void LoadModuleFromMemoryShouldThrowOnNonZeroReturnCode(int x, int y, int z, int slotId, byte[] buffer)
+    public void LoadModuleFromMemory_NonZeroReturnCode_ShouldThrow(int x, int y, int z, int slotId, byte[] buffer)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
@@ -843,7 +843,7 @@ public class SunVoxLibNativeWrapperModulesTests
     }
 
     [Test, AutoData]
-    public void LoadModuleShouldCallExpectedMethod(int x, int y, int z, int slotId, int newModuleId, string path)
+    public void LoadModule_Default_ShouldCallExpectedMethod(int x, int y, int z, int slotId, int newModuleId, string path)
     {
         var receivedString = string.Empty;
 
@@ -863,7 +863,7 @@ public class SunVoxLibNativeWrapperModulesTests
     }
 
     [Test, AutoData]
-    public void LoadModuleShouldThrowOnNonZeroReturnCode(int x, int y, int z, int slotId, string path)
+    public void LoadModule_NonZeroReturnCode_ShouldThrow(int x, int y, int z, int slotId, string path)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
@@ -878,7 +878,7 @@ public class SunVoxLibNativeWrapperModulesTests
     }
 
     [Test, AutoData]
-    public void LoadSamplerSampleFromMemoryShouldCallExpectedMethod(int slotId, int moduleId, int sampleSlot, byte[] buffer)
+    public void LoadSamplerSampleFromMemory_Default_ShouldCallExpectedMethod(int slotId, int moduleId, int sampleSlot, byte[] buffer)
     {
         var receivedBuffer = Array.Empty<byte>();
 
@@ -903,7 +903,7 @@ public class SunVoxLibNativeWrapperModulesTests
     }
 
     [Test, AutoData]
-    public void LoadSamplerSampleFromMemoryShouldThrowOnNonZeroReturnCode(int slotId, int moduleId, int sampleSlot, byte[] buffer)
+    public void LoadSamplerSampleFromMemory_NonZeroReturnCode_ShouldThrow(int slotId, int moduleId, int sampleSlot, byte[] buffer)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
@@ -920,7 +920,7 @@ public class SunVoxLibNativeWrapperModulesTests
     }
 
     [Test, AutoData]
-    public void LoadSamplerSampleShouldCallExpectedMethod(int slotId, int moduleId, int sampleSlot, string path)
+    public void LoadSamplerSample_Default_ShouldCallExpectedMethod(int slotId, int moduleId, int sampleSlot, string path)
     {
         var receivedString = string.Empty;
 
@@ -936,7 +936,7 @@ public class SunVoxLibNativeWrapperModulesTests
     }
 
     [Test, AutoData]
-    public void LoadSamplerSampleShouldCallExpectedMethodAndThrowOnNonZeroReturnCode(int slotId, int moduleId, int sampleSlot, string path)
+    public void LoadSamplerSample_NonZeroReturnCode_ShouldThrow(int slotId, int moduleId, int sampleSlot, string path)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
@@ -950,7 +950,7 @@ public class SunVoxLibNativeWrapperModulesTests
     }
 
     [Test, AutoData]
-    public void ReadModuleCurveShouldCallExpectedMethod(int slotId, int moduleId, int curveId, float[] buffer)
+    public void ReadModuleCurve_Default_ShouldCallExpectedMethod(int slotId, int moduleId, int curveId, float[] buffer)
     {
         var samplesWritten = buffer.Length;
 
@@ -973,7 +973,7 @@ public class SunVoxLibNativeWrapperModulesTests
     }
 
     [Test, AutoData]
-    public void ReadModuleCurveShouldThrowOnNonZeroReturnCode(int slotId, int moduleId, int curveId, float[] buffer)
+    public void ReadModuleCurve_NonZeroReturnCode_ShouldThrow(int slotId, int moduleId, int curveId, float[] buffer)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
@@ -988,7 +988,7 @@ public class SunVoxLibNativeWrapperModulesTests
     }
 
     [Test, AutoData]
-    public void ReadModuleScopeShouldCallExpectedMethod(int moduleId, int slotId, short[] buffer, uint readSamples, AudioChannel channel)
+    public void ReadModuleScope_Default_ShouldCallExpectedMethod(int moduleId, int slotId, short[] buffer, uint readSamples, AudioChannel channel)
     {
         var receivedBuffer = Array.Empty<short>();
 
@@ -1017,7 +1017,7 @@ public class SunVoxLibNativeWrapperModulesTests
     }
 
     [Test, AutoData]
-    public void RemoveModuleShouldCallExpectedMethod(int slotId, int moduleId)
+    public void RemoveModule_Default_ShouldCallExpectedMethod(int slotId, int moduleId)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
@@ -1031,7 +1031,7 @@ public class SunVoxLibNativeWrapperModulesTests
     }
 
     [Test, AutoData]
-    public void RemoveModuleShouldCallExpectedMethodAndThrowOnNonZeroReturnCode(int slotId, int moduleId)
+    public void RemoveModule_NonZeroReturnCode_ShouldThrow(int slotId, int moduleId)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
@@ -1045,7 +1045,7 @@ public class SunVoxLibNativeWrapperModulesTests
     }
 
     [Test, AutoData]
-    public void SetModuleColorShouldCallExpectedMethod(byte r, byte g, byte b, int moduleId, int slotId)
+    public void SetModuleColor_Default_ShouldCallExpectedMethod(byte r, byte g, byte b, int moduleId, int slotId)
     {
         var code = r | (g << 8) | (b << 16);
 
@@ -1061,7 +1061,7 @@ public class SunVoxLibNativeWrapperModulesTests
     }
 
     [Test, AutoData]
-    public void SetModuleColorShouldThrowOnNonZeroReturnCode(byte r, byte g, byte b, int moduleId, int slotId)
+    public void SetModuleColor_NonZeroReturnCode_ShouldThrow(byte r, byte g, byte b, int moduleId, int slotId)
     {
         var code = r | (g << 8) | (b << 16);
 
@@ -1077,7 +1077,7 @@ public class SunVoxLibNativeWrapperModulesTests
     }
 
     [Test, AutoData]
-    public void SetModuleControllerValueShouldCallExpectedMethod(int slotId, int moduleId, int controllerId, int valueToSet, ValueScalingMode scalingMode)
+    public void SetModuleControllerValue_Default_ShouldCallExpectedMethod(int slotId, int moduleId, int controllerId, int valueToSet, ValueScalingMode scalingMode)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
@@ -1092,7 +1092,7 @@ public class SunVoxLibNativeWrapperModulesTests
     }
 
     [Test, AutoData]
-    public void SetModuleControllerValueShouldCallExpectedMethodAndThrowOnNonZeroCode(int slotId, int moduleId, int controllerId, int valueToSet, ValueScalingMode scalingMode)
+    public void SetModuleControllerValue_NonZeroReturnCode_ShouldThrow(int slotId, int moduleId, int controllerId, int valueToSet, ValueScalingMode scalingMode)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
@@ -1107,7 +1107,7 @@ public class SunVoxLibNativeWrapperModulesTests
     }
 
     [Test, AutoData]
-    public void SetModuleFineTuneShouldCallExpectedMethod(int slotId, int moduleId, int fineTune)
+    public void SetModuleFineTune_Default_ShouldCallExpectedMethod(int slotId, int moduleId, int fineTune)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
@@ -1121,7 +1121,7 @@ public class SunVoxLibNativeWrapperModulesTests
     }
 
     [Test, AutoData]
-    public void SetModuleFineTuneShouldCallExpectedMethodAndThrowOnNonZeroReturnCode(int slotId, int moduleId, int fineTune)
+    public void SetModuleFineTune_NonZeroReturnCode_ShouldThrow(int slotId, int moduleId, int fineTune)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
@@ -1135,7 +1135,7 @@ public class SunVoxLibNativeWrapperModulesTests
     }
 
     [Test, AutoData]
-    public void SetModuleNameShouldCallExpectedMethod(int slotId, int moduleId, string nameToSet)
+    public void SetModuleName_Default_ShouldCallExpectedMethod(int slotId, int moduleId, string nameToSet)
     {
         var receivedString = string.Empty;
 
@@ -1153,7 +1153,7 @@ public class SunVoxLibNativeWrapperModulesTests
     }
 
     [Test, AutoData]
-    public void SetModuleNameShouldCallExpectedMethodAndThrowOnNonZeroReturnCode(int slotId, int moduleId, string nameToSet)
+    public void SetModuleName_NonZeroReturnCode_ShouldThrow(int slotId, int moduleId, string nameToSet)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
@@ -1167,7 +1167,7 @@ public class SunVoxLibNativeWrapperModulesTests
     }
 
     [Test, AutoData]
-    public void SetModulePositionShouldCallExpectedMethod(int moduleId, int slotId, short x, short y)
+    public void SetModulePosition_Default_ShouldCallExpectedMethod(int moduleId, int slotId, short x, short y)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
@@ -1180,7 +1180,7 @@ public class SunVoxLibNativeWrapperModulesTests
     }
 
     [Test, AutoData]
-    public void SetModulePositionShouldCallExpectedMethodAndThrowOnNonZeroReturnCode(int moduleId, int slotId, short x, short y)
+    public void SetModulePosition_NonZeroReturnCode_ShouldThrow(int moduleId, int slotId, short x, short y)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
@@ -1194,7 +1194,7 @@ public class SunVoxLibNativeWrapperModulesTests
     }
 
     [Test, AutoData]
-    public void SetModuleRelativeNoteShouldCallExpectedMethod(int slotId, int moduleId, int fineTune)
+    public void SetModuleRelativeNote_Default_ShouldCallExpectedMethod(int slotId, int moduleId, int fineTune)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
@@ -1208,7 +1208,7 @@ public class SunVoxLibNativeWrapperModulesTests
     }
 
     [Test, AutoData]
-    public void SetModuleRelativeNoteShouldCallExpectedMethodAndThrowOnNonZeroReturnCode(int slotId, int moduleId, int fineTune)
+    public void SetModuleRelativeNote_NonZeroReturnCode_ShouldThrow(int slotId, int moduleId, int fineTune)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
@@ -1222,7 +1222,7 @@ public class SunVoxLibNativeWrapperModulesTests
     }
 
     [Test, AutoData]
-    public void WriteModuleCurveShouldCallExpectedMethod(int slotId, int moduleId, int curveId, float[] buffer)
+    public void WriteModuleCurve_Default_ShouldCallExpectedMethod(int slotId, int moduleId, int curveId, float[] buffer)
     {
         var samplesWritten = buffer.Length;
 
@@ -1245,7 +1245,7 @@ public class SunVoxLibNativeWrapperModulesTests
     }
 
     [Test, AutoData]
-    public void WriteModuleCurveShouldThrowOnNonZeroReturnCode(int slotId, int moduleId, int curveId, float[] buffer)
+    public void WriteModuleCurve_NonZeroReturnCode_ShouldThrow(int slotId, int moduleId, int curveId, float[] buffer)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);

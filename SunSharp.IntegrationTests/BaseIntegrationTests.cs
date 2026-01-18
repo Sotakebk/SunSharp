@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using SunSharp.Native;
 using SunSharp.Redistribution;
 
@@ -13,20 +14,20 @@ public abstract class BaseIntegrationTests
     }
 
     [OneTimeSetUp]
-    protected void OneTimeSetUp()
+    protected virtual void OneTimeSetUp()
     {
         LibraryLoader.Load();
         _lib = LibraryLoader.GetLibraryInstance();
     }
 
     [OneTimeTearDown]
-    protected void OneTimeTearDown()
+    protected virtual void OneTimeTearDown()
     {
         LibraryLoader.Unload();
     }
 
     [SetUp]
-    protected void SetUp()
+    protected virtual void SetUp()
     {
         try
         {
@@ -36,11 +37,12 @@ public abstract class BaseIntegrationTests
         catch (Exception e)
         {
             TestContext.Out.WriteLine(e);
+            throw;
         }
     }
 
     [TearDown]
-    protected void TearDown()
+    protected virtual void TearDown()
     {
         try
         {
@@ -52,5 +54,10 @@ public abstract class BaseIntegrationTests
             _lib?.Deinitialize();
             _lib = null;
         }
+    }
+
+    protected string GetTestPath([CallerFilePath] string path = "")
+    {
+        return System.IO.Path.GetDirectoryName(path) ?? string.Empty;
     }
 }

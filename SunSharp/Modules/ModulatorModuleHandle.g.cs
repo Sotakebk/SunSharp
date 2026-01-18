@@ -44,6 +44,26 @@ namespace SunSharp.Modules
         /// Original name: 2 'Channels'
         /// </summary>
         void SetChannels(Channels value);
+
+        /// <summary>
+        /// Original name: 3 'Max PM delay'
+        /// </summary>
+        ModulatorMaxPhaseModulationDelay GetMaxPhaseModulationDelay();
+
+        /// <summary>
+        /// Original name: 3 'Max PM delay'
+        /// </summary>
+        void SetMaxPhaseModulationDelay(ModulatorMaxPhaseModulationDelay value);
+
+        /// <summary>
+        /// Original name: 4 'PM interpolation'
+        /// </summary>
+        ModulatorPhaseModulationInterpolation GetPhaseModulationInterpolation();
+
+        /// <summary>
+        /// Original name: 4 'PM interpolation'
+        /// </summary>
+        void SetPhaseModulationInterpolation(ModulatorPhaseModulationInterpolation value);
     }
 
     /// <inheritdoc cref="IModulatorModuleHandle"/>
@@ -95,6 +115,18 @@ namespace SunSharp.Modules
 
         /// <inheritdoc cref="IModulatorModuleHandle.SetChannels" />
         public void SetChannels(Channels value) => ModuleHandle.SetControllerValue(2, (int)value, ValueScalingMode.Displayed);
+
+        /// <inheritdoc cref="IModulatorModuleHandle.GetMaxPhaseModulationDelay" />
+        public ModulatorMaxPhaseModulationDelay GetMaxPhaseModulationDelay() => (ModulatorMaxPhaseModulationDelay)ModuleHandle.GetControllerValue(3, ValueScalingMode.Displayed);
+
+        /// <inheritdoc cref="IModulatorModuleHandle.SetMaxPhaseModulationDelay" />
+        public void SetMaxPhaseModulationDelay(ModulatorMaxPhaseModulationDelay value) => ModuleHandle.SetControllerValue(3, (int)value, ValueScalingMode.Displayed);
+
+        /// <inheritdoc cref="IModulatorModuleHandle.GetPhaseModulationInterpolation" />
+        public ModulatorPhaseModulationInterpolation GetPhaseModulationInterpolation() => (ModulatorPhaseModulationInterpolation)ModuleHandle.GetControllerValue(4, ValueScalingMode.Displayed);
+
+        /// <inheritdoc cref="IModulatorModuleHandle.SetPhaseModulationInterpolation" />
+        public void SetPhaseModulationInterpolation(ModulatorPhaseModulationInterpolation value) => ModuleHandle.SetControllerValue(4, (int)value, ValueScalingMode.Displayed);
     }
 }
 #endif

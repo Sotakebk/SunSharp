@@ -145,7 +145,7 @@
           "FriendlyName": "SecondaryOscillatorMode",
           "InternalName": "Osc2 mode",
           "MinValue": 0,
-          "MaxValue": 6,
+          "MaxValue": 8,
           "EnumName": "AnalogGeneratorSecondaryOscillatorMode"
         },
         "21": {
@@ -1118,35 +1118,35 @@
           "FriendlyName": "ModulationType1",
           "InternalName": "1 Modulation type",
           "MinValue": 0,
-          "MaxValue": 9,
+          "MaxValue": 11,
           "EnumName": "FmxModulationType"
         },
         "110": {
           "FriendlyName": "ModulationType2",
           "InternalName": "2 Modulation type",
           "MinValue": 0,
-          "MaxValue": 9,
+          "MaxValue": 11,
           "EnumName": "FmxModulationType"
         },
         "111": {
           "FriendlyName": "ModulationType3",
           "InternalName": "3 Modulation type",
           "MinValue": 0,
-          "MaxValue": 9,
+          "MaxValue": 11,
           "EnumName": "FmxModulationType"
         },
         "112": {
           "FriendlyName": "ModulationType4",
           "InternalName": "4 Modulation type",
           "MinValue": 0,
-          "MaxValue": 9,
+          "MaxValue": 11,
           "EnumName": "FmxModulationType"
         },
         "113": {
           "FriendlyName": "ModulationType5",
           "InternalName": "5 Modulation type",
           "MinValue": 0,
-          "MaxValue": 9,
+          "MaxValue": 11,
           "EnumName": "FmxModulationType"
         },
         "114": {
@@ -1405,6 +1405,13 @@
           "MinValue": 0,
           "MaxValue": 1,
           "EnumName": "Toggle"
+        },
+        "7": {
+          "FriendlyName": "IgnoreNoteOff",
+          "InternalName": "Ignore Note OFF",
+          "MinValue": 0,
+          "MaxValue": 1,
+          "EnumName": "Toggle"
         }
       },
       "Curves": {}
@@ -1451,6 +1458,38 @@
           "InternalName": "Rec threshold",
           "MinValue": 0,
           "MaxValue": 10000
+        },
+        "6": {
+          "FriendlyName": "TickLengthNorm128",
+          "InternalName": "Tick length (norm=128)",
+          "MinValue": 0,
+          "MaxValue": 2048
+        },
+        "7": {
+          "FriendlyName": "Record",
+          "InternalName": "Record",
+          "MinValue": 0,
+          "MaxValue": 2,
+          "EnumName": "SamplerRecordState"
+        },
+        "8": {
+          "FriendlyName": "Reverse",
+          "InternalName": "Reverse",
+          "MinValue": 0,
+          "MaxValue": 1,
+          "EnumName": "Toggle"
+        },
+        "9": {
+          "FriendlyName": "Attack",
+          "InternalName": "Attack",
+          "MinValue": 0,
+          "MaxValue": 32768
+        },
+        "10": {
+          "FriendlyName": "Release",
+          "InternalName": "Release",
+          "MinValue": 0,
+          "MaxValue": 32768
         }
       },
       "Curves": {}
@@ -1748,6 +1787,20 @@
           "InternalName": "Feedback",
           "MinValue": 0,
           "MaxValue": 32768
+        },
+        "11": {
+          "FriendlyName": "NegativeFeedback",
+          "InternalName": "Negative feedback",
+          "MinValue": 0,
+          "MaxValue": 1,
+          "EnumName": "Toggle"
+        },
+        "12": {
+          "FriendlyName": "AllPassFilter",
+          "InternalName": "All-pass filter",
+          "MinValue": 0,
+          "MaxValue": 1,
+          "EnumName": "Toggle"
         }
       },
       "Curves": {}
@@ -2163,7 +2216,7 @@
           "FriendlyName": "RollOff",
           "InternalName": "Roll-off",
           "MinValue": 0,
-          "MaxValue": 3,
+          "MaxValue": 7,
           "EnumName": "FilterProRollOff"
         },
         "9": {
@@ -2338,7 +2391,7 @@
           "FriendlyName": "FrequencyUnit",
           "InternalName": "Frequency unit",
           "MinValue": 0,
-          "MaxValue": 6,
+          "MaxValue": 8,
           "EnumName": "LfoFrequencyUnit"
         },
         "8": {
@@ -2373,6 +2426,23 @@
           "MinValue": 0,
           "MaxValue": 3,
           "EnumName": "LfoSineQuality"
+        },
+        "13": {
+          "FriendlyName": "Transpose",
+          "InternalName": "Transpose",
+          "MinValue": 0,
+          "MaxValue": 256,
+          "MinDisplayedValue": -128,
+          "MaxDisplayedValue": 128,
+          "IgnoreActualType": true
+        },
+        "14": {
+          "FriendlyName": "Finetune",
+          "InternalName": "Finetune",
+          "MinValue": 0,
+          "MaxValue": 512,
+          "MinDisplayedValue": -256,
+          "MaxDisplayedValue": 256
         }
       },
       "Curves": {}
@@ -2449,7 +2519,7 @@
           "FriendlyName": "ModulationType",
           "InternalName": "Modulation type",
           "MinValue": 0,
-          "MaxValue": 2,
+          "MaxValue": 10,
           "EnumName": "ModulationType"
         },
         "2": {
@@ -2458,6 +2528,20 @@
           "MinValue": 0,
           "MaxValue": 1,
           "EnumName": "Channels"
+        },
+        "3": {
+          "FriendlyName": "MaxPhaseModulationDelay",
+          "InternalName": "Max PM delay",
+          "MinValue": 0,
+          "MaxValue": 9,
+          "EnumName": "ModulatorMaxPhaseModulationDelay"
+        },
+        "4": {
+          "FriendlyName": "PhaseModulationInterpolation",
+          "InternalName": "PM interpolation",
+          "MinValue": 0,
+          "MaxValue": 2,
+          "EnumName": "ModulatorPhaseModulationInterpolation"
         }
       },
       "Curves": {}
@@ -2563,8 +2647,8 @@
           "FriendlyName": "AllPassFilter",
           "InternalName": "All-pass filter",
           "MinValue": 0,
-          "MaxValue": 1,
-          "EnumName": "Toggle"
+          "MaxValue": 2,
+          "EnumName": "ReverbAllPassFilter"
         },
         "8": {
           "FriendlyName": "RoomSize",
@@ -3028,6 +3112,29 @@
           "MinValue": 0,
           "MaxValue": 1,
           "EnumName": "Toggle"
+        },
+        "7": {
+          "FriendlyName": "Octave",
+          "InternalName": "Octave",
+          "MinValue": 0,
+          "MaxValue": 20,
+          "MinDisplayedValue": -10,
+          "MaxDisplayedValue": 10,
+          "IgnoreActualType": true
+        },
+        "8": {
+          "FriendlyName": "FreqMultiply",
+          "InternalName": "Freq multiply",
+          "MinValue": 1,
+          "MaxValue": 256,
+          "IgnoreActualType": true
+        },
+        "9": {
+          "FriendlyName": "FreqDivide",
+          "InternalName": "Freq divide",
+          "MinValue": 1,
+          "MaxValue": 256,
+          "IgnoreActualType": true
         }
       },
       "Curves": {}
@@ -3330,7 +3437,7 @@
           "FriendlyName": "Algorithm",
           "InternalName": "Algorithm",
           "MinValue": 0,
-          "MaxValue": 2,
+          "MaxValue": 3,
           "EnumName": "PitchDetectorAlgorithm"
         },
         "1": {

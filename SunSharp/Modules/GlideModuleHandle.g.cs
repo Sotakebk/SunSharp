@@ -90,6 +90,42 @@ namespace SunSharp.Modules
         /// Original name: 6 'Reset'
         /// </summary>
         void SetReset(Toggle value);
+
+        /// <summary>
+        /// Value range: displayed: -10-10, real: 0-20
+        /// Original name: 7 'Octave'
+        /// </summary>
+        int GetOctave(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
+
+        /// <summary>
+        /// Value range: displayed: -10-10, real: 0-20
+        /// Original name: 7 'Octave'
+        /// </summary>
+        void SetOctave(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
+
+        /// <summary>
+        /// Value range: 1-256
+        /// Original name: 8 'Freq multiply'
+        /// </summary>
+        int GetFreqMultiply(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
+
+        /// <summary>
+        /// Value range: 1-256
+        /// Original name: 8 'Freq multiply'
+        /// </summary>
+        void SetFreqMultiply(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
+
+        /// <summary>
+        /// Value range: 1-256
+        /// Original name: 9 'Freq divide'
+        /// </summary>
+        int GetFreqDivide(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
+
+        /// <summary>
+        /// Value range: 1-256
+        /// Original name: 9 'Freq divide'
+        /// </summary>
+        void SetFreqDivide(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
     }
 
     /// <inheritdoc cref="IGlideModuleHandle"/>
@@ -165,6 +201,24 @@ namespace SunSharp.Modules
 
         /// <inheritdoc cref="IGlideModuleHandle.SetReset" />
         public void SetReset(Toggle value) => ModuleHandle.SetControllerValue(6, (int)value, ValueScalingMode.Displayed);
+
+        /// <inheritdoc cref="IGlideModuleHandle.GetOctave" />
+        public int GetOctave(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(7, valueScalingMode);
+
+        /// <inheritdoc cref="IGlideModuleHandle.SetOctave" />
+        public void SetOctave(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(7, value, valueScalingMode);
+
+        /// <inheritdoc cref="IGlideModuleHandle.GetFreqMultiply" />
+        public int GetFreqMultiply(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(8, valueScalingMode);
+
+        /// <inheritdoc cref="IGlideModuleHandle.SetFreqMultiply" />
+        public void SetFreqMultiply(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(8, value, valueScalingMode);
+
+        /// <inheritdoc cref="IGlideModuleHandle.GetFreqDivide" />
+        public int GetFreqDivide(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(9, valueScalingMode);
+
+        /// <inheritdoc cref="IGlideModuleHandle.SetFreqDivide" />
+        public void SetFreqDivide(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(9, value, valueScalingMode);
     }
 }
 #endif

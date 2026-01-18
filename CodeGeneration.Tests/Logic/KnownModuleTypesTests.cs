@@ -1,7 +1,5 @@
 using System.Linq;
-using AwesomeAssertions;
 using CodeGeneration.Logic;
-using NUnit.Framework;
 
 namespace CodeGeneration.Tests.Logic;
 

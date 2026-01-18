@@ -32,11 +32,12 @@ internal sealed class Program
 
         slot.Synthesizer.ConnectModule(generator.ModuleHandle, outputModule.Value);
 
-        slot.VirtualPattern.SendEvent(0, new PatternEvent(new Note(NoteName.A, 4), 0x88, (ushort)(generator.ModuleHandle.Id + 1), 0, 0));
+        slot.VirtualPattern.SendEvent(0, PatternEvent.NoteEvent(Note.A(4), generator.ModuleHandle.Id));
 
         Thread.Sleep(TimeSpan.FromSeconds(1));
 
-        slot.VirtualPattern.SendEvent(0, new PatternEvent(Note.Off));
+        slot.VirtualPattern.SendEvent(0, PatternEvent.NoteEvent(Note.Off, generator.ModuleHandle.Id));
+
 
         slot.Save("file.sunvox");
     }

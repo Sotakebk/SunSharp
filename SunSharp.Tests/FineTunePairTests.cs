@@ -3,9 +3,9 @@ namespace SunSharp.Tests;
 public class FineTunePairTests
 {
     [Test, AutoData]
-    public void FineTunePairFromPackedValueHasExpectedValues(short fineTuneValue, short relativeNoteValue)
+    public void Constructor_FromUint_ShouldInitializePropertiesCorrectly(short fineTuneValue, short relativeNoteValue)
     {
-        var packedValue = Helper.PackTwoSignedShorts(fineTuneValue, relativeNoteValue);
+        var packedValue = UtilityHelper.PackTwoSignedShorts(fineTuneValue, relativeNoteValue);
         var fineTune = new FineTunePair(packedValue);
         fineTune.RawValue.Should().Be(packedValue);
         fineTune.FineTune.Should().Be(fineTuneValue);
@@ -13,7 +13,7 @@ public class FineTunePairTests
     }
 
     [Test]
-    public void FineTunePairToStringReturnsExpectedString()
+    public void ToString_ShouldReturnExpectedString()
     {
         var fineTune = new FineTunePair(0, 0);
         const string message = "Fine-tune: 0, relative note: 0.";
@@ -24,7 +24,7 @@ public class FineTunePairTests
     }
 
     [Test]
-    public void FineTunePairEqualityComparisonShouldJustWork()
+    public void EqualityComparison_ShouldJustWork()
     {
         var a = new FineTunePair(0, 1);
         var b = new FineTunePair(0, 1);
@@ -42,7 +42,7 @@ public class FineTunePairTests
     }
 
     [Test]
-    public void FineTunePairGetHashCodeShouldPreserveComparability()
+    public void GetHashCode_ShouldPreserveComparability()
     {
         var a = new FineTunePair(0, 1);
         var b = new FineTunePair(0, 1);

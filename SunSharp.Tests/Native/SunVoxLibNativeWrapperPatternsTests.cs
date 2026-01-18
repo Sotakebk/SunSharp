@@ -462,7 +462,7 @@ public class SunVoxLibNativeWrapperPatternsTests
     ];
 
     [Test, AutoData]
-    public void CloneModuleShouldThrowOnNegativeReturnedValue(int slotId, int originalPatternId, int x, int y)
+    public void ClonePattern_ShouldThrow_WhenNegativeValueReturned(int slotId, int originalPatternId, int x, int y)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
@@ -478,7 +478,7 @@ public class SunVoxLibNativeWrapperPatternsTests
     }
 
     [Test, AutoData]
-    public void ClonePatternShouldCallExpectedMethod(int slotId, int originalPatternId, int x, int y, int newPatternId)
+    public void ClonePattern_ShouldCallExpectedMethod(int slotId, int originalPatternId, int x, int y, int newPatternId)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
@@ -493,7 +493,7 @@ public class SunVoxLibNativeWrapperPatternsTests
     }
 
     [Test, AutoData]
-    public void CreateModuleShouldThrowOnNegativeReturnedValue(int slotId, int x, int y, int tracks, int lines, int iconSeed, string patternName)
+    public void CreatePattern_ShouldThrow_WhenNegativeValueReturned(int slotId, int x, int y, int tracks, int lines, int iconSeed, string patternName)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
@@ -509,7 +509,7 @@ public class SunVoxLibNativeWrapperPatternsTests
     }
 
     [Test, AutoData]
-    public void CreatePatternShouldCallExpectedMethod(int slotId, int x, int y, int tracks, int lines, int iconSeed, string patternName, int newPatternId)
+    public void CreatePattern_ShouldCallExpectedMethod(int slotId, int x, int y, int tracks, int lines, int iconSeed, string patternName, int newPatternId)
     {
         var receivedPatternName = string.Empty;
         var library = Substitute.For<ISunVoxLibC>();
@@ -531,7 +531,7 @@ public class SunVoxLibNativeWrapperPatternsTests
     }
 
     [Test, AutoData]
-    public void CreatePatternShouldCallExpectedMethodWithDefaultValues(int slotId, int x, int y, int tracks, int lines, int newPatternId)
+    public void CreatePattern_WithDefaultValues_ShouldCallExpectedMethod(int slotId, int x, int y, int tracks, int lines, int newPatternId)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
@@ -548,7 +548,7 @@ public class SunVoxLibNativeWrapperPatternsTests
     }
 
     [Test, AutoData]
-    public void FindPatternShouldCallExpectedMethod(int slotId, string patternName, int foundPatternId)
+    public void FindPattern_ShouldCallExpectedMethod(int slotId, string patternName, int foundPatternId)
     {
         var receivedString = string.Empty;
         var library = Substitute.For<ISunVoxLibC>();
@@ -567,7 +567,7 @@ public class SunVoxLibNativeWrapperPatternsTests
     }
 
     [Test, AutoData]
-    public void FindPatternShouldCallExpectedMethodAndReturnNullWhenPatternNotFound(int slotId, string patternName)
+    public void FindPattern_ShouldReturnNull_WhenPatternNotFound(int slotId, string patternName)
     {
         var receivedString = string.Empty;
         var library = Substitute.For<ISunVoxLibC>();
@@ -586,7 +586,7 @@ public class SunVoxLibNativeWrapperPatternsTests
     }
 
     [Test, AutoData]
-    public void FindPatternShouldCallExpectedMethodAndThrowOnReturnCodeLessThanNegativeOne(int slotId, string patternName)
+    public void FindPattern_ShouldThrow_WhenReturnCodeLessThanNegativeOne(int slotId, string patternName)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
@@ -601,7 +601,7 @@ public class SunVoxLibNativeWrapperPatternsTests
     }
 
     [Test, AutoData]
-    public void GetPatternEventValueShouldCallExpectedMethod(int slotId, int patternId, int track, int line, Column column)
+    public void GetPatternEventValue_ShouldCallExpectedMethod(int slotId, int patternId, int track, int line, Column column)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
@@ -616,7 +616,7 @@ public class SunVoxLibNativeWrapperPatternsTests
     }
 
     [Test, AutoData]
-    public void GetPatternEventValueShouldCallExpectedMethodAndThrowOnNonZeroReturnCode(int slotId, int patternId, int track, int line, Column column)
+    public void GetPatternEventValue_ShouldThrow_WhenNonZeroReturnCode(int slotId, int patternId, int track, int line, Column column)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
@@ -633,7 +633,7 @@ public class SunVoxLibNativeWrapperPatternsTests
 
     [TestCase(true)]
     [TestCase(false)]
-    public void GetPatternExistsShouldCallExpectedMethodAndReturnValue(bool exists)
+    public void GetPatternExists_ShouldReturnValue(bool exists)
     {
         var fixture = new Fixture();
         var slotId = fixture.Create<int>();
@@ -651,7 +651,7 @@ public class SunVoxLibNativeWrapperPatternsTests
     }
 
     [Test, AutoData]
-    public void GetPatternExistsShouldThrowOnErrorReturnCode(int slotId, int patternId)
+    public void GetPatternExists_ShouldThrow_WhenErrorReturnCode(int slotId, int patternId)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
@@ -666,7 +666,7 @@ public class SunVoxLibNativeWrapperPatternsTests
     }
 
     [Test, AutoData]
-    public void GetPatternLinesShouldCallExpectedMethodAndReturnValue(int slotId, int patternId, int lines)
+    public void GetPatternLines_ShouldReturnValue(int slotId, int patternId, int lines)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
@@ -681,7 +681,7 @@ public class SunVoxLibNativeWrapperPatternsTests
     }
 
     [Test, AutoData]
-    public void GetPatternLinesShouldThrowOnErrorReturnCode(int slotId, int patternId)
+    public void GetPatternLines_ShouldThrow_WhenErrorReturnCode(int slotId, int patternId)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
@@ -696,7 +696,7 @@ public class SunVoxLibNativeWrapperPatternsTests
     }
 
     [Test, AutoData]
-    public void GetPatternNameShouldCallExpectedMethodAndReturnNullWhenNullPointer(int slotId, int patternId)
+    public void GetPatternName_ShouldReturnNull_WhenNullPointer(int slotId, int patternId)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
@@ -710,7 +710,7 @@ public class SunVoxLibNativeWrapperPatternsTests
     }
 
     [Test, AutoData]
-    public void GetPatternNameShouldCallExpectedMethodAndReturnString(int slotId, int patternId, string patternName)
+    public void GetPatternName_ShouldReturnString(int slotId, int patternId, string patternName)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
@@ -735,7 +735,7 @@ public class SunVoxLibNativeWrapperPatternsTests
     }
 
     [Test, AutoData]
-    public void GetPatternPositionShouldCallExpectedMethodsAndReturnValue(int slotId, int patternId, int x, int y)
+    public void GetPatternPosition_ShouldReturnValue(int slotId, int patternId, int x, int y)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
@@ -752,7 +752,7 @@ public class SunVoxLibNativeWrapperPatternsTests
     }
 
     [Test, AutoData]
-    public void GetPatternTracksShouldCallExpectedMethodAndReturnValue(int slotId, int patternId, int tracks)
+    public void GetPatternTracks_ShouldReturnValue(int slotId, int patternId, int tracks)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
@@ -767,7 +767,7 @@ public class SunVoxLibNativeWrapperPatternsTests
     }
 
     [Test, AutoData]
-    public void GetPatternTracksShouldThrowOnErrorReturnCode(int slotId, int patternId)
+    public void GetPatternTracks_ShouldThrow_WhenErrorReturnCode(int slotId, int patternId)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
@@ -782,7 +782,7 @@ public class SunVoxLibNativeWrapperPatternsTests
     }
 
     [Test, AutoData]
-    public void GetPatternXShouldCallExpectedMethodsAndReturnValue(int slotId, int patternId, int x)
+    public void GetPatternX_ShouldReturnValue(int slotId, int patternId, int x)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
@@ -797,7 +797,7 @@ public class SunVoxLibNativeWrapperPatternsTests
     }
 
     [Test, AutoData]
-    public void GetPatternYShouldCallExpectedMethodsAndReturnValue(int slotId, int patternId, int y)
+    public void GetPatternY_ShouldReturnValue(int slotId, int patternId, int y)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
@@ -812,7 +812,7 @@ public class SunVoxLibNativeWrapperPatternsTests
     }
 
     [Test, AutoData]
-    public void GetUpperPatternCountShouldCallExpectedMethod(int slotId)
+    public void GetUpperPatternCount_ShouldCallExpectedMethod(int slotId)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
@@ -826,7 +826,7 @@ public class SunVoxLibNativeWrapperPatternsTests
     }
 
     [Test, AutoData]
-    public void GetUpperPatternCountShouldCallExpectedMethodAndThrowOnNegativeReturnCode(int slotId)
+    public void GetUpperPatternCount_ShouldThrow_WhenNegativeReturnCode(int slotId)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
@@ -841,7 +841,7 @@ public class SunVoxLibNativeWrapperPatternsTests
     }
 
     [Test, AutoData]
-    public void RemovePatternShouldCallExpectedMethod(int slotId, int patternId)
+    public void RemovePattern_ShouldCallExpectedMethod(int slotId, int patternId)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
@@ -855,7 +855,7 @@ public class SunVoxLibNativeWrapperPatternsTests
     }
 
     [Test, AutoData]
-    public void RemovePatternShouldCallExpectedMethodAndThrowOnNonZeroReturnCode(int slotId, int patternId)
+    public void RemovePattern_ShouldThrow_WhenNonZeroReturnCode(int slotId, int patternId)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
@@ -870,7 +870,7 @@ public class SunVoxLibNativeWrapperPatternsTests
     }
 
     [Test, AutoData]
-    public void SetPatternNameShouldCallExpectedMethod(int slotId, int patternId, string nameToSet)
+    public void SetPatternName_ShouldCallExpectedMethod(int slotId, int patternId, string nameToSet)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
@@ -887,7 +887,7 @@ public class SunVoxLibNativeWrapperPatternsTests
     }
 
     [Test, AutoData]
-    public void SetPatternNameShouldCallExpectedMethodAndThrowOnNonZeroReturnCode(int slotId, int patternId, string nameToSet)
+    public void SetPatternName_ShouldThrow_WhenNonZeroReturnCode(int slotId, int patternId, string nameToSet)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
@@ -901,7 +901,7 @@ public class SunVoxLibNativeWrapperPatternsTests
     }
 
     [Test, AutoData]
-    public void SetPatternPositionShouldCallExpectedMethodAndReturnValue(int slotId, int patternId, int x, int y)
+    public void SetPatternPosition_ShouldCallExpectedMethod(int slotId, int patternId, int x, int y)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
@@ -915,7 +915,7 @@ public class SunVoxLibNativeWrapperPatternsTests
     }
 
     [Test, AutoData]
-    public void SetPatternPositionShouldThrowOnErrorReturnCode(int slotId, int patternId, int x, int y)
+    public void SetPatternPosition_ShouldThrow_WhenErrorReturnCode(int slotId, int patternId, int x, int y)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
@@ -930,7 +930,7 @@ public class SunVoxLibNativeWrapperPatternsTests
     }
 
     [Test, AutoData]
-    public void SetPatternSizeShouldCallExpectedMethodAndReturnValue(int slotId, int patternId, int tracks, int lines)
+    public void SetPatternSize_ShouldCallExpectedMethod(int slotId, int patternId, int tracks, int lines)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
@@ -944,7 +944,7 @@ public class SunVoxLibNativeWrapperPatternsTests
     }
 
     [Test, AutoData]
-    public void SetPatternSizeShouldCallExpectedMethodWithDefaultValuesAndReturnValue(int slotId, int patternId)
+    public void SetPatternSize_WithDefaultValues_ShouldCallExpectedMethod(int slotId, int patternId)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
@@ -958,7 +958,7 @@ public class SunVoxLibNativeWrapperPatternsTests
     }
 
     [Test, AutoData]
-    public void SetPatternSizeShouldThrowOnErrorReturnCode(int slotId, int patternId, int tracks, int lines)
+    public void SetPatternSize_ShouldThrow_WhenErrorReturnCode(int slotId, int patternId, int tracks, int lines)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
@@ -973,7 +973,7 @@ public class SunVoxLibNativeWrapperPatternsTests
     }
 
     [Test, AutoData]
-    public void GetPatternMutedShouldCallExpectedMethodAndReturnValue(bool muted, int slotId, int patternId)
+    public void GetPatternMuted_ShouldReturnValue(bool muted, int slotId, int patternId)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
@@ -988,7 +988,7 @@ public class SunVoxLibNativeWrapperPatternsTests
     }
 
     [Test, AutoData]
-    public void SetPatternMutedShouldCallExpectedMethod(bool muted, int slotId, int patternId)
+    public void SetPatternMuted_ShouldCallExpectedMethod(bool muted, int slotId, int patternId)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
@@ -1002,7 +1002,7 @@ public class SunVoxLibNativeWrapperPatternsTests
     }
 
     [Test, AutoData]
-    public void SetPatternEventShouldCallExpectedMethod(int slotId, int patternId, int track, int line, int nn, int vv, int mm, int ccee, int xxyy)
+    public void SetPatternEvent_ShouldCallExpectedMethod(int slotId, int patternId, int track, int line, int nn, int vv, int mm, int ccee, int xxyy)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
@@ -1018,7 +1018,7 @@ public class SunVoxLibNativeWrapperPatternsTests
     }
 
     [Test, AutoData]
-    public void SetPatternEventShouldThrowOnNonZeroReturnCode(int slotId, int patternId, int track, int line, int nn, int vv, int mm, int ccee, int xxyy)
+    public void SetPatternEvent_ShouldThrow_WhenNonZeroReturnCode(int slotId, int patternId, int track, int line, int nn, int vv, int mm, int ccee, int xxyy)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
@@ -1035,7 +1035,7 @@ public class SunVoxLibNativeWrapperPatternsTests
     }
 
     [Test, AutoData]
-    public void SetPatternEventWithStructShouldCallExpectedMethod(int slotId, int patternId, int track, int line, PatternEvent patternEvent)
+    public void SetPatternEventWithStruct_ShouldCallExpectedMethod(int slotId, int patternId, int track, int line, PatternEvent patternEvent)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
@@ -1052,7 +1052,7 @@ public class SunVoxLibNativeWrapperPatternsTests
     }
 
     [Test, AutoData]
-    public void SetPatternEventWithStructShouldThrowOnNonZeroReturnCode(int slotId, int patternId, int track, int line, PatternEvent patternEvent)
+    public void SetPatternEventWithStruct_ShouldThrow_WhenNonZeroReturnCode(int slotId, int patternId, int track, int line, PatternEvent patternEvent)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
@@ -1070,7 +1070,7 @@ public class SunVoxLibNativeWrapperPatternsTests
     }
 
     [Test, AutoData]
-    public void GetPatternDataReturnsDataAsExpected(int slotId, int patternId)
+    public void GetPatternData_ShouldReturnData(int slotId, int patternId)
     {
         const int lines = 4;
         const int tracks = 5;
@@ -1118,7 +1118,7 @@ public class SunVoxLibNativeWrapperPatternsTests
     }
 
     [Test, AutoData]
-    public void GetPatternDataReturnsNullWhenLengthEqualsZero(int slotId, int patternId)
+    public void GetPatternData_ShouldReturnNull_WhenLengthEqualsZero(int slotId, int patternId)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
@@ -1133,7 +1133,7 @@ public class SunVoxLibNativeWrapperPatternsTests
     }
 
     [Test, AutoData]
-    public void GetPatternDataReturnsNullWhenPtrIsNullPtr(int slotId, int patternId)
+    public void GetPatternData_ShouldReturnNull_WhenPtrIsNullPtr(int slotId, int patternId)
     {
         const int lines = 4;
         const int tracks = 5;
@@ -1154,7 +1154,7 @@ public class SunVoxLibNativeWrapperPatternsTests
     }
 
     [Test, AutoData]
-    public void ReadPatternDataShouldReturnFalseAndNotChangeDataWhenLengthEqualsZero(int slotId, int patternId)
+    public void ReadPatternData_ShouldReturnZeroAndNotChangeData_WhenLengthEqualsZero(int slotId, int patternId)
     {
         const int readTracks = 2;
         const int readLines = 3;
@@ -1182,7 +1182,7 @@ public class SunVoxLibNativeWrapperPatternsTests
     }
 
     [Test, AutoData]
-    public void ReadPatternDataShouldReturnFalseAndNotChangeDataWhenPtrIsNullPtr(int slotId, int patternId, int lines, int tracks)
+    public void ReadPatternData_ShouldReturnZeroAndNotChangeData_WhenPtrIsNullPtr(int slotId, int patternId, int lines, int tracks)
     {
         const int readTracks = 2;
         const int readLines = 3;
@@ -1212,7 +1212,7 @@ public class SunVoxLibNativeWrapperPatternsTests
     }
 
     [Test, AutoData]
-    public void WritePatternDataShouldReturnFalseAndNotChangeDataWhenPtrIsNullPtr(int slotId, int patternId, int lines, int tracks)
+    public void WritePatternData_ShouldReturnZeroAndNotChangeData_WhenPtrIsNullPtr(int slotId, int patternId, int lines, int tracks)
     {
         const int readTracks = 2;
         const int readLines = 3;
@@ -1242,7 +1242,7 @@ public class SunVoxLibNativeWrapperPatternsTests
     }
 
     [Test, AutoData]
-    public void ReadPatternDataShouldThrowIfBufferIsDifferentToRequestedDataRead(int slotId, int patternId, int tracksToRead, int linesToRead)
+    public void ReadPatternData_ShouldThrow_WhenBufferSizeDifferentFromRequestedSize(int slotId, int patternId, int tracksToRead, int linesToRead)
     {
         const int tracksInBuffer = 4;
         const int linesInBuffer = 32;
@@ -1270,7 +1270,7 @@ public class SunVoxLibNativeWrapperPatternsTests
     [TestCase(0, -1, 0, 0)]
     [TestCase(0, 0, -1, 0)]
     [TestCase(0, 0, 0, -1)]
-    public void ReadPatternDataShouldThrowIfAnyOffsetValueIsNegative(int bufferOffsetTracks, int bufferOffsetLines, int readOffsetTracks, int readOffsetLines)
+    public void ReadPatternData_ShouldThrow_WhenAnyOffsetValueIsNegative(int bufferOffsetTracks, int bufferOffsetLines, int readOffsetTracks, int readOffsetLines)
     {
         var fixture = new Fixture();
         var slotId = fixture.Create<int>();
@@ -1303,7 +1303,7 @@ public class SunVoxLibNativeWrapperPatternsTests
     [TestCase(2, 2, 0, -1, 0, 0)]
     [TestCase(2, 2, 0, 0, -1, 0)]
     [TestCase(2, 2, 0, 0, 0, -1)]
-    public void WritePatternDataShouldThrowIfAnyOffsetValeIsNegative(int bufferTracks, int bufferLines,
+    public void WritePatternData_ShouldThrow_WhenAnyOffsetValueIsNegative(int bufferTracks, int bufferLines,
         int bufferOffsetTracks, int bufferOffsetLines, int writeOffsetTracks, int writeOffsetLines)
     {
         var fixture = new Fixture();
@@ -1333,7 +1333,7 @@ public class SunVoxLibNativeWrapperPatternsTests
     [TestCase(2, 2, 1, 2)]
     [TestCase(2, 2, 3, 2)]
     [TestCase(2, 2, 2, 3)]
-    public void WritePatternDataShouldThrowIfBufferIsDifferentToRequestedDataRead(int tracksToRead, int linesToRead,
+    public void WritePatternData_ShouldThrow_WhenBufferSizeDifferentFromRequestedSize(int tracksToRead, int linesToRead,
         int tracksInBuffer, int linesInBuffer)
     {
         var fixture = new Fixture();
@@ -1342,9 +1342,7 @@ public class SunVoxLibNativeWrapperPatternsTests
         var originalData = new PatternEvent[tracksInBuffer * linesInBuffer];
         for (var i = 0; i < originalData.Length; i++)
         {
-            {
-                originalData[i] = new PatternEvent((ulong)i);
-            }
+            originalData[i] = new PatternEvent((ulong)i);
         }
 
         var buffer = (PatternEvent[])originalData.Clone();
@@ -1376,7 +1374,7 @@ public class SunVoxLibNativeWrapperPatternsTests
     }
 
     [TestCaseSource(nameof(PatternDataCases))]
-    public void ReadPatternDataShouldWorkAsExpected(PatternDataCase testCase)
+    public void ReadPatternData_ShouldWorkAsExpected(PatternDataCase testCase)
     {
         var fixture = new Fixture();
         var slotId = fixture.Create<int>();
@@ -1416,7 +1414,7 @@ public class SunVoxLibNativeWrapperPatternsTests
     }
 
     [TestCaseSource(nameof(PatternDataCases))]
-    public void WritePatternDataShouldWorkAsExpected(PatternDataCase testCase)
+    public void WritePatternData_ShouldWorkAsExpected(PatternDataCase testCase)
     {
         var fixture = new Fixture();
         var slotId = fixture.Create<int>();
@@ -1456,7 +1454,7 @@ public class SunVoxLibNativeWrapperPatternsTests
     }
 
     [Test, AutoData]
-    public void SetPatternDataShouldSetDataAsExpected(int slotId, int patternId)
+    public void SetPatternData_ShouldSetData(int slotId, int patternId)
     {
         const int tracks = 4;
         const int lines = 32;
