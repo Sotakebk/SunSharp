@@ -12,65 +12,65 @@ namespace SunSharp.Native.Loader
     {
         #region delegate definitions
 
-        private delegate IntPtr ReturnsIntPtrTakesint(int arg1);
+        private delegate IntPtr ReturnsIntPtrTakesInt(int arg1);
 
-        private delegate IntPtr ReturnsIntPtrTakesintint(int arg1, int arg2);
+        private delegate IntPtr ReturnsIntPtrTakesIntInt(int arg1, int arg2);
 
-        private delegate IntPtr ReturnsIntPtrTakesintintint(int arg1, int arg2, int arg3);
+        private delegate IntPtr ReturnsIntPtrTakesIntIntInt(int arg1, int arg2, int arg3);
 
-        private delegate IntPtr ReturnsIntPtrTakesintIntPtr(int arg1, IntPtr arg2);
+        private delegate IntPtr ReturnsIntPtrTakesIntIntPtr(int arg1, IntPtr arg2);
 
-        private delegate int ReturnsintTakesint(int arg1);
+        private delegate int ReturnsintTakesInt(int arg1);
 
-        private delegate int ReturnsintTakesintint(int arg1, int arg2);
+        private delegate int ReturnsintTakesIntInt(int arg1, int arg2);
 
-        private delegate int ReturnsintTakesintintint(int arg1, int arg2, int arg3);
+        private delegate int ReturnsintTakesIntIntInt(int arg1, int arg2, int arg3);
 
-        private delegate int ReturnsintTakesintintintint(int arg1, int arg2, int arg3, int arg4);
+        private delegate int ReturnsintTakesIntIntIntInt(int arg1, int arg2, int arg3, int arg4);
 
-        private delegate int ReturnsintTakesintintintintint(int arg1, int arg2, int arg3, int arg4, int arg5);
+        private delegate int ReturnsintTakesIntIntIntIntInt(int arg1, int arg2, int arg3, int arg4, int arg5);
 
-        private delegate int ReturnsintTakesintintintintintint(int arg1, int arg2, int arg3, int arg4, int arg5, int arg6);
+        private delegate int ReturnsintTakesIntIntIntIntIntInt(int arg1, int arg2, int arg3, int arg4, int arg5, int arg6);
 
-        private delegate int ReturnsintTakesintintintintintintint(int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7);
+        private delegate int ReturnsintTakesIntIntIntIntIntIntInt(int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7);
 
-        private delegate int ReturnsintTakesintintintintintintintintint(int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, int arg9);
+        private delegate int ReturnsintTakesIntIntIntIntIntIntIntIntInt(int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, int arg9);
 
-        private delegate int ReturnsintTakesintintintintintintintIntPtr(int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, IntPtr arg8);
+        private delegate int ReturnsintTakesIntIntIntIntIntIntIntIntPtr(int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, IntPtr arg8);
 
-        private delegate int ReturnsintTakesintintintIntPtrint(int arg1, int arg2, int arg3, IntPtr arg4, int arg5);
+        private delegate int ReturnsintTakesIntIntIntIntPtrInt(int arg1, int arg2, int arg3, IntPtr arg4, int arg5);
 
-        private delegate int ReturnsintTakesintintintIntPtrintint(int arg1, int arg2, int arg3, IntPtr arg4, int arg5, int arg6);
+        private delegate int ReturnsintTakesIntIntIntIntPtrIntInt(int arg1, int arg2, int arg3, IntPtr arg4, int arg5, int arg6);
 
-        private delegate int ReturnsintTakesintintIntPtr(int arg1, int arg2, IntPtr arg3);
+        private delegate int ReturnsintTakesIntIntIntPtr(int arg1, int arg2, IntPtr arg3);
 
-        private delegate int ReturnsintTakesintintIntPtrint(int arg1, int arg2, IntPtr arg3, int arg4);
+        private delegate int ReturnsintTakesIntIntIntPtrInt(int arg1, int arg2, IntPtr arg3, int arg4);
 
-        private delegate int ReturnsintTakesintintIntPtruint(int arg1, int arg2, IntPtr arg3, uint arg4);
+        private delegate int ReturnsintTakesIntIntIntPtrUint(int arg1, int arg2, IntPtr arg3, uint arg4);
 
-        private delegate int ReturnsintTakesintintIntPtruintint(int arg1, int arg2, IntPtr arg3, uint arg4, int arg5);
+        private delegate int ReturnsintTakesIntIntIntPtrUintInt(int arg1, int arg2, IntPtr arg3, uint arg4, int arg5);
 
-        private delegate int ReturnsintTakesintIntPtr(int arg1, IntPtr arg2);
+        private delegate int ReturnsintTakesIntIntPtr(int arg1, IntPtr arg2);
 
-        private delegate int ReturnsintTakesintIntPtrintintint(int arg1, IntPtr arg2, int arg3, int arg4, int arg5);
+        private delegate int ReturnsintTakesIntIntPtrIntIntInt(int arg1, IntPtr arg2, int arg3, int arg4, int arg5);
 
-        private delegate int ReturnsintTakesintIntPtrIntPtrintintint(int arg1, IntPtr arg2, IntPtr arg3, int arg4, int arg5, int arg6);
+        private delegate int ReturnsintTakesIntIntPtrIntPtrIntIntInt(int arg1, IntPtr arg2, IntPtr arg3, int arg4, int arg5, int arg6);
 
-        private delegate int ReturnsintTakesintIntPtruint(int arg1, IntPtr arg2, uint arg3);
+        private delegate int ReturnsintTakesIntIntPtrUint(int arg1, IntPtr arg2, uint arg3);
 
-        private delegate int ReturnsintTakesintIntPtruintintintint(int arg1, IntPtr arg2, uint arg3, int arg4, int arg5, int arg6);
+        private delegate int ReturnsintTakesIntIntPtrUintIntIntInt(int arg1, IntPtr arg2, uint arg3, int arg4, int arg5, int arg6);
 
-        private delegate int ReturnsintTakesIntPtrintintuint(IntPtr arg1, int arg2, int arg3, uint arg4);
+        private delegate int ReturnsintTakesIntPtrIntIntUint(IntPtr arg1, int arg2, int arg3, uint arg4);
 
-        private delegate int ReturnsintTakesIntPtrintintuintintintIntPtr(IntPtr arg1, int arg2, int arg3, uint arg4, int arg5, int arg6, IntPtr arg7);
+        private delegate int ReturnsintTakesIntPtrIntIntUintIntIntIntPtr(IntPtr arg1, int arg2, int arg3, uint arg4, int arg5, int arg6, IntPtr arg7);
 
         private delegate int ReturnsintTakesVoid();
 
-        private delegate uint ReturnsuintTakesint(int arg1);
+        private delegate uint ReturnsuintTakesInt(int arg1);
 
-        private delegate uint ReturnsuintTakesintint(int arg1, int arg2);
+        private delegate uint ReturnsuintTakesIntInt(int arg1, int arg2);
 
-        private delegate uint ReturnsuintTakesintintintIntPtruint(int arg1, int arg2, int arg3, IntPtr arg4, uint arg5);
+        private delegate uint ReturnsuintTakesIntIntIntIntPtrUint(int arg1, int arg2, int arg3, IntPtr arg4, uint arg5);
 
         private delegate uint ReturnsuintTakesVoid();
 
@@ -78,197 +78,197 @@ namespace SunSharp.Native.Loader
 
         #region delegates
 
-        private ReturnsintTakesIntPtrintintuint? sv_audio_callback;
+        private ReturnsintTakesIntPtrIntIntUint? sv_audio_callback;
 
-        private ReturnsintTakesIntPtrintintuintintintIntPtr? sv_audio_callback2;
+        private ReturnsintTakesIntPtrIntIntUintIntIntIntPtr? sv_audio_callback2;
 
-        private ReturnsintTakesint? sv_close_slot;
+        private ReturnsintTakesInt? sv_close_slot;
 
-        private ReturnsintTakesintintint? sv_connect_module;
+        private ReturnsintTakesIntIntInt? sv_connect_module;
 
         private ReturnsintTakesVoid? sv_deinit;
 
-        private ReturnsintTakesintintint? sv_disconnect_module;
+        private ReturnsintTakesIntIntInt? sv_disconnect_module;
 
-        private ReturnsintTakesint? sv_end_of_song;
+        private ReturnsintTakesInt? sv_end_of_song;
 
-        private ReturnsintTakesintIntPtr? sv_find_module;
+        private ReturnsintTakesIntIntPtr? sv_find_module;
 
-        private ReturnsintTakesintIntPtr? sv_find_pattern;
+        private ReturnsintTakesIntIntPtr? sv_find_pattern;
 
-        private ReturnsintTakesint? sv_get_autostop;
+        private ReturnsintTakesInt? sv_get_autostop;
 
-        private ReturnsintTakesint? sv_get_base_version;
+        private ReturnsintTakesInt? sv_get_base_version;
 
-        private ReturnsintTakesint? sv_get_current_line;
+        private ReturnsintTakesInt? sv_get_current_line;
 
-        private ReturnsintTakesint? sv_get_current_line2;
+        private ReturnsintTakesInt? sv_get_current_line2;
 
-        private ReturnsintTakesintint? sv_get_current_signal_level;
+        private ReturnsintTakesIntInt? sv_get_current_signal_level;
 
-        private ReturnsIntPtrTakesint? sv_get_log;
+        private ReturnsIntPtrTakesInt? sv_get_log;
 
-        private ReturnsintTakesintint? sv_get_module_color;
+        private ReturnsintTakesIntInt? sv_get_module_color;
 
-        private ReturnsintTakesintintint? sv_get_module_ctl_group;
+        private ReturnsintTakesIntIntInt? sv_get_module_ctl_group;
 
-        private ReturnsintTakesintintintint? sv_get_module_ctl_max;
+        private ReturnsintTakesIntIntIntInt? sv_get_module_ctl_max;
 
-        private ReturnsintTakesintintintint? sv_get_module_ctl_min;
+        private ReturnsintTakesIntIntIntInt? sv_get_module_ctl_min;
 
-        private ReturnsIntPtrTakesintintint? sv_get_module_ctl_name;
+        private ReturnsIntPtrTakesIntIntInt? sv_get_module_ctl_name;
 
-        private ReturnsintTakesintintint? sv_get_module_ctl_offset;
+        private ReturnsintTakesIntIntInt? sv_get_module_ctl_offset;
 
-        private ReturnsintTakesintintint? sv_get_module_ctl_type;
+        private ReturnsintTakesIntIntInt? sv_get_module_ctl_type;
 
-        private ReturnsintTakesintintintint? sv_get_module_ctl_value;
+        private ReturnsintTakesIntIntIntInt? sv_get_module_ctl_value;
 
-        private ReturnsuintTakesintint? sv_get_module_finetune;
+        private ReturnsuintTakesIntInt? sv_get_module_finetune;
 
-        private ReturnsuintTakesintint? sv_get_module_flags;
+        private ReturnsuintTakesIntInt? sv_get_module_flags;
 
-        private ReturnsIntPtrTakesintint? sv_get_module_inputs;
+        private ReturnsIntPtrTakesIntInt? sv_get_module_inputs;
 
-        private ReturnsIntPtrTakesintint? sv_get_module_name;
+        private ReturnsIntPtrTakesIntInt? sv_get_module_name;
 
-        private ReturnsIntPtrTakesintint? sv_get_module_outputs;
+        private ReturnsIntPtrTakesIntInt? sv_get_module_outputs;
 
-        private ReturnsuintTakesintintintIntPtruint? sv_get_module_scope2;
+        private ReturnsuintTakesIntIntIntIntPtrUint? sv_get_module_scope2;
 
-        private ReturnsIntPtrTakesintint? sv_get_module_type;
+        private ReturnsIntPtrTakesIntInt? sv_get_module_type;
 
-        private ReturnsuintTakesintint? sv_get_module_xy;
+        private ReturnsuintTakesIntInt? sv_get_module_xy;
 
-        private ReturnsintTakesintint? sv_get_number_of_module_ctls;
+        private ReturnsintTakesIntInt? sv_get_number_of_module_ctls;
 
-        private ReturnsintTakesint? sv_get_number_of_modules;
+        private ReturnsintTakesInt? sv_get_number_of_modules;
 
-        private ReturnsintTakesint? sv_get_number_of_patterns;
+        private ReturnsintTakesInt? sv_get_number_of_patterns;
 
-        private ReturnsIntPtrTakesintint? sv_get_pattern_data;
+        private ReturnsIntPtrTakesIntInt? sv_get_pattern_data;
 
-        private ReturnsintTakesintintintintint? sv_get_pattern_event;
+        private ReturnsintTakesIntIntIntIntInt? sv_get_pattern_event;
 
-        private ReturnsintTakesintint? sv_get_pattern_lines;
+        private ReturnsintTakesIntInt? sv_get_pattern_lines;
 
-        private ReturnsIntPtrTakesintint? sv_get_pattern_name;
+        private ReturnsIntPtrTakesIntInt? sv_get_pattern_name;
 
-        private ReturnsintTakesintint? sv_get_pattern_tracks;
+        private ReturnsintTakesIntInt? sv_get_pattern_tracks;
 
-        private ReturnsintTakesintint? sv_get_pattern_x;
+        private ReturnsintTakesIntInt? sv_get_pattern_x;
 
-        private ReturnsintTakesintint? sv_get_pattern_y;
+        private ReturnsintTakesIntInt? sv_get_pattern_y;
 
         private ReturnsintTakesVoid? sv_get_sample_rate;
 
-        private ReturnsintTakesint? sv_get_song_bpm;
+        private ReturnsintTakesInt? sv_get_song_bpm;
 
-        private ReturnsuintTakesint? sv_get_song_length_frames;
+        private ReturnsuintTakesInt? sv_get_song_length_frames;
 
-        private ReturnsuintTakesint? sv_get_song_length_lines;
+        private ReturnsuintTakesInt? sv_get_song_length_lines;
 
-        private ReturnsIntPtrTakesint? sv_get_song_name;
+        private ReturnsIntPtrTakesInt? sv_get_song_name;
 
-        private ReturnsintTakesint? sv_get_song_tpl;
+        private ReturnsintTakesInt? sv_get_song_tpl;
 
         private ReturnsuintTakesVoid? sv_get_ticks;
 
         private ReturnsuintTakesVoid? sv_get_ticks_per_second;
 
-        private ReturnsintTakesintintintIntPtrint? sv_get_time_map;
+        private ReturnsintTakesIntIntIntIntPtrInt? sv_get_time_map;
 
-        private ReturnsintTakesIntPtrintintuint? sv_init;
+        private ReturnsintTakesIntPtrIntIntUint? sv_init;
 
-        private ReturnsintTakesintIntPtr? sv_load;
+        private ReturnsintTakesIntIntPtr? sv_load;
 
-        private ReturnsintTakesintIntPtruint? sv_load_from_memory;
+        private ReturnsintTakesIntIntPtrUint? sv_load_from_memory;
 
-        private ReturnsintTakesintIntPtrintintint? sv_load_module;
+        private ReturnsintTakesIntIntPtrIntIntInt? sv_load_module;
 
-        private ReturnsintTakesintIntPtruintintintint? sv_load_module_from_memory;
+        private ReturnsintTakesIntIntPtrUintIntIntInt? sv_load_module_from_memory;
 
-        private ReturnsintTakesint? sv_lock_slot;
+        private ReturnsintTakesInt? sv_lock_slot;
 
-        private ReturnsintTakesintintIntPtr? sv_metamodule_load;
+        private ReturnsintTakesIntIntIntPtr? sv_metamodule_load;
 
-        private ReturnsintTakesintintIntPtruint? sv_metamodule_load_from_memory;
+        private ReturnsintTakesIntIntIntPtrUint? sv_metamodule_load_from_memory;
 
-        private ReturnsintTakesintintintIntPtrintint? sv_module_curve;
+        private ReturnsintTakesIntIntIntIntPtrIntInt? sv_module_curve;
 
-        private ReturnsintTakesintIntPtrIntPtrintintint? sv_new_module;
+        private ReturnsintTakesIntIntPtrIntPtrIntIntInt? sv_new_module;
 
-        private ReturnsintTakesintintintintintintintIntPtr? sv_new_pattern;
+        private ReturnsintTakesIntIntIntIntIntIntIntIntPtr? sv_new_pattern;
 
-        private ReturnsintTakesint? sv_open_slot;
+        private ReturnsintTakesInt? sv_open_slot;
 
-        private ReturnsintTakesintintint? sv_pattern_mute;
+        private ReturnsintTakesIntIntInt? sv_pattern_mute;
 
-        private ReturnsintTakesint? sv_pause;
+        private ReturnsintTakesInt? sv_pause;
 
-        private ReturnsintTakesint? sv_play;
+        private ReturnsintTakesInt? sv_play;
 
-        private ReturnsintTakesint? sv_play_from_beginning;
+        private ReturnsintTakesInt? sv_play_from_beginning;
 
-        private ReturnsintTakesintint? sv_remove_module;
+        private ReturnsintTakesIntInt? sv_remove_module;
 
-        private ReturnsintTakesintint? sv_remove_pattern;
+        private ReturnsintTakesIntInt? sv_remove_pattern;
 
-        private ReturnsintTakesint? sv_resume;
+        private ReturnsintTakesInt? sv_resume;
 
-        private ReturnsintTakesintint? sv_rewind;
+        private ReturnsintTakesIntInt? sv_rewind;
 
-        private ReturnsintTakesintintIntPtrint? sv_sampler_load;
+        private ReturnsintTakesIntIntIntPtrInt? sv_sampler_load;
 
-        private ReturnsintTakesintintIntPtruintint? sv_sampler_load_from_memory;
+        private ReturnsintTakesIntIntIntPtrUintInt? sv_sampler_load_from_memory;
 
-        private ReturnsintTakesintintintintintint? sv_sampler_par;
+        private ReturnsintTakesIntIntIntIntIntInt? sv_sampler_par;
 
-        private ReturnsintTakesintIntPtr? sv_save;
+        private ReturnsintTakesIntIntPtr? sv_save;
 
-        private ReturnsIntPtrTakesintIntPtr? sv_save_to_memory;
+        private ReturnsIntPtrTakesIntIntPtr? sv_save_to_memory;
 
-        private ReturnsintTakesintintintintintintint? sv_send_event;
+        private ReturnsintTakesIntIntIntIntIntIntInt? sv_send_event;
 
-        private ReturnsintTakesintint? sv_set_autostop;
+        private ReturnsintTakesIntInt? sv_set_autostop;
 
-        private ReturnsintTakesintintint? sv_set_event_t;
+        private ReturnsintTakesIntIntInt? sv_set_event_t;
 
-        private ReturnsintTakesintintint? sv_set_module_color;
+        private ReturnsintTakesIntIntInt? sv_set_module_color;
 
-        private ReturnsintTakesintintintintint? sv_set_module_ctl_value;
+        private ReturnsintTakesIntIntIntIntInt? sv_set_module_ctl_value;
 
-        private ReturnsintTakesintintint? sv_set_module_finetune;
+        private ReturnsintTakesIntIntInt? sv_set_module_finetune;
 
-        private ReturnsintTakesintintIntPtr? sv_set_module_name;
+        private ReturnsintTakesIntIntIntPtr? sv_set_module_name;
 
-        private ReturnsintTakesintintint? sv_set_module_relnote;
+        private ReturnsintTakesIntIntInt? sv_set_module_relnote;
 
-        private ReturnsintTakesintintintint? sv_set_module_xy;
+        private ReturnsintTakesIntIntIntInt? sv_set_module_xy;
 
-        private ReturnsintTakesintintintintintintintintint? sv_set_pattern_event;
+        private ReturnsintTakesIntIntIntIntIntIntIntIntInt? sv_set_pattern_event;
 
-        private ReturnsintTakesintintIntPtr? sv_set_pattern_name;
+        private ReturnsintTakesIntIntIntPtr? sv_set_pattern_name;
 
-        private ReturnsintTakesintintintint? sv_set_pattern_size;
+        private ReturnsintTakesIntIntIntInt? sv_set_pattern_size;
 
-        private ReturnsintTakesintintintint? sv_set_pattern_xy;
+        private ReturnsintTakesIntIntIntInt? sv_set_pattern_xy;
 
-        private ReturnsintTakesintIntPtr? sv_set_song_name;
+        private ReturnsintTakesIntIntPtr? sv_set_song_name;
 
-        private ReturnsintTakesint? sv_stop;
+        private ReturnsintTakesInt? sv_stop;
 
-        private ReturnsintTakesint? sv_sync_resume;
+        private ReturnsintTakesInt? sv_sync_resume;
 
-        private ReturnsintTakesint? sv_unlock_slot;
+        private ReturnsintTakesInt? sv_unlock_slot;
 
         private ReturnsintTakesVoid? sv_update_input;
 
-        private ReturnsintTakesintint? sv_volume;
+        private ReturnsintTakesIntInt? sv_volume;
 
-        private ReturnsintTakesintintIntPtr? sv_vplayer_load;
+        private ReturnsintTakesIntIntIntPtr? sv_vplayer_load;
 
-        private ReturnsintTakesintintIntPtruint? sv_vplayer_load_from_memory;
+        private ReturnsintTakesIntIntIntPtrUint? sv_vplayer_load_from_memory;
 
         #endregion delegates
 
@@ -468,107 +468,107 @@ namespace SunSharp.Native.Loader
 
         #endregion interface
 
-        private void LoadInternal()
+        private void FetchAndAssignDelegates()
         {
-            sv_audio_callback = (ReturnsintTakesIntPtrintintuint)_handler.GetFunctionByName("sv_audio_callback", typeof(ReturnsintTakesIntPtrintintuint));
-            sv_audio_callback2 = (ReturnsintTakesIntPtrintintuintintintIntPtr)_handler.GetFunctionByName("sv_audio_callback2", typeof(ReturnsintTakesIntPtrintintuintintintIntPtr));
-            sv_close_slot = (ReturnsintTakesint)_handler.GetFunctionByName("sv_close_slot", typeof(ReturnsintTakesint));
-            sv_connect_module = (ReturnsintTakesintintint)_handler.GetFunctionByName("sv_connect_module", typeof(ReturnsintTakesintintint));
-            sv_deinit = (ReturnsintTakesVoid)_handler.GetFunctionByName("sv_deinit", typeof(ReturnsintTakesVoid));
-            sv_disconnect_module = (ReturnsintTakesintintint)_handler.GetFunctionByName("sv_disconnect_module", typeof(ReturnsintTakesintintint));
-            sv_end_of_song = (ReturnsintTakesint)_handler.GetFunctionByName("sv_end_of_song", typeof(ReturnsintTakesint));
-            sv_find_module = (ReturnsintTakesintIntPtr)_handler.GetFunctionByName("sv_find_module", typeof(ReturnsintTakesintIntPtr));
-            sv_find_pattern = (ReturnsintTakesintIntPtr)_handler.GetFunctionByName("sv_find_pattern", typeof(ReturnsintTakesintIntPtr));
-            sv_get_autostop = (ReturnsintTakesint)_handler.GetFunctionByName("sv_get_autostop", typeof(ReturnsintTakesint));
-            sv_get_base_version = (ReturnsintTakesint)_handler.GetFunctionByName("sv_get_base_version", typeof(ReturnsintTakesint));
-            sv_get_current_line = (ReturnsintTakesint)_handler.GetFunctionByName("sv_get_current_line", typeof(ReturnsintTakesint));
-            sv_get_current_line2 = (ReturnsintTakesint)_handler.GetFunctionByName("sv_get_current_line2", typeof(ReturnsintTakesint));
-            sv_get_current_signal_level = (ReturnsintTakesintint)_handler.GetFunctionByName("sv_get_current_signal_level", typeof(ReturnsintTakesintint));
-            sv_get_log = (ReturnsIntPtrTakesint)_handler.GetFunctionByName("sv_get_log", typeof(ReturnsIntPtrTakesint));
-            sv_get_module_color = (ReturnsintTakesintint)_handler.GetFunctionByName("sv_get_module_color", typeof(ReturnsintTakesintint));
-            sv_get_module_ctl_group = (ReturnsintTakesintintint)_handler.GetFunctionByName("sv_get_module_ctl_group", typeof(ReturnsintTakesintintint));
-            sv_get_module_ctl_max = (ReturnsintTakesintintintint)_handler.GetFunctionByName("sv_get_module_ctl_max", typeof(ReturnsintTakesintintintint));
-            sv_get_module_ctl_min = (ReturnsintTakesintintintint)_handler.GetFunctionByName("sv_get_module_ctl_min", typeof(ReturnsintTakesintintintint));
-            sv_get_module_ctl_name = (ReturnsIntPtrTakesintintint)_handler.GetFunctionByName("sv_get_module_ctl_name", typeof(ReturnsIntPtrTakesintintint));
-            sv_get_module_ctl_offset = (ReturnsintTakesintintint)_handler.GetFunctionByName("sv_get_module_ctl_offset", typeof(ReturnsintTakesintintint));
-            sv_get_module_ctl_type = (ReturnsintTakesintintint)_handler.GetFunctionByName("sv_get_module_ctl_type", typeof(ReturnsintTakesintintint));
-            sv_get_module_ctl_value = (ReturnsintTakesintintintint)_handler.GetFunctionByName("sv_get_module_ctl_value", typeof(ReturnsintTakesintintintint));
-            sv_get_module_finetune = (ReturnsuintTakesintint)_handler.GetFunctionByName("sv_get_module_finetune", typeof(ReturnsuintTakesintint));
-            sv_get_module_flags = (ReturnsuintTakesintint)_handler.GetFunctionByName("sv_get_module_flags", typeof(ReturnsuintTakesintint));
-            sv_get_module_inputs = (ReturnsIntPtrTakesintint)_handler.GetFunctionByName("sv_get_module_inputs", typeof(ReturnsIntPtrTakesintint));
-            sv_get_module_name = (ReturnsIntPtrTakesintint)_handler.GetFunctionByName("sv_get_module_name", typeof(ReturnsIntPtrTakesintint));
-            sv_get_module_outputs = (ReturnsIntPtrTakesintint)_handler.GetFunctionByName("sv_get_module_outputs", typeof(ReturnsIntPtrTakesintint));
-            sv_get_module_scope2 = (ReturnsuintTakesintintintIntPtruint)_handler.GetFunctionByName("sv_get_module_scope2", typeof(ReturnsuintTakesintintintIntPtruint));
-            sv_get_module_type = (ReturnsIntPtrTakesintint)_handler.GetFunctionByName("sv_get_module_type", typeof(ReturnsIntPtrTakesintint));
-            sv_get_module_xy = (ReturnsuintTakesintint)_handler.GetFunctionByName("sv_get_module_xy", typeof(ReturnsuintTakesintint));
-            sv_get_number_of_module_ctls = (ReturnsintTakesintint)_handler.GetFunctionByName("sv_get_number_of_module_ctls", typeof(ReturnsintTakesintint));
-            sv_get_number_of_modules = (ReturnsintTakesint)_handler.GetFunctionByName("sv_get_number_of_modules", typeof(ReturnsintTakesint));
-            sv_get_number_of_patterns = (ReturnsintTakesint)_handler.GetFunctionByName("sv_get_number_of_patterns", typeof(ReturnsintTakesint));
-            sv_get_pattern_data = (ReturnsIntPtrTakesintint)_handler.GetFunctionByName("sv_get_pattern_data", typeof(ReturnsIntPtrTakesintint));
-            sv_get_pattern_event = (ReturnsintTakesintintintintint)_handler.GetFunctionByName("sv_get_pattern_event", typeof(ReturnsintTakesintintintintint));
-            sv_get_pattern_lines = (ReturnsintTakesintint)_handler.GetFunctionByName("sv_get_pattern_lines", typeof(ReturnsintTakesintint));
-            sv_get_pattern_name = (ReturnsIntPtrTakesintint)_handler.GetFunctionByName("sv_get_pattern_name", typeof(ReturnsIntPtrTakesintint));
-            sv_get_pattern_tracks = (ReturnsintTakesintint)_handler.GetFunctionByName("sv_get_pattern_tracks", typeof(ReturnsintTakesintint));
-            sv_get_pattern_x = (ReturnsintTakesintint)_handler.GetFunctionByName("sv_get_pattern_x", typeof(ReturnsintTakesintint));
-            sv_get_pattern_y = (ReturnsintTakesintint)_handler.GetFunctionByName("sv_get_pattern_y", typeof(ReturnsintTakesintint));
-            sv_get_sample_rate = (ReturnsintTakesVoid)_handler.GetFunctionByName("sv_get_sample_rate", typeof(ReturnsintTakesVoid));
-            sv_get_song_bpm = (ReturnsintTakesint)_handler.GetFunctionByName("sv_get_song_bpm", typeof(ReturnsintTakesint));
-            sv_get_song_length_frames = (ReturnsuintTakesint)_handler.GetFunctionByName("sv_get_song_length_frames", typeof(ReturnsuintTakesint));
-            sv_get_song_length_lines = (ReturnsuintTakesint)_handler.GetFunctionByName("sv_get_song_length_lines", typeof(ReturnsuintTakesint));
-            sv_get_song_name = (ReturnsIntPtrTakesint)_handler.GetFunctionByName("sv_get_song_name", typeof(ReturnsIntPtrTakesint));
-            sv_get_song_tpl = (ReturnsintTakesint)_handler.GetFunctionByName("sv_get_song_tpl", typeof(ReturnsintTakesint));
-            sv_get_ticks = (ReturnsuintTakesVoid)_handler.GetFunctionByName("sv_get_ticks", typeof(ReturnsuintTakesVoid));
-            sv_get_ticks_per_second = (ReturnsuintTakesVoid)_handler.GetFunctionByName("sv_get_ticks_per_second", typeof(ReturnsuintTakesVoid));
-            sv_get_time_map = (ReturnsintTakesintintintIntPtrint)_handler.GetFunctionByName("sv_get_time_map", typeof(ReturnsintTakesintintintIntPtrint));
-            sv_init = (ReturnsintTakesIntPtrintintuint)_handler.GetFunctionByName("sv_init", typeof(ReturnsintTakesIntPtrintintuint));
-            sv_load = (ReturnsintTakesintIntPtr)_handler.GetFunctionByName("sv_load", typeof(ReturnsintTakesintIntPtr));
-            sv_load_from_memory = (ReturnsintTakesintIntPtruint)_handler.GetFunctionByName("sv_load_from_memory", typeof(ReturnsintTakesintIntPtruint));
-            sv_load_module = (ReturnsintTakesintIntPtrintintint)_handler.GetFunctionByName("sv_load_module", typeof(ReturnsintTakesintIntPtrintintint));
-            sv_load_module_from_memory = (ReturnsintTakesintIntPtruintintintint)_handler.GetFunctionByName("sv_load_module_from_memory", typeof(ReturnsintTakesintIntPtruintintintint));
-            sv_lock_slot = (ReturnsintTakesint)_handler.GetFunctionByName("sv_lock_slot", typeof(ReturnsintTakesint));
-            sv_metamodule_load = (ReturnsintTakesintintIntPtr)_handler.GetFunctionByName("sv_metamodule_load", typeof(ReturnsintTakesintintIntPtr));
-            sv_metamodule_load_from_memory = (ReturnsintTakesintintIntPtruint)_handler.GetFunctionByName("sv_metamodule_load_from_memory", typeof(ReturnsintTakesintintIntPtruint));
-            sv_module_curve = (ReturnsintTakesintintintIntPtrintint)_handler.GetFunctionByName("sv_module_curve", typeof(ReturnsintTakesintintintIntPtrintint));
-            sv_new_module = (ReturnsintTakesintIntPtrIntPtrintintint)_handler.GetFunctionByName("sv_new_module", typeof(ReturnsintTakesintIntPtrIntPtrintintint));
-            sv_new_pattern = (ReturnsintTakesintintintintintintintIntPtr)_handler.GetFunctionByName("sv_new_pattern", typeof(ReturnsintTakesintintintintintintintIntPtr));
-            sv_open_slot = (ReturnsintTakesint)_handler.GetFunctionByName("sv_open_slot", typeof(ReturnsintTakesint));
-            sv_pattern_mute = (ReturnsintTakesintintint)_handler.GetFunctionByName("sv_pattern_mute", typeof(ReturnsintTakesintintint));
-            sv_pause = (ReturnsintTakesint)_handler.GetFunctionByName("sv_pause", typeof(ReturnsintTakesint));
-            sv_play = (ReturnsintTakesint)_handler.GetFunctionByName("sv_play", typeof(ReturnsintTakesint));
-            sv_play_from_beginning = (ReturnsintTakesint)_handler.GetFunctionByName("sv_play_from_beginning", typeof(ReturnsintTakesint));
-            sv_remove_module = (ReturnsintTakesintint)_handler.GetFunctionByName("sv_remove_module", typeof(ReturnsintTakesintint));
-            sv_remove_pattern = (ReturnsintTakesintint)_handler.GetFunctionByName("sv_remove_pattern", typeof(ReturnsintTakesintint));
-            sv_resume = (ReturnsintTakesint)_handler.GetFunctionByName("sv_resume", typeof(ReturnsintTakesint));
-            sv_rewind = (ReturnsintTakesintint)_handler.GetFunctionByName("sv_rewind", typeof(ReturnsintTakesintint));
-            sv_sampler_load = (ReturnsintTakesintintIntPtrint)_handler.GetFunctionByName("sv_sampler_load", typeof(ReturnsintTakesintintIntPtrint));
-            sv_sampler_load_from_memory = (ReturnsintTakesintintIntPtruintint)_handler.GetFunctionByName("sv_sampler_load_from_memory", typeof(ReturnsintTakesintintIntPtruintint));
-            sv_sampler_par = (ReturnsintTakesintintintintintint)_handler.GetFunctionByName("sv_sampler_par", typeof(ReturnsintTakesintintintintintint));
-            sv_save = (ReturnsintTakesintIntPtr)_handler.GetFunctionByName("sv_save", typeof(ReturnsintTakesintIntPtr));
-            sv_save_to_memory = (ReturnsIntPtrTakesintIntPtr)_handler.GetFunctionByName("sv_save_to_memory", typeof(ReturnsIntPtrTakesintIntPtr));
-            sv_send_event = (ReturnsintTakesintintintintintintint)_handler.GetFunctionByName("sv_send_event", typeof(ReturnsintTakesintintintintintintint));
-            sv_set_autostop = (ReturnsintTakesintint)_handler.GetFunctionByName("sv_set_autostop", typeof(ReturnsintTakesintint));
-            sv_set_event_t = (ReturnsintTakesintintint)_handler.GetFunctionByName("sv_set_event_t", typeof(ReturnsintTakesintintint));
-            sv_set_module_color = (ReturnsintTakesintintint)_handler.GetFunctionByName("sv_set_module_color", typeof(ReturnsintTakesintintint));
-            sv_set_module_ctl_value = (ReturnsintTakesintintintintint)_handler.GetFunctionByName("sv_set_module_ctl_value", typeof(ReturnsintTakesintintintintint));
-            sv_set_module_finetune = (ReturnsintTakesintintint)_handler.GetFunctionByName("sv_set_module_finetune", typeof(ReturnsintTakesintintint));
-            sv_set_module_name = (ReturnsintTakesintintIntPtr)_handler.GetFunctionByName("sv_set_module_name", typeof(ReturnsintTakesintintIntPtr));
-            sv_set_module_relnote = (ReturnsintTakesintintint)_handler.GetFunctionByName("sv_set_module_relnote", typeof(ReturnsintTakesintintint));
-            sv_set_module_xy = (ReturnsintTakesintintintint)_handler.GetFunctionByName("sv_set_module_xy", typeof(ReturnsintTakesintintintint));
-            sv_set_pattern_event = (ReturnsintTakesintintintintintintintintint)_handler.GetFunctionByName("sv_set_pattern_event", typeof(ReturnsintTakesintintintintintintintintint));
-            sv_set_pattern_name = (ReturnsintTakesintintIntPtr)_handler.GetFunctionByName("sv_set_pattern_name", typeof(ReturnsintTakesintintIntPtr));
-            sv_set_pattern_size = (ReturnsintTakesintintintint)_handler.GetFunctionByName("sv_set_pattern_size", typeof(ReturnsintTakesintintintint));
-            sv_set_pattern_xy = (ReturnsintTakesintintintint)_handler.GetFunctionByName("sv_set_pattern_xy", typeof(ReturnsintTakesintintintint));
-            sv_set_song_name = (ReturnsintTakesintIntPtr)_handler.GetFunctionByName("sv_set_song_name", typeof(ReturnsintTakesintIntPtr));
-            sv_stop = (ReturnsintTakesint)_handler.GetFunctionByName("sv_stop", typeof(ReturnsintTakesint));
-            sv_sync_resume = (ReturnsintTakesint)_handler.GetFunctionByName("sv_sync_resume", typeof(ReturnsintTakesint));
-            sv_unlock_slot = (ReturnsintTakesint)_handler.GetFunctionByName("sv_unlock_slot", typeof(ReturnsintTakesint));
-            sv_update_input = (ReturnsintTakesVoid)_handler.GetFunctionByName("sv_update_input", typeof(ReturnsintTakesVoid));
-            sv_volume = (ReturnsintTakesintint)_handler.GetFunctionByName("sv_volume", typeof(ReturnsintTakesintint));
-            sv_vplayer_load = (ReturnsintTakesintintIntPtr)_handler.GetFunctionByName("sv_vplayer_load", typeof(ReturnsintTakesintintIntPtr));
-            sv_vplayer_load_from_memory = (ReturnsintTakesintintIntPtruint)_handler.GetFunctionByName("sv_vplayer_load_from_memory", typeof(ReturnsintTakesintintIntPtruint));
+            sv_audio_callback = (ReturnsintTakesIntPtrIntIntUint)(_handler.GetFunctionByName("sv_audio_callback", typeof(ReturnsintTakesIntPtrIntIntUint)) ?? throw new InvalidOperationException("Failed to load function sv_audio_callback"));
+            sv_audio_callback2 = (ReturnsintTakesIntPtrIntIntUintIntIntIntPtr)(_handler.GetFunctionByName("sv_audio_callback2", typeof(ReturnsintTakesIntPtrIntIntUintIntIntIntPtr)) ?? throw new InvalidOperationException("Failed to load function sv_audio_callback2"));
+            sv_close_slot = (ReturnsintTakesInt)(_handler.GetFunctionByName("sv_close_slot", typeof(ReturnsintTakesInt)) ?? throw new InvalidOperationException("Failed to load function sv_close_slot"));
+            sv_connect_module = (ReturnsintTakesIntIntInt)(_handler.GetFunctionByName("sv_connect_module", typeof(ReturnsintTakesIntIntInt)) ?? throw new InvalidOperationException("Failed to load function sv_connect_module"));
+            sv_deinit = (ReturnsintTakesVoid)(_handler.GetFunctionByName("sv_deinit", typeof(ReturnsintTakesVoid)) ?? throw new InvalidOperationException("Failed to load function sv_deinit"));
+            sv_disconnect_module = (ReturnsintTakesIntIntInt)(_handler.GetFunctionByName("sv_disconnect_module", typeof(ReturnsintTakesIntIntInt)) ?? throw new InvalidOperationException("Failed to load function sv_disconnect_module"));
+            sv_end_of_song = (ReturnsintTakesInt)(_handler.GetFunctionByName("sv_end_of_song", typeof(ReturnsintTakesInt)) ?? throw new InvalidOperationException("Failed to load function sv_end_of_song"));
+            sv_find_module = (ReturnsintTakesIntIntPtr)(_handler.GetFunctionByName("sv_find_module", typeof(ReturnsintTakesIntIntPtr)) ?? throw new InvalidOperationException("Failed to load function sv_find_module"));
+            sv_find_pattern = (ReturnsintTakesIntIntPtr)(_handler.GetFunctionByName("sv_find_pattern", typeof(ReturnsintTakesIntIntPtr)) ?? throw new InvalidOperationException("Failed to load function sv_find_pattern"));
+            sv_get_autostop = (ReturnsintTakesInt)(_handler.GetFunctionByName("sv_get_autostop", typeof(ReturnsintTakesInt)) ?? throw new InvalidOperationException("Failed to load function sv_get_autostop"));
+            sv_get_base_version = (ReturnsintTakesInt)(_handler.GetFunctionByName("sv_get_base_version", typeof(ReturnsintTakesInt)) ?? throw new InvalidOperationException("Failed to load function sv_get_base_version"));
+            sv_get_current_line = (ReturnsintTakesInt)(_handler.GetFunctionByName("sv_get_current_line", typeof(ReturnsintTakesInt)) ?? throw new InvalidOperationException("Failed to load function sv_get_current_line"));
+            sv_get_current_line2 = (ReturnsintTakesInt)(_handler.GetFunctionByName("sv_get_current_line2", typeof(ReturnsintTakesInt)) ?? throw new InvalidOperationException("Failed to load function sv_get_current_line2"));
+            sv_get_current_signal_level = (ReturnsintTakesIntInt)(_handler.GetFunctionByName("sv_get_current_signal_level", typeof(ReturnsintTakesIntInt)) ?? throw new InvalidOperationException("Failed to load function sv_get_current_signal_level"));
+            sv_get_log = (ReturnsIntPtrTakesInt)(_handler.GetFunctionByName("sv_get_log", typeof(ReturnsIntPtrTakesInt)) ?? throw new InvalidOperationException("Failed to load function sv_get_log"));
+            sv_get_module_color = (ReturnsintTakesIntInt)(_handler.GetFunctionByName("sv_get_module_color", typeof(ReturnsintTakesIntInt)) ?? throw new InvalidOperationException("Failed to load function sv_get_module_color"));
+            sv_get_module_ctl_group = (ReturnsintTakesIntIntInt)(_handler.GetFunctionByName("sv_get_module_ctl_group", typeof(ReturnsintTakesIntIntInt)) ?? throw new InvalidOperationException("Failed to load function sv_get_module_ctl_group"));
+            sv_get_module_ctl_max = (ReturnsintTakesIntIntIntInt)(_handler.GetFunctionByName("sv_get_module_ctl_max", typeof(ReturnsintTakesIntIntIntInt)) ?? throw new InvalidOperationException("Failed to load function sv_get_module_ctl_max"));
+            sv_get_module_ctl_min = (ReturnsintTakesIntIntIntInt)(_handler.GetFunctionByName("sv_get_module_ctl_min", typeof(ReturnsintTakesIntIntIntInt)) ?? throw new InvalidOperationException("Failed to load function sv_get_module_ctl_min"));
+            sv_get_module_ctl_name = (ReturnsIntPtrTakesIntIntInt)(_handler.GetFunctionByName("sv_get_module_ctl_name", typeof(ReturnsIntPtrTakesIntIntInt)) ?? throw new InvalidOperationException("Failed to load function sv_get_module_ctl_name"));
+            sv_get_module_ctl_offset = (ReturnsintTakesIntIntInt)(_handler.GetFunctionByName("sv_get_module_ctl_offset", typeof(ReturnsintTakesIntIntInt)) ?? throw new InvalidOperationException("Failed to load function sv_get_module_ctl_offset"));
+            sv_get_module_ctl_type = (ReturnsintTakesIntIntInt)(_handler.GetFunctionByName("sv_get_module_ctl_type", typeof(ReturnsintTakesIntIntInt)) ?? throw new InvalidOperationException("Failed to load function sv_get_module_ctl_type"));
+            sv_get_module_ctl_value = (ReturnsintTakesIntIntIntInt)(_handler.GetFunctionByName("sv_get_module_ctl_value", typeof(ReturnsintTakesIntIntIntInt)) ?? throw new InvalidOperationException("Failed to load function sv_get_module_ctl_value"));
+            sv_get_module_finetune = (ReturnsuintTakesIntInt)(_handler.GetFunctionByName("sv_get_module_finetune", typeof(ReturnsuintTakesIntInt)) ?? throw new InvalidOperationException("Failed to load function sv_get_module_finetune"));
+            sv_get_module_flags = (ReturnsuintTakesIntInt)(_handler.GetFunctionByName("sv_get_module_flags", typeof(ReturnsuintTakesIntInt)) ?? throw new InvalidOperationException("Failed to load function sv_get_module_flags"));
+            sv_get_module_inputs = (ReturnsIntPtrTakesIntInt)(_handler.GetFunctionByName("sv_get_module_inputs", typeof(ReturnsIntPtrTakesIntInt)) ?? throw new InvalidOperationException("Failed to load function sv_get_module_inputs"));
+            sv_get_module_name = (ReturnsIntPtrTakesIntInt)(_handler.GetFunctionByName("sv_get_module_name", typeof(ReturnsIntPtrTakesIntInt)) ?? throw new InvalidOperationException("Failed to load function sv_get_module_name"));
+            sv_get_module_outputs = (ReturnsIntPtrTakesIntInt)(_handler.GetFunctionByName("sv_get_module_outputs", typeof(ReturnsIntPtrTakesIntInt)) ?? throw new InvalidOperationException("Failed to load function sv_get_module_outputs"));
+            sv_get_module_scope2 = (ReturnsuintTakesIntIntIntIntPtrUint)(_handler.GetFunctionByName("sv_get_module_scope2", typeof(ReturnsuintTakesIntIntIntIntPtrUint)) ?? throw new InvalidOperationException("Failed to load function sv_get_module_scope2"));
+            sv_get_module_type = (ReturnsIntPtrTakesIntInt)(_handler.GetFunctionByName("sv_get_module_type", typeof(ReturnsIntPtrTakesIntInt)) ?? throw new InvalidOperationException("Failed to load function sv_get_module_type"));
+            sv_get_module_xy = (ReturnsuintTakesIntInt)(_handler.GetFunctionByName("sv_get_module_xy", typeof(ReturnsuintTakesIntInt)) ?? throw new InvalidOperationException("Failed to load function sv_get_module_xy"));
+            sv_get_number_of_module_ctls = (ReturnsintTakesIntInt)(_handler.GetFunctionByName("sv_get_number_of_module_ctls", typeof(ReturnsintTakesIntInt)) ?? throw new InvalidOperationException("Failed to load function sv_get_number_of_module_ctls"));
+            sv_get_number_of_modules = (ReturnsintTakesInt)(_handler.GetFunctionByName("sv_get_number_of_modules", typeof(ReturnsintTakesInt)) ?? throw new InvalidOperationException("Failed to load function sv_get_number_of_modules"));
+            sv_get_number_of_patterns = (ReturnsintTakesInt)(_handler.GetFunctionByName("sv_get_number_of_patterns", typeof(ReturnsintTakesInt)) ?? throw new InvalidOperationException("Failed to load function sv_get_number_of_patterns"));
+            sv_get_pattern_data = (ReturnsIntPtrTakesIntInt)(_handler.GetFunctionByName("sv_get_pattern_data", typeof(ReturnsIntPtrTakesIntInt)) ?? throw new InvalidOperationException("Failed to load function sv_get_pattern_data"));
+            sv_get_pattern_event = (ReturnsintTakesIntIntIntIntInt)(_handler.GetFunctionByName("sv_get_pattern_event", typeof(ReturnsintTakesIntIntIntIntInt)) ?? throw new InvalidOperationException("Failed to load function sv_get_pattern_event"));
+            sv_get_pattern_lines = (ReturnsintTakesIntInt)(_handler.GetFunctionByName("sv_get_pattern_lines", typeof(ReturnsintTakesIntInt)) ?? throw new InvalidOperationException("Failed to load function sv_get_pattern_lines"));
+            sv_get_pattern_name = (ReturnsIntPtrTakesIntInt)(_handler.GetFunctionByName("sv_get_pattern_name", typeof(ReturnsIntPtrTakesIntInt)) ?? throw new InvalidOperationException("Failed to load function sv_get_pattern_name"));
+            sv_get_pattern_tracks = (ReturnsintTakesIntInt)(_handler.GetFunctionByName("sv_get_pattern_tracks", typeof(ReturnsintTakesIntInt)) ?? throw new InvalidOperationException("Failed to load function sv_get_pattern_tracks"));
+            sv_get_pattern_x = (ReturnsintTakesIntInt)(_handler.GetFunctionByName("sv_get_pattern_x", typeof(ReturnsintTakesIntInt)) ?? throw new InvalidOperationException("Failed to load function sv_get_pattern_x"));
+            sv_get_pattern_y = (ReturnsintTakesIntInt)(_handler.GetFunctionByName("sv_get_pattern_y", typeof(ReturnsintTakesIntInt)) ?? throw new InvalidOperationException("Failed to load function sv_get_pattern_y"));
+            sv_get_sample_rate = (ReturnsintTakesVoid)(_handler.GetFunctionByName("sv_get_sample_rate", typeof(ReturnsintTakesVoid)) ?? throw new InvalidOperationException("Failed to load function sv_get_sample_rate"));
+            sv_get_song_bpm = (ReturnsintTakesInt)(_handler.GetFunctionByName("sv_get_song_bpm", typeof(ReturnsintTakesInt)) ?? throw new InvalidOperationException("Failed to load function sv_get_song_bpm"));
+            sv_get_song_length_frames = (ReturnsuintTakesInt)(_handler.GetFunctionByName("sv_get_song_length_frames", typeof(ReturnsuintTakesInt)) ?? throw new InvalidOperationException("Failed to load function sv_get_song_length_frames"));
+            sv_get_song_length_lines = (ReturnsuintTakesInt)(_handler.GetFunctionByName("sv_get_song_length_lines", typeof(ReturnsuintTakesInt)) ?? throw new InvalidOperationException("Failed to load function sv_get_song_length_lines"));
+            sv_get_song_name = (ReturnsIntPtrTakesInt)(_handler.GetFunctionByName("sv_get_song_name", typeof(ReturnsIntPtrTakesInt)) ?? throw new InvalidOperationException("Failed to load function sv_get_song_name"));
+            sv_get_song_tpl = (ReturnsintTakesInt)(_handler.GetFunctionByName("sv_get_song_tpl", typeof(ReturnsintTakesInt)) ?? throw new InvalidOperationException("Failed to load function sv_get_song_tpl"));
+            sv_get_ticks = (ReturnsuintTakesVoid)(_handler.GetFunctionByName("sv_get_ticks", typeof(ReturnsuintTakesVoid)) ?? throw new InvalidOperationException("Failed to load function sv_get_ticks"));
+            sv_get_ticks_per_second = (ReturnsuintTakesVoid)(_handler.GetFunctionByName("sv_get_ticks_per_second", typeof(ReturnsuintTakesVoid)) ?? throw new InvalidOperationException("Failed to load function sv_get_ticks_per_second"));
+            sv_get_time_map = (ReturnsintTakesIntIntIntIntPtrInt)(_handler.GetFunctionByName("sv_get_time_map", typeof(ReturnsintTakesIntIntIntIntPtrInt)) ?? throw new InvalidOperationException("Failed to load function sv_get_time_map"));
+            sv_init = (ReturnsintTakesIntPtrIntIntUint)(_handler.GetFunctionByName("sv_init", typeof(ReturnsintTakesIntPtrIntIntUint)) ?? throw new InvalidOperationException("Failed to load function sv_init"));
+            sv_load = (ReturnsintTakesIntIntPtr)(_handler.GetFunctionByName("sv_load", typeof(ReturnsintTakesIntIntPtr)) ?? throw new InvalidOperationException("Failed to load function sv_load"));
+            sv_load_from_memory = (ReturnsintTakesIntIntPtrUint)(_handler.GetFunctionByName("sv_load_from_memory", typeof(ReturnsintTakesIntIntPtrUint)) ?? throw new InvalidOperationException("Failed to load function sv_load_from_memory"));
+            sv_load_module = (ReturnsintTakesIntIntPtrIntIntInt)(_handler.GetFunctionByName("sv_load_module", typeof(ReturnsintTakesIntIntPtrIntIntInt)) ?? throw new InvalidOperationException("Failed to load function sv_load_module"));
+            sv_load_module_from_memory = (ReturnsintTakesIntIntPtrUintIntIntInt)(_handler.GetFunctionByName("sv_load_module_from_memory", typeof(ReturnsintTakesIntIntPtrUintIntIntInt)) ?? throw new InvalidOperationException("Failed to load function sv_load_module_from_memory"));
+            sv_lock_slot = (ReturnsintTakesInt)(_handler.GetFunctionByName("sv_lock_slot", typeof(ReturnsintTakesInt)) ?? throw new InvalidOperationException("Failed to load function sv_lock_slot"));
+            sv_metamodule_load = (ReturnsintTakesIntIntIntPtr)(_handler.GetFunctionByName("sv_metamodule_load", typeof(ReturnsintTakesIntIntIntPtr)) ?? throw new InvalidOperationException("Failed to load function sv_metamodule_load"));
+            sv_metamodule_load_from_memory = (ReturnsintTakesIntIntIntPtrUint)(_handler.GetFunctionByName("sv_metamodule_load_from_memory", typeof(ReturnsintTakesIntIntIntPtrUint)) ?? throw new InvalidOperationException("Failed to load function sv_metamodule_load_from_memory"));
+            sv_module_curve = (ReturnsintTakesIntIntIntIntPtrIntInt)(_handler.GetFunctionByName("sv_module_curve", typeof(ReturnsintTakesIntIntIntIntPtrIntInt)) ?? throw new InvalidOperationException("Failed to load function sv_module_curve"));
+            sv_new_module = (ReturnsintTakesIntIntPtrIntPtrIntIntInt)(_handler.GetFunctionByName("sv_new_module", typeof(ReturnsintTakesIntIntPtrIntPtrIntIntInt)) ?? throw new InvalidOperationException("Failed to load function sv_new_module"));
+            sv_new_pattern = (ReturnsintTakesIntIntIntIntIntIntIntIntPtr)(_handler.GetFunctionByName("sv_new_pattern", typeof(ReturnsintTakesIntIntIntIntIntIntIntIntPtr)) ?? throw new InvalidOperationException("Failed to load function sv_new_pattern"));
+            sv_open_slot = (ReturnsintTakesInt)(_handler.GetFunctionByName("sv_open_slot", typeof(ReturnsintTakesInt)) ?? throw new InvalidOperationException("Failed to load function sv_open_slot"));
+            sv_pattern_mute = (ReturnsintTakesIntIntInt)(_handler.GetFunctionByName("sv_pattern_mute", typeof(ReturnsintTakesIntIntInt)) ?? throw new InvalidOperationException("Failed to load function sv_pattern_mute"));
+            sv_pause = (ReturnsintTakesInt)(_handler.GetFunctionByName("sv_pause", typeof(ReturnsintTakesInt)) ?? throw new InvalidOperationException("Failed to load function sv_pause"));
+            sv_play = (ReturnsintTakesInt)(_handler.GetFunctionByName("sv_play", typeof(ReturnsintTakesInt)) ?? throw new InvalidOperationException("Failed to load function sv_play"));
+            sv_play_from_beginning = (ReturnsintTakesInt)(_handler.GetFunctionByName("sv_play_from_beginning", typeof(ReturnsintTakesInt)) ?? throw new InvalidOperationException("Failed to load function sv_play_from_beginning"));
+            sv_remove_module = (ReturnsintTakesIntInt)(_handler.GetFunctionByName("sv_remove_module", typeof(ReturnsintTakesIntInt)) ?? throw new InvalidOperationException("Failed to load function sv_remove_module"));
+            sv_remove_pattern = (ReturnsintTakesIntInt)(_handler.GetFunctionByName("sv_remove_pattern", typeof(ReturnsintTakesIntInt)) ?? throw new InvalidOperationException("Failed to load function sv_remove_pattern"));
+            sv_resume = (ReturnsintTakesInt)(_handler.GetFunctionByName("sv_resume", typeof(ReturnsintTakesInt)) ?? throw new InvalidOperationException("Failed to load function sv_resume"));
+            sv_rewind = (ReturnsintTakesIntInt)(_handler.GetFunctionByName("sv_rewind", typeof(ReturnsintTakesIntInt)) ?? throw new InvalidOperationException("Failed to load function sv_rewind"));
+            sv_sampler_load = (ReturnsintTakesIntIntIntPtrInt)(_handler.GetFunctionByName("sv_sampler_load", typeof(ReturnsintTakesIntIntIntPtrInt)) ?? throw new InvalidOperationException("Failed to load function sv_sampler_load"));
+            sv_sampler_load_from_memory = (ReturnsintTakesIntIntIntPtrUintInt)(_handler.GetFunctionByName("sv_sampler_load_from_memory", typeof(ReturnsintTakesIntIntIntPtrUintInt)) ?? throw new InvalidOperationException("Failed to load function sv_sampler_load_from_memory"));
+            sv_sampler_par = (ReturnsintTakesIntIntIntIntIntInt)(_handler.GetFunctionByName("sv_sampler_par", typeof(ReturnsintTakesIntIntIntIntIntInt)) ?? throw new InvalidOperationException("Failed to load function sv_sampler_par"));
+            sv_save = (ReturnsintTakesIntIntPtr)(_handler.GetFunctionByName("sv_save", typeof(ReturnsintTakesIntIntPtr)) ?? throw new InvalidOperationException("Failed to load function sv_save"));
+            sv_save_to_memory = (ReturnsIntPtrTakesIntIntPtr)(_handler.GetFunctionByName("sv_save_to_memory", typeof(ReturnsIntPtrTakesIntIntPtr)) ?? throw new InvalidOperationException("Failed to load function sv_save_to_memory"));
+            sv_send_event = (ReturnsintTakesIntIntIntIntIntIntInt)(_handler.GetFunctionByName("sv_send_event", typeof(ReturnsintTakesIntIntIntIntIntIntInt)) ?? throw new InvalidOperationException("Failed to load function sv_send_event"));
+            sv_set_autostop = (ReturnsintTakesIntInt)(_handler.GetFunctionByName("sv_set_autostop", typeof(ReturnsintTakesIntInt)) ?? throw new InvalidOperationException("Failed to load function sv_set_autostop"));
+            sv_set_event_t = (ReturnsintTakesIntIntInt)(_handler.GetFunctionByName("sv_set_event_t", typeof(ReturnsintTakesIntIntInt)) ?? throw new InvalidOperationException("Failed to load function sv_set_event_t"));
+            sv_set_module_color = (ReturnsintTakesIntIntInt)(_handler.GetFunctionByName("sv_set_module_color", typeof(ReturnsintTakesIntIntInt)) ?? throw new InvalidOperationException("Failed to load function sv_set_module_color"));
+            sv_set_module_ctl_value = (ReturnsintTakesIntIntIntIntInt)(_handler.GetFunctionByName("sv_set_module_ctl_value", typeof(ReturnsintTakesIntIntIntIntInt)) ?? throw new InvalidOperationException("Failed to load function sv_set_module_ctl_value"));
+            sv_set_module_finetune = (ReturnsintTakesIntIntInt)(_handler.GetFunctionByName("sv_set_module_finetune", typeof(ReturnsintTakesIntIntInt)) ?? throw new InvalidOperationException("Failed to load function sv_set_module_finetune"));
+            sv_set_module_name = (ReturnsintTakesIntIntIntPtr)(_handler.GetFunctionByName("sv_set_module_name", typeof(ReturnsintTakesIntIntIntPtr)) ?? throw new InvalidOperationException("Failed to load function sv_set_module_name"));
+            sv_set_module_relnote = (ReturnsintTakesIntIntInt)(_handler.GetFunctionByName("sv_set_module_relnote", typeof(ReturnsintTakesIntIntInt)) ?? throw new InvalidOperationException("Failed to load function sv_set_module_relnote"));
+            sv_set_module_xy = (ReturnsintTakesIntIntIntInt)(_handler.GetFunctionByName("sv_set_module_xy", typeof(ReturnsintTakesIntIntIntInt)) ?? throw new InvalidOperationException("Failed to load function sv_set_module_xy"));
+            sv_set_pattern_event = (ReturnsintTakesIntIntIntIntIntIntIntIntInt)(_handler.GetFunctionByName("sv_set_pattern_event", typeof(ReturnsintTakesIntIntIntIntIntIntIntIntInt)) ?? throw new InvalidOperationException("Failed to load function sv_set_pattern_event"));
+            sv_set_pattern_name = (ReturnsintTakesIntIntIntPtr)(_handler.GetFunctionByName("sv_set_pattern_name", typeof(ReturnsintTakesIntIntIntPtr)) ?? throw new InvalidOperationException("Failed to load function sv_set_pattern_name"));
+            sv_set_pattern_size = (ReturnsintTakesIntIntIntInt)(_handler.GetFunctionByName("sv_set_pattern_size", typeof(ReturnsintTakesIntIntIntInt)) ?? throw new InvalidOperationException("Failed to load function sv_set_pattern_size"));
+            sv_set_pattern_xy = (ReturnsintTakesIntIntIntInt)(_handler.GetFunctionByName("sv_set_pattern_xy", typeof(ReturnsintTakesIntIntIntInt)) ?? throw new InvalidOperationException("Failed to load function sv_set_pattern_xy"));
+            sv_set_song_name = (ReturnsintTakesIntIntPtr)(_handler.GetFunctionByName("sv_set_song_name", typeof(ReturnsintTakesIntIntPtr)) ?? throw new InvalidOperationException("Failed to load function sv_set_song_name"));
+            sv_stop = (ReturnsintTakesInt)(_handler.GetFunctionByName("sv_stop", typeof(ReturnsintTakesInt)) ?? throw new InvalidOperationException("Failed to load function sv_stop"));
+            sv_sync_resume = (ReturnsintTakesInt)(_handler.GetFunctionByName("sv_sync_resume", typeof(ReturnsintTakesInt)) ?? throw new InvalidOperationException("Failed to load function sv_sync_resume"));
+            sv_unlock_slot = (ReturnsintTakesInt)(_handler.GetFunctionByName("sv_unlock_slot", typeof(ReturnsintTakesInt)) ?? throw new InvalidOperationException("Failed to load function sv_unlock_slot"));
+            sv_update_input = (ReturnsintTakesVoid)(_handler.GetFunctionByName("sv_update_input", typeof(ReturnsintTakesVoid)) ?? throw new InvalidOperationException("Failed to load function sv_update_input"));
+            sv_volume = (ReturnsintTakesIntInt)(_handler.GetFunctionByName("sv_volume", typeof(ReturnsintTakesIntInt)) ?? throw new InvalidOperationException("Failed to load function sv_volume"));
+            sv_vplayer_load = (ReturnsintTakesIntIntIntPtr)(_handler.GetFunctionByName("sv_vplayer_load", typeof(ReturnsintTakesIntIntIntPtr)) ?? throw new InvalidOperationException("Failed to load function sv_vplayer_load"));
+            sv_vplayer_load_from_memory = (ReturnsintTakesIntIntIntPtrUint)(_handler.GetFunctionByName("sv_vplayer_load_from_memory", typeof(ReturnsintTakesIntIntIntPtrUint)) ?? throw new InvalidOperationException("Failed to load function sv_vplayer_load_from_memory"));
         }
 
-        private void UnloadInternal()
+        private void SetAllDelegatesToNull()
         {
             sv_audio_callback = null;
             sv_audio_callback2 = null;

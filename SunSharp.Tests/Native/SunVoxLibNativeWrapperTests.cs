@@ -126,17 +126,17 @@ public class SunVoxLibNativeWrapperTests
     }
 
     [Test, AutoData]
-    public void GetCurrentSignalLevel_ShouldReturnValue(int signalLevel, int slotId, int channelId)
+    public void GetCurrentSignalLevel_ShouldReturnValue(int signalLevel, int slotId, AudioChannel channel)
     {
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
         library.sv_get_current_signal_level(Arg.Any<int>(), Arg.Any<int>()).Returns(signalLevel);
 
         // when
-        var value = wrapper.GetCurrentSignalLevel(slotId, channelId);
+        var value = wrapper.GetCurrentSignalLevel(slotId, channel);
 
         // then
-        library.Received(1).sv_get_current_signal_level(slotId, channelId);
+        library.Received(1).sv_get_current_signal_level(slotId, (int)channel);
         value.Should().Be(signalLevel);
     }
 
@@ -415,20 +415,23 @@ public class SunVoxLibNativeWrapperTests
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
 
-        const int returnCode = 123454321;
+        const byte major = 1;
+        const byte minor = 2;
+        const byte minor2 = 3;
+        const int returnCode = major << 16 | minor << 8 | minor2;
         library.sv_init(Arg.Any<IntPtr>(), Arg.Any<int>(), Arg.Any<int>(), Arg.Any<uint>())
             .Returns(returnCode);
 
         string? receivedString = null;
         library.When(static l => l.sv_init(Arg.Any<IntPtr>(), Arg.Any<int>(), Arg.Any<int>(), Arg.Any<uint>()))
-            .Do(callInfo => receivedString = Marshal.PtrToStringAnsi(callInfo.Arg<IntPtr>()));
+            .Do(callInfo => receivedString = Marshal.PtrToStringUTF8(callInfo.Arg<IntPtr>()));
 
         // when
         var version = wrapper.Initialize(sampleRate, config, channels, sunVoxInitOptions);
 
         // then
         library.Received(1).sv_init(Arg.Any<IntPtr>(), sampleRate, (int)channels, (uint)sunVoxInitOptions);
-        version.Should().Be(new LibraryVersion(returnCode));
+        version.Should().Be(SunVoxVersion.FromLibraryVersion(returnCode));
         receivedString.Should().Be(config);
     }
 
@@ -438,7 +441,10 @@ public class SunVoxLibNativeWrapperTests
         var library = Substitute.For<ISunVoxLibC>();
         var wrapper = new SunVoxLibNativeWrapper(library);
 
-        const int returnCode = 123454321;
+        const byte major = 1;
+        const byte minor = 2;
+        const byte minor2 = 3;
+        const int returnCode = major << 16 | minor << 8 | minor2;
         library.sv_init(Arg.Any<IntPtr>(), Arg.Any<int>(), Arg.Any<int>(), Arg.Any<uint>())
             .Returns(returnCode);
 
@@ -447,7 +453,7 @@ public class SunVoxLibNativeWrapperTests
 
         // then
         library.Received(1).sv_init(IntPtr.Zero, sampleRate, (int)channels, (uint)sunVoxInitOptions);
-        version.Should().Be(new LibraryVersion(returnCode));
+        version.Should().Be(SunVoxVersion.FromLibraryVersion(returnCode));
     }
 
     [Test, AutoData]
@@ -523,7 +529,7 @@ public class SunVoxLibNativeWrapperTests
         var receivedString = string.Empty;
 
         library.When(static l => l.sv_load(Arg.Any<int>(), Arg.Any<IntPtr>()))
-            .Do(callInfo => receivedString = Marshal.PtrToStringAnsi(callInfo.Arg<IntPtr>()));
+            .Do(callInfo => receivedString = Marshal.PtrToStringUTF8(callInfo.Arg<IntPtr>()));
 
         // when
         wrapper.Load(slotId, path);
@@ -723,10 +729,10 @@ public class SunVoxLibNativeWrapperTests
         var receivedString = string.Empty;
 
         library.When(static l => l.sv_save(Arg.Any<int>(), Arg.Any<IntPtr>()))
-            .Do(callInfo => receivedString = Marshal.PtrToStringAnsi(callInfo.Arg<IntPtr>()));
+            .Do(callInfo => receivedString = Marshal.PtrToStringUTF8(callInfo.Arg<IntPtr>()));
 
         // when
-        wrapper.Save(slotId, path);
+        wrapper.SaveToFile(slotId, path);
 
         // then
         receivedString.Should().Be(path);
@@ -742,7 +748,7 @@ public class SunVoxLibNativeWrapperTests
         library.sv_save(Arg.Any<int>(), Arg.Any<IntPtr>()).Returns(ErrorResponseCode);
 
         // when
-        wrapper.Invoking(w => w.Save(slotId, path)).Should().Throw<SunVoxException>();
+        wrapper.Invoking(w => w.SaveToFile(slotId, path)).Should().Throw<SunVoxException>();
 
         // then
         library.Received(1).sv_save(slotId, Arg.Any<IntPtr>());
@@ -876,7 +882,7 @@ public class SunVoxLibNativeWrapperTests
         string? receivedString = null;
 
         library.When(static l => l.sv_set_song_name(Arg.Any<int>(), Arg.Any<IntPtr>()))
-            .Do(callInfo => receivedString = Marshal.PtrToStringAnsi(callInfo.Arg<IntPtr>()));
+            .Do(callInfo => receivedString = Marshal.PtrToStringUTF8(callInfo.Arg<IntPtr>()));
 
         // when
         wrapper.SetSongName(slotId, newSongName);

@@ -30,7 +30,7 @@ namespace SunSharp.Redistribution
         private static NativeProxy? _proxy;
         private static ISunVoxLib? _lib;
 
-        public static bool IsLoaded => _proxy?.IsLoaded ?? false;
+        public static bool IsLoaded => _proxy?.IsProxyLoaded ?? false;
 
         private static ILibraryHandler GetPlatformSpecificLibraryHandler()
         {

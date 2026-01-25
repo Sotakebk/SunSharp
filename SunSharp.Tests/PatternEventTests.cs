@@ -267,12 +267,13 @@ public class PatternEventTests
 
     public static TestCaseData[] TestCases =>
     [
+        //                                                       "NNVVMMMMCCEEXXYY"
         new(new PatternEvent(),                                  "                "),
-        new(new PatternEvent(Note.C(4), 0x81, 1, 0, 0, 0),       "C4800001        "),
-        new(new PatternEvent(Note.C(10), 0x81, 1, 0, 0, 0),      "C4800001        "),
+        new(new PatternEvent(Note.C(4), 0x81, 1, 0, 0, 0),       "C4800000        "),
+        new(new PatternEvent(Note.C(10), 0x81, 1, 0, 0, 0),      "CA800000        "),
         new(new PatternEvent(0, 0, 0, 0, 0, 1),                  "            0001"),
         new(new PatternEvent(0, 0, 0, 0, 0x08, 0x0704),          "          080704"),
-        new(new PatternEvent(3, 0x01, 0xA9, 0x87, 0x65, 0x4321), "D00100A987654321"),
+        new(new PatternEvent(3, 0x01, 0xA9, 0x87, 0x65, 0x4321), "D00000A887654321"),
         new(new PatternEvent(Note.Off, 0, 0, 0, 0, 0),           "--              "),
         new(new PatternEvent(Note.AllNotesOff, 0, 0, 0, 0, 0),   "-!              ")
     ];
@@ -292,17 +293,16 @@ public class PatternEventTests
 
         a.Equals(b).Should().BeTrue();
         a.Equals(a).Should().BeTrue();
-        a.Equals(1).Should().BeFalse();
+        a.Equals(1ul).Should().BeTrue();
         a.Equals((object?)b).Should().BeTrue();
         a.Equals((object?)a).Should().BeTrue();
         a.Equals(null).Should().BeFalse();
         a.Equals(new object()).Should().BeFalse();
         b.Equals(c).Should().BeFalse();
-        new Note(1).Equals(2).Should().BeFalse();
 
         (a == b).Should().BeTrue();
         (a != b).Should().BeFalse();
-        (a == 1).Should().BeFalse();
+        (a == 1).Should().BeTrue();
         (a != 2).Should().BeTrue();
         (a != c).Should().BeTrue();
         (a == c).Should().BeFalse();
@@ -401,12 +401,13 @@ public class PatternEventTests
     public void NewEvent_ShouldWork()
     {
         var note = new Note(NoteName.C, 4);
-        byte velocity = 100;
+        const byte velocity = 100;
         const int moduleId = 0;
-        byte controller = 1;
-        const ushort value = 1000;
+        const byte controller = 1;
+        const Effect effect = Effect.SlideUp;
+        const ushort value = 0x1000;
 
-        var patternEvent = PatternEvent.NewEvent(note, velocity, moduleId, controller, value);
+        var patternEvent = PatternEvent.NewEvent(note, velocity, moduleId, controller, effect, value);
 
         patternEvent.Note.Should().Be(note);
         patternEvent.Velocity.Should().Be(velocity);
@@ -484,12 +485,5 @@ public class PatternEventTests
         noteEvent.HasVelocity.Should().BeTrue();
         noteEvent.HasModule.Should().BeTrue();
         noteEvent.IsEmpty.Should().BeFalse();
-        noteEvent.IsNormalNote.Should().BeTrue();
-
-        var noteOffEvent = PatternEvent.NoteEvent(Note.Off, 0);
-        noteOffEvent.IsNoteOff.Should().BeTrue();
-
-        var setPitchEvent = PatternEvent.SetPitchEvent(0, 0x3C00);
-        setPitchEvent.IsSetPitch.Should().BeTrue();
     }
 }

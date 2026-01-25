@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
@@ -145,14 +144,9 @@ namespace SunSharp
         /// <inheritdoc cref="ISynthesizer.CreateModule"/>
         public SynthModuleHandle CreateModule(SynthModuleType type, string name, int x = 0, int y = 0, int z = 0)
         {
-            if (!Enum.IsDefined(typeof(SynthModuleType), type))
-            {
-                throw new ArgumentOutOfRangeException(nameof(type), "The specified ModuleType is not defined.");
-            }
-
             using (Slot.AcquireLock())
             {
-                var moduleId = _lib.CreateModule(_id, SynthModuleTypeHelper.InternalNameFromType(type), name, x, y, z);
+                var moduleId = _lib.CreateModule(_id, type, name, x, y, z);
                 return new SynthModuleHandle(Slot, moduleId);
             }
         }

@@ -40,7 +40,6 @@ public class NoteTests
     }
 
     [TestCase(NoteName.C, 0, 1)]
-    [TestCase(NoteName.Cb, 1, 12)]
     [TestCase(NoteName.Cs, 0, 2)]
     [TestCase(NoteName.C, 1, 13)]
     [TestCase(NoteName.Fs, 10, 127)]
@@ -65,7 +64,7 @@ public class NoteTests
     }
 
     [TestCase(NoteName.Other)]
-    [TestCase((NoteName)(-1))]
+    [TestCase((NoteName)(-2))]
     [TestCase((NoteName)13)]
     public void NoteConstructor_FromOctaveAndName_ShouldThrowOnInvalidNoteName(NoteName name)
     {
@@ -141,7 +140,9 @@ public class NoteTests
         new(Note.Nothing, "  "),
         new(Note.CleanSynths, "CS"),
         new(Note.CleanModule, "CM"),
-        new(new Note(255), "??")
+        new(new Note(255), "??"),
+        new(new Note(NoteName.C, 10), "CA"),
+        new(new Note(NoteName.Fs, 10), "fA")
     ];
 
     [TestCaseSource(nameof(TestCases))]

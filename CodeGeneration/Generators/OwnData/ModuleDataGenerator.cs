@@ -63,6 +63,7 @@ public sealed partial class ModuleDataGenerator : BaseGenerator, IGeneratorProvi
             var modules = CreateModuleDescriptions(slot);
 
             slot.Close();
+            Console.WriteLine("Logs: " + sunVox.GetLog(0xFFFF));
 
             return new KnownModuleData()
             {

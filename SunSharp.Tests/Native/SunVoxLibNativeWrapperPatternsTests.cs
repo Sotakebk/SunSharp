@@ -519,7 +519,7 @@ public class SunVoxLibNativeWrapperPatternsTests
             .Returns(newPatternId);
         library.When(static l => l.sv_new_pattern(Arg.Any<int>(), Arg.Any<int>(), Arg.Any<int>(), Arg.Any<int>(),
                 Arg.Any<int>(), Arg.Any<int>(), Arg.Any<int>(), Arg.Any<IntPtr>()))
-            .Do(callInfo => { receivedPatternName = Marshal.PtrToStringAnsi(callInfo.Arg<IntPtr>()); });
+            .Do(callInfo => { receivedPatternName = Marshal.PtrToStringUTF8(callInfo.Arg<IntPtr>()); });
 
         // when
         var value = wrapper.CreatePattern(slotId, x, y, tracks, lines, iconSeed, patternName);
@@ -555,7 +555,7 @@ public class SunVoxLibNativeWrapperPatternsTests
         var wrapper = new SunVoxLibNativeWrapper(library);
         library.sv_find_pattern(Arg.Any<int>(), Arg.Any<IntPtr>()).Returns(foundPatternId);
         library.When(static l => l.sv_find_pattern(Arg.Any<int>(), Arg.Any<IntPtr>()))
-            .Do(callInfo => receivedString = Marshal.PtrToStringAnsi(callInfo.Arg<IntPtr>()));
+            .Do(callInfo => receivedString = Marshal.PtrToStringUTF8(callInfo.Arg<IntPtr>()));
 
         // when
         var value = wrapper.FindPattern(slotId, patternName);
@@ -574,7 +574,7 @@ public class SunVoxLibNativeWrapperPatternsTests
         var wrapper = new SunVoxLibNativeWrapper(library);
         library.sv_find_pattern(Arg.Any<int>(), Arg.Any<IntPtr>()).Returns(-1);
         library.When(static l => l.sv_find_pattern(Arg.Any<int>(), Arg.Any<IntPtr>()))
-            .Do(callInfo => receivedString = Marshal.PtrToStringAnsi(callInfo.Arg<IntPtr>()));
+            .Do(callInfo => receivedString = Marshal.PtrToStringUTF8(callInfo.Arg<IntPtr>()));
 
         // when
         var value = wrapper.FindPattern(slotId, patternName);
@@ -876,7 +876,7 @@ public class SunVoxLibNativeWrapperPatternsTests
         var wrapper = new SunVoxLibNativeWrapper(library);
         var receivedString = string.Empty;
         library.When(static l => l.sv_set_pattern_name(Arg.Any<int>(), Arg.Any<int>(), Arg.Any<IntPtr>()))
-            .Do(callInfo => receivedString = Marshal.PtrToStringAnsi(callInfo.Arg<IntPtr>()));
+            .Do(callInfo => receivedString = Marshal.PtrToStringUTF8(callInfo.Arg<IntPtr>()));
 
         // when
         wrapper.SetPatternName(slotId, patternId, nameToSet);

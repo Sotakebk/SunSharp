@@ -2,161 +2,128 @@ namespace SunSharp.Native
 {
     public partial interface ISunVoxLib
     {
-        /// <summary>
-        /// Connect two specified modules.
-        /// <para>Use <see cref="ISunVoxLib.LockSlot" /> or an alternative!</para>
-        /// </summary>
+        /// <inheritdoc cref="SunVoxLibNativeWrapper.ConnectModule"/>
         void ConnectModule(int slotId, int source, int destination);
 
-        /// <summary>
-        /// Disconnect two specified modules.
-        /// <para>Use <see cref="ISunVoxLib.LockSlot" /> or an alternative!</para>
-        /// </summary>
+        /// <inheritdoc cref="SunVoxLibNativeWrapper.DisconnectModule"/>
         void DisconnectModule(int slotId, int source, int destination);
 
-        /// <summary>
-        /// Find module by name.
-        /// </summary>
-        /// <returns>Identifier of found module, or <see langword="null" /> if it was not found.</returns>
+        /// <inheritdoc cref="SunVoxLibNativeWrapper.FindModule"/>
         int? FindModule(int slotId, string name);
 
+        /// <inheritdoc cref="SunVoxLibNativeWrapper.GetModuleColor"/>
         (byte r, byte g, byte b) GetModuleColor(int slotId, int moduleId);
 
+        /// <inheritdoc cref="SunVoxLibNativeWrapper.SetModuleColor"/>
         void SetModuleColor(int slotId, int moduleId, byte r, byte g, byte b);
 
+        /// <inheritdoc cref="SunVoxLibNativeWrapper.GetModuleControllerName"/>
         string? GetModuleControllerName(int slotId, int moduleId, int controllerId);
 
-        /// <summary>
-        /// Get module controller value.
-        /// </summary>
+        /// <inheritdoc cref="SunVoxLibNativeWrapper.GetModuleControllerValue"/>
         int GetModuleControllerValue(int slotId, int moduleId, int controllerId, ValueScalingMode scalingMode);
 
+        /// <inheritdoc cref="SunVoxLibNativeWrapper.GetModuleControllerMinValue"/>
         int GetModuleControllerMinValue(int slotId, int moduleId, int controllerId, ValueScalingMode scalingMode);
 
+        /// <inheritdoc cref="SunVoxLibNativeWrapper.GetModuleControllerMaxValue"/>
         int GetModuleControllerMaxValue(int slotId, int moduleId, int controllerId, ValueScalingMode scalingMode);
 
+        /// <inheritdoc cref="SunVoxLibNativeWrapper.GetModuleControllerOffset"/>
         int GetModuleControllerOffset(int slotId, int moduleId, int controllerId);
 
+        /// <inheritdoc cref="SunVoxLibNativeWrapper.GetModuleControllerType"/>
         ControllerType GetModuleControllerType(int slotId, int moduleId, int controllerId);
 
+        /// <inheritdoc cref="SunVoxLibNativeWrapper.GetModuleControllerGroup"/>
         int GetModuleControllerGroup(int slotId, int moduleId, int controllerId);
 
-        /// <summary>
-        /// Send the value to the specified module controller. (sv_send_event() will be used internally, which may introduce
-        /// latency).
-        /// </summary>
+        /// <inheritdoc cref="SunVoxLibNativeWrapper.SetModuleControllerValue"/>
         void SetModuleControllerValue(int slotId, int moduleId, int controllerId, int value,
             ValueScalingMode scalingMode);
 
+        /// <inheritdoc cref="SunVoxLibNativeWrapper.GetModuleFineTune"/>
         FineTunePair GetModuleFineTune(int slotId, int moduleId);
 
+        /// <inheritdoc cref="SunVoxLibNativeWrapper.SetModuleFineTune"/>
         void SetModuleFineTune(int slotId, int moduleId, int fineTune);
 
+        /// <inheritdoc cref="SunVoxLibNativeWrapper.SetModuleRelativeNote"/>
         void SetModuleRelativeNote(int slotId, int moduleId, int relativeNote);
 
+        /// <inheritdoc cref="SunVoxLibNativeWrapper.GetModuleFlags"/>
         ModuleFlags GetModuleFlags(int slotId, int moduleId);
 
+        /// <inheritdoc cref="SunVoxLibNativeWrapper.GetModuleExists"/>
         bool GetModuleExists(int slotId, int moduleId);
 
-        /// <summary>
-        /// Get an array of Ids of modules that are connected as inputs.
-        /// Does NOT return -1 for empty connection slots.
-        /// </summary>
-        /// <returns></returns>
+        /// <inheritdoc cref="SunVoxLibNativeWrapper.GetModuleInputs"/>
         int[] GetModuleInputs(int slotId, int moduleId);
 
+        /// <inheritdoc cref="SunVoxLibNativeWrapper.GetModuleName"/>
         string? GetModuleName(int slotId, int moduleId);
 
+        /// <inheritdoc cref="SunVoxLibNativeWrapper.SetModuleName"/>
         void SetModuleName(int slotId, int moduleId, string name);
 
+        /// <inheritdoc cref="SunVoxLibNativeWrapper.GetModuleType"/>
         string? GetModuleType(int slotId, int moduleId);
 
-        /// <summary>
-        /// Get an array of Ids of modules.
-        /// Does NOT return -1 for empty connection slots.
-        /// </summary>
+        /// <inheritdoc cref="SunVoxLibNativeWrapper.GetModuleOutputs"/>
         int[] GetModuleOutputs(int slotId, int moduleId);
 
-        /// <summary>
-        /// Read module scope view, and write it to a buffer.
-        /// </summary>
-        /// <returns>Number of samples successfully read.</returns>
+        /// <inheritdoc cref="SunVoxLibNativeWrapper.ReadModuleScope"/>
         int ReadModuleScope(int slotId, int moduleId, AudioChannel channel, short[] buffer);
 
+        /// <inheritdoc cref="SunVoxLibNativeWrapper.GetModulePosition"/>
         (int x, int y) GetModulePosition(int slotId, int moduleId);
 
+        /// <inheritdoc cref="SunVoxLibNativeWrapper.SetModulePosition"/>
         void SetModulePosition(int slotId, int moduleId, int x, int y);
 
-        /// <summary>
-        /// Get the upper module count, which may be greater than the module count.
-        /// </summary>
+        /// <inheritdoc cref="SunVoxLibNativeWrapper.GetUpperModuleCount"/>
         int GetUpperModuleCount(int slotId);
 
+        /// <inheritdoc cref="SunVoxLibNativeWrapper.GetModuleControllerCount"/>
         int GetModuleControllerCount(int slotId, int moduleId);
 
-        /// <summary>
-        /// load a module or a sample. Supported file formats: sunsynth, xi, wav, aiff.
-        /// </summary>
-        /// <returns>Created module identifier..</returns>
+        /// <inheritdoc cref="SunVoxLibNativeWrapper.LoadModule(int, string, int, int, int)"/>
         int LoadModule(int slotId, string path, int x = 0, int y = 0, int z = 0);
 
-        /// <summary>
-        /// load a module or a sample from memory. Supported file formats: sunsynth, xi, wav, aiff.
-        /// </summary>
-        /// <returns>Created module id.</returns>
+        /// <inheritdoc cref="SunVoxLibNativeWrapper.LoadModule(int, byte[], int, int, int)"/>
         int LoadModule(int slotId, byte[] data, int x = 0, int y = 0, int z = 0);
 
-        int WriteModuleCurve(int slotId, int moduleId, int curve, float[] data);
+        /// <inheritdoc cref="SunVoxLibNativeWrapper.WriteModuleCurve"/>
+        int WriteModuleCurve(int slotId, int moduleId, int curveId, float[] data);
 
-        int ReadModuleCurve(int slotId, int moduleId, int curve, float[] data);
+        /// <inheritdoc cref="SunVoxLibNativeWrapper.ReadModuleCurve"/>
+        int ReadModuleCurve(int slotId, int moduleId, int curveId, float[] data);
 
-        /// <summary>
-        /// Create a new module. Type refers to the name visible on new module creation window.
-        /// <para>Use <see cref="ISunVoxLib.LockSlot" /> or an alternative!</para>
-        /// </summary>
-        /// <returns>Created module id.</returns>
-        int CreateModule(int slotId, string type, string name, int x = 0, int y = 0, int z = 0);
+        /// <inheritdoc cref="SunVoxLibNativeWrapper.CreateModule"/>
+        int CreateModule(int slotId, SynthModuleType type, string? name = null, int x = 0, int y = 0, int z = 0);
 
-        /// <summary>
-        /// Remove an existing module.
-        /// <para>Use <see cref="ISunVoxLib.LockSlot" /> or an alternative!</para>
-        /// </summary>
+        /// <inheritdoc cref="SunVoxLibNativeWrapper.CreateModule"/>
+        int CreateModule(int slotId, string type, string? name = null, int x = 0, int y = 0, int z = 0);
+
+        /// <inheritdoc cref="SunVoxLibNativeWrapper.RemoveModule"/>
         void RemoveModule(int slotId, int moduleId);
 
-        /// <summary>
-        /// Load a sample (xi, wav, aiff) to an existing module from file.
-        /// </summary>
-        /// <remarks>
-        /// Set <paramref name="sampleSlot"/> to <see langword="null"/> to apply the sample to all sample slots.
-        /// </remarks>
+        /// <inheritdoc cref="SunVoxLibNativeWrapper.LoadSamplerSample(int, int, string, int?)"/>
         void LoadSamplerSample(int slotId, int moduleId, string path, int? sampleSlot = null);
 
-        /// <summary>
-        /// Load a sample (xi, wav, aiff) to an existing module from memory.
-        /// </summary>
-        /// <remarks>
-        /// Set <paramref name="sampleSlot"/> to <see langword="null"/> to apply the sample to all sample slots.
-        /// </remarks>
+        /// <inheritdoc cref="SunVoxLibNativeWrapper.LoadSamplerSample(int, int, byte[], int?)"/>
         void LoadSamplerSample(int slotId, int moduleId, byte[] data, int? sampleSlot = null);
 
-        /// <summary>
-        /// load a file into the MetaModule. Supported file formats: sunvox, mod, xm, midi.
-        /// </summary>
+        /// <inheritdoc cref="SunVoxLibNativeWrapper.LoadIntoMetaModule(int, int, string)"/>
         void LoadIntoMetaModule(int slotId, int moduleId, string path);
 
-        /// <summary>
-        /// load a file into the MetaModule from memory. Supported file formats: sunvox, mod, xm, midi.
-        /// </summary>
+        /// <inheritdoc cref="SunVoxLibNativeWrapper.LoadIntoMetaModule(int, int, byte[])"/>
         void LoadIntoMetaModule(int slotId, int moduleId, byte[] data);
 
-        /// <summary>
-        /// load a file into the Vorbis Player. Supported file formats: ogg.
-        /// </summary>
-        void LoadIntoVorbisPLayer(int slotId, int moduleId, string path);
+        /// <inheritdoc cref="SunVoxLibNativeWrapper.LoadIntoVorbisPlayer(int, int, string)"/>
+        void LoadIntoVorbisPlayer(int slotId, int moduleId, string path);
 
-        /// <summary>
-        /// load a file into the Vorbis Player. Supported file formats: ogg.
-        /// </summary>
-        void LoadIntoVorbisPLayer(int slotId, int moduleId, byte[] data);
+        /// <inheritdoc cref="SunVoxLibNativeWrapper.LoadIntoVorbisPlayer(int, int, byte[])"/>
+        void LoadIntoVorbisPlayer(int slotId, int moduleId, byte[] data);
     }
 }

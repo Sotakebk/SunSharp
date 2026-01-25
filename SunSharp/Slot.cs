@@ -313,7 +313,7 @@ namespace SunSharp
         {
             using (AcquireLock())
             {
-                Library.Save(Id, path);
+                Library.SaveToFile(Id, path);
             }
         }
 
@@ -420,7 +420,7 @@ namespace SunSharp
         /// <inheritdoc/>
         public int GetCurrentSignalLevel(AudioChannel channel = AudioChannel.Mono)
         {
-            return Library.GetCurrentSignalLevel(Id, (int)channel);
+            return Library.GetCurrentSignalLevel(Id, channel);
         }
 
         #endregion playing, stopping

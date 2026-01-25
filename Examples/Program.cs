@@ -37,8 +37,5 @@ internal sealed class Program
         Thread.Sleep(TimeSpan.FromSeconds(1));
 
         slot.VirtualPattern.SendEvent(0, PatternEvent.NoteEvent(Note.Off, generator.ModuleHandle.Id));
-
-
-        slot.Save("file.sunvox");
     }
 }

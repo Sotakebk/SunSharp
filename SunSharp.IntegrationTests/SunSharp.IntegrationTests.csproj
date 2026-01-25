@@ -36,8 +36,4 @@
     <ProjectReference Include="..\SunSharp\SunSharp.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="ObjectsTests\" />
-  </ItemGroup>
-
 </Project>

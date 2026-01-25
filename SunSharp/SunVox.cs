@@ -14,7 +14,7 @@ namespace SunSharp
         bool NeedsUserCallback { get; }
         bool SingleThreaded { get; }
         OutputType? OutputType { get; }
-        LibraryVersion Version { get; }
+        SunVoxVersion Version { get; }
         int SampleRate { get; }
         AudioChannels Channels { get; }
 
@@ -59,6 +59,8 @@ namespace SunSharp
         uint GetTicks();
 
         uint GetTicksPerSecond();
+
+        string? GetLog(int length);
     }
 
     /// <inheritdoc/>
@@ -85,7 +87,7 @@ namespace SunSharp
         public OutputType? OutputType { get; }
 
         /// <inheritdoc/>
-        public LibraryVersion Version { get; }
+        public SunVoxVersion Version { get; }
 
         /// <inheritdoc/>
         public int SampleRate { get; }
@@ -316,6 +318,11 @@ namespace SunSharp
         public uint GetTicksPerSecond()
         {
             return Library.GetTicksPerSecond();
+        }
+
+        public string? GetLog(int length)
+        {
+            return Library.GetLog(length);
         }
     }
 }

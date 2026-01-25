@@ -12,9 +12,6 @@ namespace SunSharp
     /// </remarks>
     public sealed class SunVoxException : Exception
     {
-        public uint? Code { get; }
-        public string? Method { get; }
-
         public SunVoxException()
         {
         }
@@ -30,24 +27,40 @@ namespace SunSharp
         }
 
         public SunVoxException(uint code, string? method = null)
-            : base(ConstructMessage(code, method, null))
+            : this(ConstructMessage(code, method, null))
         {
-            Code = code;
-            Method = method;
         }
 
         public SunVoxException(int code, string? method = null)
-            : base(ConstructMessage(unchecked((uint)code), method, null))
+            : this(ConstructMessage(unchecked((uint)code), method, null))
         {
-            Code = unchecked((uint)code);
-            Method = method;
         }
 
         public SunVoxException(int code, string method, string message)
             : base(ConstructMessage(unchecked((uint)code), method, message))
         {
-            Code = unchecked((uint)code);
-            Method = method;
+        }
+
+        public SunVoxException(long code, string method, string message)
+            : base(ConstructMessage(unchecked((ulong)code), method, message))
+        {
+        }
+
+        public SunVoxException(ulong code, string method, string message)
+            : base(ConstructMessage(code, method, message))
+        {
+        }
+
+        private static string ConstructMessage(ulong code, string? method, string? details)
+        {
+            if (details == null)
+            {
+                return $"Received error code {code:X} from method: {method ?? "unknown"}.";
+            }
+            else
+            {
+                return $"Received error code {code:X} from method: {method ?? "unknown"}. {details}";
+            }
         }
 
         private static string ConstructMessage(uint code, string? method, string? details)

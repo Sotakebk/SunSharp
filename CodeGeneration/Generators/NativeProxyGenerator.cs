@@ -15,11 +15,27 @@ public sealed class NativeInterfaceGenerator : BaseGenerator, IGeneratorProvider
 
     public override string Name => "NativeProxy.g.cs";
 
+    private static string ToPascalCase(string value)
+    {
+        if (string.IsNullOrEmpty(value))
+        {
+            return value;
+        }
+        if (value.Length == 1)
+        {
+            return value.ToUpperInvariant();
+        }
+        return char.ToUpperInvariant(value[0]) + value[1..];
+    }
+
     private static string GetDelegateNameCode(ParsedFunction function)
     {
         var outName = TypeTranslator.TypeToCode(function.CSharpReturnType);
-        var inName = string.Join(null, function.Parameters.Select(p => TypeTranslator.TypeToCode(p.CSharpType)));
-        if (inName.Length == 0) inName = "Void";
+        var inName = string.Join(null,function.Parameters.Select(p => ToPascalCase(TypeTranslator.TypeToCode(p.CSharpType))));
+        if (inName.Length == 0)
+        {
+            inName = "Void";
+        }
         return $"Returns{outName}Takes{inName}";
     }
 
@@ -119,14 +135,14 @@ public sealed class NativeInterfaceGenerator : BaseGenerator, IGeneratorProvider
 
     private void AppendLoadMethod(ParsedFunction[] functions)
     {
-        AppendLine("private void LoadInternal()");
+        AppendLine("private void FetchAndAssignDelegates()");
         AppendLine("{");
         AddIndent(() =>
         {
             foreach (var f in functions.OrderBy(f => f.Name))
             {
                 var delegateName = GetDelegateNameCode(f);
-                AppendLine($"{f.Name} = ({delegateName})_handler.{nameof(ILibraryHandler.GetFunctionByName)}(\"{f.Name}\", typeof({delegateName}));");
+                AppendLine($"{f.Name} = ({delegateName})(_handler.{nameof(ILibraryHandler.GetFunctionByName)}(\"{f.Name}\", typeof({delegateName})) ?? throw new InvalidOperationException(\"Failed to load function {f.Name}\"));");
             }
         });
         AppendLine("}");
@@ -134,7 +150,7 @@ public sealed class NativeInterfaceGenerator : BaseGenerator, IGeneratorProvider
 
     private void AppendUnloadMethod(ParsedFunction[] functions)
     {
-        AppendLine("private void UnloadInternal()");
+        AppendLine("private void SetAllDelegatesToNull()");
         AppendLine("{");
         AddIndent(() =>
         {

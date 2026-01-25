@@ -12,7 +12,7 @@ public class BasicModuleGenerator : BaseGenerator
     protected readonly string InterfaceName;
     protected readonly string StructName;
 
-    public override string FilePath => PathHelper.GetProjectFilePath($"SunSharp/Modules/{FriendlyName}ModuleHandle.g.cs");
+    public override string FilePath => PathHelper.GetProjectFilePath($"SunSharp/Modules/g/{FriendlyName}ModuleHandle.g.cs");
 
     public override string Name => $"{FriendlyName}ModuleHandle.g.cs";
 

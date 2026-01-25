@@ -391,7 +391,7 @@ namespace SunSharp
             {
                 return (char)('0' + octave);
             }
-            return (char)('A' + octave);
+            return (char)('A' + (octave-10));
         }
 
         /// <inheritdoc/>

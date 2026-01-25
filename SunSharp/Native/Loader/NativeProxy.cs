@@ -2,19 +2,35 @@ using System;
 
 namespace SunSharp.Native.Loader
 {
-    public sealed partial class NativeProxy
+    /// <summary>
+    /// Provides a thread-safe proxy for loading and managing native library function delegates.
+    /// </summary>
+    public sealed partial class NativeProxy : ISunVoxLibC
     {
         private readonly ILibraryHandler _handler;
 
         private readonly object _lock = new object();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="NativeProxy"/> class.
+        /// </summary>
+        /// <param name="handler">The library handler responsible for loading and unloading the native library.</param>
+        /// <exception cref="ArgumentNullException">
+        /// Thrown when <paramref name="handler"/> is <see langword="null"/>.
+        /// </exception>
         public NativeProxy(ILibraryHandler handler)
         {
-            _handler = handler;
+            _handler = handler ?? throw new ArgumentNullException(nameof(handler));
         }
 
-        public bool IsLoaded { get; private set; }
+        /// <summary>
+        /// Whether the proxy has loaded all function delegates from the native library.
+        /// </summary>
+        public bool IsProxyLoaded { get; private set; }
 
+        /// <summary>
+        /// Whether the underlying native library is currently loaded.
+        /// </summary>
         public bool IsLibraryLoaded
         {
             get
@@ -27,85 +43,110 @@ namespace SunSharp.Native.Loader
         }
 
         /// <summary>
-        /// Loads the library if necessary.
-        /// Loads the library functions and sets the IsLoaded flag.
-        /// Nothing will be done if the library and proxy were already loaded.
+        /// Whether the proxy is fully ready to use, i.e., both the native library and all function delegates are loaded.
         /// </summary>
+        public bool IsReady
+        {
+            get
+            {
+                lock (_lock)
+                {
+                    return IsProxyLoaded && _handler.IsLibraryLoaded;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Returns the current instance as an object implementing the ISunVoxLibC interface.
+        /// </summary>
+        public ISunVoxLibC AsNativeLibrary() => this;
+
+        /// <summary>
+        /// Loads the native library if necessary and initializes all function delegates.
+        /// </summary>
+        /// <exception cref="AggregateException">Thrown when both loading and cleanup fail.</exception>
+        /// <remarks>
+        /// This operation is thread-safe and idempotent. If both the library and proxy are already loaded,
+        /// this method returns immediately.
+        /// </remarks>
         public void Load()
         {
             lock (_lock)
             {
-                if (IsLoaded && _handler.IsLibraryLoaded)
+                if (IsProxyLoaded && _handler.IsLibraryLoaded)
                 {
+                    // don't need to do anything
                     return;
                 }
 
                 try
                 {
+                    if (IsProxyLoaded)
+                    {
+                        // library got unloaded somehow, so we need to unload the delegates too
+                        IsProxyLoaded = false;
+                        SetAllDelegatesToNull();
+                    }
+
                     if (!_handler.IsLibraryLoaded)
                     {
-                        // make sure that all delegates are null, do so ASAP so we don't hard fail for any reason
-                        // this should never matter... probably
-                        UnloadInternal();
-
-                        // library is loaded, so we need to reload those delegates
                         _handler.LoadLibrary();
-                        LoadInternal();
                     }
-                    else if (!IsLoaded)
-                    {
-                        LoadInternal();
-                    }
+                    FetchAndAssignDelegates();
+                    IsProxyLoaded = true;
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    _handler.UnloadLibrary();
-                    UnloadInternal();
+                    // null delegates before unloading the library to avoid inconsistent state
+                    // this way, in multithreaded scenarios, we prevent memory access violations
+                    IsProxyLoaded = false;
+                    SetAllDelegatesToNull();
+                    try
+                    {
+                        if (_handler.IsLibraryLoaded)
+                        {
+                            _handler.UnloadLibrary();
+                        }
+                    }
+                    catch (Exception ex1)
+                    {
+                        throw new AggregateException("Failed to load native library and initialize delegates. Additionally, unloading the library also failed.", ex, ex1);
+                    }
                     throw;
                 }
-
-                IsLoaded = true;
             }
         }
 
         /// <summary>
-        /// Unloads the SunVox engine if possible.
-        /// Unloads the library functions and sets the IsLoaded flag.
-        /// Unloads the library if possible.
-        /// If an unexpected exception is thrown, it will be rethrown, as this is a potentially dangerous situation where
-        /// memory was probably leaked.
+        /// Deinitializes the SunVox engine, unloads all function delegates, and unloads the native library if loaded.
         /// </summary>
+        /// <remarks>
+        /// <para>
+        /// This operation is thread-safe. Delegates are set to null before calling <see cref="ISunVoxLibC.sv_deinit"/> to prevent access from other threads.
+        /// </para>
+        /// <para>
+        /// This method passes exceptions thrown during deinitialization or unloading to the caller. This requires careful handling, as there is risk of unmanaged resources not being released properly. If <see cref="ISunVoxLibC.sv_deinit"/> fails, the issue may be unrecoverable.
+        /// </para>
+        /// </remarks>
         public void Unload()
         {
             lock (_lock)
             {
-                var handlerIsLibraryLoaded = _handler.IsLibraryLoaded;
+                // null delegates before unloading the library to avoid inconsistent state
+                // this way, in multithreaded scenarios, we prevent memory access violations
+                var deinitDelegate = sv_deinit;
+                IsProxyLoaded = false;
+                SetAllDelegatesToNull(); // makes sure that all delegates are null, regardless of previous state
 
-                switch (IsLoaded)
+                // at this point other threads cannot call delegates anymore
+                // if possible, deinitialize sunvox first
+                bool isLibraryLoaded = _handler.IsLibraryLoaded;
+                if (deinitDelegate != null && isLibraryLoaded)
                 {
-                    // nothing to unload
-                    case false when !handlerIsLibraryLoaded:
-                        return;
-                    // sunvox might need to be unloaded
-                    case true when handlerIsLibraryLoaded:
-                        if (sv_deinit == null)
-                        {
-                            throw new InvalidOperationException($"{nameof(sv_deinit)} was null, but library and proxy are both loaded.");
-                        }
-
-                        sv_deinit.Invoke();
-                        break;
+                    deinitDelegate.Invoke();
                 }
 
-                // unload delegates if applies
-                if (IsLoaded)
-                {
-                    UnloadInternal();
-                    IsLoaded = false;
-                }
-
-                // unload library if applies
-                if (handlerIsLibraryLoaded)
+                if (isLibraryLoaded)
                 {
                     _handler.UnloadLibrary();
                 }
@@ -120,7 +161,7 @@ namespace SunSharp.Native.Loader
                 lock (_lock)
                 {
                     var isLibraryLoaded = _handler.IsLibraryLoaded;
-                    var isProxyLoaded = IsLoaded;
+                    var isProxyLoaded = IsProxyLoaded;
                     message = (isLibraryLoaded, isProxyLoaded) switch
                     {
                         (true, true) => "Missing delegate. Library is loaded, proxy is loaded.",

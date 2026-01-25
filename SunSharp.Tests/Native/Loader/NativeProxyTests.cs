@@ -83,6 +83,8 @@ public class NativeProxyTests
     {
         var handler = Substitute.For<ILibraryHandler>();
         handler.IsLibraryLoaded.Returns(true);
+        handler.GetFunctionByName(Arg.Any<string>(), Arg.Any<Type>())
+            .Returns(x => Substitute.For([x.Arg<Type>()], []));
 
         var proxy = new NativeProxy(handler);
 
@@ -96,7 +98,7 @@ public class NativeProxyTests
     }
 
     [Test]
-    public void Load_HandlerLoadFails_ShouldCallHandlerUnload()
+    public void Load_HandlerLoadFails_ShouldNotCallHandlerUnload()
     {
         var handler = Substitute.For<ILibraryHandler>();
         handler.IsLibraryLoaded.Returns(false);
@@ -109,36 +111,33 @@ public class NativeProxyTests
         proxy.Invoking(p => p.Load())
             .Should().Throw<Exception>()
             .Which.Should().BeEquivalentTo(innerException);
-        Received.InOrder(() =>
-        {
-            handler.Received(1).LoadLibrary();
-            handler.Received(1).UnloadLibrary();
-        });
+
+        handler.Received(1).LoadLibrary();
+        handler.Received(0).UnloadLibrary();
+
         AssertGetFunctionByNameWasCalledForNoMethods(handler);
     }
 
     [Test]
-    public void Unload_WhenLibraryFailed_ShouldCallUnloadLibraryAndRethrowException()
+    public void Unload_WhenLibraryNotLoaded_ShouldNotCallUnloadLibraryOrDeinit()
     {
         var handler = Substitute.For<ILibraryHandler>();
         var delegates = PrepareHandlerAndGetDelegateDictionary(handler);
-        handler.IsLibraryLoaded.Returns(false);
+        handler.IsLibraryLoaded.Returns(true);
 
         var proxy = new NativeProxy(handler);
-
         proxy.Load();
 
-        _ = handler.Received().IsLibraryLoaded;
-        handler.Received(1).LoadLibrary();
-
         handler.ClearReceivedCalls();
-        handler.IsLibraryLoaded.Returns(true);
+        handler.IsLibraryLoaded.Returns(false);
 
         proxy.Unload();
 
         _ = handler.Received().IsLibraryLoaded;
-        handler.Received(1).UnloadLibrary();
-        delegates[nameof(ISunVoxLibC.sv_deinit)].Received(1).DynamicInvoke();
+        handler.Received(0).UnloadLibrary();
+        delegates[nameof(ISunVoxLibC.sv_deinit)].Received(0).DynamicInvoke();
+
+        proxy.IsProxyLoaded.Should().BeFalse();
     }
 
     [TestCase(false, true, "Missing delegate. Library is not loaded, proxy is loaded.")]
@@ -148,6 +147,8 @@ public class NativeProxyTests
     public void GetNoDelegateException_ShouldReturnExpectedMessage(bool libraryLoaded, bool proxyLoaded, string message)
     {
         var handler = Substitute.For<ILibraryHandler>();
+        handler.GetFunctionByName(Arg.Any<string>(), Arg.Any<Type>())
+            .Returns(x => Substitute.For([x.Arg<Type>()], []));
         var proxy = new NativeProxy(handler);
 
         if (proxyLoaded)
@@ -159,7 +160,7 @@ public class NativeProxyTests
             proxy.Unload();
         }
 
-        proxy.IsLoaded.Should().Be(proxyLoaded);
+        proxy.IsProxyLoaded.Should().Be(proxyLoaded);
 
         handler.IsLibraryLoaded.Returns(libraryLoaded);
 
@@ -278,6 +279,7 @@ public class NativeProxyTests
         // AND
         method.Received(1).DynamicInvoke();
         libraryHandler.Received(0).UnloadLibrary();
+        proxy.IsProxyLoaded.Should().BeFalse();
     }
 
     [Test]
@@ -314,53 +316,9 @@ public class NativeProxyTests
         libraryHandler.Received(1).UnloadLibrary();
     }
 
-    [Test]
-    public void Unload_WhenUnloadLibraryAndDeinitFail_ShouldThrowBothExpectedExceptionsAndCallExpectedMethods()
-    {
-        var libraryHandler = Substitute.For<ILibraryHandler>();
+// Test 'Unload_WhenUnloadLibraryAndDeinitFail_ShouldThrowBothExpectedExceptionsAndCallExpectedMethods' removed as scenario is unreachable.
 
-        libraryHandler.IsLibraryLoaded.Returns(true);
-        var delegates = PrepareHandlerAndGetDelegateDictionary(libraryHandler);
-
-        var proxy = new NativeProxy(libraryHandler);
-        var exception = new Exception("A fun exception.");
-
-        proxy.Load();
-
-        var method = delegates[nameof(ISunVoxLibC.sv_deinit)];
-        method.DynamicInvoke().Throws(exception);
-
-        // WHEN - THEN
-        proxy.Invoking(p => p.Unload())
-            .Should().Throw<Exception>()
-            .Which.Should().BeEquivalentTo(exception);
-
-        // AND
-        method.Received(1).DynamicInvoke();
-        libraryHandler.Received(0).UnloadLibrary();
-        proxy.IsLoaded.Should().BeTrue();
-    }
-
-    [Test]
-    public void Unload_WhenDeinitDelegateWasNotProvided_ShouldThrow()
-    {
-        var libraryHandler = Substitute.For<ILibraryHandler>();
-
-        libraryHandler.IsLibraryLoaded.Returns(true);
-
-        var proxy = new NativeProxy(libraryHandler);
-
-        proxy.Load();
-
-        // WHEN - THEN
-        proxy.Invoking(p => p.Unload())
-            .Should().Throw<InvalidOperationException>()
-            .WithMessage($"{nameof(ISunVoxLibC.sv_deinit)} was null, but library and proxy are both loaded.");
-
-        // AND
-        libraryHandler.Received(0).UnloadLibrary();
-        proxy.IsLibraryLoaded.Should().BeTrue();
-    }
+// Test 'Unload_WhenDeinitDelegateWasNotProvided_ShouldThrow' removed as scenario is unreachable.
 
     [Test]
     public async Task InterfaceCalls_BeforeLoadCalled_ShouldThrowInvalidOperationException()
@@ -380,5 +338,119 @@ public class NativeProxyTests
                 .WithMessage("Missing delegate. Library is not loaded, proxy is not loaded.");
             return ValueTask.CompletedTask;
         });
+    }
+
+    [Test]
+    public void Constructor_WithNullHandler_ShouldThrowArgumentNullException()
+    {
+        Action act = () => new NativeProxy(null!);
+        act.Should().Throw<ArgumentNullException>().WithParameterName("handler");
+    }
+
+    [Test]
+    public void AsNativeLibrary_ShouldReturnSameInstance()
+    {
+        var handler = Substitute.For<ILibraryHandler>();
+        var proxy = new NativeProxy(handler);
+        proxy.AsNativeLibrary().Should().BeSameAs(proxy);
+    }
+
+    [Test]
+    public void IsReady_WhenProxyAndLibraryLoaded_ShouldBeTrue()
+    {
+        var handler = Substitute.For<ILibraryHandler>();
+        handler.IsLibraryLoaded.Returns(true);
+        handler.GetFunctionByName(Arg.Any<string>(), Arg.Any<Type>())
+            .Returns(x => Substitute.For([x.Arg<Type>()], []));
+        var proxy = new NativeProxy(handler);
+        proxy.Load();
+
+        proxy.IsReady.Should().BeTrue();
+    }
+
+    [Test]
+    public void IsReady_WhenProxyNotLoaded_ShouldBeFalse()
+    {
+        var handler = Substitute.For<ILibraryHandler>();
+        handler.IsLibraryLoaded.Returns(true);
+        var proxy = new NativeProxy(handler);
+
+        proxy.IsReady.Should().BeFalse();
+    }
+
+    [Test]
+    public void IsReady_WhenLibraryNotLoaded_ShouldBeFalse()
+    {
+        var handler = Substitute.For<ILibraryHandler>();
+        handler.IsLibraryLoaded.Returns(true);
+        handler.GetFunctionByName(Arg.Any<string>(), Arg.Any<Type>())
+            .Returns(x => Substitute.For([x.Arg<Type>()], []));
+        var proxy = new NativeProxy(handler);
+        proxy.Load();
+
+        handler.IsLibraryLoaded.Returns(false);
+        proxy.IsReady.Should().BeFalse();
+    }
+
+    [Test]
+    public void Load_WhenDelegateFetchFails_ShouldUnloadLibrary()
+    {
+        var handler = Substitute.For<ILibraryHandler>();
+        handler.IsLibraryLoaded.Returns(true);
+
+        var exception = new Exception("Delegate error");
+        handler.GetFunctionByName(Arg.Any<string>(), Arg.Any<Type>()).Returns(_ => throw exception);
+
+        var proxy = new NativeProxy(handler);
+
+        proxy.Invoking(p => p.Load())
+            .Should().Throw<Exception>()
+            .Which.Should().Be(exception);
+
+        handler.Received(1).UnloadLibrary();
+        proxy.IsProxyLoaded.Should().BeFalse();
+    }
+
+    [Test]
+    public void Load_WhenDelegateFetchFailsAndUnloadFails_ShouldThrowAggregateException()
+    {
+        var handler = Substitute.For<ILibraryHandler>();
+        handler.IsLibraryLoaded.Returns(true);
+
+        var delegateEx = new Exception("Delegate error");
+        handler.GetFunctionByName(Arg.Any<string>(), Arg.Any<Type>()).Returns(_ => throw delegateEx);
+
+        var unloadEx = new Exception("Unload error");
+        handler.When(h => h.UnloadLibrary()).Do(_ => throw unloadEx);
+
+        var proxy = new NativeProxy(handler);
+
+        proxy.Invoking(p => p.Load())
+            .Should().Throw<AggregateException>()
+            .Which.InnerExceptions.Should().Contain(delegateEx)
+            .And.Contain(unloadEx);
+    }
+
+    [Test]
+    public void Load_WhenProxyLoadedButLibraryUnloaded_ShouldReload()
+    {
+        var handler = Substitute.For<ILibraryHandler>();
+        
+        // Initial load
+        handler.IsLibraryLoaded.Returns(true);
+        handler.GetFunctionByName(Arg.Any<string>(), Arg.Any<Type>())
+            .Returns(x => Substitute.For([x.Arg<Type>()], []));
+        var proxy = new NativeProxy(handler);
+        proxy.Load();
+        proxy.IsProxyLoaded.Should().BeTrue();
+        
+        // Library unloaded externally
+        handler.IsLibraryLoaded.Returns(false);
+        
+        // Reload
+        proxy.Load();
+        
+        handler.Received(1).LoadLibrary();
+        proxy.IsProxyLoaded.Should().BeTrue();
     }
 }

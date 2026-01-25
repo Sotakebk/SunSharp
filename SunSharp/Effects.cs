@@ -69,8 +69,8 @@ namespace SunSharp
 
         /// <summary>
         /// Set playing speed or time grids.
-        /// XXYY: 0x0001..0x001F - number of ticks per line; 0x0020..0x00FF - BPM;
-        /// XXYY: 0xF001..0xF020 and 0xF100..0xF120 - time grids.
+        /// XXYY: 0x0001 to 0x001F - number of ticks per line; 0x0020 to 0x00FF - BPM;
+        /// XXYY: 0xF001 to 0xF020 and 0xF100 to 0xF120 - time grids.
         /// </summary>
         SetPlayingSpeed = 0x0F,
 
@@ -145,7 +145,7 @@ namespace SunSharp
         SetControllerRandomAbsolute = 0x22,
 
         /// <summary>
-        /// Set controller value to a random number with range from XX (0x00..0xFF) to YY (0x00..0xFF).
+        /// Set controller value to a random number with range from XX (0x00 to 0xFF) to YY (0x00 to 0xFF).
         /// </summary>
         SetControllerRandomRange = 0x23,
 
@@ -221,7 +221,7 @@ namespace SunSharp
         BindMidiOut = 0x35,
 
         /// <summary>
-        /// Delete an event on track XX with a probability of YY (0x00..0xFF (100%)).
+        /// Delete an event on track XX with a probability of YY (0x00 to 0xFF (100%)).
         /// Destructive effect - irreversibly changes the contents of the pattern.
         /// </summary>
         DeleteEventOnTrackWithProbability = 0x38,
@@ -470,7 +470,7 @@ namespace SunSharp
         /// Determines whether the specified effect is an event delay effect.
         /// </summary>
         /// <remarks>
-        /// Event delay effects (0x40..0x5F) delay an event for a selected fraction of the line,
+        /// Event delay effects (0x40 to 0x5F) delay an event for a selected fraction of the line,
         /// from 0% to 96.875%.
         /// </remarks>
         public static bool IsEventDelay(this Effect effect)

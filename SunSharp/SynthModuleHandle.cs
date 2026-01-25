@@ -90,12 +90,12 @@ namespace SunSharp
         /// <summary>
         /// load a file into the Vorbis Player. Supported file formats: ogg.
         /// </summary>
-        void LoadIntoVorbisPLayer(string path);
+        void LoadIntoVorbisPlayer(string path);
 
         /// <summary>
         /// load a file into the Vorbis Player. Supported file formats: ogg.
         /// </summary>
-        void LoadIntoVorbisPLayer(byte[] data);
+        void LoadIntoVorbisPlayer(byte[] data);
 
         int WriteCurve(int curveId, float[] buffer);
 
@@ -324,15 +324,15 @@ namespace SunSharp
         }
 
         /// <inheritdoc/>
-        public void LoadIntoVorbisPLayer(string path)
+        public void LoadIntoVorbisPlayer(string path)
         {
-            _lib.LoadIntoVorbisPLayer(_slotId, Id, path);
+            _lib.LoadIntoVorbisPlayer(_slotId, Id, path);
         }
 
         /// <inheritdoc/>
-        public void LoadIntoVorbisPLayer(byte[] data)
+        public void LoadIntoVorbisPlayer(byte[] data)
         {
-            _lib.LoadIntoVorbisPLayer(_slotId, Id, data);
+            _lib.LoadIntoVorbisPlayer(_slotId, Id, data);
         }
 
         /// <inheritdoc/>
