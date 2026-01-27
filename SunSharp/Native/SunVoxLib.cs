@@ -3,11 +3,15 @@ using System.Runtime.InteropServices;
 
 namespace SunSharp.Native
 {
-    public sealed partial class SunVoxLibNativeWrapper : ISunVoxLib
-    {
-        private readonly ISunVoxLibC _lib;
+    /// <summary>
+    /// Friendlier interface for SunVox native library functions.
+    /// </summary>
 
-        public SunVoxLibNativeWrapper(ISunVoxLibC nativeLibrary)
+    public readonly partial struct SunVoxLib : ISunVoxLib
+    {
+        internal readonly ISunVoxLibC _lib;
+
+        public SunVoxLib(ISunVoxLibC nativeLibrary)
         {
             _lib = nativeLibrary;
         }
@@ -237,7 +241,12 @@ namespace SunSharp.Native
         /// </summary>
         /// <param name="slotId">Slot number (0 to 15).</param>
         /// <exception cref="SunVoxException">Thrown when the operation fails.</exception>
-        /// <remarks>Calls <see cref="ISunVoxLibC.sv_get_song_bpm"/>.</remarks>
+        /// <remarks>
+        /// <para>
+        /// The value can be set using pattern effects.
+        /// </para>
+        /// Calls <see cref="ISunVoxLibC.sv_get_song_bpm"/>.
+        /// </remarks>
         /// <seealso cref="GetSongTpl(int)"/>
         public int GetSongBpm(int slotId)
         {
@@ -293,7 +302,12 @@ namespace SunSharp.Native
         /// </summary>
         /// <param name="slotId">Slot number (0 to 15).</param>
         /// <exception cref="SunVoxException">Thrown when the operation fails.</exception>
-        /// <remarks>Calls <see cref="ISunVoxLibC.sv_get_song_tpl"/>.</remarks>
+        /// <remarks>
+        /// <para>
+        /// The value can be set using pattern effects.
+        /// </para>
+        /// Calls <see cref="ISunVoxLibC.sv_get_song_tpl"/>.
+        /// </remarks>
         public int GetSongTpl(int slotId)
         {
             var ret = _lib.sv_get_song_tpl(slotId);
@@ -310,7 +324,7 @@ namespace SunSharp.Native
         /// </summary>
         /// <remarks>
         /// <para>
-        /// SunVox engine uses system-provided time space, measured in system ticks (don't confuse it with the project ticks). System ticks are used for timing in functions like <see cref="AudioCallback"/> and <see cref="SetSendEventTimestamp"/>.
+        /// SunVox engine uses system-provided time space, measured in system ticks (don't confuse it with the project ticks). System ticks are used for timing in functions like <see cref="AudioCallback"/> and <see cref="SetEventTiming"/>.
         /// </para>
         /// Calls <see cref="ISunVoxLibC.sv_get_ticks"/>.</remarks>
         public uint GetTicks()
@@ -333,16 +347,32 @@ namespace SunSharp.Native
         /// <param name="slotId">Slot number (0 to 15).</param>
         /// <param name="startLine">First line to read (usually 0).</param>
         /// <param name="length">Number of lines to read.</param>
-        /// <param name="type">
-        /// <see cref="TimeMapType.Speed"/>: array[X] = BPM | (TPL &lt;&lt; 16);
-        /// <see cref="TimeMapType.FrameCount"/>: array[X] = frame counter.
-        /// </param>
-        /// <returns>Array with time map values.</returns>
+        /// <returns>Array with frame counts for each line.</returns>
         /// <exception cref="SunVoxException">Thrown when the operation fails.</exception>
         /// <remarks>Calls <see cref="ISunVoxLibC.sv_get_time_map"/>.</remarks>
-        public uint[] GetTimeMap(int slotId, int startLine, int length, TimeMapType type)
+        public uint[] GetTimeMapFrames(int slotId, int startLine, int length)
         {
-            var arr = new uint[length];
+            return GetTimeMap<uint>(slotId, startLine, length, TimeMapType.FrameCount);
+        }
+
+        /// <summary>
+        /// Get the project time map.
+        /// </summary>
+        /// <param name="slotId">Slot number (0 to 15).</param>
+        /// <param name="startLine">First line to read (usually 0).</param>
+        /// <param name="length">Number of lines to read.</param>
+        /// <returns>Array with information about speed for each line.</returns>
+        /// <exception cref="SunVoxException">Thrown when the operation fails.</exception>
+        /// <remarks>Calls <see cref="ISunVoxLibC.sv_get_time_map"/>.</remarks>
+        public Speed[] GetTimeMapSpeed(int slotId, int startLine, int length)
+        {
+            return GetTimeMap<Speed>(slotId, startLine, length, TimeMapType.Speed);
+        }
+
+        private T[] GetTimeMap<T>(int slotId, int startLine, int length, TimeMapType type)
+            where T : unmanaged
+        {
+            var arr = new T[length];
             var handle = GCHandle.Alloc(arr, GCHandleType.Pinned);
             int ret;
             try
@@ -631,6 +661,7 @@ namespace SunSharp.Native
 
         /// <summary>
         /// Send an event to the SunVox engine.
+        /// Sends the specified pattern event to the given track. The event will be processed according to the last set timing.
         /// </summary>
         /// <param name="slotId">Slot number (0 to 15).</param>
         /// <param name="track">Track number within the virtual pattern.</param>
@@ -643,7 +674,7 @@ namespace SunSharp.Native
         }
 
         /// <summary>
-        /// Send an event to the SunVox engine.
+        /// <inheritdoc cref="SendEvent(int, int, PatternEvent)"/>
         /// </summary>
         /// <param name="slotId">Slot number (0 to 15).</param>
         /// <param name="track">Track number within the virtual pattern.</param>
@@ -674,45 +705,56 @@ namespace SunSharp.Native
         /// Set autostop mode. When OFF, the project loops endlessly.
         /// </summary>
         /// <param name="slotId">Slot number (0 to 15).</param>
-        /// <param name="autoStop">
+        /// <param name="enable">
         /// <see langword="true"/> - stop at the end.
         /// </param>
         /// <exception cref="SunVoxException">Thrown when the operation fails.</exception>
         /// <remarks>Calls <see cref="ISunVoxLibC.sv_set_autostop"/>.</remarks>
-        public void SetAutomaticStop(int slotId, bool autoStop)
+        public void SetAutomaticStop(int slotId, bool enable)
         {
-            var ret = _lib.sv_set_autostop(slotId, autoStop ? 1 : 0);
+            var ret = _lib.sv_set_autostop(slotId, enable ? 1 : 0);
             if (ret != 0)
             {
                 throw new SunVoxException(ret, nameof(_lib.sv_set_autostop),
-                    $"{nameof(slotId)}: {slotId}, {nameof(autoStop)}: {autoStop}.");
+                    $"{nameof(slotId)}: {slotId}, {nameof(enable)}: {enable}.");
             }
         }
 
         /// <summary>
         /// Set the timestamp of events sent by <see cref="SendEvent"/>.
         /// Every event has a timestamp (when it was generated, e.g., key press time).
-        /// If timestamp is zero: event is heard as quickly as possible.
         /// If nonzero: event is heard at timestamp + sound latency * 2.
         /// </summary>
         /// <param name="slotId">Slot number (0 to 15).</param>
-        /// <param name="reset">
-        /// <see langword="true"/> - set timestamp;
-        /// <see langword="false"/> - reset (ignores <paramref name="t"/>).
-        /// </param>
-        /// <param name="t">
+        /// <param name="timestamp">
         /// Timestamp (in system ticks) for future events.
-        /// If not zero, must be ≥ previous value for same slot. See <see cref="GetTicks"/>.
+        /// If not zero, must be ≥ previous value for same slot. See <see cref="GetTicks"/> and <see cref="GetTicksPerSecond"/>.
         /// </param>
         /// <exception cref="SunVoxException">Thrown when the operation fails.</exception>
         /// <remarks>Calls <see cref="ISunVoxLibC.sv_set_event_t"/>.</remarks>
-        public void SetSendEventTimestamp(int slotId, bool reset, int t)
+        public void SetEventTiming(int slotId, int timestamp)
         {
-            var ret = _lib.sv_set_event_t(slotId, reset ? 0 : 1, t);
+            var ret = _lib.sv_set_event_t(slotId, 0, timestamp);
             if (ret != 0)
             {
                 throw new SunVoxException(ret, nameof(_lib.sv_set_event_t),
-                    $"{nameof(slotId)}: {slotId}, {nameof(reset)}: {reset}, {nameof(t)}: {t}.");
+                    $"{nameof(slotId)}: {slotId}, {nameof(timestamp)}: {timestamp}.");
+            }
+        }
+
+        /// <summary>
+        /// Reset the timestamp of events sent by <see cref="SendEvent"/>.
+        /// If timestamp is zero: event is heard as quickly as possible.
+        /// </summary>
+        /// <param name="slotId">Slot number (0 to 15).</param>
+        /// <exception cref="SunVoxException">Thrown when the operation fails.</exception>
+        /// <remarks>Calls <see cref="ISunVoxLibC.sv_set_event_t"/>.</remarks>
+        public void ResetEventTiming(int slotId)
+        {
+            var ret = _lib.sv_set_event_t(slotId, 1, 0);
+            if (ret != 0)
+            {
+                throw new SunVoxException(ret, nameof(_lib.sv_set_event_t), $"{nameof(slotId)}: {slotId}.");
             }
         }
 
@@ -720,19 +762,19 @@ namespace SunSharp.Native
         /// Set the project name.
         /// </summary>
         /// <param name="slotId">Slot number (0 to 15).</param>
-        /// <param name="newName">New project name.</param>
+        /// <param name="value">New project name.</param>
         /// <exception cref="SunVoxException">Thrown when the operation fails.</exception>
         /// <remarks>Calls <see cref="ISunVoxLibC.sv_set_song_name"/>.</remarks>
-        public void SetSongName(int slotId, string newName)
+        public void SetSongName(int slotId, string value)
         {
-            var ptr = Marshal.StringToCoTaskMemUTF8(newName);
+            var ptr = Marshal.StringToCoTaskMemUTF8(value);
             try
             {
                 var ret = _lib.sv_set_song_name(slotId, ptr);
                 if (ret != 0)
                 {
                     throw new SunVoxException(ret, nameof(_lib.sv_set_song_name),
-                        $"{nameof(slotId)}: {slotId}, {nameof(newName)}: '{newName ?? "<null>"}'.");
+                        $"{nameof(slotId)}: {slotId}, {nameof(value)}: '{value ?? "<null>"}'.");
                 }
             }
             finally

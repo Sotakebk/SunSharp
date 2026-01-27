@@ -1,151 +1,154 @@
 namespace SunSharp.Native
 {
-    /// <summary>
-    /// Friendlier interface for SunVox native library functions.
-    /// See the <see cref="SunVoxLibNativeWrapper"/> for the default, preferred implementation.
-    /// </summary>
+    /// <inheritdoc cref="SunVoxLib"/>
     public partial interface ISunVoxLib
     {
-        /// <inheritdoc cref="SunVoxLibNativeWrapper.Initialize"/>
+        /// <inheritdoc cref="SunVoxLib.Initialize"/>
         SunVoxVersion Initialize(int sampleRate, string? config = null, AudioChannels channels = AudioChannels.Stereo, SunVoxInitOptions options = SunVoxInitOptions.None);
 
-        /// <inheritdoc cref="SunVoxLibNativeWrapper.Deinitialize"/>
+        /// <inheritdoc cref="SunVoxLib.Deinitialize"/>
         void Deinitialize();
 
-        /// <inheritdoc cref="SunVoxLibNativeWrapper.GetLog"/>
+        /// <inheritdoc cref="SunVoxLib.GetLog"/>
         string? GetLog(int size);
 
-        /// <inheritdoc cref="SunVoxLibNativeWrapper.GetTicks"/>
+        /// <inheritdoc cref="SunVoxLib.GetTicks"/>
         uint GetTicks();
 
-        /// <inheritdoc cref="SunVoxLibNativeWrapper.GetTicksPerSecond"/>
+        /// <inheritdoc cref="SunVoxLib.GetTicksPerSecond"/>
         uint GetTicksPerSecond();
 
-        /// <inheritdoc cref="SunVoxLibNativeWrapper.GetSampleRate"/>
+        /// <inheritdoc cref="SunVoxLib.GetSampleRate"/>
         int GetSampleRate();
 
-        /// <inheritdoc cref="SunVoxLibNativeWrapper.GetSongBaseVersion"/>
+        /// <inheritdoc cref="SunVoxLib.GetSongBaseVersion"/>
         SunVoxVersion GetSongBaseVersion(int slotId);
 
-        /// <inheritdoc cref="SunVoxLibNativeWrapper.UpdateInputDevices"/>
+        /// <inheritdoc cref="SunVoxLib.UpdateInputDevices"/>
         void UpdateInputDevices();
 
-        /// <inheritdoc cref="SunVoxLibNativeWrapper.AudioCallback(float[], AudioChannels, int, uint)"/>
+        /// <inheritdoc cref="SunVoxLib.AudioCallback(float[], AudioChannels, int, uint)"/>
         bool AudioCallback(float[] outputBuffer, AudioChannels channels, int latency, uint outTime);
 
-        /// <inheritdoc cref="SunVoxLibNativeWrapper.AudioCallback(float[], AudioChannels, int, uint)"/>
+        /// <inheritdoc cref="SunVoxLib.AudioCallback(float[], AudioChannels, int, uint)"/>
         bool AudioCallback(short[] outputBuffer, AudioChannels channels, int latency, uint outTime);
 
-        /// <inheritdoc cref="SunVoxLibNativeWrapper.AudioCallback(float[], AudioChannels, float[], AudioChannels, int, uint)"/>
+        /// <inheritdoc cref="SunVoxLib.AudioCallback(float[], AudioChannels, float[], AudioChannels, int, uint)"/>
         bool AudioCallback(float[] outputBuffer, AudioChannels outputChannels,
             float[] inputBuffer, AudioChannels inputChannels, int latency, uint outTime);
 
-        /// <inheritdoc cref="SunVoxLibNativeWrapper.AudioCallback(float[], AudioChannels, float[], AudioChannels, int, uint)"/>
+        /// <inheritdoc cref="SunVoxLib.AudioCallback(float[], AudioChannels, float[], AudioChannels, int, uint)"/>
         bool AudioCallback(float[] outputBuffer, AudioChannels outputChannels,
             short[] inputBuffer, AudioChannels inputChannels, int latency, uint outTime);
 
-        /// <inheritdoc cref="SunVoxLibNativeWrapper.AudioCallback(float[], AudioChannels, float[], AudioChannels, int, uint)"/>
+        /// <inheritdoc cref="SunVoxLib.AudioCallback(float[], AudioChannels, float[], AudioChannels, int, uint)"/>
         bool AudioCallback(short[] outputBuffer, AudioChannels outputChannels,
             float[] inputBuffer, AudioChannels inputChannels, int latency, uint outTime);
 
-        /// <inheritdoc cref="SunVoxLibNativeWrapper.AudioCallback(float[], AudioChannels, float[], AudioChannels, int, uint)"/>
+        /// <inheritdoc cref="SunVoxLib.AudioCallback(float[], AudioChannels, float[], AudioChannels, int, uint)"/>
         bool AudioCallback(short[] outputBuffer, AudioChannels outputChannels,
             short[] inputBuffer, AudioChannels inputChannels, int latency, uint outTime);
 
-        /// <inheritdoc cref="SunVoxLibNativeWrapper.IsPlaying"/>
+        /// <inheritdoc cref="SunVoxLib.IsPlaying"/>
         bool IsPlaying(int slotId);
 
-        /// <inheritdoc cref="SunVoxLibNativeWrapper.GetAutomaticStop"/>
+        /// <inheritdoc cref="SunVoxLib.GetAutomaticStop"/>
         bool GetAutomaticStop(int slotId);
 
-        /// <inheritdoc cref="SunVoxLibNativeWrapper.GetCurrentLine"/>
+        /// <inheritdoc cref="SunVoxLib.GetCurrentLine"/>
         int GetCurrentLine(int slotId);
 
-        /// <inheritdoc cref="SunVoxLibNativeWrapper.GetCurrentLineWithTenthPart"/>
+        /// <inheritdoc cref="SunVoxLib.GetCurrentLineWithTenthPart"/>
         int GetCurrentLineWithTenthPart(int slotId);
 
-        /// <inheritdoc cref="SunVoxLibNativeWrapper.GetCurrentSignalLevel"/>
+        /// <inheritdoc cref="SunVoxLib.GetCurrentSignalLevel"/>
         int GetCurrentSignalLevel(int slotId, AudioChannel channel);
 
-        /// <inheritdoc cref="SunVoxLibNativeWrapper.GetSongBpm"/>
+        /// <inheritdoc cref="SunVoxLib.GetSongBpm"/>
         int GetSongBpm(int slotId);
 
-        /// <inheritdoc cref="SunVoxLibNativeWrapper.GetSongLengthInFrames"/>
+        /// <inheritdoc cref="SunVoxLib.GetSongLengthInFrames"/>
         uint GetSongLengthInFrames(int slotId);
 
-        /// <inheritdoc cref="SunVoxLibNativeWrapper.GetSongLengthInLines"/>
+        /// <inheritdoc cref="SunVoxLib.GetSongLengthInLines"/>
         uint GetSongLengthInLines(int slotId);
 
-        /// <inheritdoc cref="SunVoxLibNativeWrapper.GetSongName"/>
+        /// <inheritdoc cref="SunVoxLib.GetSongName"/>
         string? GetSongName(int slotId);
 
-        /// <inheritdoc cref="SunVoxLibNativeWrapper.SetSongName"/>
-        void SetSongName(int slotId, string newName);
+        /// <inheritdoc cref="SunVoxLib.SetSongName"/>
+        void SetSongName(int slotId, string value);
 
-        /// <inheritdoc cref="SunVoxLibNativeWrapper.GetSongTpl"/>
+        /// <inheritdoc cref="SunVoxLib.GetSongTpl"/>
         int GetSongTpl(int slotId);
 
-        /// <inheritdoc cref="SunVoxLibNativeWrapper.SaveToFile"/>
+        /// <inheritdoc cref="SunVoxLib.SaveToFile"/>
         void SaveToFile(int slotId, string path);
 
         ///// <inheritdoc cref="SunVoxLibNativeWrapper.SaveToMemory"/>
         //byte[] SaveToMemory(int slotId);
 
-        /// <inheritdoc cref="SunVoxLibNativeWrapper.SendEvent(int, int, PatternEvent)"/>
+        /// <inheritdoc cref="SunVoxLib.SendEvent(int, int, PatternEvent)"/>
         void SendEvent(int slotId, int track, PatternEvent data);
 
-        /// <inheritdoc cref="SunVoxLibNativeWrapper.SendEvent(int, int, int, int, int, int, int)"/>
+        /// <inheritdoc cref="SunVoxLib.SendEvent(int, int, int, int, int, int, int)"/>
         void SendEvent(int slotId, int track, int nn = 0, int vv = 0, int mm = 0, int ccee = 0, int xxyy = 0);
 
-        /// <inheritdoc cref="SunVoxLibNativeWrapper.SetSendEventTimestamp"/>
-        void SetSendEventTimestamp(int slotId, bool reset, int t);
+        /// <inheritdoc cref="SunVoxLib.SetEventTiming"/>
+        void SetEventTiming(int slotId, int timestamp);
 
-        /// <inheritdoc cref="SunVoxLibNativeWrapper.Volume"/>
+        /// <inheritdoc cref="SunVoxLib.ResetEventTiming"/>
+        public void ResetEventTiming(int slotId);
+
+        /// <inheritdoc cref="SunVoxLib.Volume"/>
         int Volume(int slotId, int volume);
 
-        /// <inheritdoc cref="SunVoxLibNativeWrapper.GetTimeMap"/>
-        uint[] GetTimeMap(int slotId, int startLine, int length, TimeMapType type);
+        /// <inheritdoc cref="SunVoxLib.GetTimeMapFrames"/>
+        uint[] GetTimeMapFrames(int slotId, int startLine, int length);
 
-        /// <inheritdoc cref="SunVoxLibNativeWrapper.Load(int, string)"/>
+        /// <inheritdoc cref="SunVoxLib.GetTimeMapSpeed"/>
+        Speed[] GetTimeMapSpeed(int slotId, int startLine, int length);
+
+        /// <inheritdoc cref="SunVoxLib.Load(int, string)"/>
         void Load(int slotId, string path);
 
-        /// <inheritdoc cref="SunVoxLibNativeWrapper.Load(int, byte[])"/>
+        /// <inheritdoc cref="SunVoxLib.Load(int, byte[])"/>
         void Load(int slotId, byte[] data);
 
-        /// <inheritdoc cref="SunVoxLibNativeWrapper.OpenSlot"/>
+        /// <inheritdoc cref="SunVoxLib.OpenSlot"/>
         void OpenSlot(int slotId);
 
-        /// <inheritdoc cref="SunVoxLibNativeWrapper.CloseSlot"/>
+        /// <inheritdoc cref="SunVoxLib.CloseSlot"/>
         void CloseSlot(int slotId);
 
-        /// <inheritdoc cref="SunVoxLibNativeWrapper.LockSlot"/>
+        /// <inheritdoc cref="SunVoxLib.LockSlot"/>
         void LockSlot(int slotId);
 
-        /// <inheritdoc cref="SunVoxLibNativeWrapper.UnlockSlot"/>
+        /// <inheritdoc cref="SunVoxLib.UnlockSlot"/>
         void UnlockSlot(int slotId);
 
-        /// <inheritdoc cref="SunVoxLibNativeWrapper.SetAutomaticStop"/>
-        void SetAutomaticStop(int slotId, bool autoStop);
+        /// <inheritdoc cref="SunVoxLib.SetAutomaticStop"/>
+        void SetAutomaticStop(int slotId, bool enable);
 
-        /// <inheritdoc cref="SunVoxLibNativeWrapper.StopPlayback"/>
+        /// <inheritdoc cref="SunVoxLib.StopPlayback"/>
         void StopPlayback(int slotId);
 
-        /// <inheritdoc cref="SunVoxLibNativeWrapper.StartPlayback"/>
+        /// <inheritdoc cref="SunVoxLib.StartPlayback"/>
         void StartPlayback(int slotId);
 
-        /// <inheritdoc cref="SunVoxLibNativeWrapper.StartPlaybackFromBeginning"/>
+        /// <inheritdoc cref="SunVoxLib.StartPlaybackFromBeginning"/>
         void StartPlaybackFromBeginning(int slotId);
 
-        /// <inheritdoc cref="SunVoxLibNativeWrapper.Rewind"/>
+        /// <inheritdoc cref="SunVoxLib.Rewind"/>
         void Rewind(int slotId, int line);
 
-        /// <inheritdoc cref="SunVoxLibNativeWrapper.PauseAudioStream"/>
+        /// <inheritdoc cref="SunVoxLib.PauseAudioStream"/>
         void PauseAudioStream(int slotId);
 
-        /// <inheritdoc cref="SunVoxLibNativeWrapper.ResumeAudioStream"/>
+        /// <inheritdoc cref="SunVoxLib.ResumeAudioStream"/>
         void ResumeAudioStream(int slotId);
 
-        /// <inheritdoc cref="SunVoxLibNativeWrapper.ResumeStreamOnSyncEffect"/>
+        /// <inheritdoc cref="SunVoxLib.ResumeStreamOnSyncEffect"/>
         void ResumeStreamOnSyncEffect(int slotId);
     }
 }

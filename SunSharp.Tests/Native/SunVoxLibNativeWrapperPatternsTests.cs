@@ -465,7 +465,7 @@ public class SunVoxLibNativeWrapperPatternsTests
     public void ClonePattern_ShouldThrow_WhenNegativeValueReturned(int slotId, int originalPatternId, int x, int y)
     {
         var library = Substitute.For<ISunVoxLibC>();
-        var wrapper = new SunVoxLibNativeWrapper(library);
+        var wrapper = new SunVoxLib(library);
         library.sv_new_pattern(Arg.Any<int>(), Arg.Any<int>(), Arg.Any<int>(), Arg.Any<int>(), Arg.Any<int>(),
                 Arg.Any<int>(), Arg.Any<int>(), Arg.Any<IntPtr>())
             .Returns(-1);
@@ -481,7 +481,7 @@ public class SunVoxLibNativeWrapperPatternsTests
     public void ClonePattern_ShouldCallExpectedMethod(int slotId, int originalPatternId, int x, int y, int newPatternId)
     {
         var library = Substitute.For<ISunVoxLibC>();
-        var wrapper = new SunVoxLibNativeWrapper(library);
+        var wrapper = new SunVoxLib(library);
         library.sv_new_pattern(Arg.Any<int>(), Arg.Any<int>(), Arg.Any<int>(), Arg.Any<int>(), Arg.Any<int>(),
                 Arg.Any<int>(), Arg.Any<int>(), Arg.Any<IntPtr>())
             .Returns(newPatternId);
@@ -496,7 +496,7 @@ public class SunVoxLibNativeWrapperPatternsTests
     public void CreatePattern_ShouldThrow_WhenNegativeValueReturned(int slotId, int x, int y, int tracks, int lines, int iconSeed, string patternName)
     {
         var library = Substitute.For<ISunVoxLibC>();
-        var wrapper = new SunVoxLibNativeWrapper(library);
+        var wrapper = new SunVoxLib(library);
         library.sv_new_pattern(Arg.Any<int>(), Arg.Any<int>(), Arg.Any<int>(), Arg.Any<int>(), Arg.Any<int>(),
                 Arg.Any<int>(), Arg.Any<int>(), Arg.Any<IntPtr>())
             .Returns(-1);
@@ -513,7 +513,7 @@ public class SunVoxLibNativeWrapperPatternsTests
     {
         var receivedPatternName = string.Empty;
         var library = Substitute.For<ISunVoxLibC>();
-        var wrapper = new SunVoxLibNativeWrapper(library);
+        var wrapper = new SunVoxLib(library);
         library.sv_new_pattern(Arg.Any<int>(), Arg.Any<int>(), Arg.Any<int>(), Arg.Any<int>(), Arg.Any<int>(),
                 Arg.Any<int>(), Arg.Any<int>(), Arg.Any<IntPtr>())
             .Returns(newPatternId);
@@ -534,7 +534,7 @@ public class SunVoxLibNativeWrapperPatternsTests
     public void CreatePattern_WithDefaultValues_ShouldCallExpectedMethod(int slotId, int x, int y, int tracks, int lines, int newPatternId)
     {
         var library = Substitute.For<ISunVoxLibC>();
-        var wrapper = new SunVoxLibNativeWrapper(library);
+        var wrapper = new SunVoxLib(library);
         library.sv_new_pattern(Arg.Any<int>(), Arg.Any<int>(), Arg.Any<int>(), Arg.Any<int>(), Arg.Any<int>(),
                 Arg.Any<int>(), Arg.Any<int>(), Arg.Any<IntPtr>())
             .Returns(newPatternId);
@@ -552,7 +552,7 @@ public class SunVoxLibNativeWrapperPatternsTests
     {
         var receivedString = string.Empty;
         var library = Substitute.For<ISunVoxLibC>();
-        var wrapper = new SunVoxLibNativeWrapper(library);
+        var wrapper = new SunVoxLib(library);
         library.sv_find_pattern(Arg.Any<int>(), Arg.Any<IntPtr>()).Returns(foundPatternId);
         library.When(static l => l.sv_find_pattern(Arg.Any<int>(), Arg.Any<IntPtr>()))
             .Do(callInfo => receivedString = Marshal.PtrToStringUTF8(callInfo.Arg<IntPtr>()));
@@ -571,7 +571,7 @@ public class SunVoxLibNativeWrapperPatternsTests
     {
         var receivedString = string.Empty;
         var library = Substitute.For<ISunVoxLibC>();
-        var wrapper = new SunVoxLibNativeWrapper(library);
+        var wrapper = new SunVoxLib(library);
         library.sv_find_pattern(Arg.Any<int>(), Arg.Any<IntPtr>()).Returns(-1);
         library.When(static l => l.sv_find_pattern(Arg.Any<int>(), Arg.Any<IntPtr>()))
             .Do(callInfo => receivedString = Marshal.PtrToStringUTF8(callInfo.Arg<IntPtr>()));
@@ -589,7 +589,7 @@ public class SunVoxLibNativeWrapperPatternsTests
     public void FindPattern_ShouldThrow_WhenReturnCodeLessThanNegativeOne(int slotId, string patternName)
     {
         var library = Substitute.For<ISunVoxLibC>();
-        var wrapper = new SunVoxLibNativeWrapper(library);
+        var wrapper = new SunVoxLib(library);
         library.sv_find_pattern(Arg.Any<int>(), Arg.Any<IntPtr>()).Returns(-2);
 
         // when
@@ -604,7 +604,7 @@ public class SunVoxLibNativeWrapperPatternsTests
     public void GetPatternEventValue_ShouldCallExpectedMethod(int slotId, int patternId, int track, int line, Column column)
     {
         var library = Substitute.For<ISunVoxLibC>();
-        var wrapper = new SunVoxLibNativeWrapper(library);
+        var wrapper = new SunVoxLib(library);
         library.sv_get_pattern_event(Arg.Any<int>(), Arg.Any<int>(), Arg.Any<int>(), Arg.Any<int>(), Arg.Any<int>())
             .Returns(0);
 
@@ -619,7 +619,7 @@ public class SunVoxLibNativeWrapperPatternsTests
     public void GetPatternEventValue_ShouldThrow_WhenNonZeroReturnCode(int slotId, int patternId, int track, int line, Column column)
     {
         var library = Substitute.For<ISunVoxLibC>();
-        var wrapper = new SunVoxLibNativeWrapper(library);
+        var wrapper = new SunVoxLib(library);
         library.sv_get_pattern_event(Arg.Any<int>(), Arg.Any<int>(), Arg.Any<int>(), Arg.Any<int>(), Arg.Any<int>())
             .Returns(-1);
 
@@ -639,7 +639,7 @@ public class SunVoxLibNativeWrapperPatternsTests
         var slotId = fixture.Create<int>();
         var patternId = fixture.Create<int>();
         var library = Substitute.For<ISunVoxLibC>();
-        var wrapper = new SunVoxLibNativeWrapper(library);
+        var wrapper = new SunVoxLib(library);
         library.sv_get_pattern_lines(Arg.Any<int>(), Arg.Any<int>()).Returns(exists ? 1 : 0);
 
         // when
@@ -654,7 +654,7 @@ public class SunVoxLibNativeWrapperPatternsTests
     public void GetPatternExists_ShouldThrow_WhenErrorReturnCode(int slotId, int patternId)
     {
         var library = Substitute.For<ISunVoxLibC>();
-        var wrapper = new SunVoxLibNativeWrapper(library);
+        var wrapper = new SunVoxLib(library);
         library.sv_get_pattern_lines(Arg.Any<int>(), Arg.Any<int>()).Returns(-1);
 
         // when
@@ -669,7 +669,7 @@ public class SunVoxLibNativeWrapperPatternsTests
     public void GetPatternLines_ShouldReturnValue(int slotId, int patternId, int lines)
     {
         var library = Substitute.For<ISunVoxLibC>();
-        var wrapper = new SunVoxLibNativeWrapper(library);
+        var wrapper = new SunVoxLib(library);
         library.sv_get_pattern_lines(Arg.Any<int>(), Arg.Any<int>()).Returns(lines);
 
         // when
@@ -684,7 +684,7 @@ public class SunVoxLibNativeWrapperPatternsTests
     public void GetPatternLines_ShouldThrow_WhenErrorReturnCode(int slotId, int patternId)
     {
         var library = Substitute.For<ISunVoxLibC>();
-        var wrapper = new SunVoxLibNativeWrapper(library);
+        var wrapper = new SunVoxLib(library);
         library.sv_get_pattern_lines(Arg.Any<int>(), Arg.Any<int>()).Returns(-1);
 
         // when
@@ -699,7 +699,7 @@ public class SunVoxLibNativeWrapperPatternsTests
     public void GetPatternName_ShouldReturnNull_WhenNullPointer(int slotId, int patternId)
     {
         var library = Substitute.For<ISunVoxLibC>();
-        var wrapper = new SunVoxLibNativeWrapper(library);
+        var wrapper = new SunVoxLib(library);
         library.sv_get_pattern_name(Arg.Any<int>(), Arg.Any<int>()).Returns(IntPtr.Zero);
 
         // when
@@ -713,7 +713,7 @@ public class SunVoxLibNativeWrapperPatternsTests
     public void GetPatternName_ShouldReturnString(int slotId, int patternId, string patternName)
     {
         var library = Substitute.For<ISunVoxLibC>();
-        var wrapper = new SunVoxLibNativeWrapper(library);
+        var wrapper = new SunVoxLib(library);
         var stringPointer = Marshal.StringToHGlobalAnsi(patternName);
         string? receivedPatternName;
 
@@ -738,7 +738,7 @@ public class SunVoxLibNativeWrapperPatternsTests
     public void GetPatternPosition_ShouldReturnValue(int slotId, int patternId, int x, int y)
     {
         var library = Substitute.For<ISunVoxLibC>();
-        var wrapper = new SunVoxLibNativeWrapper(library);
+        var wrapper = new SunVoxLib(library);
         library.sv_get_pattern_x(Arg.Any<int>(), Arg.Any<int>()).Returns(x);
         library.sv_get_pattern_y(Arg.Any<int>(), Arg.Any<int>()).Returns(y);
 
@@ -755,7 +755,7 @@ public class SunVoxLibNativeWrapperPatternsTests
     public void GetPatternTracks_ShouldReturnValue(int slotId, int patternId, int tracks)
     {
         var library = Substitute.For<ISunVoxLibC>();
-        var wrapper = new SunVoxLibNativeWrapper(library);
+        var wrapper = new SunVoxLib(library);
         library.sv_get_pattern_tracks(Arg.Any<int>(), Arg.Any<int>()).Returns(tracks);
 
         // when
@@ -770,7 +770,7 @@ public class SunVoxLibNativeWrapperPatternsTests
     public void GetPatternTracks_ShouldThrow_WhenErrorReturnCode(int slotId, int patternId)
     {
         var library = Substitute.For<ISunVoxLibC>();
-        var wrapper = new SunVoxLibNativeWrapper(library);
+        var wrapper = new SunVoxLib(library);
         library.sv_get_pattern_tracks(Arg.Any<int>(), Arg.Any<int>()).Returns(-1);
 
         // when
@@ -785,7 +785,7 @@ public class SunVoxLibNativeWrapperPatternsTests
     public void GetPatternX_ShouldReturnValue(int slotId, int patternId, int x)
     {
         var library = Substitute.For<ISunVoxLibC>();
-        var wrapper = new SunVoxLibNativeWrapper(library);
+        var wrapper = new SunVoxLib(library);
         library.sv_get_pattern_x(Arg.Any<int>(), Arg.Any<int>()).Returns(x);
 
         // when
@@ -800,7 +800,7 @@ public class SunVoxLibNativeWrapperPatternsTests
     public void GetPatternY_ShouldReturnValue(int slotId, int patternId, int y)
     {
         var library = Substitute.For<ISunVoxLibC>();
-        var wrapper = new SunVoxLibNativeWrapper(library);
+        var wrapper = new SunVoxLib(library);
         library.sv_get_pattern_y(Arg.Any<int>(), Arg.Any<int>()).Returns(y);
 
         // when
@@ -815,7 +815,7 @@ public class SunVoxLibNativeWrapperPatternsTests
     public void GetUpperPatternCount_ShouldCallExpectedMethod(int slotId)
     {
         var library = Substitute.For<ISunVoxLibC>();
-        var wrapper = new SunVoxLibNativeWrapper(library);
+        var wrapper = new SunVoxLib(library);
         library.sv_get_number_of_patterns(Arg.Any<int>()).Returns(0);
 
         // when
@@ -829,7 +829,7 @@ public class SunVoxLibNativeWrapperPatternsTests
     public void GetUpperPatternCount_ShouldThrow_WhenNegativeReturnCode(int slotId)
     {
         var library = Substitute.For<ISunVoxLibC>();
-        var wrapper = new SunVoxLibNativeWrapper(library);
+        var wrapper = new SunVoxLib(library);
         library.sv_get_number_of_patterns(Arg.Any<int>()).Returns(-1);
 
         // when
@@ -844,7 +844,7 @@ public class SunVoxLibNativeWrapperPatternsTests
     public void RemovePattern_ShouldCallExpectedMethod(int slotId, int patternId)
     {
         var library = Substitute.For<ISunVoxLibC>();
-        var wrapper = new SunVoxLibNativeWrapper(library);
+        var wrapper = new SunVoxLib(library);
         library.sv_remove_pattern(Arg.Any<int>(), Arg.Any<int>()).Returns(0);
 
         // when
@@ -858,7 +858,7 @@ public class SunVoxLibNativeWrapperPatternsTests
     public void RemovePattern_ShouldThrow_WhenNonZeroReturnCode(int slotId, int patternId)
     {
         var library = Substitute.For<ISunVoxLibC>();
-        var wrapper = new SunVoxLibNativeWrapper(library);
+        var wrapper = new SunVoxLib(library);
         library.sv_remove_pattern(Arg.Any<int>(), Arg.Any<int>()).Returns(-1);
 
         // when
@@ -873,7 +873,7 @@ public class SunVoxLibNativeWrapperPatternsTests
     public void SetPatternName_ShouldCallExpectedMethod(int slotId, int patternId, string nameToSet)
     {
         var library = Substitute.For<ISunVoxLibC>();
-        var wrapper = new SunVoxLibNativeWrapper(library);
+        var wrapper = new SunVoxLib(library);
         var receivedString = string.Empty;
         library.When(static l => l.sv_set_pattern_name(Arg.Any<int>(), Arg.Any<int>(), Arg.Any<IntPtr>()))
             .Do(callInfo => receivedString = Marshal.PtrToStringUTF8(callInfo.Arg<IntPtr>()));
@@ -890,7 +890,7 @@ public class SunVoxLibNativeWrapperPatternsTests
     public void SetPatternName_ShouldThrow_WhenNonZeroReturnCode(int slotId, int patternId, string nameToSet)
     {
         var library = Substitute.For<ISunVoxLibC>();
-        var wrapper = new SunVoxLibNativeWrapper(library);
+        var wrapper = new SunVoxLib(library);
         library.sv_set_pattern_name(Arg.Any<int>(), Arg.Any<int>(), Arg.Any<IntPtr>()).Returns(-1);
 
         // when
@@ -904,7 +904,7 @@ public class SunVoxLibNativeWrapperPatternsTests
     public void SetPatternPosition_ShouldCallExpectedMethod(int slotId, int patternId, int x, int y)
     {
         var library = Substitute.For<ISunVoxLibC>();
-        var wrapper = new SunVoxLibNativeWrapper(library);
+        var wrapper = new SunVoxLib(library);
         library.sv_set_pattern_xy(Arg.Any<int>(), Arg.Any<int>(), Arg.Any<int>(), Arg.Any<int>()).Returns(0);
 
         // when
@@ -918,7 +918,7 @@ public class SunVoxLibNativeWrapperPatternsTests
     public void SetPatternPosition_ShouldThrow_WhenErrorReturnCode(int slotId, int patternId, int x, int y)
     {
         var library = Substitute.For<ISunVoxLibC>();
-        var wrapper = new SunVoxLibNativeWrapper(library);
+        var wrapper = new SunVoxLib(library);
         library.sv_set_pattern_xy(Arg.Any<int>(), Arg.Any<int>(), Arg.Any<int>(), Arg.Any<int>()).Returns(-1);
 
         // when
@@ -933,7 +933,7 @@ public class SunVoxLibNativeWrapperPatternsTests
     public void SetPatternSize_ShouldCallExpectedMethod(int slotId, int patternId, int tracks, int lines)
     {
         var library = Substitute.For<ISunVoxLibC>();
-        var wrapper = new SunVoxLibNativeWrapper(library);
+        var wrapper = new SunVoxLib(library);
         library.sv_get_pattern_tracks(Arg.Any<int>(), Arg.Any<int>()).Returns(0);
 
         // when
@@ -947,7 +947,7 @@ public class SunVoxLibNativeWrapperPatternsTests
     public void SetPatternSize_WithDefaultValues_ShouldCallExpectedMethod(int slotId, int patternId)
     {
         var library = Substitute.For<ISunVoxLibC>();
-        var wrapper = new SunVoxLibNativeWrapper(library);
+        var wrapper = new SunVoxLib(library);
         library.sv_set_pattern_size(Arg.Any<int>(), Arg.Any<int>(), Arg.Any<int>(), Arg.Any<int>()).Returns(0);
 
         // when
@@ -961,7 +961,7 @@ public class SunVoxLibNativeWrapperPatternsTests
     public void SetPatternSize_ShouldThrow_WhenErrorReturnCode(int slotId, int patternId, int tracks, int lines)
     {
         var library = Substitute.For<ISunVoxLibC>();
-        var wrapper = new SunVoxLibNativeWrapper(library);
+        var wrapper = new SunVoxLib(library);
         library.sv_set_pattern_size(Arg.Any<int>(), Arg.Any<int>(), Arg.Any<int>(), Arg.Any<int>()).Returns(-1);
 
         // when
@@ -976,7 +976,7 @@ public class SunVoxLibNativeWrapperPatternsTests
     public void GetPatternMuted_ShouldReturnValue(bool muted, int slotId, int patternId)
     {
         var library = Substitute.For<ISunVoxLibC>();
-        var wrapper = new SunVoxLibNativeWrapper(library);
+        var wrapper = new SunVoxLib(library);
         library.sv_pattern_mute(Arg.Any<int>(), Arg.Any<int>(), Arg.Any<int>()).Returns(muted ? 1 : 0);
 
         // when
@@ -991,7 +991,7 @@ public class SunVoxLibNativeWrapperPatternsTests
     public void SetPatternMuted_ShouldCallExpectedMethod(bool muted, int slotId, int patternId)
     {
         var library = Substitute.For<ISunVoxLibC>();
-        var wrapper = new SunVoxLibNativeWrapper(library);
+        var wrapper = new SunVoxLib(library);
         library.sv_pattern_mute(Arg.Any<int>(), Arg.Any<int>(), Arg.Any<int>()).Returns(muted ? 1 : 0);
 
         // when
@@ -1005,7 +1005,7 @@ public class SunVoxLibNativeWrapperPatternsTests
     public void SetPatternEvent_ShouldCallExpectedMethod(int slotId, int patternId, int track, int line, int nn, int vv, int mm, int ccee, int xxyy)
     {
         var library = Substitute.For<ISunVoxLibC>();
-        var wrapper = new SunVoxLibNativeWrapper(library);
+        var wrapper = new SunVoxLib(library);
         library.sv_set_pattern_event(Arg.Any<int>(), Arg.Any<int>(), Arg.Any<int>(), Arg.Any<int>(), Arg.Any<int>(),
                 Arg.Any<int>(), Arg.Any<int>(), Arg.Any<int>(), Arg.Any<int>())
             .Returns(0);
@@ -1021,7 +1021,7 @@ public class SunVoxLibNativeWrapperPatternsTests
     public void SetPatternEvent_ShouldThrow_WhenNonZeroReturnCode(int slotId, int patternId, int track, int line, int nn, int vv, int mm, int ccee, int xxyy)
     {
         var library = Substitute.For<ISunVoxLibC>();
-        var wrapper = new SunVoxLibNativeWrapper(library);
+        var wrapper = new SunVoxLib(library);
         library.sv_set_pattern_event(Arg.Any<int>(), Arg.Any<int>(), Arg.Any<int>(), Arg.Any<int>(), Arg.Any<int>(),
                 Arg.Any<int>(), Arg.Any<int>(), Arg.Any<int>(), Arg.Any<int>())
             .Returns(-1);
@@ -1038,7 +1038,7 @@ public class SunVoxLibNativeWrapperPatternsTests
     public void SetPatternEventWithStruct_ShouldCallExpectedMethod(int slotId, int patternId, int track, int line, PatternEvent patternEvent)
     {
         var library = Substitute.For<ISunVoxLibC>();
-        var wrapper = new SunVoxLibNativeWrapper(library);
+        var wrapper = new SunVoxLib(library);
         library.sv_set_pattern_event(Arg.Any<int>(), Arg.Any<int>(), Arg.Any<int>(), Arg.Any<int>(), Arg.Any<int>(),
                 Arg.Any<int>(), Arg.Any<int>(), Arg.Any<int>(), Arg.Any<int>())
             .Returns(0);
@@ -1055,7 +1055,7 @@ public class SunVoxLibNativeWrapperPatternsTests
     public void SetPatternEventWithStruct_ShouldThrow_WhenNonZeroReturnCode(int slotId, int patternId, int track, int line, PatternEvent patternEvent)
     {
         var library = Substitute.For<ISunVoxLibC>();
-        var wrapper = new SunVoxLibNativeWrapper(library);
+        var wrapper = new SunVoxLib(library);
         library.sv_set_pattern_event(Arg.Any<int>(), Arg.Any<int>(), Arg.Any<int>(), Arg.Any<int>(), Arg.Any<int>(),
                 Arg.Any<int>(), Arg.Any<int>(), Arg.Any<int>(), Arg.Any<int>())
             .Returns(-1);
@@ -1091,7 +1091,7 @@ public class SunVoxLibNativeWrapperPatternsTests
 
         var handle = GCHandle.Alloc(patternData, GCHandleType.Pinned);
         var library = Substitute.For<ISunVoxLibC>();
-        var wrapper = new SunVoxLibNativeWrapper(library);
+        var wrapper = new SunVoxLib(library);
         library.sv_get_pattern_lines(Arg.Any<int>(), Arg.Any<int>()).Returns(lines);
         library.sv_get_pattern_tracks(Arg.Any<int>(), Arg.Any<int>()).Returns(tracks);
         library.sv_get_pattern_data(Arg.Any<int>(), Arg.Any<int>()).Returns(handle.AddrOfPinnedObject());
@@ -1121,7 +1121,7 @@ public class SunVoxLibNativeWrapperPatternsTests
     public void GetPatternData_ShouldReturnNull_WhenLengthEqualsZero(int slotId, int patternId)
     {
         var library = Substitute.For<ISunVoxLibC>();
-        var wrapper = new SunVoxLibNativeWrapper(library);
+        var wrapper = new SunVoxLib(library);
         library.sv_get_pattern_lines(Arg.Any<int>(), Arg.Any<int>()).Returns(0);
         // when
         var receivedPatternData = wrapper.GetPatternData(slotId, patternId);
@@ -1139,7 +1139,7 @@ public class SunVoxLibNativeWrapperPatternsTests
         const int tracks = 5;
 
         var library = Substitute.For<ISunVoxLibC>();
-        var wrapper = new SunVoxLibNativeWrapper(library);
+        var wrapper = new SunVoxLib(library);
         library.sv_get_pattern_lines(Arg.Any<int>(), Arg.Any<int>()).Returns(lines);
         library.sv_get_pattern_tracks(Arg.Any<int>(), Arg.Any<int>()).Returns(tracks);
         library.sv_get_pattern_data(Arg.Any<int>(), Arg.Any<int>()).Returns(IntPtr.Zero);
@@ -1167,7 +1167,7 @@ public class SunVoxLibNativeWrapperPatternsTests
         var buffer = (PatternEvent[])originalData.Clone();
 
         var library = Substitute.For<ISunVoxLibC>();
-        var wrapper = new SunVoxLibNativeWrapper(library);
+        var wrapper = new SunVoxLib(library);
         library.sv_get_pattern_lines(Arg.Any<int>(), Arg.Any<int>()).Returns(0);
 
         // when
@@ -1195,7 +1195,7 @@ public class SunVoxLibNativeWrapperPatternsTests
         var buffer = (PatternEvent[])originalData.Clone();
 
         var library = Substitute.For<ISunVoxLibC>();
-        var wrapper = new SunVoxLibNativeWrapper(library);
+        var wrapper = new SunVoxLib(library);
         library.sv_get_pattern_lines(Arg.Any<int>(), Arg.Any<int>()).Returns(lines);
         library.sv_get_pattern_tracks(Arg.Any<int>(), Arg.Any<int>()).Returns(tracks);
         library.sv_get_pattern_data(Arg.Any<int>(), Arg.Any<int>()).Returns(IntPtr.Zero);
@@ -1225,7 +1225,7 @@ public class SunVoxLibNativeWrapperPatternsTests
         var buffer = (PatternEvent[])originalData.Clone();
 
         var library = Substitute.For<ISunVoxLibC>();
-        var wrapper = new SunVoxLibNativeWrapper(library);
+        var wrapper = new SunVoxLib(library);
         library.sv_get_pattern_lines(Arg.Any<int>(), Arg.Any<int>()).Returns(lines);
         library.sv_get_pattern_tracks(Arg.Any<int>(), Arg.Any<int>()).Returns(tracks);
         library.sv_get_pattern_data(Arg.Any<int>(), Arg.Any<int>()).Returns(IntPtr.Zero);
@@ -1255,7 +1255,7 @@ public class SunVoxLibNativeWrapperPatternsTests
         var buffer = (PatternEvent[])originalData.Clone();
 
         var library = Substitute.For<ISunVoxLibC>();
-        var wrapper = new SunVoxLibNativeWrapper(library);
+        var wrapper = new SunVoxLib(library);
 
         // when
         wrapper.Invoking(w => w.ReadPatternData(slotId, patternId, buffer, tracksToRead, linesToRead))
@@ -1286,7 +1286,7 @@ public class SunVoxLibNativeWrapperPatternsTests
         var buffer = (PatternEvent[])originalData.Clone();
 
         var library = Substitute.For<ISunVoxLibC>();
-        var wrapper = new SunVoxLibNativeWrapper(library);
+        var wrapper = new SunVoxLib(library);
 
         // when
         wrapper.Invoking(w => w.ReadPatternData(slotId, patternId, buffer, bufferTracks, bufferLines, bufferOffsetTracks, bufferOffsetLines, readOffsetTracks, readOffsetLines))
@@ -1318,7 +1318,7 @@ public class SunVoxLibNativeWrapperPatternsTests
         var buffer = (PatternEvent[])originalData.Clone();
 
         var library = Substitute.For<ISunVoxLibC>();
-        var wrapper = new SunVoxLibNativeWrapper(library);
+        var wrapper = new SunVoxLib(library);
 
         // when
         wrapper.Invoking(w => w.WritePatternData(slotId, patternId, buffer, bufferTracks, bufferLines, bufferOffsetTracks, bufferOffsetLines, writeOffsetTracks, writeOffsetLines))
@@ -1348,7 +1348,7 @@ public class SunVoxLibNativeWrapperPatternsTests
         var buffer = (PatternEvent[])originalData.Clone();
 
         var library = Substitute.For<ISunVoxLibC>();
-        var wrapper = new SunVoxLibNativeWrapper(library);
+        var wrapper = new SunVoxLib(library);
 
         // when
         wrapper.Invoking(w => w.WritePatternData(slotId, patternId, buffer, tracksToRead, linesToRead))
@@ -1384,7 +1384,7 @@ public class SunVoxLibNativeWrapperPatternsTests
 
         var handle = GCHandle.Alloc(testCase.FromData, GCHandleType.Pinned);
         var library = Substitute.For<ISunVoxLibC>();
-        var wrapper = new SunVoxLibNativeWrapper(library);
+        var wrapper = new SunVoxLib(library);
         library.sv_get_pattern_lines(Arg.Any<int>(), Arg.Any<int>()).Returns(testCase.FromLines);
         library.sv_get_pattern_tracks(Arg.Any<int>(), Arg.Any<int>()).Returns(testCase.FromTracks);
         library.sv_get_pattern_data(Arg.Any<int>(), Arg.Any<int>()).Returns(handle.AddrOfPinnedObject());
@@ -1424,7 +1424,7 @@ public class SunVoxLibNativeWrapperPatternsTests
 
         var handle = GCHandle.Alloc(buffer, GCHandleType.Pinned);
         var library = Substitute.For<ISunVoxLibC>();
-        var wrapper = new SunVoxLibNativeWrapper(library);
+        var wrapper = new SunVoxLib(library);
         library.sv_get_pattern_lines(Arg.Any<int>(), Arg.Any<int>()).Returns(testCase.ToLines);
         library.sv_get_pattern_tracks(Arg.Any<int>(), Arg.Any<int>()).Returns(testCase.ToTracks);
         library.sv_get_pattern_data(Arg.Any<int>(), Arg.Any<int>()).Returns(handle.AddrOfPinnedObject());
@@ -1469,7 +1469,7 @@ public class SunVoxLibNativeWrapperPatternsTests
 
         var handle = GCHandle.Alloc(buffer, GCHandleType.Pinned);
         var library = Substitute.For<ISunVoxLibC>();
-        var wrapper = new SunVoxLibNativeWrapper(library);
+        var wrapper = new SunVoxLib(library);
         library.sv_get_pattern_data(Arg.Any<int>(), Arg.Any<int>()).Returns(handle.AddrOfPinnedObject());
         library.sv_set_pattern_size(Arg.Any<int>(), Arg.Any<int>(), Arg.Any<int>(), Arg.Any<int>()).Returns(0);
         try

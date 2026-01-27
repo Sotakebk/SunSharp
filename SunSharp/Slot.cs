@@ -41,167 +41,149 @@ namespace SunSharp
         }
     }
 
+    /// <inheritdoc cref="Slot"/>
+    public interface ISlot
+    {
+        /// <inheritdoc cref="Slot.Id"/>
+        int Id { get; }
+
+        /// <inheritdoc cref="Slot.VirtualPattern"/>
+        IVirtualPattern VirtualPattern { get; }
+
+        /// <inheritdoc cref="Slot.Timeline"/>
+        ITimeline Timeline { get; }
+
+        /// <inheritdoc cref="Slot.Synthesizer"/>
+        ISynthesizer Synthesizer { get; }
+
+        /// <inheritdoc cref="Slot.SunVox"/>
+        ISunVox SunVox { get; }
+
+        /// <inheritdoc cref="Slot.IsOpen"/>
+        bool IsOpen { get; }
+
+        /// <inheritdoc cref="Slot.AcquireLock"/>
+        IDisposable AcquireLock();
+
+        /// <inheritdoc cref="Slot.Lock"/>
+        void Lock();
+
+        /// <inheritdoc cref="Slot.Unlock"/>
+        void Unlock();
+
+        /// <inheritdoc cref="Slot.Open"/>
+        void Open();
+
+        /// <inheritdoc cref="Slot.Close"/>
+        void Close();
+
+        /// <inheritdoc cref="Slot.Load(string)"/>
+        void Load(string path);
+
+        /// <inheritdoc cref="Slot.Load(byte[])"/>
+        void Load(byte[] data);
+
+        /// <inheritdoc cref="Slot.Save"/>
+        void Save(string path);
+
+        /// <inheritdoc cref="Slot.StartPlayback"/>
+        void StartPlayback();
+
+        /// <inheritdoc cref="Slot.StartPlaybackFromBeginning"/>
+        void StartPlaybackFromBeginning();
+
+        /// <inheritdoc cref="Slot.StopPlayback"/>
+        void StopPlayback();
+
+        /// <inheritdoc cref="Slot.ResumeStreamOnSyncEffect"/>
+        void ResumeStreamOnSyncEffect();
+
+        /// <inheritdoc cref="Slot.PauseAudioStream"/>
+        void PauseAudioStream();
+
+        /// <inheritdoc cref="Slot.ResumeAudioStream"/>
+        void ResumeAudioStream();
+
+        /// <inheritdoc cref="Slot.SetAutomaticStop"/>
+        void SetAutomaticStop(bool enable);
+
+        /// <inheritdoc cref="Slot.GetAutomaticStop"/>
+        bool GetAutomaticStop();
+
+        /// <inheritdoc cref="Slot.IsPlaying"/>
+        bool IsPlaying();
+
+        /// <inheritdoc cref="Slot.Rewind"/>
+        void Rewind(int lineNumber);
+
+        /// <inheritdoc cref="Slot.GetCurrentLine"/>
+        int GetCurrentLine();
+
+        /// <inheritdoc cref="Slot.GetCurrentLineWithTenthPart"/>
+        int GetCurrentLineWithTenthPart();
+
+        /// <inheritdoc cref="Slot.GetCurrentSignalLevel"/>
+        int GetCurrentSignalLevel(AudioChannel channel = AudioChannel.Left);
+
+        /// <inheritdoc cref="Slot.GetVolume"/>
+        int GetVolume();
+
+        /// <inheritdoc cref="Slot.SetVolume"/>
+        void SetVolume(int value);
+
+        /// <inheritdoc cref="Slot.GetSongBpm"/>
+        int GetSongBpm();
+
+        /// <inheritdoc cref="Slot.GetSongTpl"/>
+        int GetSongTpl();
+
+        /// <inheritdoc cref="Slot.GetSongLengthInLines"/>
+        uint GetSongLengthInLines();
+
+        /// <inheritdoc cref="Slot.GetSongLengthInFrames"/>
+        uint GetSongLengthInFrames();
+
+        /// <inheritdoc cref="Slot.GetSongName"/>
+        string? GetSongName();
+
+        /// <inheritdoc cref="Slot.SetSongName"/>
+        void SetSongName(string value);
+
+        /// <inheritdoc cref="Slot.GetTimeMapFrames"/>
+        uint[] GetTimeMapFrames(int startLine, int length);
+
+        /// <inheritdoc cref="Slot.GetTimeMapSpeed"/>
+        Speed[] GetTimeMapSpeed(int startLine, int length);
+    }
+
     /// <summary>
     /// Represents a SunVox slot.
     /// </summary>
-    public interface ISlot
+    public sealed class Slot : ISlot
     {
-        int Id { get; }
+        /// <summary>
+        /// Gets the slot ID.
+        /// </summary>
+        public int Id { get; }
 
         /// <summary>
         /// Virtual, 16-track pattern for sending events to the engine.
         /// </summary>
-        IVirtualPattern VirtualPattern { get; }
+        public VirtualPattern VirtualPattern { get; }
 
         /// <summary>
         /// Project timeline, containing all the existing patterns.
         /// </summary>
-        ITimeline Timeline { get; }
+        public Timeline Timeline { get; }
 
         /// <summary>
         /// Project synthesizer, containing all the existing modules.
         /// </summary>
-        ISynthesizer Synthesizer { get; }
+        public Synthesizer Synthesizer { get; }
 
         /// <summary>
         /// SunVox instance this slot belongs to.
         /// </summary>
-        ISunVox SunVox { get; }
-
-        /// <summary>
-        /// Underlying library instance.
-        /// </summary>
-        ISunVoxLib Library { get; }
-
-        /// <summary>
-        /// Gets a value indicating whether the slot is currently open.
-        /// </summary>
-        bool IsOpen { get; }
-
-        /// <summary>
-        /// Can be used instead of the <see cref="Lock"/> and <see cref="Unlock"/> methods,
-        /// taking advantage of the <see langword="using"/> keyword.
-        /// </summary>
-        IDisposable AcquireLock();
-
-        /// <summary>
-        /// Locks the library-side reentrant mutex once.
-        /// </summary>
-        void Lock();
-
-        /// <summary>
-        /// Unlocks the library-side reentrant mutex once.
-        /// </summary>
-        void Unlock();
-
-        /// <summary>
-        /// Opens the slot for use. Uses the shared slot management lock for thread safety.
-        /// </summary>
-        void Open();
-
-        /// <summary>
-        /// Closes the slot. Uses the shared slot management lock for thread safety.
-        /// </summary>
-        void Close();
-
-        /// <summary>
-        /// Load a project from file.
-        /// </summary>
-        void Load(string path);
-
-        /// <summary>
-        /// load a project from memory.
-        /// </summary>
-        void Load(byte[] data);
-
-        /// <summary>
-        /// Save a project to file.
-        /// </summary>
-        void Save(string path);
-
-        void StartPlayback();
-
-        void StartPlaybackFromBeginning();
-
-        void StopPlayback();
-
-        void ResumeStreamOnSyncEffect();
-
-        void PauseAudioStream();
-
-        void ResumeAudioStream();
-
-        void SetAutomaticStop(bool enable);
-
-        bool GetAutomaticStop();
-
-        bool IsPlaying();
-
-        void Rewind(int lineNumber);
-
-        int GetCurrentLine();
-
-        /// <summary>
-        /// Get current line in fixed point format (with tenth part).
-        /// </summary>
-        int GetCurrentLineWithTenthPart();
-
-        int GetCurrentSignalLevel(AudioChannel channel = AudioChannel.Mono);
-
-        int GetVolume();
-
-        void SetVolume(int value);
-
-        int GetSongBpm();
-
-        /// <summary>
-        /// Sets the beats per minute (BPM) for the current song.
-        /// The value is clamped to the range [0, 800].
-        /// </summary>
-        void SetSongBpm(int value);
-
-        int GetSongTpl();
-
-        /// <summary>
-        /// Sets song TPL (ticks per line) by sending a <see cref="Effect.SetPlayingSpeed"/> event.
-        /// The value is clamped to the range [1, 31].
-        /// </summary>
-        void SetSongTpl(int value);
-
-        uint GetSongLengthInLines();
-
-        uint GetSongLengthInFrames();
-
-        string? GetSongName();
-
-        void SetSongName(string name);
-
-        /// <summary>
-        /// Get the project time map.
-        /// </summary>
-        /// <remarks>
-        /// <para>For <paramref name="type"/> = <see cref="TimeMapType.Speed"/>, n-th value equals speed at the beginning of n-th line (Bpm | Tpl &lt;&lt; 16). </para>
-        /// <para>For <paramref name="type"/> = <see cref="TimeMapType.FrameCount"/>, n-th value equals frame counter at the beginning of Nth line. </para>
-        /// </remarks>
-        uint[] GetTimeMap(int startLine, int length, TimeMapType type);
-    }
-
-    /// <inheritdoc/>
-    public sealed class Slot : ISlot
-    {
-        /// <inheritdoc/>
-        public int Id { get; }
-
-        /// <inheritdoc cref="ISlot.VirtualPattern"/>
-        public VirtualPattern VirtualPattern { get; }
-
-        /// <inheritdoc cref="ISlot.Timeline" />
-        public Timeline Timeline { get; }
-
-        /// <inheritdoc cref="ISlot.Synthesizer"/>
-        public Synthesizer Synthesizer { get; }
-
-        /// <inheritdoc cref="ISlot.SunVox"/>
         public SunVox SunVox { get; }
 
         /// <inheritdoc/>
@@ -216,10 +198,18 @@ namespace SunSharp
         /// <inheritdoc/>
         ISunVox ISlot.SunVox => SunVox;
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// Underlying library instance.
+        /// </summary>
+#if RELEASE
+        public SunVoxLib Library { get; }
+#else
         public ISunVoxLib Library { get; }
+#endif
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// Gets a value indicating whether the slot is currently open.
+        /// </summary>
         public bool IsOpen { get; private set; }
 
         private readonly object _slotManagementLock;
@@ -237,13 +227,16 @@ namespace SunSharp
 
         #region locks
 
-        /// <inheritdoc/>
+        /// <inheritdoc cref="ISunVoxLib.LockSlot"/>
         public void Lock() => Library.LockSlot(Id);
 
-        /// <inheritdoc/>
+        /// <inheritdoc cref="ISunVoxLib.UnlockSlot"/>
         public void Unlock() => Library.UnlockSlot(Id);
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// Can be used instead of the <see cref="Lock"/> and <see cref="Unlock"/> methods,
+        /// taking advantage of the <see langword="using"/> keyword.
+        /// </summary>
         public IDisposable AcquireLock()
         {
             return new SlotLock(SunVox, Id);
@@ -253,7 +246,12 @@ namespace SunSharp
 
         #region open, close
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// Opens the slot for use. Uses the shared slot management lock for thread safety.
+        /// </summary>
+        /// <remarks>
+        /// Calls <see cref="ISunVoxLibC.sv_open_slot(int)"/>.
+        /// </remarks>
         public void Open()
         {
             lock (_slotManagementLock)
@@ -271,7 +269,12 @@ namespace SunSharp
             }
         }
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// Closes the slot. Uses the shared slot management lock for thread safety.
+        /// </summary>
+        /// <remarks>
+        /// Calls <see cref="ISunVoxLibC.sv_close_slot(int)"/>.
+        /// </remarks>
         public void Close()
         {
             lock (_slotManagementLock)
@@ -290,135 +293,105 @@ namespace SunSharp
 
         #region loading, saving
 
-        /// <inheritdoc/>
+        /// <inheritdoc cref="ISunVoxLib.Load(int, string)"/>
         public void Load(string path)
         {
-            using (AcquireLock())
-            {
-                Library.Load(Id, path);
-            }
+            Library.Load(Id, path);
         }
 
-        /// <inheritdoc/>
+        /// <inheritdoc cref="ISunVoxLib.Load(int, byte[])"/>
         public void Load(byte[] data)
         {
-            using (AcquireLock())
-            {
-                Library.Load(Id, data);
-            }
+            Library.Load(Id, data);
         }
 
-        /// <inheritdoc/>
+        /// <inheritdoc cref="ISunVoxLib.SaveToFile"/>
         public void Save(string path)
         {
-            using (AcquireLock())
-            {
-                Library.SaveToFile(Id, path);
-            }
+            Library.SaveToFile(Id, path);
         }
 
         #endregion loading, saving
 
         #region playing, stopping
 
-        /// <inheritdoc/>
+        /// <inheritdoc cref="ISunVoxLib.StartPlayback"/>
         public void StartPlayback()
         {
-            using (AcquireLock())
-            {
-                Library.StartPlayback(Id);
-            }
+            Library.StartPlayback(Id);
         }
 
-        /// <inheritdoc/>
+        /// <inheritdoc cref="ISunVoxLib.StartPlaybackFromBeginning"/>
         public void StartPlaybackFromBeginning()
         {
-            using (AcquireLock())
-            {
-                Library.StartPlaybackFromBeginning(Id);
-            }
+            Library.StartPlaybackFromBeginning(Id);
         }
 
-        /// <inheritdoc/>
+        /// <inheritdoc cref="ISunVoxLib.StopPlayback"/>
         public void StopPlayback()
         {
-            using (AcquireLock())
-            {
-                Library.StopPlayback(Id);
-            }
+            Library.StopPlayback(Id);
         }
 
-        /// <inheritdoc/>
+        /// <inheritdoc cref="ISunVoxLib.ResumeStreamOnSyncEffect"/>
         public void ResumeStreamOnSyncEffect()
         {
-            using (AcquireLock())
-            {
-                Library.ResumeStreamOnSyncEffect(Id);
-            }
+            Library.ResumeStreamOnSyncEffect(Id);
         }
 
-        /// <inheritdoc/>
+        /// <inheritdoc cref="ISunVoxLib.PauseAudioStream"/>
         public void PauseAudioStream()
         {
-            using (AcquireLock())
-            {
-                Library.PauseAudioStream(Id);
-            }
+            Library.PauseAudioStream(Id);
         }
 
-        /// <inheritdoc/>
+        /// <inheritdoc cref="ISunVoxLib.ResumeAudioStream"/>
         public void ResumeAudioStream()
         {
-            using (AcquireLock())
-            {
-                Library.ResumeAudioStream(Id);
-            }
+            Library.ResumeAudioStream(Id);
         }
 
-        /// <inheritdoc/>
+        /// <inheritdoc cref="ISunVoxLib.SetAutomaticStop"/>
         public void SetAutomaticStop(bool enable)
         {
-            using (AcquireLock())
-            {
-                Library.SetAutomaticStop(Id, enable);
-            }
+            Library.SetAutomaticStop(Id, enable);
         }
 
-        /// <inheritdoc/>
+        /// <inheritdoc cref="ISunVoxLib.GetAutomaticStop"/>
         public bool GetAutomaticStop()
         {
             return Library.GetAutomaticStop(Id);
         }
 
-        /// <inheritdoc/>
+        /// <inheritdoc cref="ISunVoxLib.IsPlaying"/>
         public bool IsPlaying()
         {
             return Library.IsPlaying(Id);
         }
 
-        /// <inheritdoc/>
+        /// <inheritdoc cref="ISunVoxLib.Rewind"/>
         public void Rewind(int lineNumber)
         {
-            using (AcquireLock())
-            {
-                Library.Rewind(Id, lineNumber);
-            }
+            Library.Rewind(Id, lineNumber);
         }
 
-        /// <inheritdoc/>
+        /// <inheritdoc cref="ISunVoxLib.GetCurrentLine"/>
         public int GetCurrentLine()
         {
             return Library.GetCurrentLine(Id);
         }
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// Get current line in fixed point format (with tenth part).
+        /// </summary>
+        /// <inheritdoc cref="ISunVoxLib.GetCurrentLineWithTenthPart"/>
         public int GetCurrentLineWithTenthPart()
         {
             return Library.GetCurrentLineWithTenthPart(Id);
         }
 
-        /// <inheritdoc/>
-        public int GetCurrentSignalLevel(AudioChannel channel = AudioChannel.Mono)
+        /// <inheritdoc cref="ISunVoxLib.GetCurrentSignalLevel"/>
+        public int GetCurrentSignalLevel(AudioChannel channel = AudioChannel.Left)
         {
             return Library.GetCurrentSignalLevel(Id, channel);
         }
@@ -427,72 +400,64 @@ namespace SunSharp
 
         #region song properties
 
-        /// <inheritdoc/>
+        /// <inheritdoc cref="ISunVoxLib.Volume"/>
         public int GetVolume()
         {
             return Library.Volume(Id, -1);
         }
 
-        /// <inheritdoc/>
+        /// <inheritdoc cref="ISunVoxLib.Volume"/>
         public void SetVolume(int value)
         {
             Library.Volume(Id, value);
         }
 
-        /// <inheritdoc/>
+        /// <inheritdoc cref="ISunVoxLib.GetSongBpm"/>
         public int GetSongBpm()
         {
             return Library.GetSongBpm(Id);
         }
 
-        /// <inheritdoc/>
-        public void SetSongBpm(int value)
-        {
-            var xxyy = (ushort)Math.Min(Math.Max(0, value), 800);
-            VirtualPattern.SendEventImmediately(0, PatternEvent.EffectEvent(null, Effect.SetBpm, xxyy));
-        }
-
-        /// <inheritdoc/>
+        /// <inheritdoc cref="ISunVoxLib.GetSongTpl"/>
         public int GetSongTpl()
         {
             return Library.GetSongTpl(Id);
         }
 
-        /// <inheritdoc/>
-        public void SetSongTpl(int value)
-        {
-            var xxyy = (ushort)Math.Min(Math.Max(1, value), 31);
-            VirtualPattern.SendEventImmediately(0, PatternEvent.EffectEvent(null, Effect.SetPlayingSpeed, xxyy));
-        }
-
-        /// <inheritdoc/>
+        /// <inheritdoc cref="ISunVoxLib.GetSongLengthInLines"/>
         public uint GetSongLengthInLines()
         {
             return Library.GetSongLengthInLines(Id);
         }
 
-        /// <inheritdoc/>
+        /// <inheritdoc cref="ISunVoxLib.GetSongLengthInFrames"/>
         public uint GetSongLengthInFrames()
         {
             return Library.GetSongLengthInFrames(Id);
         }
 
-        /// <inheritdoc/>
+        /// <inheritdoc cref="ISunVoxLib.GetSongName"/>
         public string? GetSongName()
         {
             return Library.GetSongName(Id);
         }
 
-        /// <inheritdoc/>
-        public void SetSongName(string name)
+        /// <inheritdoc cref="ISunVoxLib.SetSongName"/>
+        public void SetSongName(string value)
         {
-            Library.SetSongName(Id, name);
+            Library.SetSongName(Id, value);
         }
 
-        /// <inheritdoc/>
-        public uint[] GetTimeMap(int startLine, int length, TimeMapType type)
+        /// <inheritdoc cref="ISunVoxLib.GetTimeMapFrames"/>
+        public uint[] GetTimeMapFrames(int startLine, int length)
         {
-            return Library.GetTimeMap(Id, startLine, length, type);
+            return Library.GetTimeMapFrames(Id, startLine, length);
+        }
+
+        /// <inheritdoc cref="ISunVoxLib.GetTimeMapSpeed"/>
+        public Speed[] GetTimeMapSpeed(int startLine, int length)
+        {
+            return Library.GetTimeMapSpeed(Id, startLine, length);
         }
 
         #endregion song properties

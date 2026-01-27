@@ -2,128 +2,128 @@ namespace SunSharp.Native
 {
     public partial interface ISunVoxLib
     {
-        /// <inheritdoc cref="SunVoxLibNativeWrapper.ConnectModule"/>
+        /// <inheritdoc cref="SunVoxLib.ConnectModule"/>
         void ConnectModule(int slotId, int source, int destination);
 
-        /// <inheritdoc cref="SunVoxLibNativeWrapper.DisconnectModule"/>
+        /// <inheritdoc cref="SunVoxLib.DisconnectModule"/>
         void DisconnectModule(int slotId, int source, int destination);
 
-        /// <inheritdoc cref="SunVoxLibNativeWrapper.FindModule"/>
+        /// <inheritdoc cref="SunVoxLib.FindModule"/>
         int? FindModule(int slotId, string name);
 
-        /// <inheritdoc cref="SunVoxLibNativeWrapper.GetModuleColor"/>
+        /// <inheritdoc cref="SunVoxLib.GetModuleColor"/>
         (byte r, byte g, byte b) GetModuleColor(int slotId, int moduleId);
 
-        /// <inheritdoc cref="SunVoxLibNativeWrapper.SetModuleColor"/>
+        /// <inheritdoc cref="SunVoxLib.SetModuleColor"/>
         void SetModuleColor(int slotId, int moduleId, byte r, byte g, byte b);
 
-        /// <inheritdoc cref="SunVoxLibNativeWrapper.GetModuleControllerName"/>
+        /// <inheritdoc cref="SunVoxLib.GetModuleControllerName"/>
         string? GetModuleControllerName(int slotId, int moduleId, int controllerId);
 
-        /// <inheritdoc cref="SunVoxLibNativeWrapper.GetModuleControllerValue"/>
+        /// <inheritdoc cref="SunVoxLib.GetModuleControllerValue"/>
         int GetModuleControllerValue(int slotId, int moduleId, int controllerId, ValueScalingMode scalingMode);
 
-        /// <inheritdoc cref="SunVoxLibNativeWrapper.GetModuleControllerMinValue"/>
+        /// <inheritdoc cref="SunVoxLib.GetModuleControllerMinValue"/>
         int GetModuleControllerMinValue(int slotId, int moduleId, int controllerId, ValueScalingMode scalingMode);
 
-        /// <inheritdoc cref="SunVoxLibNativeWrapper.GetModuleControllerMaxValue"/>
+        /// <inheritdoc cref="SunVoxLib.GetModuleControllerMaxValue"/>
         int GetModuleControllerMaxValue(int slotId, int moduleId, int controllerId, ValueScalingMode scalingMode);
 
-        /// <inheritdoc cref="SunVoxLibNativeWrapper.GetModuleControllerOffset"/>
+        /// <inheritdoc cref="SunVoxLib.GetModuleControllerOffset"/>
         int GetModuleControllerOffset(int slotId, int moduleId, int controllerId);
 
-        /// <inheritdoc cref="SunVoxLibNativeWrapper.GetModuleControllerType"/>
+        /// <inheritdoc cref="SunVoxLib.GetModuleControllerType"/>
         ControllerType GetModuleControllerType(int slotId, int moduleId, int controllerId);
 
-        /// <inheritdoc cref="SunVoxLibNativeWrapper.GetModuleControllerGroup"/>
+        /// <inheritdoc cref="SunVoxLib.GetModuleControllerGroup"/>
         int GetModuleControllerGroup(int slotId, int moduleId, int controllerId);
 
-        /// <inheritdoc cref="SunVoxLibNativeWrapper.SetModuleControllerValue"/>
+        /// <inheritdoc cref="SunVoxLib.SetModuleControllerValue"/>
         void SetModuleControllerValue(int slotId, int moduleId, int controllerId, int value,
             ValueScalingMode scalingMode);
 
-        /// <inheritdoc cref="SunVoxLibNativeWrapper.GetModuleFineTune"/>
+        /// <inheritdoc cref="SunVoxLib.GetModuleFineTune"/>
         FineTunePair GetModuleFineTune(int slotId, int moduleId);
 
-        /// <inheritdoc cref="SunVoxLibNativeWrapper.SetModuleFineTune"/>
+        /// <inheritdoc cref="SunVoxLib.SetModuleFineTune"/>
         void SetModuleFineTune(int slotId, int moduleId, int fineTune);
 
-        /// <inheritdoc cref="SunVoxLibNativeWrapper.SetModuleRelativeNote"/>
+        /// <inheritdoc cref="SunVoxLib.SetModuleRelativeNote"/>
         void SetModuleRelativeNote(int slotId, int moduleId, int relativeNote);
 
-        /// <inheritdoc cref="SunVoxLibNativeWrapper.GetModuleFlags"/>
+        /// <inheritdoc cref="SunVoxLib.GetModuleFlags"/>
         ModuleFlags GetModuleFlags(int slotId, int moduleId);
 
-        /// <inheritdoc cref="SunVoxLibNativeWrapper.GetModuleExists"/>
+        /// <inheritdoc cref="SunVoxLib.GetModuleExists"/>
         bool GetModuleExists(int slotId, int moduleId);
 
-        /// <inheritdoc cref="SunVoxLibNativeWrapper.GetModuleInputs"/>
+        /// <inheritdoc cref="SunVoxLib.GetModuleInputs"/>
         int[] GetModuleInputs(int slotId, int moduleId);
 
-        /// <inheritdoc cref="SunVoxLibNativeWrapper.GetModuleName"/>
+        /// <inheritdoc cref="SunVoxLib.GetModuleName"/>
         string? GetModuleName(int slotId, int moduleId);
 
-        /// <inheritdoc cref="SunVoxLibNativeWrapper.SetModuleName"/>
+        /// <inheritdoc cref="SunVoxLib.SetModuleName"/>
         void SetModuleName(int slotId, int moduleId, string name);
 
-        /// <inheritdoc cref="SunVoxLibNativeWrapper.GetModuleType"/>
+        /// <inheritdoc cref="SunVoxLib.GetModuleType"/>
         string? GetModuleType(int slotId, int moduleId);
 
-        /// <inheritdoc cref="SunVoxLibNativeWrapper.GetModuleOutputs"/>
+        /// <inheritdoc cref="SunVoxLib.GetModuleOutputs"/>
         int[] GetModuleOutputs(int slotId, int moduleId);
 
-        /// <inheritdoc cref="SunVoxLibNativeWrapper.ReadModuleScope"/>
+        /// <inheritdoc cref="SunVoxLib.ReadModuleScope"/>
         int ReadModuleScope(int slotId, int moduleId, AudioChannel channel, short[] buffer);
 
-        /// <inheritdoc cref="SunVoxLibNativeWrapper.GetModulePosition"/>
+        /// <inheritdoc cref="SunVoxLib.GetModulePosition"/>
         (int x, int y) GetModulePosition(int slotId, int moduleId);
 
-        /// <inheritdoc cref="SunVoxLibNativeWrapper.SetModulePosition"/>
+        /// <inheritdoc cref="SunVoxLib.SetModulePosition"/>
         void SetModulePosition(int slotId, int moduleId, int x, int y);
 
-        /// <inheritdoc cref="SunVoxLibNativeWrapper.GetUpperModuleCount"/>
+        /// <inheritdoc cref="SunVoxLib.GetUpperModuleCount"/>
         int GetUpperModuleCount(int slotId);
 
-        /// <inheritdoc cref="SunVoxLibNativeWrapper.GetModuleControllerCount"/>
+        /// <inheritdoc cref="SunVoxLib.GetModuleControllerCount"/>
         int GetModuleControllerCount(int slotId, int moduleId);
 
-        /// <inheritdoc cref="SunVoxLibNativeWrapper.LoadModule(int, string, int, int, int)"/>
+        /// <inheritdoc cref="SunVoxLib.LoadModule(int, string, int, int, int)"/>
         int LoadModule(int slotId, string path, int x = 0, int y = 0, int z = 0);
 
-        /// <inheritdoc cref="SunVoxLibNativeWrapper.LoadModule(int, byte[], int, int, int)"/>
+        /// <inheritdoc cref="SunVoxLib.LoadModule(int, byte[], int, int, int)"/>
         int LoadModule(int slotId, byte[] data, int x = 0, int y = 0, int z = 0);
 
-        /// <inheritdoc cref="SunVoxLibNativeWrapper.WriteModuleCurve"/>
+        /// <inheritdoc cref="SunVoxLib.WriteModuleCurve"/>
         int WriteModuleCurve(int slotId, int moduleId, int curveId, float[] data);
 
-        /// <inheritdoc cref="SunVoxLibNativeWrapper.ReadModuleCurve"/>
+        /// <inheritdoc cref="SunVoxLib.ReadModuleCurve"/>
         int ReadModuleCurve(int slotId, int moduleId, int curveId, float[] data);
 
-        /// <inheritdoc cref="SunVoxLibNativeWrapper.CreateModule"/>
+        /// <inheritdoc cref="SunVoxLib.CreateModule"/>
         int CreateModule(int slotId, SynthModuleType type, string? name = null, int x = 0, int y = 0, int z = 0);
 
-        /// <inheritdoc cref="SunVoxLibNativeWrapper.CreateModule"/>
+        /// <inheritdoc cref="SunVoxLib.CreateModule"/>
         int CreateModule(int slotId, string type, string? name = null, int x = 0, int y = 0, int z = 0);
 
-        /// <inheritdoc cref="SunVoxLibNativeWrapper.RemoveModule"/>
+        /// <inheritdoc cref="SunVoxLib.RemoveModule"/>
         void RemoveModule(int slotId, int moduleId);
 
-        /// <inheritdoc cref="SunVoxLibNativeWrapper.LoadSamplerSample(int, int, string, int?)"/>
+        /// <inheritdoc cref="SunVoxLib.LoadSamplerSample(int, int, string, int?)"/>
         void LoadSamplerSample(int slotId, int moduleId, string path, int? sampleSlot = null);
 
-        /// <inheritdoc cref="SunVoxLibNativeWrapper.LoadSamplerSample(int, int, byte[], int?)"/>
+        /// <inheritdoc cref="SunVoxLib.LoadSamplerSample(int, int, byte[], int?)"/>
         void LoadSamplerSample(int slotId, int moduleId, byte[] data, int? sampleSlot = null);
 
-        /// <inheritdoc cref="SunVoxLibNativeWrapper.LoadIntoMetaModule(int, int, string)"/>
+        /// <inheritdoc cref="SunVoxLib.LoadIntoMetaModule(int, int, string)"/>
         void LoadIntoMetaModule(int slotId, int moduleId, string path);
 
-        /// <inheritdoc cref="SunVoxLibNativeWrapper.LoadIntoMetaModule(int, int, byte[])"/>
+        /// <inheritdoc cref="SunVoxLib.LoadIntoMetaModule(int, int, byte[])"/>
         void LoadIntoMetaModule(int slotId, int moduleId, byte[] data);
 
-        /// <inheritdoc cref="SunVoxLibNativeWrapper.LoadIntoVorbisPlayer(int, int, string)"/>
+        /// <inheritdoc cref="SunVoxLib.LoadIntoVorbisPlayer(int, int, string)"/>
         void LoadIntoVorbisPlayer(int slotId, int moduleId, string path);
 
-        /// <inheritdoc cref="SunVoxLibNativeWrapper.LoadIntoVorbisPlayer(int, int, byte[])"/>
+        /// <inheritdoc cref="SunVoxLib.LoadIntoVorbisPlayer(int, int, byte[])"/>
         void LoadIntoVorbisPlayer(int slotId, int moduleId, byte[] data);
     }
 }

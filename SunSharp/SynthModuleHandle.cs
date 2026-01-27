@@ -2,133 +2,139 @@ using SunSharp.Native;
 
 namespace SunSharp
 {
-    /// <summary>
-    /// Represents a handle to a generic synthesizer module, providing access to module properties
-    /// and operations regardless of the underlying module type.
-    /// </summary>
+    /// <inheritdoc cref="SynthModuleHandle"/>
     public interface IGenericSynthModuleHandle
     {
-        /// <summary>
-        /// Gets the ID of the synthessizer module.
-        /// </summary>
+        /// <inheritdoc cref="SynthModuleHandle.Id"/>
         int Id { get; }
 
-        /// <summary>
-        /// Gets the slot associated with this instance.
-        /// </summary>
+        /// <inheritdoc cref="SynthModuleHandle.Slot"/>
         ISlot Slot { get; }
 
+        /// <inheritdoc cref="SynthModuleHandle.GetFlags"/>
         ModuleFlags GetFlags();
 
-        /// <summary>
-        /// Returns the module type. If the module does not exist, returns <see langword="null"/>.
-        /// If the module type is unknown (due to library mismatch or otherwise), returns <see cref="SynthModuleType.Unknown"/>.
-        /// </summary>
-        /// <returns> </returns>
+        /// <inheritdoc cref="SynthModuleHandle.GetModuleType"/>
         SynthModuleType? GetModuleType();
 
+        /// <inheritdoc cref="SynthModuleHandle.GetExists"/>
         bool GetExists();
 
+        /// <inheritdoc cref="SynthModuleHandle.GetFineTune"/>
         FineTunePair GetFineTune();
 
+        /// <inheritdoc cref="SynthModuleHandle.SetFineTune"/>
         void SetFineTune(FineTunePair fineTune);
 
-        /// <summary>
-        /// Read module scope view, and write it to a buffer.
-        /// </summary>
-        /// <returns> Number of samples successfully read. </returns>
+        /// <inheritdoc cref="SynthModuleHandle.ReadScope"/>
         int ReadScope(AudioChannel channel, short[] buffer);
 
+        /// <inheritdoc cref="SynthModuleHandle.GetName"/>
         string? GetName();
 
+        /// <inheritdoc cref="SynthModuleHandle.SetName"/>
         void SetName(string name);
 
+        /// <inheritdoc cref="SynthModuleHandle.GetPosition"/>
         (int x, int y) GetPosition();
 
+        /// <inheritdoc cref="SynthModuleHandle.SetPosition"/>
         void SetPosition(int x, int y);
 
+        /// <inheritdoc cref="SynthModuleHandle.GetColor"/>
         (byte R, byte G, byte B) GetColor();
 
+        /// <inheritdoc cref="SynthModuleHandle.SetColor"/>
         void SetColor(byte r, byte g, byte b);
 
+        /// <inheritdoc cref="SynthModuleHandle.GetInputs"/>
         int[] GetInputs();
 
+        /// <inheritdoc cref="SynthModuleHandle.GetInputModules"/>
         ISynthModuleHandle[] GetInputModules();
 
+        /// <inheritdoc cref="SynthModuleHandle.GetOutputs"/>
         int[] GetOutputs();
 
+        /// <inheritdoc cref="SynthModuleHandle.GetOutputModules"/>
         ISynthModuleHandle[] GetOutputModules();
     }
 
     public partial interface ISynthModuleHandle : IGenericSynthModuleHandle
     {
-        /// <summary>
-        /// Load a sample (xi, wav, aiff) to a Sampler module from file.
-        /// </summary>
-        /// <remarks>
-        /// Set <paramref name="sampleSlot"/> to <see langword="null"/> to apply the sample to all
-        /// sample slots.
-        /// </remarks>
+        /// <inheritdoc cref="SynthModuleHandle.LoadSamplerSample(string, int?)"/>
         void LoadSamplerSample(string path, int? sampleSlot = null);
 
-        /// <summary>
-        /// Load a sample (xi, wav, aiff) to a Sampler module from memory. Set <paramref
-        /// name="sampleSlot"/> to -1 to apply the sample to all sample slots.
-        /// </summary>
+        /// <inheritdoc cref="SynthModuleHandle.LoadSamplerSample(byte[], int?)"/>
         void LoadSamplerSample(byte[] data, int? sampleSlot = null);
 
-        /// <summary>
-        /// load a file into the MetaModule. Supported file formats: sunvox, mod, xm, midi.
-        /// </summary>
+        /// <inheritdoc cref="SynthModuleHandle.LoadIntoMetaModule(string)"/>
         void LoadIntoMetaModule(string path);
 
-        /// <summary>
-        /// load a file from memory into the MetaModule. Supported file formats: sunvox, mod, xm, midi.
-        /// </summary>
+        /// <inheritdoc cref="SynthModuleHandle.LoadIntoMetaModule(byte[])"/>
         void LoadIntoMetaModule(byte[] data);
 
-        /// <summary>
-        /// load a file into the Vorbis Player. Supported file formats: ogg.
-        /// </summary>
+        /// <inheritdoc cref="SynthModuleHandle.LoadIntoVorbisPlayer(string)"/>
         void LoadIntoVorbisPlayer(string path);
 
-        /// <summary>
-        /// load a file into the Vorbis Player. Supported file formats: ogg.
-        /// </summary>
+        /// <inheritdoc cref="SynthModuleHandle.LoadIntoVorbisPlayer(byte[])"/>
         void LoadIntoVorbisPlayer(byte[] data);
 
+        /// <inheritdoc cref="SynthModuleHandle.WriteCurve"/>
         int WriteCurve(int curveId, float[] buffer);
 
+        /// <inheritdoc cref="SynthModuleHandle.ReadCurve"/>
         int ReadCurve(int curveId, float[] buffer);
 
+        /// <inheritdoc cref="SynthModuleHandle.GetControllerCount"/>
         int GetControllerCount();
 
+        /// <inheritdoc cref="SynthModuleHandle.GetControllerName"/>
         string? GetControllerName(int controllerId);
 
+        /// <inheritdoc cref="SynthModuleHandle.GetControllerValue"/>
         int GetControllerValue(int controllerId, ValueScalingMode scaling = ValueScalingMode.Displayed);
 
+        /// <inheritdoc cref="SynthModuleHandle.SetControllerValue"/>
         void SetControllerValue(int controller, int value, ValueScalingMode scaling = ValueScalingMode.Displayed);
 
+        /// <inheritdoc cref="SynthModuleHandle.GetControllerMinValue"/>
         int GetControllerMinValue(int controllerId, ValueScalingMode scaling);
 
+        /// <inheritdoc cref="SynthModuleHandle.GetControllerMaxValue"/>
         int GetControllerMaxValue(int controllerId, ValueScalingMode scaling);
 
+        /// <inheritdoc cref="SynthModuleHandle.GetControllerOffset"/>
         int GetControllerOffset(int controllerId);
 
+        /// <inheritdoc cref="SynthModuleHandle.GetControllerType"/>
         ControllerType GetControllerType(int controllerId);
 
+        /// <inheritdoc cref="SynthModuleHandle.GetControllerGroup"/>
         int GetControllerGroup(int controllerId);
     }
 
-    /// <inheritdoc cref="ISynthModuleHandle"/>
+    /// <summary>
+    /// Represents a handle to a generic synthesizer module, providing access to module properties
+    /// and operations regardless of the underlying module type.
+    /// </summary>
     public readonly partial struct SynthModuleHandle : ISynthModuleHandle
     {
+#if RELEASE
+        private readonly SunVoxLib _lib;
+#else
         private readonly ISunVoxLib _lib;
+#endif
         private readonly int _slotId;
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// Gets the ID of the synthesizer module.
+        /// </summary>
         public int Id { get; }
 
+        /// <summary>
+        /// Gets the slot associated with this instance.
+        /// </summary>
         public Slot Slot { get; }
 
         ISlot IGenericSynthModuleHandle.Slot => Slot;
@@ -143,13 +149,16 @@ namespace SunSharp
 
         #region general
 
-        /// <inheritdoc/>
+        /// <inheritdoc cref="ISunVoxLib.GetModuleFlags"/>
         public ModuleFlags GetFlags()
         {
             return _lib.GetModuleFlags(_slotId, Id);
         }
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// Returns the module type. If the module does not exist, returns <see langword="null"/>.
+        /// If the module type is unknown (due to library mismatch or otherwise), returns <see cref="SynthModuleType.Unknown"/>.
+        /// </summary>
         public SynthModuleType? GetModuleType()
         {
             var moduleType = _lib.GetModuleType(_slotId, Id);
@@ -160,26 +169,32 @@ namespace SunSharp
             return SynthModuleTypeHelper.TypeFromInternalName(moduleType);
         }
 
-        /// <inheritdoc/>
+        /// <inheritdoc cref="ISunVoxLib.GetModuleExists"/>
         public bool GetExists()
         {
             return _lib.GetModuleExists(_slotId, Id);
         }
 
-        /// <inheritdoc/>
+        /// <inheritdoc cref="ISunVoxLib.GetModuleFineTune"/>
         public FineTunePair GetFineTune()
         {
             return _lib.GetModuleFineTune(_slotId, Id);
         }
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// Sets the fine tune for the module.
+        /// </summary>
         public void SetFineTune(FineTunePair fineTune)
         {
             _lib.SetModuleRelativeNote(_slotId, Id, fineTune.RelativeNote);
             _lib.SetModuleFineTune(_slotId, Id, fineTune.FineTune);
         }
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// Read module scope view, and write it to a buffer.
+        /// </summary>
+        /// <returns>Number of samples successfully read.</returns>
+        /// <inheritdoc cref="ISunVoxLib.ReadModuleScope"/>
         public int ReadScope(AudioChannel channel, short[] buffer)
         {
             return _lib.ReadModuleScope(_slotId, Id, channel, buffer);
@@ -189,37 +204,37 @@ namespace SunSharp
 
         #region cosmetic
 
-        /// <inheritdoc/>
+        /// <inheritdoc cref="ISunVoxLib.GetModuleName"/>
         public string? GetName()
         {
             return _lib.GetModuleName(_slotId, Id);
         }
 
-        /// <inheritdoc/>
+        /// <inheritdoc cref="ISunVoxLib.SetModuleName"/>
         public void SetName(string name)
         {
             _lib.SetModuleName(_slotId, Id, name);
         }
 
-        /// <inheritdoc/>
+        /// <inheritdoc cref="ISunVoxLib.GetModulePosition"/>
         public (int x, int y) GetPosition()
         {
             return _lib.GetModulePosition(_slotId, Id);
         }
 
-        /// <inheritdoc/>
+        /// <inheritdoc cref="ISunVoxLib.SetModulePosition"/>
         public void SetPosition(int x, int y)
         {
             _lib.SetModulePosition(_slotId, Id, x, y);
         }
 
-        /// <inheritdoc/>
+        /// <inheritdoc cref="ISunVoxLib.GetModuleColor"/>
         public (byte R, byte G, byte B) GetColor()
         {
             return _lib.GetModuleColor(_slotId, Id);
         }
 
-        /// <inheritdoc/>
+        /// <inheritdoc cref="ISunVoxLib.SetModuleColor"/>
         public void SetColor(byte r, byte g, byte b)
         {
             _lib.SetModuleColor(_slotId, Id, r, g, b);
@@ -229,13 +244,15 @@ namespace SunSharp
 
         #region connections
 
-        /// <inheritdoc/>
+        /// <inheritdoc cref="ISunVoxLib.GetModuleInputs"/>
         public int[] GetInputs()
         {
             return _lib.GetModuleInputs(_slotId, Id);
         }
 
-        /// <inheritdoc cref="=IModuleHandle.GetInputModules"/>
+        /// <summary>
+        /// Gets the input modules connected to this module.
+        /// </summary>
         public SynthModuleHandle[] GetInputModules()
         {
             return ToHandles(GetInputs());
@@ -246,14 +263,16 @@ namespace SunSharp
             return ToInterfaceHandles(GetInputs());
         }
 
-        /// <inheritdoc/>
+        /// <inheritdoc cref="ISunVoxLib.GetModuleOutputs"/>
         public int[] GetOutputs()
         {
             return _lib.GetModuleInputs(_slotId, Id);
         }
 
-        /// <inheritdoc/>
-        public SynthModuleHandle[] GetModuleOutputs()
+        /// <summary>
+        /// Gets the output modules connected to this module.
+        /// </summary>
+        public SynthModuleHandle[] GetOutputModules()
         {
             return ToHandles(GetOutputs());
         }
@@ -287,7 +306,13 @@ namespace SunSharp
 
         #region specific data IO
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// Load a sample (xi, wav, aiff) to a Sampler module from file.
+        /// </summary>
+        /// <remarks>
+        /// Set <paramref name="sampleSlot"/> to <see langword="null"/> to apply the sample to all sample slots.
+        /// </remarks>
+        /// <inheritdoc cref="ISunVoxLib.LoadSamplerSample(int, int, string, int?)"/>
         public void LoadSamplerSample(string path, int? sampleSlot = null)
         {
             var lib = _lib;
@@ -299,43 +324,49 @@ namespace SunSharp
             }
         }
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// Load a sample (xi, wav, aiff) to a Sampler module from memory.
+        /// </summary>
+        /// <remarks>
+        /// Set <paramref name="sampleSlot"/> to <see langword="null"/> to apply the sample to all sample slots.
+        /// </remarks>
+        /// <inheritdoc cref="ISunVoxLib.LoadSamplerSample(int, int, byte[], int?)"/>
         public void LoadSamplerSample(byte[] data, int? sampleSlot = null)
         {
-            var lib = _lib;
-            var slotId = _slotId;
-            var id = Id;
-            using (Slot.AcquireLock())
-            {
-                lib.LoadSamplerSample(slotId, id, data, sampleSlot);
-            }
+            _lib.LoadSamplerSample(_slotId, Id, data, sampleSlot);
         }
 
-        /// <inheritdoc/>
+        /// <inheritdoc cref="ISunVoxLib.LoadIntoMetaModule(int, int, string)"/>
         public void LoadIntoMetaModule(string path)
         {
             _lib.LoadIntoMetaModule(_slotId, Id, path);
         }
 
-        /// <inheritdoc/>
+        /// <inheritdoc cref="ISunVoxLib.LoadIntoMetaModule(int, int, byte[])"/>
         public void LoadIntoMetaModule(byte[] data)
         {
             _lib.LoadIntoMetaModule(_slotId, Id, data);
         }
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// Load a file into the Vorbis Player. Supported file formats: ogg.
+        /// </summary>
+        /// <inheritdoc cref="ISunVoxLib.LoadIntoVorbisPlayer(int, int, string)"/>
         public void LoadIntoVorbisPlayer(string path)
         {
             _lib.LoadIntoVorbisPlayer(_slotId, Id, path);
         }
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// Load a file into the Vorbis Player. Supported file formats: ogg.
+        /// </summary>
+        /// <inheritdoc cref="ISunVoxLib.LoadIntoVorbisPlayer(int, int, byte[])"/>
         public void LoadIntoVorbisPlayer(byte[] data)
         {
             _lib.LoadIntoVorbisPlayer(_slotId, Id, data);
         }
 
-        /// <inheritdoc/>
+        /// <inheritdoc cref="ISunVoxLib.WriteModuleCurve"/>
         public int WriteCurve(int curveId, float[] buffer)
         {
             var lib = _lib;
@@ -347,7 +378,7 @@ namespace SunSharp
             }
         }
 
-        /// <inheritdoc/>
+        /// <inheritdoc cref="ISunVoxLib.ReadModuleCurve"/>
         public int ReadCurve(int curveId, float[] buffer)
         {
             var lib = _lib;
@@ -363,55 +394,55 @@ namespace SunSharp
 
         #region controllers
 
-        /// <inheritdoc/>
+        /// <inheritdoc cref="ISunVoxLib.GetModuleControllerCount"/>
         public int GetControllerCount()
         {
             return _lib.GetModuleControllerCount(_slotId, Id);
         }
 
-        /// <inheritdoc/>
+        /// <inheritdoc cref="ISunVoxLib.GetModuleControllerName"/>
         public string? GetControllerName(int controllerId)
         {
             return _lib.GetModuleControllerName(_slotId, Id, controllerId);
         }
 
-        /// <inheritdoc/>
+        /// <inheritdoc cref="ISunVoxLib.GetModuleControllerValue"/>
         public int GetControllerValue(int controllerId, ValueScalingMode scaling = ValueScalingMode.Displayed)
         {
             return _lib.GetModuleControllerValue(_slotId, Id, controllerId, scaling);
         }
 
-        /// <inheritdoc/>
+        /// <inheritdoc cref="ISunVoxLib.SetModuleControllerValue"/>
         public void SetControllerValue(int controller, int value, ValueScalingMode scaling = ValueScalingMode.Displayed)
         {
             _lib.SetModuleControllerValue(_slotId, Id, controller, value, scaling);
         }
 
-        /// <inheritdoc/>
+        /// <inheritdoc cref="ISunVoxLib.GetModuleControllerMinValue"/>
         public int GetControllerMinValue(int controllerId, ValueScalingMode scaling)
         {
             return _lib.GetModuleControllerMinValue(_slotId, Id, controllerId, scaling);
         }
 
-        /// <inheritdoc/>
+        /// <inheritdoc cref="ISunVoxLib.GetModuleControllerMaxValue"/>
         public int GetControllerMaxValue(int controllerId, ValueScalingMode scaling)
         {
             return _lib.GetModuleControllerMaxValue(_slotId, Id, controllerId, scaling);
         }
 
-        /// <inheritdoc/>
+        /// <inheritdoc cref="ISunVoxLib.GetModuleControllerOffset"/>
         public int GetControllerOffset(int controllerId)
         {
             return _lib.GetModuleControllerOffset(_slotId, Id, controllerId);
         }
 
-        /// <inheritdoc/>
+        /// <inheritdoc cref="ISunVoxLib.GetModuleControllerType"/>
         public ControllerType GetControllerType(int controllerId)
         {
             return _lib.GetModuleControllerType(_slotId, Id, controllerId);
         }
 
-        /// <inheritdoc/>
+        /// <inheritdoc cref="ISunVoxLib.GetModuleControllerGroup"/>
         public int GetControllerGroup(int controllerId)
         {
             return _lib.GetModuleControllerGroup(_slotId, Id, controllerId);

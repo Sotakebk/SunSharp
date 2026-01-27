@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 
 namespace SunSharp.Native
 {
-    public partial class SunVoxLibNativeWrapper
+    public partial struct SunVoxLib : ISunVoxLib
     {
         /// <summary>
         /// Connect the source module to the destination module.

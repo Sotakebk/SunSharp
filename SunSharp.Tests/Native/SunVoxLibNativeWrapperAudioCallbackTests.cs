@@ -15,7 +15,7 @@ public class SunVoxLibNativeWrapperAudioCallbackTests
         var library = Substitute.For<ISunVoxLibC>();
         var outputBuffer = new short[256];
         var inputBuffer = new short[256];
-        var wrapper = new SunVoxLibNativeWrapper(library);
+        var wrapper = new SunVoxLib(library);
         library.sv_audio_callback2(Arg.Any<IntPtr>(), Arg.Any<int>(), Arg.Any<int>(), Arg.Any<uint>(), Arg.Any<int>(),
                 Arg.Any<int>(), Arg.Any<IntPtr>())
             .Returns(expectedValue ? 1 : 0);
@@ -49,7 +49,7 @@ public class SunVoxLibNativeWrapperAudioCallbackTests
         var outputBuffer = new short[256];
         var inputBuffer = new float[256];
         var library = Substitute.For<ISunVoxLibC>();
-        var wrapper = new SunVoxLibNativeWrapper(library);
+        var wrapper = new SunVoxLib(library);
         library.sv_audio_callback2(Arg.Any<IntPtr>(), Arg.Any<int>(), Arg.Any<int>(), Arg.Any<uint>(), Arg.Any<int>(),
                 Arg.Any<int>(), Arg.Any<IntPtr>())
             .Returns(expectedValue ? 1 : 0);
@@ -83,7 +83,7 @@ public class SunVoxLibNativeWrapperAudioCallbackTests
         var outputBuffer = new float[256];
         var inputBuffer = new short[256];
         var library = Substitute.For<ISunVoxLibC>();
-        var wrapper = new SunVoxLibNativeWrapper(library);
+        var wrapper = new SunVoxLib(library);
         library.sv_audio_callback2(Arg.Any<IntPtr>(), Arg.Any<int>(), Arg.Any<int>(), Arg.Any<uint>(), Arg.Any<int>(),
                 Arg.Any<int>(), Arg.Any<IntPtr>())
             .Returns(expectedValue ? 1 : 0);
@@ -116,7 +116,7 @@ public class SunVoxLibNativeWrapperAudioCallbackTests
     {
         var buffer = new float[256];
         var library = Substitute.For<ISunVoxLibC>();
-        var wrapper = new SunVoxLibNativeWrapper(library);
+        var wrapper = new SunVoxLib(library);
         library.sv_audio_callback(Arg.Any<IntPtr>(), Arg.Any<int>(), Arg.Any<int>(), Arg.Any<uint>())
             .Returns(expectedValue ? 1 : 0);
         var copiedBuffer = Array.Empty<float>();
@@ -141,7 +141,7 @@ public class SunVoxLibNativeWrapperAudioCallbackTests
     public void AudioCallback_WithFloatInMonoOnReturnCodeNotOneOrZero_ShouldThrow(float[] buffer, int latency, uint outTime)
     {
         var library = Substitute.For<ISunVoxLibC>();
-        var wrapper = new SunVoxLibNativeWrapper(library);
+        var wrapper = new SunVoxLib(library);
         library.sv_audio_callback(Arg.Any<IntPtr>(), Arg.Any<int>(), Arg.Any<int>(), Arg.Any<uint>())
             .Returns(ErrorResponseCode);
         // when
@@ -160,7 +160,7 @@ public class SunVoxLibNativeWrapperAudioCallbackTests
     {
         var buffer = new float[256];
         var library = Substitute.For<ISunVoxLibC>();
-        var wrapper = new SunVoxLibNativeWrapper(library);
+        var wrapper = new SunVoxLib(library);
         library.sv_audio_callback(Arg.Any<IntPtr>(), Arg.Any<int>(), Arg.Any<int>(), Arg.Any<uint>())
             .Returns(expectedValue ? 1 : 0);
         var copiedBuffer = Array.Empty<float>();
@@ -185,7 +185,7 @@ public class SunVoxLibNativeWrapperAudioCallbackTests
     public void AudioCallback_WithFloatInStereoOnBufferSizeNotMultipleOfTwo_ShouldThrow(float[] buffer, int latency, uint outTime)
     {
         var library = Substitute.For<ISunVoxLibC>();
-        var wrapper = new SunVoxLibNativeWrapper(library);
+        var wrapper = new SunVoxLib(library);
         library.sv_audio_callback(Arg.Any<IntPtr>(), Arg.Any<int>(), Arg.Any<int>(), Arg.Any<uint>()).Returns(0);
         // when
         wrapper.Invoking(w => w.AudioCallback(buffer, AudioChannels.Stereo, latency, outTime)).Should().Throw<ArgumentException>().WithMessage("Buffer size is not a multiple of two.");
@@ -198,7 +198,7 @@ public class SunVoxLibNativeWrapperAudioCallbackTests
     {
         var buffer = new float[256];
         var library = Substitute.For<ISunVoxLibC>();
-        var wrapper = new SunVoxLibNativeWrapper(library);
+        var wrapper = new SunVoxLib(library);
         library.sv_audio_callback(Arg.Any<IntPtr>(), Arg.Any<int>(), Arg.Any<int>(), Arg.Any<uint>())
             .Returns(ErrorResponseCode);
         // when
@@ -216,7 +216,7 @@ public class SunVoxLibNativeWrapperAudioCallbackTests
     {
         var buffer = new short[256];
         var library = Substitute.For<ISunVoxLibC>();
-        var wrapper = new SunVoxLibNativeWrapper(library);
+        var wrapper = new SunVoxLib(library);
         library.sv_audio_callback(Arg.Any<IntPtr>(), Arg.Any<int>(), Arg.Any<int>(), Arg.Any<uint>())
             .Returns(expectedValue ? 1 : 0);
         var copiedBuffer = Array.Empty<short>();
@@ -242,7 +242,7 @@ public class SunVoxLibNativeWrapperAudioCallbackTests
     {
         var buffer = new short[256];
         var library = Substitute.For<ISunVoxLibC>();
-        var wrapper = new SunVoxLibNativeWrapper(library);
+        var wrapper = new SunVoxLib(library);
         library.sv_audio_callback(Arg.Any<IntPtr>(), Arg.Any<int>(), Arg.Any<int>(), Arg.Any<uint>())
             .Returns(ErrorResponseCode);
         // when
@@ -261,7 +261,7 @@ public class SunVoxLibNativeWrapperAudioCallbackTests
     {
         var buffer = new short[256];
         var library = Substitute.For<ISunVoxLibC>();
-        var wrapper = new SunVoxLibNativeWrapper(library);
+        var wrapper = new SunVoxLib(library);
         library.sv_audio_callback(Arg.Any<IntPtr>(), Arg.Any<int>(), Arg.Any<int>(), Arg.Any<uint>())
             .Returns(expectedValue ? 1 : 0);
         var copiedBuffer = Array.Empty<short>();
@@ -286,7 +286,7 @@ public class SunVoxLibNativeWrapperAudioCallbackTests
     public void AudioCallback_WithShortInStereoOnBufferSizeNotMultipleOfTwo_ShouldThrow(short[] buffer, int latency, uint outTime)
     {
         var library = Substitute.For<ISunVoxLibC>();
-        var wrapper = new SunVoxLibNativeWrapper(library);
+        var wrapper = new SunVoxLib(library);
         library.sv_audio_callback(Arg.Any<IntPtr>(), Arg.Any<int>(), Arg.Any<int>(), Arg.Any<uint>()).Returns(0);
         // when
         wrapper.Invoking(w => w.AudioCallback(buffer, AudioChannels.Stereo, latency, outTime)).Should().Throw<ArgumentException>().WithMessage("Buffer size is not a multiple of two.");
@@ -299,7 +299,7 @@ public class SunVoxLibNativeWrapperAudioCallbackTests
     {
         var buffer = new short[256];
         var library = Substitute.For<ISunVoxLibC>();
-        var wrapper = new SunVoxLibNativeWrapper(library);
+        var wrapper = new SunVoxLib(library);
         library.sv_audio_callback(Arg.Any<IntPtr>(), Arg.Any<int>(), Arg.Any<int>(), Arg.Any<uint>())
             .Returns(ErrorResponseCode);
         // when
@@ -317,7 +317,7 @@ public class SunVoxLibNativeWrapperAudioCallbackTests
         bool expectedValue, float[] outputBuffer, float[] inputBuffer, int latency, uint outTime)
     {
         var library = Substitute.For<ISunVoxLibC>();
-        var wrapper = new SunVoxLibNativeWrapper(library);
+        var wrapper = new SunVoxLib(library);
         library.sv_audio_callback2(Arg.Any<IntPtr>(), Arg.Any<int>(), Arg.Any<int>(), Arg.Any<uint>(), Arg.Any<int>(),
                 Arg.Any<int>(), Arg.Any<IntPtr>())
             .Returns(expectedValue ? 1 : 0);
@@ -347,7 +347,7 @@ public class SunVoxLibNativeWrapperAudioCallbackTests
         var outputBuffer = new float[10];
         var inputBuffer = new float[11];
         var library = Substitute.For<ISunVoxLibC>();
-        var wrapper = new SunVoxLibNativeWrapper(library);
+        var wrapper = new SunVoxLib(library);
         library.sv_audio_callback2(Arg.Any<IntPtr>(), Arg.Any<int>(), Arg.Any<int>(), Arg.Any<uint>(), Arg.Any<int>(), Arg.Any<int>(), Arg.Any<IntPtr>())
             .Returns(1);
         // when
@@ -361,7 +361,7 @@ public class SunVoxLibNativeWrapperAudioCallbackTests
     public void AudioCallback_WithOutputFloatInMonoInputFloatInMonoOnReturnCodeNotOneOrZero_ShouldThrow(float[] outputBuffer, float[] inputBuffer, int latency, uint outTime)
     {
         var library = Substitute.For<ISunVoxLibC>();
-        var wrapper = new SunVoxLibNativeWrapper(library);
+        var wrapper = new SunVoxLib(library);
         library.sv_audio_callback2(Arg.Any<IntPtr>(), Arg.Any<int>(), Arg.Any<int>(), Arg.Any<uint>(), Arg.Any<int>(), Arg.Any<int>(), Arg.Any<IntPtr>())
             .Returns(ErrorResponseCode);
         // when
@@ -380,7 +380,7 @@ public class SunVoxLibNativeWrapperAudioCallbackTests
         var outputBuffer = new float[256];
         var inputBuffer = new float[128];
         var library = Substitute.For<ISunVoxLibC>();
-        var wrapper = new SunVoxLibNativeWrapper(library);
+        var wrapper = new SunVoxLib(library);
         library.sv_audio_callback2(Arg.Any<IntPtr>(), Arg.Any<int>(), Arg.Any<int>(), Arg.Any<uint>(), Arg.Any<int>(),
                 Arg.Any<int>(), Arg.Any<IntPtr>())
             .Returns(expectedValue ? 1 : 0);
@@ -408,7 +408,7 @@ public class SunVoxLibNativeWrapperAudioCallbackTests
     public void AudioCallback_WithOutputFloatInStereoInputFloatInMonoOnBufferSizeMismatch_ShouldThrow(float[] outputBuffer, float[] inputBuffer, int latency, uint outTime)
     {
         var library = Substitute.For<ISunVoxLibC>();
-        var wrapper = new SunVoxLibNativeWrapper(library);
+        var wrapper = new SunVoxLib(library);
         library.sv_audio_callback2(Arg.Any<IntPtr>(), Arg.Any<int>(), Arg.Any<int>(), Arg.Any<uint>(), Arg.Any<int>(),
                 Arg.Any<int>(), Arg.Any<IntPtr>())
             .Returns(1);
@@ -430,7 +430,7 @@ public class SunVoxLibNativeWrapperAudioCallbackTests
         var outputBuffer = new float[256];
         var inputBuffer = new float[256];
         var library = Substitute.For<ISunVoxLibC>();
-        var wrapper = new SunVoxLibNativeWrapper(library);
+        var wrapper = new SunVoxLib(library);
         library.sv_audio_callback2(Arg.Any<IntPtr>(), Arg.Any<int>(), Arg.Any<int>(), Arg.Any<uint>(), Arg.Any<int>(),
                 Arg.Any<int>(), Arg.Any<IntPtr>())
             .Returns(expectedValue ? 1 : 0);
@@ -458,7 +458,7 @@ public class SunVoxLibNativeWrapperAudioCallbackTests
     public void AudioCallback_WithOutputFloatInStereoInputFloatInStereoOnInputBufferSizeNotDivisibleByTwo_ShouldThrow(int latency, uint outTime)
     {
         var library = Substitute.For<ISunVoxLibC>();
-        var wrapper = new SunVoxLibNativeWrapper(library);
+        var wrapper = new SunVoxLib(library);
         // Use provided parameters, but ensure inputBuffer is not divisible by two and outputBuffer is divisible by two
         var outputBuffer = new float[256];
         var inputBuffer = new float[255];
@@ -474,7 +474,7 @@ public class SunVoxLibNativeWrapperAudioCallbackTests
     public void AudioCallback_WithOutputFloatInStereoInputFloatInStereoOnOutputBufferSizeNotDivisibleByTwo_ShouldThrow(int latency, uint outTime)
     {
         var library = Substitute.For<ISunVoxLibC>();
-        var wrapper = new SunVoxLibNativeWrapper(library);
+        var wrapper = new SunVoxLib(library);
         // Use provided parameters, but ensure outputBuffer is not divisible by two and inputBuffer is divisible by two
         var outputBuffer = new float[31];
         var inputBuffer = new float[32];

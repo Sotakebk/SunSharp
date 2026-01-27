@@ -5,60 +5,70 @@ using SunSharp.Native;
 
 namespace SunSharp
 {
+    /// <inheritdoc cref="Synthesizer"/>
     public interface ISynthesizer : IEnumerable<ISynthModuleHandle>
     {
+        /// <inheritdoc cref="Synthesizer.Slot"/>
         ISlot Slot { get; }
 
+        /// <inheritdoc cref="Synthesizer.GetUpperModuleCount"/>
         int GetUpperModuleCount();
 
+        /// <inheritdoc cref="Synthesizer.GetModuleExists"/>
         bool GetModuleExists(int moduleId);
 
+        /// <inheritdoc cref="Synthesizer.GetModuleFlags"/>
         ModuleFlags GetModuleFlags(int moduleId);
 
+        /// <inheritdoc cref="Synthesizer.TryGetModule(int, out SynthModuleHandle?)"/>
         bool TryGetModule(int moduleId, [NotNullWhen(true)] out ISynthModuleHandle? moduleHandle);
 
+        /// <inheritdoc cref="Synthesizer.TryGetModule(string, out SynthModuleHandle?)"/>
         bool TryGetModule(string name, [NotNullWhen(true)] out ISynthModuleHandle? moduleHandle);
 
+        /// <inheritdoc cref="Synthesizer.CreateModule"/>
         ISynthModuleHandle CreateModule(SynthModuleType type, string name, int x = 0, int y = 0, int z = 0);
 
-        /// <summary>
-        /// load a module or sample. Supported file formats: sunsynth, xi, wav, aiff.
-        /// </summary>
-        /// <param name="data"></param>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        /// <param name="z"></param>
-        /// <returns></returns>
+        /// <inheritdoc cref="Synthesizer.LoadModule(byte[], int, int, int)"/>
         ISynthModuleHandle LoadModule(byte[] data, int x = 0, int y = 0, int z = 0);
 
-        /// <summary>
-        /// load a module or sample. Supported file formats: sunsynth, xi, wav, aiff.
-        /// </summary>
-        /// <param name="path"></param>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        /// <param name="z"></param>
-        /// <returns></returns>
+        /// <inheritdoc cref="Synthesizer.LoadModule(string, int, int, int)"/>
         ISynthModuleHandle LoadModule(string path, int x = 0, int y = 0, int z = 0);
 
+        /// <inheritdoc cref="Synthesizer.RemoveModule(int)"/>
         void RemoveModule(int moduleId);
 
+        /// <inheritdoc cref="Synthesizer.RemoveModule(SynthModuleHandle)"/>
         void RemoveModule(ISynthModuleHandle moduleHandle);
 
+        /// <inheritdoc cref="Synthesizer.ConnectModule(int, int)"/>
         void ConnectModule(int sourceId, int destinationId);
 
+        /// <inheritdoc cref="Synthesizer.ConnectModule(SynthModuleHandle, SynthModuleHandle)"/>
         void ConnectModule(ISynthModuleHandle source, ISynthModuleHandle destination);
 
+        /// <inheritdoc cref="Synthesizer.DisconnectModule(int, int)"/>
         void DisconnectModule(int sourceId, int destinationId);
 
+        /// <inheritdoc cref="Synthesizer.DisconnectModule(SynthModuleHandle, SynthModuleHandle)"/>
         void DisconnectModule(ISynthModuleHandle source, ISynthModuleHandle destination);
     }
 
+    /// <summary>
+    /// Project synthesizer, containing all the existing modules.
+    /// </summary>
     public class Synthesizer : ISynthesizer, IEnumerable<SynthModuleHandle>
     {
+#if RELEASE
+        private readonly SunVoxLib _lib;
+#else
         private readonly ISunVoxLib _lib;
+#endif
         private readonly int _id;
 
+        /// <summary>
+        /// Gets the slot this synthesizer belongs to.
+        /// </summary>
         public Slot Slot { get; }
 
         ISlot ISynthesizer.Slot => Slot;
@@ -70,25 +80,27 @@ namespace SunSharp
             _id = slot.Id;
         }
 
-        /// <inheritdoc/>
+        /// <inheritdoc cref="ISunVoxLib.GetUpperModuleCount"/>
         public int GetUpperModuleCount()
         {
             return _lib.GetUpperModuleCount(_id);
         }
 
-        /// <inheritdoc/>
+        /// <inheritdoc cref="ISunVoxLib.GetModuleExists"/>
         public bool GetModuleExists(int moduleId)
         {
             return _lib.GetModuleExists(_id, moduleId);
         }
 
-        /// <inheritdoc/>
+        /// <inheritdoc cref="ISunVoxLib.GetModuleFlags"/>
         public ModuleFlags GetModuleFlags(int moduleId)
         {
             return _lib.GetModuleFlags(_id, moduleId);
         }
 
-        /// <inheritdoc cref="ISynthesizer.TryGetModule(int, out ISynthModuleHandle?)"/>
+        /// <summary>
+        /// Tries to get a module by ID.
+        /// </summary>
         public bool TryGetModule(int moduleId, [NotNullWhen(true)] out SynthModuleHandle? moduleHandle)
         {
             if (_lib.GetModuleExists(_id, moduleId))
@@ -101,7 +113,9 @@ namespace SunSharp
             return false;
         }
 
-        /// <inheritdoc cref="ISynthesizer.TryGetModule(string, out ISynthModuleHandle?)"/>
+        /// <summary>
+        /// Tries to get a module by name.
+        /// </summary>
         public bool TryGetModule(string name, [NotNullWhen(true)] out SynthModuleHandle? moduleHandle)
         {
             var moduleId = _lib.FindModule(_id, name);
@@ -141,7 +155,7 @@ namespace SunSharp
             return false;
         }
 
-        /// <inheritdoc cref="ISynthesizer.CreateModule"/>
+        /// <inheritdoc cref="ISunVoxLib.CreateModule(int, SynthModuleType, string, int, int, int)"/>
         public SynthModuleHandle CreateModule(SynthModuleType type, string name, int x = 0, int y = 0, int z = 0)
         {
             using (Slot.AcquireLock())
@@ -157,7 +171,10 @@ namespace SunSharp
             return CreateModule(type, name, x, y, z);
         }
 
-        /// <inheritdoc cref="ISynthesizer.LoadModule(byte[], int, int, int)"/>
+        /// <summary>
+        /// Load a module or sample from memory. Supported file formats: sunsynth, xi, wav, aiff.
+        /// </summary>
+        /// <inheritdoc cref="ISunVoxLib.LoadModule(int, byte[], int, int, int)"/>
         public SynthModuleHandle LoadModule(byte[] data, int x = 0, int y = 0, int z = 0)
         {
             using (Slot.AcquireLock())
@@ -167,7 +184,10 @@ namespace SunSharp
             }
         }
 
-        /// <inheritdoc cref="ISynthesizer.LoadModule(string, int, int, int)"/>
+        /// <summary>
+        /// Load a module or sample from file. Supported file formats: sunsynth, xi, wav, aiff.
+        /// </summary>
+        /// <inheritdoc cref="ISunVoxLib.LoadModule(int, string, int, int, int)"/>
         public SynthModuleHandle LoadModule(string path, int x = 0, int y = 0, int z = 0)
         {
             using (Slot.AcquireLock())
@@ -189,7 +209,7 @@ namespace SunSharp
             return LoadModule(path, x, y, z);
         }
 
-        /// <inheritdoc/>
+        /// <inheritdoc cref="ISunVoxLib.RemoveModule"/>
         public void RemoveModule(int moduleId)
         {
             using (Slot.AcquireLock())
@@ -198,7 +218,9 @@ namespace SunSharp
             }
         }
 
-        /// <inheritdoc cref="ISynthesizer.RemoveModule(ISynthModuleHandle)"/>
+        /// <summary>
+        /// Removes a module from the synthesizer.
+        /// </summary>
         public void RemoveModule(SynthModuleHandle moduleHandle)
         {
             RemoveModule(moduleHandle.Id);
@@ -210,7 +232,7 @@ namespace SunSharp
             RemoveModule(moduleHandle.Id);
         }
 
-        /// <inheritdoc/>
+        /// <inheritdoc cref="ISunVoxLib.ConnectModule"/>
         public void ConnectModule(int sourceId, int destinationId)
         {
             using (Slot.AcquireLock())
@@ -219,7 +241,9 @@ namespace SunSharp
             }
         }
 
-        /// <inheritdoc cref="ISynthesizer.ConnectModule(ISynthModuleHandle, ISynthModuleHandle)"/>
+        /// <summary>
+        /// Connects two modules.
+        /// </summary>
         public void ConnectModule(SynthModuleHandle source, SynthModuleHandle destination)
         {
             ConnectModule(source.Id, destination.Id);
@@ -231,7 +255,7 @@ namespace SunSharp
             ConnectModule(source.Id, destination.Id);
         }
 
-        /// <inheritdoc/>
+        /// <inheritdoc cref="ISunVoxLib.DisconnectModule"/>
         public void DisconnectModule(int sourceId, int destinationId)
         {
             using (Slot.AcquireLock())
@@ -240,7 +264,9 @@ namespace SunSharp
             }
         }
 
-        /// <inheritdoc cref="ISynthesizer.DisconnectModule(ISynthModuleHandle, ISynthModuleHandle)"/>
+        /// <summary>
+        /// Disconnects two modules.
+        /// </summary>
         public void DisconnectModule(SynthModuleHandle source, SynthModuleHandle destination)
         {
             DisconnectModule(source.Id, destination.Id);

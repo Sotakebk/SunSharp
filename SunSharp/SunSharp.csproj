@@ -34,6 +34,10 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Generation|AnyCPU'">
     <DefineConstants>GENERATION</DefineConstants>
   </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DefineConstants>RELEASE</DefineConstants>
+  </PropertyGroup>
   
   <Target Name="PreparePackageReleaseNotesFromFile" BeforeTargets="GenerateNuspec">
     <ReadLinesFromFile File="./RELEASE-NOTES.txt">

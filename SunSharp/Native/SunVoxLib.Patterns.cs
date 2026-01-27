@@ -3,22 +3,22 @@ using System.Runtime.InteropServices;
 
 namespace SunSharp.Native
 {
-    public partial class SunVoxLibNativeWrapper
+    public partial struct SunVoxLib : ISunVoxLib
     {
-		/// <summary>
-		/// Clone a pattern.
-		/// </summary>
-		/// <param name="slotId">Slot number (0 to 15).</param>
-		/// <param name="originalPatternId">Pattern to clone.</param>
-		/// <param name="x">Line number on which the pattern starts (horizontal).</param>
-		/// <param name="y">Vertical position on the timeline.</param>
-		/// <returns>The number of the newly created pattern.</returns>
-		/// <exception cref="SunVoxException">Thrown when the operation fails.</exception>
-		/// <remarks>
-		/// <para>Requires <see cref="LockSlot"/> / <see cref="UnlockSlot"/>.</para>
-		/// Calls <see cref="ISunVoxLibC.sv_new_pattern"/>.
-		/// </remarks>
-		public int ClonePattern(int slotId, int originalPatternId, int x, int y)
+        /// <summary>
+        /// Clone a pattern.
+        /// </summary>
+        /// <param name="slotId">Slot number (0 to 15).</param>
+        /// <param name="originalPatternId">Pattern to clone.</param>
+        /// <param name="x">Line number on which the pattern starts (horizontal).</param>
+        /// <param name="y">Vertical position on the timeline.</param>
+        /// <returns>The number of the newly created pattern.</returns>
+        /// <exception cref="SunVoxException">Thrown when the operation fails.</exception>
+        /// <remarks>
+        /// <para>Requires <see cref="LockSlot"/> / <see cref="UnlockSlot"/>.</para>
+        /// Calls <see cref="ISunVoxLibC.sv_new_pattern"/>.
+        /// </remarks>
+        public int ClonePattern(int slotId, int originalPatternId, int x, int y)
         {
             var ret = _lib.sv_new_pattern(slotId, originalPatternId, x, y, -1, -1, -1, IntPtr.Zero);
 
@@ -175,16 +175,16 @@ namespace SunSharp.Native
             return GetPatternLines(slotId, patternId) > 0;
         }
 
-		/// <summary>
-		/// Get the number of lines in the pattern.
-		/// Can be used to check if a pattern exists (lines &gt; 0).
-		/// </summary>
-		/// <param name="slotId">Slot number (0 to 15).</param>
-		/// <param name="patternId">Pattern number.</param>
-		/// <returns>Number of lines.</returns>
-		/// <exception cref="SunVoxException">Thrown when the operation fails.</exception>
-		/// <remarks>Calls <see cref="ISunVoxLibC.sv_get_pattern_lines"/>.</remarks>
-		public int GetPatternLines(int slotId, int patternId)
+        /// <summary>
+        /// Get the number of lines in the pattern.
+        /// Can be used to check if a pattern exists (lines &gt; 0).
+        /// </summary>
+        /// <param name="slotId">Slot number (0 to 15).</param>
+        /// <param name="patternId">Pattern number.</param>
+        /// <returns>Number of lines.</returns>
+        /// <exception cref="SunVoxException">Thrown when the operation fails.</exception>
+        /// <remarks>Calls <see cref="ISunVoxLibC.sv_get_pattern_lines"/>.</remarks>
+        public int GetPatternLines(int slotId, int patternId)
         {
             var ret = _lib.sv_get_pattern_lines(slotId, patternId);
             if (ret < 0)
@@ -314,20 +314,20 @@ namespace SunSharp.Native
             return ret;
         }
 
-		/// <summary>
-		/// Delete a pattern.
-		/// </summary>
-		/// <param name="slotId">Slot number (0 to 15).</param>
-		/// <param name="patternId">Pattern number.</param>
-		/// <exception cref="SunVoxException">Thrown when the operation fails.</exception>
-		/// <remarks>
-		/// <para>
-		/// Deleting the original pattern also deletes all its clones.
+        /// <summary>
+        /// Delete a pattern.
+        /// </summary>
+        /// <param name="slotId">Slot number (0 to 15).</param>
+        /// <param name="patternId">Pattern number.</param>
+        /// <exception cref="SunVoxException">Thrown when the operation fails.</exception>
+        /// <remarks>
+        /// <para>
+        /// Deleting the original pattern also deletes all its clones.
         /// </para>
-		/// <para>Requires <see cref="LockSlot"/> / <see cref="UnlockSlot"/>.</para>
-		/// Calls <see cref="ISunVoxLibC.sv_remove_pattern"/>.
-		/// </remarks>
-		public void RemovePattern(int slotId, int patternId)
+        /// <para>Requires <see cref="LockSlot"/> / <see cref="UnlockSlot"/>.</para>
+        /// Calls <see cref="ISunVoxLibC.sv_remove_pattern"/>.
+        /// </remarks>
+        public void RemovePattern(int slotId, int patternId)
         {
             var ret = _lib.sv_remove_pattern(slotId, patternId);
             if (ret != 0)
@@ -391,29 +391,29 @@ namespace SunSharp.Native
             }
         }
 
-		/// <summary>
-		/// Read a section or all of the pattern data into a buffer.
-		/// </summary>
-		/// <param name="slotId">Slot number (0 to 15).</param>
-		/// <param name="patternId">Pattern number.</param>
-		/// <param name="buffer">Buffer to receive pattern data.</param>
-		/// <param name="bufferTracks">Width of the buffer.</param>
-		/// <param name="bufferLines">Height of the buffer.</param>
-		/// <param name="bufferOffsetTracks">Number of tracks in the buffer to skip.</param>
-		/// <param name="bufferOffsetLines">Number of lines in the buffer to skip.</param>
-		/// <param name="readOffsetTracks">Number of tracks in the pattern to skip.</param>
-		/// <param name="readOffsetLines">Number of lines in the pattern to skip.</param>
-		/// <param name="maxTracks">Maximum number of tracks to read.</param>
-		/// <param name="maxLines">Maximum number of lines to read.</param>
-		/// <returns>Number of events read.</returns>
-		/// <exception cref="ArgumentOutOfRangeException">Thrown if any offset or size parameter is negative.</exception>
-		/// <exception cref="ArgumentException">Thrown if buffer length doesn't match bufferTracks * bufferLines.</exception>
-		/// <exception cref="SunVoxException">Thrown when the operation fails.</exception>
-		/// <remarks>
-		/// <para>Requires <see cref="LockSlot"/> / <see cref="UnlockSlot"/>.</para>
-		/// Calls <see cref="ISunVoxLibC.sv_get_pattern_data"/>.
-		/// </remarks>
-		public int ReadPatternData(int slotId, int patternId, PatternEvent[] buffer, int bufferTracks, int bufferLines,
+        /// <summary>
+        /// Read a section or all of the pattern data into a buffer.
+        /// </summary>
+        /// <param name="slotId">Slot number (0 to 15).</param>
+        /// <param name="patternId">Pattern number.</param>
+        /// <param name="buffer">Buffer to receive pattern data.</param>
+        /// <param name="bufferTracks">Width of the buffer.</param>
+        /// <param name="bufferLines">Height of the buffer.</param>
+        /// <param name="bufferOffsetTracks">Number of tracks in the buffer to skip.</param>
+        /// <param name="bufferOffsetLines">Number of lines in the buffer to skip.</param>
+        /// <param name="readOffsetTracks">Number of tracks in the pattern to skip.</param>
+        /// <param name="readOffsetLines">Number of lines in the pattern to skip.</param>
+        /// <param name="maxTracks">Maximum number of tracks to read.</param>
+        /// <param name="maxLines">Maximum number of lines to read.</param>
+        /// <returns>Number of events read.</returns>
+        /// <exception cref="ArgumentOutOfRangeException">Thrown if any offset or size parameter is negative.</exception>
+        /// <exception cref="ArgumentException">Thrown if buffer length doesn't match bufferTracks * bufferLines.</exception>
+        /// <exception cref="SunVoxException">Thrown when the operation fails.</exception>
+        /// <remarks>
+        /// <para>Requires <see cref="LockSlot"/> / <see cref="UnlockSlot"/>.</para>
+        /// Calls <see cref="ISunVoxLibC.sv_get_pattern_data"/>.
+        /// </remarks>
+        public int ReadPatternData(int slotId, int patternId, PatternEvent[] buffer, int bufferTracks, int bufferLines,
             int bufferOffsetTracks = 0, int bufferOffsetLines = 0, int readOffsetTracks = 0, int readOffsetLines = 0,
             int? maxTracks = null, int? maxLines = null)
         {

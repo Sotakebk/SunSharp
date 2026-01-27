@@ -100,7 +100,7 @@ namespace SunSharp.Redistribution
                     throw new InvalidOperationException("The library was not loaded yet.");
                 }
 
-                return _lib ??= new SunVoxLibNativeWrapper(new SunVoxLibWithLogger(_proxy, new ConsoleLogger()));
+                return _lib ??= new SunVoxLib(new SunVoxLibWithLogger(_proxy, new ConsoleLogger()));
             }
         }
 

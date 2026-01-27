@@ -69,7 +69,11 @@ namespace SunSharp
         /// <summary>
         /// The underlying library interface. Direct use may break existing abstractions.
         /// </summary>
+#if RELEASE
+        public SunVoxLib Library { get; }
+#else
         public ISunVoxLib Library { get; }
+#endif
 
         /// <inheritdoc cref="ISunVox.Slots"/>
         public Slots Slots { get; }
@@ -105,8 +109,12 @@ namespace SunSharp
         /// <param name="deviceOut">Leave <see langword="null"/> for the value to be assigned by the engine.</param>
         /// <param name="driver">Leave <see langword="null"/> for the value to be assigned by the engine.</param>
         /// <param name="noDebugOutput">Limit information sent to Standard Output.</param>
-        public SunVox(ISunVoxLib library, AudioChannels channels = AudioChannels.Stereo, uint? bufferSize = null,
-            string? deviceIn = null, string? deviceOut = null, string? driver = null, bool noDebugOutput = true)
+#if RELEASE
+
+        public SunVox(ISunVoxLibC library, AudioChannels channels = AudioChannels.Stereo, uint? bufferSize = null, string? deviceIn = null, string? deviceOut = null, string? driver = null, bool noDebugOutput = true)
+#else
+        public SunVox(ISunVoxLib library, AudioChannels channels = AudioChannels.Stereo, uint? bufferSize = null, string? deviceIn = null, string? deviceOut = null, string? driver = null, bool noDebugOutput = true)
+#endif
         {
             var flags = SunVoxInitOptions.None;
             if (noDebugOutput)
@@ -116,7 +124,11 @@ namespace SunSharp
 
             var configuration = AssembleConfigurationParams(bufferSize, deviceIn, deviceOut, driver);
 
+#if RELEASE
+            Library = new SunVoxLib(library);
+#else
             Library = library;
+#endif
             Version = Library.Initialize(sampleRate: -1, config: configuration, channels: channels, options: flags);
             SampleRate = Library.GetSampleRate();
             SingleThreaded = false;
@@ -135,8 +147,14 @@ namespace SunSharp
         /// <param name="singleThreaded">Use to promise that audio callback and other methods will be called from one thread.</param>
         /// <param name="noDebugOutput">Limit information sent to Standard Output.</param>
         /// <exception cref="System.ArgumentException"></exception>
+#if RELEASE
+
+        public SunVox(ISunVoxLibC library, int sampleRate, OutputType outputType, AudioChannels channels = AudioChannels.Stereo,
+            bool singleThreaded = false, bool noDebugOutput = true)
+#else
         public SunVox(ISunVoxLib library, int sampleRate, OutputType outputType, AudioChannels channels = AudioChannels.Stereo,
             bool singleThreaded = false, bool noDebugOutput = true)
+#endif
         {
             var flags = ConstructInitFlags(SunVoxInitOptions.UserAudioCallback, noDebugOutput, outputType, singleThreaded);
 
@@ -145,7 +163,11 @@ namespace SunSharp
                 throw new ArgumentException($"Invalid value: {sampleRate}", nameof(sampleRate));
             }
 
+#if RELEASE
+            Library = new SunVoxLib(library);
+#else
             Library = library;
+#endif
             Version = Library.Initialize(sampleRate: sampleRate, channels: channels, options: flags);
             SampleRate = Library.GetSampleRate();
             SingleThreaded = false;
