@@ -58,6 +58,45 @@ namespace SunSharp
 
         /// <inheritdoc cref="SynthModuleHandle.GetOutputModules"/>
         ISynthModuleHandle[] GetOutputModules();
+
+        /// <inheritdoc cref="SynthModuleHandle.ConnectInput(int)"/>
+        void ConnectInput(int targetModuleId);
+
+        /// <inheritdoc cref="SynthModuleHandle.ConnectInput(SynthModuleHandle)"/>
+        void ConnectInput(ISynthModuleHandle targetModule);
+
+        /// <inheritdoc cref="SynthModuleHandle.ConnectOutput(int)"/>
+        void ConnectOutput(int targetModuleId);
+
+        /// <inheritdoc cref="SynthModuleHandle.ConnectOutput(SynthModuleHandle)"/>
+        void ConnectOutput(ISynthModuleHandle targetModule);
+
+        /// <inheritdoc cref="SynthModuleHandle.DisconnectInput(int)"/>
+        void DisconnectInput(int targetModuleId);
+
+        /// <inheritdoc cref="SynthModuleHandle.DisconnectInput(SynthModuleHandle)"/>
+        void DisconnectInput(ISynthModuleHandle targetModule);
+
+        /// <inheritdoc cref="SynthModuleHandle.DisconnectOutput(int)"/>
+        void DisconnectOutput(int targetModuleId);
+
+        /// <inheritdoc cref="SynthModuleHandle.DisconnectOutput(SynthModuleHandle)"/>
+        void DisconnectOutput(ISynthModuleHandle targetModule);
+
+        /// <inheritdoc cref="SynthModuleHandle.MakeSetControllerValueEvent(byte, ushort)"/>
+        PatternEvent MakeSetControllerValueEvent(byte controllerId, ushort value);
+
+        /// <inheritdoc cref="SynthModuleHandle.MakeNoteEvent(Note, byte?)"/>
+        PatternEvent MakeNoteEvent(Note note, byte? velocity = null);
+
+        /// <inheritdoc cref="SynthModuleHandle.MakeSetPitchEvent(ushort, byte?)"/>
+        PatternEvent MakeSetPitchEvent(ushort pitch, byte? velocity = null);
+
+        /// <inheritdoc cref="SynthModuleHandle.MakeSetFrequencyEvent(double, byte?)"/>
+        PatternEvent MakeSetFrequencyEvent(double frequency, byte? velocity = null);
+
+        /// <inheritdoc cref="SynthModuleHandle.MakeEvent(Note, byte?, byte?, Effect, ushort)"/>
+        PatternEvent MakeEvent(Note note = default, byte? velocity = null, byte? controller = null, Effect effect = Effect.None, ushort value = 0);
     }
 
     public partial interface ISynthModuleHandle : IGenericSynthModuleHandle
@@ -251,8 +290,9 @@ namespace SunSharp
         }
 
         /// <summary>
-        /// Gets the input modules connected to this module.
+        /// Get the array of input modules connected to this module.
         /// </summary>
+        /// <inheritdoc cref="ISunVoxLib.GetModuleInputs"/>
         public SynthModuleHandle[] GetInputModules()
         {
             return ToHandles(GetInputs());
@@ -266,12 +306,13 @@ namespace SunSharp
         /// <inheritdoc cref="ISunVoxLib.GetModuleOutputs"/>
         public int[] GetOutputs()
         {
-            return _lib.GetModuleInputs(_slotId, Id);
+            return _lib.GetModuleOutputs(_slotId, Id);
         }
 
         /// <summary>
-        /// Gets the output modules connected to this module.
+        /// Gets the array of output modules connected to this module.
         /// </summary>
+        /// <inheritdoc cref="ISunVoxLib.GetModuleOutputs"/>
         public SynthModuleHandle[] GetOutputModules()
         {
             return ToHandles(GetOutputs());
@@ -302,6 +343,98 @@ namespace SunSharp
             return handles;
         }
 
+        /// <summary>
+        /// Connect the input of this module to the output of another module.
+        /// </summary>
+        /// <inheritdoc cref="ISunVoxLib.ConnectModules"/>
+        public void ConnectInput(int targetModuleId)
+        {
+            _lib.ConnectModules(_slotId, targetModuleId, Id);
+        }
+
+        /// <summary>
+        /// Connect the input of this module to the output of another module.
+        /// </summary>
+        /// <inheritdoc cref="ISunVoxLib.ConnectModules"/>
+        public void ConnectInput(SynthModuleHandle targetModule)
+        {
+            ConnectInput(targetModule.Id);
+        }
+
+        void IGenericSynthModuleHandle.ConnectInput(ISynthModuleHandle targetModule)
+        {
+            ConnectInput(targetModule.Id);
+        }
+
+        /// <summary>
+        /// Connect the output of this module to the input of another module.
+        /// </summary>
+        /// <inheritdoc cref="ISunVoxLib.ConnectModules"/>
+        public void ConnectOutput(int targetModuleId)
+        {
+            _lib.ConnectModules(_slotId, Id, targetModuleId);
+        }
+
+        /// <summary>
+        /// Connect the output of this module to the input of another module.
+        /// </summary>
+        /// <inheritdoc cref="ISunVoxLib.ConnectModules"/>
+        public void ConnectOutput(SynthModuleHandle targetModule)
+        {
+            ConnectOutput(targetModule.Id);
+        }
+
+        void IGenericSynthModuleHandle.ConnectOutput(ISynthModuleHandle targetModule)
+        {
+            ConnectOutput(targetModule.Id);
+        }
+
+        /// <summary>
+        /// Disconnect the input of this module from the output of another module.
+        /// </summary>
+        /// <inheritdoc cref="ISunVoxLib.ConnectModules"/>
+        public void DisconnectInput(int targetModuleId)
+        {
+            _lib.DisconnectModules(_slotId, targetModuleId, Id);
+        }
+
+        /// <summary>
+        /// Disconnect the input of this module from the output of another module.
+        /// </summary>
+        /// <inheritdoc cref="ISunVoxLib.ConnectModules"/>
+        public void DisconnectInput(SynthModuleHandle targetModule)
+        {
+            DisconnectInput(targetModule.Id);
+        }
+
+        void IGenericSynthModuleHandle.DisconnectInput(ISynthModuleHandle targetModule)
+        {
+            DisconnectInput(targetModule.Id);
+        }
+
+        /// <summary>
+        /// Disconnect the output of this module from the input of another module.
+        /// </summary>
+        /// <inheritdoc cref="ISunVoxLib.ConnectModules"/>
+        public void DisconnectOutput(int targetModuleId)
+        {
+            _lib.DisconnectModules(_slotId, Id, targetModuleId);
+        }
+
+        /// <summary>
+        /// Disconnect the output of this module from the input of another module.
+        /// </summary>
+        /// <inheritdoc cref="ISunVoxLib.ConnectModules"/>
+        public void DisconnectOutput(SynthModuleHandle targetModule)
+        {
+            DisconnectOutput(targetModule.Id);
+        }
+
+        void IGenericSynthModuleHandle.DisconnectOutput(ISynthModuleHandle targetModule)
+        {
+            DisconnectOutput(targetModule.Id);
+        }
+
         #endregion connections
 
         #region specific data IO
@@ -315,13 +448,7 @@ namespace SunSharp
         /// <inheritdoc cref="ISunVoxLib.LoadSamplerSample(int, int, string, int?)"/>
         public void LoadSamplerSample(string path, int? sampleSlot = null)
         {
-            var lib = _lib;
-            var slotId = _slotId;
-            var id = Id;
-            using (Slot.AcquireLock())
-            {
-                lib.LoadSamplerSample(slotId, id, path, sampleSlot);
-            }
+            _lib.LoadSamplerSample(_slotId, Id, path, sampleSlot);
         }
 
         /// <summary>
@@ -369,25 +496,13 @@ namespace SunSharp
         /// <inheritdoc cref="ISunVoxLib.WriteModuleCurve"/>
         public int WriteCurve(int curveId, float[] buffer)
         {
-            var lib = _lib;
-            var slotId = _slotId;
-            var id = Id;
-            using (Slot.AcquireLock())
-            {
-                return lib.WriteModuleCurve(slotId, id, curveId, buffer);
-            }
+            return _lib.WriteModuleCurve(_slotId, Id, curveId, buffer);
         }
 
         /// <inheritdoc cref="ISunVoxLib.ReadModuleCurve"/>
         public int ReadCurve(int curveId, float[] buffer)
         {
-            var lib = _lib;
-            var slotId = _slotId;
-            var id = Id;
-            using (Slot.AcquireLock())
-            {
-                return lib.ReadModuleCurve(slotId, id, curveId, buffer);
-            }
+            return _lib.ReadModuleCurve(_slotId, Id, curveId, buffer);
         }
 
         #endregion specific data IO
@@ -449,5 +564,35 @@ namespace SunSharp
         }
 
         #endregion controllers
+
+        /// <inheritdoc cref="PatternEvent.ControllerEvent(int, byte, ushort)"/>
+        public PatternEvent MakeSetControllerValueEvent(byte controllerId, ushort value)
+        {
+            return PatternEvent.ControllerEvent(Id, controllerId, value);
+        }
+
+        /// <inheritdoc cref="PatternEvent.NoteEvent(Note, int?, byte?)"/>
+        public PatternEvent MakeNoteEvent(Note note, byte? velocity = null)
+        {
+            return PatternEvent.NoteEvent(note, Id, velocity);
+        }
+
+        /// <inheritdoc cref="PatternEvent.SetPitchEvent(int, ushort, byte?)"/>
+        public PatternEvent MakeSetPitchEvent(ushort pitch, byte? velocity = null)
+        {
+            return PatternEvent.SetPitchEvent(Id, pitch, velocity);
+        }
+
+        /// <inheritdoc cref="PatternEvent.SetFrequencyEvent(int, double, byte?)"/>
+        public PatternEvent MakeSetFrequencyEvent(double frequency, byte? velocity = null)
+        {
+            return PatternEvent.SetFrequencyEvent(Id, frequency, velocity);
+        }
+
+        /// <inheritdoc cref="PatternEvent.NewEvent(Note, byte?, int?, byte?, Effect, ushort)"/>
+        public PatternEvent MakeEvent(Note note = default, byte? velocity = null, byte? controller = null, Effect effect = Effect.None, ushort value = 0)
+        {
+            return PatternEvent.NewEvent(note, velocity, Id, controller, effect, value);
+        }
     }
 }

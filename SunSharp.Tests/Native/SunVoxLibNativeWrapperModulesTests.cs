@@ -21,7 +21,7 @@ public class SunVoxLibNativeWrapperModulesTests
         library.sv_connect_module(Arg.Any<int>(), Arg.Any<int>(), Arg.Any<int>()).Returns(0);
 
         // when
-        wrapper.ConnectModule(slotId, source, destination);
+        wrapper.ConnectModules(slotId, source, destination);
 
         // then
         library.Received(1).sv_connect_module(slotId, source, destination);
@@ -35,7 +35,7 @@ public class SunVoxLibNativeWrapperModulesTests
         library.sv_connect_module(Arg.Any<int>(), Arg.Any<int>(), Arg.Any<int>()).Returns(-1);
 
         // when - then
-        wrapper.Invoking(w => w.ConnectModule(slotId, source, destination)).Should().Throw<SunVoxException>();
+        wrapper.Invoking(w => w.ConnectModules(slotId, source, destination)).Should().Throw<SunVoxException>();
 
         // then
         library.Received(1).sv_connect_module(slotId, source, destination);
@@ -90,7 +90,7 @@ public class SunVoxLibNativeWrapperModulesTests
         library.sv_disconnect_module(Arg.Any<int>(), Arg.Any<int>(), Arg.Any<int>()).Returns(0);
 
         // when
-        wrapper.DisconnectModule(slotId, source, destination);
+        wrapper.DisconnectModules(slotId, source, destination);
 
         // then
         library.Received(1).sv_disconnect_module(slotId, source, destination);
@@ -104,7 +104,7 @@ public class SunVoxLibNativeWrapperModulesTests
         library.sv_disconnect_module(Arg.Any<int>(), Arg.Any<int>(), Arg.Any<int>()).Returns(-1);
 
         // when - then
-        wrapper.Invoking(w => w.DisconnectModule(slotId, source, destination)).Should().Throw<SunVoxException>();
+        wrapper.Invoking(w => w.DisconnectModules(slotId, source, destination)).Should().Throw<SunVoxException>();
 
         // then
         library.Received(1).sv_disconnect_module(slotId, source, destination);

@@ -2,11 +2,11 @@ namespace SunSharp.Native
 {
     public partial interface ISunVoxLib
     {
-        /// <inheritdoc cref="SunVoxLib.ConnectModule"/>
-        void ConnectModule(int slotId, int source, int destination);
+        /// <inheritdoc cref="SunVoxLib.ConnectModules"/>
+        void ConnectModules(int slotId, int source, int destination);
 
-        /// <inheritdoc cref="SunVoxLib.DisconnectModule"/>
-        void DisconnectModule(int slotId, int source, int destination);
+        /// <inheritdoc cref="SunVoxLib.DisconnectModules"/>
+        void DisconnectModules(int slotId, int source, int destination);
 
         /// <inheritdoc cref="SunVoxLib.FindModule"/>
         int? FindModule(int slotId, string name);

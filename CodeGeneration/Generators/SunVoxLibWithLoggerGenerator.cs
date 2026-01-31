@@ -16,8 +16,8 @@ internal class SunVoxLibWithLoggerGenerator : BaseGenerator, IGeneratorProvider
 
     private static string GetMethodSignature(ParsedFunction function)
     {
-        var ret = TypeTranslator.TypeToCode(function.CSharpReturnType);
-        var pars = string.Join(", ", function.Parameters.Select(p => $"{TypeTranslator.TypeToCode(p.CSharpType)} {p.Name}"));
+        var ret = CodeGenerationHelper.TypeToCode(function.CSharpReturnType);
+        var pars = string.Join(", ", function.Parameters.Select(p => $"{CodeGenerationHelper.TypeToCode(p.CSharpType)} {p.Name}"));
         return $"{ret} ISunVoxLibC.{function.Name}({pars})";
     }
 

@@ -204,10 +204,163 @@ public class BasicModuleGenerator : BaseGenerator
             });
             AppendLine("}");
             GenerateOperatorsAndStuff();
+            GenerateGenericSynthModuleHandleImplementation();
             GenerateModuleStructMembers();
             GenerateStructCurveWritesReads();
         });
         AppendLine("}");
+    }
+
+    protected virtual void GenerateGenericSynthModuleHandleImplementation()
+    {
+        AppendLine();
+        AppendLine("#region IGenericSynthModuleHandle implementation");
+        AppendLine();
+
+        var interfaceType = typeof(IGenericSynthModuleHandle);
+        var nullabilityContext = new System.Reflection.NullabilityInfoContext();
+
+        foreach (var property in interfaceType.GetProperties())
+        {
+            var nullabilityInfo = nullabilityContext.Create(property);
+            var returnType = CodeGenerationHelper.GetTypeName(property.PropertyType, nullabilityInfo);
+            AppendLine($"public {returnType} {property.Name} => ModuleHandle.{property.Name};");
+            AppendLine();
+        }
+
+        var methodImplementations = BuildMethodImplementationDescriptors();
+
+        foreach (var impl in methodImplementations)
+        {
+            GenerateMethodImplementation(impl);
+        }
+
+        AppendLine("#endregion");
+    }
+
+    private record MethodImplementationDescriptor(
+        System.Reflection.MethodInfo Method,
+        bool IsExplicitInterfaceImplementation,
+        bool RequiresCastToInterface,
+        string? InheritDocTarget = null
+    )
+    {
+        private System.Reflection.NullabilityInfoContext? _nullabilityContext;
+
+        public System.Reflection.NullabilityInfoContext NullabilityContext =>
+            _nullabilityContext ??= new System.Reflection.NullabilityInfoContext();
+    };
+
+    private List<MethodImplementationDescriptor> BuildMethodImplementationDescriptors()
+    {
+        var descriptors = new List<MethodImplementationDescriptor>();
+        var interfaceType = typeof(IGenericSynthModuleHandle);
+
+        var additionalOverloads = GetAdditionalMethodOverloads();
+        var collidingMethodNames = new HashSet<string>(additionalOverloads.Select(o => o.MethodName));
+
+        foreach (var method in interfaceType.GetMethods().Where(m => !m.IsSpecialName))
+        {
+            var parameters = method.GetParameters();
+            var parameterTypes = parameters.Select(p => p.ParameterType).ToArray();
+
+            var matchingOnStruct = typeof(SynthModuleHandle).GetMethod(method.Name, parameterTypes);
+            bool requiresCast = matchingOnStruct == null || matchingOnStruct.ReturnType != method.ReturnType;
+
+            bool hasCollision = collidingMethodNames.Contains(method.Name);
+
+            descriptors.Add(new MethodImplementationDescriptor(
+                Method: method,
+                IsExplicitInterfaceImplementation: hasCollision,
+                RequiresCastToInterface: requiresCast
+            ));
+        }
+
+        foreach (var (methodName, parameterTypes) in additionalOverloads)
+        {
+            var method = typeof(SynthModuleHandle).GetMethod(methodName, parameterTypes);
+            if (method == null)
+            {
+                throw new InvalidOperationException($"Method {methodName} with specified parameters not found on {nameof(SynthModuleHandle)}");
+            }
+
+            descriptors.Add(new MethodImplementationDescriptor(
+                Method: method,
+                IsExplicitInterfaceImplementation: false,
+                RequiresCastToInterface: false,
+                InheritDocTarget: $"{nameof(SynthModuleHandle)}.{methodName}"
+            ));
+        }
+
+        return descriptors;
+    }
+
+    private (string MethodName, Type[] ParameterTypes)[] GetAdditionalMethodOverloads()
+    {
+        return
+        [
+            (nameof(SynthModuleHandle.GetInputModules), []),
+            (nameof(SynthModuleHandle.GetOutputModules), []),
+            (nameof(SynthModuleHandle.ConnectInput), [typeof(SynthModuleHandle)]),
+            (nameof(SynthModuleHandle.ConnectOutput), [typeof(SynthModuleHandle)]),
+            (nameof(SynthModuleHandle.DisconnectInput), [typeof(SynthModuleHandle)]),
+            (nameof(SynthModuleHandle.DisconnectOutput), [typeof(SynthModuleHandle)])
+        ];
+    }
+
+    private void GenerateMethodImplementation(MethodImplementationDescriptor descriptor)
+    {
+        var method = descriptor.Method;
+        var returnNullability = descriptor.NullabilityContext.Create(method.ReturnParameter);
+        var returnType = CodeGenerationHelper.GetTypeName(method.ReturnType, returnNullability);
+        var parameters = method.GetParameters();
+        var paramList = string.Join(", ", parameters.Select(p =>
+        {
+            var paramNullability = descriptor.NullabilityContext.Create(p);
+            var paramType = CodeGenerationHelper.GetTypeName(p.ParameterType, paramNullability);
+            var paramDecl = $"{paramType} {p.Name}";
+            
+            if (p.HasDefaultValue)
+            {
+                paramDecl += $" = {CodeGenerationHelper.FormatDefaultValue(p.DefaultValue, p.ParameterType)}";
+            }
+            
+            return paramDecl;
+        }));
+        var argList = string.Join(", ", parameters.Select(p => p.Name));
+
+        if (descriptor.InheritDocTarget != null)
+        {
+            AppendLine($"/// <inheritdoc cref=\"{descriptor.InheritDocTarget}\"/>");
+        }
+        else
+        {
+            AppendLine($"/// <inheritdoc/>");
+        }
+
+        if (descriptor.IsExplicitInterfaceImplementation)
+        {
+            if (descriptor.RequiresCastToInterface)
+            {
+                AppendLine($"{returnType} {nameof(IGenericSynthModuleHandle)}.{method.Name}({paramList}) => (ModuleHandle as {nameof(IGenericSynthModuleHandle)}).{method.Name}({argList});");
+            }
+            else
+            {
+                AppendLine($"{returnType} {nameof(IGenericSynthModuleHandle)}.{method.Name}({paramList}) => ModuleHandle.{method.Name}({argList});");
+            }
+        }
+        else
+        {
+            if (descriptor.RequiresCastToInterface)
+            {
+                AppendLine($"public {returnType} {method.Name}({paramList}) => (ModuleHandle as {nameof(IGenericSynthModuleHandle)}).{method.Name}({argList});");
+            }
+            else
+            {
+                AppendLine($"public {returnType} {method.Name}({paramList}) => ModuleHandle.{method.Name}({argList});");
+            }
+        }
+        AppendLine();
     }
 
     protected virtual void GenerateStructCurveWritesReads()

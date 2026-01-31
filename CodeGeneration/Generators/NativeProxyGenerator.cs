@@ -30,8 +30,8 @@ public sealed class NativeInterfaceGenerator : BaseGenerator, IGeneratorProvider
 
     private static string GetDelegateNameCode(ParsedFunction function)
     {
-        var outName = TypeTranslator.TypeToCode(function.CSharpReturnType);
-        var inName = string.Join(null,function.Parameters.Select(p => ToPascalCase(TypeTranslator.TypeToCode(p.CSharpType))));
+        var outName = CodeGenerationHelper.TypeToCode(function.CSharpReturnType);
+        var inName = string.Join(null,function.Parameters.Select(p => ToPascalCase(CodeGenerationHelper.TypeToCode(p.CSharpType))));
         if (inName.Length == 0)
         {
             inName = "Void";
@@ -43,16 +43,16 @@ public sealed class NativeInterfaceGenerator : BaseGenerator, IGeneratorProvider
 
     private static DelegateDefinitionCode GetDelegateDefinitionCode(ParsedFunction function)
     {
-        var ret = TypeTranslator.TypeToCode(function.CSharpReturnType);
-        var args = string.Join(", ", function.Parameters.Select((p, i) => $"{TypeTranslator.TypeToCode(p.CSharpType)} arg{i + 1}"));
+        var ret = CodeGenerationHelper.TypeToCode(function.CSharpReturnType);
+        var args = string.Join(", ", function.Parameters.Select((p, i) => $"{CodeGenerationHelper.TypeToCode(p.CSharpType)} arg{i + 1}"));
         var name = GetDelegateNameCode(function);
         return new DelegateDefinitionCode(name, $"private delegate {ret} {name}({args});");
     }
 
     private static string GetInterfaceMethodCode(ParsedFunction function)
     {
-        var ret = TypeTranslator.TypeToCode(function.CSharpReturnType);
-        var pars = string.Join(", ", function.Parameters.Select(p => $"{TypeTranslator.TypeToCode(p.CSharpType)} {p.Name}"));
+        var ret = CodeGenerationHelper.TypeToCode(function.CSharpReturnType);
+        var pars = string.Join(", ", function.Parameters.Select(p => $"{CodeGenerationHelper.TypeToCode(p.CSharpType)} {p.Name}"));
         var forwarded = string.Join(", ", function.Parameters.Select(p => p.Name));
         return $"{ret} ISunVoxLibC.{function.Name}({pars}) => {function.Name}?.Invoke({forwarded}) ?? throw GetNoDelegateException();";
     }

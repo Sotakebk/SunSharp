@@ -57,9 +57,9 @@ public sealed class SunVoxHeaderInterfaceGenerator : BaseGenerator, IGeneratorPr
     {
         var parameters = string.Join(
             ", ",
-            function.Parameters.Select(p => TypeTranslator.TypeToCode(p.CSharpType) + " " + p.Name)
+            function.Parameters.Select(p => CodeGenerationHelper.TypeToCode(p.CSharpType) + " " + p.Name)
         );
-        return $"{TypeTranslator.TypeToCode(function.CSharpReturnType)} {function.Name}({parameters});";
+        return $"{CodeGenerationHelper.TypeToCode(function.CSharpReturnType)} {function.Name}({parameters});";
     }
 
     private static string EscapeForXmlDoc(string value)

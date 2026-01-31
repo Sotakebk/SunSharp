@@ -1,6 +1,6 @@
 namespace SunSharp.Modules
 {
-    public interface ITypedModuleHandle
+    public interface ITypedModuleHandle : IGenericSynthModuleHandle
     {
         /// <summary>
         /// Determines whether the underlying module is of the correct type.

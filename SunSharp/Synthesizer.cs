@@ -232,12 +232,12 @@ namespace SunSharp
             RemoveModule(moduleHandle.Id);
         }
 
-        /// <inheritdoc cref="ISunVoxLib.ConnectModule"/>
+        /// <inheritdoc cref="ISunVoxLib.ConnectModules"/>
         public void ConnectModule(int sourceId, int destinationId)
         {
             using (Slot.AcquireLock())
             {
-                _lib.ConnectModule(_id, sourceId, destinationId);
+                _lib.ConnectModules(_id, sourceId, destinationId);
             }
         }
 
@@ -255,12 +255,12 @@ namespace SunSharp
             ConnectModule(source.Id, destination.Id);
         }
 
-        /// <inheritdoc cref="ISunVoxLib.DisconnectModule"/>
+        /// <inheritdoc cref="ISunVoxLib.DisconnectModules"/>
         public void DisconnectModule(int sourceId, int destinationId)
         {
             using (Slot.AcquireLock())
             {
-                _lib.DisconnectModule(_id, sourceId, destinationId);
+                _lib.DisconnectModules(_id, sourceId, destinationId);
             }
         }
 

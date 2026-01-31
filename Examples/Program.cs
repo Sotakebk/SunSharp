@@ -1,7 +1,11 @@
+#if !GENERATION
+
 using System;
 using System.Threading;
 using SunSharp;
 using SunSharp.Redistribution;
+
+#endif
 
 namespace Examples;
 
@@ -9,6 +13,7 @@ internal sealed class Program
 {
     private static void Main()
     {
+#if !GENERATION
         LibraryLoader.Load();
         var libraryInstance = LibraryLoader.GetLibraryInstance();
 
@@ -32,10 +37,11 @@ internal sealed class Program
 
         slot.Synthesizer.ConnectModule(generator.ModuleHandle, outputModule.Value);
 
-        slot.VirtualPattern.SendEvent(0, PatternEvent.NoteEvent(Note.A(4), generator.ModuleHandle.Id));
+        slot.VirtualPattern.SendEvent(0, generator.MakeNoteEvent(Note.A(4)));
 
         Thread.Sleep(TimeSpan.FromSeconds(1));
 
         slot.VirtualPattern.SendEvent(0, PatternEvent.NoteEvent(Note.Off, generator.ModuleHandle.Id));
+#endif
     }
 }

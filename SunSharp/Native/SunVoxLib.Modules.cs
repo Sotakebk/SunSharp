@@ -16,7 +16,7 @@ namespace SunSharp.Native
         /// <para>Requires <see cref="LockSlot"/> / <see cref="UnlockSlot"/>.</para>
         /// Calls <see cref="ISunVoxLibC.sv_connect_module"/>.
         /// </remarks>
-        public void ConnectModule(int slotId, int source, int destination)
+        public void ConnectModules(int slotId, int source, int destination)
         {
             var ret = _lib.sv_connect_module(slotId, source, destination);
             if (ret != 0)
@@ -93,7 +93,7 @@ namespace SunSharp.Native
         /// <para>Requires <see cref="LockSlot"/> / <see cref="UnlockSlot"/>.</para>
         /// Calls <see cref="ISunVoxLibC.sv_disconnect_module"/>.
         /// </remarks>
-        public void DisconnectModule(int slotId, int source, int destination)
+        public void DisconnectModules(int slotId, int source, int destination)
         {
             var ret = _lib.sv_disconnect_module(slotId, source, destination);
             if (ret != 0)
