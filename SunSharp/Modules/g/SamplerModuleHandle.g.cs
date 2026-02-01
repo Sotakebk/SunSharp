@@ -5,6 +5,9 @@
 #nullable enable
 
 #if !GENERATION
+
+using System;
+
 namespace SunSharp.Modules
 {
     /// <summary>
@@ -14,28 +17,42 @@ namespace SunSharp.Modules
     {
 
         /// <summary>
-        /// Value range: 0-512
+        /// Value range: displayed: 0 to 512, real: 0 to 512
         /// Original name: 0 'Volume'
         /// </summary>
         int GetVolume(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: 0-512
+        /// Value range: displayed: 0 to 512, real: 0 to 512
         /// Original name: 0 'Volume'
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetVolume(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: displayed: -128-128, real: 0-256
+        /// <para>This is a helper method to automatically handle turning target controller values into column values.</para>
+        /// <para>For this controller the input value is mapped from displayed range (0 to 512) to column range (0 to 0x8000). Out of range values are clamped.</para>
+        /// </summary>
+        PatternEvent MakeVolumeEvent(int value);
+
+        /// <summary>
+        /// Value range: displayed: -128 to 128, real: 0 to 256
         /// Original name: 1 'Panning'
         /// </summary>
         int GetPanning(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: displayed: -128-128, real: 0-256
+        /// Value range: displayed: -128 to 128, real: 0 to 256
         /// Original name: 1 'Panning'
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetPanning(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
+
+        /// <summary>
+        /// <para>This is a helper method to automatically handle turning target controller values into column values.</para>
+        /// <para>For this controller the input value is mapped from displayed range (-128 to 128) to column range (0 to 0x8000). Out of range values are clamped.</para>
+        /// </summary>
+        PatternEvent MakePanningEvent(int value);
 
         /// <summary>
         /// Original name: 2 'Sample interpolation'
@@ -44,8 +61,15 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 2 'Sample interpolation'
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetSampleInterpolation(SamplerInterpolation value);
+
+        /// <summary>
+        /// <para>This is a helper method to automatically handle turning target controller values into column values.</para>
+        /// <para>For this controller the input value is taken as is, only clamped to column value range.</para>
+        /// </summary>
+        PatternEvent MakeSampleInterpolationEvent(SamplerInterpolation value);
 
         /// <summary>
         /// Original name: 3 'Envelope interpolation'
@@ -54,44 +78,70 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 3 'Envelope interpolation'
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetEnvelopeInterpolation(SamplerEnvelopeInterpolation value);
 
         /// <summary>
-        /// Value range: 1-32
+        /// <para>This is a helper method to automatically handle turning target controller values into column values.</para>
+        /// <para>For this controller the input value is taken as is, only clamped to column value range.</para>
+        /// </summary>
+        PatternEvent MakeEnvelopeInterpolationEvent(SamplerEnvelopeInterpolation value);
+
+        /// <summary>
         /// Original name: 4 'Polyphony'
         /// </summary>
         int GetPolyphony(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: 1-32
         /// Original name: 4 'Polyphony'
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetPolyphony(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: 0-10000
+        /// <para>This is a helper method to automatically handle turning target controller values into column values.</para>
+        /// <para>For this controller the input value is taken as is, only clamped to column value range.</para>
+        /// </summary>
+        PatternEvent MakePolyphonyEvent(int value);
+
+        /// <summary>
+        /// Value range: displayed: 0 to 10000, real: 0 to 10000
         /// Original name: 5 'Rec threshold'
         /// </summary>
         int GetRecThreshold(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: 0-10000
+        /// Value range: displayed: 0 to 10000, real: 0 to 10000
         /// Original name: 5 'Rec threshold'
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetRecThreshold(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: 0-2048
+        /// <para>This is a helper method to automatically handle turning target controller values into column values.</para>
+        /// <para>For this controller the input value is mapped from displayed range (0 to 10000) to column range (0 to 0x8000). Out of range values are clamped.</para>
+        /// </summary>
+        PatternEvent MakeRecThresholdEvent(int value);
+
+        /// <summary>
+        /// Value range: displayed: 0 to 2048, real: 0 to 2048
         /// Original name: 6 'Tick length (norm=128)'
         /// </summary>
         int GetTickLengthNorm128(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: 0-2048
+        /// Value range: displayed: 0 to 2048, real: 0 to 2048
         /// Original name: 6 'Tick length (norm=128)'
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetTickLengthNorm128(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
+
+        /// <summary>
+        /// <para>This is a helper method to automatically handle turning target controller values into column values.</para>
+        /// <para>For this controller the input value is mapped from displayed range (0 to 2048) to column range (0 to 0x8000). Out of range values are clamped.</para>
+        /// </summary>
+        PatternEvent MakeTickLengthNorm128Event(int value);
 
         /// <summary>
         /// Original name: 7 'Record'
@@ -100,8 +150,15 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 7 'Record'
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetRecord(SamplerRecordState value);
+
+        /// <summary>
+        /// <para>This is a helper method to automatically handle turning target controller values into column values.</para>
+        /// <para>For this controller the input value is taken as is, only clamped to column value range.</para>
+        /// </summary>
+        PatternEvent MakeRecordEvent(SamplerRecordState value);
 
         /// <summary>
         /// Original name: 8 'Reverse'
@@ -110,32 +167,53 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 8 'Reverse'
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetReverse(Toggle value);
 
         /// <summary>
-        /// Value range: 0-32768
+        /// <para>This is a helper method to automatically handle turning target controller values into column values.</para>
+        /// <para>For this controller the input value is taken as is, only clamped to column value range.</para>
+        /// </summary>
+        PatternEvent MakeReverseEvent(Toggle value);
+
+        /// <summary>
+        /// Value range: displayed: 0 to 32768, real: 0 to 32768
         /// Original name: 9 'Attack'
         /// </summary>
         int GetAttack(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: 0-32768
+        /// Value range: displayed: 0 to 32768, real: 0 to 32768
         /// Original name: 9 'Attack'
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetAttack(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: 0-32768
+        /// <para>This is a helper method to automatically handle turning target controller values into column values.</para>
+        /// <para>For this controller the input value is mapped from displayed range (0 to 32768) to column range (0 to 0x8000). Out of range values are clamped.</para>
+        /// </summary>
+        PatternEvent MakeAttackEvent(int value);
+
+        /// <summary>
+        /// Value range: displayed: 0 to 32768, real: 0 to 32768
         /// Original name: 10 'Release'
         /// </summary>
         int GetRelease(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: 0-32768
+        /// Value range: displayed: 0 to 32768, real: 0 to 32768
         /// Original name: 10 'Release'
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetRelease(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
+
+        /// <summary>
+        /// <para>This is a helper method to automatically handle turning target controller values into column values.</para>
+        /// <para>For this controller the input value is mapped from displayed range (0 to 32768) to column range (0 to 0x8000). Out of range values are clamped.</para>
+        /// </summary>
+        PatternEvent MakeReleaseEvent(int value);
     }
 
     /// <inheritdoc cref="ISamplerModuleHandle"/>
@@ -289,11 +367,26 @@ namespace SunSharp.Modules
         /// <inheritdoc cref="ISamplerModuleHandle.SetVolume" />
         public void SetVolume(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(0, value, valueScalingMode);
 
+        /// <inheritdoc cref="ISamplerModuleHandle.MakeVolumeEvent" />
+        public PatternEvent MakeVolumeEvent(int value)
+        {
+            value = value * 0x8000 / (512);
+            return PatternEvent.ControllerEvent(ModuleHandle.Id, 0, (ushort)Math.Clamp(value, 0, 0x8000));
+        }
+
         /// <inheritdoc cref="ISamplerModuleHandle.GetPanning" />
         public int GetPanning(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(1, valueScalingMode);
 
         /// <inheritdoc cref="ISamplerModuleHandle.SetPanning" />
         public void SetPanning(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(1, value, valueScalingMode);
+
+        /// <inheritdoc cref="ISamplerModuleHandle.MakePanningEvent" />
+        public PatternEvent MakePanningEvent(int value)
+        {
+            value -= -128;
+            value = value * 0x8000 / (256);
+            return PatternEvent.ControllerEvent(ModuleHandle.Id, 1, (ushort)Math.Clamp(value, 0, 0x8000));
+        }
 
         /// <inheritdoc cref="ISamplerModuleHandle.GetSampleInterpolation" />
         public SamplerInterpolation GetSampleInterpolation() => (SamplerInterpolation)ModuleHandle.GetControllerValue(2, ValueScalingMode.Displayed);
@@ -301,11 +394,23 @@ namespace SunSharp.Modules
         /// <inheritdoc cref="ISamplerModuleHandle.SetSampleInterpolation" />
         public void SetSampleInterpolation(SamplerInterpolation value) => ModuleHandle.SetControllerValue(2, (int)value, ValueScalingMode.Displayed);
 
+        /// <inheritdoc cref="ISamplerModuleHandle.MakeSampleInterpolationEvent" />
+        public PatternEvent MakeSampleInterpolationEvent(SamplerInterpolation value)
+        {
+            return PatternEvent.ControllerEvent(ModuleHandle.Id, 2, (ushort)Math.Clamp((int)value, 0, 0x8000));
+        }
+
         /// <inheritdoc cref="ISamplerModuleHandle.GetEnvelopeInterpolation" />
         public SamplerEnvelopeInterpolation GetEnvelopeInterpolation() => (SamplerEnvelopeInterpolation)ModuleHandle.GetControllerValue(3, ValueScalingMode.Displayed);
 
         /// <inheritdoc cref="ISamplerModuleHandle.SetEnvelopeInterpolation" />
         public void SetEnvelopeInterpolation(SamplerEnvelopeInterpolation value) => ModuleHandle.SetControllerValue(3, (int)value, ValueScalingMode.Displayed);
+
+        /// <inheritdoc cref="ISamplerModuleHandle.MakeEnvelopeInterpolationEvent" />
+        public PatternEvent MakeEnvelopeInterpolationEvent(SamplerEnvelopeInterpolation value)
+        {
+            return PatternEvent.ControllerEvent(ModuleHandle.Id, 3, (ushort)Math.Clamp((int)value, 0, 0x8000));
+        }
 
         /// <inheritdoc cref="ISamplerModuleHandle.GetPolyphony" />
         public int GetPolyphony(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(4, valueScalingMode);
@@ -313,11 +418,24 @@ namespace SunSharp.Modules
         /// <inheritdoc cref="ISamplerModuleHandle.SetPolyphony" />
         public void SetPolyphony(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(4, value, valueScalingMode);
 
+        /// <inheritdoc cref="ISamplerModuleHandle.MakePolyphonyEvent" />
+        public PatternEvent MakePolyphonyEvent(int value)
+        {
+            return PatternEvent.ControllerEvent(ModuleHandle.Id, 4, (ushort)Math.Clamp(value, 0, 0x8000));
+        }
+
         /// <inheritdoc cref="ISamplerModuleHandle.GetRecThreshold" />
         public int GetRecThreshold(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(5, valueScalingMode);
 
         /// <inheritdoc cref="ISamplerModuleHandle.SetRecThreshold" />
         public void SetRecThreshold(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(5, value, valueScalingMode);
+
+        /// <inheritdoc cref="ISamplerModuleHandle.MakeRecThresholdEvent" />
+        public PatternEvent MakeRecThresholdEvent(int value)
+        {
+            value = value * 0x8000 / (10000);
+            return PatternEvent.ControllerEvent(ModuleHandle.Id, 5, (ushort)Math.Clamp(value, 0, 0x8000));
+        }
 
         /// <inheritdoc cref="ISamplerModuleHandle.GetTickLengthNorm128" />
         public int GetTickLengthNorm128(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(6, valueScalingMode);
@@ -325,11 +443,24 @@ namespace SunSharp.Modules
         /// <inheritdoc cref="ISamplerModuleHandle.SetTickLengthNorm128" />
         public void SetTickLengthNorm128(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(6, value, valueScalingMode);
 
+        /// <inheritdoc cref="ISamplerModuleHandle.MakeTickLengthNorm128Event" />
+        public PatternEvent MakeTickLengthNorm128Event(int value)
+        {
+            value = value * 0x8000 / (2048);
+            return PatternEvent.ControllerEvent(ModuleHandle.Id, 6, (ushort)Math.Clamp(value, 0, 0x8000));
+        }
+
         /// <inheritdoc cref="ISamplerModuleHandle.GetRecord" />
         public SamplerRecordState GetRecord() => (SamplerRecordState)ModuleHandle.GetControllerValue(7, ValueScalingMode.Displayed);
 
         /// <inheritdoc cref="ISamplerModuleHandle.SetRecord" />
         public void SetRecord(SamplerRecordState value) => ModuleHandle.SetControllerValue(7, (int)value, ValueScalingMode.Displayed);
+
+        /// <inheritdoc cref="ISamplerModuleHandle.MakeRecordEvent" />
+        public PatternEvent MakeRecordEvent(SamplerRecordState value)
+        {
+            return PatternEvent.ControllerEvent(ModuleHandle.Id, 7, (ushort)Math.Clamp((int)value, 0, 0x8000));
+        }
 
         /// <inheritdoc cref="ISamplerModuleHandle.GetReverse" />
         public Toggle GetReverse() => (Toggle)ModuleHandle.GetControllerValue(8, ValueScalingMode.Displayed);
@@ -337,17 +468,37 @@ namespace SunSharp.Modules
         /// <inheritdoc cref="ISamplerModuleHandle.SetReverse" />
         public void SetReverse(Toggle value) => ModuleHandle.SetControllerValue(8, (int)value, ValueScalingMode.Displayed);
 
+        /// <inheritdoc cref="ISamplerModuleHandle.MakeReverseEvent" />
+        public PatternEvent MakeReverseEvent(Toggle value)
+        {
+            return PatternEvent.ControllerEvent(ModuleHandle.Id, 8, (ushort)Math.Clamp((int)value, 0, 0x8000));
+        }
+
         /// <inheritdoc cref="ISamplerModuleHandle.GetAttack" />
         public int GetAttack(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(9, valueScalingMode);
 
         /// <inheritdoc cref="ISamplerModuleHandle.SetAttack" />
         public void SetAttack(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(9, value, valueScalingMode);
 
+        /// <inheritdoc cref="ISamplerModuleHandle.MakeAttackEvent" />
+        public PatternEvent MakeAttackEvent(int value)
+        {
+            value = value * 0x8000 / (32768);
+            return PatternEvent.ControllerEvent(ModuleHandle.Id, 9, (ushort)Math.Clamp(value, 0, 0x8000));
+        }
+
         /// <inheritdoc cref="ISamplerModuleHandle.GetRelease" />
         public int GetRelease(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(10, valueScalingMode);
 
         /// <inheritdoc cref="ISamplerModuleHandle.SetRelease" />
         public void SetRelease(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(10, value, valueScalingMode);
+
+        /// <inheritdoc cref="ISamplerModuleHandle.MakeReleaseEvent" />
+        public PatternEvent MakeReleaseEvent(int value)
+        {
+            value = value * 0x8000 / (32768);
+            return PatternEvent.ControllerEvent(ModuleHandle.Id, 10, (ushort)Math.Clamp(value, 0, 0x8000));
+        }
     }
 }
 #endif

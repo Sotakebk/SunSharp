@@ -5,6 +5,9 @@
 #nullable enable
 
 #if !GENERATION
+
+using System;
+
 namespace SunSharp.Modules
 {
     /// <summary>
@@ -14,40 +17,61 @@ namespace SunSharp.Modules
     {
 
         /// <summary>
-        /// Value range: 0-256
+        /// Value range: displayed: 0 to 256, real: 0 to 256
         /// Original name: 0 'Volume'
         /// </summary>
         int GetVolume(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: 0-256
+        /// Value range: displayed: 0 to 256, real: 0 to 256
         /// Original name: 0 'Volume'
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetVolume(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: 0-256
+        /// <para>This is a helper method to automatically handle turning target controller values into column values.</para>
+        /// <para>For this controller the input value is mapped from displayed range (0 to 256) to column range (0 to 0x8000). Out of range values are clamped.</para>
+        /// </summary>
+        PatternEvent MakeVolumeEvent(int value);
+
+        /// <summary>
+        /// Value range: displayed: 0 to 256, real: 0 to 256
         /// Original name: 1 'Amplitude'
         /// </summary>
         int GetAmplitude(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: 0-256
+        /// Value range: displayed: 0 to 256, real: 0 to 256
         /// Original name: 1 'Amplitude'
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetAmplitude(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: 1-2048
+        /// <para>This is a helper method to automatically handle turning target controller values into column values.</para>
+        /// <para>For this controller the input value is mapped from displayed range (0 to 256) to column range (0 to 0x8000). Out of range values are clamped.</para>
+        /// </summary>
+        PatternEvent MakeAmplitudeEvent(int value);
+
+        /// <summary>
+        /// Value range: displayed: 1 to 2048, real: 1 to 2048
         /// Original name: 2 'Freq'
         /// </summary>
         int GetFreq(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: 1-2048
+        /// Value range: displayed: 1 to 2048, real: 1 to 2048
         /// Original name: 2 'Freq'
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetFreq(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
+
+        /// <summary>
+        /// <para>This is a helper method to automatically handle turning target controller values into column values.</para>
+        /// <para>For this controller the input value is mapped from displayed range (1 to 2048) to column range (0 to 0x8000). Out of range values are clamped.</para>
+        /// </summary>
+        PatternEvent MakeFreqEvent(int value);
 
         /// <summary>
         /// Original name: 3 'Channels'
@@ -56,20 +80,34 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 3 'Channels'
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetChannels(Channels value);
 
         /// <summary>
-        /// Value range: 0-256
+        /// <para>This is a helper method to automatically handle turning target controller values into column values.</para>
+        /// <para>For this controller the input value is taken as is, only clamped to column value range.</para>
+        /// </summary>
+        PatternEvent MakeChannelsEvent(Channels value);
+
+        /// <summary>
+        /// Value range: displayed: 0 to 256, real: 0 to 256
         /// Original name: 4 'Set phase'
         /// </summary>
         int GetSetPhase(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: 0-256
+        /// Value range: displayed: 0 to 256, real: 0 to 256
         /// Original name: 4 'Set phase'
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetSetPhase(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
+
+        /// <summary>
+        /// <para>This is a helper method to automatically handle turning target controller values into column values.</para>
+        /// <para>For this controller the input value is mapped from displayed range (0 to 256) to column range (0 to 0x8000). Out of range values are clamped.</para>
+        /// </summary>
+        PatternEvent MakeSetPhaseEvent(int value);
 
         /// <summary>
         /// Original name: 5 'Frequency unit'
@@ -78,8 +116,15 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 5 'Frequency unit'
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetFrequencyUnit(VibratoFrequencyUnit value);
+
+        /// <summary>
+        /// <para>This is a helper method to automatically handle turning target controller values into column values.</para>
+        /// <para>For this controller the input value is taken as is, only clamped to column value range.</para>
+        /// </summary>
+        PatternEvent MakeFrequencyUnitEvent(VibratoFrequencyUnit value);
 
         /// <summary>
         /// Original name: 6 'Exponential amplitude'
@@ -88,8 +133,15 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 6 'Exponential amplitude'
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetExponentialAmplitude(Toggle value);
+
+        /// <summary>
+        /// <para>This is a helper method to automatically handle turning target controller values into column values.</para>
+        /// <para>For this controller the input value is taken as is, only clamped to column value range.</para>
+        /// </summary>
+        PatternEvent MakeExponentialAmplitudeEvent(Toggle value);
     }
 
     /// <inheritdoc cref="IVibratoModuleHandle"/>
@@ -243,11 +295,25 @@ namespace SunSharp.Modules
         /// <inheritdoc cref="IVibratoModuleHandle.SetVolume" />
         public void SetVolume(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(0, value, valueScalingMode);
 
+        /// <inheritdoc cref="IVibratoModuleHandle.MakeVolumeEvent" />
+        public PatternEvent MakeVolumeEvent(int value)
+        {
+            value = value * 0x8000 / (256);
+            return PatternEvent.ControllerEvent(ModuleHandle.Id, 0, (ushort)Math.Clamp(value, 0, 0x8000));
+        }
+
         /// <inheritdoc cref="IVibratoModuleHandle.GetAmplitude" />
         public int GetAmplitude(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(1, valueScalingMode);
 
         /// <inheritdoc cref="IVibratoModuleHandle.SetAmplitude" />
         public void SetAmplitude(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(1, value, valueScalingMode);
+
+        /// <inheritdoc cref="IVibratoModuleHandle.MakeAmplitudeEvent" />
+        public PatternEvent MakeAmplitudeEvent(int value)
+        {
+            value = value * 0x8000 / (256);
+            return PatternEvent.ControllerEvent(ModuleHandle.Id, 1, (ushort)Math.Clamp(value, 0, 0x8000));
+        }
 
         /// <inheritdoc cref="IVibratoModuleHandle.GetFreq" />
         public int GetFreq(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(2, valueScalingMode);
@@ -255,11 +321,25 @@ namespace SunSharp.Modules
         /// <inheritdoc cref="IVibratoModuleHandle.SetFreq" />
         public void SetFreq(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(2, value, valueScalingMode);
 
+        /// <inheritdoc cref="IVibratoModuleHandle.MakeFreqEvent" />
+        public PatternEvent MakeFreqEvent(int value)
+        {
+            value -= 1;
+            value = value * 0x8000 / (2047);
+            return PatternEvent.ControllerEvent(ModuleHandle.Id, 2, (ushort)Math.Clamp(value, 0, 0x8000));
+        }
+
         /// <inheritdoc cref="IVibratoModuleHandle.GetChannels" />
         public Channels GetChannels() => (Channels)ModuleHandle.GetControllerValue(3, ValueScalingMode.Displayed);
 
         /// <inheritdoc cref="IVibratoModuleHandle.SetChannels" />
         public void SetChannels(Channels value) => ModuleHandle.SetControllerValue(3, (int)value, ValueScalingMode.Displayed);
+
+        /// <inheritdoc cref="IVibratoModuleHandle.MakeChannelsEvent" />
+        public PatternEvent MakeChannelsEvent(Channels value)
+        {
+            return PatternEvent.ControllerEvent(ModuleHandle.Id, 3, (ushort)Math.Clamp((int)value, 0, 0x8000));
+        }
 
         /// <inheritdoc cref="IVibratoModuleHandle.GetSetPhase" />
         public int GetSetPhase(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(4, valueScalingMode);
@@ -267,17 +347,36 @@ namespace SunSharp.Modules
         /// <inheritdoc cref="IVibratoModuleHandle.SetSetPhase" />
         public void SetSetPhase(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(4, value, valueScalingMode);
 
+        /// <inheritdoc cref="IVibratoModuleHandle.MakeSetPhaseEvent" />
+        public PatternEvent MakeSetPhaseEvent(int value)
+        {
+            value = value * 0x8000 / (256);
+            return PatternEvent.ControllerEvent(ModuleHandle.Id, 4, (ushort)Math.Clamp(value, 0, 0x8000));
+        }
+
         /// <inheritdoc cref="IVibratoModuleHandle.GetFrequencyUnit" />
         public VibratoFrequencyUnit GetFrequencyUnit() => (VibratoFrequencyUnit)ModuleHandle.GetControllerValue(5, ValueScalingMode.Displayed);
 
         /// <inheritdoc cref="IVibratoModuleHandle.SetFrequencyUnit" />
         public void SetFrequencyUnit(VibratoFrequencyUnit value) => ModuleHandle.SetControllerValue(5, (int)value, ValueScalingMode.Displayed);
 
+        /// <inheritdoc cref="IVibratoModuleHandle.MakeFrequencyUnitEvent" />
+        public PatternEvent MakeFrequencyUnitEvent(VibratoFrequencyUnit value)
+        {
+            return PatternEvent.ControllerEvent(ModuleHandle.Id, 5, (ushort)Math.Clamp((int)value, 0, 0x8000));
+        }
+
         /// <inheritdoc cref="IVibratoModuleHandle.GetExponentialAmplitude" />
         public Toggle GetExponentialAmplitude() => (Toggle)ModuleHandle.GetControllerValue(6, ValueScalingMode.Displayed);
 
         /// <inheritdoc cref="IVibratoModuleHandle.SetExponentialAmplitude" />
         public void SetExponentialAmplitude(Toggle value) => ModuleHandle.SetControllerValue(6, (int)value, ValueScalingMode.Displayed);
+
+        /// <inheritdoc cref="IVibratoModuleHandle.MakeExponentialAmplitudeEvent" />
+        public PatternEvent MakeExponentialAmplitudeEvent(Toggle value)
+        {
+            return PatternEvent.ControllerEvent(ModuleHandle.Id, 6, (ushort)Math.Clamp((int)value, 0, 0x8000));
+        }
     }
 }
 #endif

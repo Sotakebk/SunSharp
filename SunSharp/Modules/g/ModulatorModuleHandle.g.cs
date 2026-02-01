@@ -5,6 +5,9 @@
 #nullable enable
 
 #if !GENERATION
+
+using System;
+
 namespace SunSharp.Modules
 {
     /// <summary>
@@ -14,16 +17,23 @@ namespace SunSharp.Modules
     {
 
         /// <summary>
-        /// Value range: 0-512
+        /// Value range: displayed: 0 to 512, real: 0 to 512
         /// Original name: 0 'Volume'
         /// </summary>
         int GetVolume(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: 0-512
+        /// Value range: displayed: 0 to 512, real: 0 to 512
         /// Original name: 0 'Volume'
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetVolume(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
+
+        /// <summary>
+        /// <para>This is a helper method to automatically handle turning target controller values into column values.</para>
+        /// <para>For this controller the input value is mapped from displayed range (0 to 512) to column range (0 to 0x8000). Out of range values are clamped.</para>
+        /// </summary>
+        PatternEvent MakeVolumeEvent(int value);
 
         /// <summary>
         /// Original name: 1 'Modulation type'
@@ -32,8 +42,15 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 1 'Modulation type'
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetModulationType(ModulationType value);
+
+        /// <summary>
+        /// <para>This is a helper method to automatically handle turning target controller values into column values.</para>
+        /// <para>For this controller the input value is taken as is, only clamped to column value range.</para>
+        /// </summary>
+        PatternEvent MakeModulationTypeEvent(ModulationType value);
 
         /// <summary>
         /// Original name: 2 'Channels'
@@ -42,8 +59,15 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 2 'Channels'
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetChannels(Channels value);
+
+        /// <summary>
+        /// <para>This is a helper method to automatically handle turning target controller values into column values.</para>
+        /// <para>For this controller the input value is taken as is, only clamped to column value range.</para>
+        /// </summary>
+        PatternEvent MakeChannelsEvent(Channels value);
 
         /// <summary>
         /// Original name: 3 'Max PM delay'
@@ -52,8 +76,15 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 3 'Max PM delay'
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetMaxPhaseModulationDelay(ModulatorMaxPhaseModulationDelay value);
+
+        /// <summary>
+        /// <para>This is a helper method to automatically handle turning target controller values into column values.</para>
+        /// <para>For this controller the input value is taken as is, only clamped to column value range.</para>
+        /// </summary>
+        PatternEvent MakeMaxPhaseModulationDelayEvent(ModulatorMaxPhaseModulationDelay value);
 
         /// <summary>
         /// Original name: 4 'PM interpolation'
@@ -62,8 +93,15 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 4 'PM interpolation'
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetPhaseModulationInterpolation(ModulatorPhaseModulationInterpolation value);
+
+        /// <summary>
+        /// <para>This is a helper method to automatically handle turning target controller values into column values.</para>
+        /// <para>For this controller the input value is taken as is, only clamped to column value range.</para>
+        /// </summary>
+        PatternEvent MakePhaseModulationInterpolationEvent(ModulatorPhaseModulationInterpolation value);
     }
 
     /// <inheritdoc cref="IModulatorModuleHandle"/>
@@ -217,11 +255,24 @@ namespace SunSharp.Modules
         /// <inheritdoc cref="IModulatorModuleHandle.SetVolume" />
         public void SetVolume(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(0, value, valueScalingMode);
 
+        /// <inheritdoc cref="IModulatorModuleHandle.MakeVolumeEvent" />
+        public PatternEvent MakeVolumeEvent(int value)
+        {
+            value = value * 0x8000 / (512);
+            return PatternEvent.ControllerEvent(ModuleHandle.Id, 0, (ushort)Math.Clamp(value, 0, 0x8000));
+        }
+
         /// <inheritdoc cref="IModulatorModuleHandle.GetModulationType" />
         public ModulationType GetModulationType() => (ModulationType)ModuleHandle.GetControllerValue(1, ValueScalingMode.Displayed);
 
         /// <inheritdoc cref="IModulatorModuleHandle.SetModulationType" />
         public void SetModulationType(ModulationType value) => ModuleHandle.SetControllerValue(1, (int)value, ValueScalingMode.Displayed);
+
+        /// <inheritdoc cref="IModulatorModuleHandle.MakeModulationTypeEvent" />
+        public PatternEvent MakeModulationTypeEvent(ModulationType value)
+        {
+            return PatternEvent.ControllerEvent(ModuleHandle.Id, 1, (ushort)Math.Clamp((int)value, 0, 0x8000));
+        }
 
         /// <inheritdoc cref="IModulatorModuleHandle.GetChannels" />
         public Channels GetChannels() => (Channels)ModuleHandle.GetControllerValue(2, ValueScalingMode.Displayed);
@@ -229,17 +280,35 @@ namespace SunSharp.Modules
         /// <inheritdoc cref="IModulatorModuleHandle.SetChannels" />
         public void SetChannels(Channels value) => ModuleHandle.SetControllerValue(2, (int)value, ValueScalingMode.Displayed);
 
+        /// <inheritdoc cref="IModulatorModuleHandle.MakeChannelsEvent" />
+        public PatternEvent MakeChannelsEvent(Channels value)
+        {
+            return PatternEvent.ControllerEvent(ModuleHandle.Id, 2, (ushort)Math.Clamp((int)value, 0, 0x8000));
+        }
+
         /// <inheritdoc cref="IModulatorModuleHandle.GetMaxPhaseModulationDelay" />
         public ModulatorMaxPhaseModulationDelay GetMaxPhaseModulationDelay() => (ModulatorMaxPhaseModulationDelay)ModuleHandle.GetControllerValue(3, ValueScalingMode.Displayed);
 
         /// <inheritdoc cref="IModulatorModuleHandle.SetMaxPhaseModulationDelay" />
         public void SetMaxPhaseModulationDelay(ModulatorMaxPhaseModulationDelay value) => ModuleHandle.SetControllerValue(3, (int)value, ValueScalingMode.Displayed);
 
+        /// <inheritdoc cref="IModulatorModuleHandle.MakeMaxPhaseModulationDelayEvent" />
+        public PatternEvent MakeMaxPhaseModulationDelayEvent(ModulatorMaxPhaseModulationDelay value)
+        {
+            return PatternEvent.ControllerEvent(ModuleHandle.Id, 3, (ushort)Math.Clamp((int)value, 0, 0x8000));
+        }
+
         /// <inheritdoc cref="IModulatorModuleHandle.GetPhaseModulationInterpolation" />
         public ModulatorPhaseModulationInterpolation GetPhaseModulationInterpolation() => (ModulatorPhaseModulationInterpolation)ModuleHandle.GetControllerValue(4, ValueScalingMode.Displayed);
 
         /// <inheritdoc cref="IModulatorModuleHandle.SetPhaseModulationInterpolation" />
         public void SetPhaseModulationInterpolation(ModulatorPhaseModulationInterpolation value) => ModuleHandle.SetControllerValue(4, (int)value, ValueScalingMode.Displayed);
+
+        /// <inheritdoc cref="IModulatorModuleHandle.MakePhaseModulationInterpolationEvent" />
+        public PatternEvent MakePhaseModulationInterpolationEvent(ModulatorPhaseModulationInterpolation value)
+        {
+            return PatternEvent.ControllerEvent(ModuleHandle.Id, 4, (ushort)Math.Clamp((int)value, 0, 0x8000));
+        }
     }
 }
 #endif

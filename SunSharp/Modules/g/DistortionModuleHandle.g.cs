@@ -5,6 +5,9 @@
 #nullable enable
 
 #if !GENERATION
+
+using System;
+
 namespace SunSharp.Modules
 {
     /// <summary>
@@ -14,16 +17,23 @@ namespace SunSharp.Modules
     {
 
         /// <summary>
-        /// Value range: 0-256
+        /// Value range: displayed: 0 to 256, real: 0 to 256
         /// Original name: 0 'Volume'
         /// </summary>
         int GetVolume(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: 0-256
+        /// Value range: displayed: 0 to 256, real: 0 to 256
         /// Original name: 0 'Volume'
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetVolume(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
+
+        /// <summary>
+        /// <para>This is a helper method to automatically handle turning target controller values into column values.</para>
+        /// <para>For this controller the input value is mapped from displayed range (0 to 256) to column range (0 to 0x8000). Out of range values are clamped.</para>
+        /// </summary>
+        PatternEvent MakeVolumeEvent(int value);
 
         /// <summary>
         /// Original name: 1 'Type'
@@ -32,56 +42,89 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 1 'Type'
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetDistortionType(DistortionType value);
 
         /// <summary>
-        /// Value range: 0-256
+        /// <para>This is a helper method to automatically handle turning target controller values into column values.</para>
+        /// <para>For this controller the input value is taken as is, only clamped to column value range.</para>
+        /// </summary>
+        PatternEvent MakeDistortionTypeEvent(DistortionType value);
+
+        /// <summary>
+        /// Value range: displayed: 0 to 256, real: 0 to 256
         /// Original name: 2 'Power'
         /// </summary>
         int GetPower(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: 0-256
+        /// Value range: displayed: 0 to 256, real: 0 to 256
         /// Original name: 2 'Power'
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetPower(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: 1-16
+        /// <para>This is a helper method to automatically handle turning target controller values into column values.</para>
+        /// <para>For this controller the input value is mapped from displayed range (0 to 256) to column range (0 to 0x8000). Out of range values are clamped.</para>
+        /// </summary>
+        PatternEvent MakePowerEvent(int value);
+
+        /// <summary>
         /// Original name: 3 'Bit depth'
         /// </summary>
         int GetBitDepth(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: 1-16
         /// Original name: 3 'Bit depth'
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetBitDepth(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: 0-44100
+        /// <para>This is a helper method to automatically handle turning target controller values into column values.</para>
+        /// <para>For this controller the input value is taken as is, only clamped to column value range.</para>
+        /// </summary>
+        PatternEvent MakeBitDepthEvent(int value);
+
+        /// <summary>
+        /// Value range: displayed: 0 to 44100, real: 0 to 44100
         /// Original name: 4 'Freq'
         /// </summary>
         int GetFreq(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: 0-44100
+        /// Value range: displayed: 0 to 44100, real: 0 to 44100
         /// Original name: 4 'Freq'
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetFreq(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: 0-256
+        /// <para>This is a helper method to automatically handle turning target controller values into column values.</para>
+        /// <para>For this controller the input value is mapped from displayed range (0 to 44100) to column range (0 to 0x8000). Out of range values are clamped.</para>
+        /// </summary>
+        PatternEvent MakeFreqEvent(int value);
+
+        /// <summary>
+        /// Value range: displayed: 0 to 256, real: 0 to 256
         /// Original name: 5 'Noise'
         /// </summary>
         int GetNoise(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: 0-256
+        /// Value range: displayed: 0 to 256, real: 0 to 256
         /// Original name: 5 'Noise'
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetNoise(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
+
+        /// <summary>
+        /// <para>This is a helper method to automatically handle turning target controller values into column values.</para>
+        /// <para>For this controller the input value is mapped from displayed range (0 to 256) to column range (0 to 0x8000). Out of range values are clamped.</para>
+        /// </summary>
+        PatternEvent MakeNoiseEvent(int value);
     }
 
     /// <inheritdoc cref="IDistortionModuleHandle"/>
@@ -235,11 +278,24 @@ namespace SunSharp.Modules
         /// <inheritdoc cref="IDistortionModuleHandle.SetVolume" />
         public void SetVolume(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(0, value, valueScalingMode);
 
+        /// <inheritdoc cref="IDistortionModuleHandle.MakeVolumeEvent" />
+        public PatternEvent MakeVolumeEvent(int value)
+        {
+            value = value * 0x8000 / (256);
+            return PatternEvent.ControllerEvent(ModuleHandle.Id, 0, (ushort)Math.Clamp(value, 0, 0x8000));
+        }
+
         /// <inheritdoc cref="IDistortionModuleHandle.GetDistortionType" />
         public DistortionType GetDistortionType() => (DistortionType)ModuleHandle.GetControllerValue(1, ValueScalingMode.Displayed);
 
         /// <inheritdoc cref="IDistortionModuleHandle.SetDistortionType" />
         public void SetDistortionType(DistortionType value) => ModuleHandle.SetControllerValue(1, (int)value, ValueScalingMode.Displayed);
+
+        /// <inheritdoc cref="IDistortionModuleHandle.MakeDistortionTypeEvent" />
+        public PatternEvent MakeDistortionTypeEvent(DistortionType value)
+        {
+            return PatternEvent.ControllerEvent(ModuleHandle.Id, 1, (ushort)Math.Clamp((int)value, 0, 0x8000));
+        }
 
         /// <inheritdoc cref="IDistortionModuleHandle.GetPower" />
         public int GetPower(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(2, valueScalingMode);
@@ -247,11 +303,24 @@ namespace SunSharp.Modules
         /// <inheritdoc cref="IDistortionModuleHandle.SetPower" />
         public void SetPower(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(2, value, valueScalingMode);
 
+        /// <inheritdoc cref="IDistortionModuleHandle.MakePowerEvent" />
+        public PatternEvent MakePowerEvent(int value)
+        {
+            value = value * 0x8000 / (256);
+            return PatternEvent.ControllerEvent(ModuleHandle.Id, 2, (ushort)Math.Clamp(value, 0, 0x8000));
+        }
+
         /// <inheritdoc cref="IDistortionModuleHandle.GetBitDepth" />
         public int GetBitDepth(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(3, valueScalingMode);
 
         /// <inheritdoc cref="IDistortionModuleHandle.SetBitDepth" />
         public void SetBitDepth(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(3, value, valueScalingMode);
+
+        /// <inheritdoc cref="IDistortionModuleHandle.MakeBitDepthEvent" />
+        public PatternEvent MakeBitDepthEvent(int value)
+        {
+            return PatternEvent.ControllerEvent(ModuleHandle.Id, 3, (ushort)Math.Clamp(value, 0, 0x8000));
+        }
 
         /// <inheritdoc cref="IDistortionModuleHandle.GetFreq" />
         public int GetFreq(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(4, valueScalingMode);
@@ -259,11 +328,25 @@ namespace SunSharp.Modules
         /// <inheritdoc cref="IDistortionModuleHandle.SetFreq" />
         public void SetFreq(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(4, value, valueScalingMode);
 
+        /// <inheritdoc cref="IDistortionModuleHandle.MakeFreqEvent" />
+        public PatternEvent MakeFreqEvent(int value)
+        {
+            value = value * 0x8000 / (44100);
+            return PatternEvent.ControllerEvent(ModuleHandle.Id, 4, (ushort)Math.Clamp(value, 0, 0x8000));
+        }
+
         /// <inheritdoc cref="IDistortionModuleHandle.GetNoise" />
         public int GetNoise(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(5, valueScalingMode);
 
         /// <inheritdoc cref="IDistortionModuleHandle.SetNoise" />
         public void SetNoise(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(5, value, valueScalingMode);
+
+        /// <inheritdoc cref="IDistortionModuleHandle.MakeNoiseEvent" />
+        public PatternEvent MakeNoiseEvent(int value)
+        {
+            value = value * 0x8000 / (256);
+            return PatternEvent.ControllerEvent(ModuleHandle.Id, 5, (ushort)Math.Clamp(value, 0, 0x8000));
+        }
     }
 }
 #endif

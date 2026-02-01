@@ -5,6 +5,9 @@
 #nullable enable
 
 #if !GENERATION
+
+using System;
+
 namespace SunSharp.Modules
 {
     /// <summary>
@@ -20,8 +23,15 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 0 'Channels'
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetChannels(Channels value);
+
+        /// <summary>
+        /// <para>This is a helper method to automatically handle turning target controller values into column values.</para>
+        /// <para>For this controller the input value is taken as is, only clamped to column value range.</para>
+        /// </summary>
+        PatternEvent MakeChannelsEvent(Channels value);
     }
 
     /// <inheritdoc cref="IDcBlockerModuleHandle"/>
@@ -174,6 +184,12 @@ namespace SunSharp.Modules
 
         /// <inheritdoc cref="IDcBlockerModuleHandle.SetChannels" />
         public void SetChannels(Channels value) => ModuleHandle.SetControllerValue(0, (int)value, ValueScalingMode.Displayed);
+
+        /// <inheritdoc cref="IDcBlockerModuleHandle.MakeChannelsEvent" />
+        public PatternEvent MakeChannelsEvent(Channels value)
+        {
+            return PatternEvent.ControllerEvent(ModuleHandle.Id, 0, (ushort)Math.Clamp((int)value, 0, 0x8000));
+        }
     }
 }
 #endif

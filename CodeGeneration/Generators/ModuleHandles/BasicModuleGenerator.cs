@@ -32,6 +32,9 @@ public class BasicModuleGenerator : BaseGenerator
 
         CodeGenerationHelper.AppendHeader(Context);
         AppendLine("#if !GENERATION");
+        AppendLine();
+        AppendLine("using System;");
+        AppendLine();
         AppendLine("namespace SunSharp.Modules");
         AppendLine("{");
         AddIndent(() =>
@@ -57,7 +60,7 @@ public class BasicModuleGenerator : BaseGenerator
         AppendLine("{");
         AddIndent(() =>
         {
-            GenerateInterfaceControllerGettersSetters();
+            GenerateInterfaceControllerGettersSettersEvents();
             GenerateInterfaceCurveWritesReads();
         });
         AppendLine("}");
@@ -118,7 +121,7 @@ public class BasicModuleGenerator : BaseGenerator
         AppendLine("/// </summary>");
     }
 
-    protected virtual void GenerateInterfaceControllerGettersSetters()
+    protected virtual void GenerateInterfaceControllerGettersSettersEvents()
     {
         foreach (var (i, c) in ModuleDescription.Controllers)
         {
@@ -126,36 +129,25 @@ public class BasicModuleGenerator : BaseGenerator
             GenerateInterfaceGetter(i, c);
             AppendLine();
             GenerateInterfaceSetter(i, c);
+            AppendLine();
+            GenerateInterfaceMakeEvent(i, c);
         }
     }
 
-    protected virtual void GenerateInterfaceGetter(int i, ControllerDescription c)
+    protected virtual void GenerateInterfaceMakeEvent(int i, ControllerDescription c)
     {
-        GenerateGetterSetterXmlDoc(i, c);
+        GenerateMakeEventXmlDoc(i, c);
         if (c.EnumName != null)
         {
-            AppendLine($"{c.EnumName} Get{c.FriendlyName}();");
+            AppendLine($"{nameof(PatternEvent)} Make{c.FriendlyName}Event({c.EnumName} value);");
         }
         else
         {
-            AppendLine($"int Get{c.FriendlyName}({nameof(ValueScalingMode)} valueScalingMode = {nameof(ValueScalingMode)}.{ValueScalingMode.Displayed});");
+            AppendLine($"{nameof(PatternEvent)} Make{c.FriendlyName}Event(int value);");
         }
     }
 
-    protected virtual void GenerateInterfaceSetter(int i, ControllerDescription c)
-    {
-        GenerateGetterSetterXmlDoc(i, c);
-        if (c.EnumName != null)
-        {
-            AppendLine($"void Set{c.FriendlyName}({c.EnumName} value);");
-        }
-        else
-        {
-            AppendLine($"void Set{c.FriendlyName}(int value, {nameof(ValueScalingMode)} valueScalingMode = {nameof(ValueScalingMode)}.{ValueScalingMode.Displayed});");
-        }
-    }
-
-    protected virtual void GenerateGetterSetterXmlDoc(int i, ControllerDescription c)
+    private void GenerateMakeEventXmlDoc(int i, ControllerDescription c)
     {
         AppendLine("/// <summary>");
         if (c.Description is not null)
@@ -171,18 +163,69 @@ public class BasicModuleGenerator : BaseGenerator
                 }
             }
         }
-        if (c.EnumName == null)
+        AppendLine($"/// <para>This is a helper method to automatically handle turning target controller values into column values.</para>");
+        if (c.ControllerType == ControllerType.Selector)
         {
-            if (c.MinDisplayedValue is not null)
+            AppendLine($"/// <para>For this controller the input value is taken as is, only clamped to column value range.</para>");
+        }
+        else
+        {
+            AppendLine($"/// <para>For this controller the input value is mapped from displayed range ({c.MinDisplayedValue} to {c.MaxDisplayedValue}) to column range (0 to 0x8000). Out of range values are clamped.</para>");
+        }
+        AppendLine("/// </summary>");
+    }
+
+    protected virtual void GenerateInterfaceGetter(int i, ControllerDescription c)
+    {
+        GenerateGetterSetterXmlDoc(i, c, false);
+        if (c.EnumName != null)
+        {
+            AppendLine($"{c.EnumName} Get{c.FriendlyName}();");
+        }
+        else
+        {
+            AppendLine($"int Get{c.FriendlyName}({nameof(ValueScalingMode)} valueScalingMode = {nameof(ValueScalingMode)}.{ValueScalingMode.Displayed});");
+        }
+    }
+
+    protected virtual void GenerateInterfaceSetter(int i, ControllerDescription c)
+    {
+        GenerateGetterSetterXmlDoc(i, c, true);
+        if (c.EnumName != null)
+        {
+            AppendLine($"void Set{c.FriendlyName}({c.EnumName} value);");
+        }
+        else
+        {
+            AppendLine($"void Set{c.FriendlyName}(int value, {nameof(ValueScalingMode)} valueScalingMode = {nameof(ValueScalingMode)}.{ValueScalingMode.Displayed});");
+        }
+    }
+
+    protected virtual void GenerateGetterSetterXmlDoc(int i, ControllerDescription c, bool setter)
+    {
+        AppendLine("/// <summary>");
+        if (c.Description is not null)
+        {
+            var descriptionLines = c.Description.Split(["\r\n", "\r", "\n"], StringSplitOptions.None);
+            for (int l = 0; l < descriptionLines.Length; l++)
             {
-                AppendLine($"/// Value range: displayed: {c.MinDisplayedValue}-{c.MaxDisplayedValue}, real: {c.MinValue}-{c.MaxValue}");
-            }
-            else
-            {
-                AppendLine($"/// Value range: {c.MinValue}-{c.MaxValue}");
+                var line = descriptionLines[l];
+                AppendLine($"/// {line}");
+                if (l == descriptionLines.Length - 1)
+                {
+                    AppendLine("/// <br>");
+                }
             }
         }
+        if (c.ControllerType == ControllerType.Normal)
+        {
+            AppendLine($"/// Value range: displayed: {c.MinDisplayedValue} to {c.MaxDisplayedValue}, real: {c.MinValue} to {c.MaxValue}");
+        }
         AppendLine($"/// Original name: {i} '{c.InternalName}'");
+        if (setter)
+        {
+            AppendLine($"/// Note: equivalent <see cref=\"{nameof(IVirtualPattern)}.{nameof(IVirtualPattern.SendEvent)}\"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.");
+        }
         AppendLine("/// </summary>");
     }
 
@@ -319,12 +362,12 @@ public class BasicModuleGenerator : BaseGenerator
             var paramNullability = descriptor.NullabilityContext.Create(p);
             var paramType = CodeGenerationHelper.GetTypeName(p.ParameterType, paramNullability);
             var paramDecl = $"{paramType} {p.Name}";
-            
+
             if (p.HasDefaultValue)
             {
                 paramDecl += $" = {CodeGenerationHelper.FormatDefaultValue(p.DefaultValue, p.ParameterType)}";
             }
-            
+
             return paramDecl;
         }));
         var argList = string.Join(", ", parameters.Select(p => p.Name));
@@ -431,6 +474,55 @@ public class BasicModuleGenerator : BaseGenerator
             GenerateStructGetter(i, c);
             AppendLine();
             GenerateStructSetter(i, c);
+            AppendLine();
+            GenerateStructMakeEvent(i, c);
+        }
+    }
+
+    protected virtual void GenerateStructMakeEvent(int i, ControllerDescription c)
+    {
+        AppendLine($"/// <inheritdoc cref=\"{InterfaceName}.Make{c.FriendlyName}Event\" />");
+        if (c.EnumName != null)
+        {
+            AppendLine($"public {nameof(PatternEvent)} Make{c.FriendlyName}Event({c.EnumName} value)");
+            AppendLine("{");
+            AddIndent(() =>
+            {
+                if (c.MinValue != 0 || c.MinDisplayedValue != 0 || c.Offset != 0 || c.MinValue != c.MinDisplayedValue)
+                {
+                    throw new Exception("Assumption about enum-controller values was violated.");
+                }
+                AppendLine($"return {nameof(PatternEvent)}.{nameof(PatternEvent.ControllerEvent)}(ModuleHandle.{nameof(SynthModuleHandle.Id)}, {i}, (ushort)Math.Clamp((int)value, 0, 0x8000));");
+            });
+            AppendLine("}");
+        }
+        else
+        {
+            AppendLine($"public {nameof(PatternEvent)} Make{c.FriendlyName}Event(int value)");
+            AppendLine("{");
+            AddIndent(() =>
+            {
+                if (c.ControllerType == ControllerType.Selector)
+                {
+                    // value can be set as is
+                    // note: min may not be 0, but it's fine
+                    AppendLine($"return {nameof(PatternEvent)}.{nameof(PatternEvent.ControllerEvent)}(ModuleHandle.{nameof(SynthModuleHandle.Id)}, {i}, (ushort)Math.Clamp(value, 0, 0x8000));");
+                    return;
+                }
+                // follow the code from the library
+                if (c.Offset != 0)
+                {
+                    AppendLine($"value -= {c.Offset};");
+                }
+                if (c.MinValue != 0)
+                {
+                    AppendLine($"value -= {c.MinValue};");
+                }
+                AppendLine($"value = value * 0x8000 / ({c.MaxValue - c.MinValue});");
+
+                AppendLine($"return {nameof(PatternEvent)}.{nameof(PatternEvent.ControllerEvent)}(ModuleHandle.{nameof(SynthModuleHandle.Id)}, {i}, (ushort)Math.Clamp(value, 0, 0x8000));");
+            });
+            AppendLine("}");
         }
     }
 

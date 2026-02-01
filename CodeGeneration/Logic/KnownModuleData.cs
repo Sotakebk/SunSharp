@@ -1,5 +1,6 @@
 using System.ComponentModel;
 using System.Text.Json.Serialization;
+using SunSharp;
 
 namespace CodeGeneration.Logic;
 
@@ -31,16 +32,16 @@ public class ControllerDescription
 
     public required int MinValue { get; init; }
     public required int MaxValue { get; init; }
+    public required int MinDisplayedValue { get; init; }
+    public required int MaxDisplayedValue { get; init; }
+    public required int Offset { get; init; }
 
-    [Description("The minimum displayed value of the controller. Available if different to MinValue.")]
-    public int? MinDisplayedValue { get; init; }
+    [Description("The type of controller this is, as defined in the SunVox API.")]
+    [JsonConverter(typeof(JsonStringEnumConverter<ControllerType>))]
+    public required ControllerType ControllerType { get; init; }
 
-    [Description("The maximum displayed value of the controller. Available if different to MaxValue.")]
-    public int? MaxDisplayedValue { get; init; }
-
-    [Description("Whether the underlying type of the controller should be ignored. " +
-        "If true, the data should not be overwritten by the generator code.")]
-    public bool? IgnoreActualType { get; init; }
+    [Description("Whether the selector is an enum.")]
+    public bool? SelectorIsNotEnum { get; init; }
 
     [Description("The name of the enum this controller uses.")]
     public string? EnumName { get; init; }

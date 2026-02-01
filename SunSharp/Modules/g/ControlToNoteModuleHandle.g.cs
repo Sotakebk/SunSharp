@@ -5,6 +5,9 @@
 #nullable enable
 
 #if !GENERATION
+
+using System;
+
 namespace SunSharp.Modules
 {
     /// <summary>
@@ -14,76 +17,112 @@ namespace SunSharp.Modules
     {
 
         /// <summary>
-        /// Value range: 0-32768
+        /// Value range: displayed: 0 to 32768, real: 0 to 32768
         /// Original name: 0 'Pitch'
         /// </summary>
         int GetPitch(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: 0-32768
+        /// Value range: displayed: 0 to 32768, real: 0 to 32768
         /// Original name: 0 'Pitch'
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetPitch(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: 0-120
+        /// <para>This is a helper method to automatically handle turning target controller values into column values.</para>
+        /// <para>For this controller the input value is mapped from displayed range (0 to 32768) to column range (0 to 0x8000). Out of range values are clamped.</para>
+        /// </summary>
+        PatternEvent MakePitchEvent(int value);
+
+        /// <summary>
         /// Original name: 1 'First note'
         /// </summary>
         int GetFirstNote(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: 0-120
         /// Original name: 1 'First note'
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetFirstNote(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: 0-120
+        /// <para>This is a helper method to automatically handle turning target controller values into column values.</para>
+        /// <para>For this controller the input value is taken as is, only clamped to column value range.</para>
+        /// </summary>
+        PatternEvent MakeFirstNoteEvent(int value);
+
+        /// <summary>
         /// Original name: 2 'Range (number of semitones)'
         /// </summary>
         int GetRangeNumberOfSemitones(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: 0-120
         /// Original name: 2 'Range (number of semitones)'
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetRangeNumberOfSemitones(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: displayed: -128-128, real: 0-256
+        /// <para>This is a helper method to automatically handle turning target controller values into column values.</para>
+        /// <para>For this controller the input value is taken as is, only clamped to column value range.</para>
+        /// </summary>
+        PatternEvent MakeRangeNumberOfSemitonesEvent(int value);
+
+        /// <summary>
         /// Original name: 3 'Transpose'
         /// </summary>
         int GetTranspose(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: displayed: -128-128, real: 0-256
         /// Original name: 3 'Transpose'
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetTranspose(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: displayed: -256-256, real: 0-512
-        /// Original name: 4 'Finetune'
+        /// <para>This is a helper method to automatically handle turning target controller values into column values.</para>
+        /// <para>For this controller the input value is taken as is, only clamped to column value range.</para>
         /// </summary>
-        int GetFinetune(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
+        PatternEvent MakeTransposeEvent(int value);
 
         /// <summary>
-        /// Value range: displayed: -256-256, real: 0-512
+        /// Value range: displayed: -256 to 256, real: 0 to 512
         /// Original name: 4 'Finetune'
         /// </summary>
-        void SetFinetune(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
+        int GetFineTune(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: 0-256
+        /// Value range: displayed: -256 to 256, real: 0 to 512
+        /// Original name: 4 'Finetune'
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// </summary>
+        void SetFineTune(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
+
+        /// <summary>
+        /// <para>This is a helper method to automatically handle turning target controller values into column values.</para>
+        /// <para>For this controller the input value is mapped from displayed range (-256 to 256) to column range (0 to 0x8000). Out of range values are clamped.</para>
+        /// </summary>
+        PatternEvent MakeFineTuneEvent(int value);
+
+        /// <summary>
+        /// Value range: displayed: 0 to 256, real: 0 to 256
         /// Original name: 5 'Velocity'
         /// </summary>
         int GetVelocity(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: 0-256
+        /// Value range: displayed: 0 to 256, real: 0 to 256
         /// Original name: 5 'Velocity'
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetVelocity(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
+
+        /// <summary>
+        /// <para>This is a helper method to automatically handle turning target controller values into column values.</para>
+        /// <para>For this controller the input value is mapped from displayed range (0 to 256) to column range (0 to 0x8000). Out of range values are clamped.</para>
+        /// </summary>
+        PatternEvent MakeVelocityEvent(int value);
 
         /// <summary>
         /// Original name: 6 'State'
@@ -92,8 +131,15 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 6 'State'
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetState(Toggle value);
+
+        /// <summary>
+        /// <para>This is a helper method to automatically handle turning target controller values into column values.</para>
+        /// <para>For this controller the input value is taken as is, only clamped to column value range.</para>
+        /// </summary>
+        PatternEvent MakeStateEvent(Toggle value);
 
         /// <summary>
         /// Original name: 7 'NoteON'
@@ -102,8 +148,15 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 7 'NoteON'
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetNoteon(ControlToNoteOnBehaviour value);
+
+        /// <summary>
+        /// <para>This is a helper method to automatically handle turning target controller values into column values.</para>
+        /// <para>For this controller the input value is taken as is, only clamped to column value range.</para>
+        /// </summary>
+        PatternEvent MakeNoteonEvent(ControlToNoteOnBehaviour value);
 
         /// <summary>
         /// Original name: 8 'NoteOFF'
@@ -112,8 +165,15 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 8 'NoteOFF'
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetNoteoff(ControlToNoteOffBehaviour value);
+
+        /// <summary>
+        /// <para>This is a helper method to automatically handle turning target controller values into column values.</para>
+        /// <para>For this controller the input value is taken as is, only clamped to column value range.</para>
+        /// </summary>
+        PatternEvent MakeNoteoffEvent(ControlToNoteOffBehaviour value);
 
         /// <summary>
         /// Original name: 9 'Record notes'
@@ -122,8 +182,15 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 9 'Record notes'
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetRecordNotes(Toggle value);
+
+        /// <summary>
+        /// <para>This is a helper method to automatically handle turning target controller values into column values.</para>
+        /// <para>For this controller the input value is taken as is, only clamped to column value range.</para>
+        /// </summary>
+        PatternEvent MakeRecordNotesEvent(Toggle value);
     }
 
     /// <inheritdoc cref="IControlToNoteModuleHandle"/>
@@ -277,11 +344,24 @@ namespace SunSharp.Modules
         /// <inheritdoc cref="IControlToNoteModuleHandle.SetPitch" />
         public void SetPitch(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(0, value, valueScalingMode);
 
+        /// <inheritdoc cref="IControlToNoteModuleHandle.MakePitchEvent" />
+        public PatternEvent MakePitchEvent(int value)
+        {
+            value = value * 0x8000 / (32768);
+            return PatternEvent.ControllerEvent(ModuleHandle.Id, 0, (ushort)Math.Clamp(value, 0, 0x8000));
+        }
+
         /// <inheritdoc cref="IControlToNoteModuleHandle.GetFirstNote" />
         public int GetFirstNote(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(1, valueScalingMode);
 
         /// <inheritdoc cref="IControlToNoteModuleHandle.SetFirstNote" />
         public void SetFirstNote(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(1, value, valueScalingMode);
+
+        /// <inheritdoc cref="IControlToNoteModuleHandle.MakeFirstNoteEvent" />
+        public PatternEvent MakeFirstNoteEvent(int value)
+        {
+            return PatternEvent.ControllerEvent(ModuleHandle.Id, 1, (ushort)Math.Clamp(value, 0, 0x8000));
+        }
 
         /// <inheritdoc cref="IControlToNoteModuleHandle.GetRangeNumberOfSemitones" />
         public int GetRangeNumberOfSemitones(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(2, valueScalingMode);
@@ -289,17 +369,37 @@ namespace SunSharp.Modules
         /// <inheritdoc cref="IControlToNoteModuleHandle.SetRangeNumberOfSemitones" />
         public void SetRangeNumberOfSemitones(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(2, value, valueScalingMode);
 
+        /// <inheritdoc cref="IControlToNoteModuleHandle.MakeRangeNumberOfSemitonesEvent" />
+        public PatternEvent MakeRangeNumberOfSemitonesEvent(int value)
+        {
+            return PatternEvent.ControllerEvent(ModuleHandle.Id, 2, (ushort)Math.Clamp(value, 0, 0x8000));
+        }
+
         /// <inheritdoc cref="IControlToNoteModuleHandle.GetTranspose" />
         public int GetTranspose(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(3, valueScalingMode);
 
         /// <inheritdoc cref="IControlToNoteModuleHandle.SetTranspose" />
         public void SetTranspose(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(3, value, valueScalingMode);
 
-        /// <inheritdoc cref="IControlToNoteModuleHandle.GetFinetune" />
-        public int GetFinetune(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(4, valueScalingMode);
+        /// <inheritdoc cref="IControlToNoteModuleHandle.MakeTransposeEvent" />
+        public PatternEvent MakeTransposeEvent(int value)
+        {
+            return PatternEvent.ControllerEvent(ModuleHandle.Id, 3, (ushort)Math.Clamp(value, 0, 0x8000));
+        }
 
-        /// <inheritdoc cref="IControlToNoteModuleHandle.SetFinetune" />
-        public void SetFinetune(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(4, value, valueScalingMode);
+        /// <inheritdoc cref="IControlToNoteModuleHandle.GetFineTune" />
+        public int GetFineTune(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(4, valueScalingMode);
+
+        /// <inheritdoc cref="IControlToNoteModuleHandle.SetFineTune" />
+        public void SetFineTune(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(4, value, valueScalingMode);
+
+        /// <inheritdoc cref="IControlToNoteModuleHandle.MakeFineTuneEvent" />
+        public PatternEvent MakeFineTuneEvent(int value)
+        {
+            value -= -256;
+            value = value * 0x8000 / (512);
+            return PatternEvent.ControllerEvent(ModuleHandle.Id, 4, (ushort)Math.Clamp(value, 0, 0x8000));
+        }
 
         /// <inheritdoc cref="IControlToNoteModuleHandle.GetVelocity" />
         public int GetVelocity(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(5, valueScalingMode);
@@ -307,11 +407,24 @@ namespace SunSharp.Modules
         /// <inheritdoc cref="IControlToNoteModuleHandle.SetVelocity" />
         public void SetVelocity(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(5, value, valueScalingMode);
 
+        /// <inheritdoc cref="IControlToNoteModuleHandle.MakeVelocityEvent" />
+        public PatternEvent MakeVelocityEvent(int value)
+        {
+            value = value * 0x8000 / (256);
+            return PatternEvent.ControllerEvent(ModuleHandle.Id, 5, (ushort)Math.Clamp(value, 0, 0x8000));
+        }
+
         /// <inheritdoc cref="IControlToNoteModuleHandle.GetState" />
         public Toggle GetState() => (Toggle)ModuleHandle.GetControllerValue(6, ValueScalingMode.Displayed);
 
         /// <inheritdoc cref="IControlToNoteModuleHandle.SetState" />
         public void SetState(Toggle value) => ModuleHandle.SetControllerValue(6, (int)value, ValueScalingMode.Displayed);
+
+        /// <inheritdoc cref="IControlToNoteModuleHandle.MakeStateEvent" />
+        public PatternEvent MakeStateEvent(Toggle value)
+        {
+            return PatternEvent.ControllerEvent(ModuleHandle.Id, 6, (ushort)Math.Clamp((int)value, 0, 0x8000));
+        }
 
         /// <inheritdoc cref="IControlToNoteModuleHandle.GetNoteon" />
         public ControlToNoteOnBehaviour GetNoteon() => (ControlToNoteOnBehaviour)ModuleHandle.GetControllerValue(7, ValueScalingMode.Displayed);
@@ -319,17 +432,35 @@ namespace SunSharp.Modules
         /// <inheritdoc cref="IControlToNoteModuleHandle.SetNoteon" />
         public void SetNoteon(ControlToNoteOnBehaviour value) => ModuleHandle.SetControllerValue(7, (int)value, ValueScalingMode.Displayed);
 
+        /// <inheritdoc cref="IControlToNoteModuleHandle.MakeNoteonEvent" />
+        public PatternEvent MakeNoteonEvent(ControlToNoteOnBehaviour value)
+        {
+            return PatternEvent.ControllerEvent(ModuleHandle.Id, 7, (ushort)Math.Clamp((int)value, 0, 0x8000));
+        }
+
         /// <inheritdoc cref="IControlToNoteModuleHandle.GetNoteoff" />
         public ControlToNoteOffBehaviour GetNoteoff() => (ControlToNoteOffBehaviour)ModuleHandle.GetControllerValue(8, ValueScalingMode.Displayed);
 
         /// <inheritdoc cref="IControlToNoteModuleHandle.SetNoteoff" />
         public void SetNoteoff(ControlToNoteOffBehaviour value) => ModuleHandle.SetControllerValue(8, (int)value, ValueScalingMode.Displayed);
 
+        /// <inheritdoc cref="IControlToNoteModuleHandle.MakeNoteoffEvent" />
+        public PatternEvent MakeNoteoffEvent(ControlToNoteOffBehaviour value)
+        {
+            return PatternEvent.ControllerEvent(ModuleHandle.Id, 8, (ushort)Math.Clamp((int)value, 0, 0x8000));
+        }
+
         /// <inheritdoc cref="IControlToNoteModuleHandle.GetRecordNotes" />
         public Toggle GetRecordNotes() => (Toggle)ModuleHandle.GetControllerValue(9, ValueScalingMode.Displayed);
 
         /// <inheritdoc cref="IControlToNoteModuleHandle.SetRecordNotes" />
         public void SetRecordNotes(Toggle value) => ModuleHandle.SetControllerValue(9, (int)value, ValueScalingMode.Displayed);
+
+        /// <inheritdoc cref="IControlToNoteModuleHandle.MakeRecordNotesEvent" />
+        public PatternEvent MakeRecordNotesEvent(Toggle value)
+        {
+            return PatternEvent.ControllerEvent(ModuleHandle.Id, 9, (ushort)Math.Clamp((int)value, 0, 0x8000));
+        }
     }
 }
 #endif

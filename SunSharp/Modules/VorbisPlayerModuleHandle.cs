@@ -5,22 +5,22 @@ namespace SunSharp.Modules
     public partial interface IVorbisPlayerModuleHandle
     {
         /// <inheritdoc cref="ISynthModuleHandle.LoadIntoVorbisPlayer(string)"/>
-        void LoadVorbis(string path);
+        void LoadAudio(string path);
 
         /// <inheritdoc cref="ISynthModuleHandle.LoadIntoVorbisPlayer(byte[])"/>
-        void LoadIntoVorbisPlayer(byte[] data);
+        void LoadAudio(byte[] data);
     }
 
     public partial struct VorbisPlayerModuleHandle : IVorbisPlayerModuleHandle
     {
         /// <inheritdoc/>
-        public void LoadVorbis(string path)
+        public void LoadAudio(string path)
         {
             ModuleHandle.LoadIntoVorbisPlayer(path);
         }
 
         /// <inheritdoc/>
-        public void LoadIntoVorbisPlayer(byte[] data)
+        public void LoadAudio(byte[] data)
         {
             ModuleHandle.LoadIntoVorbisPlayer(data);
         }

@@ -5,6 +5,9 @@
 #nullable enable
 
 #if !GENERATION
+
+using System;
+
 namespace SunSharp.Modules
 {
     /// <summary>
@@ -14,28 +17,40 @@ namespace SunSharp.Modules
     {
 
         /// <summary>
-        /// Value range: 0-1024
+        /// Value range: displayed: 0 to 1024, real: 0 to 1024
         /// Original name: 0 'Volume'
         /// </summary>
         int GetVolume(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: 0-1024
+        /// Value range: displayed: 0 to 1024, real: 0 to 1024
         /// Original name: 0 'Volume'
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetVolume(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: 1-256
+        /// <para>This is a helper method to automatically handle turning target controller values into column values.</para>
+        /// <para>For this controller the input value is mapped from displayed range (0 to 1024) to column range (0 to 0x8000). Out of range values are clamped.</para>
+        /// </summary>
+        PatternEvent MakeVolumeEvent(int value);
+
+        /// <summary>
         /// Original name: 1 'Input module'
         /// </summary>
         int GetInputModule(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: 1-256
         /// Original name: 1 'Input module'
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetInputModule(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
+
+        /// <summary>
+        /// <para>This is a helper method to automatically handle turning target controller values into column values.</para>
+        /// <para>For this controller the input value is taken as is, only clamped to column value range.</para>
+        /// </summary>
+        PatternEvent MakeInputModuleEvent(int value);
 
         /// <summary>
         /// Original name: 2 'Play patterns'
@@ -44,32 +59,49 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 2 'Play patterns'
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetPlayPatterns(MetaModulePatternMode value);
 
         /// <summary>
-        /// Value range: 1-1000
+        /// <para>This is a helper method to automatically handle turning target controller values into column values.</para>
+        /// <para>For this controller the input value is taken as is, only clamped to column value range.</para>
+        /// </summary>
+        PatternEvent MakePlayPatternsEvent(MetaModulePatternMode value);
+
+        /// <summary>
         /// Original name: 3 'BPM (Beats Per Minute)'
         /// </summary>
         int GetBeatsPerMinute(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: 1-1000
         /// Original name: 3 'BPM (Beats Per Minute)'
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetBeatsPerMinute(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: 1-31
+        /// <para>This is a helper method to automatically handle turning target controller values into column values.</para>
+        /// <para>For this controller the input value is taken as is, only clamped to column value range.</para>
+        /// </summary>
+        PatternEvent MakeBeatsPerMinuteEvent(int value);
+
+        /// <summary>
         /// Original name: 4 'TPL (Ticks Per Line)'
         /// </summary>
         int GetTicksPerLine(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: 1-31
         /// Original name: 4 'TPL (Ticks Per Line)'
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetTicksPerLine(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
+
+        /// <summary>
+        /// <para>This is a helper method to automatically handle turning target controller values into column values.</para>
+        /// <para>For this controller the input value is taken as is, only clamped to column value range.</para>
+        /// </summary>
+        PatternEvent MakeTicksPerLineEvent(int value);
     }
 
     /// <inheritdoc cref="IMetaModuleModuleHandle"/>
@@ -223,11 +255,24 @@ namespace SunSharp.Modules
         /// <inheritdoc cref="IMetaModuleModuleHandle.SetVolume" />
         public void SetVolume(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(0, value, valueScalingMode);
 
+        /// <inheritdoc cref="IMetaModuleModuleHandle.MakeVolumeEvent" />
+        public PatternEvent MakeVolumeEvent(int value)
+        {
+            value = value * 0x8000 / (1024);
+            return PatternEvent.ControllerEvent(ModuleHandle.Id, 0, (ushort)Math.Clamp(value, 0, 0x8000));
+        }
+
         /// <inheritdoc cref="IMetaModuleModuleHandle.GetInputModule" />
         public int GetInputModule(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(1, valueScalingMode);
 
         /// <inheritdoc cref="IMetaModuleModuleHandle.SetInputModule" />
         public void SetInputModule(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(1, value, valueScalingMode);
+
+        /// <inheritdoc cref="IMetaModuleModuleHandle.MakeInputModuleEvent" />
+        public PatternEvent MakeInputModuleEvent(int value)
+        {
+            return PatternEvent.ControllerEvent(ModuleHandle.Id, 1, (ushort)Math.Clamp(value, 0, 0x8000));
+        }
 
         /// <inheritdoc cref="IMetaModuleModuleHandle.GetPlayPatterns" />
         public MetaModulePatternMode GetPlayPatterns() => (MetaModulePatternMode)ModuleHandle.GetControllerValue(2, ValueScalingMode.Displayed);
@@ -235,17 +280,35 @@ namespace SunSharp.Modules
         /// <inheritdoc cref="IMetaModuleModuleHandle.SetPlayPatterns" />
         public void SetPlayPatterns(MetaModulePatternMode value) => ModuleHandle.SetControllerValue(2, (int)value, ValueScalingMode.Displayed);
 
+        /// <inheritdoc cref="IMetaModuleModuleHandle.MakePlayPatternsEvent" />
+        public PatternEvent MakePlayPatternsEvent(MetaModulePatternMode value)
+        {
+            return PatternEvent.ControllerEvent(ModuleHandle.Id, 2, (ushort)Math.Clamp((int)value, 0, 0x8000));
+        }
+
         /// <inheritdoc cref="IMetaModuleModuleHandle.GetBeatsPerMinute" />
         public int GetBeatsPerMinute(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(3, valueScalingMode);
 
         /// <inheritdoc cref="IMetaModuleModuleHandle.SetBeatsPerMinute" />
         public void SetBeatsPerMinute(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(3, value, valueScalingMode);
 
+        /// <inheritdoc cref="IMetaModuleModuleHandle.MakeBeatsPerMinuteEvent" />
+        public PatternEvent MakeBeatsPerMinuteEvent(int value)
+        {
+            return PatternEvent.ControllerEvent(ModuleHandle.Id, 3, (ushort)Math.Clamp(value, 0, 0x8000));
+        }
+
         /// <inheritdoc cref="IMetaModuleModuleHandle.GetTicksPerLine" />
         public int GetTicksPerLine(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(4, valueScalingMode);
 
         /// <inheritdoc cref="IMetaModuleModuleHandle.SetTicksPerLine" />
         public void SetTicksPerLine(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(4, value, valueScalingMode);
+
+        /// <inheritdoc cref="IMetaModuleModuleHandle.MakeTicksPerLineEvent" />
+        public PatternEvent MakeTicksPerLineEvent(int value)
+        {
+            return PatternEvent.ControllerEvent(ModuleHandle.Id, 4, (ushort)Math.Clamp(value, 0, 0x8000));
+        }
     }
 }
 #endif

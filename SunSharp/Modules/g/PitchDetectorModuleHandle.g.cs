@@ -5,6 +5,9 @@
 #nullable enable
 
 #if !GENERATION
+
+using System;
+
 namespace SunSharp.Modules
 {
     /// <summary>
@@ -20,32 +23,53 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 0 'Algorithm'
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetAlgorithm(PitchDetectorAlgorithm value);
 
         /// <summary>
-        /// Value range: 0-10000
+        /// <para>This is a helper method to automatically handle turning target controller values into column values.</para>
+        /// <para>For this controller the input value is taken as is, only clamped to column value range.</para>
+        /// </summary>
+        PatternEvent MakeAlgorithmEvent(PitchDetectorAlgorithm value);
+
+        /// <summary>
+        /// Value range: displayed: 0 to 10000, real: 0 to 10000
         /// Original name: 1 'Threshold'
         /// </summary>
         int GetThreshold(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: 0-10000
+        /// Value range: displayed: 0 to 10000, real: 0 to 10000
         /// Original name: 1 'Threshold'
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetThreshold(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: 0-256
+        /// <para>This is a helper method to automatically handle turning target controller values into column values.</para>
+        /// <para>For this controller the input value is mapped from displayed range (0 to 10000) to column range (0 to 0x8000). Out of range values are clamped.</para>
+        /// </summary>
+        PatternEvent MakeThresholdEvent(int value);
+
+        /// <summary>
+        /// Value range: displayed: 0 to 256, real: 0 to 256
         /// Original name: 2 'Gain'
         /// </summary>
         int GetGain(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: 0-256
+        /// Value range: displayed: 0 to 256, real: 0 to 256
         /// Original name: 2 'Gain'
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetGain(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
+
+        /// <summary>
+        /// <para>This is a helper method to automatically handle turning target controller values into column values.</para>
+        /// <para>For this controller the input value is mapped from displayed range (0 to 256) to column range (0 to 0x8000). Out of range values are clamped.</para>
+        /// </summary>
+        PatternEvent MakeGainEvent(int value);
 
         /// <summary>
         /// Original name: 3 'Microtones'
@@ -54,32 +78,53 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 3 'Microtones'
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetMicrotones(Toggle value);
 
         /// <summary>
-        /// Value range: displayed: -256-256, real: 0-512
-        /// Original name: 4 'Detector finetune'
+        /// <para>This is a helper method to automatically handle turning target controller values into column values.</para>
+        /// <para>For this controller the input value is taken as is, only clamped to column value range.</para>
         /// </summary>
-        int GetDetectorFinetune(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
+        PatternEvent MakeMicrotonesEvent(Toggle value);
 
         /// <summary>
-        /// Value range: displayed: -256-256, real: 0-512
+        /// Value range: displayed: -256 to 256, real: 0 to 512
         /// Original name: 4 'Detector finetune'
         /// </summary>
-        void SetDetectorFinetune(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
+        int GetDetectorFineTune(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: 0-4000
+        /// Value range: displayed: -256 to 256, real: 0 to 512
+        /// Original name: 4 'Detector finetune'
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// </summary>
+        void SetDetectorFineTune(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
+
+        /// <summary>
+        /// <para>This is a helper method to automatically handle turning target controller values into column values.</para>
+        /// <para>For this controller the input value is mapped from displayed range (-256 to 256) to column range (0 to 0x8000). Out of range values are clamped.</para>
+        /// </summary>
+        PatternEvent MakeDetectorFineTuneEvent(int value);
+
+        /// <summary>
+        /// Value range: displayed: 0 to 4000, real: 0 to 4000
         /// Original name: 5 'LP filter freq (0 - OFF)'
         /// </summary>
         int GetLpFilterFreqOff0(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: 0-4000
+        /// Value range: displayed: 0 to 4000, real: 0 to 4000
         /// Original name: 5 'LP filter freq (0 - OFF)'
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetLpFilterFreqOff0(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
+
+        /// <summary>
+        /// <para>This is a helper method to automatically handle turning target controller values into column values.</para>
+        /// <para>For this controller the input value is mapped from displayed range (0 to 4000) to column range (0 to 0x8000). Out of range values are clamped.</para>
+        /// </summary>
+        PatternEvent MakeLpFilterFreqOff0Event(int value);
 
         /// <summary>
         /// Original name: 6 'LP filter roll-off'
@@ -88,8 +133,15 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 6 'LP filter roll-off'
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetLpFilterRollOff(FilterRollOff value);
+
+        /// <summary>
+        /// <para>This is a helper method to automatically handle turning target controller values into column values.</para>
+        /// <para>For this controller the input value is taken as is, only clamped to column value range.</para>
+        /// </summary>
+        PatternEvent MakeLpFilterRollOffEvent(FilterRollOff value);
 
         /// <summary>
         /// Original name: 7 'Alg1-2 Sample rate (Hz)'
@@ -98,8 +150,15 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 7 'Alg1-2 Sample rate (Hz)'
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetAlgSampleRateHz12(PitchDetectorAlgSampleRate value);
+
+        /// <summary>
+        /// <para>This is a helper method to automatically handle turning target controller values into column values.</para>
+        /// <para>For this controller the input value is taken as is, only clamped to column value range.</para>
+        /// </summary>
+        PatternEvent MakeAlgSampleRateHz12Event(PitchDetectorAlgSampleRate value);
 
         /// <summary>
         /// Original name: 8 'Alg1-2 Buffer (ms)'
@@ -108,32 +167,53 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 8 'Alg1-2 Buffer (ms)'
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetAlgBufferMs12(PitchDetectorBufferSize value);
 
         /// <summary>
-        /// Value range: 0-100
+        /// <para>This is a helper method to automatically handle turning target controller values into column values.</para>
+        /// <para>For this controller the input value is taken as is, only clamped to column value range.</para>
+        /// </summary>
+        PatternEvent MakeAlgBufferMs12Event(PitchDetectorBufferSize value);
+
+        /// <summary>
+        /// Value range: displayed: 0 to 100, real: 0 to 100
         /// Original name: 9 'Alg1-2 Buf overlap'
         /// </summary>
         int GetAlgBufOverlap12(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: 0-100
+        /// Value range: displayed: 0 to 100, real: 0 to 100
         /// Original name: 9 'Alg1-2 Buf overlap'
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetAlgBufOverlap12(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: 0-100
+        /// <para>This is a helper method to automatically handle turning target controller values into column values.</para>
+        /// <para>For this controller the input value is mapped from displayed range (0 to 100) to column range (0 to 0x8000). Out of range values are clamped.</para>
+        /// </summary>
+        PatternEvent MakeAlgBufOverlap12Event(int value);
+
+        /// <summary>
+        /// Value range: displayed: 0 to 100, real: 0 to 100
         /// Original name: 10 'Alg1 Sensitivity (absolute threshold)'
         /// </summary>
         int GetAlgSensitivityAbsoluteThreshold1(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: 0-100
+        /// Value range: displayed: 0 to 100, real: 0 to 100
         /// Original name: 10 'Alg1 Sensitivity (absolute threshold)'
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetAlgSensitivityAbsoluteThreshold1(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
+
+        /// <summary>
+        /// <para>This is a helper method to automatically handle turning target controller values into column values.</para>
+        /// <para>For this controller the input value is mapped from displayed range (0 to 100) to column range (0 to 0x8000). Out of range values are clamped.</para>
+        /// </summary>
+        PatternEvent MakeAlgSensitivityAbsoluteThreshold1Event(int value);
 
         /// <summary>
         /// Original name: 11 'Record notes'
@@ -142,8 +222,15 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 11 'Record notes'
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetRecordNotes(Toggle value);
+
+        /// <summary>
+        /// <para>This is a helper method to automatically handle turning target controller values into column values.</para>
+        /// <para>For this controller the input value is taken as is, only clamped to column value range.</para>
+        /// </summary>
+        PatternEvent MakeRecordNotesEvent(Toggle value);
     }
 
     /// <inheritdoc cref="IPitchDetectorModuleHandle"/>
@@ -297,11 +384,24 @@ namespace SunSharp.Modules
         /// <inheritdoc cref="IPitchDetectorModuleHandle.SetAlgorithm" />
         public void SetAlgorithm(PitchDetectorAlgorithm value) => ModuleHandle.SetControllerValue(0, (int)value, ValueScalingMode.Displayed);
 
+        /// <inheritdoc cref="IPitchDetectorModuleHandle.MakeAlgorithmEvent" />
+        public PatternEvent MakeAlgorithmEvent(PitchDetectorAlgorithm value)
+        {
+            return PatternEvent.ControllerEvent(ModuleHandle.Id, 0, (ushort)Math.Clamp((int)value, 0, 0x8000));
+        }
+
         /// <inheritdoc cref="IPitchDetectorModuleHandle.GetThreshold" />
         public int GetThreshold(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(1, valueScalingMode);
 
         /// <inheritdoc cref="IPitchDetectorModuleHandle.SetThreshold" />
         public void SetThreshold(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(1, value, valueScalingMode);
+
+        /// <inheritdoc cref="IPitchDetectorModuleHandle.MakeThresholdEvent" />
+        public PatternEvent MakeThresholdEvent(int value)
+        {
+            value = value * 0x8000 / (10000);
+            return PatternEvent.ControllerEvent(ModuleHandle.Id, 1, (ushort)Math.Clamp(value, 0, 0x8000));
+        }
 
         /// <inheritdoc cref="IPitchDetectorModuleHandle.GetGain" />
         public int GetGain(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(2, valueScalingMode);
@@ -309,17 +409,38 @@ namespace SunSharp.Modules
         /// <inheritdoc cref="IPitchDetectorModuleHandle.SetGain" />
         public void SetGain(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(2, value, valueScalingMode);
 
+        /// <inheritdoc cref="IPitchDetectorModuleHandle.MakeGainEvent" />
+        public PatternEvent MakeGainEvent(int value)
+        {
+            value = value * 0x8000 / (256);
+            return PatternEvent.ControllerEvent(ModuleHandle.Id, 2, (ushort)Math.Clamp(value, 0, 0x8000));
+        }
+
         /// <inheritdoc cref="IPitchDetectorModuleHandle.GetMicrotones" />
         public Toggle GetMicrotones() => (Toggle)ModuleHandle.GetControllerValue(3, ValueScalingMode.Displayed);
 
         /// <inheritdoc cref="IPitchDetectorModuleHandle.SetMicrotones" />
         public void SetMicrotones(Toggle value) => ModuleHandle.SetControllerValue(3, (int)value, ValueScalingMode.Displayed);
 
-        /// <inheritdoc cref="IPitchDetectorModuleHandle.GetDetectorFinetune" />
-        public int GetDetectorFinetune(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(4, valueScalingMode);
+        /// <inheritdoc cref="IPitchDetectorModuleHandle.MakeMicrotonesEvent" />
+        public PatternEvent MakeMicrotonesEvent(Toggle value)
+        {
+            return PatternEvent.ControllerEvent(ModuleHandle.Id, 3, (ushort)Math.Clamp((int)value, 0, 0x8000));
+        }
 
-        /// <inheritdoc cref="IPitchDetectorModuleHandle.SetDetectorFinetune" />
-        public void SetDetectorFinetune(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(4, value, valueScalingMode);
+        /// <inheritdoc cref="IPitchDetectorModuleHandle.GetDetectorFineTune" />
+        public int GetDetectorFineTune(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(4, valueScalingMode);
+
+        /// <inheritdoc cref="IPitchDetectorModuleHandle.SetDetectorFineTune" />
+        public void SetDetectorFineTune(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(4, value, valueScalingMode);
+
+        /// <inheritdoc cref="IPitchDetectorModuleHandle.MakeDetectorFineTuneEvent" />
+        public PatternEvent MakeDetectorFineTuneEvent(int value)
+        {
+            value -= -256;
+            value = value * 0x8000 / (512);
+            return PatternEvent.ControllerEvent(ModuleHandle.Id, 4, (ushort)Math.Clamp(value, 0, 0x8000));
+        }
 
         /// <inheritdoc cref="IPitchDetectorModuleHandle.GetLpFilterFreqOff0" />
         public int GetLpFilterFreqOff0(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(5, valueScalingMode);
@@ -327,11 +448,24 @@ namespace SunSharp.Modules
         /// <inheritdoc cref="IPitchDetectorModuleHandle.SetLpFilterFreqOff0" />
         public void SetLpFilterFreqOff0(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(5, value, valueScalingMode);
 
+        /// <inheritdoc cref="IPitchDetectorModuleHandle.MakeLpFilterFreqOff0Event" />
+        public PatternEvent MakeLpFilterFreqOff0Event(int value)
+        {
+            value = value * 0x8000 / (4000);
+            return PatternEvent.ControllerEvent(ModuleHandle.Id, 5, (ushort)Math.Clamp(value, 0, 0x8000));
+        }
+
         /// <inheritdoc cref="IPitchDetectorModuleHandle.GetLpFilterRollOff" />
         public FilterRollOff GetLpFilterRollOff() => (FilterRollOff)ModuleHandle.GetControllerValue(6, ValueScalingMode.Displayed);
 
         /// <inheritdoc cref="IPitchDetectorModuleHandle.SetLpFilterRollOff" />
         public void SetLpFilterRollOff(FilterRollOff value) => ModuleHandle.SetControllerValue(6, (int)value, ValueScalingMode.Displayed);
+
+        /// <inheritdoc cref="IPitchDetectorModuleHandle.MakeLpFilterRollOffEvent" />
+        public PatternEvent MakeLpFilterRollOffEvent(FilterRollOff value)
+        {
+            return PatternEvent.ControllerEvent(ModuleHandle.Id, 6, (ushort)Math.Clamp((int)value, 0, 0x8000));
+        }
 
         /// <inheritdoc cref="IPitchDetectorModuleHandle.GetAlgSampleRateHz12" />
         public PitchDetectorAlgSampleRate GetAlgSampleRateHz12() => (PitchDetectorAlgSampleRate)ModuleHandle.GetControllerValue(7, ValueScalingMode.Displayed);
@@ -339,11 +473,23 @@ namespace SunSharp.Modules
         /// <inheritdoc cref="IPitchDetectorModuleHandle.SetAlgSampleRateHz12" />
         public void SetAlgSampleRateHz12(PitchDetectorAlgSampleRate value) => ModuleHandle.SetControllerValue(7, (int)value, ValueScalingMode.Displayed);
 
+        /// <inheritdoc cref="IPitchDetectorModuleHandle.MakeAlgSampleRateHz12Event" />
+        public PatternEvent MakeAlgSampleRateHz12Event(PitchDetectorAlgSampleRate value)
+        {
+            return PatternEvent.ControllerEvent(ModuleHandle.Id, 7, (ushort)Math.Clamp((int)value, 0, 0x8000));
+        }
+
         /// <inheritdoc cref="IPitchDetectorModuleHandle.GetAlgBufferMs12" />
         public PitchDetectorBufferSize GetAlgBufferMs12() => (PitchDetectorBufferSize)ModuleHandle.GetControllerValue(8, ValueScalingMode.Displayed);
 
         /// <inheritdoc cref="IPitchDetectorModuleHandle.SetAlgBufferMs12" />
         public void SetAlgBufferMs12(PitchDetectorBufferSize value) => ModuleHandle.SetControllerValue(8, (int)value, ValueScalingMode.Displayed);
+
+        /// <inheritdoc cref="IPitchDetectorModuleHandle.MakeAlgBufferMs12Event" />
+        public PatternEvent MakeAlgBufferMs12Event(PitchDetectorBufferSize value)
+        {
+            return PatternEvent.ControllerEvent(ModuleHandle.Id, 8, (ushort)Math.Clamp((int)value, 0, 0x8000));
+        }
 
         /// <inheritdoc cref="IPitchDetectorModuleHandle.GetAlgBufOverlap12" />
         public int GetAlgBufOverlap12(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(9, valueScalingMode);
@@ -351,17 +497,37 @@ namespace SunSharp.Modules
         /// <inheritdoc cref="IPitchDetectorModuleHandle.SetAlgBufOverlap12" />
         public void SetAlgBufOverlap12(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(9, value, valueScalingMode);
 
+        /// <inheritdoc cref="IPitchDetectorModuleHandle.MakeAlgBufOverlap12Event" />
+        public PatternEvent MakeAlgBufOverlap12Event(int value)
+        {
+            value = value * 0x8000 / (100);
+            return PatternEvent.ControllerEvent(ModuleHandle.Id, 9, (ushort)Math.Clamp(value, 0, 0x8000));
+        }
+
         /// <inheritdoc cref="IPitchDetectorModuleHandle.GetAlgSensitivityAbsoluteThreshold1" />
         public int GetAlgSensitivityAbsoluteThreshold1(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(10, valueScalingMode);
 
         /// <inheritdoc cref="IPitchDetectorModuleHandle.SetAlgSensitivityAbsoluteThreshold1" />
         public void SetAlgSensitivityAbsoluteThreshold1(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(10, value, valueScalingMode);
 
+        /// <inheritdoc cref="IPitchDetectorModuleHandle.MakeAlgSensitivityAbsoluteThreshold1Event" />
+        public PatternEvent MakeAlgSensitivityAbsoluteThreshold1Event(int value)
+        {
+            value = value * 0x8000 / (100);
+            return PatternEvent.ControllerEvent(ModuleHandle.Id, 10, (ushort)Math.Clamp(value, 0, 0x8000));
+        }
+
         /// <inheritdoc cref="IPitchDetectorModuleHandle.GetRecordNotes" />
         public Toggle GetRecordNotes() => (Toggle)ModuleHandle.GetControllerValue(11, ValueScalingMode.Displayed);
 
         /// <inheritdoc cref="IPitchDetectorModuleHandle.SetRecordNotes" />
         public void SetRecordNotes(Toggle value) => ModuleHandle.SetControllerValue(11, (int)value, ValueScalingMode.Displayed);
+
+        /// <inheritdoc cref="IPitchDetectorModuleHandle.MakeRecordNotesEvent" />
+        public PatternEvent MakeRecordNotesEvent(Toggle value)
+        {
+            return PatternEvent.ControllerEvent(ModuleHandle.Id, 11, (ushort)Math.Clamp((int)value, 0, 0x8000));
+        }
     }
 }
 #endif

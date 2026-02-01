@@ -10,13 +10,21 @@
           "FriendlyName": "Volume",
           "InternalName": "Volume",
           "MinValue": 0,
-          "MaxValue": 256
+          "MaxValue": 256,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 256,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "1": {
           "FriendlyName": "Waveform",
           "InternalName": "Waveform",
           "MinValue": 0,
           "MaxValue": 16,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 16,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "AnalogGeneratorWaveform"
         },
         "2": {
@@ -25,25 +33,39 @@
           "MinValue": 0,
           "MaxValue": 256,
           "MinDisplayedValue": -128,
-          "MaxDisplayedValue": 128
+          "MaxDisplayedValue": 128,
+          "Offset": -128,
+          "ControllerType": "Normal"
         },
         "3": {
           "FriendlyName": "Attack",
           "InternalName": "Attack",
           "MinValue": 0,
-          "MaxValue": 256
+          "MaxValue": 256,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 256,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "4": {
           "FriendlyName": "Release",
           "InternalName": "Release",
           "MinValue": 0,
-          "MaxValue": 256
+          "MaxValue": 256,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 256,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "5": {
           "FriendlyName": "Sustain",
           "InternalName": "Sustain",
           "MinValue": 0,
           "MaxValue": 1,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 1,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "Toggle"
         },
         "6": {
@@ -51,13 +73,21 @@
           "InternalName": "Exponential envelope",
           "MinValue": 0,
           "MaxValue": 1,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 1,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "Toggle"
         },
         "7": {
           "FriendlyName": "DutyCycle",
           "InternalName": "Duty cycle",
           "MinValue": 0,
-          "MaxValue": 1024
+          "MaxValue": 1024,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 1024,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "8": {
           "FriendlyName": "SecondaryOscillatorPitch",
@@ -66,51 +96,81 @@
           "MinValue": 0,
           "MaxValue": 2000,
           "MinDisplayedValue": -1000,
-          "MaxDisplayedValue": 1000
+          "MaxDisplayedValue": 1000,
+          "Offset": -1000,
+          "ControllerType": "Normal"
         },
         "9": {
           "FriendlyName": "Filter",
           "InternalName": "Filter",
           "MinValue": 0,
           "MaxValue": 8,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 8,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "AnalogGeneratorFilterType"
         },
         "10": {
           "FriendlyName": "FilterFrequency",
           "InternalName": "F.freq",
           "MinValue": 0,
-          "MaxValue": 14000
+          "MaxValue": 14000,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 14000,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "11": {
           "FriendlyName": "FilterResonance",
           "InternalName": "F.resonance",
           "MinValue": 0,
-          "MaxValue": 1530
+          "MaxValue": 1530,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 1530,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "12": {
           "FriendlyName": "FilterExponentialFrequency",
           "InternalName": "F.exponential freq",
           "MinValue": 0,
           "MaxValue": 1,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 1,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "Toggle"
         },
         "13": {
           "FriendlyName": "FilterAttack",
           "InternalName": "F.attack",
           "MinValue": 0,
-          "MaxValue": 256
+          "MaxValue": 256,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 256,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "14": {
           "FriendlyName": "FilterRelease",
           "InternalName": "F.release",
           "MinValue": 0,
-          "MaxValue": 256
+          "MaxValue": 256,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 256,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "15": {
           "FriendlyName": "FilterEnvelope",
           "InternalName": "F.envelope",
           "MinValue": 0,
           "MaxValue": 2,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 2,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "AnalogGeneratorEnvelopeMode"
         },
         "16": {
@@ -118,7 +178,11 @@
           "InternalName": "Polyphony",
           "MinValue": 1,
           "MaxValue": 32,
-          "IgnoreActualType": true
+          "MinDisplayedValue": 1,
+          "MaxDisplayedValue": 32,
+          "Offset": 0,
+          "ControllerType": "Selector",
+          "SelectorIsNotEnum": true
         },
         "17": {
           "FriendlyName": "Mode",
@@ -126,6 +190,10 @@
           "Description": "Quality mode of the module.",
           "MinValue": 0,
           "MaxValue": 3,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 3,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "Quality"
         },
         "18": {
@@ -133,26 +201,42 @@
           "InternalName": "Noise",
           "Description": "Amount of white noise added to the signal.",
           "MinValue": 0,
-          "MaxValue": 256
+          "MaxValue": 256,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 256,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "19": {
           "FriendlyName": "SecondaryOscillatorVolume",
           "InternalName": "Osc2 volume",
           "MinValue": 0,
-          "MaxValue": 32768
+          "MaxValue": 32768,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 32768,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "20": {
           "FriendlyName": "SecondaryOscillatorMode",
           "InternalName": "Osc2 mode",
           "MinValue": 0,
           "MaxValue": 8,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 8,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "AnalogGeneratorSecondaryOscillatorMode"
         },
         "21": {
           "FriendlyName": "SecondaryOscillatorPhase",
           "InternalName": "Osc2 phase",
           "MinValue": 0,
-          "MaxValue": 32768
+          "MaxValue": 32768,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 32768,
+          "Offset": 0,
+          "ControllerType": "Normal"
         }
       },
       "Curves": {
@@ -171,7 +255,11 @@
           "FriendlyName": "Volume",
           "InternalName": "Volume",
           "MinValue": 0,
-          "MaxValue": 512
+          "MaxValue": 512,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 512,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "1": {
           "FriendlyName": "Panning",
@@ -179,68 +267,110 @@
           "MinValue": 0,
           "MaxValue": 256,
           "MinDisplayedValue": -128,
-          "MaxDisplayedValue": 128
+          "MaxDisplayedValue": 128,
+          "Offset": -128,
+          "ControllerType": "Normal"
         },
         "2": {
           "FriendlyName": "Polyphony",
           "InternalName": "Polyphony",
           "MinValue": 1,
           "MaxValue": 8,
-          "IgnoreActualType": true
+          "MinDisplayedValue": 1,
+          "MaxDisplayedValue": 8,
+          "Offset": 0,
+          "ControllerType": "Selector",
+          "SelectorIsNotEnum": true
         },
         "3": {
           "FriendlyName": "BassVolume",
           "InternalName": "Bass volume",
           "MinValue": 0,
-          "MaxValue": 512
+          "MaxValue": 512,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 512,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "4": {
           "FriendlyName": "BassPower",
           "InternalName": "Bass power",
           "MinValue": 0,
-          "MaxValue": 256
+          "MaxValue": 256,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 256,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "5": {
           "FriendlyName": "BassTone",
           "InternalName": "Bass tone",
           "MinValue": 0,
-          "MaxValue": 256
+          "MaxValue": 256,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 256,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "6": {
           "FriendlyName": "BassLength",
           "InternalName": "Bass length",
           "MinValue": 0,
-          "MaxValue": 256
+          "MaxValue": 256,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 256,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "7": {
           "FriendlyName": "HihatVolume",
           "InternalName": "Hihat volume",
           "MinValue": 0,
-          "MaxValue": 512
+          "MaxValue": 512,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 512,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "8": {
           "FriendlyName": "HihatLength",
           "InternalName": "Hihat length",
           "MinValue": 0,
-          "MaxValue": 256
+          "MaxValue": 256,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 256,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "9": {
           "FriendlyName": "SnareVolume",
           "InternalName": "Snare volume",
           "MinValue": 0,
-          "MaxValue": 512
+          "MaxValue": 512,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 512,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "10": {
           "FriendlyName": "SnareTone",
           "InternalName": "Snare tone",
           "MinValue": 0,
-          "MaxValue": 256
+          "MaxValue": 256,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 256,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "11": {
           "FriendlyName": "SnareLength",
           "InternalName": "Snare length",
           "MinValue": 0,
-          "MaxValue": 256
+          "MaxValue": 256,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 256,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "12": {
           "FriendlyName": "BassPanning",
@@ -248,7 +378,9 @@
           "MinValue": 0,
           "MaxValue": 256,
           "MinDisplayedValue": -128,
-          "MaxDisplayedValue": 128
+          "MaxDisplayedValue": 128,
+          "Offset": -128,
+          "ControllerType": "Normal"
         },
         "13": {
           "FriendlyName": "HihatPanning",
@@ -256,7 +388,9 @@
           "MinValue": 0,
           "MaxValue": 256,
           "MinDisplayedValue": -128,
-          "MaxDisplayedValue": 128
+          "MaxDisplayedValue": 128,
+          "Offset": -128,
+          "ControllerType": "Normal"
         },
         "14": {
           "FriendlyName": "SnarePanning",
@@ -264,7 +398,9 @@
           "MinValue": 0,
           "MaxValue": 256,
           "MinDisplayedValue": -128,
-          "MaxDisplayedValue": 128
+          "MaxDisplayedValue": 128,
+          "Offset": -128,
+          "ControllerType": "Normal"
         }
       },
       "Curves": {}
@@ -275,13 +411,21 @@
           "FriendlyName": "CarrierVolume",
           "InternalName": "C.Volume",
           "MinValue": 0,
-          "MaxValue": 256
+          "MaxValue": 256,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 256,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "1": {
           "FriendlyName": "ModulatorVolume",
           "InternalName": "M.Volume",
           "MinValue": 0,
-          "MaxValue": 256
+          "MaxValue": 256,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 256,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "2": {
           "FriendlyName": "Panning",
@@ -289,92 +433,150 @@
           "MinValue": 0,
           "MaxValue": 256,
           "MinDisplayedValue": -128,
-          "MaxDisplayedValue": 128
+          "MaxDisplayedValue": 128,
+          "Offset": -128,
+          "ControllerType": "Normal"
         },
         "3": {
           "FriendlyName": "CarrierFrequencyRatio",
           "InternalName": "C.Freq ratio",
           "MinValue": 0,
-          "MaxValue": 16
+          "MaxValue": 16,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 16,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "4": {
           "FriendlyName": "ModulatorFrequencyRatio",
           "InternalName": "M.Freq ratio",
           "MinValue": 0,
-          "MaxValue": 16
+          "MaxValue": 16,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 16,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "5": {
           "FriendlyName": "ModulatorSelfModulation",
           "InternalName": "M.Self-modulation",
           "MinValue": 0,
-          "MaxValue": 256
+          "MaxValue": 256,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 256,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "6": {
           "FriendlyName": "CarrierAttack",
           "InternalName": "C.Attack",
           "MinValue": 0,
-          "MaxValue": 512
+          "MaxValue": 512,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 512,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "7": {
           "FriendlyName": "CarrierDecay",
           "InternalName": "C.Decay",
           "MinValue": 0,
-          "MaxValue": 512
+          "MaxValue": 512,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 512,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "8": {
           "FriendlyName": "CarrierSustain",
           "InternalName": "C.Sustain",
           "MinValue": 0,
-          "MaxValue": 256
+          "MaxValue": 256,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 256,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "9": {
           "FriendlyName": "CarrierRelease",
           "InternalName": "C.Release",
           "MinValue": 0,
-          "MaxValue": 512
+          "MaxValue": 512,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 512,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "10": {
           "FriendlyName": "ModulatorAttack",
           "InternalName": "M.Attack",
           "MinValue": 0,
-          "MaxValue": 512
+          "MaxValue": 512,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 512,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "11": {
           "FriendlyName": "ModulatorDecay",
           "InternalName": "M.Decay",
           "MinValue": 0,
-          "MaxValue": 512
+          "MaxValue": 512,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 512,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "12": {
           "FriendlyName": "ModulatorSustain",
           "InternalName": "M.Sustain",
           "MinValue": 0,
-          "MaxValue": 256
+          "MaxValue": 256,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 256,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "13": {
           "FriendlyName": "ModulatorRelease",
           "InternalName": "M.Release",
           "MinValue": 0,
-          "MaxValue": 512
+          "MaxValue": 512,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 512,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "14": {
           "FriendlyName": "ModulatorScalingPerKey",
           "InternalName": "M.Scaling per key",
           "MinValue": 0,
-          "MaxValue": 4
+          "MaxValue": 4,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 4,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "15": {
           "FriendlyName": "Polyphony",
           "InternalName": "Polyphony",
           "MinValue": 1,
           "MaxValue": 16,
-          "IgnoreActualType": true
+          "MinDisplayedValue": 1,
+          "MaxDisplayedValue": 16,
+          "Offset": 0,
+          "ControllerType": "Selector",
+          "SelectorIsNotEnum": true
         },
         "16": {
           "FriendlyName": "Mode",
           "InternalName": "Mode",
           "MinValue": 0,
           "MaxValue": 3,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 3,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "Quality"
         }
       },
@@ -386,7 +588,11 @@
           "FriendlyName": "Volume",
           "InternalName": "Volume",
           "MinValue": 0,
-          "MaxValue": 32768
+          "MaxValue": 32768,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 32768,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "1": {
           "FriendlyName": "Panning",
@@ -394,13 +600,19 @@
           "MinValue": 0,
           "MaxValue": 256,
           "MinDisplayedValue": -128,
-          "MaxDisplayedValue": 128
+          "MaxDisplayedValue": 128,
+          "Offset": -128,
+          "ControllerType": "Normal"
         },
         "2": {
           "FriendlyName": "SampleRate",
           "InternalName": "Sample rate",
           "MinValue": 0,
           "MaxValue": 6,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 6,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "FmxSampleRate"
         },
         "3": {
@@ -408,13 +620,21 @@
           "InternalName": "Polyphony",
           "MinValue": 1,
           "MaxValue": 32,
-          "IgnoreActualType": true
+          "MinDisplayedValue": 1,
+          "MaxDisplayedValue": 32,
+          "Offset": 0,
+          "ControllerType": "Selector",
+          "SelectorIsNotEnum": true
         },
         "4": {
           "FriendlyName": "Channels",
           "InternalName": "Channels",
           "MinValue": 0,
           "MaxValue": 1,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 1,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "ChannelsInverted"
         },
         "5": {
@@ -422,13 +642,21 @@
           "InternalName": "Input -\u003E Operator #",
           "MinValue": 0,
           "MaxValue": 5,
-          "IgnoreActualType": true
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 5,
+          "Offset": 0,
+          "ControllerType": "Selector",
+          "SelectorIsNotEnum": true
         },
         "6": {
           "FriendlyName": "InputCustomWaveform",
           "InternalName": "Input -\u003E Custom waveform",
           "MinValue": 0,
           "MaxValue": 2,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 2,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "FmxCustomWaveform"
         },
         "7": {
@@ -436,169 +664,281 @@
           "InternalName": "ADSR smooth transitions",
           "MinValue": 0,
           "MaxValue": 3,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 3,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "AdsrSmoothTransitions"
         },
         "8": {
           "FriendlyName": "NoiseFilterOff32768",
           "InternalName": "Noise filter (32768 - OFF)",
           "MinValue": 0,
-          "MaxValue": 32768
+          "MaxValue": 32768,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 32768,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "9": {
           "FriendlyName": "Volume1",
           "InternalName": "1 Volume",
           "MinValue": 0,
-          "MaxValue": 32768
+          "MaxValue": 32768,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 32768,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "10": {
           "FriendlyName": "Volume2",
           "InternalName": "2 Volume",
           "MinValue": 0,
-          "MaxValue": 32768
+          "MaxValue": 32768,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 32768,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "11": {
           "FriendlyName": "Volume3",
           "InternalName": "3 Volume",
           "MinValue": 0,
-          "MaxValue": 32768
+          "MaxValue": 32768,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 32768,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "12": {
           "FriendlyName": "Volume4",
           "InternalName": "4 Volume",
           "MinValue": 0,
-          "MaxValue": 32768
+          "MaxValue": 32768,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 32768,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "13": {
           "FriendlyName": "Volume5",
           "InternalName": "5 Volume",
           "MinValue": 0,
-          "MaxValue": 32768
+          "MaxValue": 32768,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 32768,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "14": {
           "FriendlyName": "Attack1",
           "InternalName": "1 Attack",
           "MinValue": 0,
-          "MaxValue": 10000
+          "MaxValue": 10000,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 10000,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "15": {
           "FriendlyName": "Attack2",
           "InternalName": "2 Attack",
           "MinValue": 0,
-          "MaxValue": 10000
+          "MaxValue": 10000,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 10000,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "16": {
           "FriendlyName": "Attack3",
           "InternalName": "3 Attack",
           "MinValue": 0,
-          "MaxValue": 10000
+          "MaxValue": 10000,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 10000,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "17": {
           "FriendlyName": "Attack4",
           "InternalName": "4 Attack",
           "MinValue": 0,
-          "MaxValue": 10000
+          "MaxValue": 10000,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 10000,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "18": {
           "FriendlyName": "Attack5",
           "InternalName": "5 Attack",
           "MinValue": 0,
-          "MaxValue": 10000
+          "MaxValue": 10000,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 10000,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "19": {
           "FriendlyName": "Decay1",
           "InternalName": "1 Decay",
           "MinValue": 0,
-          "MaxValue": 10000
+          "MaxValue": 10000,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 10000,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "20": {
           "FriendlyName": "Decay2",
           "InternalName": "2 Decay",
           "MinValue": 0,
-          "MaxValue": 10000
+          "MaxValue": 10000,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 10000,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "21": {
           "FriendlyName": "Decay3",
           "InternalName": "3 Decay",
           "MinValue": 0,
-          "MaxValue": 10000
+          "MaxValue": 10000,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 10000,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "22": {
           "FriendlyName": "Decay4",
           "InternalName": "4 Decay",
           "MinValue": 0,
-          "MaxValue": 10000
+          "MaxValue": 10000,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 10000,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "23": {
           "FriendlyName": "Decay5",
           "InternalName": "5 Decay",
           "MinValue": 0,
-          "MaxValue": 10000
+          "MaxValue": 10000,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 10000,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "24": {
           "FriendlyName": "SustainLevel1",
           "InternalName": "1 Sustain level",
           "MinValue": 0,
-          "MaxValue": 32768
+          "MaxValue": 32768,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 32768,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "25": {
           "FriendlyName": "SustainLevel2",
           "InternalName": "2 Sustain level",
           "MinValue": 0,
-          "MaxValue": 32768
+          "MaxValue": 32768,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 32768,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "26": {
           "FriendlyName": "SustainLevel3",
           "InternalName": "3 Sustain level",
           "MinValue": 0,
-          "MaxValue": 32768
+          "MaxValue": 32768,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 32768,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "27": {
           "FriendlyName": "SustainLevel4",
           "InternalName": "4 Sustain level",
           "MinValue": 0,
-          "MaxValue": 32768
+          "MaxValue": 32768,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 32768,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "28": {
           "FriendlyName": "SustainLevel5",
           "InternalName": "5 Sustain level",
           "MinValue": 0,
-          "MaxValue": 32768
+          "MaxValue": 32768,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 32768,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "29": {
           "FriendlyName": "Release1",
           "InternalName": "1 Release",
           "MinValue": 0,
-          "MaxValue": 10000
+          "MaxValue": 10000,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 10000,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "30": {
           "FriendlyName": "Release2",
           "InternalName": "2 Release",
           "MinValue": 0,
-          "MaxValue": 10000
+          "MaxValue": 10000,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 10000,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "31": {
           "FriendlyName": "Release3",
           "InternalName": "3 Release",
           "MinValue": 0,
-          "MaxValue": 10000
+          "MaxValue": 10000,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 10000,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "32": {
           "FriendlyName": "Release4",
           "InternalName": "4 Release",
           "MinValue": 0,
-          "MaxValue": 10000
+          "MaxValue": 10000,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 10000,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "33": {
           "FriendlyName": "Release5",
           "InternalName": "5 Release",
           "MinValue": 0,
-          "MaxValue": 10000
+          "MaxValue": 10000,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 10000,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "34": {
           "FriendlyName": "AttackCurve1",
           "InternalName": "1 Attack curve",
           "MinValue": 0,
           "MaxValue": 11,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 11,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "AdsrCurveType"
         },
         "35": {
@@ -606,6 +946,10 @@
           "InternalName": "2 Attack curve",
           "MinValue": 0,
           "MaxValue": 11,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 11,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "AdsrCurveType"
         },
         "36": {
@@ -613,6 +957,10 @@
           "InternalName": "3 Attack curve",
           "MinValue": 0,
           "MaxValue": 11,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 11,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "AdsrCurveType"
         },
         "37": {
@@ -620,6 +968,10 @@
           "InternalName": "4 Attack curve",
           "MinValue": 0,
           "MaxValue": 11,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 11,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "AdsrCurveType"
         },
         "38": {
@@ -627,6 +979,10 @@
           "InternalName": "5 Attack curve",
           "MinValue": 0,
           "MaxValue": 11,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 11,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "AdsrCurveType"
         },
         "39": {
@@ -634,6 +990,10 @@
           "InternalName": "1 Decay curve",
           "MinValue": 0,
           "MaxValue": 11,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 11,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "AdsrCurveType"
         },
         "40": {
@@ -641,6 +1001,10 @@
           "InternalName": "2 Decay curve",
           "MinValue": 0,
           "MaxValue": 11,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 11,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "AdsrCurveType"
         },
         "41": {
@@ -648,6 +1012,10 @@
           "InternalName": "3 Decay curve",
           "MinValue": 0,
           "MaxValue": 11,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 11,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "AdsrCurveType"
         },
         "42": {
@@ -655,6 +1023,10 @@
           "InternalName": "4 Decay curve",
           "MinValue": 0,
           "MaxValue": 11,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 11,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "AdsrCurveType"
         },
         "43": {
@@ -662,6 +1034,10 @@
           "InternalName": "5 Decay curve",
           "MinValue": 0,
           "MaxValue": 11,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 11,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "AdsrCurveType"
         },
         "44": {
@@ -669,6 +1045,10 @@
           "InternalName": "1 Release curve",
           "MinValue": 0,
           "MaxValue": 11,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 11,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "AdsrCurveType"
         },
         "45": {
@@ -676,6 +1056,10 @@
           "InternalName": "2 Release curve",
           "MinValue": 0,
           "MaxValue": 11,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 11,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "AdsrCurveType"
         },
         "46": {
@@ -683,6 +1067,10 @@
           "InternalName": "3 Release curve",
           "MinValue": 0,
           "MaxValue": 11,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 11,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "AdsrCurveType"
         },
         "47": {
@@ -690,6 +1078,10 @@
           "InternalName": "4 Release curve",
           "MinValue": 0,
           "MaxValue": 11,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 11,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "AdsrCurveType"
         },
         "48": {
@@ -697,6 +1089,10 @@
           "InternalName": "5 Release curve",
           "MinValue": 0,
           "MaxValue": 11,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 11,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "AdsrCurveType"
         },
         "49": {
@@ -704,6 +1100,10 @@
           "InternalName": "1 Sustain",
           "MinValue": 0,
           "MaxValue": 2,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 2,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "AdsrSustainMode"
         },
         "50": {
@@ -711,6 +1111,10 @@
           "InternalName": "2 Sustain",
           "MinValue": 0,
           "MaxValue": 2,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 2,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "AdsrSustainMode"
         },
         "51": {
@@ -718,6 +1122,10 @@
           "InternalName": "3 Sustain",
           "MinValue": 0,
           "MaxValue": 2,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 2,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "AdsrSustainMode"
         },
         "52": {
@@ -725,6 +1133,10 @@
           "InternalName": "4 Sustain",
           "MinValue": 0,
           "MaxValue": 2,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 2,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "AdsrSustainMode"
         },
         "53": {
@@ -732,6 +1144,10 @@
           "InternalName": "5 Sustain",
           "MinValue": 0,
           "MaxValue": 2,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 2,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "AdsrSustainMode"
         },
         "54": {
@@ -739,6 +1155,10 @@
           "InternalName": "1 Sustain pedal",
           "MinValue": 0,
           "MaxValue": 1,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 1,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "Toggle"
         },
         "55": {
@@ -746,6 +1166,10 @@
           "InternalName": "2 Sustain pedal",
           "MinValue": 0,
           "MaxValue": 1,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 1,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "Toggle"
         },
         "56": {
@@ -753,6 +1177,10 @@
           "InternalName": "3 Sustain pedal",
           "MinValue": 0,
           "MaxValue": 1,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 1,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "Toggle"
         },
         "57": {
@@ -760,6 +1188,10 @@
           "InternalName": "4 Sustain pedal",
           "MinValue": 0,
           "MaxValue": 1,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 1,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "Toggle"
         },
         "58": {
@@ -767,6 +1199,10 @@
           "InternalName": "5 Sustain pedal",
           "MinValue": 0,
           "MaxValue": 1,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 1,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "Toggle"
         },
         "59": {
@@ -775,7 +1211,9 @@
           "MinValue": 0,
           "MaxValue": 256,
           "MinDisplayedValue": -128,
-          "MaxDisplayedValue": 128
+          "MaxDisplayedValue": 128,
+          "Offset": -128,
+          "ControllerType": "Normal"
         },
         "60": {
           "FriendlyName": "EnvelopeScalingPerKey2",
@@ -783,7 +1221,9 @@
           "MinValue": 0,
           "MaxValue": 256,
           "MinDisplayedValue": -128,
-          "MaxDisplayedValue": 128
+          "MaxDisplayedValue": 128,
+          "Offset": -128,
+          "ControllerType": "Normal"
         },
         "61": {
           "FriendlyName": "EnvelopeScalingPerKey3",
@@ -791,7 +1231,9 @@
           "MinValue": 0,
           "MaxValue": 256,
           "MinDisplayedValue": -128,
-          "MaxDisplayedValue": 128
+          "MaxDisplayedValue": 128,
+          "Offset": -128,
+          "ControllerType": "Normal"
         },
         "62": {
           "FriendlyName": "EnvelopeScalingPerKey4",
@@ -799,7 +1241,9 @@
           "MinValue": 0,
           "MaxValue": 256,
           "MinDisplayedValue": -128,
-          "MaxDisplayedValue": 128
+          "MaxDisplayedValue": 128,
+          "Offset": -128,
+          "ControllerType": "Normal"
         },
         "63": {
           "FriendlyName": "EnvelopeScalingPerKey5",
@@ -807,7 +1251,9 @@
           "MinValue": 0,
           "MaxValue": 256,
           "MinDisplayedValue": -128,
-          "MaxDisplayedValue": 128
+          "MaxDisplayedValue": 128,
+          "Offset": -128,
+          "ControllerType": "Normal"
         },
         "64": {
           "FriendlyName": "VolumeScalingPerKey1",
@@ -815,7 +1261,9 @@
           "MinValue": 0,
           "MaxValue": 256,
           "MinDisplayedValue": -128,
-          "MaxDisplayedValue": 128
+          "MaxDisplayedValue": 128,
+          "Offset": -128,
+          "ControllerType": "Normal"
         },
         "65": {
           "FriendlyName": "VolumeScalingPerKey2",
@@ -823,7 +1271,9 @@
           "MinValue": 0,
           "MaxValue": 256,
           "MinDisplayedValue": -128,
-          "MaxDisplayedValue": 128
+          "MaxDisplayedValue": 128,
+          "Offset": -128,
+          "ControllerType": "Normal"
         },
         "66": {
           "FriendlyName": "VolumeScalingPerKey3",
@@ -831,7 +1281,9 @@
           "MinValue": 0,
           "MaxValue": 256,
           "MinDisplayedValue": -128,
-          "MaxDisplayedValue": 128
+          "MaxDisplayedValue": 128,
+          "Offset": -128,
+          "ControllerType": "Normal"
         },
         "67": {
           "FriendlyName": "VolumeScalingPerKey4",
@@ -839,7 +1291,9 @@
           "MinValue": 0,
           "MaxValue": 256,
           "MinDisplayedValue": -128,
-          "MaxDisplayedValue": 128
+          "MaxDisplayedValue": 128,
+          "Offset": -128,
+          "ControllerType": "Normal"
         },
         "68": {
           "FriendlyName": "VolumeScalingPerKey5",
@@ -847,7 +1301,9 @@
           "MinValue": 0,
           "MaxValue": 256,
           "MinDisplayedValue": -128,
-          "MaxDisplayedValue": 128
+          "MaxDisplayedValue": 128,
+          "Offset": -128,
+          "ControllerType": "Normal"
         },
         "69": {
           "FriendlyName": "VelocitySensitivity1",
@@ -855,7 +1311,9 @@
           "MinValue": 0,
           "MaxValue": 256,
           "MinDisplayedValue": -128,
-          "MaxDisplayedValue": 128
+          "MaxDisplayedValue": 128,
+          "Offset": -128,
+          "ControllerType": "Normal"
         },
         "70": {
           "FriendlyName": "VelocitySensitivity2",
@@ -863,7 +1321,9 @@
           "MinValue": 0,
           "MaxValue": 256,
           "MinDisplayedValue": -128,
-          "MaxDisplayedValue": 128
+          "MaxDisplayedValue": 128,
+          "Offset": -128,
+          "ControllerType": "Normal"
         },
         "71": {
           "FriendlyName": "VelocitySensitivity3",
@@ -871,7 +1331,9 @@
           "MinValue": 0,
           "MaxValue": 256,
           "MinDisplayedValue": -128,
-          "MaxDisplayedValue": 128
+          "MaxDisplayedValue": 128,
+          "Offset": -128,
+          "ControllerType": "Normal"
         },
         "72": {
           "FriendlyName": "VelocitySensitivity4",
@@ -879,7 +1341,9 @@
           "MinValue": 0,
           "MaxValue": 256,
           "MinDisplayedValue": -128,
-          "MaxDisplayedValue": 128
+          "MaxDisplayedValue": 128,
+          "Offset": -128,
+          "ControllerType": "Normal"
         },
         "73": {
           "FriendlyName": "VelocitySensitivity5",
@@ -887,13 +1351,19 @@
           "MinValue": 0,
           "MaxValue": 256,
           "MinDisplayedValue": -128,
-          "MaxDisplayedValue": 128
+          "MaxDisplayedValue": 128,
+          "Offset": -128,
+          "ControllerType": "Normal"
         },
         "74": {
           "FriendlyName": "Waveform1",
           "InternalName": "1 Waveform",
           "MinValue": 0,
           "MaxValue": 9,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 9,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "FmxWaveform"
         },
         "75": {
@@ -901,6 +1371,10 @@
           "InternalName": "2 Waveform",
           "MinValue": 0,
           "MaxValue": 9,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 9,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "FmxWaveform"
         },
         "76": {
@@ -908,6 +1382,10 @@
           "InternalName": "3 Waveform",
           "MinValue": 0,
           "MaxValue": 9,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 9,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "FmxWaveform"
         },
         "77": {
@@ -915,6 +1393,10 @@
           "InternalName": "4 Waveform",
           "MinValue": 0,
           "MaxValue": 9,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 9,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "FmxWaveform"
         },
         "78": {
@@ -922,97 +1404,161 @@
           "InternalName": "5 Waveform",
           "MinValue": 0,
           "MaxValue": 9,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 9,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "FmxWaveform"
         },
         "79": {
           "FriendlyName": "Noise1",
           "InternalName": "1 Noise",
           "MinValue": 0,
-          "MaxValue": 32768
+          "MaxValue": 32768,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 32768,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "80": {
           "FriendlyName": "Noise2",
           "InternalName": "2 Noise",
           "MinValue": 0,
-          "MaxValue": 32768
+          "MaxValue": 32768,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 32768,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "81": {
           "FriendlyName": "Noise3",
           "InternalName": "3 Noise",
           "MinValue": 0,
-          "MaxValue": 32768
+          "MaxValue": 32768,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 32768,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "82": {
           "FriendlyName": "Noise4",
           "InternalName": "4 Noise",
           "MinValue": 0,
-          "MaxValue": 32768
+          "MaxValue": 32768,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 32768,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "83": {
           "FriendlyName": "Noise5",
           "InternalName": "5 Noise",
           "MinValue": 0,
-          "MaxValue": 32768
+          "MaxValue": 32768,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 32768,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "84": {
           "FriendlyName": "Phase1",
           "InternalName": "1 Phase",
           "MinValue": 0,
-          "MaxValue": 32768
+          "MaxValue": 32768,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 32768,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "85": {
           "FriendlyName": "Phase2",
           "InternalName": "2 Phase",
           "MinValue": 0,
-          "MaxValue": 32768
+          "MaxValue": 32768,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 32768,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "86": {
           "FriendlyName": "Phase3",
           "InternalName": "3 Phase",
           "MinValue": 0,
-          "MaxValue": 32768
+          "MaxValue": 32768,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 32768,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "87": {
           "FriendlyName": "Phase4",
           "InternalName": "4 Phase",
           "MinValue": 0,
-          "MaxValue": 32768
+          "MaxValue": 32768,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 32768,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "88": {
           "FriendlyName": "Phase5",
           "InternalName": "5 Phase",
           "MinValue": 0,
-          "MaxValue": 32768
+          "MaxValue": 32768,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 32768,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "89": {
           "FriendlyName": "FreqMultiply1",
           "InternalName": "1 Freq multiply",
           "MinValue": 0,
-          "MaxValue": 32000
+          "MaxValue": 32000,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 32000,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "90": {
           "FriendlyName": "FreqMultiply2",
           "InternalName": "2 Freq multiply",
           "MinValue": 0,
-          "MaxValue": 32000
+          "MaxValue": 32000,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 32000,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "91": {
           "FriendlyName": "FreqMultiply3",
           "InternalName": "3 Freq multiply",
           "MinValue": 0,
-          "MaxValue": 32000
+          "MaxValue": 32000,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 32000,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "92": {
           "FriendlyName": "FreqMultiply4",
           "InternalName": "4 Freq multiply",
           "MinValue": 0,
-          "MaxValue": 32000
+          "MaxValue": 32000,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 32000,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "93": {
           "FriendlyName": "FreqMultiply5",
           "InternalName": "5 Freq multiply",
           "MinValue": 0,
-          "MaxValue": 32000
+          "MaxValue": 32000,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 32000,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "94": {
           "FriendlyName": "ConstantPitch1",
@@ -1020,7 +1566,9 @@
           "MinValue": 0,
           "MaxValue": 16384,
           "MinDisplayedValue": -8192,
-          "MaxDisplayedValue": 8192
+          "MaxDisplayedValue": 8192,
+          "Offset": -8192,
+          "ControllerType": "Normal"
         },
         "95": {
           "FriendlyName": "ConstantPitch2",
@@ -1028,7 +1576,9 @@
           "MinValue": 0,
           "MaxValue": 16384,
           "MinDisplayedValue": -8192,
-          "MaxDisplayedValue": 8192
+          "MaxDisplayedValue": 8192,
+          "Offset": -8192,
+          "ControllerType": "Normal"
         },
         "96": {
           "FriendlyName": "ConstantPitch3",
@@ -1036,7 +1586,9 @@
           "MinValue": 0,
           "MaxValue": 16384,
           "MinDisplayedValue": -8192,
-          "MaxDisplayedValue": 8192
+          "MaxDisplayedValue": 8192,
+          "Offset": -8192,
+          "ControllerType": "Normal"
         },
         "97": {
           "FriendlyName": "ConstantPitch4",
@@ -1044,7 +1596,9 @@
           "MinValue": 0,
           "MaxValue": 16384,
           "MinDisplayedValue": -8192,
-          "MaxDisplayedValue": 8192
+          "MaxDisplayedValue": 8192,
+          "Offset": -8192,
+          "ControllerType": "Normal"
         },
         "98": {
           "FriendlyName": "ConstantPitch5",
@@ -1052,73 +1606,119 @@
           "MinValue": 0,
           "MaxValue": 16384,
           "MinDisplayedValue": -8192,
-          "MaxDisplayedValue": 8192
+          "MaxDisplayedValue": 8192,
+          "Offset": -8192,
+          "ControllerType": "Normal"
         },
         "99": {
           "FriendlyName": "SelfModulation1",
           "InternalName": "1 Self-modulation",
           "MinValue": 0,
-          "MaxValue": 32768
+          "MaxValue": 32768,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 32768,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "100": {
           "FriendlyName": "SelfModulation2",
           "InternalName": "2 Self-modulation",
           "MinValue": 0,
-          "MaxValue": 32768
+          "MaxValue": 32768,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 32768,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "101": {
           "FriendlyName": "SelfModulation3",
           "InternalName": "3 Self-modulation",
           "MinValue": 0,
-          "MaxValue": 32768
+          "MaxValue": 32768,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 32768,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "102": {
           "FriendlyName": "SelfModulation4",
           "InternalName": "4 Self-modulation",
           "MinValue": 0,
-          "MaxValue": 32768
+          "MaxValue": 32768,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 32768,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "103": {
           "FriendlyName": "SelfModulation5",
           "InternalName": "5 Self-modulation",
           "MinValue": 0,
-          "MaxValue": 32768
+          "MaxValue": 32768,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 32768,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "104": {
           "FriendlyName": "Feedback1",
           "InternalName": "1 Feedback",
           "MinValue": 0,
-          "MaxValue": 32768
+          "MaxValue": 32768,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 32768,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "105": {
           "FriendlyName": "Feedback2",
           "InternalName": "2 Feedback",
           "MinValue": 0,
-          "MaxValue": 32768
+          "MaxValue": 32768,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 32768,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "106": {
           "FriendlyName": "Feedback3",
           "InternalName": "3 Feedback",
           "MinValue": 0,
-          "MaxValue": 32768
+          "MaxValue": 32768,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 32768,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "107": {
           "FriendlyName": "Feedback4",
           "InternalName": "4 Feedback",
           "MinValue": 0,
-          "MaxValue": 32768
+          "MaxValue": 32768,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 32768,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "108": {
           "FriendlyName": "Feedback5",
           "InternalName": "5 Feedback",
           "MinValue": 0,
-          "MaxValue": 32768
+          "MaxValue": 32768,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 32768,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "109": {
           "FriendlyName": "ModulationType1",
           "InternalName": "1 Modulation type",
           "MinValue": 0,
           "MaxValue": 11,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 11,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "FmxModulationType"
         },
         "110": {
@@ -1126,6 +1726,10 @@
           "InternalName": "2 Modulation type",
           "MinValue": 0,
           "MaxValue": 11,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 11,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "FmxModulationType"
         },
         "111": {
@@ -1133,6 +1737,10 @@
           "InternalName": "3 Modulation type",
           "MinValue": 0,
           "MaxValue": 11,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 11,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "FmxModulationType"
         },
         "112": {
@@ -1140,6 +1748,10 @@
           "InternalName": "4 Modulation type",
           "MinValue": 0,
           "MaxValue": 11,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 11,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "FmxModulationType"
         },
         "113": {
@@ -1147,6 +1759,10 @@
           "InternalName": "5 Modulation type",
           "MinValue": 0,
           "MaxValue": 11,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 11,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "FmxModulationType"
         },
         "114": {
@@ -1154,34 +1770,54 @@
           "InternalName": "1 Output mode",
           "MinValue": 0,
           "MaxValue": 31,
-          "IgnoreActualType": true
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 31,
+          "Offset": 0,
+          "ControllerType": "Selector",
+          "SelectorIsNotEnum": true
         },
         "115": {
           "FriendlyName": "OutputMode2",
           "InternalName": "2 Output mode",
           "MinValue": 0,
           "MaxValue": 15,
-          "IgnoreActualType": true
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 15,
+          "Offset": 0,
+          "ControllerType": "Selector",
+          "SelectorIsNotEnum": true
         },
         "116": {
           "FriendlyName": "OutputMode3",
           "InternalName": "3 Output mode",
           "MinValue": 0,
           "MaxValue": 7,
-          "IgnoreActualType": true
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 7,
+          "Offset": 0,
+          "ControllerType": "Selector",
+          "SelectorIsNotEnum": true
         },
         "117": {
           "FriendlyName": "OutputMode4",
           "InternalName": "4 Output mode",
           "MinValue": 0,
           "MaxValue": 3,
-          "IgnoreActualType": true
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 3,
+          "Offset": 0,
+          "ControllerType": "Selector",
+          "SelectorIsNotEnum": true
         },
         "118": {
           "FriendlyName": "EnvelopeGain",
           "InternalName": "Envelope gain",
           "MinValue": 0,
-          "MaxValue": 8000
+          "MaxValue": 8000,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 8000,
+          "Offset": 0,
+          "ControllerType": "Normal"
         }
       },
       "Curves": {
@@ -1200,13 +1836,21 @@
           "FriendlyName": "Volume",
           "InternalName": "Volume",
           "MinValue": 0,
-          "MaxValue": 256
+          "MaxValue": 256,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 256,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "1": {
           "FriendlyName": "Waveform",
           "InternalName": "Waveform",
           "MinValue": 0,
           "MaxValue": 8,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 8,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "GeneratorWaveform"
         },
         "2": {
@@ -1215,32 +1859,50 @@
           "MinValue": 0,
           "MaxValue": 256,
           "MinDisplayedValue": -128,
-          "MaxDisplayedValue": 128
+          "MaxDisplayedValue": 128,
+          "Offset": -128,
+          "ControllerType": "Normal"
         },
         "3": {
           "FriendlyName": "Attack",
           "InternalName": "Attack",
           "MinValue": 0,
-          "MaxValue": 512
+          "MaxValue": 512,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 512,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "4": {
           "FriendlyName": "Release",
           "InternalName": "Release",
           "MinValue": 0,
-          "MaxValue": 512
+          "MaxValue": 512,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 512,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "5": {
           "FriendlyName": "Polyphony",
           "InternalName": "Polyphony",
           "MinValue": 1,
           "MaxValue": 16,
-          "IgnoreActualType": true
+          "MinDisplayedValue": 1,
+          "MaxDisplayedValue": 16,
+          "Offset": 0,
+          "ControllerType": "Selector",
+          "SelectorIsNotEnum": true
         },
         "6": {
           "FriendlyName": "Mode",
           "InternalName": "Mode",
           "MinValue": 0,
           "MaxValue": 1,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 1,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "Channels"
         },
         "7": {
@@ -1248,19 +1910,31 @@
           "InternalName": "Sustain",
           "MinValue": 0,
           "MaxValue": 1,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 1,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "Toggle"
         },
         "8": {
           "FriendlyName": "FreqModulationByInput",
           "InternalName": "Freq.modulation by input",
           "MinValue": 0,
-          "MaxValue": 256
+          "MaxValue": 256,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 256,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "9": {
           "FriendlyName": "DutyCycle",
           "InternalName": "Duty cycle",
           "MinValue": 0,
-          "MaxValue": 1022
+          "MaxValue": 1022,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 1022,
+          "Offset": 0,
+          "ControllerType": "Normal"
         }
       },
       "Curves": {
@@ -1279,13 +1953,21 @@
           "FriendlyName": "Volume",
           "InternalName": "Volume",
           "MinValue": 0,
-          "MaxValue": 1024
+          "MaxValue": 1024,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 1024,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "1": {
           "FriendlyName": "Channels",
           "InternalName": "Channels",
           "MinValue": 0,
           "MaxValue": 1,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 1,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "ChannelsInverted"
         }
       },
@@ -1297,13 +1979,21 @@
           "FriendlyName": "Volume",
           "InternalName": "Volume",
           "MinValue": 0,
-          "MaxValue": 256
+          "MaxValue": 256,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 256,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "1": {
           "FriendlyName": "Waveform",
           "InternalName": "Waveform",
           "MinValue": 0,
           "MaxValue": 2,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 2,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "KickerWaveform"
         },
         "2": {
@@ -1312,44 +2002,70 @@
           "MinValue": 0,
           "MaxValue": 256,
           "MinDisplayedValue": -128,
-          "MaxDisplayedValue": 128
+          "MaxDisplayedValue": 128,
+          "Offset": -128,
+          "ControllerType": "Normal"
         },
         "3": {
           "FriendlyName": "Attack",
           "InternalName": "Attack",
           "MinValue": 0,
-          "MaxValue": 512
+          "MaxValue": 512,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 512,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "4": {
           "FriendlyName": "Release",
           "InternalName": "Release",
           "MinValue": 0,
-          "MaxValue": 512
+          "MaxValue": 512,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 512,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "5": {
           "FriendlyName": "Boost",
           "InternalName": "Boost",
           "MinValue": 0,
-          "MaxValue": 1024
+          "MaxValue": 1024,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 1024,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "6": {
           "FriendlyName": "Acceleration",
           "InternalName": "Acceleration",
           "MinValue": 0,
-          "MaxValue": 1024
+          "MaxValue": 1024,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 1024,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "7": {
           "FriendlyName": "Polyphony",
           "InternalName": "Polyphony",
           "MinValue": 1,
           "MaxValue": 4,
-          "IgnoreActualType": true
+          "MinDisplayedValue": 1,
+          "MaxDisplayedValue": 4,
+          "Offset": 0,
+          "ControllerType": "Selector",
+          "SelectorIsNotEnum": true
         },
         "8": {
           "FriendlyName": "NoClick",
           "InternalName": "No click",
           "MinValue": 0,
           "MaxValue": 1,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 1,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "Toggle"
         }
       },
@@ -1361,35 +2077,53 @@
           "FriendlyName": "Volume",
           "InternalName": "Volume",
           "MinValue": 0,
-          "MaxValue": 512
+          "MaxValue": 512,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 512,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "1": {
           "FriendlyName": "OriginalSpeed",
           "InternalName": "Original speed",
           "MinValue": 0,
           "MaxValue": 1,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 1,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "Toggle"
         },
         "2": {
-          "FriendlyName": "Finetune",
+          "FriendlyName": "AudioFineTune",
           "InternalName": "Finetune",
           "MinValue": -128,
-          "MaxValue": 128
+          "MaxValue": 128,
+          "MinDisplayedValue": -128,
+          "MaxDisplayedValue": 128,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "3": {
-          "FriendlyName": "Transpose",
+          "FriendlyName": "AudioTranspose",
           "InternalName": "Transpose",
           "MinValue": 0,
           "MaxValue": 256,
           "MinDisplayedValue": -128,
           "MaxDisplayedValue": 128,
-          "IgnoreActualType": true
+          "Offset": -128,
+          "ControllerType": "Selector",
+          "SelectorIsNotEnum": true
         },
         "4": {
           "FriendlyName": "Interpolation",
           "InternalName": "Interpolation",
           "MinValue": 0,
           "MaxValue": 1,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 1,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "Toggle"
         },
         "5": {
@@ -1397,13 +2131,21 @@
           "InternalName": "Polyphony",
           "MinValue": 1,
           "MaxValue": 4,
-          "IgnoreActualType": true
+          "MinDisplayedValue": 1,
+          "MaxDisplayedValue": 4,
+          "Offset": 0,
+          "ControllerType": "Selector",
+          "SelectorIsNotEnum": true
         },
         "6": {
           "FriendlyName": "Repeat",
           "InternalName": "Repeat",
           "MinValue": 0,
           "MaxValue": 1,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 1,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "Toggle"
         },
         "7": {
@@ -1411,6 +2153,10 @@
           "InternalName": "Ignore Note OFF",
           "MinValue": 0,
           "MaxValue": 1,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 1,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "Toggle"
         }
       },
@@ -1422,7 +2168,11 @@
           "FriendlyName": "Volume",
           "InternalName": "Volume",
           "MinValue": 0,
-          "MaxValue": 512
+          "MaxValue": 512,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 512,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "1": {
           "FriendlyName": "Panning",
@@ -1430,13 +2180,19 @@
           "MinValue": 0,
           "MaxValue": 256,
           "MinDisplayedValue": -128,
-          "MaxDisplayedValue": 128
+          "MaxDisplayedValue": 128,
+          "Offset": -128,
+          "ControllerType": "Normal"
         },
         "2": {
           "FriendlyName": "SampleInterpolation",
           "InternalName": "Sample interpolation",
           "MinValue": 0,
           "MaxValue": 2,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 2,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "SamplerInterpolation"
         },
         "3": {
@@ -1444,6 +2200,10 @@
           "InternalName": "Envelope interpolation",
           "MinValue": 0,
           "MaxValue": 1,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 1,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "SamplerEnvelopeInterpolation"
         },
         "4": {
@@ -1451,25 +2211,41 @@
           "InternalName": "Polyphony",
           "MinValue": 1,
           "MaxValue": 32,
-          "IgnoreActualType": true
+          "MinDisplayedValue": 1,
+          "MaxDisplayedValue": 32,
+          "Offset": 0,
+          "ControllerType": "Selector",
+          "SelectorIsNotEnum": true
         },
         "5": {
           "FriendlyName": "RecThreshold",
           "InternalName": "Rec threshold",
           "MinValue": 0,
-          "MaxValue": 10000
+          "MaxValue": 10000,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 10000,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "6": {
           "FriendlyName": "TickLengthNorm128",
           "InternalName": "Tick length (norm=128)",
           "MinValue": 0,
-          "MaxValue": 2048
+          "MaxValue": 2048,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 2048,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "7": {
           "FriendlyName": "Record",
           "InternalName": "Record",
           "MinValue": 0,
           "MaxValue": 2,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 2,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "SamplerRecordState"
         },
         "8": {
@@ -1477,19 +2253,31 @@
           "InternalName": "Reverse",
           "MinValue": 0,
           "MaxValue": 1,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 1,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "Toggle"
         },
         "9": {
           "FriendlyName": "Attack",
           "InternalName": "Attack",
           "MinValue": 0,
-          "MaxValue": 32768
+          "MaxValue": 32768,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 32768,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "10": {
           "FriendlyName": "Release",
           "InternalName": "Release",
           "MinValue": 0,
-          "MaxValue": 32768
+          "MaxValue": 32768,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 32768,
+          "Offset": 0,
+          "ControllerType": "Normal"
         }
       },
       "Curves": {}
@@ -1500,7 +2288,11 @@
           "FriendlyName": "Volume",
           "InternalName": "Volume",
           "MinValue": 0,
-          "MaxValue": 256
+          "MaxValue": 256,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 256,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "1": {
           "FriendlyName": "Panning",
@@ -1508,32 +2300,50 @@
           "MinValue": 0,
           "MaxValue": 256,
           "MinDisplayedValue": -128,
-          "MaxDisplayedValue": 128
+          "MaxDisplayedValue": 128,
+          "Offset": -128,
+          "ControllerType": "Normal"
         },
         "2": {
           "FriendlyName": "Attack",
           "InternalName": "Attack",
           "MinValue": 0,
-          "MaxValue": 512
+          "MaxValue": 512,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 512,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "3": {
           "FriendlyName": "Release",
           "InternalName": "Release",
           "MinValue": 0,
-          "MaxValue": 512
+          "MaxValue": 512,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 512,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "4": {
           "FriendlyName": "Polyphony",
           "InternalName": "Polyphony",
           "MinValue": 1,
           "MaxValue": 32,
-          "IgnoreActualType": true
+          "MinDisplayedValue": 1,
+          "MaxDisplayedValue": 32,
+          "Offset": 0,
+          "ControllerType": "Selector",
+          "SelectorIsNotEnum": true
         },
         "5": {
           "FriendlyName": "Mode",
           "InternalName": "Mode",
           "MinValue": 0,
           "MaxValue": 4,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 4,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "SpectraVoiceMode"
         },
         "6": {
@@ -1541,6 +2351,10 @@
           "InternalName": "Sustain",
           "MinValue": 0,
           "MaxValue": 1,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 1,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "Toggle"
         },
         "7": {
@@ -1548,6 +2362,10 @@
           "InternalName": "Spectrum resolution",
           "MinValue": 0,
           "MaxValue": 5,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 5,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "SpectraVoiceResolution"
         },
         "8": {
@@ -1555,34 +2373,54 @@
           "InternalName": "Harmonic",
           "MinValue": 0,
           "MaxValue": 15,
-          "IgnoreActualType": true
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 15,
+          "Offset": 0,
+          "ControllerType": "Selector",
+          "SelectorIsNotEnum": true
         },
         "9": {
           "FriendlyName": "HFreq",
           "InternalName": "H.freq",
           "MinValue": 0,
           "MaxValue": 22050,
-          "IgnoreActualType": true
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 22050,
+          "Offset": 0,
+          "ControllerType": "Selector",
+          "SelectorIsNotEnum": true
         },
         "10": {
           "FriendlyName": "HVolume",
           "InternalName": "H.volume",
           "MinValue": 0,
           "MaxValue": 255,
-          "IgnoreActualType": true
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 255,
+          "Offset": 0,
+          "ControllerType": "Selector",
+          "SelectorIsNotEnum": true
         },
         "11": {
           "FriendlyName": "HWidth",
           "InternalName": "H.width",
           "MinValue": 0,
           "MaxValue": 255,
-          "IgnoreActualType": true
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 255,
+          "Offset": 0,
+          "ControllerType": "Selector",
+          "SelectorIsNotEnum": true
         },
         "12": {
           "FriendlyName": "HType",
           "InternalName": "H.type",
           "MinValue": 0,
           "MaxValue": 18,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 18,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "SpectraVoiceHarmonicType"
         }
       },
@@ -1594,7 +2432,11 @@
           "FriendlyName": "Volume",
           "InternalName": "Volume",
           "MinValue": 0,
-          "MaxValue": 1024
+          "MaxValue": 1024,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 1024,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "1": {
           "FriendlyName": "Balance",
@@ -1602,7 +2444,9 @@
           "MinValue": 0,
           "MaxValue": 256,
           "MinDisplayedValue": -128,
-          "MaxDisplayedValue": 128
+          "MaxDisplayedValue": 128,
+          "Offset": -128,
+          "ControllerType": "Normal"
         },
         "2": {
           "FriendlyName": "DcOffset",
@@ -1610,39 +2454,61 @@
           "MinValue": 0,
           "MaxValue": 256,
           "MinDisplayedValue": -128,
-          "MaxDisplayedValue": 128
+          "MaxDisplayedValue": 128,
+          "Offset": -128,
+          "ControllerType": "Normal"
         },
         "3": {
           "FriendlyName": "Inverse",
           "InternalName": "Inverse",
           "MinValue": 0,
           "MaxValue": 1,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 1,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "Toggle"
         },
         "4": {
           "FriendlyName": "StereoWidth",
           "InternalName": "Stereo width",
           "MinValue": 0,
-          "MaxValue": 256
+          "MaxValue": 256,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 256,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "5": {
           "FriendlyName": "Absolute",
           "InternalName": "Absolute",
           "MinValue": 0,
           "MaxValue": 1,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 1,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "Toggle"
         },
         "6": {
           "FriendlyName": "FineVolume",
           "InternalName": "Fine volume",
           "MinValue": 0,
-          "MaxValue": 32768
+          "MaxValue": 32768,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 32768,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "7": {
           "FriendlyName": "Gain",
           "InternalName": "Gain",
           "MinValue": 0,
-          "MaxValue": 5000
+          "MaxValue": 5000,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 5000,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "8": {
           "FriendlyName": "BipolarDcOffset",
@@ -1650,7 +2516,9 @@
           "MinValue": 0,
           "MaxValue": 32768,
           "MinDisplayedValue": -16384,
-          "MaxDisplayedValue": 16384
+          "MaxDisplayedValue": 16384,
+          "Offset": -16384,
+          "ControllerType": "Normal"
         }
       },
       "Curves": {}
@@ -1661,37 +2529,61 @@
           "FriendlyName": "Volume",
           "InternalName": "Volume",
           "MinValue": 0,
-          "MaxValue": 512
+          "MaxValue": 512,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 512,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "1": {
           "FriendlyName": "Threshold",
           "InternalName": "Threshold",
           "MinValue": 0,
-          "MaxValue": 512
+          "MaxValue": 512,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 512,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "2": {
           "FriendlyName": "Slope",
           "InternalName": "Slope",
           "MinValue": 0,
-          "MaxValue": 200
+          "MaxValue": 200,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 200,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "3": {
           "FriendlyName": "Attack",
           "InternalName": "Attack",
           "MinValue": 0,
-          "MaxValue": 500
+          "MaxValue": 500,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 500,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "4": {
           "FriendlyName": "Release",
           "InternalName": "Release",
           "MinValue": 1,
-          "MaxValue": 1000
+          "MaxValue": 1000,
+          "MinDisplayedValue": 1,
+          "MaxDisplayedValue": 1000,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "5": {
           "FriendlyName": "Mode",
           "InternalName": "Mode",
           "MinValue": 0,
           "MaxValue": 2,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 2,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "CompressorMode"
         },
         "6": {
@@ -1699,7 +2591,11 @@
           "InternalName": "Side-chain input",
           "MinValue": 0,
           "MaxValue": 32,
-          "IgnoreActualType": true
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 32,
+          "Offset": 0,
+          "ControllerType": "Selector",
+          "SelectorIsNotEnum": true
         }
       },
       "Curves": {}
@@ -1711,6 +2607,10 @@
           "InternalName": "Channels",
           "MinValue": 0,
           "MaxValue": 1,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 1,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "Channels"
         }
       },
@@ -1722,43 +2622,71 @@
           "FriendlyName": "Dry",
           "InternalName": "Dry",
           "MinValue": 0,
-          "MaxValue": 512
+          "MaxValue": 512,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 512,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "1": {
           "FriendlyName": "Wet",
           "InternalName": "Wet",
           "MinValue": 0,
-          "MaxValue": 512
+          "MaxValue": 512,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 512,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "2": {
           "FriendlyName": "DelayL",
           "InternalName": "Delay L",
           "MinValue": 0,
-          "MaxValue": 256
+          "MaxValue": 256,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 256,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "3": {
           "FriendlyName": "DelayR",
           "InternalName": "Delay R",
           "MinValue": 0,
-          "MaxValue": 256
+          "MaxValue": 256,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 256,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "4": {
           "FriendlyName": "VolumeL",
           "InternalName": "Volume L",
           "MinValue": 0,
-          "MaxValue": 256
+          "MaxValue": 256,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 256,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "5": {
           "FriendlyName": "VolumeR",
           "InternalName": "Volume R",
           "MinValue": 0,
-          "MaxValue": 256
+          "MaxValue": 256,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 256,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "6": {
           "FriendlyName": "Channels",
           "InternalName": "Channels",
           "MinValue": 0,
           "MaxValue": 1,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 1,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "Channels"
         },
         "7": {
@@ -1766,6 +2694,10 @@
           "InternalName": "Inverse",
           "MinValue": 0,
           "MaxValue": 1,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 1,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "Toggle"
         },
         "8": {
@@ -1773,6 +2705,10 @@
           "InternalName": "Delay unit",
           "MinValue": 0,
           "MaxValue": 9,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 9,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "DelayUnit"
         },
         "9": {
@@ -1780,19 +2716,31 @@
           "InternalName": "Delay multiplier",
           "MinValue": 1,
           "MaxValue": 15,
-          "IgnoreActualType": true
+          "MinDisplayedValue": 1,
+          "MaxDisplayedValue": 15,
+          "Offset": 0,
+          "ControllerType": "Selector",
+          "SelectorIsNotEnum": true
         },
         "10": {
           "FriendlyName": "Feedback",
           "InternalName": "Feedback",
           "MinValue": 0,
-          "MaxValue": 32768
+          "MaxValue": 32768,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 32768,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "11": {
           "FriendlyName": "NegativeFeedback",
           "InternalName": "Negative feedback",
           "MinValue": 0,
           "MaxValue": 1,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 1,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "Toggle"
         },
         "12": {
@@ -1800,6 +2748,10 @@
           "InternalName": "All-pass filter",
           "MinValue": 0,
           "MaxValue": 1,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 1,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "Toggle"
         }
       },
@@ -1811,39 +2763,63 @@
           "FriendlyName": "Volume",
           "InternalName": "Volume",
           "MinValue": 0,
-          "MaxValue": 256
+          "MaxValue": 256,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 256,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "1": {
           "FriendlyName": "DistortionType",
           "InternalName": "Type",
           "MinValue": 0,
           "MaxValue": 10,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 10,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "DistortionType"
         },
         "2": {
           "FriendlyName": "Power",
           "InternalName": "Power",
           "MinValue": 0,
-          "MaxValue": 256
+          "MaxValue": 256,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 256,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "3": {
           "FriendlyName": "BitDepth",
           "InternalName": "Bit depth",
           "MinValue": 1,
           "MaxValue": 16,
-          "IgnoreActualType": true
+          "MinDisplayedValue": 1,
+          "MaxDisplayedValue": 16,
+          "Offset": 0,
+          "ControllerType": "Selector",
+          "SelectorIsNotEnum": true
         },
         "4": {
           "FriendlyName": "Freq",
           "InternalName": "Freq",
           "MinValue": 0,
-          "MaxValue": 44100
+          "MaxValue": 44100,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 44100,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "5": {
           "FriendlyName": "Noise",
           "InternalName": "Noise",
           "MinValue": 0,
-          "MaxValue": 256
+          "MaxValue": 256,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 256,
+          "Offset": 0,
+          "ControllerType": "Normal"
         }
       },
       "Curves": {}
@@ -1854,31 +2830,51 @@
           "FriendlyName": "Dry",
           "InternalName": "Dry",
           "MinValue": 0,
-          "MaxValue": 256
+          "MaxValue": 256,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 256,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "1": {
           "FriendlyName": "Wet",
           "InternalName": "Wet",
           "MinValue": 0,
-          "MaxValue": 256
+          "MaxValue": 256,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 256,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "2": {
           "FriendlyName": "Feedback",
           "InternalName": "Feedback",
           "MinValue": 0,
-          "MaxValue": 256
+          "MaxValue": 256,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 256,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "3": {
           "FriendlyName": "Delay",
           "InternalName": "Delay",
           "MinValue": 0,
-          "MaxValue": 256
+          "MaxValue": 256,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 256,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "4": {
           "FriendlyName": "RightChannelOffset",
           "InternalName": "Right channel offset",
           "MinValue": 0,
           "MaxValue": 1,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 1,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "Toggle"
         },
         "5": {
@@ -1886,6 +2882,10 @@
           "InternalName": "Delay unit",
           "MinValue": 0,
           "MaxValue": 6,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 6,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "EchoDelayUnit"
         },
         "6": {
@@ -1893,20 +2893,32 @@
           "InternalName": "Right channel offset",
           "Description": "Expressed as Delay/32768.",
           "MinValue": 0,
-          "MaxValue": 32768
+          "MaxValue": 32768,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 32768,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "7": {
           "FriendlyName": "Filter",
           "InternalName": "Filter",
           "MinValue": 0,
           "MaxValue": 2,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 2,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "EchoFilter"
         },
         "8": {
           "FriendlyName": "FFreq",
           "InternalName": "F.freq",
           "MinValue": 0,
-          "MaxValue": 22000
+          "MaxValue": 22000,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 22000,
+          "Offset": 0,
+          "ControllerType": "Normal"
         }
       },
       "Curves": {}
@@ -1917,25 +2929,41 @@
           "FriendlyName": "Low",
           "InternalName": "Low",
           "MinValue": 0,
-          "MaxValue": 512
+          "MaxValue": 512,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 512,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "1": {
           "FriendlyName": "Middle",
           "InternalName": "Middle",
           "MinValue": 0,
-          "MaxValue": 512
+          "MaxValue": 512,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 512,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "2": {
           "FriendlyName": "High",
           "InternalName": "High",
           "MinValue": 0,
-          "MaxValue": 512
+          "MaxValue": 512,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 512,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "3": {
           "FriendlyName": "Channels",
           "InternalName": "Channels",
           "MinValue": 0,
           "MaxValue": 1,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 1,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "Channels"
         }
       },
@@ -1948,6 +2976,10 @@
           "InternalName": "Sample rate",
           "MinValue": 0,
           "MaxValue": 9,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 9,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "FftSampleRate"
         },
         "1": {
@@ -1955,6 +2987,10 @@
           "InternalName": "Channels",
           "MinValue": 0,
           "MaxValue": 1,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 1,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "ChannelsInverted"
         },
         "2": {
@@ -1962,6 +2998,10 @@
           "InternalName": "Buffer (samples)",
           "MinValue": 0,
           "MaxValue": 7,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 7,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "FftBufferSize"
         },
         "3": {
@@ -1969,50 +3009,82 @@
           "InternalName": "Buf overlap",
           "MinValue": 0,
           "MaxValue": 2,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 2,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "FftBufferOverlap"
         },
         "4": {
           "FriendlyName": "Feedback",
           "InternalName": "Feedback",
           "MinValue": 0,
-          "MaxValue": 32768
+          "MaxValue": 32768,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 32768,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "5": {
           "FriendlyName": "NoiseReduction",
           "InternalName": "Noise reduction",
           "MinValue": 0,
-          "MaxValue": 32768
+          "MaxValue": 32768,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 32768,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "6": {
           "FriendlyName": "PhaseGainNorm16384",
           "InternalName": "Phase gain (norm=16384)",
           "MinValue": 0,
           "MaxValue": 32768,
-          "IgnoreActualType": true
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 32768,
+          "Offset": 0,
+          "ControllerType": "Selector",
+          "SelectorIsNotEnum": true
         },
         "7": {
           "FriendlyName": "AllPassFilter",
           "InternalName": "All-pass filter",
           "MinValue": 0,
-          "MaxValue": 32768
+          "MaxValue": 32768,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 32768,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "8": {
           "FriendlyName": "FrequencySpread",
           "InternalName": "Frequency spread",
           "MinValue": 0,
-          "MaxValue": 32768
+          "MaxValue": 32768,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 32768,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "9": {
           "FriendlyName": "RandomPhase",
           "InternalName": "Random phase",
           "MinValue": 0,
-          "MaxValue": 32768
+          "MaxValue": 32768,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 32768,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "10": {
           "FriendlyName": "RandomPhaseLite",
           "InternalName": "Random phase (lite)",
           "MinValue": 0,
-          "MaxValue": 32768
+          "MaxValue": 32768,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 32768,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "11": {
           "FriendlyName": "FreqShift",
@@ -2020,37 +3092,59 @@
           "MinValue": 0,
           "MaxValue": 8192,
           "MinDisplayedValue": -4096,
-          "MaxDisplayedValue": 4096
+          "MaxDisplayedValue": 4096,
+          "Offset": -4096,
+          "ControllerType": "Normal"
         },
         "12": {
           "FriendlyName": "Deform1",
           "InternalName": "Deform1",
           "MinValue": 0,
-          "MaxValue": 32768
+          "MaxValue": 32768,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 32768,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "13": {
           "FriendlyName": "Deform2",
           "InternalName": "Deform2",
           "MinValue": 0,
-          "MaxValue": 32768
+          "MaxValue": 32768,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 32768,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "14": {
           "FriendlyName": "HpCutoff",
           "InternalName": "HP cutoff",
           "MinValue": 0,
-          "MaxValue": 32768
+          "MaxValue": 32768,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 32768,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "15": {
           "FriendlyName": "LpCutoff",
           "InternalName": "LP cutoff",
           "MinValue": 0,
-          "MaxValue": 32768
+          "MaxValue": 32768,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 32768,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "16": {
           "FriendlyName": "Volume",
           "InternalName": "Volume",
           "MinValue": 0,
-          "MaxValue": 32768
+          "MaxValue": 32768,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 32768,
+          "Offset": 0,
+          "ControllerType": "Normal"
         }
       },
       "Curves": {}
@@ -2061,75 +3155,123 @@
           "FriendlyName": "Volume",
           "InternalName": "Volume",
           "MinValue": 0,
-          "MaxValue": 256
+          "MaxValue": 256,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 256,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "1": {
           "FriendlyName": "Freq",
           "InternalName": "Freq",
           "MinValue": 0,
-          "MaxValue": 14000
+          "MaxValue": 14000,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 14000,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "2": {
           "FriendlyName": "Resonance",
           "InternalName": "Resonance",
           "MinValue": 0,
-          "MaxValue": 1530
+          "MaxValue": 1530,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 1530,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "3": {
           "FriendlyName": "FilterType",
           "InternalName": "Type",
           "MinValue": 0,
           "MaxValue": 3,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 3,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "FilterType"
         },
         "4": {
           "FriendlyName": "Response",
           "InternalName": "Response",
           "MinValue": 0,
-          "MaxValue": 256
+          "MaxValue": 256,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 256,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "5": {
           "FriendlyName": "Mode",
           "InternalName": "Mode",
           "MinValue": 0,
           "MaxValue": 3,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 3,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "Quality"
         },
         "6": {
           "FriendlyName": "Impulse",
           "InternalName": "Impulse",
           "MinValue": 0,
-          "MaxValue": 14000
+          "MaxValue": 14000,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 14000,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "7": {
           "FriendlyName": "Mix",
           "InternalName": "Mix",
           "MinValue": 0,
-          "MaxValue": 256
+          "MaxValue": 256,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 256,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "8": {
           "FriendlyName": "LfoFreq",
           "InternalName": "LFO freq",
           "MinValue": 0,
-          "MaxValue": 1024
+          "MaxValue": 1024,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 1024,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "9": {
           "FriendlyName": "LfoAmp",
           "InternalName": "LFO amp",
           "MinValue": 0,
-          "MaxValue": 256
+          "MaxValue": 256,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 256,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "10": {
           "FriendlyName": "SetLfoPhase",
           "InternalName": "Set LFO phase",
           "MinValue": 0,
-          "MaxValue": 256
+          "MaxValue": 256,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 256,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "11": {
           "FriendlyName": "ExponentialFreq",
           "InternalName": "Exponential freq",
           "MinValue": 0,
           "MaxValue": 1,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 1,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "Toggle"
         },
         "12": {
@@ -2137,6 +3279,10 @@
           "InternalName": "Roll-off",
           "MinValue": 0,
           "MaxValue": 3,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 3,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "FilterRollOff"
         },
         "13": {
@@ -2144,6 +3290,10 @@
           "InternalName": "LFO freq unit",
           "MinValue": 0,
           "MaxValue": 6,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 6,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "FilterLfoFrequencyUnit"
         },
         "14": {
@@ -2151,6 +3301,10 @@
           "InternalName": "LFO waveform",
           "MinValue": 0,
           "MaxValue": 4,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 4,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "FilterLfoWaveform"
         }
       },
@@ -2162,47 +3316,73 @@
           "FriendlyName": "Volume",
           "InternalName": "Volume",
           "MinValue": 0,
-          "MaxValue": 32768
+          "MaxValue": 32768,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 32768,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "1": {
           "FriendlyName": "FilterType",
           "InternalName": "Type",
           "MinValue": 0,
           "MaxValue": 10,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 10,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "FilterProType"
         },
         "2": {
           "FriendlyName": "Freq",
           "InternalName": "Freq",
           "MinValue": 0,
-          "MaxValue": 22000
+          "MaxValue": 22000,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 22000,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "3": {
-          "FriendlyName": "FreqFinetune",
+          "FriendlyName": "FreqFineTune",
           "InternalName": "Freq finetune",
           "MinValue": 0,
           "MaxValue": 2000,
           "MinDisplayedValue": -1000,
-          "MaxDisplayedValue": 1000
+          "MaxDisplayedValue": 1000,
+          "Offset": -1000,
+          "ControllerType": "Normal"
         },
         "4": {
           "FriendlyName": "FreqScale",
           "InternalName": "Freq scale",
           "MinValue": 0,
-          "MaxValue": 200
+          "MaxValue": 200,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 200,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "5": {
           "FriendlyName": "ExponentialFreq",
           "InternalName": "Exponential freq",
           "MinValue": 0,
           "MaxValue": 1,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 1,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "Toggle"
         },
         "6": {
           "FriendlyName": "Q",
           "InternalName": "Q",
           "MinValue": 0,
-          "MaxValue": 32768
+          "MaxValue": 32768,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 32768,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "7": {
           "FriendlyName": "Gain",
@@ -2210,64 +3390,102 @@
           "MinValue": 0,
           "MaxValue": 32768,
           "MinDisplayedValue": -16384,
-          "MaxDisplayedValue": 16384
+          "MaxDisplayedValue": 16384,
+          "Offset": -16384,
+          "ControllerType": "Normal"
         },
         "8": {
           "FriendlyName": "RollOff",
           "InternalName": "Roll-off",
           "MinValue": 0,
           "MaxValue": 7,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 7,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "FilterProRollOff"
         },
         "9": {
           "FriendlyName": "Response",
           "InternalName": "Response",
           "MinValue": 0,
-          "MaxValue": 1000
+          "MaxValue": 1000,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 1000,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "10": {
           "FriendlyName": "Mode",
           "InternalName": "Mode",
           "MinValue": 0,
           "MaxValue": 3,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 3,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "FilterProMode"
         },
         "11": {
           "FriendlyName": "Mix",
           "InternalName": "Mix",
           "MinValue": 0,
-          "MaxValue": 32768
+          "MaxValue": 32768,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 32768,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "12": {
           "FriendlyName": "LfoFreq",
           "InternalName": "LFO freq",
           "MinValue": 0,
-          "MaxValue": 1024
+          "MaxValue": 1024,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 1024,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "13": {
           "FriendlyName": "LfoAmp",
           "InternalName": "LFO amp",
           "MinValue": 0,
-          "MaxValue": 32768
+          "MaxValue": 32768,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 32768,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "14": {
           "FriendlyName": "LfoWaveform",
           "InternalName": "LFO waveform",
           "MinValue": 0,
           "MaxValue": 4,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 4,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "FilterLfoWaveform"
         },
         "15": {
           "FriendlyName": "SetLfoPhase",
           "InternalName": "Set LFO phase",
           "MinValue": 0,
-          "MaxValue": 256
+          "MaxValue": 256,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 256,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "16": {
           "FriendlyName": "LfoFreqUnit",
           "InternalName": "LFO freq unit",
           "MinValue": 0,
           "MaxValue": 6,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 6,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "FilterLfoFrequencyUnit"
         }
       },
@@ -2279,62 +3497,102 @@
           "FriendlyName": "Dry",
           "InternalName": "Dry",
           "MinValue": 0,
-          "MaxValue": 256
+          "MaxValue": 256,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 256,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "1": {
           "FriendlyName": "Wet",
           "InternalName": "Wet",
           "MinValue": 0,
-          "MaxValue": 256
+          "MaxValue": 256,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 256,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "2": {
           "FriendlyName": "Feedback",
           "InternalName": "Feedback",
           "MinValue": 0,
-          "MaxValue": 256
+          "MaxValue": 256,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 256,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "3": {
           "FriendlyName": "Delay",
           "InternalName": "Delay",
           "MinValue": 8,
-          "MaxValue": 1000
+          "MaxValue": 1000,
+          "MinDisplayedValue": 8,
+          "MaxDisplayedValue": 1000,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "4": {
           "FriendlyName": "Response",
           "InternalName": "Response",
           "MinValue": 0,
-          "MaxValue": 256
+          "MaxValue": 256,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 256,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "5": {
           "FriendlyName": "LfoFreq",
           "InternalName": "LFO freq",
           "MinValue": 0,
-          "MaxValue": 512
+          "MaxValue": 512,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 512,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "6": {
           "FriendlyName": "LfoAmp",
           "InternalName": "LFO amp",
           "MinValue": 0,
-          "MaxValue": 256
+          "MaxValue": 256,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 256,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "7": {
           "FriendlyName": "LfoWaveform",
           "InternalName": "LFO waveform",
           "MinValue": 0,
           "MaxValue": 1,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 1,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "FlangerLfoWaveform"
         },
         "8": {
           "FriendlyName": "SetLfoPhase",
           "InternalName": "Set LFO phase",
           "MinValue": 0,
-          "MaxValue": 256
+          "MaxValue": 256,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 256,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "9": {
           "FriendlyName": "LfoFreqUnit",
           "InternalName": "LFO freq unit",
           "MinValue": 0,
           "MaxValue": 6,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 6,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "FlangerLfoFrequencyUnit"
         }
       },
@@ -2346,45 +3604,73 @@
           "FriendlyName": "Volume",
           "InternalName": "Volume",
           "MinValue": 0,
-          "MaxValue": 512
+          "MaxValue": 512,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 512,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "1": {
           "FriendlyName": "FilterType",
           "InternalName": "Type",
           "MinValue": 0,
           "MaxValue": 1,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 1,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "LfoType"
         },
         "2": {
           "FriendlyName": "Amplitude",
           "InternalName": "Amplitude",
           "MinValue": 0,
-          "MaxValue": 256
+          "MaxValue": 256,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 256,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "3": {
           "FriendlyName": "Freq",
           "InternalName": "Freq",
           "MinValue": 1,
-          "MaxValue": 256
+          "MaxValue": 256,
+          "MinDisplayedValue": 1,
+          "MaxDisplayedValue": 256,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "4": {
           "FriendlyName": "Waveform",
           "InternalName": "Waveform",
           "MinValue": 0,
           "MaxValue": 7,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 7,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "LfoWaveform"
         },
         "5": {
           "FriendlyName": "SetPhase",
           "InternalName": "Set phase",
           "MinValue": 0,
-          "MaxValue": 256
+          "MaxValue": 256,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 256,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "6": {
           "FriendlyName": "Channels",
           "InternalName": "Channels",
           "MinValue": 0,
           "MaxValue": 1,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 1,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "Channels"
         },
         "7": {
@@ -2392,32 +3678,52 @@
           "InternalName": "Frequency unit",
           "MinValue": 0,
           "MaxValue": 8,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 8,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "LfoFrequencyUnit"
         },
         "8": {
           "FriendlyName": "DutyCycle",
           "InternalName": "Duty cycle",
           "MinValue": 0,
-          "MaxValue": 256
+          "MaxValue": 256,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 256,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "9": {
           "FriendlyName": "Generator",
           "InternalName": "Generator",
           "MinValue": 0,
           "MaxValue": 1,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 1,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "Toggle"
         },
         "10": {
           "FriendlyName": "FreqScale",
           "InternalName": "Freq scale",
           "MinValue": 0,
-          "MaxValue": 200
+          "MaxValue": 200,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 200,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "11": {
           "FriendlyName": "SmoothTransitions",
           "InternalName": "Smooth transitions",
           "MinValue": 0,
           "MaxValue": 1,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 1,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "LfoSmoothTransitions"
         },
         "12": {
@@ -2425,6 +3731,10 @@
           "InternalName": "Sine quality",
           "MinValue": 0,
           "MaxValue": 3,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 3,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "LfoSineQuality"
         },
         "13": {
@@ -2434,15 +3744,19 @@
           "MaxValue": 256,
           "MinDisplayedValue": -128,
           "MaxDisplayedValue": 128,
-          "IgnoreActualType": true
+          "Offset": -128,
+          "ControllerType": "Selector",
+          "SelectorIsNotEnum": true
         },
         "14": {
-          "FriendlyName": "Finetune",
+          "FriendlyName": "FineTune",
           "InternalName": "Finetune",
           "MinValue": 0,
           "MaxValue": 512,
           "MinDisplayedValue": -256,
-          "MaxDisplayedValue": 256
+          "MaxDisplayedValue": 256,
+          "Offset": -256,
+          "ControllerType": "Normal"
         }
       },
       "Curves": {}
@@ -2453,19 +3767,31 @@
           "FriendlyName": "Volume",
           "InternalName": "Volume",
           "MinValue": 0,
-          "MaxValue": 256
+          "MaxValue": 256,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 256,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "1": {
           "FriendlyName": "Length",
           "InternalName": "Length",
           "MinValue": 0,
-          "MaxValue": 256
+          "MaxValue": 256,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 256,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "2": {
           "FriendlyName": "Channels",
           "InternalName": "Channels",
           "MinValue": 0,
           "MaxValue": 1,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 1,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "ChannelsInverted"
         },
         "3": {
@@ -2473,13 +3799,21 @@
           "InternalName": "Repeat (128=endless)",
           "MinValue": 0,
           "MaxValue": 128,
-          "IgnoreActualType": true
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 128,
+          "Offset": 0,
+          "ControllerType": "Selector",
+          "SelectorIsNotEnum": true
         },
         "4": {
           "FriendlyName": "Mode",
           "InternalName": "Mode",
           "MinValue": 0,
           "MaxValue": 1,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 1,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "LoopMode"
         },
         "5": {
@@ -2487,6 +3821,10 @@
           "InternalName": "Length unit",
           "MinValue": 0,
           "MaxValue": 6,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 6,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "LoopTimeUnit"
         },
         "6": {
@@ -2495,13 +3833,21 @@
           "Description": "Max buffer size in seconds",
           "MinValue": 1,
           "MaxValue": 240,
-          "IgnoreActualType": true
+          "MinDisplayedValue": 1,
+          "MaxDisplayedValue": 240,
+          "Offset": 0,
+          "ControllerType": "Selector",
+          "SelectorIsNotEnum": true
         },
         "7": {
           "FriendlyName": "OnNoteon",
           "InternalName": "On NoteON",
           "MinValue": 0,
           "MaxValue": 1,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 1,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "LoopOnNoteOn"
         }
       },
@@ -2513,13 +3859,21 @@
           "FriendlyName": "Volume",
           "InternalName": "Volume",
           "MinValue": 0,
-          "MaxValue": 512
+          "MaxValue": 512,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 512,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "1": {
           "FriendlyName": "ModulationType",
           "InternalName": "Modulation type",
           "MinValue": 0,
           "MaxValue": 10,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 10,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "ModulationType"
         },
         "2": {
@@ -2527,6 +3881,10 @@
           "InternalName": "Channels",
           "MinValue": 0,
           "MaxValue": 1,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 1,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "Channels"
         },
         "3": {
@@ -2534,6 +3892,10 @@
           "InternalName": "Max PM delay",
           "MinValue": 0,
           "MaxValue": 9,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 9,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "ModulatorMaxPhaseModulationDelay"
         },
         "4": {
@@ -2541,6 +3903,10 @@
           "InternalName": "PM interpolation",
           "MinValue": 0,
           "MaxValue": 2,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 2,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "ModulatorPhaseModulationInterpolation"
         }
       },
@@ -2552,7 +3918,11 @@
           "FriendlyName": "Volume",
           "InternalName": "Volume",
           "MinValue": 0,
-          "MaxValue": 512
+          "MaxValue": 512,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 512,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "1": {
           "FriendlyName": "Pitch",
@@ -2560,31 +3930,49 @@
           "MinValue": 0,
           "MaxValue": 1200,
           "MinDisplayedValue": -600,
-          "MaxDisplayedValue": 600
+          "MaxDisplayedValue": 600,
+          "Offset": -600,
+          "ControllerType": "Normal"
         },
         "2": {
           "FriendlyName": "PitchScale",
           "InternalName": "Pitch scale",
           "MinValue": 0,
-          "MaxValue": 200
+          "MaxValue": 200,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 200,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "3": {
           "FriendlyName": "Feedback",
           "InternalName": "Feedback",
           "MinValue": 0,
-          "MaxValue": 256
+          "MaxValue": 256,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 256,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "4": {
           "FriendlyName": "GrainSize",
           "InternalName": "Grain size",
           "MinValue": 0,
-          "MaxValue": 256
+          "MaxValue": 256,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 256,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "5": {
           "FriendlyName": "Mode",
           "InternalName": "Mode",
           "MinValue": 0,
           "MaxValue": 3,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 3,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "Quality"
         },
         "6": {
@@ -2592,6 +3980,10 @@
           "InternalName": "Bypass if pitch=0",
           "MinValue": 0,
           "MaxValue": 2,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 2,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "PitchShifterBypassMode"
         }
       },
@@ -2603,37 +3995,61 @@
           "FriendlyName": "Dry",
           "InternalName": "Dry",
           "MinValue": 0,
-          "MaxValue": 256
+          "MaxValue": 256,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 256,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "1": {
           "FriendlyName": "Wet",
           "InternalName": "Wet",
           "MinValue": 0,
-          "MaxValue": 256
+          "MaxValue": 256,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 256,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "2": {
           "FriendlyName": "Feedback",
           "InternalName": "Feedback",
           "MinValue": 0,
-          "MaxValue": 256
+          "MaxValue": 256,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 256,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "3": {
           "FriendlyName": "Damp",
           "InternalName": "Damp",
           "MinValue": 0,
-          "MaxValue": 256
+          "MaxValue": 256,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 256,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "4": {
           "FriendlyName": "StereoWidth",
           "InternalName": "Stereo width",
           "MinValue": 0,
-          "MaxValue": 256
+          "MaxValue": 256,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 256,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "5": {
           "FriendlyName": "Freeze",
           "InternalName": "Freeze",
           "MinValue": 0,
           "MaxValue": 1,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 1,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "Toggle"
         },
         "6": {
@@ -2641,6 +4057,10 @@
           "InternalName": "Mode",
           "MinValue": 0,
           "MaxValue": 3,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 3,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "Quality"
         },
         "7": {
@@ -2648,20 +4068,32 @@
           "InternalName": "All-pass filter",
           "MinValue": 0,
           "MaxValue": 2,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 2,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "ReverbAllPassFilter"
         },
         "8": {
           "FriendlyName": "RoomSize",
           "InternalName": "Room size",
           "MinValue": 0,
-          "MaxValue": 128
+          "MaxValue": 128,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 128,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "9": {
           "FriendlyName": "RandomSeed",
           "InternalName": "Random seed",
           "MinValue": 0,
           "MaxValue": 32768,
-          "IgnoreActualType": true
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 32768,
+          "Offset": 0,
+          "ControllerType": "Selector",
+          "SelectorIsNotEnum": true
         }
       },
       "Curves": {}
@@ -2672,38 +4104,62 @@
           "FriendlyName": "Volume",
           "InternalName": "Volume",
           "MinValue": 0,
-          "MaxValue": 512
+          "MaxValue": 512,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 512,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "1": {
           "FriendlyName": "FormantWidth",
           "InternalName": "Formant width",
           "MinValue": 0,
-          "MaxValue": 256
+          "MaxValue": 256,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 256,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "2": {
           "FriendlyName": "Intensity",
           "InternalName": "Intensity",
           "MinValue": 0,
-          "MaxValue": 256
+          "MaxValue": 256,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 256,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "3": {
           "FriendlyName": "Formants",
           "InternalName": "Formants",
           "MinValue": 1,
           "MaxValue": 5,
-          "IgnoreActualType": true
+          "MinDisplayedValue": 1,
+          "MaxDisplayedValue": 5,
+          "Offset": 0,
+          "ControllerType": "Selector",
+          "SelectorIsNotEnum": true
         },
         "4": {
           "FriendlyName": "VowelAEIOU",
           "InternalName": "Vowel (a,e,i,o,u)",
           "MinValue": 0,
-          "MaxValue": 256
+          "MaxValue": 256,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 256,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "5": {
           "FriendlyName": "VoiceType",
           "InternalName": "Voice type",
           "MinValue": 0,
           "MaxValue": 3,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 3,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "VocalFilterVoiceType"
         },
         "6": {
@@ -2711,25 +4167,41 @@
           "InternalName": "Channels",
           "MinValue": 0,
           "MaxValue": 1,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 1,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "Channels"
         },
         "7": {
           "FriendlyName": "RandomFrequency",
           "InternalName": "Random frequency",
           "MinValue": 0,
-          "MaxValue": 1024
+          "MaxValue": 1024,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 1024,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "8": {
           "FriendlyName": "RandomSeed",
           "InternalName": "Random seed",
           "MinValue": 0,
-          "MaxValue": 32768
+          "MaxValue": 32768,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 32768,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "9": {
           "FriendlyName": "Vowel1",
           "InternalName": "Vowel1",
           "MinValue": 0,
           "MaxValue": 4,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 4,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "VocalFilterVowel"
         },
         "10": {
@@ -2737,6 +4209,10 @@
           "InternalName": "Vowel2",
           "MinValue": 0,
           "MaxValue": 4,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 4,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "VocalFilterVowel"
         },
         "11": {
@@ -2744,6 +4220,10 @@
           "InternalName": "Vowel3",
           "MinValue": 0,
           "MaxValue": 4,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 4,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "VocalFilterVowel"
         },
         "12": {
@@ -2751,6 +4231,10 @@
           "InternalName": "Vowel4",
           "MinValue": 0,
           "MaxValue": 4,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 4,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "VocalFilterVowel"
         },
         "13": {
@@ -2758,6 +4242,10 @@
           "InternalName": "Vowel5",
           "MinValue": 0,
           "MaxValue": 4,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 4,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "VocalFilterVowel"
         }
       },
@@ -2769,38 +4257,62 @@
           "FriendlyName": "Volume",
           "InternalName": "Volume",
           "MinValue": 0,
-          "MaxValue": 256
+          "MaxValue": 256,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 256,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "1": {
           "FriendlyName": "Amplitude",
           "InternalName": "Amplitude",
           "MinValue": 0,
-          "MaxValue": 256
+          "MaxValue": 256,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 256,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "2": {
           "FriendlyName": "Freq",
           "InternalName": "Freq",
           "MinValue": 1,
-          "MaxValue": 2048
+          "MaxValue": 2048,
+          "MinDisplayedValue": 1,
+          "MaxDisplayedValue": 2048,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "3": {
           "FriendlyName": "Channels",
           "InternalName": "Channels",
           "MinValue": 0,
           "MaxValue": 1,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 1,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "Channels"
         },
         "4": {
           "FriendlyName": "SetPhase",
           "InternalName": "Set phase",
           "MinValue": 0,
-          "MaxValue": 256
+          "MaxValue": 256,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 256,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "5": {
           "FriendlyName": "FrequencyUnit",
           "InternalName": "Frequency unit",
           "MinValue": 0,
           "MaxValue": 6,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 6,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "VibratoFrequencyUnit"
         },
         "6": {
@@ -2808,6 +4320,10 @@
           "InternalName": "Exponential amplitude",
           "MinValue": 0,
           "MaxValue": 1,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 1,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "Toggle"
         }
       },
@@ -2819,25 +4335,41 @@
           "FriendlyName": "InputVolume",
           "InternalName": "Input volume",
           "MinValue": 0,
-          "MaxValue": 512
+          "MaxValue": 512,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 512,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "1": {
           "FriendlyName": "Mix",
           "InternalName": "Mix",
           "MinValue": 0,
-          "MaxValue": 256
+          "MaxValue": 256,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 256,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "2": {
           "FriendlyName": "OutputVolume",
           "InternalName": "Output volume",
           "MinValue": 0,
-          "MaxValue": 512
+          "MaxValue": 512,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 512,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "3": {
           "FriendlyName": "Symmetric",
           "InternalName": "Symmetric",
           "MinValue": 0,
           "MaxValue": 1,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 1,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "Toggle"
         },
         "4": {
@@ -2845,6 +4377,10 @@
           "InternalName": "Mode",
           "MinValue": 0,
           "MaxValue": 3,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 3,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "Quality"
         },
         "5": {
@@ -2852,6 +4388,10 @@
           "InternalName": "DC blocker",
           "MinValue": 0,
           "MaxValue": 1,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 1,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "Toggle"
         }
       },
@@ -2871,37 +4411,61 @@
           "FriendlyName": "Volume",
           "InternalName": "Volume",
           "MinValue": 0,
-          "MaxValue": 32768
+          "MaxValue": 32768,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 32768,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "1": {
           "FriendlyName": "Attack",
           "InternalName": "Attack",
           "MinValue": 0,
-          "MaxValue": 10000
+          "MaxValue": 10000,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 10000,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "2": {
           "FriendlyName": "Decay",
           "InternalName": "Decay",
           "MinValue": 0,
-          "MaxValue": 10000
+          "MaxValue": 10000,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 10000,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "3": {
           "FriendlyName": "SustainLevel",
           "InternalName": "Sustain level",
           "MinValue": 0,
-          "MaxValue": 32768
+          "MaxValue": 32768,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 32768,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "4": {
           "FriendlyName": "Release",
           "InternalName": "Release",
           "MinValue": 0,
-          "MaxValue": 10000
+          "MaxValue": 10000,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 10000,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "5": {
           "FriendlyName": "AttackCurve",
           "InternalName": "Attack curve",
           "MinValue": 0,
           "MaxValue": 11,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 11,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "AdsrCurveType"
         },
         "6": {
@@ -2909,6 +4473,10 @@
           "InternalName": "Decay curve",
           "MinValue": 0,
           "MaxValue": 11,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 11,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "AdsrCurveType"
         },
         "7": {
@@ -2916,6 +4484,10 @@
           "InternalName": "Release curve",
           "MinValue": 0,
           "MaxValue": 11,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 11,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "AdsrCurveType"
         },
         "8": {
@@ -2923,6 +4495,10 @@
           "InternalName": "Sustain",
           "MinValue": 0,
           "MaxValue": 2,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 2,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "AdsrSustainMode"
         },
         "9": {
@@ -2930,6 +4506,10 @@
           "InternalName": "Sustain pedal",
           "MinValue": 0,
           "MaxValue": 1,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 1,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "Toggle"
         },
         "10": {
@@ -2937,6 +4517,10 @@
           "InternalName": "State",
           "MinValue": 0,
           "MaxValue": 1,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 1,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "Toggle"
         },
         "11": {
@@ -2944,6 +4528,10 @@
           "InternalName": "On NoteON",
           "MinValue": 0,
           "MaxValue": 2,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 2,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "AdsrOnNoteOnBehaviour"
         },
         "12": {
@@ -2951,6 +4539,10 @@
           "InternalName": "On NoteOFF",
           "MinValue": 0,
           "MaxValue": 2,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 2,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "AdsrOnNoteOffBehaviour"
         },
         "13": {
@@ -2958,6 +4550,10 @@
           "InternalName": "Mode",
           "MinValue": 0,
           "MaxValue": 2,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 2,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "AdsrMode"
         },
         "14": {
@@ -2965,6 +4561,10 @@
           "InternalName": "Smooth transitions",
           "MinValue": 0,
           "MaxValue": 3,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 3,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "AdsrSmoothTransitions"
         }
       },
@@ -2976,21 +4576,33 @@
           "FriendlyName": "Pitch",
           "InternalName": "Pitch",
           "MinValue": 0,
-          "MaxValue": 32768
+          "MaxValue": 32768,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 32768,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "1": {
           "FriendlyName": "FirstNote",
           "InternalName": "First note",
           "MinValue": 0,
           "MaxValue": 120,
-          "IgnoreActualType": true
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 120,
+          "Offset": 0,
+          "ControllerType": "Selector",
+          "SelectorIsNotEnum": true
         },
         "2": {
           "FriendlyName": "RangeNumberOfSemitones",
           "InternalName": "Range (number of semitones)",
           "MinValue": 0,
           "MaxValue": 120,
-          "IgnoreActualType": true
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 120,
+          "Offset": 0,
+          "ControllerType": "Selector",
+          "SelectorIsNotEnum": true
         },
         "3": {
           "FriendlyName": "Transpose",
@@ -2999,27 +4611,39 @@
           "MaxValue": 256,
           "MinDisplayedValue": -128,
           "MaxDisplayedValue": 128,
-          "IgnoreActualType": true
+          "Offset": -128,
+          "ControllerType": "Selector",
+          "SelectorIsNotEnum": true
         },
         "4": {
-          "FriendlyName": "Finetune",
+          "FriendlyName": "FineTune",
           "InternalName": "Finetune",
           "MinValue": 0,
           "MaxValue": 512,
           "MinDisplayedValue": -256,
-          "MaxDisplayedValue": 256
+          "MaxDisplayedValue": 256,
+          "Offset": -256,
+          "ControllerType": "Normal"
         },
         "5": {
           "FriendlyName": "Velocity",
           "InternalName": "Velocity",
           "MinValue": 0,
-          "MaxValue": 256
+          "MaxValue": 256,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 256,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "6": {
           "FriendlyName": "State",
           "InternalName": "State",
           "MinValue": 0,
           "MaxValue": 1,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 1,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "Toggle"
         },
         "7": {
@@ -3027,6 +4651,10 @@
           "InternalName": "NoteON",
           "MinValue": 0,
           "MaxValue": 1,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 1,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "ControlToNoteOnBehaviour"
         },
         "8": {
@@ -3034,6 +4662,10 @@
           "InternalName": "NoteOFF",
           "MinValue": 0,
           "MaxValue": 2,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 2,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "ControlToNoteOffBehaviour"
         },
         "9": {
@@ -3041,6 +4673,10 @@
           "InternalName": "Record notes",
           "MinValue": 0,
           "MaxValue": 1,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 1,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "Toggle"
         }
       },
@@ -3052,13 +4688,21 @@
           "FriendlyName": "Volume",
           "InternalName": "Volume",
           "MinValue": 0,
-          "MaxValue": 10000
+          "MaxValue": 10000,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 10000,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "1": {
           "FriendlyName": "Channels",
           "InternalName": "Channels",
           "MinValue": 0,
           "MaxValue": 1,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 1,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "Channels"
         }
       },
@@ -3070,19 +4714,31 @@
           "FriendlyName": "Response",
           "InternalName": "Response",
           "MinValue": 0,
-          "MaxValue": 1000
+          "MaxValue": 1000,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 1000,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "1": {
           "FriendlyName": "SampleRate",
           "InternalName": "Sample rate",
           "MinValue": 1,
-          "MaxValue": 32768
+          "MaxValue": 32768,
+          "MinDisplayedValue": 1,
+          "MaxDisplayedValue": 32768,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "2": {
           "FriendlyName": "ResetOnStNote1",
           "InternalName": "Reset on 1st note",
           "MinValue": 0,
           "MaxValue": 1,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 1,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "Toggle"
         },
         "3": {
@@ -3090,6 +4746,10 @@
           "InternalName": "Polyphony",
           "MinValue": 0,
           "MaxValue": 1,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 1,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "Toggle"
         },
         "4": {
@@ -3098,19 +4758,29 @@
           "MinValue": 0,
           "MaxValue": 1200,
           "MinDisplayedValue": -600,
-          "MaxDisplayedValue": 600
+          "MaxDisplayedValue": 600,
+          "Offset": -600,
+          "ControllerType": "Normal"
         },
         "5": {
           "FriendlyName": "PitchScale",
           "InternalName": "Pitch scale",
           "MinValue": 0,
-          "MaxValue": 200
+          "MaxValue": 200,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 200,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "6": {
           "FriendlyName": "Reset",
           "InternalName": "Reset",
           "MinValue": 0,
           "MaxValue": 1,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 1,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "Toggle"
         },
         "7": {
@@ -3120,21 +4790,31 @@
           "MaxValue": 20,
           "MinDisplayedValue": -10,
           "MaxDisplayedValue": 10,
-          "IgnoreActualType": true
+          "Offset": -10,
+          "ControllerType": "Selector",
+          "SelectorIsNotEnum": true
         },
         "8": {
           "FriendlyName": "FreqMultiply",
           "InternalName": "Freq multiply",
           "MinValue": 1,
           "MaxValue": 256,
-          "IgnoreActualType": true
+          "MinDisplayedValue": 1,
+          "MaxDisplayedValue": 256,
+          "Offset": 0,
+          "ControllerType": "Selector",
+          "SelectorIsNotEnum": true
         },
         "9": {
           "FriendlyName": "FreqDivide",
           "InternalName": "Freq divide",
           "MinValue": 1,
           "MaxValue": 256,
-          "IgnoreActualType": true
+          "MinDisplayedValue": 1,
+          "MaxDisplayedValue": 256,
+          "Offset": 0,
+          "ControllerType": "Selector",
+          "SelectorIsNotEnum": true
         }
       },
       "Curves": {}
@@ -3146,6 +4826,10 @@
           "InternalName": "Out",
           "MinValue": 0,
           "MaxValue": 1,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 1,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "Toggle"
         },
         "1": {
@@ -3153,19 +4837,31 @@
           "InternalName": "Out pin",
           "MinValue": 0,
           "MaxValue": 256,
-          "IgnoreActualType": true
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 256,
+          "Offset": 0,
+          "ControllerType": "Selector",
+          "SelectorIsNotEnum": true
         },
         "2": {
           "FriendlyName": "OutThreshold",
           "InternalName": "Out threshold",
           "MinValue": 0,
-          "MaxValue": 100
+          "MaxValue": 100,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 100,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "3": {
           "FriendlyName": "In",
           "InternalName": "In",
           "MinValue": 0,
           "MaxValue": 1,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 1,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "Toggle"
         },
         "4": {
@@ -3173,20 +4869,32 @@
           "InternalName": "In pin",
           "MinValue": 0,
           "MaxValue": 256,
-          "IgnoreActualType": true
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 256,
+          "Offset": 0,
+          "ControllerType": "Selector",
+          "SelectorIsNotEnum": true
         },
         "5": {
           "FriendlyName": "InNote",
           "InternalName": "In note",
           "MinValue": 0,
           "MaxValue": 128,
-          "IgnoreActualType": true
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 128,
+          "Offset": 0,
+          "ControllerType": "Selector",
+          "SelectorIsNotEnum": true
         },
         "6": {
           "FriendlyName": "InAmplitude",
           "InternalName": "In amplitude",
           "MinValue": 0,
-          "MaxValue": 100
+          "MaxValue": 100,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 100,
+          "Offset": 0,
+          "ControllerType": "Normal"
         }
       },
       "Curves": {}
@@ -3197,20 +4905,32 @@
           "FriendlyName": "Volume",
           "InternalName": "Volume",
           "MinValue": 0,
-          "MaxValue": 1024
+          "MaxValue": 1024,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 1024,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "1": {
           "FriendlyName": "InputModule",
           "InternalName": "Input module",
           "MinValue": 1,
           "MaxValue": 256,
-          "IgnoreActualType": true
+          "MinDisplayedValue": 1,
+          "MaxDisplayedValue": 256,
+          "Offset": 0,
+          "ControllerType": "Selector",
+          "SelectorIsNotEnum": true
         },
         "2": {
           "FriendlyName": "PlayPatterns",
           "InternalName": "Play patterns",
           "MinValue": 0,
           "MaxValue": 4,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 4,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "MetaModulePatternMode"
         },
         "3": {
@@ -3218,32 +4938,52 @@
           "InternalName": "BPM (Beats Per Minute)",
           "MinValue": 1,
           "MaxValue": 1000,
-          "IgnoreActualType": true
+          "MinDisplayedValue": 1,
+          "MaxDisplayedValue": 1000,
+          "Offset": 0,
+          "ControllerType": "Selector",
+          "SelectorIsNotEnum": true
         },
         "4": {
           "FriendlyName": "TicksPerLine",
           "InternalName": "TPL (Ticks Per Line)",
           "MinValue": 1,
           "MaxValue": 31,
-          "IgnoreActualType": true
+          "MinDisplayedValue": 1,
+          "MaxDisplayedValue": 31,
+          "Offset": 0,
+          "ControllerType": "Selector",
+          "SelectorIsNotEnum": true
         },
         "5": {
           "FriendlyName": "",
           "InternalName": "...",
           "MinValue": 0,
-          "MaxValue": 256
+          "MaxValue": 256,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 256,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "6": {
           "FriendlyName": "",
           "InternalName": "...",
           "MinValue": 0,
-          "MaxValue": 256
+          "MaxValue": 256,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 256,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "7": {
           "FriendlyName": "",
           "InternalName": "...",
           "MinValue": 0,
-          "MaxValue": 256
+          "MaxValue": 256,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 256,
+          "Offset": 0,
+          "ControllerType": "Normal"
         }
       },
       "Curves": {}
@@ -3254,19 +4994,31 @@
           "FriendlyName": "Value",
           "InternalName": "Value",
           "MinValue": 0,
-          "MaxValue": 32768
+          "MaxValue": 32768,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 32768,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "1": {
           "FriendlyName": "Gain",
           "InternalName": "Gain",
           "MinValue": 0,
-          "MaxValue": 1024
+          "MaxValue": 1024,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 1024,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "2": {
           "FriendlyName": "Quantization",
           "InternalName": "Quantization",
           "MinValue": 0,
-          "MaxValue": 32768
+          "MaxValue": 32768,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 32768,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "3": {
           "FriendlyName": "OutOffset",
@@ -3274,19 +5026,29 @@
           "MinValue": 0,
           "MaxValue": 32768,
           "MinDisplayedValue": -16384,
-          "MaxDisplayedValue": 16384
+          "MaxDisplayedValue": 16384,
+          "Offset": -16384,
+          "ControllerType": "Normal"
         },
         "4": {
           "FriendlyName": "Response",
           "InternalName": "Response",
           "MinValue": 0,
-          "MaxValue": 1000
+          "MaxValue": 1000,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 1000,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "5": {
           "FriendlyName": "SampleRate",
           "InternalName": "Sample rate",
           "MinValue": 1,
-          "MaxValue": 32768
+          "MaxValue": 32768,
+          "MinDisplayedValue": 1,
+          "MaxDisplayedValue": 32768,
+          "Offset": 0,
+          "ControllerType": "Normal"
         }
       },
       "Curves": {
@@ -3308,51 +5070,79 @@
           "MaxValue": 256,
           "MinDisplayedValue": -128,
           "MaxDisplayedValue": 128,
-          "IgnoreActualType": true
+          "Offset": -128,
+          "ControllerType": "Selector",
+          "SelectorIsNotEnum": true
         },
         "1": {
           "FriendlyName": "RandomPitch",
           "InternalName": "Random pitch",
           "MinValue": 0,
-          "MaxValue": 4096
+          "MaxValue": 4096,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 4096,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "2": {
           "FriendlyName": "Velocity",
           "InternalName": "Velocity",
           "MinValue": 0,
-          "MaxValue": 256
+          "MaxValue": 256,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 256,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "3": {
-          "FriendlyName": "Finetune",
+          "FriendlyName": "FineTune",
           "InternalName": "Finetune",
           "MinValue": 0,
           "MaxValue": 512,
           "MinDisplayedValue": -256,
-          "MaxDisplayedValue": 256
+          "MaxDisplayedValue": 256,
+          "Offset": -256,
+          "ControllerType": "Normal"
         },
         "4": {
           "FriendlyName": "RandomPhase",
           "InternalName": "Random phase",
           "MinValue": 0,
-          "MaxValue": 32768
+          "MaxValue": 32768,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 32768,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "5": {
           "FriendlyName": "RandomVelocity",
           "InternalName": "Random velocity",
           "MinValue": 0,
-          "MaxValue": 32768
+          "MaxValue": 32768,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 32768,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "6": {
           "FriendlyName": "Phase",
           "InternalName": "Phase",
           "MinValue": 0,
-          "MaxValue": 32768
+          "MaxValue": 32768,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 32768,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "7": {
           "FriendlyName": "Curve2Influence",
           "InternalName": "Curve2 influence",
           "MinValue": 0,
-          "MaxValue": 256
+          "MaxValue": 256,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 256,
+          "Offset": 0,
+          "ControllerType": "Normal"
         }
       },
       "Curves": {
@@ -3386,6 +5176,10 @@
           "InternalName": "Mode",
           "MinValue": 0,
           "MaxValue": 1,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 1,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "PitchToControlMode"
         },
         "1": {
@@ -3393,6 +5187,10 @@
           "InternalName": "On NoteOFF",
           "MinValue": 0,
           "MaxValue": 2,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 2,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "PitchToControlOnNoteOff"
         },
         "2": {
@@ -3400,33 +5198,53 @@
           "InternalName": "First note",
           "MinValue": 0,
           "MaxValue": 256,
-          "IgnoreActualType": true
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 256,
+          "Offset": 0,
+          "ControllerType": "Selector",
+          "SelectorIsNotEnum": true
         },
         "3": {
           "FriendlyName": "Range",
           "InternalName": "Range (number of semitones)",
           "MinValue": 0,
           "MaxValue": 256,
-          "IgnoreActualType": true
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 256,
+          "Offset": 0,
+          "ControllerType": "Selector",
+          "SelectorIsNotEnum": true
         },
         "4": {
           "FriendlyName": "OutMin",
           "InternalName": "OUT min",
           "MinValue": 0,
-          "MaxValue": 32768
+          "MaxValue": 32768,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 32768,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "5": {
           "FriendlyName": "OutMax",
           "InternalName": "OUT max",
           "MinValue": 0,
-          "MaxValue": 32768
+          "MaxValue": 32768,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 32768,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "6": {
           "FriendlyName": "OutController",
           "InternalName": "OUT controller",
           "MinValue": 0,
           "MaxValue": 255,
-          "IgnoreActualType": true
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 255,
+          "Offset": 0,
+          "ControllerType": "Selector",
+          "SelectorIsNotEnum": true
         }
       },
       "Curves": {}
@@ -3438,46 +5256,72 @@
           "InternalName": "Algorithm",
           "MinValue": 0,
           "MaxValue": 3,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 3,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "PitchDetectorAlgorithm"
         },
         "1": {
           "FriendlyName": "Threshold",
           "InternalName": "Threshold",
           "MinValue": 0,
-          "MaxValue": 10000
+          "MaxValue": 10000,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 10000,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "2": {
           "FriendlyName": "Gain",
           "InternalName": "Gain",
           "MinValue": 0,
-          "MaxValue": 256
+          "MaxValue": 256,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 256,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "3": {
           "FriendlyName": "Microtones",
           "InternalName": "Microtones",
           "MinValue": 0,
           "MaxValue": 1,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 1,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "Toggle"
         },
         "4": {
-          "FriendlyName": "DetectorFinetune",
+          "FriendlyName": "DetectorFineTune",
           "InternalName": "Detector finetune",
           "MinValue": 0,
           "MaxValue": 512,
           "MinDisplayedValue": -256,
-          "MaxDisplayedValue": 256
+          "MaxDisplayedValue": 256,
+          "Offset": -256,
+          "ControllerType": "Normal"
         },
         "5": {
           "FriendlyName": "LpFilterFreqOff0",
           "InternalName": "LP filter freq (0 - OFF)",
           "MinValue": 0,
-          "MaxValue": 4000
+          "MaxValue": 4000,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 4000,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "6": {
           "FriendlyName": "LpFilterRollOff",
           "InternalName": "LP filter roll-off",
           "MinValue": 0,
           "MaxValue": 3,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 3,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "FilterRollOff"
         },
         "7": {
@@ -3485,6 +5329,10 @@
           "InternalName": "Alg1-2 Sample rate (Hz)",
           "MinValue": 0,
           "MaxValue": 2,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 2,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "PitchDetectorAlgSampleRate"
         },
         "8": {
@@ -3492,25 +5340,41 @@
           "InternalName": "Alg1-2 Buffer (ms)",
           "MinValue": 0,
           "MaxValue": 4,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 4,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "PitchDetectorBufferSize"
         },
         "9": {
           "FriendlyName": "AlgBufOverlap12",
           "InternalName": "Alg1-2 Buf overlap",
           "MinValue": 0,
-          "MaxValue": 100
+          "MaxValue": 100,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 100,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "10": {
           "FriendlyName": "AlgSensitivityAbsoluteThreshold1",
           "InternalName": "Alg1 Sensitivity (absolute threshold)",
           "MinValue": 0,
-          "MaxValue": 100
+          "MaxValue": 100,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 100,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "11": {
           "FriendlyName": "RecordNotes",
           "InternalName": "Record notes",
           "MinValue": 0,
           "MaxValue": 1,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 1,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "Toggle"
         }
       },
@@ -3522,13 +5386,21 @@
           "FriendlyName": "SampleRate",
           "InternalName": "Sample rate",
           "MinValue": 1,
-          "MaxValue": 32768
+          "MaxValue": 32768,
+          "MinDisplayedValue": 1,
+          "MaxDisplayedValue": 32768,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "1": {
           "FriendlyName": "Channels",
           "InternalName": "Channels",
           "MinValue": 0,
           "MaxValue": 1,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 1,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "ChannelsInverted"
         },
         "2": {
@@ -3536,45 +5408,73 @@
           "InternalName": "Absolute",
           "MinValue": 0,
           "MaxValue": 1,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 1,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "Toggle"
         },
         "3": {
           "FriendlyName": "Gain",
           "InternalName": "Gain",
           "MinValue": 0,
-          "MaxValue": 1024
+          "MaxValue": 1024,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 1024,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "4": {
           "FriendlyName": "Smooth",
           "InternalName": "Smooth",
           "MinValue": 0,
-          "MaxValue": 256
+          "MaxValue": 256,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 256,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "5": {
           "FriendlyName": "Mode",
           "InternalName": "Mode",
           "MinValue": 0,
           "MaxValue": 1,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 1,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "SoundToControlMode"
         },
         "6": {
           "FriendlyName": "OutMin",
           "InternalName": "OUT min",
           "MinValue": 0,
-          "MaxValue": 32768
+          "MaxValue": 32768,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 32768,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "7": {
           "FriendlyName": "OutMax",
           "InternalName": "OUT max",
           "MinValue": 0,
-          "MaxValue": 32768
+          "MaxValue": 32768,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 32768,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "8": {
           "FriendlyName": "OutController",
           "InternalName": "OUT controller",
           "MinValue": 0,
           "MaxValue": 255,
-          "IgnoreActualType": true
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 255,
+          "Offset": 0,
+          "ControllerType": "Selector",
+          "SelectorIsNotEnum": true
         }
       },
       "Curves": {}
@@ -3586,19 +5486,31 @@
           "InternalName": "On NoteOFF",
           "MinValue": 0,
           "MaxValue": 2,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 2,
+          "Offset": 0,
+          "ControllerType": "Selector",
           "EnumName": "VelocityToControlOnNoteOff"
         },
         "1": {
           "FriendlyName": "OutMin",
           "InternalName": "OUT min",
           "MinValue": 0,
-          "MaxValue": 32768
+          "MaxValue": 32768,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 32768,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "2": {
           "FriendlyName": "OutMax",
           "InternalName": "OUT max",
           "MinValue": 0,
-          "MaxValue": 32768
+          "MaxValue": 32768,
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 32768,
+          "Offset": 0,
+          "ControllerType": "Normal"
         },
         "3": {
           "FriendlyName": "OutOffset",
@@ -3606,14 +5518,20 @@
           "MinValue": 0,
           "MaxValue": 32768,
           "MinDisplayedValue": -16384,
-          "MaxDisplayedValue": 16384
+          "MaxDisplayedValue": 16384,
+          "Offset": -16384,
+          "ControllerType": "Normal"
         },
         "4": {
           "FriendlyName": "OutController",
           "InternalName": "OUT controller",
           "MinValue": 0,
           "MaxValue": 255,
-          "IgnoreActualType": true
+          "MinDisplayedValue": 0,
+          "MaxDisplayedValue": 255,
+          "Offset": 0,
+          "ControllerType": "Selector",
+          "SelectorIsNotEnum": true
         }
       },
       "Curves": {}

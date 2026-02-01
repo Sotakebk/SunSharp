@@ -5,6 +5,9 @@
 #nullable enable
 
 #if !GENERATION
+
+using System;
+
 namespace SunSharp.Modules
 {
     /// <summary>
@@ -14,100 +17,154 @@ namespace SunSharp.Modules
     {
 
         /// <summary>
-        /// Value range: displayed: -128-128, real: 0-256
         /// Original name: 0 'Transpose'
         /// </summary>
         int GetTranspose(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: displayed: -128-128, real: 0-256
         /// Original name: 0 'Transpose'
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetTranspose(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: 0-4096
+        /// <para>This is a helper method to automatically handle turning target controller values into column values.</para>
+        /// <para>For this controller the input value is taken as is, only clamped to column value range.</para>
+        /// </summary>
+        PatternEvent MakeTransposeEvent(int value);
+
+        /// <summary>
+        /// Value range: displayed: 0 to 4096, real: 0 to 4096
         /// Original name: 1 'Random pitch'
         /// </summary>
         int GetRandomPitch(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: 0-4096
+        /// Value range: displayed: 0 to 4096, real: 0 to 4096
         /// Original name: 1 'Random pitch'
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetRandomPitch(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: 0-256
+        /// <para>This is a helper method to automatically handle turning target controller values into column values.</para>
+        /// <para>For this controller the input value is mapped from displayed range (0 to 4096) to column range (0 to 0x8000). Out of range values are clamped.</para>
+        /// </summary>
+        PatternEvent MakeRandomPitchEvent(int value);
+
+        /// <summary>
+        /// Value range: displayed: 0 to 256, real: 0 to 256
         /// Original name: 2 'Velocity'
         /// </summary>
         int GetVelocity(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: 0-256
+        /// Value range: displayed: 0 to 256, real: 0 to 256
         /// Original name: 2 'Velocity'
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetVelocity(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: displayed: -256-256, real: 0-512
-        /// Original name: 3 'Finetune'
+        /// <para>This is a helper method to automatically handle turning target controller values into column values.</para>
+        /// <para>For this controller the input value is mapped from displayed range (0 to 256) to column range (0 to 0x8000). Out of range values are clamped.</para>
         /// </summary>
-        int GetFinetune(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
+        PatternEvent MakeVelocityEvent(int value);
 
         /// <summary>
-        /// Value range: displayed: -256-256, real: 0-512
+        /// Value range: displayed: -256 to 256, real: 0 to 512
         /// Original name: 3 'Finetune'
         /// </summary>
-        void SetFinetune(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
+        int GetFineTune(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: 0-32768
+        /// Value range: displayed: -256 to 256, real: 0 to 512
+        /// Original name: 3 'Finetune'
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// </summary>
+        void SetFineTune(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
+
+        /// <summary>
+        /// <para>This is a helper method to automatically handle turning target controller values into column values.</para>
+        /// <para>For this controller the input value is mapped from displayed range (-256 to 256) to column range (0 to 0x8000). Out of range values are clamped.</para>
+        /// </summary>
+        PatternEvent MakeFineTuneEvent(int value);
+
+        /// <summary>
+        /// Value range: displayed: 0 to 32768, real: 0 to 32768
         /// Original name: 4 'Random phase'
         /// </summary>
         int GetRandomPhase(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: 0-32768
+        /// Value range: displayed: 0 to 32768, real: 0 to 32768
         /// Original name: 4 'Random phase'
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetRandomPhase(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: 0-32768
+        /// <para>This is a helper method to automatically handle turning target controller values into column values.</para>
+        /// <para>For this controller the input value is mapped from displayed range (0 to 32768) to column range (0 to 0x8000). Out of range values are clamped.</para>
+        /// </summary>
+        PatternEvent MakeRandomPhaseEvent(int value);
+
+        /// <summary>
+        /// Value range: displayed: 0 to 32768, real: 0 to 32768
         /// Original name: 5 'Random velocity'
         /// </summary>
         int GetRandomVelocity(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: 0-32768
+        /// Value range: displayed: 0 to 32768, real: 0 to 32768
         /// Original name: 5 'Random velocity'
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetRandomVelocity(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: 0-32768
+        /// <para>This is a helper method to automatically handle turning target controller values into column values.</para>
+        /// <para>For this controller the input value is mapped from displayed range (0 to 32768) to column range (0 to 0x8000). Out of range values are clamped.</para>
+        /// </summary>
+        PatternEvent MakeRandomVelocityEvent(int value);
+
+        /// <summary>
+        /// Value range: displayed: 0 to 32768, real: 0 to 32768
         /// Original name: 6 'Phase'
         /// </summary>
         int GetPhase(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: 0-32768
+        /// Value range: displayed: 0 to 32768, real: 0 to 32768
         /// Original name: 6 'Phase'
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetPhase(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: 0-256
+        /// <para>This is a helper method to automatically handle turning target controller values into column values.</para>
+        /// <para>For this controller the input value is mapped from displayed range (0 to 32768) to column range (0 to 0x8000). Out of range values are clamped.</para>
+        /// </summary>
+        PatternEvent MakePhaseEvent(int value);
+
+        /// <summary>
+        /// Value range: displayed: 0 to 256, real: 0 to 256
         /// Original name: 7 'Curve2 influence'
         /// </summary>
         int GetCurve2Influence(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: 0-256
+        /// Value range: displayed: 0 to 256, real: 0 to 256
         /// Original name: 7 'Curve2 influence'
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetCurve2Influence(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
+
+        /// <summary>
+        /// <para>This is a helper method to automatically handle turning target controller values into column values.</para>
+        /// <para>For this controller the input value is mapped from displayed range (0 to 256) to column range (0 to 0x8000). Out of range values are clamped.</para>
+        /// </summary>
+        PatternEvent MakeCurve2InfluenceEvent(int value);
 
         /// <summary>
         /// Velocity to apply to arriving note.
@@ -309,11 +366,24 @@ namespace SunSharp.Modules
         /// <inheritdoc cref="IMultiSynthModuleHandle.SetTranspose" />
         public void SetTranspose(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(0, value, valueScalingMode);
 
+        /// <inheritdoc cref="IMultiSynthModuleHandle.MakeTransposeEvent" />
+        public PatternEvent MakeTransposeEvent(int value)
+        {
+            return PatternEvent.ControllerEvent(ModuleHandle.Id, 0, (ushort)Math.Clamp(value, 0, 0x8000));
+        }
+
         /// <inheritdoc cref="IMultiSynthModuleHandle.GetRandomPitch" />
         public int GetRandomPitch(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(1, valueScalingMode);
 
         /// <inheritdoc cref="IMultiSynthModuleHandle.SetRandomPitch" />
         public void SetRandomPitch(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(1, value, valueScalingMode);
+
+        /// <inheritdoc cref="IMultiSynthModuleHandle.MakeRandomPitchEvent" />
+        public PatternEvent MakeRandomPitchEvent(int value)
+        {
+            value = value * 0x8000 / (4096);
+            return PatternEvent.ControllerEvent(ModuleHandle.Id, 1, (ushort)Math.Clamp(value, 0, 0x8000));
+        }
 
         /// <inheritdoc cref="IMultiSynthModuleHandle.GetVelocity" />
         public int GetVelocity(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(2, valueScalingMode);
@@ -321,11 +391,26 @@ namespace SunSharp.Modules
         /// <inheritdoc cref="IMultiSynthModuleHandle.SetVelocity" />
         public void SetVelocity(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(2, value, valueScalingMode);
 
-        /// <inheritdoc cref="IMultiSynthModuleHandle.GetFinetune" />
-        public int GetFinetune(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(3, valueScalingMode);
+        /// <inheritdoc cref="IMultiSynthModuleHandle.MakeVelocityEvent" />
+        public PatternEvent MakeVelocityEvent(int value)
+        {
+            value = value * 0x8000 / (256);
+            return PatternEvent.ControllerEvent(ModuleHandle.Id, 2, (ushort)Math.Clamp(value, 0, 0x8000));
+        }
 
-        /// <inheritdoc cref="IMultiSynthModuleHandle.SetFinetune" />
-        public void SetFinetune(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(3, value, valueScalingMode);
+        /// <inheritdoc cref="IMultiSynthModuleHandle.GetFineTune" />
+        public int GetFineTune(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(3, valueScalingMode);
+
+        /// <inheritdoc cref="IMultiSynthModuleHandle.SetFineTune" />
+        public void SetFineTune(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(3, value, valueScalingMode);
+
+        /// <inheritdoc cref="IMultiSynthModuleHandle.MakeFineTuneEvent" />
+        public PatternEvent MakeFineTuneEvent(int value)
+        {
+            value -= -256;
+            value = value * 0x8000 / (512);
+            return PatternEvent.ControllerEvent(ModuleHandle.Id, 3, (ushort)Math.Clamp(value, 0, 0x8000));
+        }
 
         /// <inheritdoc cref="IMultiSynthModuleHandle.GetRandomPhase" />
         public int GetRandomPhase(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(4, valueScalingMode);
@@ -333,11 +418,25 @@ namespace SunSharp.Modules
         /// <inheritdoc cref="IMultiSynthModuleHandle.SetRandomPhase" />
         public void SetRandomPhase(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(4, value, valueScalingMode);
 
+        /// <inheritdoc cref="IMultiSynthModuleHandle.MakeRandomPhaseEvent" />
+        public PatternEvent MakeRandomPhaseEvent(int value)
+        {
+            value = value * 0x8000 / (32768);
+            return PatternEvent.ControllerEvent(ModuleHandle.Id, 4, (ushort)Math.Clamp(value, 0, 0x8000));
+        }
+
         /// <inheritdoc cref="IMultiSynthModuleHandle.GetRandomVelocity" />
         public int GetRandomVelocity(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(5, valueScalingMode);
 
         /// <inheritdoc cref="IMultiSynthModuleHandle.SetRandomVelocity" />
         public void SetRandomVelocity(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(5, value, valueScalingMode);
+
+        /// <inheritdoc cref="IMultiSynthModuleHandle.MakeRandomVelocityEvent" />
+        public PatternEvent MakeRandomVelocityEvent(int value)
+        {
+            value = value * 0x8000 / (32768);
+            return PatternEvent.ControllerEvent(ModuleHandle.Id, 5, (ushort)Math.Clamp(value, 0, 0x8000));
+        }
 
         /// <inheritdoc cref="IMultiSynthModuleHandle.GetPhase" />
         public int GetPhase(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(6, valueScalingMode);
@@ -345,11 +444,25 @@ namespace SunSharp.Modules
         /// <inheritdoc cref="IMultiSynthModuleHandle.SetPhase" />
         public void SetPhase(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(6, value, valueScalingMode);
 
+        /// <inheritdoc cref="IMultiSynthModuleHandle.MakePhaseEvent" />
+        public PatternEvent MakePhaseEvent(int value)
+        {
+            value = value * 0x8000 / (32768);
+            return PatternEvent.ControllerEvent(ModuleHandle.Id, 6, (ushort)Math.Clamp(value, 0, 0x8000));
+        }
+
         /// <inheritdoc cref="IMultiSynthModuleHandle.GetCurve2Influence" />
         public int GetCurve2Influence(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(7, valueScalingMode);
 
         /// <inheritdoc cref="IMultiSynthModuleHandle.SetCurve2Influence" />
         public void SetCurve2Influence(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(7, value, valueScalingMode);
+
+        /// <inheritdoc cref="IMultiSynthModuleHandle.MakeCurve2InfluenceEvent" />
+        public PatternEvent MakeCurve2InfluenceEvent(int value)
+        {
+            value = value * 0x8000 / (256);
+            return PatternEvent.ControllerEvent(ModuleHandle.Id, 7, (ushort)Math.Clamp(value, 0, 0x8000));
+        }
 
         /// <inheritdoc cref="IMultiSynthModuleHandle.ReadCurveNoteToVelocity"
         public int ReadCurveNoteToVelocity(float[] buffer) => ModuleHandle.ReadCurve(0, buffer);

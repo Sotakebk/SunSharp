@@ -5,6 +5,9 @@
 #nullable enable
 
 #if !GENERATION
+
+using System;
+
 namespace SunSharp.Modules
 {
     /// <summary>
@@ -20,32 +23,51 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 0 'Out'
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetOut(Toggle value);
 
         /// <summary>
-        /// Value range: 0-256
+        /// <para>This is a helper method to automatically handle turning target controller values into column values.</para>
+        /// <para>For this controller the input value is taken as is, only clamped to column value range.</para>
+        /// </summary>
+        PatternEvent MakeOutEvent(Toggle value);
+
+        /// <summary>
         /// Original name: 1 'Out pin'
         /// </summary>
         int GetOutPin(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: 0-256
         /// Original name: 1 'Out pin'
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetOutPin(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: 0-100
+        /// <para>This is a helper method to automatically handle turning target controller values into column values.</para>
+        /// <para>For this controller the input value is taken as is, only clamped to column value range.</para>
+        /// </summary>
+        PatternEvent MakeOutPinEvent(int value);
+
+        /// <summary>
+        /// Value range: displayed: 0 to 100, real: 0 to 100
         /// Original name: 2 'Out threshold'
         /// </summary>
         int GetOutThreshold(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: 0-100
+        /// Value range: displayed: 0 to 100, real: 0 to 100
         /// Original name: 2 'Out threshold'
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetOutThreshold(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
+
+        /// <summary>
+        /// <para>This is a helper method to automatically handle turning target controller values into column values.</para>
+        /// <para>For this controller the input value is mapped from displayed range (0 to 100) to column range (0 to 0x8000). Out of range values are clamped.</para>
+        /// </summary>
+        PatternEvent MakeOutThresholdEvent(int value);
 
         /// <summary>
         /// Original name: 3 'In'
@@ -54,44 +76,68 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 3 'In'
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetIn(Toggle value);
 
         /// <summary>
-        /// Value range: 0-256
+        /// <para>This is a helper method to automatically handle turning target controller values into column values.</para>
+        /// <para>For this controller the input value is taken as is, only clamped to column value range.</para>
+        /// </summary>
+        PatternEvent MakeInEvent(Toggle value);
+
+        /// <summary>
         /// Original name: 4 'In pin'
         /// </summary>
         int GetInPin(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: 0-256
         /// Original name: 4 'In pin'
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetInPin(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: 0-128
+        /// <para>This is a helper method to automatically handle turning target controller values into column values.</para>
+        /// <para>For this controller the input value is taken as is, only clamped to column value range.</para>
+        /// </summary>
+        PatternEvent MakeInPinEvent(int value);
+
+        /// <summary>
         /// Original name: 5 'In note'
         /// </summary>
         int GetInNote(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: 0-128
         /// Original name: 5 'In note'
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetInNote(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: 0-100
+        /// <para>This is a helper method to automatically handle turning target controller values into column values.</para>
+        /// <para>For this controller the input value is taken as is, only clamped to column value range.</para>
+        /// </summary>
+        PatternEvent MakeInNoteEvent(int value);
+
+        /// <summary>
+        /// Value range: displayed: 0 to 100, real: 0 to 100
         /// Original name: 6 'In amplitude'
         /// </summary>
         int GetInAmplitude(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: 0-100
+        /// Value range: displayed: 0 to 100, real: 0 to 100
         /// Original name: 6 'In amplitude'
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetInAmplitude(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
+
+        /// <summary>
+        /// <para>This is a helper method to automatically handle turning target controller values into column values.</para>
+        /// <para>For this controller the input value is mapped from displayed range (0 to 100) to column range (0 to 0x8000). Out of range values are clamped.</para>
+        /// </summary>
+        PatternEvent MakeInAmplitudeEvent(int value);
     }
 
     /// <inheritdoc cref="IGpioModuleHandle"/>
@@ -245,11 +291,23 @@ namespace SunSharp.Modules
         /// <inheritdoc cref="IGpioModuleHandle.SetOut" />
         public void SetOut(Toggle value) => ModuleHandle.SetControllerValue(0, (int)value, ValueScalingMode.Displayed);
 
+        /// <inheritdoc cref="IGpioModuleHandle.MakeOutEvent" />
+        public PatternEvent MakeOutEvent(Toggle value)
+        {
+            return PatternEvent.ControllerEvent(ModuleHandle.Id, 0, (ushort)Math.Clamp((int)value, 0, 0x8000));
+        }
+
         /// <inheritdoc cref="IGpioModuleHandle.GetOutPin" />
         public int GetOutPin(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(1, valueScalingMode);
 
         /// <inheritdoc cref="IGpioModuleHandle.SetOutPin" />
         public void SetOutPin(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(1, value, valueScalingMode);
+
+        /// <inheritdoc cref="IGpioModuleHandle.MakeOutPinEvent" />
+        public PatternEvent MakeOutPinEvent(int value)
+        {
+            return PatternEvent.ControllerEvent(ModuleHandle.Id, 1, (ushort)Math.Clamp(value, 0, 0x8000));
+        }
 
         /// <inheritdoc cref="IGpioModuleHandle.GetOutThreshold" />
         public int GetOutThreshold(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(2, valueScalingMode);
@@ -257,11 +315,24 @@ namespace SunSharp.Modules
         /// <inheritdoc cref="IGpioModuleHandle.SetOutThreshold" />
         public void SetOutThreshold(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(2, value, valueScalingMode);
 
+        /// <inheritdoc cref="IGpioModuleHandle.MakeOutThresholdEvent" />
+        public PatternEvent MakeOutThresholdEvent(int value)
+        {
+            value = value * 0x8000 / (100);
+            return PatternEvent.ControllerEvent(ModuleHandle.Id, 2, (ushort)Math.Clamp(value, 0, 0x8000));
+        }
+
         /// <inheritdoc cref="IGpioModuleHandle.GetIn" />
         public Toggle GetIn() => (Toggle)ModuleHandle.GetControllerValue(3, ValueScalingMode.Displayed);
 
         /// <inheritdoc cref="IGpioModuleHandle.SetIn" />
         public void SetIn(Toggle value) => ModuleHandle.SetControllerValue(3, (int)value, ValueScalingMode.Displayed);
+
+        /// <inheritdoc cref="IGpioModuleHandle.MakeInEvent" />
+        public PatternEvent MakeInEvent(Toggle value)
+        {
+            return PatternEvent.ControllerEvent(ModuleHandle.Id, 3, (ushort)Math.Clamp((int)value, 0, 0x8000));
+        }
 
         /// <inheritdoc cref="IGpioModuleHandle.GetInPin" />
         public int GetInPin(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(4, valueScalingMode);
@@ -269,17 +340,36 @@ namespace SunSharp.Modules
         /// <inheritdoc cref="IGpioModuleHandle.SetInPin" />
         public void SetInPin(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(4, value, valueScalingMode);
 
+        /// <inheritdoc cref="IGpioModuleHandle.MakeInPinEvent" />
+        public PatternEvent MakeInPinEvent(int value)
+        {
+            return PatternEvent.ControllerEvent(ModuleHandle.Id, 4, (ushort)Math.Clamp(value, 0, 0x8000));
+        }
+
         /// <inheritdoc cref="IGpioModuleHandle.GetInNote" />
         public int GetInNote(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(5, valueScalingMode);
 
         /// <inheritdoc cref="IGpioModuleHandle.SetInNote" />
         public void SetInNote(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(5, value, valueScalingMode);
 
+        /// <inheritdoc cref="IGpioModuleHandle.MakeInNoteEvent" />
+        public PatternEvent MakeInNoteEvent(int value)
+        {
+            return PatternEvent.ControllerEvent(ModuleHandle.Id, 5, (ushort)Math.Clamp(value, 0, 0x8000));
+        }
+
         /// <inheritdoc cref="IGpioModuleHandle.GetInAmplitude" />
         public int GetInAmplitude(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(6, valueScalingMode);
 
         /// <inheritdoc cref="IGpioModuleHandle.SetInAmplitude" />
         public void SetInAmplitude(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(6, value, valueScalingMode);
+
+        /// <inheritdoc cref="IGpioModuleHandle.MakeInAmplitudeEvent" />
+        public PatternEvent MakeInAmplitudeEvent(int value)
+        {
+            value = value * 0x8000 / (100);
+            return PatternEvent.ControllerEvent(ModuleHandle.Id, 6, (ushort)Math.Clamp(value, 0, 0x8000));
+        }
     }
 }
 #endif

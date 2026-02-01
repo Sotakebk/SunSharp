@@ -5,6 +5,9 @@
 #nullable enable
 
 #if !GENERATION
+
+using System;
+
 namespace SunSharp.Modules
 {
     /// <summary>
@@ -14,40 +17,61 @@ namespace SunSharp.Modules
     {
 
         /// <summary>
-        /// Value range: 0-1024
+        /// Value range: displayed: 0 to 1024, real: 0 to 1024
         /// Original name: 0 'Volume'
         /// </summary>
         int GetVolume(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: 0-1024
+        /// Value range: displayed: 0 to 1024, real: 0 to 1024
         /// Original name: 0 'Volume'
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetVolume(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: displayed: -128-128, real: 0-256
+        /// <para>This is a helper method to automatically handle turning target controller values into column values.</para>
+        /// <para>For this controller the input value is mapped from displayed range (0 to 1024) to column range (0 to 0x8000). Out of range values are clamped.</para>
+        /// </summary>
+        PatternEvent MakeVolumeEvent(int value);
+
+        /// <summary>
+        /// Value range: displayed: -128 to 128, real: 0 to 256
         /// Original name: 1 'Balance'
         /// </summary>
         int GetBalance(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: displayed: -128-128, real: 0-256
+        /// Value range: displayed: -128 to 128, real: 0 to 256
         /// Original name: 1 'Balance'
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetBalance(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: displayed: -128-128, real: 0-256
+        /// <para>This is a helper method to automatically handle turning target controller values into column values.</para>
+        /// <para>For this controller the input value is mapped from displayed range (-128 to 128) to column range (0 to 0x8000). Out of range values are clamped.</para>
+        /// </summary>
+        PatternEvent MakeBalanceEvent(int value);
+
+        /// <summary>
+        /// Value range: displayed: -128 to 128, real: 0 to 256
         /// Original name: 2 'DC Offset'
         /// </summary>
         int GetDcOffset(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: displayed: -128-128, real: 0-256
+        /// Value range: displayed: -128 to 128, real: 0 to 256
         /// Original name: 2 'DC Offset'
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetDcOffset(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
+
+        /// <summary>
+        /// <para>This is a helper method to automatically handle turning target controller values into column values.</para>
+        /// <para>For this controller the input value is mapped from displayed range (-128 to 128) to column range (0 to 0x8000). Out of range values are clamped.</para>
+        /// </summary>
+        PatternEvent MakeDcOffsetEvent(int value);
 
         /// <summary>
         /// Original name: 3 'Inverse'
@@ -56,20 +80,34 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 3 'Inverse'
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetInverse(Toggle value);
 
         /// <summary>
-        /// Value range: 0-256
+        /// <para>This is a helper method to automatically handle turning target controller values into column values.</para>
+        /// <para>For this controller the input value is taken as is, only clamped to column value range.</para>
+        /// </summary>
+        PatternEvent MakeInverseEvent(Toggle value);
+
+        /// <summary>
+        /// Value range: displayed: 0 to 256, real: 0 to 256
         /// Original name: 4 'Stereo width'
         /// </summary>
         int GetStereoWidth(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: 0-256
+        /// Value range: displayed: 0 to 256, real: 0 to 256
         /// Original name: 4 'Stereo width'
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetStereoWidth(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
+
+        /// <summary>
+        /// <para>This is a helper method to automatically handle turning target controller values into column values.</para>
+        /// <para>For this controller the input value is mapped from displayed range (0 to 256) to column range (0 to 0x8000). Out of range values are clamped.</para>
+        /// </summary>
+        PatternEvent MakeStereoWidthEvent(int value);
 
         /// <summary>
         /// Original name: 5 'Absolute'
@@ -78,44 +116,72 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 5 'Absolute'
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetAbsolute(Toggle value);
 
         /// <summary>
-        /// Value range: 0-32768
+        /// <para>This is a helper method to automatically handle turning target controller values into column values.</para>
+        /// <para>For this controller the input value is taken as is, only clamped to column value range.</para>
+        /// </summary>
+        PatternEvent MakeAbsoluteEvent(Toggle value);
+
+        /// <summary>
+        /// Value range: displayed: 0 to 32768, real: 0 to 32768
         /// Original name: 6 'Fine volume'
         /// </summary>
         int GetFineVolume(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: 0-32768
+        /// Value range: displayed: 0 to 32768, real: 0 to 32768
         /// Original name: 6 'Fine volume'
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetFineVolume(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: 0-5000
+        /// <para>This is a helper method to automatically handle turning target controller values into column values.</para>
+        /// <para>For this controller the input value is mapped from displayed range (0 to 32768) to column range (0 to 0x8000). Out of range values are clamped.</para>
+        /// </summary>
+        PatternEvent MakeFineVolumeEvent(int value);
+
+        /// <summary>
+        /// Value range: displayed: 0 to 5000, real: 0 to 5000
         /// Original name: 7 'Gain'
         /// </summary>
         int GetGain(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: 0-5000
+        /// Value range: displayed: 0 to 5000, real: 0 to 5000
         /// Original name: 7 'Gain'
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetGain(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: displayed: -16384-16384, real: 0-32768
+        /// <para>This is a helper method to automatically handle turning target controller values into column values.</para>
+        /// <para>For this controller the input value is mapped from displayed range (0 to 5000) to column range (0 to 0x8000). Out of range values are clamped.</para>
+        /// </summary>
+        PatternEvent MakeGainEvent(int value);
+
+        /// <summary>
+        /// Value range: displayed: -16384 to 16384, real: 0 to 32768
         /// Original name: 8 'Bipolar DC Offset'
         /// </summary>
         int GetBipolarDcOffset(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: displayed: -16384-16384, real: 0-32768
+        /// Value range: displayed: -16384 to 16384, real: 0 to 32768
         /// Original name: 8 'Bipolar DC Offset'
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetBipolarDcOffset(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
+
+        /// <summary>
+        /// <para>This is a helper method to automatically handle turning target controller values into column values.</para>
+        /// <para>For this controller the input value is mapped from displayed range (-16384 to 16384) to column range (0 to 0x8000). Out of range values are clamped.</para>
+        /// </summary>
+        PatternEvent MakeBipolarDcOffsetEvent(int value);
     }
 
     /// <inheritdoc cref="IAmplifierModuleHandle"/>
@@ -269,11 +335,26 @@ namespace SunSharp.Modules
         /// <inheritdoc cref="IAmplifierModuleHandle.SetVolume" />
         public void SetVolume(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(0, value, valueScalingMode);
 
+        /// <inheritdoc cref="IAmplifierModuleHandle.MakeVolumeEvent" />
+        public PatternEvent MakeVolumeEvent(int value)
+        {
+            value = value * 0x8000 / (1024);
+            return PatternEvent.ControllerEvent(ModuleHandle.Id, 0, (ushort)Math.Clamp(value, 0, 0x8000));
+        }
+
         /// <inheritdoc cref="IAmplifierModuleHandle.GetBalance" />
         public int GetBalance(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(1, valueScalingMode);
 
         /// <inheritdoc cref="IAmplifierModuleHandle.SetBalance" />
         public void SetBalance(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(1, value, valueScalingMode);
+
+        /// <inheritdoc cref="IAmplifierModuleHandle.MakeBalanceEvent" />
+        public PatternEvent MakeBalanceEvent(int value)
+        {
+            value -= -128;
+            value = value * 0x8000 / (256);
+            return PatternEvent.ControllerEvent(ModuleHandle.Id, 1, (ushort)Math.Clamp(value, 0, 0x8000));
+        }
 
         /// <inheritdoc cref="IAmplifierModuleHandle.GetDcOffset" />
         public int GetDcOffset(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(2, valueScalingMode);
@@ -281,11 +362,25 @@ namespace SunSharp.Modules
         /// <inheritdoc cref="IAmplifierModuleHandle.SetDcOffset" />
         public void SetDcOffset(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(2, value, valueScalingMode);
 
+        /// <inheritdoc cref="IAmplifierModuleHandle.MakeDcOffsetEvent" />
+        public PatternEvent MakeDcOffsetEvent(int value)
+        {
+            value -= -128;
+            value = value * 0x8000 / (256);
+            return PatternEvent.ControllerEvent(ModuleHandle.Id, 2, (ushort)Math.Clamp(value, 0, 0x8000));
+        }
+
         /// <inheritdoc cref="IAmplifierModuleHandle.GetInverse" />
         public Toggle GetInverse() => (Toggle)ModuleHandle.GetControllerValue(3, ValueScalingMode.Displayed);
 
         /// <inheritdoc cref="IAmplifierModuleHandle.SetInverse" />
         public void SetInverse(Toggle value) => ModuleHandle.SetControllerValue(3, (int)value, ValueScalingMode.Displayed);
+
+        /// <inheritdoc cref="IAmplifierModuleHandle.MakeInverseEvent" />
+        public PatternEvent MakeInverseEvent(Toggle value)
+        {
+            return PatternEvent.ControllerEvent(ModuleHandle.Id, 3, (ushort)Math.Clamp((int)value, 0, 0x8000));
+        }
 
         /// <inheritdoc cref="IAmplifierModuleHandle.GetStereoWidth" />
         public int GetStereoWidth(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(4, valueScalingMode);
@@ -293,11 +388,24 @@ namespace SunSharp.Modules
         /// <inheritdoc cref="IAmplifierModuleHandle.SetStereoWidth" />
         public void SetStereoWidth(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(4, value, valueScalingMode);
 
+        /// <inheritdoc cref="IAmplifierModuleHandle.MakeStereoWidthEvent" />
+        public PatternEvent MakeStereoWidthEvent(int value)
+        {
+            value = value * 0x8000 / (256);
+            return PatternEvent.ControllerEvent(ModuleHandle.Id, 4, (ushort)Math.Clamp(value, 0, 0x8000));
+        }
+
         /// <inheritdoc cref="IAmplifierModuleHandle.GetAbsolute" />
         public Toggle GetAbsolute() => (Toggle)ModuleHandle.GetControllerValue(5, ValueScalingMode.Displayed);
 
         /// <inheritdoc cref="IAmplifierModuleHandle.SetAbsolute" />
         public void SetAbsolute(Toggle value) => ModuleHandle.SetControllerValue(5, (int)value, ValueScalingMode.Displayed);
+
+        /// <inheritdoc cref="IAmplifierModuleHandle.MakeAbsoluteEvent" />
+        public PatternEvent MakeAbsoluteEvent(Toggle value)
+        {
+            return PatternEvent.ControllerEvent(ModuleHandle.Id, 5, (ushort)Math.Clamp((int)value, 0, 0x8000));
+        }
 
         /// <inheritdoc cref="IAmplifierModuleHandle.GetFineVolume" />
         public int GetFineVolume(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(6, valueScalingMode);
@@ -305,17 +413,39 @@ namespace SunSharp.Modules
         /// <inheritdoc cref="IAmplifierModuleHandle.SetFineVolume" />
         public void SetFineVolume(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(6, value, valueScalingMode);
 
+        /// <inheritdoc cref="IAmplifierModuleHandle.MakeFineVolumeEvent" />
+        public PatternEvent MakeFineVolumeEvent(int value)
+        {
+            value = value * 0x8000 / (32768);
+            return PatternEvent.ControllerEvent(ModuleHandle.Id, 6, (ushort)Math.Clamp(value, 0, 0x8000));
+        }
+
         /// <inheritdoc cref="IAmplifierModuleHandle.GetGain" />
         public int GetGain(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(7, valueScalingMode);
 
         /// <inheritdoc cref="IAmplifierModuleHandle.SetGain" />
         public void SetGain(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(7, value, valueScalingMode);
 
+        /// <inheritdoc cref="IAmplifierModuleHandle.MakeGainEvent" />
+        public PatternEvent MakeGainEvent(int value)
+        {
+            value = value * 0x8000 / (5000);
+            return PatternEvent.ControllerEvent(ModuleHandle.Id, 7, (ushort)Math.Clamp(value, 0, 0x8000));
+        }
+
         /// <inheritdoc cref="IAmplifierModuleHandle.GetBipolarDcOffset" />
         public int GetBipolarDcOffset(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(8, valueScalingMode);
 
         /// <inheritdoc cref="IAmplifierModuleHandle.SetBipolarDcOffset" />
         public void SetBipolarDcOffset(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(8, value, valueScalingMode);
+
+        /// <inheritdoc cref="IAmplifierModuleHandle.MakeBipolarDcOffsetEvent" />
+        public PatternEvent MakeBipolarDcOffsetEvent(int value)
+        {
+            value -= -16384;
+            value = value * 0x8000 / (32768);
+            return PatternEvent.ControllerEvent(ModuleHandle.Id, 8, (ushort)Math.Clamp(value, 0, 0x8000));
+        }
     }
 }
 #endif

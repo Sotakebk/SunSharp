@@ -5,6 +5,9 @@
 #nullable enable
 
 #if !GENERATION
+
+using System;
+
 namespace SunSharp.Modules
 {
     /// <summary>
@@ -14,40 +17,61 @@ namespace SunSharp.Modules
     {
 
         /// <summary>
-        /// Value range: 0-512
+        /// Value range: displayed: 0 to 512, real: 0 to 512
         /// Original name: 0 'Low'
         /// </summary>
         int GetLow(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: 0-512
+        /// Value range: displayed: 0 to 512, real: 0 to 512
         /// Original name: 0 'Low'
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetLow(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: 0-512
+        /// <para>This is a helper method to automatically handle turning target controller values into column values.</para>
+        /// <para>For this controller the input value is mapped from displayed range (0 to 512) to column range (0 to 0x8000). Out of range values are clamped.</para>
+        /// </summary>
+        PatternEvent MakeLowEvent(int value);
+
+        /// <summary>
+        /// Value range: displayed: 0 to 512, real: 0 to 512
         /// Original name: 1 'Middle'
         /// </summary>
         int GetMiddle(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: 0-512
+        /// Value range: displayed: 0 to 512, real: 0 to 512
         /// Original name: 1 'Middle'
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetMiddle(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: 0-512
+        /// <para>This is a helper method to automatically handle turning target controller values into column values.</para>
+        /// <para>For this controller the input value is mapped from displayed range (0 to 512) to column range (0 to 0x8000). Out of range values are clamped.</para>
+        /// </summary>
+        PatternEvent MakeMiddleEvent(int value);
+
+        /// <summary>
+        /// Value range: displayed: 0 to 512, real: 0 to 512
         /// Original name: 2 'High'
         /// </summary>
         int GetHigh(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: 0-512
+        /// Value range: displayed: 0 to 512, real: 0 to 512
         /// Original name: 2 'High'
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetHigh(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
+
+        /// <summary>
+        /// <para>This is a helper method to automatically handle turning target controller values into column values.</para>
+        /// <para>For this controller the input value is mapped from displayed range (0 to 512) to column range (0 to 0x8000). Out of range values are clamped.</para>
+        /// </summary>
+        PatternEvent MakeHighEvent(int value);
 
         /// <summary>
         /// Original name: 3 'Channels'
@@ -56,8 +80,15 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 3 'Channels'
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetChannels(Channels value);
+
+        /// <summary>
+        /// <para>This is a helper method to automatically handle turning target controller values into column values.</para>
+        /// <para>For this controller the input value is taken as is, only clamped to column value range.</para>
+        /// </summary>
+        PatternEvent MakeChannelsEvent(Channels value);
     }
 
     /// <inheritdoc cref="IEqModuleHandle"/>
@@ -211,11 +242,25 @@ namespace SunSharp.Modules
         /// <inheritdoc cref="IEqModuleHandle.SetLow" />
         public void SetLow(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(0, value, valueScalingMode);
 
+        /// <inheritdoc cref="IEqModuleHandle.MakeLowEvent" />
+        public PatternEvent MakeLowEvent(int value)
+        {
+            value = value * 0x8000 / (512);
+            return PatternEvent.ControllerEvent(ModuleHandle.Id, 0, (ushort)Math.Clamp(value, 0, 0x8000));
+        }
+
         /// <inheritdoc cref="IEqModuleHandle.GetMiddle" />
         public int GetMiddle(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(1, valueScalingMode);
 
         /// <inheritdoc cref="IEqModuleHandle.SetMiddle" />
         public void SetMiddle(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(1, value, valueScalingMode);
+
+        /// <inheritdoc cref="IEqModuleHandle.MakeMiddleEvent" />
+        public PatternEvent MakeMiddleEvent(int value)
+        {
+            value = value * 0x8000 / (512);
+            return PatternEvent.ControllerEvent(ModuleHandle.Id, 1, (ushort)Math.Clamp(value, 0, 0x8000));
+        }
 
         /// <inheritdoc cref="IEqModuleHandle.GetHigh" />
         public int GetHigh(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(2, valueScalingMode);
@@ -223,11 +268,24 @@ namespace SunSharp.Modules
         /// <inheritdoc cref="IEqModuleHandle.SetHigh" />
         public void SetHigh(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(2, value, valueScalingMode);
 
+        /// <inheritdoc cref="IEqModuleHandle.MakeHighEvent" />
+        public PatternEvent MakeHighEvent(int value)
+        {
+            value = value * 0x8000 / (512);
+            return PatternEvent.ControllerEvent(ModuleHandle.Id, 2, (ushort)Math.Clamp(value, 0, 0x8000));
+        }
+
         /// <inheritdoc cref="IEqModuleHandle.GetChannels" />
         public Channels GetChannels() => (Channels)ModuleHandle.GetControllerValue(3, ValueScalingMode.Displayed);
 
         /// <inheritdoc cref="IEqModuleHandle.SetChannels" />
         public void SetChannels(Channels value) => ModuleHandle.SetControllerValue(3, (int)value, ValueScalingMode.Displayed);
+
+        /// <inheritdoc cref="IEqModuleHandle.MakeChannelsEvent" />
+        public PatternEvent MakeChannelsEvent(Channels value)
+        {
+            return PatternEvent.ControllerEvent(ModuleHandle.Id, 3, (ushort)Math.Clamp((int)value, 0, 0x8000));
+        }
     }
 }
 #endif

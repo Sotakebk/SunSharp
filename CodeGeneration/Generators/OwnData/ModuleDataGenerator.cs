@@ -173,19 +173,21 @@ public sealed partial class ModuleDataGenerator : BaseGenerator, IGeneratorProvi
         var maxValue = module.GetControllerMaxValue(id, ValueScalingMode.Real);
         var maxDisplayedValue = module.GetControllerMaxValue(id, ValueScalingMode.Displayed);
         var minDisplayedValue = module.GetControllerMinValue(id, ValueScalingMode.Displayed);
-        var isControllerEnum = controllerType == ControllerType.Enum;
+        var offset = module.GetControllerOffset(id);
 
         return new ControllerDescription()
         {
             InternalName = internalName,
             FriendlyName = MakeControllerNameFriendly(internalName),
             Description = null,
-            EnumName = isControllerEnum ? "CHANGEME" : null,
-            IgnoreActualType = null,
-            MaxDisplayedValue = maxValue == maxDisplayedValue ? null : maxDisplayedValue,
+            EnumName = (controllerType == ControllerType.Selector) ? "CHANGEME" : null,
+            SelectorIsNotEnum = false,
+            MaxDisplayedValue = maxDisplayedValue,
             MaxValue = maxValue,
-            MinDisplayedValue = minValue == minDisplayedValue ? null : minDisplayedValue,
+            MinDisplayedValue = minDisplayedValue,
             MinValue = minValue,
+            ControllerType = controllerType,
+            Offset = offset,
         };
     }
 
@@ -291,17 +293,27 @@ public sealed partial class ModuleDataGenerator : BaseGenerator, IGeneratorProvi
 
     private static ControllerDescription MergeControllerData(ControllerDescription sunVoxController, ControllerDescription matching)
     {
+        var selectorIsNotEnum = (sunVoxController.ControllerType == ControllerType.Normal)
+            ? null
+            : matching.SelectorIsNotEnum;
+
+        var enumName = selectorIsNotEnum != true
+            ? matching.EnumName ?? sunVoxController.EnumName
+            : null;
+
         return new ControllerDescription()
         {
             Description = matching.Description,
             FriendlyName = matching.FriendlyName,
             InternalName = sunVoxController.InternalName,
-            IgnoreActualType = matching.IgnoreActualType,
             MinValue = sunVoxController.MinValue,
             MaxValue = sunVoxController.MaxValue,
             MinDisplayedValue = sunVoxController.MinDisplayedValue,
             MaxDisplayedValue = sunVoxController.MaxDisplayedValue,
-            EnumName = matching.EnumName ?? (matching.IgnoreActualType == true ? matching.EnumName : sunVoxController.EnumName)
+            SelectorIsNotEnum = selectorIsNotEnum,
+            EnumName = enumName,
+            ControllerType = sunVoxController.ControllerType,
+            Offset = sunVoxController.Offset,
         };
     }
 

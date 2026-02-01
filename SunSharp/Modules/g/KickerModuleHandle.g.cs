@@ -5,6 +5,9 @@
 #nullable enable
 
 #if !GENERATION
+
+using System;
+
 namespace SunSharp.Modules
 {
     /// <summary>
@@ -14,16 +17,23 @@ namespace SunSharp.Modules
     {
 
         /// <summary>
-        /// Value range: 0-256
+        /// Value range: displayed: 0 to 256, real: 0 to 256
         /// Original name: 0 'Volume'
         /// </summary>
         int GetVolume(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: 0-256
+        /// Value range: displayed: 0 to 256, real: 0 to 256
         /// Original name: 0 'Volume'
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetVolume(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
+
+        /// <summary>
+        /// <para>This is a helper method to automatically handle turning target controller values into column values.</para>
+        /// <para>For this controller the input value is mapped from displayed range (0 to 256) to column range (0 to 0x8000). Out of range values are clamped.</para>
+        /// </summary>
+        PatternEvent MakeVolumeEvent(int value);
 
         /// <summary>
         /// Original name: 1 'Waveform'
@@ -32,80 +42,127 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 1 'Waveform'
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetWaveform(KickerWaveform value);
 
         /// <summary>
-        /// Value range: displayed: -128-128, real: 0-256
+        /// <para>This is a helper method to automatically handle turning target controller values into column values.</para>
+        /// <para>For this controller the input value is taken as is, only clamped to column value range.</para>
+        /// </summary>
+        PatternEvent MakeWaveformEvent(KickerWaveform value);
+
+        /// <summary>
+        /// Value range: displayed: -128 to 128, real: 0 to 256
         /// Original name: 2 'Panning'
         /// </summary>
         int GetPanning(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: displayed: -128-128, real: 0-256
+        /// Value range: displayed: -128 to 128, real: 0 to 256
         /// Original name: 2 'Panning'
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetPanning(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: 0-512
+        /// <para>This is a helper method to automatically handle turning target controller values into column values.</para>
+        /// <para>For this controller the input value is mapped from displayed range (-128 to 128) to column range (0 to 0x8000). Out of range values are clamped.</para>
+        /// </summary>
+        PatternEvent MakePanningEvent(int value);
+
+        /// <summary>
+        /// Value range: displayed: 0 to 512, real: 0 to 512
         /// Original name: 3 'Attack'
         /// </summary>
         int GetAttack(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: 0-512
+        /// Value range: displayed: 0 to 512, real: 0 to 512
         /// Original name: 3 'Attack'
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetAttack(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: 0-512
+        /// <para>This is a helper method to automatically handle turning target controller values into column values.</para>
+        /// <para>For this controller the input value is mapped from displayed range (0 to 512) to column range (0 to 0x8000). Out of range values are clamped.</para>
+        /// </summary>
+        PatternEvent MakeAttackEvent(int value);
+
+        /// <summary>
+        /// Value range: displayed: 0 to 512, real: 0 to 512
         /// Original name: 4 'Release'
         /// </summary>
         int GetRelease(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: 0-512
+        /// Value range: displayed: 0 to 512, real: 0 to 512
         /// Original name: 4 'Release'
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetRelease(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: 0-1024
+        /// <para>This is a helper method to automatically handle turning target controller values into column values.</para>
+        /// <para>For this controller the input value is mapped from displayed range (0 to 512) to column range (0 to 0x8000). Out of range values are clamped.</para>
+        /// </summary>
+        PatternEvent MakeReleaseEvent(int value);
+
+        /// <summary>
+        /// Value range: displayed: 0 to 1024, real: 0 to 1024
         /// Original name: 5 'Boost'
         /// </summary>
         int GetBoost(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: 0-1024
+        /// Value range: displayed: 0 to 1024, real: 0 to 1024
         /// Original name: 5 'Boost'
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetBoost(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: 0-1024
+        /// <para>This is a helper method to automatically handle turning target controller values into column values.</para>
+        /// <para>For this controller the input value is mapped from displayed range (0 to 1024) to column range (0 to 0x8000). Out of range values are clamped.</para>
+        /// </summary>
+        PatternEvent MakeBoostEvent(int value);
+
+        /// <summary>
+        /// Value range: displayed: 0 to 1024, real: 0 to 1024
         /// Original name: 6 'Acceleration'
         /// </summary>
         int GetAcceleration(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: 0-1024
+        /// Value range: displayed: 0 to 1024, real: 0 to 1024
         /// Original name: 6 'Acceleration'
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetAcceleration(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: 1-4
+        /// <para>This is a helper method to automatically handle turning target controller values into column values.</para>
+        /// <para>For this controller the input value is mapped from displayed range (0 to 1024) to column range (0 to 0x8000). Out of range values are clamped.</para>
+        /// </summary>
+        PatternEvent MakeAccelerationEvent(int value);
+
+        /// <summary>
         /// Original name: 7 'Polyphony'
         /// </summary>
         int GetPolyphony(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: 1-4
         /// Original name: 7 'Polyphony'
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetPolyphony(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
+
+        /// <summary>
+        /// <para>This is a helper method to automatically handle turning target controller values into column values.</para>
+        /// <para>For this controller the input value is taken as is, only clamped to column value range.</para>
+        /// </summary>
+        PatternEvent MakePolyphonyEvent(int value);
 
         /// <summary>
         /// Original name: 8 'No click'
@@ -114,8 +171,15 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 8 'No click'
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetNoClick(Toggle value);
+
+        /// <summary>
+        /// <para>This is a helper method to automatically handle turning target controller values into column values.</para>
+        /// <para>For this controller the input value is taken as is, only clamped to column value range.</para>
+        /// </summary>
+        PatternEvent MakeNoClickEvent(Toggle value);
     }
 
     /// <inheritdoc cref="IKickerModuleHandle"/>
@@ -269,11 +333,24 @@ namespace SunSharp.Modules
         /// <inheritdoc cref="IKickerModuleHandle.SetVolume" />
         public void SetVolume(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(0, value, valueScalingMode);
 
+        /// <inheritdoc cref="IKickerModuleHandle.MakeVolumeEvent" />
+        public PatternEvent MakeVolumeEvent(int value)
+        {
+            value = value * 0x8000 / (256);
+            return PatternEvent.ControllerEvent(ModuleHandle.Id, 0, (ushort)Math.Clamp(value, 0, 0x8000));
+        }
+
         /// <inheritdoc cref="IKickerModuleHandle.GetWaveform" />
         public KickerWaveform GetWaveform() => (KickerWaveform)ModuleHandle.GetControllerValue(1, ValueScalingMode.Displayed);
 
         /// <inheritdoc cref="IKickerModuleHandle.SetWaveform" />
         public void SetWaveform(KickerWaveform value) => ModuleHandle.SetControllerValue(1, (int)value, ValueScalingMode.Displayed);
+
+        /// <inheritdoc cref="IKickerModuleHandle.MakeWaveformEvent" />
+        public PatternEvent MakeWaveformEvent(KickerWaveform value)
+        {
+            return PatternEvent.ControllerEvent(ModuleHandle.Id, 1, (ushort)Math.Clamp((int)value, 0, 0x8000));
+        }
 
         /// <inheritdoc cref="IKickerModuleHandle.GetPanning" />
         public int GetPanning(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(2, valueScalingMode);
@@ -281,11 +358,26 @@ namespace SunSharp.Modules
         /// <inheritdoc cref="IKickerModuleHandle.SetPanning" />
         public void SetPanning(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(2, value, valueScalingMode);
 
+        /// <inheritdoc cref="IKickerModuleHandle.MakePanningEvent" />
+        public PatternEvent MakePanningEvent(int value)
+        {
+            value -= -128;
+            value = value * 0x8000 / (256);
+            return PatternEvent.ControllerEvent(ModuleHandle.Id, 2, (ushort)Math.Clamp(value, 0, 0x8000));
+        }
+
         /// <inheritdoc cref="IKickerModuleHandle.GetAttack" />
         public int GetAttack(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(3, valueScalingMode);
 
         /// <inheritdoc cref="IKickerModuleHandle.SetAttack" />
         public void SetAttack(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(3, value, valueScalingMode);
+
+        /// <inheritdoc cref="IKickerModuleHandle.MakeAttackEvent" />
+        public PatternEvent MakeAttackEvent(int value)
+        {
+            value = value * 0x8000 / (512);
+            return PatternEvent.ControllerEvent(ModuleHandle.Id, 3, (ushort)Math.Clamp(value, 0, 0x8000));
+        }
 
         /// <inheritdoc cref="IKickerModuleHandle.GetRelease" />
         public int GetRelease(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(4, valueScalingMode);
@@ -293,11 +385,25 @@ namespace SunSharp.Modules
         /// <inheritdoc cref="IKickerModuleHandle.SetRelease" />
         public void SetRelease(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(4, value, valueScalingMode);
 
+        /// <inheritdoc cref="IKickerModuleHandle.MakeReleaseEvent" />
+        public PatternEvent MakeReleaseEvent(int value)
+        {
+            value = value * 0x8000 / (512);
+            return PatternEvent.ControllerEvent(ModuleHandle.Id, 4, (ushort)Math.Clamp(value, 0, 0x8000));
+        }
+
         /// <inheritdoc cref="IKickerModuleHandle.GetBoost" />
         public int GetBoost(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(5, valueScalingMode);
 
         /// <inheritdoc cref="IKickerModuleHandle.SetBoost" />
         public void SetBoost(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(5, value, valueScalingMode);
+
+        /// <inheritdoc cref="IKickerModuleHandle.MakeBoostEvent" />
+        public PatternEvent MakeBoostEvent(int value)
+        {
+            value = value * 0x8000 / (1024);
+            return PatternEvent.ControllerEvent(ModuleHandle.Id, 5, (ushort)Math.Clamp(value, 0, 0x8000));
+        }
 
         /// <inheritdoc cref="IKickerModuleHandle.GetAcceleration" />
         public int GetAcceleration(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(6, valueScalingMode);
@@ -305,17 +411,36 @@ namespace SunSharp.Modules
         /// <inheritdoc cref="IKickerModuleHandle.SetAcceleration" />
         public void SetAcceleration(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(6, value, valueScalingMode);
 
+        /// <inheritdoc cref="IKickerModuleHandle.MakeAccelerationEvent" />
+        public PatternEvent MakeAccelerationEvent(int value)
+        {
+            value = value * 0x8000 / (1024);
+            return PatternEvent.ControllerEvent(ModuleHandle.Id, 6, (ushort)Math.Clamp(value, 0, 0x8000));
+        }
+
         /// <inheritdoc cref="IKickerModuleHandle.GetPolyphony" />
         public int GetPolyphony(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(7, valueScalingMode);
 
         /// <inheritdoc cref="IKickerModuleHandle.SetPolyphony" />
         public void SetPolyphony(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(7, value, valueScalingMode);
 
+        /// <inheritdoc cref="IKickerModuleHandle.MakePolyphonyEvent" />
+        public PatternEvent MakePolyphonyEvent(int value)
+        {
+            return PatternEvent.ControllerEvent(ModuleHandle.Id, 7, (ushort)Math.Clamp(value, 0, 0x8000));
+        }
+
         /// <inheritdoc cref="IKickerModuleHandle.GetNoClick" />
         public Toggle GetNoClick() => (Toggle)ModuleHandle.GetControllerValue(8, ValueScalingMode.Displayed);
 
         /// <inheritdoc cref="IKickerModuleHandle.SetNoClick" />
         public void SetNoClick(Toggle value) => ModuleHandle.SetControllerValue(8, (int)value, ValueScalingMode.Displayed);
+
+        /// <inheritdoc cref="IKickerModuleHandle.MakeNoClickEvent" />
+        public PatternEvent MakeNoClickEvent(Toggle value)
+        {
+            return PatternEvent.ControllerEvent(ModuleHandle.Id, 8, (ushort)Math.Clamp((int)value, 0, 0x8000));
+        }
     }
 }
 #endif

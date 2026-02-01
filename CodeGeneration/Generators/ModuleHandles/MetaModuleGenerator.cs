@@ -9,7 +9,7 @@ public class MetaModuleGenerator : BasicModuleGenerator
     {
     }
 
-    protected override void GenerateInterfaceControllerGettersSetters()
+    protected override void GenerateInterfaceControllerGettersSettersEvents()
     {
         foreach (var (i, c) in ModuleDescription.Controllers)
         {
@@ -22,6 +22,8 @@ public class MetaModuleGenerator : BasicModuleGenerator
             GenerateInterfaceGetter(i, c);
             AppendLine();
             GenerateInterfaceSetter(i, c);
+            AppendLine();
+            GenerateInterfaceMakeEvent(i, c);
         }
     }
 
@@ -38,6 +40,8 @@ public class MetaModuleGenerator : BasicModuleGenerator
             GenerateStructGetter(i, c);
             AppendLine();
             GenerateStructSetter(i, c);
+            AppendLine();
+            GenerateStructMakeEvent(i, c);
         }
     }
 }

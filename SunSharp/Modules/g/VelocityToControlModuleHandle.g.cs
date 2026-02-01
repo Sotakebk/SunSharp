@@ -5,6 +5,9 @@
 #nullable enable
 
 #if !GENERATION
+
+using System;
+
 namespace SunSharp.Modules
 {
     /// <summary>
@@ -20,56 +23,89 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 0 'On NoteOFF'
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetOnNoteoff(VelocityToControlOnNoteOff value);
 
         /// <summary>
-        /// Value range: 0-32768
+        /// <para>This is a helper method to automatically handle turning target controller values into column values.</para>
+        /// <para>For this controller the input value is taken as is, only clamped to column value range.</para>
+        /// </summary>
+        PatternEvent MakeOnNoteoffEvent(VelocityToControlOnNoteOff value);
+
+        /// <summary>
+        /// Value range: displayed: 0 to 32768, real: 0 to 32768
         /// Original name: 1 'OUT min'
         /// </summary>
         int GetOutMin(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: 0-32768
+        /// Value range: displayed: 0 to 32768, real: 0 to 32768
         /// Original name: 1 'OUT min'
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetOutMin(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: 0-32768
+        /// <para>This is a helper method to automatically handle turning target controller values into column values.</para>
+        /// <para>For this controller the input value is mapped from displayed range (0 to 32768) to column range (0 to 0x8000). Out of range values are clamped.</para>
+        /// </summary>
+        PatternEvent MakeOutMinEvent(int value);
+
+        /// <summary>
+        /// Value range: displayed: 0 to 32768, real: 0 to 32768
         /// Original name: 2 'OUT max'
         /// </summary>
         int GetOutMax(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: 0-32768
+        /// Value range: displayed: 0 to 32768, real: 0 to 32768
         /// Original name: 2 'OUT max'
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetOutMax(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: displayed: -16384-16384, real: 0-32768
+        /// <para>This is a helper method to automatically handle turning target controller values into column values.</para>
+        /// <para>For this controller the input value is mapped from displayed range (0 to 32768) to column range (0 to 0x8000). Out of range values are clamped.</para>
+        /// </summary>
+        PatternEvent MakeOutMaxEvent(int value);
+
+        /// <summary>
+        /// Value range: displayed: -16384 to 16384, real: 0 to 32768
         /// Original name: 3 'OUT offset'
         /// </summary>
         int GetOutOffset(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: displayed: -16384-16384, real: 0-32768
+        /// Value range: displayed: -16384 to 16384, real: 0 to 32768
         /// Original name: 3 'OUT offset'
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetOutOffset(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: 0-255
+        /// <para>This is a helper method to automatically handle turning target controller values into column values.</para>
+        /// <para>For this controller the input value is mapped from displayed range (-16384 to 16384) to column range (0 to 0x8000). Out of range values are clamped.</para>
+        /// </summary>
+        PatternEvent MakeOutOffsetEvent(int value);
+
+        /// <summary>
         /// Original name: 4 'OUT controller'
         /// </summary>
         int GetOutController(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: 0-255
         /// Original name: 4 'OUT controller'
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetOutController(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
+
+        /// <summary>
+        /// <para>This is a helper method to automatically handle turning target controller values into column values.</para>
+        /// <para>For this controller the input value is taken as is, only clamped to column value range.</para>
+        /// </summary>
+        PatternEvent MakeOutControllerEvent(int value);
     }
 
     /// <inheritdoc cref="IVelocityToControlModuleHandle"/>
@@ -223,11 +259,24 @@ namespace SunSharp.Modules
         /// <inheritdoc cref="IVelocityToControlModuleHandle.SetOnNoteoff" />
         public void SetOnNoteoff(VelocityToControlOnNoteOff value) => ModuleHandle.SetControllerValue(0, (int)value, ValueScalingMode.Displayed);
 
+        /// <inheritdoc cref="IVelocityToControlModuleHandle.MakeOnNoteoffEvent" />
+        public PatternEvent MakeOnNoteoffEvent(VelocityToControlOnNoteOff value)
+        {
+            return PatternEvent.ControllerEvent(ModuleHandle.Id, 0, (ushort)Math.Clamp((int)value, 0, 0x8000));
+        }
+
         /// <inheritdoc cref="IVelocityToControlModuleHandle.GetOutMin" />
         public int GetOutMin(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(1, valueScalingMode);
 
         /// <inheritdoc cref="IVelocityToControlModuleHandle.SetOutMin" />
         public void SetOutMin(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(1, value, valueScalingMode);
+
+        /// <inheritdoc cref="IVelocityToControlModuleHandle.MakeOutMinEvent" />
+        public PatternEvent MakeOutMinEvent(int value)
+        {
+            value = value * 0x8000 / (32768);
+            return PatternEvent.ControllerEvent(ModuleHandle.Id, 1, (ushort)Math.Clamp(value, 0, 0x8000));
+        }
 
         /// <inheritdoc cref="IVelocityToControlModuleHandle.GetOutMax" />
         public int GetOutMax(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(2, valueScalingMode);
@@ -235,17 +284,38 @@ namespace SunSharp.Modules
         /// <inheritdoc cref="IVelocityToControlModuleHandle.SetOutMax" />
         public void SetOutMax(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(2, value, valueScalingMode);
 
+        /// <inheritdoc cref="IVelocityToControlModuleHandle.MakeOutMaxEvent" />
+        public PatternEvent MakeOutMaxEvent(int value)
+        {
+            value = value * 0x8000 / (32768);
+            return PatternEvent.ControllerEvent(ModuleHandle.Id, 2, (ushort)Math.Clamp(value, 0, 0x8000));
+        }
+
         /// <inheritdoc cref="IVelocityToControlModuleHandle.GetOutOffset" />
         public int GetOutOffset(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(3, valueScalingMode);
 
         /// <inheritdoc cref="IVelocityToControlModuleHandle.SetOutOffset" />
         public void SetOutOffset(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(3, value, valueScalingMode);
 
+        /// <inheritdoc cref="IVelocityToControlModuleHandle.MakeOutOffsetEvent" />
+        public PatternEvent MakeOutOffsetEvent(int value)
+        {
+            value -= -16384;
+            value = value * 0x8000 / (32768);
+            return PatternEvent.ControllerEvent(ModuleHandle.Id, 3, (ushort)Math.Clamp(value, 0, 0x8000));
+        }
+
         /// <inheritdoc cref="IVelocityToControlModuleHandle.GetOutController" />
         public int GetOutController(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(4, valueScalingMode);
 
         /// <inheritdoc cref="IVelocityToControlModuleHandle.SetOutController" />
         public void SetOutController(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(4, value, valueScalingMode);
+
+        /// <inheritdoc cref="IVelocityToControlModuleHandle.MakeOutControllerEvent" />
+        public PatternEvent MakeOutControllerEvent(int value)
+        {
+            return PatternEvent.ControllerEvent(ModuleHandle.Id, 4, (ushort)Math.Clamp(value, 0, 0x8000));
+        }
     }
 }
 #endif

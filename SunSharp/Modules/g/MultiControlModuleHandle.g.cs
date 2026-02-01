@@ -5,6 +5,9 @@
 #nullable enable
 
 #if !GENERATION
+
+using System;
+
 namespace SunSharp.Modules
 {
     /// <summary>
@@ -14,76 +17,118 @@ namespace SunSharp.Modules
     {
 
         /// <summary>
-        /// Value range: 0-32768
+        /// Value range: displayed: 0 to 32768, real: 0 to 32768
         /// Original name: 0 'Value'
         /// </summary>
         int GetValue(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: 0-32768
+        /// Value range: displayed: 0 to 32768, real: 0 to 32768
         /// Original name: 0 'Value'
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetValue(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: 0-1024
+        /// <para>This is a helper method to automatically handle turning target controller values into column values.</para>
+        /// <para>For this controller the input value is mapped from displayed range (0 to 32768) to column range (0 to 0x8000). Out of range values are clamped.</para>
+        /// </summary>
+        PatternEvent MakeValueEvent(int value);
+
+        /// <summary>
+        /// Value range: displayed: 0 to 1024, real: 0 to 1024
         /// Original name: 1 'Gain'
         /// </summary>
         int GetGain(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: 0-1024
+        /// Value range: displayed: 0 to 1024, real: 0 to 1024
         /// Original name: 1 'Gain'
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetGain(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: 0-32768
+        /// <para>This is a helper method to automatically handle turning target controller values into column values.</para>
+        /// <para>For this controller the input value is mapped from displayed range (0 to 1024) to column range (0 to 0x8000). Out of range values are clamped.</para>
+        /// </summary>
+        PatternEvent MakeGainEvent(int value);
+
+        /// <summary>
+        /// Value range: displayed: 0 to 32768, real: 0 to 32768
         /// Original name: 2 'Quantization'
         /// </summary>
         int GetQuantization(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: 0-32768
+        /// Value range: displayed: 0 to 32768, real: 0 to 32768
         /// Original name: 2 'Quantization'
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetQuantization(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: displayed: -16384-16384, real: 0-32768
+        /// <para>This is a helper method to automatically handle turning target controller values into column values.</para>
+        /// <para>For this controller the input value is mapped from displayed range (0 to 32768) to column range (0 to 0x8000). Out of range values are clamped.</para>
+        /// </summary>
+        PatternEvent MakeQuantizationEvent(int value);
+
+        /// <summary>
+        /// Value range: displayed: -16384 to 16384, real: 0 to 32768
         /// Original name: 3 'OUT offset'
         /// </summary>
         int GetOutOffset(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: displayed: -16384-16384, real: 0-32768
+        /// Value range: displayed: -16384 to 16384, real: 0 to 32768
         /// Original name: 3 'OUT offset'
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetOutOffset(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: 0-1000
+        /// <para>This is a helper method to automatically handle turning target controller values into column values.</para>
+        /// <para>For this controller the input value is mapped from displayed range (-16384 to 16384) to column range (0 to 0x8000). Out of range values are clamped.</para>
+        /// </summary>
+        PatternEvent MakeOutOffsetEvent(int value);
+
+        /// <summary>
+        /// Value range: displayed: 0 to 1000, real: 0 to 1000
         /// Original name: 4 'Response'
         /// </summary>
         int GetResponse(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: 0-1000
+        /// Value range: displayed: 0 to 1000, real: 0 to 1000
         /// Original name: 4 'Response'
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetResponse(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: 1-32768
+        /// <para>This is a helper method to automatically handle turning target controller values into column values.</para>
+        /// <para>For this controller the input value is mapped from displayed range (0 to 1000) to column range (0 to 0x8000). Out of range values are clamped.</para>
+        /// </summary>
+        PatternEvent MakeResponseEvent(int value);
+
+        /// <summary>
+        /// Value range: displayed: 1 to 32768, real: 1 to 32768
         /// Original name: 5 'Sample rate'
         /// </summary>
         int GetSampleRate(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: 1-32768
+        /// Value range: displayed: 1 to 32768, real: 1 to 32768
         /// Original name: 5 'Sample rate'
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetSampleRate(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
+
+        /// <summary>
+        /// <para>This is a helper method to automatically handle turning target controller values into column values.</para>
+        /// <para>For this controller the input value is mapped from displayed range (1 to 32768) to column range (0 to 0x8000). Out of range values are clamped.</para>
+        /// </summary>
+        PatternEvent MakeSampleRateEvent(int value);
 
         /// <summary>
         /// Modifies values.
@@ -253,11 +298,25 @@ namespace SunSharp.Modules
         /// <inheritdoc cref="IMultiControlModuleHandle.SetValue" />
         public void SetValue(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(0, value, valueScalingMode);
 
+        /// <inheritdoc cref="IMultiControlModuleHandle.MakeValueEvent" />
+        public PatternEvent MakeValueEvent(int value)
+        {
+            value = value * 0x8000 / (32768);
+            return PatternEvent.ControllerEvent(ModuleHandle.Id, 0, (ushort)Math.Clamp(value, 0, 0x8000));
+        }
+
         /// <inheritdoc cref="IMultiControlModuleHandle.GetGain" />
         public int GetGain(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(1, valueScalingMode);
 
         /// <inheritdoc cref="IMultiControlModuleHandle.SetGain" />
         public void SetGain(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(1, value, valueScalingMode);
+
+        /// <inheritdoc cref="IMultiControlModuleHandle.MakeGainEvent" />
+        public PatternEvent MakeGainEvent(int value)
+        {
+            value = value * 0x8000 / (1024);
+            return PatternEvent.ControllerEvent(ModuleHandle.Id, 1, (ushort)Math.Clamp(value, 0, 0x8000));
+        }
 
         /// <inheritdoc cref="IMultiControlModuleHandle.GetQuantization" />
         public int GetQuantization(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(2, valueScalingMode);
@@ -265,11 +324,26 @@ namespace SunSharp.Modules
         /// <inheritdoc cref="IMultiControlModuleHandle.SetQuantization" />
         public void SetQuantization(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(2, value, valueScalingMode);
 
+        /// <inheritdoc cref="IMultiControlModuleHandle.MakeQuantizationEvent" />
+        public PatternEvent MakeQuantizationEvent(int value)
+        {
+            value = value * 0x8000 / (32768);
+            return PatternEvent.ControllerEvent(ModuleHandle.Id, 2, (ushort)Math.Clamp(value, 0, 0x8000));
+        }
+
         /// <inheritdoc cref="IMultiControlModuleHandle.GetOutOffset" />
         public int GetOutOffset(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(3, valueScalingMode);
 
         /// <inheritdoc cref="IMultiControlModuleHandle.SetOutOffset" />
         public void SetOutOffset(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(3, value, valueScalingMode);
+
+        /// <inheritdoc cref="IMultiControlModuleHandle.MakeOutOffsetEvent" />
+        public PatternEvent MakeOutOffsetEvent(int value)
+        {
+            value -= -16384;
+            value = value * 0x8000 / (32768);
+            return PatternEvent.ControllerEvent(ModuleHandle.Id, 3, (ushort)Math.Clamp(value, 0, 0x8000));
+        }
 
         /// <inheritdoc cref="IMultiControlModuleHandle.GetResponse" />
         public int GetResponse(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(4, valueScalingMode);
@@ -277,11 +351,26 @@ namespace SunSharp.Modules
         /// <inheritdoc cref="IMultiControlModuleHandle.SetResponse" />
         public void SetResponse(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(4, value, valueScalingMode);
 
+        /// <inheritdoc cref="IMultiControlModuleHandle.MakeResponseEvent" />
+        public PatternEvent MakeResponseEvent(int value)
+        {
+            value = value * 0x8000 / (1000);
+            return PatternEvent.ControllerEvent(ModuleHandle.Id, 4, (ushort)Math.Clamp(value, 0, 0x8000));
+        }
+
         /// <inheritdoc cref="IMultiControlModuleHandle.GetSampleRate" />
         public int GetSampleRate(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(5, valueScalingMode);
 
         /// <inheritdoc cref="IMultiControlModuleHandle.SetSampleRate" />
         public void SetSampleRate(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(5, value, valueScalingMode);
+
+        /// <inheritdoc cref="IMultiControlModuleHandle.MakeSampleRateEvent" />
+        public PatternEvent MakeSampleRateEvent(int value)
+        {
+            value -= 1;
+            value = value * 0x8000 / (32767);
+            return PatternEvent.ControllerEvent(ModuleHandle.Id, 5, (ushort)Math.Clamp(value, 0, 0x8000));
+        }
 
         /// <inheritdoc cref="IMultiControlModuleHandle.ReadCurveValueMap"
         public int ReadCurveValueMap(float[] buffer) => ModuleHandle.ReadCurve(0, buffer);

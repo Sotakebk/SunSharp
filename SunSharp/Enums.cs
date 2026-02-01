@@ -59,8 +59,17 @@ namespace SunSharp
 
     public enum ControllerType
     {
-        Real = 0,
-        Enum = 1
+        /// <summary>
+        /// Volume, frequency, resonance and other parameters with a continuous scale.
+        /// In pattern events the value takes the whole range that is then mapped to the real parameter range.
+        /// </summary>
+        Normal = 0,
+
+        /// <summary>
+        /// Number of harmonics, waveform type, etc.
+        /// In pattern events the value is an index of a discrete set of values.
+        /// </summary>
+        Selector = 1
     }
 
     [Flags]

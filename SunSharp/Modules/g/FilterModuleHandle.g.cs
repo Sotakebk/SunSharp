@@ -5,6 +5,9 @@
 #nullable enable
 
 #if !GENERATION
+
+using System;
+
 namespace SunSharp.Modules
 {
     /// <summary>
@@ -14,40 +17,61 @@ namespace SunSharp.Modules
     {
 
         /// <summary>
-        /// Value range: 0-256
+        /// Value range: displayed: 0 to 256, real: 0 to 256
         /// Original name: 0 'Volume'
         /// </summary>
         int GetVolume(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: 0-256
+        /// Value range: displayed: 0 to 256, real: 0 to 256
         /// Original name: 0 'Volume'
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetVolume(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: 0-14000
+        /// <para>This is a helper method to automatically handle turning target controller values into column values.</para>
+        /// <para>For this controller the input value is mapped from displayed range (0 to 256) to column range (0 to 0x8000). Out of range values are clamped.</para>
+        /// </summary>
+        PatternEvent MakeVolumeEvent(int value);
+
+        /// <summary>
+        /// Value range: displayed: 0 to 14000, real: 0 to 14000
         /// Original name: 1 'Freq'
         /// </summary>
         int GetFreq(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: 0-14000
+        /// Value range: displayed: 0 to 14000, real: 0 to 14000
         /// Original name: 1 'Freq'
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetFreq(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: 0-1530
+        /// <para>This is a helper method to automatically handle turning target controller values into column values.</para>
+        /// <para>For this controller the input value is mapped from displayed range (0 to 14000) to column range (0 to 0x8000). Out of range values are clamped.</para>
+        /// </summary>
+        PatternEvent MakeFreqEvent(int value);
+
+        /// <summary>
+        /// Value range: displayed: 0 to 1530, real: 0 to 1530
         /// Original name: 2 'Resonance'
         /// </summary>
         int GetResonance(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: 0-1530
+        /// Value range: displayed: 0 to 1530, real: 0 to 1530
         /// Original name: 2 'Resonance'
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetResonance(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
+
+        /// <summary>
+        /// <para>This is a helper method to automatically handle turning target controller values into column values.</para>
+        /// <para>For this controller the input value is mapped from displayed range (0 to 1530) to column range (0 to 0x8000). Out of range values are clamped.</para>
+        /// </summary>
+        PatternEvent MakeResonanceEvent(int value);
 
         /// <summary>
         /// Original name: 3 'Type'
@@ -56,20 +80,34 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 3 'Type'
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetFilterType(FilterType value);
 
         /// <summary>
-        /// Value range: 0-256
+        /// <para>This is a helper method to automatically handle turning target controller values into column values.</para>
+        /// <para>For this controller the input value is taken as is, only clamped to column value range.</para>
+        /// </summary>
+        PatternEvent MakeFilterTypeEvent(FilterType value);
+
+        /// <summary>
+        /// Value range: displayed: 0 to 256, real: 0 to 256
         /// Original name: 4 'Response'
         /// </summary>
         int GetResponse(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: 0-256
+        /// Value range: displayed: 0 to 256, real: 0 to 256
         /// Original name: 4 'Response'
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetResponse(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
+
+        /// <summary>
+        /// <para>This is a helper method to automatically handle turning target controller values into column values.</para>
+        /// <para>For this controller the input value is mapped from displayed range (0 to 256) to column range (0 to 0x8000). Out of range values are clamped.</para>
+        /// </summary>
+        PatternEvent MakeResponseEvent(int value);
 
         /// <summary>
         /// Original name: 5 'Mode'
@@ -78,68 +116,110 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 5 'Mode'
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetMode(Quality value);
 
         /// <summary>
-        /// Value range: 0-14000
+        /// <para>This is a helper method to automatically handle turning target controller values into column values.</para>
+        /// <para>For this controller the input value is taken as is, only clamped to column value range.</para>
+        /// </summary>
+        PatternEvent MakeModeEvent(Quality value);
+
+        /// <summary>
+        /// Value range: displayed: 0 to 14000, real: 0 to 14000
         /// Original name: 6 'Impulse'
         /// </summary>
         int GetImpulse(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: 0-14000
+        /// Value range: displayed: 0 to 14000, real: 0 to 14000
         /// Original name: 6 'Impulse'
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetImpulse(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: 0-256
+        /// <para>This is a helper method to automatically handle turning target controller values into column values.</para>
+        /// <para>For this controller the input value is mapped from displayed range (0 to 14000) to column range (0 to 0x8000). Out of range values are clamped.</para>
+        /// </summary>
+        PatternEvent MakeImpulseEvent(int value);
+
+        /// <summary>
+        /// Value range: displayed: 0 to 256, real: 0 to 256
         /// Original name: 7 'Mix'
         /// </summary>
         int GetMix(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: 0-256
+        /// Value range: displayed: 0 to 256, real: 0 to 256
         /// Original name: 7 'Mix'
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetMix(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: 0-1024
+        /// <para>This is a helper method to automatically handle turning target controller values into column values.</para>
+        /// <para>For this controller the input value is mapped from displayed range (0 to 256) to column range (0 to 0x8000). Out of range values are clamped.</para>
+        /// </summary>
+        PatternEvent MakeMixEvent(int value);
+
+        /// <summary>
+        /// Value range: displayed: 0 to 1024, real: 0 to 1024
         /// Original name: 8 'LFO freq'
         /// </summary>
         int GetLfoFreq(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: 0-1024
+        /// Value range: displayed: 0 to 1024, real: 0 to 1024
         /// Original name: 8 'LFO freq'
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetLfoFreq(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: 0-256
+        /// <para>This is a helper method to automatically handle turning target controller values into column values.</para>
+        /// <para>For this controller the input value is mapped from displayed range (0 to 1024) to column range (0 to 0x8000). Out of range values are clamped.</para>
+        /// </summary>
+        PatternEvent MakeLfoFreqEvent(int value);
+
+        /// <summary>
+        /// Value range: displayed: 0 to 256, real: 0 to 256
         /// Original name: 9 'LFO amp'
         /// </summary>
         int GetLfoAmp(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: 0-256
+        /// Value range: displayed: 0 to 256, real: 0 to 256
         /// Original name: 9 'LFO amp'
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetLfoAmp(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: 0-256
+        /// <para>This is a helper method to automatically handle turning target controller values into column values.</para>
+        /// <para>For this controller the input value is mapped from displayed range (0 to 256) to column range (0 to 0x8000). Out of range values are clamped.</para>
+        /// </summary>
+        PatternEvent MakeLfoAmpEvent(int value);
+
+        /// <summary>
+        /// Value range: displayed: 0 to 256, real: 0 to 256
         /// Original name: 10 'Set LFO phase'
         /// </summary>
         int GetSetLfoPhase(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
         /// <summary>
-        /// Value range: 0-256
+        /// Value range: displayed: 0 to 256, real: 0 to 256
         /// Original name: 10 'Set LFO phase'
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetSetLfoPhase(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
+
+        /// <summary>
+        /// <para>This is a helper method to automatically handle turning target controller values into column values.</para>
+        /// <para>For this controller the input value is mapped from displayed range (0 to 256) to column range (0 to 0x8000). Out of range values are clamped.</para>
+        /// </summary>
+        PatternEvent MakeSetLfoPhaseEvent(int value);
 
         /// <summary>
         /// Original name: 11 'Exponential freq'
@@ -148,8 +228,15 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 11 'Exponential freq'
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetExponentialFreq(Toggle value);
+
+        /// <summary>
+        /// <para>This is a helper method to automatically handle turning target controller values into column values.</para>
+        /// <para>For this controller the input value is taken as is, only clamped to column value range.</para>
+        /// </summary>
+        PatternEvent MakeExponentialFreqEvent(Toggle value);
 
         /// <summary>
         /// Original name: 12 'Roll-off'
@@ -158,8 +245,15 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 12 'Roll-off'
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetRollOff(FilterRollOff value);
+
+        /// <summary>
+        /// <para>This is a helper method to automatically handle turning target controller values into column values.</para>
+        /// <para>For this controller the input value is taken as is, only clamped to column value range.</para>
+        /// </summary>
+        PatternEvent MakeRollOffEvent(FilterRollOff value);
 
         /// <summary>
         /// Original name: 13 'LFO freq unit'
@@ -168,8 +262,15 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 13 'LFO freq unit'
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetLfoFreqUnit(FilterLfoFrequencyUnit value);
+
+        /// <summary>
+        /// <para>This is a helper method to automatically handle turning target controller values into column values.</para>
+        /// <para>For this controller the input value is taken as is, only clamped to column value range.</para>
+        /// </summary>
+        PatternEvent MakeLfoFreqUnitEvent(FilterLfoFrequencyUnit value);
 
         /// <summary>
         /// Original name: 14 'LFO waveform'
@@ -178,8 +279,15 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 14 'LFO waveform'
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetLfoWaveform(FilterLfoWaveform value);
+
+        /// <summary>
+        /// <para>This is a helper method to automatically handle turning target controller values into column values.</para>
+        /// <para>For this controller the input value is taken as is, only clamped to column value range.</para>
+        /// </summary>
+        PatternEvent MakeLfoWaveformEvent(FilterLfoWaveform value);
     }
 
     /// <inheritdoc cref="IFilterModuleHandle"/>
@@ -333,11 +441,25 @@ namespace SunSharp.Modules
         /// <inheritdoc cref="IFilterModuleHandle.SetVolume" />
         public void SetVolume(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(0, value, valueScalingMode);
 
+        /// <inheritdoc cref="IFilterModuleHandle.MakeVolumeEvent" />
+        public PatternEvent MakeVolumeEvent(int value)
+        {
+            value = value * 0x8000 / (256);
+            return PatternEvent.ControllerEvent(ModuleHandle.Id, 0, (ushort)Math.Clamp(value, 0, 0x8000));
+        }
+
         /// <inheritdoc cref="IFilterModuleHandle.GetFreq" />
         public int GetFreq(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(1, valueScalingMode);
 
         /// <inheritdoc cref="IFilterModuleHandle.SetFreq" />
         public void SetFreq(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(1, value, valueScalingMode);
+
+        /// <inheritdoc cref="IFilterModuleHandle.MakeFreqEvent" />
+        public PatternEvent MakeFreqEvent(int value)
+        {
+            value = value * 0x8000 / (14000);
+            return PatternEvent.ControllerEvent(ModuleHandle.Id, 1, (ushort)Math.Clamp(value, 0, 0x8000));
+        }
 
         /// <inheritdoc cref="IFilterModuleHandle.GetResonance" />
         public int GetResonance(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(2, valueScalingMode);
@@ -345,11 +467,24 @@ namespace SunSharp.Modules
         /// <inheritdoc cref="IFilterModuleHandle.SetResonance" />
         public void SetResonance(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(2, value, valueScalingMode);
 
+        /// <inheritdoc cref="IFilterModuleHandle.MakeResonanceEvent" />
+        public PatternEvent MakeResonanceEvent(int value)
+        {
+            value = value * 0x8000 / (1530);
+            return PatternEvent.ControllerEvent(ModuleHandle.Id, 2, (ushort)Math.Clamp(value, 0, 0x8000));
+        }
+
         /// <inheritdoc cref="IFilterModuleHandle.GetFilterType" />
         public FilterType GetFilterType() => (FilterType)ModuleHandle.GetControllerValue(3, ValueScalingMode.Displayed);
 
         /// <inheritdoc cref="IFilterModuleHandle.SetFilterType" />
         public void SetFilterType(FilterType value) => ModuleHandle.SetControllerValue(3, (int)value, ValueScalingMode.Displayed);
+
+        /// <inheritdoc cref="IFilterModuleHandle.MakeFilterTypeEvent" />
+        public PatternEvent MakeFilterTypeEvent(FilterType value)
+        {
+            return PatternEvent.ControllerEvent(ModuleHandle.Id, 3, (ushort)Math.Clamp((int)value, 0, 0x8000));
+        }
 
         /// <inheritdoc cref="IFilterModuleHandle.GetResponse" />
         public int GetResponse(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(4, valueScalingMode);
@@ -357,11 +492,24 @@ namespace SunSharp.Modules
         /// <inheritdoc cref="IFilterModuleHandle.SetResponse" />
         public void SetResponse(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(4, value, valueScalingMode);
 
+        /// <inheritdoc cref="IFilterModuleHandle.MakeResponseEvent" />
+        public PatternEvent MakeResponseEvent(int value)
+        {
+            value = value * 0x8000 / (256);
+            return PatternEvent.ControllerEvent(ModuleHandle.Id, 4, (ushort)Math.Clamp(value, 0, 0x8000));
+        }
+
         /// <inheritdoc cref="IFilterModuleHandle.GetMode" />
         public Quality GetMode() => (Quality)ModuleHandle.GetControllerValue(5, ValueScalingMode.Displayed);
 
         /// <inheritdoc cref="IFilterModuleHandle.SetMode" />
         public void SetMode(Quality value) => ModuleHandle.SetControllerValue(5, (int)value, ValueScalingMode.Displayed);
+
+        /// <inheritdoc cref="IFilterModuleHandle.MakeModeEvent" />
+        public PatternEvent MakeModeEvent(Quality value)
+        {
+            return PatternEvent.ControllerEvent(ModuleHandle.Id, 5, (ushort)Math.Clamp((int)value, 0, 0x8000));
+        }
 
         /// <inheritdoc cref="IFilterModuleHandle.GetImpulse" />
         public int GetImpulse(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(6, valueScalingMode);
@@ -369,11 +517,25 @@ namespace SunSharp.Modules
         /// <inheritdoc cref="IFilterModuleHandle.SetImpulse" />
         public void SetImpulse(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(6, value, valueScalingMode);
 
+        /// <inheritdoc cref="IFilterModuleHandle.MakeImpulseEvent" />
+        public PatternEvent MakeImpulseEvent(int value)
+        {
+            value = value * 0x8000 / (14000);
+            return PatternEvent.ControllerEvent(ModuleHandle.Id, 6, (ushort)Math.Clamp(value, 0, 0x8000));
+        }
+
         /// <inheritdoc cref="IFilterModuleHandle.GetMix" />
         public int GetMix(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(7, valueScalingMode);
 
         /// <inheritdoc cref="IFilterModuleHandle.SetMix" />
         public void SetMix(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(7, value, valueScalingMode);
+
+        /// <inheritdoc cref="IFilterModuleHandle.MakeMixEvent" />
+        public PatternEvent MakeMixEvent(int value)
+        {
+            value = value * 0x8000 / (256);
+            return PatternEvent.ControllerEvent(ModuleHandle.Id, 7, (ushort)Math.Clamp(value, 0, 0x8000));
+        }
 
         /// <inheritdoc cref="IFilterModuleHandle.GetLfoFreq" />
         public int GetLfoFreq(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(8, valueScalingMode);
@@ -381,11 +543,25 @@ namespace SunSharp.Modules
         /// <inheritdoc cref="IFilterModuleHandle.SetLfoFreq" />
         public void SetLfoFreq(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(8, value, valueScalingMode);
 
+        /// <inheritdoc cref="IFilterModuleHandle.MakeLfoFreqEvent" />
+        public PatternEvent MakeLfoFreqEvent(int value)
+        {
+            value = value * 0x8000 / (1024);
+            return PatternEvent.ControllerEvent(ModuleHandle.Id, 8, (ushort)Math.Clamp(value, 0, 0x8000));
+        }
+
         /// <inheritdoc cref="IFilterModuleHandle.GetLfoAmp" />
         public int GetLfoAmp(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(9, valueScalingMode);
 
         /// <inheritdoc cref="IFilterModuleHandle.SetLfoAmp" />
         public void SetLfoAmp(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(9, value, valueScalingMode);
+
+        /// <inheritdoc cref="IFilterModuleHandle.MakeLfoAmpEvent" />
+        public PatternEvent MakeLfoAmpEvent(int value)
+        {
+            value = value * 0x8000 / (256);
+            return PatternEvent.ControllerEvent(ModuleHandle.Id, 9, (ushort)Math.Clamp(value, 0, 0x8000));
+        }
 
         /// <inheritdoc cref="IFilterModuleHandle.GetSetLfoPhase" />
         public int GetSetLfoPhase(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(10, valueScalingMode);
@@ -393,11 +569,24 @@ namespace SunSharp.Modules
         /// <inheritdoc cref="IFilterModuleHandle.SetSetLfoPhase" />
         public void SetSetLfoPhase(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(10, value, valueScalingMode);
 
+        /// <inheritdoc cref="IFilterModuleHandle.MakeSetLfoPhaseEvent" />
+        public PatternEvent MakeSetLfoPhaseEvent(int value)
+        {
+            value = value * 0x8000 / (256);
+            return PatternEvent.ControllerEvent(ModuleHandle.Id, 10, (ushort)Math.Clamp(value, 0, 0x8000));
+        }
+
         /// <inheritdoc cref="IFilterModuleHandle.GetExponentialFreq" />
         public Toggle GetExponentialFreq() => (Toggle)ModuleHandle.GetControllerValue(11, ValueScalingMode.Displayed);
 
         /// <inheritdoc cref="IFilterModuleHandle.SetExponentialFreq" />
         public void SetExponentialFreq(Toggle value) => ModuleHandle.SetControllerValue(11, (int)value, ValueScalingMode.Displayed);
+
+        /// <inheritdoc cref="IFilterModuleHandle.MakeExponentialFreqEvent" />
+        public PatternEvent MakeExponentialFreqEvent(Toggle value)
+        {
+            return PatternEvent.ControllerEvent(ModuleHandle.Id, 11, (ushort)Math.Clamp((int)value, 0, 0x8000));
+        }
 
         /// <inheritdoc cref="IFilterModuleHandle.GetRollOff" />
         public FilterRollOff GetRollOff() => (FilterRollOff)ModuleHandle.GetControllerValue(12, ValueScalingMode.Displayed);
@@ -405,17 +594,35 @@ namespace SunSharp.Modules
         /// <inheritdoc cref="IFilterModuleHandle.SetRollOff" />
         public void SetRollOff(FilterRollOff value) => ModuleHandle.SetControllerValue(12, (int)value, ValueScalingMode.Displayed);
 
+        /// <inheritdoc cref="IFilterModuleHandle.MakeRollOffEvent" />
+        public PatternEvent MakeRollOffEvent(FilterRollOff value)
+        {
+            return PatternEvent.ControllerEvent(ModuleHandle.Id, 12, (ushort)Math.Clamp((int)value, 0, 0x8000));
+        }
+
         /// <inheritdoc cref="IFilterModuleHandle.GetLfoFreqUnit" />
         public FilterLfoFrequencyUnit GetLfoFreqUnit() => (FilterLfoFrequencyUnit)ModuleHandle.GetControllerValue(13, ValueScalingMode.Displayed);
 
         /// <inheritdoc cref="IFilterModuleHandle.SetLfoFreqUnit" />
         public void SetLfoFreqUnit(FilterLfoFrequencyUnit value) => ModuleHandle.SetControllerValue(13, (int)value, ValueScalingMode.Displayed);
 
+        /// <inheritdoc cref="IFilterModuleHandle.MakeLfoFreqUnitEvent" />
+        public PatternEvent MakeLfoFreqUnitEvent(FilterLfoFrequencyUnit value)
+        {
+            return PatternEvent.ControllerEvent(ModuleHandle.Id, 13, (ushort)Math.Clamp((int)value, 0, 0x8000));
+        }
+
         /// <inheritdoc cref="IFilterModuleHandle.GetLfoWaveform" />
         public FilterLfoWaveform GetLfoWaveform() => (FilterLfoWaveform)ModuleHandle.GetControllerValue(14, ValueScalingMode.Displayed);
 
         /// <inheritdoc cref="IFilterModuleHandle.SetLfoWaveform" />
         public void SetLfoWaveform(FilterLfoWaveform value) => ModuleHandle.SetControllerValue(14, (int)value, ValueScalingMode.Displayed);
+
+        /// <inheritdoc cref="IFilterModuleHandle.MakeLfoWaveformEvent" />
+        public PatternEvent MakeLfoWaveformEvent(FilterLfoWaveform value)
+        {
+            return PatternEvent.ControllerEvent(ModuleHandle.Id, 14, (ushort)Math.Clamp((int)value, 0, 0x8000));
+        }
     }
 }
 #endif

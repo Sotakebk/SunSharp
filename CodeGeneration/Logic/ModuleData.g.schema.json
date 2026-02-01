@@ -39,18 +39,21 @@
                   "type": "integer"
                 },
                 "MinDisplayedValue": {
-                  "type": [
-                    "integer",
-                    "null"
-                  ]
+                  "type": "integer"
                 },
                 "MaxDisplayedValue": {
-                  "type": [
-                    "integer",
-                    "null"
+                  "type": "integer"
+                },
+                "Offset": {
+                  "type": "integer"
+                },
+                "ControllerType": {
+                  "enum": [
+                    "Normal",
+                    "Selector"
                   ]
                 },
-                "IgnoreActualType": {
+                "SelectorIsNotEnum": {
                   "type": [
                     "boolean",
                     "null"
@@ -67,7 +70,11 @@
                 "FriendlyName",
                 "InternalName",
                 "MinValue",
-                "MaxValue"
+                "MaxValue",
+                "MinDisplayedValue",
+                "MaxDisplayedValue",
+                "Offset",
+                "ControllerType"
               ]
             }
           },
