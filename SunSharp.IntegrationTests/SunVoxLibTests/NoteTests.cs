@@ -10,12 +10,11 @@ internal class NoteTests : BaseIntegrationTests
     public void AllNotes_ShouldBeReadAsExpected()
     {
         const int slotId = 0;
-        var lib = GetLoadedLibrary();
-        lib.OpenSlot(slotId);
-        lib.Load(slotId, TestFilePath);
-        lib.LockSlot(slotId);
+        Lib.OpenSlot(slotId);
+        Lib.Load(slotId, TestFilePath);
+        Lib.LockSlot(slotId);
 
-        var result = lib.GetPatternData(slotId, 0);
+        var result = Lib.GetPatternData(slotId, 0);
         result.Should().NotBeNull();
 
         var (data, tracks, lines) = result.Value;

@@ -65,7 +65,6 @@ namespace SunSharp
         private readonly ISunVoxLib _lib;
 #endif
         private readonly int _slotId;
-        private readonly Slot _slot;
 
         /// <summary>
         /// Gets the pattern ID.
@@ -75,7 +74,6 @@ namespace SunSharp
         public PatternHandle(Timeline timeline, int id)
         {
             _lib = timeline.Slot.SunVox.Library;
-            _slot = timeline.Slot;
             _slotId = timeline.Slot.Id;
             Id = id;
         }

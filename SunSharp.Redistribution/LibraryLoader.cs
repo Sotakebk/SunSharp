@@ -37,10 +37,15 @@ namespace SunSharp.Redistribution
             {
                 var path = RuntimeInformation.ProcessArchitecture switch
                 {
-                    Architecture.X64 => Path.Combine(Environment.CurrentDirectory, "runtimes/win-x64/native/sunvox.dll"),
-                    Architecture.X86 => Path.Combine(Environment.CurrentDirectory, "runtimes/win-x86-64/native/sunvox.dll"),
+                    Architecture.X64 => Path.Combine(AppContext.BaseDirectory, "runtimes/win-x64/native/sunvox.dll"),
+                    Architecture.X86 => Path.Combine(AppContext.BaseDirectory, "runtimes/win-x86/native/sunvox.dll"),
                     _ => throw new PlatformNotSupportedException(errorMessage)
                 };
+
+                if(!File.Exists(path))
+                {
+                    throw new DllNotFoundException($"The SunVox library was not found at the expected location: {path}");
+                }
 
                 return new WindowsLibraryHandler(path);
             }
@@ -49,11 +54,17 @@ namespace SunSharp.Redistribution
             {
                 var path = RuntimeInformation.ProcessArchitecture switch
                 {
-                    Architecture.X64 => Path.Combine(Environment.CurrentDirectory, "runtimes/linux-x86-64/native/sunvox.so"),
-                    Architecture.X86 => Path.Combine(Environment.CurrentDirectory, "runtimes/linux-x86/native/sunvox.so"),
-                    Architecture.Arm64 => Path.Combine(Environment.CurrentDirectory, "runtimes/linux-arm64/native/sunvox.so"),
+                    Architecture.X64 => Path.Combine(AppContext.BaseDirectory, "runtimes/linux-x64/native/sunvox.so"),
+                    Architecture.X86 => Path.Combine(AppContext.BaseDirectory, "runtimes/linux-x86/native/sunvox.so"),
+                    Architecture.Arm => Path.Combine(AppContext.BaseDirectory, "runtimes/linux-arm/native/sunvox.so"),
+                    Architecture.Arm64 => Path.Combine(AppContext.BaseDirectory, "runtimes/linux-arm64/native/sunvox.so"),
                     _ => throw new PlatformNotSupportedException(errorMessage)
                 };
+
+                if (!File.Exists(path))
+                {
+                    throw new DllNotFoundException($"The SunVox library was not found at the expected location: {path}");
+                }
 
                 return new UnixLibraryHandler(path);
             }
@@ -62,10 +73,15 @@ namespace SunSharp.Redistribution
             {
                 var path = RuntimeInformation.ProcessArchitecture switch
                 {
-                    Architecture.X64 => Path.Combine(Environment.CurrentDirectory, "runtimes/macos-x86-64/native/sunvox.so"),
-                    Architecture.Arm64 => Path.Combine(Environment.CurrentDirectory, "runtimes/macos-arm64/native/sunvox.so"),
+                    Architecture.X64 => Path.Combine(AppContext.BaseDirectory, "runtimes/osx-x64/native/sunvox.dylib"),
+                    Architecture.Arm64 => Path.Combine(AppContext.BaseDirectory, "runtimes/osx-arm64/native/sunvox.dylib"),
                     _ => throw new PlatformNotSupportedException(errorMessage)
                 };
+
+                if (!File.Exists(path))
+                {
+                    throw new DllNotFoundException($"The SunVox library was not found at the expected location: {path}");
+                }
 
                 return new UnixLibraryHandler(path);
             }
@@ -73,6 +89,7 @@ namespace SunSharp.Redistribution
             throw new PlatformNotSupportedException(errorMessage);
         }
 
+        /// <exception cref="LibraryLoadingException">Thrown when the library fails to load.</exception>
         public static ISunVoxLibC Load()
         {
             lock (Lock)

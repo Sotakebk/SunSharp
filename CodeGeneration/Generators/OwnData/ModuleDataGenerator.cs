@@ -2,6 +2,7 @@ using System.Text.Json;
 using System.Text.RegularExpressions;
 using CodeGeneration.Logic;
 using SunSharp;
+using SunSharp.Native;
 using SunSharp.Redistribution;
 
 namespace CodeGeneration.Generators.OwnData;
@@ -48,17 +49,20 @@ public sealed partial class ModuleDataGenerator : BaseGenerator, IGeneratorProvi
         bool loaded = false;
         try
         {
-            LibraryLoader.Load();
+            var instance = LibraryLoader.Load();
             loaded = true;
-
-            var instance = LibraryLoader.GetLibraryInstance();
+            var thinWrapper = new SunVoxLib(instance);
+#if RELEASE
             using var sunVox = new SunVox(instance, 48000, OutputType.Float32, singleThreaded: true, noDebugOutput: false);
+#else
+            using var sunVox = new SunVox(thinWrapper, 48000, OutputType.Float32, singleThreaded: true, noDebugOutput: false);
+#endif
             var slot = sunVox.Slots[0];
 
             slot.Open();
             foreach (var module in KnownModuleTypes.ModuleTypes.Where(m => m.Index > 0))
             {
-                instance.CreateModule(0, module.InternalName, module.InternalName);
+                thinWrapper.CreateModule(0, module.InternalName, module.InternalName);
             }
             var modules = CreateModuleDescriptions(slot);
 

@@ -6,18 +6,18 @@ namespace SunSharp.IntegrationTests;
 
 public abstract class BaseIntegrationTests
 {
-    private ISunVoxLib? _lib;
+    public ISunVoxLibC? _libc;
+    public SunVoxLib Lib { get; protected set; }
 
-    protected ISunVoxLib GetLoadedLibrary()
+    protected ISunVoxLibC GetLoadedLibrary()
     {
-        return _lib ?? throw new InvalidOperationException();
+        return _libc ?? throw new InvalidOperationException();
     }
 
     [OneTimeSetUp]
     protected virtual void OneTimeSetUp()
     {
-        LibraryLoader.Load();
-        _lib = LibraryLoader.GetLibraryInstance();
+        _libc = LibraryLoader.Load();
     }
 
     [OneTimeTearDown]
@@ -31,8 +31,8 @@ public abstract class BaseIntegrationTests
     {
         try
         {
-            _lib = LibraryLoader.GetLibraryInstance();
-            _lib.Initialize(-1, options: SunVoxInitOptions.UserAudioCallback | SunVoxInitOptions.AudioFloat32);
+            Lib = new SunVoxLib(_libc!);
+            Lib.Initialize(-1, options: SunVoxInitOptions.UserAudioCallback | SunVoxInitOptions.AudioFloat32);
         }
         catch (Exception e)
         {
@@ -46,13 +46,13 @@ public abstract class BaseIntegrationTests
     {
         try
         {
-            var log = _lib?.GetLog(0x10000);
+            var log = Lib.GetLog(0x10000);
             TestContext.Out.WriteLine(log);
         }
         finally
         {
-            _lib?.Deinitialize();
-            _lib = null;
+            Lib.Deinitialize();
+            _libc = null;
         }
     }
 

@@ -1,11 +1,11 @@
-#if !GENERATION
+#if RELEASE
 
 using System;
 using System.Threading;
 using SunSharp;
+using SunSharp.Diagnostics;
+using SunSharp.Native;
 using SunSharp.Redistribution;
-
-#endif
 
 namespace Examples;
 
@@ -13,10 +13,7 @@ internal sealed class Program
 {
     private static void Main()
     {
-#if !GENERATION
-        LibraryLoader.Load();
-        var libraryInstance = LibraryLoader.GetLibraryInstance();
-
+        var libraryInstance = LibraryLoader.Load();
         using var sunVox = new SunVox(libraryInstance, noDebugOutput: false);
 
         if (!sunVox.Slots.TryOpenNewSlot(out var slot))
@@ -42,6 +39,16 @@ internal sealed class Program
         Thread.Sleep(TimeSpan.FromSeconds(1));
 
         slot.VirtualPattern.SendEvent(0, PatternEvent.NoteEvent(Note.Off, generator.ModuleHandle.Id));
-#endif
     }
 }
+#else
+
+namespace Examples;
+
+internal sealed class Program
+{
+    private static void Main()
+    {
+    }
+}
+#endif
