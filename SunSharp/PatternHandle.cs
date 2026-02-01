@@ -39,10 +39,10 @@ namespace SunSharp
         void SetData(PatternEvent[] data, int tracks, int lines);
 
         /// <inheritdoc cref="PatternHandle.SetMuted"/>
-        void SetMuted(int id, bool mute);
+        void SetMuted(bool mute);
 
         /// <inheritdoc cref="PatternHandle.GetMuted"/>
-        bool GetMuted(int id);
+        bool GetMuted();
 
         /// <inheritdoc cref="PatternHandle.SetEvent(int, int, PatternEvent)"/>
         void SetEvent(int track, int line, PatternEvent patternEvent);
@@ -95,13 +95,7 @@ namespace SunSharp
         /// <inheritdoc cref="ISunVoxLib.SetPatternName"/>
         public void SetName(string name)
         {
-            var lib = _lib;
-            var slotId = _slotId;
-            var id = Id;
-            using (_slot.AcquireLock())
-            {
-                lib.SetPatternName(slotId, id, name);
-            }
+            _lib.SetPatternName(_slotId, Id, name);
         }
 
         /// <inheritdoc cref="ISunVoxLib.GetPatternPosition"/>
@@ -113,13 +107,7 @@ namespace SunSharp
         /// <inheritdoc cref="ISunVoxLib.SetPatternPosition"/>
         public void SetPosition(int x, int y)
         {
-            var lib = _lib;
-            var slotId = _slotId;
-            var id = Id;
-            using (_slot.AcquireLock())
-            {
-                lib.SetPatternPosition(slotId, id, x, y);
-            }
+            _lib.SetPatternPosition(_slotId, Id, x, y);
         }
 
         /// <inheritdoc cref="ISunVoxLib.GetPatternTracks"/>
@@ -136,93 +124,49 @@ namespace SunSharp
         /// <inheritdoc cref="ISunVoxLib.SetPatternSize"/>
         public void Resize(int? tracks = null, int? lines = null)
         {
-            var lib = _lib;
-            var slotId = _slotId;
-            var id = Id;
-
-            using (_slot.AcquireLock())
-            {
-                lib.SetPatternSize(slotId, id, tracks, lines);
-            }
+            _lib.SetPatternSize(_slotId, Id, tracks, lines);
         }
 
         /// <inheritdoc cref="ISunVoxLib.GetPatternData"/>
         public (PatternEvent[] data, int tracks, int lines)? GetData()
         {
-            var slotId = _slotId;
-            var id = Id;
-            var lib = _lib;
-            using (_slot.AcquireLock())
-            {
-                return lib.GetPatternData(slotId, id);
-            }
+            return _lib.GetPatternData(_slotId, Id);
         }
 
         /// <inheritdoc cref="ISunVoxLib.SetPatternData"/>
         public void SetData(PatternEvent[] data, int tracks, int lines)
         {
-            var slotId = _slotId;
-            var id = Id;
-            var lib = _lib;
-            using (_slot.AcquireLock())
-            {
-                lib.SetPatternData(slotId, id, data, tracks, lines);
-            }
+            _lib.SetPatternData(_slotId, Id, data, tracks, lines);
         }
 
         /// <inheritdoc cref="ISunVoxLib.SetPatternMuted"/>
-        public void SetMuted(int id, bool mute)
+        public void SetMuted(bool mute)
         {
-            var lib = _lib;
-            var slotId = Id;
-            using (_slot.AcquireLock())
-            {
-                lib.SetPatternMuted(slotId, id, mute);
-            }
+            _lib.SetPatternMuted(_slotId, Id, mute);
         }
 
         /// <inheritdoc cref="ISunVoxLib.GetPatternMuted"/>
-        public bool GetMuted(int id)
+        public bool GetMuted()
         {
-            using (_slot.AcquireLock())
-            {
-                return _lib.GetPatternMuted(Id, id);
-            }
+            return _lib.GetPatternMuted(_slotId, Id);
         }
 
         /// <inheritdoc cref="ISunVoxLib.SetPatternEvent(int, int, int, int, PatternEvent)"/>
         public void SetEvent(int track, int line, PatternEvent patternEvent)
         {
-            var lib = _lib;
-            var slotId = Id;
-            var id = Id;
-
-            using (_slot.AcquireLock())
-            {
-                lib.SetPatternEvent(slotId, id, track, line, patternEvent);
-            }
+            _lib.SetPatternEvent(_slotId, Id, track, line, patternEvent);
         }
 
         /// <inheritdoc cref="ISunVoxLib.SetPatternEvent(int, int, int, int, int, int, int, int, int)"/>
         public void SetEvent(int track, int line, int nn, int vv, int mm, int ccee, int xxyy)
         {
-            var lib = _lib;
-            var slotId = Id;
-            var id = Id;
-
-            using (_slot.AcquireLock())
-            {
-                lib.SetPatternEvent(slotId, id, track, line, nn, vv, mm, ccee, xxyy);
-            }
+            _lib.SetPatternEvent(_slotId, Id, track, line, nn, vv, mm, ccee, xxyy);
         }
 
         /// <inheritdoc cref="ISunVoxLib.GetPatternEventValue"/>
         public int GetEventValue(int track, int line, Column column)
         {
-            var lib = _lib;
-            var slotId = Id;
-            var id = Id;
-            return lib.GetPatternEventValue(slotId, id, track, line, column);
+            return _lib.GetPatternEventValue(_slotId, Id, track, line, column);
         }
     }
 }

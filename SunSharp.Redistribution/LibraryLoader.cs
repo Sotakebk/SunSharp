@@ -1,7 +1,6 @@
 using System;
 using System.IO;
 using System.Runtime.InteropServices;
-using SunSharp.Diagnostics;
 using SunSharp.Native;
 using SunSharp.Native.Loader;
 
@@ -12,7 +11,7 @@ namespace SunSharp.Redistribution
     /// </summary>
     /// <remarks>
     /// <para>
-    /// <see cref="Load" /> the library once, then <see cref="GetLibraryInstance" />.
+    /// <see cref="Load" /> the library to use it through the preferred wrapper.
     /// After that, you may either use the returned instance, or construct a <see cref="SunSharp.SunVox" /> instance with it.
     /// </para>
     /// <para>
@@ -28,9 +27,6 @@ namespace SunSharp.Redistribution
         private static readonly object Lock = new object();
 
         private static NativeProxy? _proxy;
-        private static ISunVoxLib? _lib;
-
-        public static bool IsLoaded => _proxy?.IsProxyLoaded ?? false;
 
         private static ILibraryHandler GetPlatformSpecificLibraryHandler()
         {
@@ -77,7 +73,7 @@ namespace SunSharp.Redistribution
             throw new PlatformNotSupportedException(errorMessage);
         }
 
-        public static void Load()
+        public static ISunVoxLibC Load()
         {
             lock (Lock)
             {
@@ -88,19 +84,8 @@ namespace SunSharp.Redistribution
                 }
 
                 _proxy.Load();
-            }
-        }
 
-        public static ISunVoxLib GetLibraryInstance()
-        {
-            lock (Lock)
-            {
-                if (!IsLoaded || _proxy == null)
-                {
-                    throw new InvalidOperationException("The library was not loaded yet.");
-                }
-
-                return _lib ??= new SunVoxLib(new SunVoxLibWithLogger(_proxy, new ConsoleLogger()));
+                return _proxy;
             }
         }
 
@@ -108,11 +93,6 @@ namespace SunSharp.Redistribution
         {
             lock (Lock)
             {
-                if (!IsLoaded)
-                {
-                    throw new InvalidOperationException("The library was not loaded yet.");
-                }
-
                 _proxy?.Unload();
             }
         }

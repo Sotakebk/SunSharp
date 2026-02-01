@@ -17,17 +17,19 @@ namespace SunSharp
         /// <inheritdoc cref="Timeline.GetPatternExists"/>
         bool GetPatternExists(int patternId);
 
+        IPatternHandle GetPattern(int patternId);
+
         /// <inheritdoc cref="Timeline.TryGetPattern(string, out PatternHandle?)"/>
         bool TryGetPattern(string name, [NotNullWhen(true)] out IPatternHandle? pattern);
 
         /// <inheritdoc cref="Timeline.TryGetPattern(int, out PatternHandle?)"/>
-        bool TryGetPattern(int id, [NotNullWhen(true)] out IPatternHandle? pattern);
+        bool TryGetPattern(int patternId, [NotNullWhen(true)] out IPatternHandle? pattern);
 
         /// <inheritdoc cref="Timeline.CreatePattern"/>
         IPatternHandle CreatePattern(int lines, int tracks, int x, int y, int iconSeed = 0, string? name = null);
 
         /// <inheritdoc cref="Timeline.ClonePattern(int, int, int)"/>
-        int ClonePattern(int id, int x, int y);
+        int ClonePattern(int patternId, int x, int y);
 
         /// <inheritdoc cref="Timeline.ClonePattern(PatternHandle, int, int)"/>
         IPatternHandle ClonePattern(IPatternHandle original, int x, int y);
@@ -70,6 +72,21 @@ namespace SunSharp
         public bool GetPatternExists(int patternId)
         {
             return _lib.GetPatternExists(_slotId, patternId);
+        }
+
+        /// <summary>
+        /// Returns a handle to a pattern by ID.
+        /// The underlying pattern may not exist.
+        /// </summary>
+        public PatternHandle GetPattern(int patternId)
+        {
+            return new PatternHandle(this, patternId);
+        }
+
+        /// <inheritdoc cref="GetPattern(int)" />
+        IPatternHandle ITimeline.GetPattern(int patternId)
+        {
+            return GetPattern(patternId);
         }
 
         /// <summary>
@@ -120,9 +137,9 @@ namespace SunSharp
             }
         }
 
-        public bool TryGetPattern(int id, [NotNullWhen(true)] out IPatternHandle? pattern)
+        public bool TryGetPattern(int patternId, [NotNullWhen(true)] out IPatternHandle? pattern)
         {
-            if (TryGetPattern(id, out PatternHandle? p))
+            if (TryGetPattern(patternId, out PatternHandle? p))
             {
                 pattern = p;
                 return true;
@@ -137,11 +154,8 @@ namespace SunSharp
         /// <inheritdoc cref="ISunVoxLib.CreatePattern"/>
         public PatternHandle CreatePattern(int lines, int tracks, int x, int y, int iconSeed = 0, string? name = null)
         {
-            using (Slot.AcquireLock())
-            {
-                var id = _lib.CreatePattern(_slotId, x, y, tracks, lines, iconSeed, name);
-                return new PatternHandle(this, id);
-            }
+            var id = _lib.CreatePattern(_slotId, x, y, tracks, lines, iconSeed, name);
+            return new PatternHandle(this, id);
         }
 
         IPatternHandle ITimeline.CreatePattern(int lines, int tracks, int x, int y, int iconSeed, string? name)
@@ -150,12 +164,9 @@ namespace SunSharp
         }
 
         /// <inheritdoc cref="ISunVoxLib.ClonePattern"/>
-        public int ClonePattern(int id, int x, int y)
+        public int ClonePattern(int patternId, int x, int y)
         {
-            using (Slot.AcquireLock())
-            {
-                return _lib.ClonePattern(_slotId, id, x, y);
-            }
+            return _lib.ClonePattern(_slotId, patternId, x, y);
         }
 
         /// <summary>

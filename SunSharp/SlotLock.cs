@@ -2,22 +2,25 @@ using System;
 
 namespace SunSharp
 {
-    public sealed class SlotLock : IDisposable
+    internal sealed class SlotLock : IDisposable
     {
-        private readonly SunVox _instance;
-        private readonly int _slotId;
+        private readonly Slot _slot;
+        private readonly uint _openCount;
         private bool _disposed;
 
-        public SlotLock(SunVox sunVox, int slotId)
+        /// <summary>
+        /// This object should only be created under a lock on SlotManagementLock.
+        /// </summary>
+        internal SlotLock(Slot slot, uint openCount)
         {
-            _instance = sunVox;
-            _slotId = slotId;
-            sunVox.Library.LockSlot(slotId);
+            _slot = slot;
+            _openCount = openCount;
+            slot.Library.LockSlot(slot.Id);
         }
 
         private void ReleaseUnmanagedResources()
         {
-            _instance.Library.UnlockSlot(_slotId);
+            _slot.Library.UnlockSlot(_slot.Id);
         }
 
         private void Dispose(bool disposing)
@@ -27,7 +30,19 @@ namespace SunSharp
                 return;
             }
 
-            ReleaseUnmanagedResources();
+            lock (_slot.SunVox.Slots.SlotManagementLock)
+            {
+                if (_slot.SunVox.Deinitialized)
+                {
+                    _disposed = true;
+                    return;
+                }
+
+                if (_slot.OpenCount == _openCount)
+                {
+                    ReleaseUnmanagedResources();
+                }
+            }
 
             if (disposing)
             {

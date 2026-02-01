@@ -113,6 +113,7 @@ namespace SunSharp
 
         public SunVox(ISunVoxLibC library, AudioChannels channels = AudioChannels.Stereo, uint? bufferSize = null, string? deviceIn = null, string? deviceOut = null, string? driver = null, bool noDebugOutput = true)
 #else
+
         public SunVox(ISunVoxLib library, AudioChannels channels = AudioChannels.Stereo, uint? bufferSize = null, string? deviceIn = null, string? deviceOut = null, string? driver = null, bool noDebugOutput = true)
 #endif
         {
@@ -152,6 +153,7 @@ namespace SunSharp
         public SunVox(ISunVoxLibC library, int sampleRate, OutputType outputType, AudioChannels channels = AudioChannels.Stereo,
             bool singleThreaded = false, bool noDebugOutput = true)
 #else
+
         public SunVox(ISunVoxLib library, int sampleRate, OutputType outputType, AudioChannels channels = AudioChannels.Stereo,
             bool singleThreaded = false, bool noDebugOutput = true)
 #endif
@@ -226,11 +228,11 @@ namespace SunSharp
 
         #region disposable
 
-        private bool _deinitialized;
+        internal bool Deinitialized { get; private set; }
 
         private void Dispose(bool disposing)
         {
-            if (!_deinitialized)
+            if (!Deinitialized)
             {
                 if (disposing)
                 {
@@ -239,7 +241,7 @@ namespace SunSharp
                 }
 
                 Library.Deinitialize();
-                _deinitialized = true;
+                Deinitialized = true;
             }
         }
 

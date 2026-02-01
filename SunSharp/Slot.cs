@@ -1,4 +1,5 @@
 using System;
+using SunSharp.Modules;
 using SunSharp.Native;
 
 namespace SunSharp
@@ -167,6 +168,11 @@ namespace SunSharp
         public int Id { get; }
 
         /// <summary>
+        /// The number of times this slot has been opened.
+        /// </summary>
+        internal uint OpenCount { get; private set; }
+
+        /// <summary>
         /// Virtual, 16-track pattern for sending events to the engine.
         /// </summary>
         public VirtualPattern VirtualPattern { get; }
@@ -239,7 +245,11 @@ namespace SunSharp
         /// </summary>
         public IDisposable AcquireLock()
         {
-            return new SlotLock(SunVox, Id);
+            lock (_slotManagementLock)
+            {
+                return new SlotLock(this, OpenCount);
+            }
+
         }
 
         #endregion locks
@@ -261,11 +271,8 @@ namespace SunSharp
                     throw new SlotAlreadyOpenException(Id);
                 }
                 Library.OpenSlot(Id);
+                OpenCount = unchecked(OpenCount + 1);
                 IsOpen = true;
-                using (AcquireLock())
-                {
-                    VirtualPattern.ResetEventTiming();
-                }
             }
         }
 
