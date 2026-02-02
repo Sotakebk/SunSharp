@@ -3,8 +3,7 @@
 using System;
 using System.Threading;
 using SunSharp;
-using SunSharp.Diagnostics;
-using SunSharp.Native;
+using SunSharp.Modules;
 using SunSharp.Redistribution;
 
 namespace Examples;
@@ -22,17 +21,21 @@ internal sealed class Program
             return;
         }
 
-        var generator = slot.Synthesizer
-            .CreateModule(SynthModuleType.AnalogGenerator, "My Generator Module")
-            .AsAnalogGenerator();
-
-        if (!slot.Synthesizer.TryGetModule(0, out var outputModule))
+        AnalogGeneratorModuleHandle generator;
+        using (var slotLock = slot.AcquireLock())
         {
-            Console.WriteLine("Failed to get the output module.");
-            return;
-        }
+            generator = slot.Synthesizer
+                .CreateModule(SynthModuleType.AnalogGenerator, "My Generator Module")
+                .AsAnalogGenerator();
 
-        slot.Synthesizer.ConnectModule(generator.ModuleHandle, outputModule.Value);
+            if (!slot.Synthesizer.TryGetModule(0, out var outputModule))
+            {
+                Console.WriteLine("Failed to get the output module.");
+                return;
+            }
+
+            slot.Synthesizer.ConnectModule(generator.ModuleHandle, outputModule.Value);
+        }
 
         slot.VirtualPattern.SendEvent(0, generator.MakeNoteEvent(Note.A(4)));
 
@@ -41,6 +44,7 @@ internal sealed class Program
         slot.VirtualPattern.SendEvent(0, PatternEvent.NoteEvent(Note.Off, generator.ModuleHandle.Id));
     }
 }
+
 #else
 
 namespace Examples;

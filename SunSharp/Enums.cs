@@ -10,9 +10,14 @@ namespace SunSharp
         Right = 1
     }
 
+    /// <summary>
+    /// Number of audio channels at initialization.
+    /// 'Mono' is not currently supported by SunVox.
+    /// </summary>
     public enum AudioChannels
     {
-        Mono = 1,
+        // currently not supported
+        // Mono = 1,
         Stereo = 2
     }
 

@@ -3,7 +3,7 @@ using SunSharp.Native;
 
 namespace SunSharp.Tests.Native;
 
-public class SunVoxLibNativeWrapperModulesTests
+public class SunVoxLibModulesTests
 {
     public static readonly TestCaseData[] ModuleInputOutputAndResult =
     [
@@ -1257,5 +1257,39 @@ public class SunVoxLibNativeWrapperModulesTests
 
         // then
         library.Received(1).sv_module_curve(slotId, moduleId, curveId, Arg.Any<IntPtr>(), buffer.Length, 1);
+    }
+
+    [Test, AutoData]
+    public void GetSamplerSampleParameter_Default_ShouldCallExpectedMethod(int slotId, int moduleId, int sampleSlot, int parameter, int parameterValue)
+    {
+        var expectedValue = 1234;
+        var library = Substitute.For<ISunVoxLibC>();
+        var wrapper = new SunVoxLib(library);
+
+        library.sv_sampler_par(Arg.Any<int>(), Arg.Any<int>(), Arg.Any<int>(), Arg.Any<int>(), Arg.Any<int>(), Arg.Any<int>())
+            .Returns(expectedValue);
+
+        // when
+        var value = wrapper.GetSamplerSampleParameter(slotId, moduleId, sampleSlot, parameter);
+
+        // then
+        library.Received(1).sv_sampler_par(slotId, moduleId, sampleSlot, parameter, 0, 0);
+        value.Should().Be(expectedValue);
+    }
+
+    [Test, AutoData]
+    public void SetSamplerSampleParameter_Default_ShouldCallExpectedMethod(int slotId, int moduleId, int sampleSlot, int parameter, int parameterValue)
+    {
+        var library = Substitute.For<ISunVoxLibC>();
+        var wrapper = new SunVoxLib(library);
+
+        library.sv_sampler_par(Arg.Any<int>(), Arg.Any<int>(), Arg.Any<int>(), Arg.Any<int>(), Arg.Any<int>(), Arg.Any<int>())
+            .Returns(0);
+
+        // when
+        wrapper.SetSamplerSampleParameter(slotId, moduleId, sampleSlot, parameter, parameterValue);
+
+        // then
+        library.Received(1).sv_sampler_par(slotId, moduleId, sampleSlot, (int)parameter, parameterValue, 1);
     }
 }

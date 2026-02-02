@@ -3,6 +3,7 @@
 */
 
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Runtime.CompilerServices;
 using SunSharp.Native;
@@ -18,6 +19,7 @@ namespace SunSharp.Diagnostics
     /// issues through logging. All SunVox interactions performed via this wrapper will be logged
     /// using the provided logger instance.
     /// </remarks>
+    [ExcludeFromCodeCoverage] // bulk of it is generated code
     public sealed partial class SunVoxLibWithLogger
     {
         private readonly ISunVoxLibC _lib;

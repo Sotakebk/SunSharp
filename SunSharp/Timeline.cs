@@ -123,7 +123,7 @@ namespace SunSharp
             }
         }
 
-        public bool TryGetPattern(string name, [NotNullWhen(true)] out IPatternHandle? pattern)
+        bool ITimeline.TryGetPattern(string name, [NotNullWhen(true)] out IPatternHandle? pattern)
         {
             if (TryGetPattern(name, out PatternHandle? p))
             {
@@ -137,7 +137,7 @@ namespace SunSharp
             }
         }
 
-        public bool TryGetPattern(int patternId, [NotNullWhen(true)] out IPatternHandle? pattern)
+        bool ITimeline.TryGetPattern(int patternId, [NotNullWhen(true)] out IPatternHandle? pattern)
         {
             if (TryGetPattern(patternId, out PatternHandle? p))
             {

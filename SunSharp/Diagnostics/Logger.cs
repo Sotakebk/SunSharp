@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace SunSharp.Diagnostics
 {
@@ -12,6 +13,7 @@ namespace SunSharp.Diagnostics
     }
 
     /// <inheritdoc cref="ILogger"/>
+    [ExcludeFromCodeCoverage]
     public class ConsoleLogger : ILogger
     {
         public void Log(string message, string methodName, string? parameters, string? result)

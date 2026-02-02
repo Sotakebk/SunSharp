@@ -84,8 +84,8 @@ namespace SunSharp
         /// <inheritdoc cref="Slot.Load(byte[])"/>
         void Load(byte[] data);
 
-        /// <inheritdoc cref="Slot.Save"/>
-        void Save(string path);
+        /// <inheritdoc cref="Slot.SaveToFile"/>
+        void SaveToFile(string path);
 
         /// <inheritdoc cref="Slot.StartPlayback"/>
         void StartPlayback();
@@ -190,8 +190,11 @@ namespace SunSharp
         /// <summary>
         /// SunVox instance this slot belongs to.
         /// </summary>
+#if RELEASE
         public SunVox SunVox { get; }
-
+#else
+        public ISunVox SunVox { get; }
+#endif
         /// <inheritdoc/>
         IVirtualPattern ISlot.VirtualPattern => VirtualPattern;
 
@@ -219,8 +222,11 @@ namespace SunSharp
         public bool IsOpen { get; private set; }
 
         private readonly object _slotManagementLock;
-
+#if RELEASE
         internal Slot(int id, object slotManagementLock, SunVox sunVox)
+#else
+        internal Slot(int id, object slotManagementLock, ISunVox sunVox)
+#endif
         {
             Id = id;
             _slotManagementLock = slotManagementLock;
@@ -247,7 +253,7 @@ namespace SunSharp
         {
             lock (_slotManagementLock)
             {
-                return new SlotLock(this, OpenCount);
+                return new SlotLock(this, _slotManagementLock, OpenCount);
             }
 
         }
@@ -313,7 +319,7 @@ namespace SunSharp
         }
 
         /// <inheritdoc cref="ISunVoxLib.SaveToFile"/>
-        public void Save(string path)
+        public void SaveToFile(string path)
         {
             Library.SaveToFile(Id, path);
         }

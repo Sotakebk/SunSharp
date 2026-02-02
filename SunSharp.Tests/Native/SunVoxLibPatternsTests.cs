@@ -3,7 +3,7 @@ using SunSharp.Native;
 
 namespace SunSharp.Tests.Native;
 
-public class SunVoxLibNativeWrapperPatternsTests
+public class SunVoxLibPatternsTests
 {
     public static PatternDataCase[] PatternDataCases =>
     [

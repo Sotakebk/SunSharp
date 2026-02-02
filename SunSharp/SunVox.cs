@@ -6,60 +6,64 @@ namespace SunSharp
 {
     /// <summary>
     /// Allows for object-oriented approach to using the SunVox library.
-    /// No manual locking should be necessary.
     /// </summary>
     public interface ISunVox : IDisposable
     {
+        /// <inheritdoc cref="SunVox.Slots"/>
         ISlots Slots { get; }
+
+        /// <inheritdoc cref="SunVox.NeedsUserCallback"/>
         bool NeedsUserCallback { get; }
+
+        /// <inheritdoc cref="SunVox.SingleThreaded"/>
         bool SingleThreaded { get; }
+
+        /// <inheritdoc cref="SunVox.Deinitialized"/>
+        bool Deinitialized { get; }
+
+        /// <inheritdoc cref="SunVox.OutputType"/>
         OutputType? OutputType { get; }
+
+        /// <inheritdoc cref="SunVox.Version"/>
         SunVoxVersion Version { get; }
+
+        /// <inheritdoc cref="SunVox.SampleRate"/>
         int SampleRate { get; }
+
+        /// <inheritdoc cref="SunVox.Channels"/>
         AudioChannels Channels { get; }
 
-        /// <summary>
-        /// Handle input ON/OFF requests to enable/disable input ports of the sound card (for example, after the Input module creation). Call it from the main thread only, where the SunVox sound stream is not locked.
-        /// </summary>
+        /// <inheritdoc cref="SunVox.Library"/>
+        ISunVoxLib Library { get; }
+
+        /// <inheritdoc cref="SunVox.UpdateInputDevices"/>
         void UpdateInputDevices();
 
-        /// <summary>
-        /// Get the next piece of audio.
-        /// If library was initialized with <see cref="AudioChannels.Stereo"/>, the samples will be interlaced, and the buffer size must be a multiple of two.
-        /// </summary>
-        /// <param name="outputBuffer">Buffer to write sound data to.</param>
-        /// <param name="latency">Audio latency (in frames).</param>
-        /// <param name="outTime">Buffer output time (in system ticks).</param>
+        /// <inheritdoc cref="SunVox.AudioCallback(float[],int,uint)"/>
         bool AudioCallback(float[] outputBuffer, int latency, uint outTime);
 
-        /// <inheritdoc cref="SunVox.AudioCallback(float[],int,uint)"/>
+        /// <inheritdoc cref="SunVox.AudioCallback(short[],int,uint)"/>
         bool AudioCallback(short[] outputBuffer, int latency, uint outTime);
 
-        /// <summary>
-        /// Get the next piece of audio.
-        /// If audio is stereo, the samples will be interlaced, and the buffer size must be a multiple of two.
-        /// Sends equal size buffer of an input device, which will be applied to any Input modules.
-        /// </summary>
-        /// <param name="outputBuffer">Buffer to write sound data to.</param>
-        /// <param name="inputBuffer">Buffer to read sound data from.</param>
-        /// <param name="inputChannels">Input data channels.</param>
-        /// <param name="latency">Audio latency (in frames).</param>
-        /// <param name="outTime">Buffer output time (in system ticks).</param>
+        /// <inheritdoc cref="SunVox.AudioCallback(float[],float[],AudioChannels,int,uint)"/>
         bool AudioCallback(float[] outputBuffer, float[] inputBuffer, AudioChannels inputChannels, int latency, uint outTime);
 
-        /// <inheritdoc cref="SunVox.AudioCallback(float[],float[],SunSharp.AudioChannels,int,uint)"/>
+        /// <inheritdoc cref="SunVox.AudioCallback(float[],short[],AudioChannels,int,uint)"/>
         bool AudioCallback(float[] outputBuffer, short[] inputBuffer, AudioChannels inputChannels, int latency, uint outTime);
 
-        /// <inheritdoc cref="SunVox.AudioCallback(float[],float[],SunSharp.AudioChannels,int,uint)"/>
+        /// <inheritdoc cref="SunVox.AudioCallback(short[],float[],AudioChannels,int,uint)"/>
         bool AudioCallback(short[] outputBuffer, float[] inputBuffer, AudioChannels inputChannels, int latency, uint outTime);
 
-        /// <inheritdoc cref="SunVox.AudioCallback(float[],float[],SunSharp.AudioChannels,int,uint)"/>
+        /// <inheritdoc cref="SunVox.AudioCallback(short[],short[],AudioChannels,int,uint)"/>
         bool AudioCallback(short[] outputBuffer, short[] inputBuffer, AudioChannels inputChannels, int latency, uint outTime);
 
+        /// <inheritdoc cref="SunVox.GetTicks"/>
         uint GetTicks();
 
+        /// <inheritdoc cref="SunVox.GetTicksPerSecond"/>
         uint GetTicksPerSecond();
 
+        /// <inheritdoc cref="SunVox.GetLog(int)"/>
         string? GetLog(int length);
     }
 
@@ -75,28 +79,26 @@ namespace SunSharp
         public ISunVoxLib Library { get; }
 #endif
 
-        /// <inheritdoc cref="ISunVox.Slots"/>
+        ISunVoxLib ISunVox.Library => Library;
+
         public Slots Slots { get; }
 
         /// <inheritdoc/>
         ISlots ISunVox.Slots => Slots;
 
-        /// <inheritdoc/>
         public bool NeedsUserCallback => OutputType != null;
 
-        /// <inheritdoc/>
         public bool SingleThreaded { get; }
 
-        /// <inheritdoc/>
         public OutputType? OutputType { get; }
 
-        /// <inheritdoc/>
         public SunVoxVersion Version { get; }
 
-        /// <inheritdoc/>
         public int SampleRate { get; }
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// Number of channels SunVox was initialized with on startup.
+        /// </summary>
         public AudioChannels Channels { get; }
 
         /// <summary>
@@ -117,6 +119,11 @@ namespace SunSharp
         public SunVox(ISunVoxLib library, AudioChannels channels = AudioChannels.Stereo, uint? bufferSize = null, string? deviceIn = null, string? deviceOut = null, string? driver = null, bool noDebugOutput = true)
 #endif
         {
+            if (library == null)
+            {
+                throw new ArgumentNullException(nameof(library));
+            }
+
             var flags = SunVoxInitOptions.None;
             if (noDebugOutput)
             {
@@ -158,6 +165,11 @@ namespace SunSharp
             bool singleThreaded = false, bool noDebugOutput = true)
 #endif
         {
+            if (library == null)
+            {
+                throw new ArgumentNullException(nameof(library));
+            }
+
             var flags = ConstructInitFlags(SunVoxInitOptions.UserAudioCallback, noDebugOutput, outputType, singleThreaded);
 
             if (sampleRate < 1)
@@ -228,7 +240,7 @@ namespace SunSharp
 
         #region disposable
 
-        internal bool Deinitialized { get; private set; }
+        public bool Deinitialized { get; private set; }
 
         private void Dispose(bool disposing)
         {
@@ -240,8 +252,16 @@ namespace SunSharp
                     // nothing right now
                 }
 
-                Library.Deinitialize();
                 Deinitialized = true;
+                try
+                {
+                    Library.Deinitialize();
+                }
+                catch (SunVoxException)
+                {
+                    // swallow exceptions on deinitialization
+                    // this is because Deinitialize may fail if already deinitialized elsewhere somehow
+                }
             }
         }
 
@@ -263,7 +283,7 @@ namespace SunSharp
 
         #region audio I/O
 
-        /// <inheritdoc/>
+        /// <inheritdoc cref="SunVoxLib.UpdateInputDevices"/>
         public void UpdateInputDevices()
         {
             Library.UpdateInputDevices();
@@ -288,42 +308,42 @@ namespace SunSharp
             throw new InvalidOperationException(msg);
         }
 
-        /// <inheritdoc/>
+        /// <inheritdoc cref="SunVoxLib.AudioCallback(float[],AudioChannels,int,uint)"/>
         public bool AudioCallback(float[] outputBuffer, int latency, uint outTime)
         {
             AudioGuard(true);
             return Library.AudioCallback(outputBuffer, Channels, latency, outTime);
         }
 
-        /// <inheritdoc/>
+        /// <inheritdoc cref="SunVoxLib.AudioCallback(short[],AudioChannels,int,uint)"/>
         public bool AudioCallback(short[] outputBuffer, int latency, uint outTime)
         {
             AudioGuard(false);
             return Library.AudioCallback(outputBuffer, Channels, latency, outTime);
         }
 
-        /// <inheritdoc/>
+        /// <inheritdoc cref="SunVoxLib.AudioCallback(float[],AudioChannels,float[],AudioChannels,int,uint)"/>
         public bool AudioCallback(float[] outputBuffer, float[] inputBuffer, AudioChannels inputChannels, int latency, uint outTime)
         {
             AudioGuard(true);
             return Library.AudioCallback(outputBuffer, Channels, inputBuffer, inputChannels, latency, outTime);
         }
 
-        /// <inheritdoc/>
+        /// <inheritdoc cref="SunVoxLib.AudioCallback(float[],AudioChannels,short[],AudioChannels,int,uint)"/>
         public bool AudioCallback(float[] outputBuffer, short[] inputBuffer, AudioChannels inputChannels, int latency, uint outTime)
         {
             AudioGuard(true);
             return Library.AudioCallback(outputBuffer, Channels, inputBuffer, inputChannels, latency, outTime);
         }
 
-        /// <inheritdoc/>
+        /// <inheritdoc cref="SunVoxLib.AudioCallback(short[],AudioChannels,float[],AudioChannels,int,uint)"/>
         public bool AudioCallback(short[] outputBuffer, float[] inputBuffer, AudioChannels inputChannels, int latency, uint outTime)
         {
             AudioGuard(false);
             return Library.AudioCallback(outputBuffer, Channels, inputBuffer, inputChannels, latency, outTime);
         }
 
-        /// <inheritdoc/>
+        /// <inheritdoc cref="SunVoxLib.AudioCallback(short[],AudioChannels,short[],AudioChannels,int,uint)"/>
         public bool AudioCallback(short[] outputBuffer, short[] inputBuffer, AudioChannels inputChannels, int latency, uint outTime)
         {
             AudioGuard(false);
@@ -332,18 +352,19 @@ namespace SunSharp
 
         #endregion audio I/O
 
-        /// <inheritdoc/>
+        /// <inheritdoc cref="SunVoxLib.GetTicks"/>
         public uint GetTicks()
         {
             return Library.GetTicks();
         }
 
-        /// <inheritdoc/>
+        /// <inheritdoc cref="SunVoxLib.GetTicksPerSecond"/>
         public uint GetTicksPerSecond()
         {
             return Library.GetTicksPerSecond();
         }
 
+        /// <inheritdoc cref="SunVoxLib.GetLog(int)"/>
         public string? GetLog(int length)
         {
             return Library.GetLog(length);

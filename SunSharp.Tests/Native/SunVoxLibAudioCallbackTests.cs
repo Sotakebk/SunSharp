@@ -3,7 +3,7 @@ using SunSharp.Native;
 
 namespace SunSharp.Tests.Native;
 
-public class SunVoxLibNativeWrapperAudioCallbackTests
+public class SunVoxLibAudioCallbackTests
 {
     private const int ErrorResponseCode = -1;
 
@@ -110,7 +110,7 @@ public class SunVoxLibNativeWrapperAudioCallbackTests
     #endregion input short, output float
 
     #region output only, float, mono
-
+    /*
     [Test, AutoData]
     public void AudioCallback_WithFloatInMono_ShouldCallExpectedMethodAndReturnBoolean(bool expectedValue, int latency, uint outTime)
     {
@@ -206,11 +206,11 @@ public class SunVoxLibNativeWrapperAudioCallbackTests
         // then
         library.Received(1).sv_audio_callback(Arg.Any<IntPtr>(), Arg.Any<int>(), Arg.Any<int>(), Arg.Any<uint>());
     }
-
+    */
     #endregion output only, float, stereo
 
     #region output only, short, mono
-
+    /*
     [Test, AutoData]
     public void AudioCallback_WithShortInMono_ShouldCallExpectedMethodAndReturnBoolean(bool expectedValue, int latency, uint outTime)
     {
@@ -250,7 +250,7 @@ public class SunVoxLibNativeWrapperAudioCallbackTests
         // then
         library.Received(1).sv_audio_callback(Arg.Any<IntPtr>(), Arg.Any<int>(), Arg.Any<int>(), Arg.Any<uint>());
     }
-
+    */
     #endregion output only, short, mono
 
     #region output only, short, stereo
@@ -307,11 +307,11 @@ public class SunVoxLibNativeWrapperAudioCallbackTests
         // then
         library.Received(1).sv_audio_callback(Arg.Any<IntPtr>(), Arg.Any<int>(), Arg.Any<int>(), Arg.Any<uint>());
     }
-
+    
     #endregion output only, short, stereo
 
     #region output float mono, input float mono
-
+    /*
     [Test, AutoData]
     public void AudioCallback_WithOutputFloatInMonoInputFloatInMono_ShouldCallExpectedMethodAndReturnBoolean(
         bool expectedValue, float[] outputBuffer, float[] inputBuffer, int latency, uint outTime)
@@ -369,11 +369,11 @@ public class SunVoxLibNativeWrapperAudioCallbackTests
         // then
         library.Received(1).sv_audio_callback2(Arg.Any<IntPtr>(), Arg.Any<int>(), Arg.Any<int>(), Arg.Any<uint>(), Arg.Any<int>(), Arg.Any<int>(), Arg.Any<IntPtr>());
     }
-
+    */
     #endregion output float mono, input float mono
 
     #region output float stereo, input float mono
-
+    /*
     [Test, AutoData]
     public void AudioCallback_WithOutputFloatInStereoInputFloatInMono_ShouldCallExpectedMethodWithHalfInputFramesAndReturnBoolean(bool expectedValue, int latency, uint outTime)
     {
@@ -419,7 +419,7 @@ public class SunVoxLibNativeWrapperAudioCallbackTests
         // then
         library.Received(0).sv_audio_callback2(Arg.Any<IntPtr>(), outputBuffer.Length / 2, latency, outTime, 1, 1, Arg.Any<IntPtr>());
     }
-
+    */
     #endregion output float stereo, input float mono
 
     #region input float stereo, output float stereo

@@ -71,7 +71,7 @@ public sealed class NativeInterfaceGenerator : BaseGenerator, IGeneratorProvider
         AppendLine("{");
         AddIndent(() =>
         {
-            AppendLine($"public sealed partial class {nameof(SunSharp.Native.Loader.NativeProxy)} : ISunVoxLibC");
+            AppendLine($"public sealed partial class {nameof(NativeProxy)} : ISunVoxLibC");
             AppendLine("{");
             AddIndent(() =>
             {
@@ -142,7 +142,7 @@ public sealed class NativeInterfaceGenerator : BaseGenerator, IGeneratorProvider
             foreach (var f in functions.OrderBy(f => f.Name))
             {
                 var delegateName = GetDelegateNameCode(f);
-                AppendLine($"{f.Name} = ({delegateName})(_handler.{nameof(ILibraryHandler.GetFunctionByName)}(\"{f.Name}\", typeof({delegateName})) ?? throw new InvalidOperationException(\"Failed to load function {f.Name}\"));");
+                AppendLine($"{f.Name} = GetDelegateOrThrow<{delegateName}>(\"{f.Name}\");");
             }
         });
         AppendLine("}");

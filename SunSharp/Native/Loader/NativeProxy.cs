@@ -1,4 +1,5 @@
 using System;
+using System.Runtime.CompilerServices;
 
 namespace SunSharp.Native.Loader
 {
@@ -143,6 +144,8 @@ namespace SunSharp.Native.Loader
                 bool isLibraryLoaded = _handler.IsLibraryLoaded;
                 if (deinitDelegate != null && isLibraryLoaded)
                 {
+                    // value may be 0 if successful or -1 if already deinitialized
+                    // ignoring return value as there is nothing we can do about it here
                     deinitDelegate.Invoke();
                 }
 
@@ -153,7 +156,7 @@ namespace SunSharp.Native.Loader
             }
         }
 
-        internal Exception GetNoDelegateException()
+        internal Exception GetNoDelegateException([CallerMemberName] string name = "")
         {
             string message;
             try
@@ -164,10 +167,10 @@ namespace SunSharp.Native.Loader
                     var isProxyLoaded = IsProxyLoaded;
                     message = (isLibraryLoaded, isProxyLoaded) switch
                     {
-                        (true, true) => "Missing delegate. Library is loaded, proxy is loaded.",
-                        (true, false) => "Missing delegate. Library is loaded, proxy is not loaded.",
-                        (false, true) => "Missing delegate. Library is not loaded, proxy is loaded.",
-                        (false, false) => "Missing delegate. Library is not loaded, proxy is not loaded."
+                        (true, true) => $"Missing delegate for function '{name}'. Library is loaded, proxy is loaded.",
+                        (true, false) => $"Missing delegate for function '{name}'. Library is loaded, proxy is not loaded.",
+                        (false, true) => $"Missing delegate for function '{name}'. Library is not loaded, proxy is loaded.",
+                        (false, false) => $"Missing delegate for function '{name}'. Library is not loaded, proxy is not loaded."
                     };
                 }
             }
@@ -177,6 +180,12 @@ namespace SunSharp.Native.Loader
             }
 
             return new InvalidOperationException(message);
+        }
+
+        private T GetDelegateOrThrow<T>(string name)
+            where T : Delegate
+        {
+            return (T)_handler.GetFunctionByName(name, typeof(T)) ?? throw new InvalidOperationException($"Failed to load function '{name}'.");
         }
     }
 }

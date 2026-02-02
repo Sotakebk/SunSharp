@@ -433,6 +433,49 @@ public class PatternEventTests
     }
 
     [Test]
+    public void Merge_WithEmptyFirst_ShouldReturnSecond()
+    {
+        var first = new PatternEvent();
+        var second = new PatternEvent(10, 20, 30, 40, 50, 60);
+
+        var merged = PatternEvent.Merge(first, second);
+
+        merged.NN.Should().Be(10);
+        merged.VV.Should().Be(20);
+        merged.MM.Should().Be(30);
+        merged.CC.Should().Be(40);
+        merged.EE.Should().Be(50);
+        merged.XXYY.Should().Be(60);
+    }
+
+    [Test]
+    public void Merge_WithEmptySecond_ShouldReturnFirst()
+    {
+        var first = new PatternEvent(10, 20, 30, 40, 50, 60);
+        var second = new PatternEvent();
+
+        var merged = PatternEvent.Merge(first, second);
+
+        merged.NN.Should().Be(10);
+        merged.VV.Should().Be(20);
+        merged.MM.Should().Be(30);
+        merged.CC.Should().Be(40);
+        merged.EE.Should().Be(50);
+        merged.XXYY.Should().Be(60);
+    }
+
+    [Test]
+    public void Merge_WithBothEmpty_ShouldReturnEmpty()
+    {
+        var first = new PatternEvent();
+        var second = new PatternEvent();
+
+        var merged = PatternEvent.Merge(first, second);
+
+        merged.IsEmpty.Should().BeTrue();
+    }
+
+    [Test]
     public void FriendlyProperties_ShouldHandleOffsetsCorrectly()
     {
         var patternEvent = new PatternEvent

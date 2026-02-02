@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AwesomeAssertions.Execution;
 using NSubstitute.ExceptionExtensions;
 using SunSharp.Native;
 using SunSharp.Native.Loader;
@@ -140,10 +141,10 @@ public class NativeProxyTests
         proxy.IsProxyLoaded.Should().BeFalse();
     }
 
-    [TestCase(false, true, "Missing delegate. Library is not loaded, proxy is loaded.")]
-    [TestCase(true, false, "Missing delegate. Library is loaded, proxy is not loaded.")]
-    [TestCase(false, false, "Missing delegate. Library is not loaded, proxy is not loaded.")]
-    [TestCase(true, true, "Missing delegate. Library is loaded, proxy is loaded.")]
+    [TestCase(false, true, "Missing delegate for function 'test'. Library is not loaded, proxy is loaded.")]
+    [TestCase(true, false, "Missing delegate for function 'test'. Library is loaded, proxy is not loaded.")]
+    [TestCase(false, false, "Missing delegate for function 'test'. Library is not loaded, proxy is not loaded.")]
+    [TestCase(true, true, "Missing delegate for function 'test'. Library is loaded, proxy is loaded.")]
     public void GetNoDelegateException_ShouldReturnExpectedMessage(bool libraryLoaded, bool proxyLoaded, string message)
     {
         var handler = Substitute.For<ILibraryHandler>();
@@ -164,7 +165,7 @@ public class NativeProxyTests
 
         handler.IsLibraryLoaded.Returns(libraryLoaded);
 
-        var exception = proxy.GetNoDelegateException();
+        var exception = proxy.GetNoDelegateException("test");
         exception.Message.Should().Be(message);
     }
 
@@ -329,15 +330,15 @@ public class NativeProxyTests
 
         var methods = typeof(ISunVoxLibC).GetMethods();
 
-        await Parallel.ForEachAsync(methods, (method, _) =>
+        using var scope = new AssertionScope();
+        foreach (var method in methods)
         {
             var parameters = method.GetParameters().Select(static p => GetDefault(p.ParameterType)).ToArray();
             method.Invoking(m => m.Invoke(proxy, parameters))
                 .Should().Throw<Exception>()
                 .WithInnerException<InvalidOperationException>()
-                .WithMessage("Missing delegate. Library is not loaded, proxy is not loaded.");
-            return ValueTask.CompletedTask;
-        });
+                .WithMessage($"Missing delegate for function '{method.Name}'. Library is not loaded, proxy is not loaded.");
+        }
     }
 
     [Test]
@@ -452,5 +453,22 @@ public class NativeProxyTests
         
         handler.Received(1).LoadLibrary();
         proxy.IsProxyLoaded.Should().BeTrue();
+    }
+
+    [Test]
+    public void Load_WhenGetFunctionByNameReturnsNull_ShouldThrowAndUnloadLibrary()
+    {
+        var handler = Substitute.For<ILibraryHandler>();
+        handler.IsLibraryLoaded.Returns(true);
+        handler.GetFunctionByName(Arg.Any<string>(), Arg.Any<Type>()).Returns((Delegate?)null);
+
+        var proxy = new NativeProxy(handler);
+
+        proxy.Invoking(p => p.Load())
+            .Should().Throw<InvalidOperationException>()
+            .WithMessage("Failed to load function '*'.");
+
+        handler.Received(1).UnloadLibrary();
+        proxy.IsProxyLoaded.Should().BeFalse();
     }
 }

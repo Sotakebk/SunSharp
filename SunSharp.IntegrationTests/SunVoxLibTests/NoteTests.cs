@@ -2,19 +2,21 @@ using System.IO;
 
 namespace SunSharp.IntegrationTests.SunVoxLibTests;
 
-internal class NoteTests : BaseIntegrationTests
+internal class NoteTests : BaseIntegrationTest
 {
     private string TestFilePath => Path.Join(base.GetTestPath(), "all_notes.sunvox");
 
     [Test]
     public void AllNotes_ShouldBeReadAsExpected()
     {
+        Lib.Initialize(-1, options: SunVoxInitOptions.UserAudioCallback | SunVoxInitOptions.AudioFloat32);
         const int slotId = 0;
         Lib.OpenSlot(slotId);
         Lib.Load(slotId, TestFilePath);
         Lib.LockSlot(slotId);
-
         var result = Lib.GetPatternData(slotId, 0);
+        Lib.UnlockSlot(slotId);
+        Lib.Deinitialize();
         result.Should().NotBeNull();
 
         var (data, tracks, lines) = result.Value;

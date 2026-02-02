@@ -110,9 +110,8 @@ namespace SunSharp.Native
 
         /// <summary>
         /// Deinitialize the SunVox engine and free all resources.
-        /// May be safely called multiple times.
         /// </summary>
-        /// <exception cref="SunVoxException">Thrown when the operation fails.</exception>
+        /// <exception cref="SunVoxException">Thrown when the operation fails, or when already deinitialized.</exception>
         /// <remarks>Calls <see cref="ISunVoxLibC.sv_deinit"/>.</remarks>
         public void Deinitialize()
         {
@@ -394,7 +393,7 @@ namespace SunSharp.Native
         }
 
         /// <summary>
-        /// Initialize the SunVox engine. May be called again to re-initialize.
+        /// Initialize the SunVox engine.
         /// </summary>
         /// <param name="sampleRate">
         /// Desired sample rate (Hz); minimum 44100. The actual rate may differ if offline mode is not set.
@@ -405,7 +404,7 @@ namespace SunSharp.Native
         /// </param>
         /// <param name="channels">Number of audio channels.</param>
         /// <param name="options">Initialization flags.</param>
-        /// <exception cref="SunVoxException">Thrown when initialization fails.</exception>
+        /// <exception cref="SunVoxException">Thrown when initialization fails, or when already initialized.</exception>
         /// <remarks>Calls <see cref="ISunVoxLibC.sv_init"/>.</remarks>
         public SunVoxVersion Initialize(int sampleRate, string? config = null,
             AudioChannels channels = AudioChannels.Stereo, SunVoxInitOptions options = SunVoxInitOptions.None)

@@ -36,4 +36,8 @@
     <ProjectReference Include="..\SunSharp\SunSharp.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="AudioTests\output\" />
+  </ItemGroup>
+
 </Project>

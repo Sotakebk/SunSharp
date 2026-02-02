@@ -4,43 +4,66 @@ namespace SunSharp
 {
     internal sealed class SlotLock : IDisposable
     {
+        private enum LockState : byte
+        {
+            NotLockedYet = 0,
+            Locked = 1,
+            Unlocked = 2
+        }
+
         private readonly Slot _slot;
+        private readonly object _slotManagementLock;
         private readonly uint _openCount;
-        private bool _disposed;
+        private LockState _lockState;
 
         /// <summary>
         /// This object should only be created under a lock on SlotManagementLock.
         /// </summary>
-        internal SlotLock(Slot slot, uint openCount)
+        internal SlotLock(Slot slot, object slotManagementLock, uint openCount)
         {
             _slot = slot;
             _openCount = openCount;
+            _slotManagementLock = slotManagementLock;
+            _lockState = LockState.NotLockedYet;
             slot.Library.LockSlot(slot.Id);
+            _lockState = LockState.Locked;
         }
 
-        private void ReleaseUnmanagedResources()
+        private void ReleaseUnmanagedResources(bool disposing)
         {
-            _slot.Library.UnlockSlot(_slot.Id);
+            if (disposing)
+            {
+                _slot.Library.UnlockSlot(_slot.Id);
+                return;
+            }
+            try
+            {
+                _slot.Library.UnlockSlot(_slot.Id);
+            }
+            catch (Exception)
+            {
+                // may be caused by a null delegate, or SunVoxException
+            }
         }
 
         private void Dispose(bool disposing)
         {
-            if (_disposed)
+            if (_lockState != LockState.Locked)
             {
                 return;
             }
 
-            lock (_slot.SunVox.Slots.SlotManagementLock)
+            _lockState = LockState.Unlocked;
+            lock (_slotManagementLock)
             {
                 if (_slot.SunVox.Deinitialized)
                 {
-                    _disposed = true;
                     return;
                 }
 
                 if (_slot.OpenCount == _openCount)
                 {
-                    ReleaseUnmanagedResources();
+                    ReleaseUnmanagedResources(disposing);
                 }
             }
 
@@ -48,8 +71,6 @@ namespace SunSharp
             {
                 // release managed resources
             }
-
-            _disposed = true;
         }
 
         public void Dispose()

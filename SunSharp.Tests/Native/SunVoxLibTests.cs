@@ -4,7 +4,7 @@ using SunSharp.Native;
 
 namespace SunSharp.Tests.Native;
 
-public class SunVoxLibNativeWrapperTests
+public class SunVoxLibTests
 {
     public const int ErrorResponseCode = -1;
 
