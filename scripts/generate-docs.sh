@@ -47,6 +47,8 @@ clean() {
 }
 
 serve() {
+    echo "Restoring project dependencies"
+    dotnet restore src/SunSharp.sln
     echo "Serving documentation with hot-reload"
     echo "Press Ctrl+C to stop"
     $DOCFX_CMD "$PROJECT_DIR/docs/docfx.json" --serve

@@ -1,54 +1,46 @@
 using System;
 using System.Runtime.InteropServices;
-using SunSharp.Native.Loader;
 
 namespace SunSharp.Redistribution
 {
-    internal sealed class WindowsLibraryHandler : ILibraryHandler
+    internal sealed class WindowsLibraryHandler : LibraryHandlerBase
     {
-        private readonly object _lock = new object();
-        private readonly string _path;
-        private volatile IntPtr _ptr = IntPtr.Zero;
-
-        public WindowsLibraryHandler(string path)
+        public WindowsLibraryHandler(string path) : base(path)
         {
-            _path = path;
         }
 
-        public bool IsLibraryLoaded => _ptr != IntPtr.Zero;
-
-        public void LoadLibrary()
+        public override void LoadLibrary()
         {
-            lock (_lock)
+            lock (Lock)
             {
                 if (IsLibraryLoaded)
                 {
-                    throw new LibraryLoadingException("SunVoxLib is already loaded.");
+                    return;
                 }
 
-                var ptr = LoadLibrary(_path);
+                var ptr = LoadLibraryW(Path);
                 if (ptr == IntPtr.Zero)
                 {
                     var error = Marshal.GetHRForLastWin32Error();
                     throw new LibraryLoadingException(
-                        $"Failed to load SunVoxLib from path '{_path}' with error '{error:X8}'.");
+                        $"Failed to load SunVoxLib from path '{Path}' with error '{error:X8}'.");
                 }
 
-                _ptr = ptr;
+                Handle = ptr;
             }
         }
 
-        public void UnloadLibrary()
+        public override void UnloadLibrary()
         {
-            lock (_lock)
+            lock (Lock)
             {
                 if (!IsLibraryLoaded)
                 {
-                    throw new LibraryLoadingException("SunVoxLib is not loaded.");
+                    return;
                 }
 
-                var ptr = _ptr;
-                _ptr = IntPtr.Zero;
+                var ptr = Handle;
+                Handle = IntPtr.Zero;
                 var value = FreeLibrary(ptr);
                 if (value != 0)
                 {
@@ -56,41 +48,25 @@ namespace SunSharp.Redistribution
                 }
 
                 var error = Marshal.GetHRForLastWin32Error();
-                throw new LibraryLoadingException($"Failed to unload SunVoxLib with error error '{error:X8}'.");
+                throw new LibraryLoadingException($"Failed to unload SunVoxLib with error '{error:X8}'.");
             }
         }
 
-        public Delegate GetFunctionByName(string name, Type delegateType)
+        protected override IntPtr GetFunctionPointer(IntPtr handle, string name)
         {
-            if (delegateType.IsAssignableFrom(typeof(Delegate)))
-            {
-                throw new ArgumentException($"Type {delegateType.Name} is not a delegate type");
-            }
-
-            lock (_lock)
-            {
-                if (!IsLibraryLoaded)
-                {
-                    throw new LibraryLoadingException("SunVoxLib is not loaded.");
-                }
-
-                var ptr = GetProcAddress(_ptr, name);
-                if (ptr != IntPtr.Zero)
-                {
-                    return Marshal.GetDelegateForFunctionPointer(ptr, delegateType);
-                }
-
-                var error = Marshal.GetHRForLastWin32Error();
-                throw new LibraryLoadingException($"Failed to load SunVoxLib function '{name}' with error '{error:X8}'.");
-            }
+            return GetProcAddress(handle, name);
         }
 
-        [DllImport("kernel32.dll", SetLastError = true, BestFitMapping = false, ThrowOnUnmappableChar = true,
-            CharSet = CharSet.Ansi)]
-        private static extern IntPtr LoadLibrary([MarshalAs(UnmanagedType.LPStr)] string dllToLoad);
+        protected override Exception CreateFunctionLoadException(string name)
+        {
+            var error = Marshal.GetHRForLastWin32Error();
+            return new LibraryLoadingException($"Failed to load SunVoxLib function '{name}' with error '{error:X8}'.");
+        }
 
-        [DllImport("kernel32.dll", SetLastError = true, BestFitMapping = false, ThrowOnUnmappableChar = true,
-            CharSet = CharSet.Ansi)]
+        [DllImport("kernel32", SetLastError = true, CharSet = CharSet.Unicode)]
+        static extern IntPtr LoadLibraryW([MarshalAs(UnmanagedType.LPWStr)] string lpFilename);
+
+        [DllImport("kernel32.dll", SetLastError = true, BestFitMapping = false, ThrowOnUnmappableChar = true, CharSet = CharSet.Ansi)]
         private static extern IntPtr GetProcAddress(IntPtr hModule,
             [MarshalAs(UnmanagedType.LPStr)] string procedureName);
 

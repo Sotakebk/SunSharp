@@ -66,7 +66,7 @@ namespace SunSharp.Redistribution
                     throw new DllNotFoundException($"The SunVox library was not found at the expected location: {path}");
                 }
 
-                return new UnixLibraryHandler(path);
+                return new LinuxLibraryHandler(path);
             }
 
             if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
@@ -83,7 +83,7 @@ namespace SunSharp.Redistribution
                     throw new DllNotFoundException($"The SunVox library was not found at the expected location: {path}");
                 }
 
-                return new UnixLibraryHandler(path);
+                return new MacOsLibraryLoader(path);
             }
 
             throw new PlatformNotSupportedException(errorMessage);

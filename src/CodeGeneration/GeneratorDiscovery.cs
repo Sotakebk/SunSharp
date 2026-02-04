@@ -61,7 +61,7 @@ public class DiscoveredGenerator
                 originalFileContent = await File.ReadAllTextAsync(targetPath, cancellationToken).ConfigureAwait(false);
             }
 
-            var sourceCodeIsTheSame = string.Equals(source, originalFileContent, StringComparison.Ordinal);
+            var sourceCodeIsTheSame = string.Equals(source.ReplaceLineEndings(), originalFileContent?.ReplaceLineEndings(), StringComparison.Ordinal);
             return sourceCodeIsTheSame
                 ? GeneratorResult.SuccessNoChanges(Name, targetPath)
                 : GeneratorResult.SuccessWithChanges(Name, targetPath, source);

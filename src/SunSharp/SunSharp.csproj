@@ -13,7 +13,7 @@
     <RepositoryUrl>https://github.com/Sotakebk/SunSharp.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>sunvox;music;wrapper</PackageTags>
-    <Version>2.0.0-dev0</Version>
+    <Version>2.0.0-dev20260205</Version>
     <AssemblyVersion>0.0.0.0</AssemblyVersion>
     <IncludeSymbols>True</IncludeSymbols>
     <EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>

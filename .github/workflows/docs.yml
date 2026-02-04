@@ -28,10 +28,13 @@ on:
 permissions:
   contents: read
   pages: write
+  id-token: write
 
 concurrency:
   group: "pages"
   cancel-in-progress: false
+
+run-name: Build and Deploy Documentation
 
 jobs:
   build:
@@ -47,6 +50,9 @@ jobs:
 
       - name: Install DocFX
         run: dotnet tool install -g docfx
+
+      - name: Restore dependencies
+        run: dotnet restore src/SunSharp.sln
 
       - name: Generate API metadata
         run: docfx metadata docs/docfx.json

@@ -1,0 +1,101 @@
+name: Build and Test
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+    inputs:
+      build-packages:
+        description: 'Whether to build NuGet packages.'
+        required: false
+        default: 'false'
+        type: boolean
+
+permissions:
+  contents: read
+
+run-name: Build and Test SunSharp
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+      fail-fast: false
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '10.0.x'
+
+    - name: Restore dependencies
+      run: dotnet restore src/SunSharp.sln
+
+    - name: Run CodeGeneration tests
+      run: dotnet test src/CodeGeneration.Tests/CodeGeneration.Tests.csproj --configuration Generation --verbosity normal --logger "trx;LogFileName=codegen-test-results.trx"
+      continue-on-error: false
+
+    - name: Run unit tests
+      run: dotnet test src/SunSharp.Tests/SunSharp.Tests.csproj --configuration Debug --verbosity normal --logger "trx;LogFileName=test-results.trx"
+      continue-on-error: true
+
+    - name: Run integration tests
+      run: dotnet test src/SunSharp.IntegrationTests/SunSharp.IntegrationTests.csproj --configuration Release --verbosity normal --logger "trx;LogFileName=integration-test-results.trx"
+      continue-on-error: true
+
+    - name: Upload test results
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: test-results-${{ matrix.os }}-${{ matrix.dotnet-version }}
+        path: '**/*.trx'
+        retention-days: 1
+
+  package:
+    runs-on: ubuntu-latest
+    if: >
+      (github.event_name == 'push' && github.ref == 'refs/heads/main')
+      || (github.event_name == 'workflow_dispatch' && github.event.inputs.build-packages == 'true')
+    needs: build
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '10.0.x'
+
+    - name: Restore dependencies
+      run: dotnet restore src/SunSharp.sln
+
+    - name: Build solution
+      run: dotnet build src/SunSharp.sln --configuration Release --no-restore
+
+    - name: Pack SunSharp
+      run: dotnet pack src/SunSharp/SunSharp.csproj --configuration Release --no-build --output ./artifacts
+
+    - name: Pack SunSharp.Redistribution
+      run: dotnet pack src/SunSharp.Redistribution/SunSharp.Redistribution.csproj --configuration Release --no-build --output ./artifacts
+
+    - name: Upload NuGet packages
+      uses: actions/upload-artifact@v4
+      with:
+        name: nuget-packages
+        path: ./artifacts/*.nupkg
+        retention-days: 1
+
+    - name: Upload NuGet symbols
+      uses: actions/upload-artifact@v4
+      with:
+        name: nuget-symbols
+        path: ./artifacts/*.snupkg
+        retention-days: 1
