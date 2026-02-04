@@ -1,0 +1,62 @@
+{
+  "$schema": "https://raw.githubusercontent.com/dotnet/docfx/main/schemas/docfx.schema.json",
+  "metadata": [
+    {
+      "src": [
+        {
+          "src": "../src",
+          "files": [
+            "SunSharp/SunSharp.csproj",
+            "SunSharp.Redistribution/SunSharp.Redistribution.csproj"
+          ]
+        }
+      ],
+      "output": "out/api",
+      "filter": "filterConfig.yml"
+    }
+  ],
+  "build": {
+    "content": [
+      {
+        "files": [
+          "**/*.{md,yml}"
+        ],
+        "exclude": [
+          "_site/**",
+          "obj/**"
+        ]
+      }
+    ],
+    "resource": [
+      {
+        "files": [
+          "images/**"
+        ]
+      }
+    ],
+    "output": "out/site",
+    "template": [
+      "default",
+      "modern"
+    ],
+    "globalMetadata": {
+      "_appName": "SunSharp",
+      "_appTitle": "SunSharp Documentation",
+      "_appFooter": "SunSharp is licensed under the MIT License.",
+      "_enableSearch": true,
+      "_enableNewTab": true,
+      "pdf": false
+    },
+    "fileMetadata": {
+      "_appLogoPath": {
+        "**/*": "images/logo.png"
+      }
+    },
+    "markdownEngineProperties": {
+      "markdigExtensions": [
+        "attributes",
+        "customcontainers"
+      ]
+    }
+  }
+}

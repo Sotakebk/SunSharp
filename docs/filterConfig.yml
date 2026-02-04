@@ -1,0 +1,9 @@
+### YamlMime:ManagedReference
+apiRules:
+- exclude:
+    uidRegex: ^System\.
+    type: Type
+- exclude:
+    hasAttribute:
+      uid: System.Runtime.CompilerServices.CompilerGeneratedAttribute
+    type: Type
