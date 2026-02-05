@@ -54,4 +54,4 @@ jobs:
         continue-on-error: true
 
       - name: Build examples
-        run: dotnet build examples/Examples.sln --configuration Release 
+        run: dotnet build examples/Examples.slnx --configuration Release 
