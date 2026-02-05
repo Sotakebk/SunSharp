@@ -37,15 +37,12 @@ jobs:
 
       - name: Run CodeGeneration tests
         run: dotnet test src/CodeGeneration.Tests/CodeGeneration.Tests.csproj --configuration Generation --verbosity normal --logger "trx;LogFileName=codegen-test-results.trx"
-        continue-on-error: false
 
       - name: Run unit tests
         run: dotnet test src/SunSharp.Tests/SunSharp.Tests.csproj --configuration Debug --verbosity normal --logger "trx;LogFileName=test-results.trx"
-        continue-on-error: true
 
       - name: Run integration tests
         run: dotnet test src/SunSharp.IntegrationTests/SunSharp.IntegrationTests.csproj --configuration Release --verbosity normal --logger "trx;LogFileName=integration-test-results.trx"
-        continue-on-error: true
 
       - name: Upload test results
         uses: actions/upload-artifact@v4
