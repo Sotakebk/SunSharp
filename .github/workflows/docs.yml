@@ -10,7 +10,7 @@ on:
         type: boolean
 
   push:
-    branches: ["main"]
+    branches: ["master"]
     paths:
       - "docs/**"
       - "SunSharp/**"
@@ -18,7 +18,7 @@ on:
       - ".github/workflows/docs.yml"
 
   pull_request:
-    branches: ["main"]
+    branches: ["master"]
     paths:
       - "docs/**"
       - "SunSharp/**"
