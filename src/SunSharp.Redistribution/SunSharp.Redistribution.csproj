@@ -16,6 +16,7 @@
     <RepositoryType>git</RepositoryType>
     <PackageTags>sunvox;music;wrapper</PackageTags>
     <AnalysisLevel>latest-recommended</AnalysisLevel>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageLicenseFile>license.txt</PackageLicenseFile>
     <IncludeSymbols>True</IncludeSymbols>
