@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using SunSharp.Modules;
 using SunSharp.Native;
 
 namespace SunSharp
@@ -101,6 +102,32 @@ namespace SunSharp
         /// </summary>
         public AudioChannels Channels { get; }
 
+#if SUNSHARP_RELEASE
+        internal SunVox(SunVoxLib sunVoxLib, AudioChannels channels, SunVoxVersion version, int sampleRate, bool singleThreaded, OutputType? outputType)
+        {
+            Library = sunVoxLib;
+            Channels = channels;
+            Version = version;
+            SampleRate = sampleRate;
+            SingleThreaded = singleThreaded;
+            OutputType = outputType;
+            Slots = new Slots(this);
+        }
+#else
+
+        internal SunVox(ISunVoxLib sunVoxLib, AudioChannels channels, SunVoxVersion version, int sampleRate, bool singleThreaded, OutputType? outputType)
+        {
+            Library = sunVoxLib;
+            Channels = channels;
+            Version = version;
+            SampleRate = sampleRate;
+            SingleThreaded = singleThreaded;
+            OutputType = outputType;
+            Slots = new Slots(this);
+        }
+
+#endif
+
         /// <summary>
         /// Create an instance of the engine with own audio stream and threading.
         /// </summary>
@@ -112,11 +139,10 @@ namespace SunSharp
         /// <param name="driver">Leave <see langword="null"/> for the value to be assigned by the engine.</param>
         /// <param name="noDebugOutput">Limit information sent to Standard Output.</param>
 #if SUNSHARP_RELEASE
-
-        public SunVox(ISunVoxLibC library, AudioChannels channels = AudioChannels.Stereo, uint? bufferSize = null, string? deviceIn = null, string? deviceOut = null, string? driver = null, bool noDebugOutput = true)
+        public static SunVox WithOwnAudioStream(ISunVoxLibC library, AudioChannels channels = AudioChannels.Stereo, uint? bufferSize = null, string? deviceIn = null, string? deviceOut = null, string? driver = null, bool noDebugOutput = true)
 #else
 
-        public SunVox(ISunVoxLib library, AudioChannels channels = AudioChannels.Stereo, uint? bufferSize = null, string? deviceIn = null, string? deviceOut = null, string? driver = null, bool noDebugOutput = true)
+        public static SunVox WithOwnAudioStream(ISunVoxLib library, AudioChannels channels = AudioChannels.Stereo, uint? bufferSize = null, string? deviceIn = null, string? deviceOut = null, string? driver = null, bool noDebugOutput = true)
 #endif
         {
             if (library == null)
@@ -133,16 +159,22 @@ namespace SunSharp
             var configuration = AssembleConfigurationParams(bufferSize, deviceIn, deviceOut, driver);
 
 #if SUNSHARP_RELEASE
-            Library = new SunVoxLib(library);
+            var wrappedLibrary = new SunVoxLib(library);
 #else
-            Library = library;
+            var wrappedLibrary = library;
 #endif
-            Version = Library.Initialize(sampleRate: -1, config: configuration, channels: channels, options: flags);
-            SampleRate = Library.GetSampleRate();
-            SingleThreaded = false;
-            OutputType = null;
-            Channels = channels;
-            Slots = new Slots(this);
+
+            var version = wrappedLibrary.Initialize(sampleRate: -1, config: configuration, channels: channels, options: flags);
+            try
+            {
+                var sampleRate = wrappedLibrary.GetSampleRate();
+                return new SunVox(wrappedLibrary, channels, version, sampleRate, false, null);
+            }
+            catch (Exception)
+            {
+                wrappedLibrary.Deinitialize();
+                throw;
+            }
         }
 
         /// <summary>
@@ -155,14 +187,13 @@ namespace SunSharp
         /// <param name="singleThreaded">Use to promise that audio callback and other methods will be called from one thread.</param>
         /// <param name="noDebugOutput">Limit information sent to Standard Output.</param>
         /// <exception cref="System.ArgumentException"></exception>
+        ///
 #if SUNSHARP_RELEASE
-
-        public SunVox(ISunVoxLibC library, int sampleRate, OutputType outputType, AudioChannels channels = AudioChannels.Stereo,
-            bool singleThreaded = false, bool noDebugOutput = true)
+        public static SunVox WithUserManagedAudio(ISunVoxLibC library, int sampleRate, OutputType outputType, AudioChannels channels = AudioChannels.Stereo, bool singleThreaded = false, bool noDebugOutput = true)
 #else
 
-        public SunVox(ISunVoxLib library, int sampleRate, OutputType outputType, AudioChannels channels = AudioChannels.Stereo,
-            bool singleThreaded = false, bool noDebugOutput = true)
+        public static SunVox WithUserManagedAudio(ISunVoxLib library, int sampleRate, OutputType outputType, AudioChannels channels = AudioChannels.Stereo, bool singleThreaded = false, bool noDebugOutput = true)
+
 #endif
         {
             if (library == null)
@@ -178,16 +209,23 @@ namespace SunSharp
             }
 
 #if SUNSHARP_RELEASE
-            Library = new SunVoxLib(library);
+            var wrappedLibrary = new SunVoxLib(library);
 #else
-            Library = library;
+            var wrappedLibrary = library;
 #endif
-            Version = Library.Initialize(sampleRate: sampleRate, channels: channels, options: flags);
-            SampleRate = Library.GetSampleRate();
-            SingleThreaded = false;
-            Channels = channels;
-            OutputType = outputType;
-            Slots = new Slots(this);
+
+            var version = wrappedLibrary.Initialize(sampleRate: sampleRate, channels: channels, options: flags);
+            try
+            {
+                // check if the library accepted the requested sample rate, as it may choose a different one if the requested one is not supported
+                sampleRate = wrappedLibrary.GetSampleRate();
+                return new SunVox(wrappedLibrary, channels, version, sampleRate, singleThreaded, outputType);
+            }
+            catch (Exception)
+            {
+                wrappedLibrary.Deinitialize();
+                throw;
+            }
         }
 
         private static string? AssembleConfigurationParams(uint? bufferSize, string? deviceIn, string? deviceOut, string? driver)
@@ -253,14 +291,21 @@ namespace SunSharp
                 }
 
                 Deinitialized = true;
-                try
+                if (disposing)
                 {
                     Library.Deinitialize();
                 }
-                catch (SunVoxException)
+                else
                 {
-                    // swallow exceptions on deinitialization
-                    // this is because Deinitialize may fail if already deinitialized elsewhere somehow
+                    try
+                    {
+                        Library.Deinitialize();
+                    }
+                    catch (SunVoxException)
+                    {
+                        // swallow exceptions on deinitialization
+                        // this is because Deinitialize may fail if already deinitialized elsewhere somehow
+                    }
                 }
             }
         }

@@ -7,7 +7,7 @@ public class SunVoxTests
 #if !SUNSHARP_RELEASE
 
     [Test, AutoData]
-    public void Constructor_WithOwnAudioStream_ShouldInitializeCorrectly(int sampleRate)
+    public void WithOwnAudioStream_ShouldInitializeCorrectly(int sampleRate)
     {
         // Arrange
         var mockLib = Substitute.For<ISunVoxLib>();
@@ -17,7 +17,7 @@ public class SunVoxTests
         mockLib.GetSampleRate().Returns(expectedSampleRate);
 
         // Act
-        using var sunvox = new SunVox(mockLib, AudioChannels.Stereo);
+        using var sunvox = SunVox.WithOwnAudioStream(mockLib, AudioChannels.Stereo);
 
         // Assert
         sunvox.Channels.Should().Be(AudioChannels.Stereo);
@@ -31,49 +31,49 @@ public class SunVoxTests
     }
 
     [Test]
-    public void Constructor_WithOwnAudioStream_WithBufferSize_ShouldIncludeInConfig()
+    public void WithOwnAudioStream_WithBufferSize_ShouldIncludeInConfig()
     {
         // Arrange
         var mockLib = Substitute.For<ISunVoxLib>();
         mockLib.Initialize(Arg.Any<int>(), Arg.Any<string?>(), Arg.Any<AudioChannels>(), Arg.Any<SunVoxInitOptions>()).Returns(new SunVoxVersion(2, 1, 0, 0));
 
         // Act
-        using var sunvox = new SunVox(mockLib, bufferSize: 2048);
+        using var sunvox = SunVox.WithOwnAudioStream(mockLib, bufferSize: 2048);
 
         // Assert
         mockLib.Received(1).Initialize(-1, Arg.Is<string?>(s => s != null && s.Contains("buffer=2048")), Arg.Any<AudioChannels>(), Arg.Any<SunVoxInitOptions>());
     }
 
     [Test]
-    public void Constructor_WithOwnAudioStream_WithDevices_ShouldIncludeInConfig()
+    public void WithOwnAudioStream_WithDevices_ShouldIncludeInConfig()
     {
         // Arrange
         var mockLib = Substitute.For<ISunVoxLib>();
         mockLib.Initialize(Arg.Any<int>(), Arg.Any<string?>(), Arg.Any<AudioChannels>(), Arg.Any<SunVoxInitOptions>()).Returns(new SunVoxVersion(2, 1, 0, 0));
 
         // Act
-        using var sunvox = new SunVox(mockLib, deviceIn: "input_device", deviceOut: "output_device");
+        using var sunvox = SunVox.WithOwnAudioStream(mockLib, deviceIn: "input_device", deviceOut: "output_device");
 
         // Assert
         mockLib.Received(1).Initialize(-1, Arg.Is<string?>(s => s != null && s.Contains("audiodevice_in=input_device") && s.Contains("audiodevice=output_device")), Arg.Any<AudioChannels>(), Arg.Any<SunVoxInitOptions>());
     }
 
     [Test]
-    public void Constructor_WithOwnAudioStream_WithDriver_ShouldIncludeInConfig()
+    public void WithOwnAudioStream_WithDriver_ShouldIncludeInConfig()
     {
         // Arrange
         var mockLib = Substitute.For<ISunVoxLib>();
         mockLib.Initialize(Arg.Any<int>(), Arg.Any<string?>(), Arg.Any<AudioChannels>(), Arg.Any<SunVoxInitOptions>()).Returns(new SunVoxVersion(2, 1, 0, 0));
 
         // Act
-        using var sunvox = new SunVox(mockLib, driver: "asio");
+        using var sunvox = SunVox.WithOwnAudioStream(mockLib, driver: "asio");
 
         // Assert
         mockLib.Received(1).Initialize(-1, Arg.Is<string?>(s => s != null && s.Contains("audiodriver=asio")), Arg.Any<AudioChannels>(), Arg.Any<SunVoxInitOptions>());
     }
 
     [Test, AutoData]
-    public void Constructor_WithUserCallback_Float32_ShouldInitializeCorrectly(int sampleRate)
+    public void WithUserManagedAudio_Float32_ShouldInitializeCorrectly(int sampleRate)
     {
         // Arrange
         var mockLib = Substitute.For<ISunVoxLib>();
@@ -81,7 +81,7 @@ public class SunVoxTests
         mockLib.GetSampleRate().Returns(sampleRate);
 
         // Act
-        using var sunvox = new SunVox(mockLib, sampleRate, OutputType.Float32, AudioChannels.Stereo);
+        using var sunvox = SunVox.WithUserManagedAudio(mockLib, sampleRate, OutputType.Float32, AudioChannels.Stereo);
 
         // Assert
         sunvox.Channels.Should().Be(AudioChannels.Stereo);
@@ -93,14 +93,14 @@ public class SunVoxTests
     }
 
     [Test, AutoData]
-    public void Constructor_WithUserCallback_Int16_ShouldInitializeCorrectly(int sampleRate)
+    public void WithUserManagedAudio_Int16_ShouldInitializeCorrectly(int sampleRate)
     {
         // Arrange
         var mockLib = Substitute.For<ISunVoxLib>();
         mockLib.Initialize(Arg.Any<int>(), Arg.Any<string?>(), Arg.Any<AudioChannels>(), Arg.Any<SunVoxInitOptions>()).Returns(new SunVoxVersion(2, 1, 0, 0));
 
         // Act
-        using var sunvox = new SunVox(mockLib, sampleRate, OutputType.Int16, AudioChannels.Stereo);
+        using var sunvox = SunVox.WithUserManagedAudio(mockLib, sampleRate, OutputType.Int16, AudioChannels.Stereo);
 
         // Assert
         sunvox.OutputType.Should().Be(OutputType.Int16);
@@ -109,42 +109,42 @@ public class SunVoxTests
     }
 
     [Test]
-    public void Constructor_WithUserCallback_ShouldCallInitializeWithCorrectFlags()
+    public void WithUserManagedAudio_ShouldCallInitializeWithCorrectFlags()
     {
         // Arrange
         var mockLib = Substitute.For<ISunVoxLib>();
         mockLib.Initialize(Arg.Any<int>(), Arg.Any<string?>(), Arg.Any<AudioChannels>(), Arg.Any<SunVoxInitOptions>()).Returns(new SunVoxVersion(2, 1, 0, 0));
 
         // Act
-        using var sunvox = new SunVox(mockLib, 44100, OutputType.Float32, singleThreaded: true, noDebugOutput: true);
+        using var sunvox = SunVox.WithUserManagedAudio(mockLib, 44100, OutputType.Float32, singleThreaded: true, noDebugOutput: true);
 
         // Assert
         mockLib.Received(1).Initialize(44100, null, AudioChannels.Stereo, SunVoxInitOptions.UserAudioCallback | SunVoxInitOptions.NoDebugOutput | SunVoxInitOptions.AudioFloat32 | SunVoxInitOptions.OneThread);
     }
 
     [Test]
-    public void Constructor_WithUserCallback_InvalidSampleRate_ShouldThrow()
+    public void WithUserManagedAudio_InvalidSampleRate_ShouldThrow()
     {
         // Arrange
         var mockLib = Substitute.For<ISunVoxLib>();
         mockLib.Initialize(Arg.Any<int>(), Arg.Any<string?>(), Arg.Any<AudioChannels>(), Arg.Any<SunVoxInitOptions>()).Returns(new SunVoxVersion(2, 1, 0, 0));
 
         // Act
-        Action act = () => new SunVox(mockLib, 0, OutputType.Float32);
+        Action act = () => SunVox.WithUserManagedAudio(mockLib, 0, OutputType.Float32);
 
         // Assert
         act.Should().Throw<ArgumentException>().WithMessage("*Invalid value: 0*").And.ParamName.Should().Be("sampleRate");
     }
 
     [Test]
-    public void Constructor_WithUserCallback_NegativeSampleRate_ShouldThrow()
+    public void WithUserManagedAudio_NegativeSampleRate_ShouldThrow()
     {
         // Arrange
         var mockLib = Substitute.For<ISunVoxLib>();
         mockLib.Initialize(Arg.Any<int>(), Arg.Any<string?>(), Arg.Any<AudioChannels>(), Arg.Any<SunVoxInitOptions>()).Returns(new SunVoxVersion(2, 1, 0, 0));
 
         // Act
-        Action act = () => new SunVox(mockLib, -1, OutputType.Float32);
+        Action act = () => SunVox.WithUserManagedAudio(mockLib, -1, OutputType.Float32);
 
         // Assert
         act.Should().Throw<ArgumentException>().WithMessage("*Invalid value: -1*").And.ParamName.Should().Be("sampleRate");
@@ -160,7 +160,7 @@ public class SunVoxTests
         mockLib.GetSampleRate().Returns(48000);
 
         // Act
-        using var sunvox = new SunVox(mockLib, AudioChannels.Stereo);
+        using var sunvox = SunVox.WithOwnAudioStream(mockLib, AudioChannels.Stereo);
 
         // Assert
         sunvox.Version.Should().Be(expectedVersion);
@@ -177,7 +177,7 @@ public class SunVoxTests
         mockLib.Initialize(Arg.Any<int>(), Arg.Any<string?>(), Arg.Any<AudioChannels>(), Arg.Any<SunVoxInitOptions>()).Returns(new SunVoxVersion(2, 1, 0, 0));
 
         // Act
-        using var sunvox = new SunVox(mockLib);
+        using var sunvox = SunVox.WithOwnAudioStream(mockLib);
 
         // Assert
         sunvox.NeedsUserCallback.Should().BeFalse();
@@ -191,7 +191,7 @@ public class SunVoxTests
         mockLib.Initialize(Arg.Any<int>(), Arg.Any<string?>(), Arg.Any<AudioChannels>(), Arg.Any<SunVoxInitOptions>()).Returns(new SunVoxVersion(2, 1, 0, 0));
 
         // Act
-        using var sunvox = new SunVox(mockLib, 44100, OutputType.Float32);
+        using var sunvox = SunVox.WithUserManagedAudio(mockLib, 44100, OutputType.Float32);
 
         // Assert
         sunvox.NeedsUserCallback.Should().BeTrue();
@@ -203,7 +203,7 @@ public class SunVoxTests
         // Arrange
         var mockLib = Substitute.For<ISunVoxLib>();
         mockLib.Initialize(Arg.Any<int>(), Arg.Any<string?>(), Arg.Any<AudioChannels>(), Arg.Any<SunVoxInitOptions>()).Returns(new SunVoxVersion(2, 1, 0, 0));
-        using var sunvox = new SunVox(mockLib);
+        using var sunvox = SunVox.WithOwnAudioStream(mockLib);
 
         // Act
         sunvox.UpdateInputDevices();
@@ -219,7 +219,7 @@ public class SunVoxTests
         var mockLib = Substitute.For<ISunVoxLib>();
         mockLib.Initialize(Arg.Any<int>(), Arg.Any<string?>(), Arg.Any<AudioChannels>(), Arg.Any<SunVoxInitOptions>()).Returns(new SunVoxVersion(2, 1, 0, 0));
         mockLib.AudioCallback(Arg.Any<float[]>(), Arg.Any<AudioChannels>(), Arg.Any<int>(), Arg.Any<uint>()).Returns(true);
-        using var sunvox = new SunVox(mockLib, 44100, OutputType.Float32);
+        using var sunvox = SunVox.WithUserManagedAudio(mockLib, 44100, OutputType.Float32);
         var buffer = new float[256];
 
         // Act
@@ -236,7 +236,7 @@ public class SunVoxTests
         // Arrange
         var mockLib = Substitute.For<ISunVoxLib>();
         mockLib.Initialize(Arg.Any<int>(), Arg.Any<string?>(), Arg.Any<AudioChannels>(), Arg.Any<SunVoxInitOptions>()).Returns(new SunVoxVersion(2, 1, 0, 0));
-        using var sunvox = new SunVox(mockLib, 44100, OutputType.Int16);
+        using var sunvox = SunVox.WithUserManagedAudio(mockLib, 44100, OutputType.Int16);
         var buffer = new float[256];
 
         // Act
@@ -252,7 +252,7 @@ public class SunVoxTests
         // Arrange
         var mockLib = Substitute.For<ISunVoxLib>();
         mockLib.Initialize(Arg.Any<int>(), Arg.Any<string?>(), Arg.Any<AudioChannels>(), Arg.Any<SunVoxInitOptions>()).Returns(new SunVoxVersion(2, 1, 0, 0));
-        using var sunvox = new SunVox(mockLib);
+        using var sunvox = SunVox.WithOwnAudioStream(mockLib);
         var buffer = new float[256];
 
         // Act
@@ -269,7 +269,7 @@ public class SunVoxTests
         var mockLib = Substitute.For<ISunVoxLib>();
         mockLib.Initialize(Arg.Any<int>(), Arg.Any<string?>(), Arg.Any<AudioChannels>(), Arg.Any<SunVoxInitOptions>()).Returns(new SunVoxVersion(2, 1, 0, 0));
         mockLib.AudioCallback(Arg.Any<float[]>(), Arg.Any<AudioChannels>(), Arg.Any<float[]>(), Arg.Any<AudioChannels>(), Arg.Any<int>(), Arg.Any<uint>()).Returns(true);
-        using var sunvox = new SunVox(mockLib, 44100, OutputType.Float32);
+        using var sunvox = SunVox.WithUserManagedAudio(mockLib, 44100, OutputType.Float32);
         var outputBuffer = new float[256];
         var inputBuffer = new float[256];
 
@@ -288,7 +288,7 @@ public class SunVoxTests
         var mockLib = Substitute.For<ISunVoxLib>();
         mockLib.Initialize(Arg.Any<int>(), Arg.Any<string?>(), Arg.Any<AudioChannels>(), Arg.Any<SunVoxInitOptions>()).Returns(new SunVoxVersion(2, 1, 0, 0));
         mockLib.AudioCallback(Arg.Any<float[]>(), Arg.Any<AudioChannels>(), Arg.Any<short[]>(), Arg.Any<AudioChannels>(), Arg.Any<int>(), Arg.Any<uint>()).Returns(true);
-        using var sunvox = new SunVox(mockLib, 44100, OutputType.Float32);
+        using var sunvox = SunVox.WithUserManagedAudio(mockLib, 44100, OutputType.Float32);
         var outputBuffer = new float[256];
         var inputBuffer = new short[256];
 
@@ -307,7 +307,7 @@ public class SunVoxTests
         var mockLib = Substitute.For<ISunVoxLib>();
         mockLib.Initialize(Arg.Any<int>(), Arg.Any<string?>(), Arg.Any<AudioChannels>(), Arg.Any<SunVoxInitOptions>()).Returns(new SunVoxVersion(2, 1, 0, 0));
         mockLib.AudioCallback(Arg.Any<short[]>(), Arg.Any<AudioChannels>(), Arg.Any<int>(), Arg.Any<uint>()).Returns(true);
-        using var sunvox = new SunVox(mockLib, 44100, OutputType.Int16);
+        using var sunvox = SunVox.WithUserManagedAudio(mockLib, 44100, OutputType.Int16);
         var buffer = new short[256];
 
         // Act
@@ -324,7 +324,7 @@ public class SunVoxTests
         // Arrange
         var mockLib = Substitute.For<ISunVoxLib>();
         mockLib.Initialize(Arg.Any<int>(), Arg.Any<string?>(), Arg.Any<AudioChannels>(), Arg.Any<SunVoxInitOptions>()).Returns(new SunVoxVersion(2, 1, 0, 0));
-        using var sunvox = new SunVox(mockLib, 44100, OutputType.Float32);
+        using var sunvox = SunVox.WithUserManagedAudio(mockLib, 44100, OutputType.Float32);
         var buffer = new short[256];
 
         // Act
@@ -341,7 +341,7 @@ public class SunVoxTests
         var mockLib = Substitute.For<ISunVoxLib>();
         mockLib.Initialize(Arg.Any<int>(), Arg.Any<string?>(), Arg.Any<AudioChannels>(), Arg.Any<SunVoxInitOptions>()).Returns(new SunVoxVersion(2, 1, 0, 0));
         mockLib.AudioCallback(Arg.Any<short[]>(), Arg.Any<AudioChannels>(), Arg.Any<float[]>(), Arg.Any<AudioChannels>(), Arg.Any<int>(), Arg.Any<uint>()).Returns(true);
-        using var sunvox = new SunVox(mockLib, 44100, OutputType.Int16);
+        using var sunvox = SunVox.WithUserManagedAudio(mockLib, 44100, OutputType.Int16);
         var outputBuffer = new short[256];
         var inputBuffer = new float[256];
 
@@ -360,7 +360,7 @@ public class SunVoxTests
         var mockLib = Substitute.For<ISunVoxLib>();
         mockLib.Initialize(Arg.Any<int>(), Arg.Any<string?>(), Arg.Any<AudioChannels>(), Arg.Any<SunVoxInitOptions>()).Returns(new SunVoxVersion(2, 1, 0, 0));
         mockLib.AudioCallback(Arg.Any<short[]>(), Arg.Any<AudioChannels>(), Arg.Any<short[]>(), Arg.Any<AudioChannels>(), Arg.Any<int>(), Arg.Any<uint>()).Returns(true);
-        using var sunvox = new SunVox(mockLib, 44100, OutputType.Int16);
+        using var sunvox = SunVox.WithUserManagedAudio(mockLib, 44100, OutputType.Int16);
         var outputBuffer = new short[256];
         var inputBuffer = new short[256];
 
@@ -379,7 +379,7 @@ public class SunVoxTests
         var mockLib = Substitute.For<ISunVoxLib>();
         mockLib.Initialize(Arg.Any<int>(), Arg.Any<string?>(), Arg.Any<AudioChannels>(), Arg.Any<SunVoxInitOptions>()).Returns(new SunVoxVersion(2, 1, 0, 0));
         mockLib.GetTicks().Returns(12345u);
-        using var sunvox = new SunVox(mockLib);
+        using var sunvox = SunVox.WithOwnAudioStream(mockLib);
 
         // Act
         var result = sunvox.GetTicks();
@@ -396,7 +396,7 @@ public class SunVoxTests
         var mockLib = Substitute.For<ISunVoxLib>();
         mockLib.Initialize(Arg.Any<int>(), Arg.Any<string?>(), Arg.Any<AudioChannels>(), Arg.Any<SunVoxInitOptions>()).Returns(new SunVoxVersion(2, 1, 0, 0));
         mockLib.GetTicksPerSecond().Returns(1000u);
-        using var sunvox = new SunVox(mockLib);
+        using var sunvox = SunVox.WithOwnAudioStream(mockLib);
 
         // Act
         var result = sunvox.GetTicksPerSecond();
@@ -413,7 +413,7 @@ public class SunVoxTests
         var mockLib = Substitute.For<ISunVoxLib>();
         mockLib.Initialize(Arg.Any<int>(), Arg.Any<string?>(), Arg.Any<AudioChannels>(), Arg.Any<SunVoxInitOptions>()).Returns(new SunVoxVersion(2, 1, 0, 0));
         mockLib.GetLog(100).Returns("Test log message");
-        using var sunvox = new SunVox(mockLib);
+        using var sunvox = SunVox.WithOwnAudioStream(mockLib);
 
         // Act
         var result = sunvox.GetLog(100);
@@ -430,7 +430,7 @@ public class SunVoxTests
         var mockLib = Substitute.For<ISunVoxLib>();
         mockLib.Initialize(Arg.Any<int>(), Arg.Any<string?>(), Arg.Any<AudioChannels>(), Arg.Any<SunVoxInitOptions>()).Returns(new SunVoxVersion(2, 1, 0, 0));
         mockLib.GetLog(Arg.Any<int>()).Returns((string?)null);
-        using var sunvox = new SunVox(mockLib);
+        using var sunvox = SunVox.WithOwnAudioStream(mockLib);
 
         // Act
         var result = sunvox.GetLog(100);
@@ -445,7 +445,7 @@ public class SunVoxTests
         // Arrange
         var mockLib = Substitute.For<ISunVoxLib>();
         mockLib.Initialize(Arg.Any<int>(), Arg.Any<string?>(), Arg.Any<AudioChannels>(), Arg.Any<SunVoxInitOptions>()).Returns(new SunVoxVersion(2, 1, 0, 0));
-        using var sunvox = new SunVox(mockLib);
+        using var sunvox = SunVox.WithOwnAudioStream(mockLib);
 
         // Act
         sunvox.Dispose();
@@ -460,7 +460,7 @@ public class SunVoxTests
         // Arrange
         var mockLib = Substitute.For<ISunVoxLib>();
         mockLib.Initialize(Arg.Any<int>(), Arg.Any<string?>(), Arg.Any<AudioChannels>(), Arg.Any<SunVoxInitOptions>()).Returns(new SunVoxVersion(2, 1, 0, 0));
-        using var sunvox = new SunVox(mockLib);
+        using var sunvox = SunVox.WithOwnAudioStream(mockLib);
 
         // Act
         sunvox.Dispose();
@@ -477,7 +477,7 @@ public class SunVoxTests
         // Arrange
         var mockLib = Substitute.For<ISunVoxLib>();
         mockLib.Initialize(Arg.Any<int>(), Arg.Any<string?>(), Arg.Any<AudioChannels>(), Arg.Any<SunVoxInitOptions>()).Returns(new SunVoxVersion(2, 1, 0, 0));
-        using var sunvox = new SunVox(mockLib);
+        using var sunvox = SunVox.WithOwnAudioStream(mockLib);
 
         // Act
         sunvox.Deinitialized.Should().BeFalse();

@@ -58,12 +58,29 @@ Depending on the engine, a dedicated package may be available:
 - Unity: [SunSharpUnity](https://github.com/Sotakebk/SunSharpUnity);
 - Godot: (in progress)
 
+If you need testability in your project, the API has full interface coverage, allowing you to mock the SunVox library calls with ease.
+
 ### How To Use
 
 Quick start example:
 
 ```csharp
-// TODO
+using SunSharp;
+using SunSharp.Redistribution;
+
+var libc = SunVoxLibraryLoader.Load();
+using var sunVox = SunVox.WithOwnAudioStream(libc);
+var slot = sunVox.Slots[0];
+
+slot.Open();
+slot.Load("bass_and_melody.sunvox");
+slot.SetAutomaticStop(false);
+slot.StartPlaybackFromBeginning();
+
+do
+{
+    Thread.Sleep(100);
+} while (slot.IsPlaying() || slot.GetCurrentSignalLevel() > 0);
 ```
 
 There is code available in the [examples](/examples) folder of the repository that contains source code for simple console applications demonstrating the usage of the wrapper.

@@ -22,7 +22,7 @@ namespace SunSharp.Redistribution
     /// any memory leaks. You should keep the same library instance loaded in most use-cases.
     /// </para>
     /// </remarks>
-    public static class LibraryLoader
+    public static class SunVoxLibraryLoader
     {
         private static readonly object Lock = new object();
 

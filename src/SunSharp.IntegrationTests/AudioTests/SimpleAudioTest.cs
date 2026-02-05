@@ -13,11 +13,8 @@ internal class SimpleAudioTest : BaseAudioTest
         const string hash = "FLBVvS3nffTDsajOlBeceZsIero8UpCd4RFwyXhJBVM=";
         const int sampleRate = 44100;
 
-#if SUNSHARP_RELEASE
-        using var sunVox = new SunVox(_libc!, 44100, OutputType.Int16);
-#else
-        using var sunVox = new SunVox(Lib, 44100, OutputType.Int16);
-#endif
+        using var sunVox = MakeSunVoxWithUserManagedAudio(sampleRate, OutputType.Int16);
+
         if (!sunVox.Slots.TryOpenNewSlot(out var slot))
         {
             Assert.Fail("Failed to open new slot");

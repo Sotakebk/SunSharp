@@ -44,7 +44,11 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <DefineConstants>SUNSHARP_RELEASE</DefineConstants>
   </PropertyGroup>
-  
+
+  <PropertyGroup Condition="'$(SolutionName)'=='Examples'">
+    <DefineConstants>SUNSHARP_RELEASE</DefineConstants>
+  </PropertyGroup>
+
   <Target Name="PreparePackageReleaseNotesFromFile" BeforeTargets="GenerateNuspec">
     <ReadLinesFromFile File="./RELEASE-NOTES.txt">
       <Output TaskParameter="Lines" ItemName="ReleaseNoteLines" />

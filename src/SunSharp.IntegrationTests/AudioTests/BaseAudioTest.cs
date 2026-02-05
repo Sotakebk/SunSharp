@@ -96,4 +96,15 @@ internal class BaseAudioTest : BaseIntegrationTest
         var hashBytes = sha256.ComputeHash(data);
         return Convert.ToBase64String(hashBytes);
     }
+
+
+    protected SunVox MakeSunVoxWithUserManagedAudio(int sampleRate, OutputType outputType)
+    {
+
+#if SUNSHARP_RELEASE
+        return SunVox.WithUserManagedAudio(_libc!, sampleRate, outputType);
+#else
+        return SunVox.WithUserManagedAudio(Lib, sampleRate, outputType);
+#endif
+    }
 }

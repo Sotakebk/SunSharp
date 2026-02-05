@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using SunSharp.Modules;
 using SunSharp.Native;
 
 namespace SunSharp
@@ -11,6 +12,11 @@ namespace SunSharp
     {
         /// <inheritdoc cref="Synthesizer.Slot"/>
         ISlot Slot { get; }
+
+#if !SUNSHARP_GENERATION
+        /// <inheritdoc cref="Synthesizer.Output"/>
+        IOutputModuleHandle Output { get; }
+#endif
 
         /// <inheritdoc cref="Synthesizer.GetUpperModuleCount"/>
         int GetUpperModuleCount();
@@ -76,6 +82,13 @@ namespace SunSharp
         public Slot Slot { get; }
 
         ISlot ISynthesizer.Slot => Slot;
+
+#if !SUNSHARP_GENERATION
+
+        public OutputModuleHandle Output => GetModule(0).AsOutput();
+
+        IOutputModuleHandle ISynthesizer.Output => GetModule(0).AsOutput();
+#endif
 
         internal Synthesizer(Slot slot)
         {

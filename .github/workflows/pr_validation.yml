@@ -1,0 +1,57 @@
+name: PR Validation
+
+on:
+  pull_request:
+    branches: ["main"]
+
+permissions:
+  contents: read
+
+run-name: Build and Deploy Documentation
+
+jobs:
+  build-docs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "10.0.x"
+
+      - name: Install DocFX
+        run: dotnet tool install -g docfx
+
+      - name: Generate API metadata
+        run: docfx metadata docs/docfx.json
+
+      - name: Build documentation
+        run: docfx build docs/docfx.json
+
+  build-and-run-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "10.0.x"
+
+      - name: Run CodeGeneration tests
+        run: dotnet test src/CodeGeneration.Tests/CodeGeneration.Tests.csproj --configuration Generation --verbosity normal --logger "trx;LogFileName=codegen-test-results.trx"
+        continue-on-error: false
+
+      - name: Run unit tests
+        run: dotnet test src/SunSharp.Tests/SunSharp.Tests.csproj --configuration Debug --verbosity normal --logger "trx;LogFileName=test-results.trx"
+        continue-on-error: true
+
+      - name: Run integration tests
+        run: dotnet test src/SunSharp.IntegrationTests/SunSharp.IntegrationTests.csproj --configuration Release --verbosity normal --logger "trx;LogFileName=integration-test-results.trx"
+        continue-on-error: true
+
+      - name: Build examples
+        run: dotnet build examples/Examples.sln --configuration Release 

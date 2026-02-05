@@ -18,13 +18,13 @@ public abstract class BaseIntegrationTest
     [OneTimeSetUp]
     protected virtual void OneTimeSetUp()
     {
-        _libc = LibraryLoader.Load();
+        _libc = SunVoxLibraryLoader.Load();
     }
 
     [OneTimeTearDown]
     protected virtual void OneTimeTearDown()
     {
-        LibraryLoader.Unload();
+        SunVoxLibraryLoader.Unload();
     }
 
     [SetUp]

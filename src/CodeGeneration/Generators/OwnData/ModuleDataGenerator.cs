@@ -46,41 +46,29 @@ public sealed partial class ModuleDataGenerator : BaseGenerator, IGeneratorProvi
 
     private static KnownModuleData ReadModuleDataFromSunVox()
     {
-        bool loaded = false;
-        try
-        {
-            var instance = LibraryLoader.Load();
-            loaded = true;
-            var thinWrapper = new SunVoxLib(instance);
+        var instance = SunVoxLibraryLoader.Load();
+        var thinWrapper = new SunVoxLib(instance);
 #if SUNSHARP_RELEASE
-            using var sunVox = new SunVox(instance, 48000, OutputType.Float32, singleThreaded: true, noDebugOutput: false);
+        using var sunVox = SunVox.WithUserManagedAudio(instance, 48000, OutputType.Float32, singleThreaded: true, noDebugOutput: false);
 #else
-            using var sunVox = new SunVox(thinWrapper, 48000, OutputType.Float32, singleThreaded: true, noDebugOutput: false);
+        using var sunVox = SunVox.WithUserManagedAudio(thinWrapper, 48000, OutputType.Float32, singleThreaded: true, noDebugOutput: false);
 #endif
-            var slot = sunVox.Slots[0];
+        var slot = sunVox.Slots[0];
 
-            slot.Open();
-            foreach (var module in KnownModuleTypes.ModuleTypes.Where(m => m.Index > 0))
-            {
-                thinWrapper.CreateModule(0, module.InternalName, module.InternalName);
-            }
-            var modules = CreateModuleDescriptions(slot);
-
-            slot.Close();
-            Console.WriteLine("Logs: " + sunVox.GetLog(0xFFFF));
-
-            return new KnownModuleData()
-            {
-                Modules = modules
-            };
-        }
-        finally
+        slot.Open();
+        foreach (var module in KnownModuleTypes.ModuleTypes.Where(m => m.Index > 0))
         {
-            if (loaded)
-            {
-                LibraryLoader.Unload();
-            }
+            thinWrapper.CreateModule(0, module.InternalName, module.InternalName);
         }
+        var modules = CreateModuleDescriptions(slot);
+
+        slot.Close();
+        Console.WriteLine("Logs: " + sunVox.GetLog(0xFFFF));
+
+        return new KnownModuleData()
+        {
+            Modules = modules
+        };
     }
 
     private static Dictionary<string, ModuleDescription> CreateModuleDescriptions(Slot slot)

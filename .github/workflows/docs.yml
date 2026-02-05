@@ -4,26 +4,26 @@ on:
   workflow_dispatch:
     inputs:
       publish:
-        description: 'Whether to publish the generated documentation to GitHub Pages.'
+        description: "Whether to publish the generated documentation to GitHub Pages."
         required: false
-        default: 'false'
+        default: "false"
         type: boolean
-    
+
   push:
     branches: ["main"]
     paths:
-      - 'docs/**'
-      - 'SunSharp/**'
-      - 'SunSharp.Redistribution/**'
-      - '.github/workflows/docs.yml'
+      - "docs/**"
+      - "SunSharp/**"
+      - "SunSharp.Redistribution/**"
+      - ".github/workflows/docs.yml"
 
   pull_request:
     branches: ["main"]
     paths:
-      - 'docs/**'
-      - 'SunSharp/**'
-      - 'SunSharp.Redistribution/**'
-      - '.github/workflows/docs.yml'
+      - "docs/**"
+      - "SunSharp/**"
+      - "SunSharp.Redistribution/**"
+      - ".github/workflows/docs.yml"
 
 permissions:
   contents: read
@@ -46,7 +46,7 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '10.0.x'
+          dotnet-version: "10.0.x"
 
       - name: Install DocFX
         run: dotnet tool install -g docfx
