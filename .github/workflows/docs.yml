@@ -1,0 +1,91 @@
+name: Documentation
+
+on:
+  workflow_dispatch:
+    inputs:
+      publish:
+        description: "Whether to publish the generated documentation to GitHub Pages."
+        required: false
+        default: "false"
+        type: boolean
+
+  push:
+    branches: ["master"]
+    paths:
+      - "docs/**"
+      - "SunSharp/**"
+      - "SunSharp.Redistribution/**"
+      - ".github/workflows/docs.yml"
+
+  pull_request:
+    branches: ["master"]
+    paths:
+      - "docs/**"
+      - "SunSharp/**"
+      - "SunSharp.Redistribution/**"
+      - ".github/workflows/docs.yml"
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+run-name: Build and Deploy Documentation
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "10.0.x"
+
+      - name: Install DocFX
+        run: dotnet tool install -g docfx
+
+      - name: Restore dependencies
+        run: dotnet restore src/SunSharp.sln
+
+      - name: Generate API metadata
+        run: docfx metadata docs/docfx.json
+
+      - name: Build documentation
+        run: docfx build docs/docfx.json
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: docs-site
+          path: docs/out/site
+          retention-days: 1
+
+      - name: Upload Pages artifact
+        if: >
+          (github.event_name == 'push' && github.ref == 'refs/heads/main') 
+          || (github.event_name == 'workflow_dispatch' && github.event.inputs.publish == 'true')
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs/out/site
+          retention-days: 1
+
+  deploy:
+    if: >
+      (github.event_name == 'push' && github.ref == 'refs/heads/main')
+      || (github.event_name == 'workflow_dispatch' && github.event.inputs.publish == 'true')
+    runs-on: ubuntu-latest
+    needs: build
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

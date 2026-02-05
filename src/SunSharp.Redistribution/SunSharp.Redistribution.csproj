@@ -1,0 +1,75 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <AssemblyName>SunSharp.Redistribution</AssemblyName>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <PackageId>Sotakebk.SunSharp.Redistribution</PackageId>
+    <Title>SunSharp.Redistribution</Title>
+    <Version>2.0.0-dev20260205</Version>
+    <AssemblyVersion>0.0.0.0</AssemblyVersion>
+    <Authors>Sotakebk</Authors>
+    <Product>SunSharp.Redistribution</Product>
+    <Description>SunVox Library redistribution for SunSharp.</Description>
+    <PackageProjectUrl>https://github.com/Sotakebk/SunSharp</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/Sotakebk/SunSharp.git</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>sunvox;music;wrapper</PackageTags>
+    <AnalysisLevel>latest-recommended</AnalysisLevel>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageLicenseFile>license.txt</PackageLicenseFile>
+    <IncludeSymbols>True</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <Nullable>enable</Nullable>
+    <WarningLevel>9999</WarningLevel>
+    <WarningsAsErrors>Nullable</WarningsAsErrors>
+    <Configurations>Debug;Release;Generation</Configurations>
+  </PropertyGroup>
+
+  <Target Name="PreparePackageReleaseNotesFromFile" BeforeTargets="GenerateNuspec">
+    <ReadLinesFromFile File="./RELEASE-NOTES.txt">
+      <Output TaskParameter="Lines" ItemName="ReleaseNoteLines" />
+    </ReadLinesFromFile>
+    <PropertyGroup>
+      <PackageReleaseNotes>@(ReleaseNoteLines, '%0a')</PackageReleaseNotes>
+    </PropertyGroup>
+  </Target>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SunSharp\SunSharp.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="LICENSE.txt">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Update="README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Update="RELEASE-NOTES.txt">
+      <PackagePath>\</PackagePath>
+      <Pack>True</Pack>
+    </None>
+    <Content Include="runtimes\linux-x64\native\sunvox.so" Pack="true" PackagePath="runtimes\linux-x64\native" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="runtimes\linux-x86\native\sunvox.so" Pack="true" PackagePath="runtimes\linux-x86\native" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="runtimes\linux-arm64\native\sunvox.so" Pack="true" PackagePath="runtimes\linux-arm64\native" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="runtimes\linux-arm\native\sunvox.so" Pack="true" PackagePath="runtimes\linux-arm\native" CopyToOutputDirectory="PreserveNewest" />
+
+    <Content Include="runtimes\osx-arm64\native\sunvox.dylib" Pack="true" PackagePath="runtimes\osx-arm64\native" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="runtimes\osx-x64\native\sunvox.dylib" Pack="true" PackagePath="runtimes\osx-x64\native" CopyToOutputDirectory="PreserveNewest" />
+
+    <Content Include="runtimes\win-x64\native\sunvox.dll" Pack="true" PackagePath="runtimes\win-x64\native" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="runtimes\win-x86\native\sunvox.dll" Pack="true" PackagePath="runtimes\win-x86\native" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Generation|AnyCPU'">
+    <DefineConstants>SUNSHARP_GENERATION</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DefineConstants>SUNSHARP_RELEASE</DefineConstants>
+  </PropertyGroup>
+  
+</Project>

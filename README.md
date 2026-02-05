@@ -1,79 +1,115 @@
 # SunSharp
-*[SunVox](https://warmplace.ru/soft/sunvox/)* is a small, fast and powerful modular synthesizer with pattern-based sequencer (tracker). *SunVox Library* is the main part of the *SunVox* engine without a graphical interface.
 
-*SunSharp* is a wrapper and helper library for *SunVox Library*, written in C#. The library contains a thin wrapper, allowing for comfortably making calls with C#-style methods and objects, as well as an intuitive object-oriented wrapper, managing a few more things for the user. Additionally, additional abstractions and mechanisms are provided to help implement dynamic music in games and other software.
+SunSharp is a C# wrapper and helper library for the [SunVox Library](https://warmplace.ru/soft/sunvox/) - a small, fast and powerful modular synthesizer with a pattern-based sequencer (tracker).
 
-Target SunVox version: 2.1b.
-## How to install
+The objective of this project is to provide easy-to-use and discoverable C# bindings for the SunVox Library. The purpose is to enable developers to use SunVox as a sound engine and/or a dynamic music subsystem in their C# applications, including games.
+
+SunVox is created and maintained by [Alexander Zolotov](https://warmplace.ru/).
+
+Table of Contents
+
+- [SunSharp](#sunsharp)
+  - [State of the project](#state-of-the-project)
+  - [Where to start](#where-to-start)
+    - [How To Use](#how-to-use)
+  - [Contributing](#contributing)
+  - [Questions \& Answers](#questions--answers)
+
+## State of the project
+
+While the project is currently in active development, the latest (dev) NuGet packages should be reasonably stable and usable in a project.
+
+The targeted SunVox version is 2.1.4.
+
+The following features are planned or in progress:
+
+- complete test coverage;
+- separate build of the SunVox library;
+  - own extensions to the SunVox library:
+    - separate audio I/O per slot;
+    - conditional effect execution;
+    - callback effects;
+    - log callback function instead of STDOUT logging;
+    - 3D positioning/panning module;
+- updated Unity package;
+- Godot package;
+- more examples and documentation;
+- hosting the library in a separate process to avoid crashes;
+- WASM support (SunVox has support for this, but it needs to be integrated into the wrapper)
+
+Any contributions are welcome!
+
+## Where to start
+
+For API reference and documentation, please visit the [GitHub Pages site](https://sotakebk.github.io/SunSharp/).
+Information about the underlying SunVox Library can be found on the [official SunVox website](https://warmplace.ru/soft/sunvox/sunvox_lib.php).
+
 Two packages are available on NuGet:
-* [SunSharp](https://www.nuget.org/packages/Sotakebk.SunSharp/) ![Nuget](https://img.shields.io/nuget/v/Sotakebk.SunSharp) ![Nuget](https://img.shields.io/nuget/dt/Sotakebk.SunSharp)
-* [SunSharp.Redistribution](https://www.nuget.org/packages/Sotakebk.SunSharp.Redistribution/)  ![Nuget](https://img.shields.io/nuget/v/Sotakebk.SunSharp.Redistribution) ![Nuget](https://img.shields.io/nuget/dt/Sotakebk.SunSharp.Redistribution)
 
-To use the wrapper, install the *SunSharp* package.
-To get automatically managed binaries, install the *SunSharp.Redistribution* package. Alternatively, you may load the library and provide necessary function delegates yourself (see: *SunSharp.LibraryLoading::ProxyClass* and *SunSharp.Redistribution::LibraryLoader*).
+- [SunSharp](https://www.nuget.org/packages/Sotakebk.SunSharp/) ![Nuget](https://img.shields.io/nuget/vpre/Sotakebk.SunSharp) ![Nuget](https://img.shields.io/nuget/dt/Sotakebk.SunSharp)
+- [SunSharp.Redistribution](https://www.nuget.org/packages/Sotakebk.SunSharp.Redistribution/)  ![Nuget](https://img.shields.io/nuget/vpre/Sotakebk.SunSharp.Redistribution) ![Nuget](https://img.shields.io/nuget/dt/Sotakebk.SunSharp.Redistribution)
 
-Platforms supported by the binaries in *SunSharp.Redistribution* are:
-* Windows x86, x86_64;
-* Linux x86, x86_64, arm64;
-* macOS x86_64, arm64.
+For future development, please consider using the `2.0.0-dev` pre-release versions of the packages, as they contain major improvements, new features, and bug fixes.
 
-There is also a [Unity package](https://github.com/Sotakebk/SunSharpUnity).
+The `SunSharp` package contains the C# wrapper code only, while the `SunSharp.Redistribution` package contains pre-built SunVox library binaries for multiple platforms and a loader for them. Depending on your use case, you may choose to use only the `SunSharp` package and provide your own SunVox library binaries. If you are working with a game engine, you may need to bind the library manually.
 
-## How to start
-### Object wrapper
-After obtaining an instance of *ISunVoxLib* representing the loaded library, you may create an 'instance' of the engine. All library functions are grouped into objects that make sense together.
+Depending on the engine, a dedicated package may be available:
 
-Here's an example that plays a song, then waits until it's finished:
+- Unity: [SunSharpUnity](https://github.com/Sotakebk/SunSharpUnity);
+- Godot: (in progress)
+
+If you need testability in your project, the API has full interface coverage, allowing you to mock the SunVox library calls with ease.
+
+### How To Use
+
+Quick start example:
+
 ```csharp
-using SunSharp.ObjectWrapper;
-/* ... */
-var sv = new SunVox(lib))
-var slot = sv.Slots[0];
+using SunSharp;
+using SunSharp.Redistribution;
+
+var libc = SunVoxLibraryLoader.Load();
+using var sunVox = SunVox.WithOwnAudioStream(libc);
+var slot = sunVox.Slots[0];
+
 slot.Open();
-slot.Load("song.sunvox");
-slot.SetAutostop(true);
-slot.Rewind(0);
-slot.Play();
-int line = 0;
-while (line != slot.GetSongLengthInLines() - 1 || slot.IsPlaying())
-    line = slot.GetCurrentLine();
+slot.Load("bass_and_melody.sunvox");
+slot.SetAutomaticStop(false);
+slot.StartPlaybackFromBeginning();
 
-WriteLine("Song finished");
-slot.Close();
-sv.Dispose();
+do
+{
+    Thread.Sleep(100);
+} while (slot.IsPlaying() || slot.GetCurrentSignalLevel() > 0);
 ```
-### Thin wrapper
-If you wish to use the functions as provided, you may use the thin wrapper. All the calls are directly available from the *ISunVoxLib* interface, though using extensions provided in *SunSharp.ThinWrapper* namespace is advisable. The extension methods handle  marshalling and other annoying boilerplate for you; the names are very similar to those in official documentation, and their usage should be very intuitive.
 
-Remember, you will have to deal with locking/unlocking yourself!
+There is code available in the [examples](/examples) folder of the repository that contains source code for simple console applications demonstrating the usage of the wrapper.
 
-Here's an example, equivalent to object wrapper code:
-```csharp
-using SunSharp.ThinWrapper;
-/* ... */
-lib.Init(sampleRate: -1);
-lib.OpenSlot(0);
-lib.Load(0, "song.sunvox");
-lib.SetAutostop(0, autostop: true);
-lib.Rewind(0, line: 0);
-lib.Play(0);
-int line = 0;
-while (line != lib.GetSongLengthInLines(0) - 1 || lib.IsPlaying(0))
-    line = lib.GetCurrentLine(0);
+## Contributing
 
-lib.CloseSlot(0);
-lib.Deinit();
-```
-### More examples
-More examples available in the [Examples](/Examples) folder.
+Any contributions are welcome! Feel free to open issues or pull requests on GitHub.
 
-## Bug reporting
-Please use the issues page of this repository. If the problem is with the underlying library, I will pass the necessary information to the SunVox forums myself.
+Additional information on contributing can be found on the project [GitHub Pages site](https://sotakebk.github.io/SunSharp/).
 
 ## Questions & Answers
-##### Can I use multiple SunVox instances?
+
+**Can I use multiple SunVox instances?**
+
 Due to engine limitations, only one instance can be used per loaded library. Since it is possible to load multiple libraries, or versions of the same library into your process, it should be possible.
-##### Will it work on Android/iOS/whatever?
-Maybe? My code is basically a wrapper, so it should be platform invariant. If the platform in question is supported by the SunVox Library, and there is a binary provided, you should be able to load it yourself.
-##### Is the library safe?
-If you want to, you can shoot yourself in the foot, although there should be warning signs along the way. The code should be transparent enough that any unexpected behaviour should originate from SunVox itself. No promises are made, but if you don't mix thin and object wrapper code, it should be fine.
+
+**Will it work on Android/iOS/whatever?**
+
+It is currently not tested on mobile platforms, but in theory, it should be possible to use the SunVox library binaries for those platforms, load them and bind them with the wrapper.
+
+**Is the library safe?**
+
+The wrapper code should be safe. The underlying SunVox library may not be. There are known issues with memory corruption and crashes in some scenarios, but they only happen in edge cases. If you are using the library in a safe manner (e.g., not calling functions from multiple threads simultaneously), and ensure proper usage (e.g., by checking if the underlying module is of the expected type), it should be fine.
+
+If you encounter any issues, please report them.
+
+**Can I use this in my commercial project?**
+
+Yes, you can.
+
+- The wrapper is licensed under the MIT license.
+- The SunVox library is distributed under the MIT license, and requires attribution and a note that it is based on SunVox. Please refer to the [author's website](https://warmplace.ru) for more details.

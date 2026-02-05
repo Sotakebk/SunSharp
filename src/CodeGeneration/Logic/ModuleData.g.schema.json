@@ -1,0 +1,131 @@
+{
+  "type": [
+    "object",
+    "null"
+  ],
+  "properties": {
+    "Modules": {
+      "type": "object",
+      "additionalProperties": {
+        "type": [
+          "object",
+          "null"
+        ],
+        "properties": {
+          "Controllers": {
+            "type": "object",
+            "additionalProperties": {
+              "type": [
+                "object",
+                "null"
+              ],
+              "properties": {
+                "FriendlyName": {
+                  "type": "string"
+                },
+                "InternalName": {
+                  "type": "string"
+                },
+                "Description": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "MinValue": {
+                  "type": "integer"
+                },
+                "MaxValue": {
+                  "type": "integer"
+                },
+                "MinDisplayedValue": {
+                  "type": "integer"
+                },
+                "MaxDisplayedValue": {
+                  "type": "integer"
+                },
+                "Offset": {
+                  "type": "integer"
+                },
+                "ControllerType": {
+                  "enum": [
+                    "Normal",
+                    "Selector"
+                  ]
+                },
+                "SelectorIsNotEnum": {
+                  "type": [
+                    "boolean",
+                    "null"
+                  ]
+                },
+                "EnumName": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              },
+              "required": [
+                "FriendlyName",
+                "InternalName",
+                "MinValue",
+                "MaxValue",
+                "MinDisplayedValue",
+                "MaxDisplayedValue",
+                "Offset",
+                "ControllerType"
+              ]
+            }
+          },
+          "Curves": {
+            "type": "object",
+            "additionalProperties": {
+              "type": [
+                "object",
+                "null"
+              ],
+              "properties": {
+                "FriendlyName": {
+                  "type": "string"
+                },
+                "Size": {
+                  "type": "integer"
+                },
+                "MinValue": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "MaxValue": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "Description": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              },
+              "required": [
+                "FriendlyName",
+                "Size"
+              ]
+            }
+          }
+        },
+        "required": [
+          "Controllers",
+          "Curves"
+        ]
+      }
+    }
+  },
+  "required": [
+    "Modules"
+  ]
+}
