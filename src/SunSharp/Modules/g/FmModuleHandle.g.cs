@@ -25,7 +25,7 @@ namespace SunSharp.Modules
         /// <summary>
         /// Value range: displayed: 0 to 256, real: 0 to 256
         /// Original name: 0 'C.Volume'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetCarrierVolume(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -44,7 +44,7 @@ namespace SunSharp.Modules
         /// <summary>
         /// Value range: displayed: 0 to 256, real: 0 to 256
         /// Original name: 1 'M.Volume'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetModulatorVolume(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -63,7 +63,7 @@ namespace SunSharp.Modules
         /// <summary>
         /// Value range: displayed: -128 to 128, real: 0 to 256
         /// Original name: 2 'Panning'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetPanning(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -82,7 +82,7 @@ namespace SunSharp.Modules
         /// <summary>
         /// Value range: displayed: 0 to 16, real: 0 to 16
         /// Original name: 3 'C.Freq ratio'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetCarrierFrequencyRatio(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -101,7 +101,7 @@ namespace SunSharp.Modules
         /// <summary>
         /// Value range: displayed: 0 to 16, real: 0 to 16
         /// Original name: 4 'M.Freq ratio'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetModulatorFrequencyRatio(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -120,7 +120,7 @@ namespace SunSharp.Modules
         /// <summary>
         /// Value range: displayed: 0 to 256, real: 0 to 256
         /// Original name: 5 'M.Self-modulation'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetModulatorSelfModulation(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -139,7 +139,7 @@ namespace SunSharp.Modules
         /// <summary>
         /// Value range: displayed: 0 to 512, real: 0 to 512
         /// Original name: 6 'C.Attack'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetCarrierAttack(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -158,7 +158,7 @@ namespace SunSharp.Modules
         /// <summary>
         /// Value range: displayed: 0 to 512, real: 0 to 512
         /// Original name: 7 'C.Decay'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetCarrierDecay(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -177,7 +177,7 @@ namespace SunSharp.Modules
         /// <summary>
         /// Value range: displayed: 0 to 256, real: 0 to 256
         /// Original name: 8 'C.Sustain'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetCarrierSustain(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -196,7 +196,7 @@ namespace SunSharp.Modules
         /// <summary>
         /// Value range: displayed: 0 to 512, real: 0 to 512
         /// Original name: 9 'C.Release'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetCarrierRelease(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -215,7 +215,7 @@ namespace SunSharp.Modules
         /// <summary>
         /// Value range: displayed: 0 to 512, real: 0 to 512
         /// Original name: 10 'M.Attack'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetModulatorAttack(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -234,7 +234,7 @@ namespace SunSharp.Modules
         /// <summary>
         /// Value range: displayed: 0 to 512, real: 0 to 512
         /// Original name: 11 'M.Decay'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetModulatorDecay(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -253,7 +253,7 @@ namespace SunSharp.Modules
         /// <summary>
         /// Value range: displayed: 0 to 256, real: 0 to 256
         /// Original name: 12 'M.Sustain'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetModulatorSustain(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -272,7 +272,7 @@ namespace SunSharp.Modules
         /// <summary>
         /// Value range: displayed: 0 to 512, real: 0 to 512
         /// Original name: 13 'M.Release'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetModulatorRelease(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -291,7 +291,7 @@ namespace SunSharp.Modules
         /// <summary>
         /// Value range: displayed: 0 to 4, real: 0 to 4
         /// Original name: 14 'M.Scaling per key'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetModulatorScalingPerKey(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -308,7 +308,7 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 15 'Polyphony'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetPolyphony(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -325,7 +325,7 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 16 'Mode'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetMode(Quality value);
 
@@ -461,30 +461,30 @@ namespace SunSharp.Modules
         /// <inheritdoc/>
         public PatternEvent MakeEvent(Note note = default, byte? velocity = default, byte? controller = default, Effect effect = Effect.None, ushort value = 0) => ModuleHandle.MakeEvent(note, velocity, controller, effect, value);
 
-        /// <inheritdoc cref="SynthModuleHandle.GetInputModules"/>
+        /// <inheritdoc cref="SynthModuleHandle.GetInputModules()"/>
         public SynthModuleHandle[] GetInputModules() => ModuleHandle.GetInputModules();
 
-        /// <inheritdoc cref="SynthModuleHandle.GetOutputModules"/>
+        /// <inheritdoc cref="SynthModuleHandle.GetOutputModules()"/>
         public SynthModuleHandle[] GetOutputModules() => ModuleHandle.GetOutputModules();
 
-        /// <inheritdoc cref="SynthModuleHandle.ConnectInput"/>
+        /// <inheritdoc cref="SynthModuleHandle.ConnectInput(SynthModuleHandle)"/>
         public void ConnectInput(SynthModuleHandle targetModule) => ModuleHandle.ConnectInput(targetModule);
 
-        /// <inheritdoc cref="SynthModuleHandle.ConnectOutput"/>
+        /// <inheritdoc cref="SynthModuleHandle.ConnectOutput(SynthModuleHandle)"/>
         public void ConnectOutput(SynthModuleHandle targetModule) => ModuleHandle.ConnectOutput(targetModule);
 
-        /// <inheritdoc cref="SynthModuleHandle.DisconnectInput"/>
+        /// <inheritdoc cref="SynthModuleHandle.DisconnectInput(SynthModuleHandle)"/>
         public void DisconnectInput(SynthModuleHandle targetModule) => ModuleHandle.DisconnectInput(targetModule);
 
-        /// <inheritdoc cref="SynthModuleHandle.DisconnectOutput"/>
+        /// <inheritdoc cref="SynthModuleHandle.DisconnectOutput(SynthModuleHandle)"/>
         public void DisconnectOutput(SynthModuleHandle targetModule) => ModuleHandle.DisconnectOutput(targetModule);
 
         #endregion
 
-        /// <inheritdoc cref="IFmModuleHandle.GetCarrierVolume" />
+        /// <inheritdoc cref="IFmModuleHandle.GetCarrierVolume(ValueScalingMode)" />
         public int GetCarrierVolume(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(0, valueScalingMode);
 
-        /// <inheritdoc cref="IFmModuleHandle.SetCarrierVolume" />
+        /// <inheritdoc cref="IFmModuleHandle.SetCarrierVolume(int, ValueScalingMode)" />
         public void SetCarrierVolume(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(0, value, valueScalingMode);
 
         /// <inheritdoc cref="IFmModuleHandle.MakeCarrierVolumeEvent" />
@@ -494,10 +494,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 0, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IFmModuleHandle.GetModulatorVolume" />
+        /// <inheritdoc cref="IFmModuleHandle.GetModulatorVolume(ValueScalingMode)" />
         public int GetModulatorVolume(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(1, valueScalingMode);
 
-        /// <inheritdoc cref="IFmModuleHandle.SetModulatorVolume" />
+        /// <inheritdoc cref="IFmModuleHandle.SetModulatorVolume(int, ValueScalingMode)" />
         public void SetModulatorVolume(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(1, value, valueScalingMode);
 
         /// <inheritdoc cref="IFmModuleHandle.MakeModulatorVolumeEvent" />
@@ -507,10 +507,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 1, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IFmModuleHandle.GetPanning" />
+        /// <inheritdoc cref="IFmModuleHandle.GetPanning(ValueScalingMode)" />
         public int GetPanning(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(2, valueScalingMode);
 
-        /// <inheritdoc cref="IFmModuleHandle.SetPanning" />
+        /// <inheritdoc cref="IFmModuleHandle.SetPanning(int, ValueScalingMode)" />
         public void SetPanning(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(2, value, valueScalingMode);
 
         /// <inheritdoc cref="IFmModuleHandle.MakePanningEvent" />
@@ -521,10 +521,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 2, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IFmModuleHandle.GetCarrierFrequencyRatio" />
+        /// <inheritdoc cref="IFmModuleHandle.GetCarrierFrequencyRatio(ValueScalingMode)" />
         public int GetCarrierFrequencyRatio(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(3, valueScalingMode);
 
-        /// <inheritdoc cref="IFmModuleHandle.SetCarrierFrequencyRatio" />
+        /// <inheritdoc cref="IFmModuleHandle.SetCarrierFrequencyRatio(int, ValueScalingMode)" />
         public void SetCarrierFrequencyRatio(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(3, value, valueScalingMode);
 
         /// <inheritdoc cref="IFmModuleHandle.MakeCarrierFrequencyRatioEvent" />
@@ -534,10 +534,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 3, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IFmModuleHandle.GetModulatorFrequencyRatio" />
+        /// <inheritdoc cref="IFmModuleHandle.GetModulatorFrequencyRatio(ValueScalingMode)" />
         public int GetModulatorFrequencyRatio(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(4, valueScalingMode);
 
-        /// <inheritdoc cref="IFmModuleHandle.SetModulatorFrequencyRatio" />
+        /// <inheritdoc cref="IFmModuleHandle.SetModulatorFrequencyRatio(int, ValueScalingMode)" />
         public void SetModulatorFrequencyRatio(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(4, value, valueScalingMode);
 
         /// <inheritdoc cref="IFmModuleHandle.MakeModulatorFrequencyRatioEvent" />
@@ -547,10 +547,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 4, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IFmModuleHandle.GetModulatorSelfModulation" />
+        /// <inheritdoc cref="IFmModuleHandle.GetModulatorSelfModulation(ValueScalingMode)" />
         public int GetModulatorSelfModulation(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(5, valueScalingMode);
 
-        /// <inheritdoc cref="IFmModuleHandle.SetModulatorSelfModulation" />
+        /// <inheritdoc cref="IFmModuleHandle.SetModulatorSelfModulation(int, ValueScalingMode)" />
         public void SetModulatorSelfModulation(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(5, value, valueScalingMode);
 
         /// <inheritdoc cref="IFmModuleHandle.MakeModulatorSelfModulationEvent" />
@@ -560,10 +560,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 5, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IFmModuleHandle.GetCarrierAttack" />
+        /// <inheritdoc cref="IFmModuleHandle.GetCarrierAttack(ValueScalingMode)" />
         public int GetCarrierAttack(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(6, valueScalingMode);
 
-        /// <inheritdoc cref="IFmModuleHandle.SetCarrierAttack" />
+        /// <inheritdoc cref="IFmModuleHandle.SetCarrierAttack(int, ValueScalingMode)" />
         public void SetCarrierAttack(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(6, value, valueScalingMode);
 
         /// <inheritdoc cref="IFmModuleHandle.MakeCarrierAttackEvent" />
@@ -573,10 +573,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 6, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IFmModuleHandle.GetCarrierDecay" />
+        /// <inheritdoc cref="IFmModuleHandle.GetCarrierDecay(ValueScalingMode)" />
         public int GetCarrierDecay(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(7, valueScalingMode);
 
-        /// <inheritdoc cref="IFmModuleHandle.SetCarrierDecay" />
+        /// <inheritdoc cref="IFmModuleHandle.SetCarrierDecay(int, ValueScalingMode)" />
         public void SetCarrierDecay(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(7, value, valueScalingMode);
 
         /// <inheritdoc cref="IFmModuleHandle.MakeCarrierDecayEvent" />
@@ -586,10 +586,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 7, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IFmModuleHandle.GetCarrierSustain" />
+        /// <inheritdoc cref="IFmModuleHandle.GetCarrierSustain(ValueScalingMode)" />
         public int GetCarrierSustain(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(8, valueScalingMode);
 
-        /// <inheritdoc cref="IFmModuleHandle.SetCarrierSustain" />
+        /// <inheritdoc cref="IFmModuleHandle.SetCarrierSustain(int, ValueScalingMode)" />
         public void SetCarrierSustain(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(8, value, valueScalingMode);
 
         /// <inheritdoc cref="IFmModuleHandle.MakeCarrierSustainEvent" />
@@ -599,10 +599,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 8, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IFmModuleHandle.GetCarrierRelease" />
+        /// <inheritdoc cref="IFmModuleHandle.GetCarrierRelease(ValueScalingMode)" />
         public int GetCarrierRelease(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(9, valueScalingMode);
 
-        /// <inheritdoc cref="IFmModuleHandle.SetCarrierRelease" />
+        /// <inheritdoc cref="IFmModuleHandle.SetCarrierRelease(int, ValueScalingMode)" />
         public void SetCarrierRelease(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(9, value, valueScalingMode);
 
         /// <inheritdoc cref="IFmModuleHandle.MakeCarrierReleaseEvent" />
@@ -612,10 +612,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 9, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IFmModuleHandle.GetModulatorAttack" />
+        /// <inheritdoc cref="IFmModuleHandle.GetModulatorAttack(ValueScalingMode)" />
         public int GetModulatorAttack(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(10, valueScalingMode);
 
-        /// <inheritdoc cref="IFmModuleHandle.SetModulatorAttack" />
+        /// <inheritdoc cref="IFmModuleHandle.SetModulatorAttack(int, ValueScalingMode)" />
         public void SetModulatorAttack(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(10, value, valueScalingMode);
 
         /// <inheritdoc cref="IFmModuleHandle.MakeModulatorAttackEvent" />
@@ -625,10 +625,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 10, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IFmModuleHandle.GetModulatorDecay" />
+        /// <inheritdoc cref="IFmModuleHandle.GetModulatorDecay(ValueScalingMode)" />
         public int GetModulatorDecay(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(11, valueScalingMode);
 
-        /// <inheritdoc cref="IFmModuleHandle.SetModulatorDecay" />
+        /// <inheritdoc cref="IFmModuleHandle.SetModulatorDecay(int, ValueScalingMode)" />
         public void SetModulatorDecay(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(11, value, valueScalingMode);
 
         /// <inheritdoc cref="IFmModuleHandle.MakeModulatorDecayEvent" />
@@ -638,10 +638,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 11, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IFmModuleHandle.GetModulatorSustain" />
+        /// <inheritdoc cref="IFmModuleHandle.GetModulatorSustain(ValueScalingMode)" />
         public int GetModulatorSustain(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(12, valueScalingMode);
 
-        /// <inheritdoc cref="IFmModuleHandle.SetModulatorSustain" />
+        /// <inheritdoc cref="IFmModuleHandle.SetModulatorSustain(int, ValueScalingMode)" />
         public void SetModulatorSustain(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(12, value, valueScalingMode);
 
         /// <inheritdoc cref="IFmModuleHandle.MakeModulatorSustainEvent" />
@@ -651,10 +651,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 12, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IFmModuleHandle.GetModulatorRelease" />
+        /// <inheritdoc cref="IFmModuleHandle.GetModulatorRelease(ValueScalingMode)" />
         public int GetModulatorRelease(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(13, valueScalingMode);
 
-        /// <inheritdoc cref="IFmModuleHandle.SetModulatorRelease" />
+        /// <inheritdoc cref="IFmModuleHandle.SetModulatorRelease(int, ValueScalingMode)" />
         public void SetModulatorRelease(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(13, value, valueScalingMode);
 
         /// <inheritdoc cref="IFmModuleHandle.MakeModulatorReleaseEvent" />
@@ -664,10 +664,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 13, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IFmModuleHandle.GetModulatorScalingPerKey" />
+        /// <inheritdoc cref="IFmModuleHandle.GetModulatorScalingPerKey(ValueScalingMode)" />
         public int GetModulatorScalingPerKey(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(14, valueScalingMode);
 
-        /// <inheritdoc cref="IFmModuleHandle.SetModulatorScalingPerKey" />
+        /// <inheritdoc cref="IFmModuleHandle.SetModulatorScalingPerKey(int, ValueScalingMode)" />
         public void SetModulatorScalingPerKey(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(14, value, valueScalingMode);
 
         /// <inheritdoc cref="IFmModuleHandle.MakeModulatorScalingPerKeyEvent" />
@@ -677,10 +677,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 14, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IFmModuleHandle.GetPolyphony" />
+        /// <inheritdoc cref="IFmModuleHandle.GetPolyphony(ValueScalingMode)" />
         public int GetPolyphony(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(15, valueScalingMode);
 
-        /// <inheritdoc cref="IFmModuleHandle.SetPolyphony" />
+        /// <inheritdoc cref="IFmModuleHandle.SetPolyphony(int, ValueScalingMode)" />
         public void SetPolyphony(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(15, value, valueScalingMode);
 
         /// <inheritdoc cref="IFmModuleHandle.MakePolyphonyEvent" />
@@ -689,10 +689,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 15, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IFmModuleHandle.GetMode" />
+        /// <inheritdoc cref="IFmModuleHandle.GetMode()" />
         public Quality GetMode() => (Quality)ModuleHandle.GetControllerValue(16, ValueScalingMode.Displayed);
 
-        /// <inheritdoc cref="IFmModuleHandle.SetMode" />
+        /// <inheritdoc cref="IFmModuleHandle.SetMode(Quality)" />
         public void SetMode(Quality value) => ModuleHandle.SetControllerValue(16, (int)value, ValueScalingMode.Displayed);
 
         /// <inheritdoc cref="IFmModuleHandle.MakeModeEvent" />

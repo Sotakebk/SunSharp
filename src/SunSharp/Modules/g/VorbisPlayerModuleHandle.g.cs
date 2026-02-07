@@ -25,7 +25,7 @@ namespace SunSharp.Modules
         /// <summary>
         /// Value range: displayed: 0 to 512, real: 0 to 512
         /// Original name: 0 'Volume'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetVolume(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -42,7 +42,7 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 1 'Original speed'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetOriginalSpeed(Toggle value);
 
@@ -61,7 +61,7 @@ namespace SunSharp.Modules
         /// <summary>
         /// Value range: displayed: -128 to 128, real: -128 to 128
         /// Original name: 2 'Finetune'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetAudioFineTune(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -78,7 +78,7 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 3 'Transpose'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetAudioTranspose(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -95,7 +95,7 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 4 'Interpolation'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetInterpolation(Toggle value);
 
@@ -112,7 +112,7 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 5 'Polyphony'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetPolyphony(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -129,7 +129,7 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 6 'Repeat'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetRepeat(Toggle value);
 
@@ -146,7 +146,7 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 7 'Ignore Note OFF'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetIgnoreNoteOff(Toggle value);
 
@@ -282,30 +282,30 @@ namespace SunSharp.Modules
         /// <inheritdoc/>
         public PatternEvent MakeEvent(Note note = default, byte? velocity = default, byte? controller = default, Effect effect = Effect.None, ushort value = 0) => ModuleHandle.MakeEvent(note, velocity, controller, effect, value);
 
-        /// <inheritdoc cref="SynthModuleHandle.GetInputModules"/>
+        /// <inheritdoc cref="SynthModuleHandle.GetInputModules()"/>
         public SynthModuleHandle[] GetInputModules() => ModuleHandle.GetInputModules();
 
-        /// <inheritdoc cref="SynthModuleHandle.GetOutputModules"/>
+        /// <inheritdoc cref="SynthModuleHandle.GetOutputModules()"/>
         public SynthModuleHandle[] GetOutputModules() => ModuleHandle.GetOutputModules();
 
-        /// <inheritdoc cref="SynthModuleHandle.ConnectInput"/>
+        /// <inheritdoc cref="SynthModuleHandle.ConnectInput(SynthModuleHandle)"/>
         public void ConnectInput(SynthModuleHandle targetModule) => ModuleHandle.ConnectInput(targetModule);
 
-        /// <inheritdoc cref="SynthModuleHandle.ConnectOutput"/>
+        /// <inheritdoc cref="SynthModuleHandle.ConnectOutput(SynthModuleHandle)"/>
         public void ConnectOutput(SynthModuleHandle targetModule) => ModuleHandle.ConnectOutput(targetModule);
 
-        /// <inheritdoc cref="SynthModuleHandle.DisconnectInput"/>
+        /// <inheritdoc cref="SynthModuleHandle.DisconnectInput(SynthModuleHandle)"/>
         public void DisconnectInput(SynthModuleHandle targetModule) => ModuleHandle.DisconnectInput(targetModule);
 
-        /// <inheritdoc cref="SynthModuleHandle.DisconnectOutput"/>
+        /// <inheritdoc cref="SynthModuleHandle.DisconnectOutput(SynthModuleHandle)"/>
         public void DisconnectOutput(SynthModuleHandle targetModule) => ModuleHandle.DisconnectOutput(targetModule);
 
         #endregion
 
-        /// <inheritdoc cref="IVorbisPlayerModuleHandle.GetVolume" />
+        /// <inheritdoc cref="IVorbisPlayerModuleHandle.GetVolume(ValueScalingMode)" />
         public int GetVolume(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(0, valueScalingMode);
 
-        /// <inheritdoc cref="IVorbisPlayerModuleHandle.SetVolume" />
+        /// <inheritdoc cref="IVorbisPlayerModuleHandle.SetVolume(int, ValueScalingMode)" />
         public void SetVolume(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(0, value, valueScalingMode);
 
         /// <inheritdoc cref="IVorbisPlayerModuleHandle.MakeVolumeEvent" />
@@ -315,10 +315,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 0, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IVorbisPlayerModuleHandle.GetOriginalSpeed" />
+        /// <inheritdoc cref="IVorbisPlayerModuleHandle.GetOriginalSpeed()" />
         public Toggle GetOriginalSpeed() => (Toggle)ModuleHandle.GetControllerValue(1, ValueScalingMode.Displayed);
 
-        /// <inheritdoc cref="IVorbisPlayerModuleHandle.SetOriginalSpeed" />
+        /// <inheritdoc cref="IVorbisPlayerModuleHandle.SetOriginalSpeed(Toggle)" />
         public void SetOriginalSpeed(Toggle value) => ModuleHandle.SetControllerValue(1, (int)value, ValueScalingMode.Displayed);
 
         /// <inheritdoc cref="IVorbisPlayerModuleHandle.MakeOriginalSpeedEvent" />
@@ -327,10 +327,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 1, (ushort)Math.Clamp((int)value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IVorbisPlayerModuleHandle.GetAudioFineTune" />
+        /// <inheritdoc cref="IVorbisPlayerModuleHandle.GetAudioFineTune(ValueScalingMode)" />
         public int GetAudioFineTune(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(2, valueScalingMode);
 
-        /// <inheritdoc cref="IVorbisPlayerModuleHandle.SetAudioFineTune" />
+        /// <inheritdoc cref="IVorbisPlayerModuleHandle.SetAudioFineTune(int, ValueScalingMode)" />
         public void SetAudioFineTune(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(2, value, valueScalingMode);
 
         /// <inheritdoc cref="IVorbisPlayerModuleHandle.MakeAudioFineTuneEvent" />
@@ -341,10 +341,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 2, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IVorbisPlayerModuleHandle.GetAudioTranspose" />
+        /// <inheritdoc cref="IVorbisPlayerModuleHandle.GetAudioTranspose(ValueScalingMode)" />
         public int GetAudioTranspose(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(3, valueScalingMode);
 
-        /// <inheritdoc cref="IVorbisPlayerModuleHandle.SetAudioTranspose" />
+        /// <inheritdoc cref="IVorbisPlayerModuleHandle.SetAudioTranspose(int, ValueScalingMode)" />
         public void SetAudioTranspose(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(3, value, valueScalingMode);
 
         /// <inheritdoc cref="IVorbisPlayerModuleHandle.MakeAudioTransposeEvent" />
@@ -353,10 +353,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 3, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IVorbisPlayerModuleHandle.GetInterpolation" />
+        /// <inheritdoc cref="IVorbisPlayerModuleHandle.GetInterpolation()" />
         public Toggle GetInterpolation() => (Toggle)ModuleHandle.GetControllerValue(4, ValueScalingMode.Displayed);
 
-        /// <inheritdoc cref="IVorbisPlayerModuleHandle.SetInterpolation" />
+        /// <inheritdoc cref="IVorbisPlayerModuleHandle.SetInterpolation(Toggle)" />
         public void SetInterpolation(Toggle value) => ModuleHandle.SetControllerValue(4, (int)value, ValueScalingMode.Displayed);
 
         /// <inheritdoc cref="IVorbisPlayerModuleHandle.MakeInterpolationEvent" />
@@ -365,10 +365,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 4, (ushort)Math.Clamp((int)value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IVorbisPlayerModuleHandle.GetPolyphony" />
+        /// <inheritdoc cref="IVorbisPlayerModuleHandle.GetPolyphony(ValueScalingMode)" />
         public int GetPolyphony(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(5, valueScalingMode);
 
-        /// <inheritdoc cref="IVorbisPlayerModuleHandle.SetPolyphony" />
+        /// <inheritdoc cref="IVorbisPlayerModuleHandle.SetPolyphony(int, ValueScalingMode)" />
         public void SetPolyphony(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(5, value, valueScalingMode);
 
         /// <inheritdoc cref="IVorbisPlayerModuleHandle.MakePolyphonyEvent" />
@@ -377,10 +377,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 5, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IVorbisPlayerModuleHandle.GetRepeat" />
+        /// <inheritdoc cref="IVorbisPlayerModuleHandle.GetRepeat()" />
         public Toggle GetRepeat() => (Toggle)ModuleHandle.GetControllerValue(6, ValueScalingMode.Displayed);
 
-        /// <inheritdoc cref="IVorbisPlayerModuleHandle.SetRepeat" />
+        /// <inheritdoc cref="IVorbisPlayerModuleHandle.SetRepeat(Toggle)" />
         public void SetRepeat(Toggle value) => ModuleHandle.SetControllerValue(6, (int)value, ValueScalingMode.Displayed);
 
         /// <inheritdoc cref="IVorbisPlayerModuleHandle.MakeRepeatEvent" />
@@ -389,10 +389,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 6, (ushort)Math.Clamp((int)value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IVorbisPlayerModuleHandle.GetIgnoreNoteOff" />
+        /// <inheritdoc cref="IVorbisPlayerModuleHandle.GetIgnoreNoteOff()" />
         public Toggle GetIgnoreNoteOff() => (Toggle)ModuleHandle.GetControllerValue(7, ValueScalingMode.Displayed);
 
-        /// <inheritdoc cref="IVorbisPlayerModuleHandle.SetIgnoreNoteOff" />
+        /// <inheritdoc cref="IVorbisPlayerModuleHandle.SetIgnoreNoteOff(Toggle)" />
         public void SetIgnoreNoteOff(Toggle value) => ModuleHandle.SetControllerValue(7, (int)value, ValueScalingMode.Displayed);
 
         /// <inheritdoc cref="IVorbisPlayerModuleHandle.MakeIgnoreNoteOffEvent" />

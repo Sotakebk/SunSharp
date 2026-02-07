@@ -28,6 +28,7 @@ namespace SunSharp.Native
         /// </returns>
         /// <exception cref="ArgumentException">Thrown when buffer size is invalid for the channel count.</exception>
         /// <exception cref="SunVoxException">Thrown when the operation fails.</exception>
+        /// <exception cref="ArgumentNullException">Thrown if <paramref name="outputBuffer"/> is null.</exception>
         /// <remarks>
         /// <para>
         /// <see cref="SunVoxInitOptions.UserAudioCallback"/> must be set in <see cref="Initialize"/> to use this function.
@@ -60,6 +61,9 @@ namespace SunSharp.Native
         /// <returns>
         /// <see langword="true"/> if buffer contains any non-0 samples.
         /// </returns>
+        /// <exception cref="ArgumentException">Thrown when buffer sizes are invalid for the channel count or not equal length.</exception>
+        /// <exception cref="SunVoxException">Thrown when the operation fails.</exception>
+        /// <exception cref="ArgumentNullException">Thrown if <paramref name="outputBuffer"/> or <paramref name="inputBuffer"/> is null.</exception>
         /// <remarks>
         /// <para>
         /// <see cref="SunVoxInitOptions.UserAudioCallback"/> must be set in <see cref="Initialize"/> to use this function.
@@ -323,7 +327,7 @@ namespace SunSharp.Native
         /// </summary>
         /// <remarks>
         /// <para>
-        /// SunVox engine uses system-provided time space, measured in system ticks (don't confuse it with the project ticks). System ticks are used for timing in functions like <see cref="AudioCallback"/> and <see cref="SetEventTiming"/>.
+        /// SunVox engine uses system-provided time space, measured in system ticks (don't confuse it with the project ticks). System ticks are used for timing in functions like <see cref="AudioCallback(float[], AudioChannels, int, uint)"/> and <see cref="SetEventTiming"/>.
         /// </para>
         /// Calls <see cref="ISunVoxLibC.sv_get_ticks"/>.</remarks>
         public uint GetTicks()
@@ -409,7 +413,7 @@ namespace SunSharp.Native
         public SunVoxVersion Initialize(int sampleRate, string? config = null,
             AudioChannels channels = AudioChannels.Stereo, SunVoxInitOptions options = SunVoxInitOptions.None)
         {
-            var ptr = Marshal.StringToCoTaskMemUTF8(config);
+            var ptr = config != null ? Marshal.StringToCoTaskMemUTF8(config) : IntPtr.Zero;
             try
             {
                 var ret = _lib.sv_init(ptr, sampleRate, (int)channels, (uint)options);
@@ -423,7 +427,10 @@ namespace SunSharp.Native
             }
             finally
             {
-                Marshal.ZeroFreeCoTaskMemUTF8(ptr);
+                if (ptr != IntPtr.Zero)
+                {
+                    Marshal.ZeroFreeCoTaskMemUTF8(ptr);
+                }
             }
         }
 
@@ -450,9 +457,14 @@ namespace SunSharp.Native
         /// <param name="slotId">Slot number (0 to 15).</param>
         /// <param name="path">File path (relative or absolute).</param>
         /// <exception cref="SunVoxException">Thrown when the operation fails.</exception>
+        /// <exception cref="ArgumentNullException">Thrown if <paramref name="path"/> is null.</exception>
         /// <remarks>Calls <see cref="ISunVoxLibC.sv_load"/>.</remarks>
         public void Load(int slotId, string path)
         {
+            if (path == null)
+            {
+                throw new ArgumentNullException(nameof(path));
+            }
             var ptr = Marshal.StringToCoTaskMemUTF8(path);
             int ret;
             try
@@ -480,6 +492,10 @@ namespace SunSharp.Native
         /// <remarks>Calls <see cref="ISunVoxLibC.sv_load_from_memory"/>.</remarks>
         public void Load(int slotId, byte[] data)
         {
+            if(data == null)
+            {
+                throw new ArgumentNullException(nameof(data));
+            }
             var handle = GCHandle.Alloc(data, GCHandleType.Pinned);
             int ret;
             try
@@ -601,9 +617,14 @@ namespace SunSharp.Native
         /// <param name="slotId">Slot number (0 to 15).</param>
         /// <param name="path">File path where the project will be saved.</param>
         /// <exception cref="SunVoxException">Thrown when the operation fails.</exception>
+        /// <exception cref="ArgumentNullException">Thrown if <paramref name="path"/> is null.</exception>
         /// <remarks>Calls <see cref="ISunVoxLibC.sv_save"/>.</remarks>
         public void SaveToFile(int slotId, string path)
         {
+            if (path == null)
+            {
+                throw new ArgumentNullException(nameof(path));
+            }
             var ptr = Marshal.StringToCoTaskMemUTF8(path);
             int ret;
             try
@@ -720,7 +741,7 @@ namespace SunSharp.Native
         }
 
         /// <summary>
-        /// Set the timestamp of events sent by <see cref="SendEvent"/>.
+        /// Set the timestamp of events sent by <see cref="SendEvent(int, int, PatternEvent)"/>.
         /// Every event has a timestamp (when it was generated, e.g., key press time).
         /// If nonzero: event is heard at timestamp + sound latency * 2.
         /// </summary>
@@ -742,7 +763,7 @@ namespace SunSharp.Native
         }
 
         /// <summary>
-        /// Reset the timestamp of events sent by <see cref="SendEvent"/>.
+        /// Reset the timestamp of events sent by <see cref="SendEvent(int, int, PatternEvent)"/>.
         /// If timestamp is zero: event is heard as quickly as possible.
         /// </summary>
         /// <param name="slotId">Slot number (0 to 15).</param>
@@ -766,7 +787,7 @@ namespace SunSharp.Native
         /// <remarks>Calls <see cref="ISunVoxLibC.sv_set_song_name"/>.</remarks>
         public void SetSongName(int slotId, string value)
         {
-            var ptr = Marshal.StringToCoTaskMemUTF8(value);
+            var ptr = value != null ? Marshal.StringToCoTaskMemUTF8(value) : IntPtr.Zero;
             try
             {
                 var ret = _lib.sv_set_song_name(slotId, ptr);
@@ -778,7 +799,10 @@ namespace SunSharp.Native
             }
             finally
             {
-                Marshal.ZeroFreeCoTaskMemUTF8(ptr);
+                if (ptr != IntPtr.Zero)
+                {
+                    Marshal.ZeroFreeCoTaskMemUTF8(ptr);
+                }
             }
         }
 
@@ -886,6 +910,11 @@ namespace SunSharp.Native
                 throw new ArgumentException("Buffer size is not a multiple of two.");
             }
 
+            if(outputBuffer == null)
+            {
+                throw new ArgumentNullException(nameof(outputBuffer));
+            }
+
             var frames = outputBuffer.Length;
             if (channels == AudioChannels.Stereo)
             {
@@ -925,6 +954,16 @@ namespace SunSharp.Native
             if (inputChannels == AudioChannels.Stereo && (inputBuffer.Length & 1) != 0)
             {
                 throw new ArgumentException("Input buffer size is not a multiple of two.");
+            }
+
+            if (outputBuffer == null)
+            {
+                throw new ArgumentNullException(nameof(outputBuffer));
+            }
+
+            if (inputBuffer == null)
+            {
+                throw new ArgumentNullException(nameof(inputBuffer));
             }
 
             var inputFrames = inputBuffer.Length;

@@ -25,7 +25,7 @@ namespace SunSharp.Modules
         /// <summary>
         /// Value range: displayed: 0 to 1024, real: 0 to 1024
         /// Original name: 0 'Volume'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetVolume(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -42,7 +42,7 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 1 'Input module'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetInputModule(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -59,7 +59,7 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 2 'Play patterns'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetPlayPatterns(MetaModulePatternMode value);
 
@@ -76,7 +76,7 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 3 'BPM (Beats Per Minute)'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetBeatsPerMinute(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -93,7 +93,7 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 4 'TPL (Ticks Per Line)'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetTicksPerLine(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -229,30 +229,30 @@ namespace SunSharp.Modules
         /// <inheritdoc/>
         public PatternEvent MakeEvent(Note note = default, byte? velocity = default, byte? controller = default, Effect effect = Effect.None, ushort value = 0) => ModuleHandle.MakeEvent(note, velocity, controller, effect, value);
 
-        /// <inheritdoc cref="SynthModuleHandle.GetInputModules"/>
+        /// <inheritdoc cref="SynthModuleHandle.GetInputModules()"/>
         public SynthModuleHandle[] GetInputModules() => ModuleHandle.GetInputModules();
 
-        /// <inheritdoc cref="SynthModuleHandle.GetOutputModules"/>
+        /// <inheritdoc cref="SynthModuleHandle.GetOutputModules()"/>
         public SynthModuleHandle[] GetOutputModules() => ModuleHandle.GetOutputModules();
 
-        /// <inheritdoc cref="SynthModuleHandle.ConnectInput"/>
+        /// <inheritdoc cref="SynthModuleHandle.ConnectInput(SynthModuleHandle)"/>
         public void ConnectInput(SynthModuleHandle targetModule) => ModuleHandle.ConnectInput(targetModule);
 
-        /// <inheritdoc cref="SynthModuleHandle.ConnectOutput"/>
+        /// <inheritdoc cref="SynthModuleHandle.ConnectOutput(SynthModuleHandle)"/>
         public void ConnectOutput(SynthModuleHandle targetModule) => ModuleHandle.ConnectOutput(targetModule);
 
-        /// <inheritdoc cref="SynthModuleHandle.DisconnectInput"/>
+        /// <inheritdoc cref="SynthModuleHandle.DisconnectInput(SynthModuleHandle)"/>
         public void DisconnectInput(SynthModuleHandle targetModule) => ModuleHandle.DisconnectInput(targetModule);
 
-        /// <inheritdoc cref="SynthModuleHandle.DisconnectOutput"/>
+        /// <inheritdoc cref="SynthModuleHandle.DisconnectOutput(SynthModuleHandle)"/>
         public void DisconnectOutput(SynthModuleHandle targetModule) => ModuleHandle.DisconnectOutput(targetModule);
 
         #endregion
 
-        /// <inheritdoc cref="IMetaModuleModuleHandle.GetVolume" />
+        /// <inheritdoc cref="IMetaModuleModuleHandle.GetVolume(ValueScalingMode)" />
         public int GetVolume(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(0, valueScalingMode);
 
-        /// <inheritdoc cref="IMetaModuleModuleHandle.SetVolume" />
+        /// <inheritdoc cref="IMetaModuleModuleHandle.SetVolume(int, ValueScalingMode)" />
         public void SetVolume(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(0, value, valueScalingMode);
 
         /// <inheritdoc cref="IMetaModuleModuleHandle.MakeVolumeEvent" />
@@ -262,10 +262,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 0, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IMetaModuleModuleHandle.GetInputModule" />
+        /// <inheritdoc cref="IMetaModuleModuleHandle.GetInputModule(ValueScalingMode)" />
         public int GetInputModule(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(1, valueScalingMode);
 
-        /// <inheritdoc cref="IMetaModuleModuleHandle.SetInputModule" />
+        /// <inheritdoc cref="IMetaModuleModuleHandle.SetInputModule(int, ValueScalingMode)" />
         public void SetInputModule(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(1, value, valueScalingMode);
 
         /// <inheritdoc cref="IMetaModuleModuleHandle.MakeInputModuleEvent" />
@@ -274,10 +274,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 1, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IMetaModuleModuleHandle.GetPlayPatterns" />
+        /// <inheritdoc cref="IMetaModuleModuleHandle.GetPlayPatterns()" />
         public MetaModulePatternMode GetPlayPatterns() => (MetaModulePatternMode)ModuleHandle.GetControllerValue(2, ValueScalingMode.Displayed);
 
-        /// <inheritdoc cref="IMetaModuleModuleHandle.SetPlayPatterns" />
+        /// <inheritdoc cref="IMetaModuleModuleHandle.SetPlayPatterns(MetaModulePatternMode)" />
         public void SetPlayPatterns(MetaModulePatternMode value) => ModuleHandle.SetControllerValue(2, (int)value, ValueScalingMode.Displayed);
 
         /// <inheritdoc cref="IMetaModuleModuleHandle.MakePlayPatternsEvent" />
@@ -286,10 +286,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 2, (ushort)Math.Clamp((int)value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IMetaModuleModuleHandle.GetBeatsPerMinute" />
+        /// <inheritdoc cref="IMetaModuleModuleHandle.GetBeatsPerMinute(ValueScalingMode)" />
         public int GetBeatsPerMinute(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(3, valueScalingMode);
 
-        /// <inheritdoc cref="IMetaModuleModuleHandle.SetBeatsPerMinute" />
+        /// <inheritdoc cref="IMetaModuleModuleHandle.SetBeatsPerMinute(int, ValueScalingMode)" />
         public void SetBeatsPerMinute(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(3, value, valueScalingMode);
 
         /// <inheritdoc cref="IMetaModuleModuleHandle.MakeBeatsPerMinuteEvent" />
@@ -298,10 +298,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 3, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IMetaModuleModuleHandle.GetTicksPerLine" />
+        /// <inheritdoc cref="IMetaModuleModuleHandle.GetTicksPerLine(ValueScalingMode)" />
         public int GetTicksPerLine(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(4, valueScalingMode);
 
-        /// <inheritdoc cref="IMetaModuleModuleHandle.SetTicksPerLine" />
+        /// <inheritdoc cref="IMetaModuleModuleHandle.SetTicksPerLine(int, ValueScalingMode)" />
         public void SetTicksPerLine(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(4, value, valueScalingMode);
 
         /// <inheritdoc cref="IMetaModuleModuleHandle.MakeTicksPerLineEvent" />

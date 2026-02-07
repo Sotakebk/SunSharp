@@ -25,7 +25,7 @@ namespace SunSharp.Modules
         /// <summary>
         /// Value range: displayed: 0 to 256, real: 0 to 256
         /// Original name: 0 'Volume'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetVolume(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -44,7 +44,7 @@ namespace SunSharp.Modules
         /// <summary>
         /// Value range: displayed: -128 to 128, real: 0 to 256
         /// Original name: 1 'Panning'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetPanning(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -63,7 +63,7 @@ namespace SunSharp.Modules
         /// <summary>
         /// Value range: displayed: 0 to 512, real: 0 to 512
         /// Original name: 2 'Attack'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetAttack(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -82,7 +82,7 @@ namespace SunSharp.Modules
         /// <summary>
         /// Value range: displayed: 0 to 512, real: 0 to 512
         /// Original name: 3 'Release'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetRelease(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -99,7 +99,7 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 4 'Polyphony'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetPolyphony(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -116,7 +116,7 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 5 'Mode'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetMode(SpectraVoiceMode value);
 
@@ -133,7 +133,7 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 6 'Sustain'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetSustain(Toggle value);
 
@@ -150,7 +150,7 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 7 'Spectrum resolution'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetSpectrumResolution(SpectraVoiceResolution value);
 
@@ -167,7 +167,7 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 8 'Harmonic'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetHarmonic(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -184,7 +184,7 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 9 'H.freq'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetHFreq(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -201,7 +201,7 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 10 'H.volume'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetHVolume(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -218,7 +218,7 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 11 'H.width'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetHWidth(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -235,7 +235,7 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 12 'H.type'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetHType(SpectraVoiceHarmonicType value);
 
@@ -371,30 +371,30 @@ namespace SunSharp.Modules
         /// <inheritdoc/>
         public PatternEvent MakeEvent(Note note = default, byte? velocity = default, byte? controller = default, Effect effect = Effect.None, ushort value = 0) => ModuleHandle.MakeEvent(note, velocity, controller, effect, value);
 
-        /// <inheritdoc cref="SynthModuleHandle.GetInputModules"/>
+        /// <inheritdoc cref="SynthModuleHandle.GetInputModules()"/>
         public SynthModuleHandle[] GetInputModules() => ModuleHandle.GetInputModules();
 
-        /// <inheritdoc cref="SynthModuleHandle.GetOutputModules"/>
+        /// <inheritdoc cref="SynthModuleHandle.GetOutputModules()"/>
         public SynthModuleHandle[] GetOutputModules() => ModuleHandle.GetOutputModules();
 
-        /// <inheritdoc cref="SynthModuleHandle.ConnectInput"/>
+        /// <inheritdoc cref="SynthModuleHandle.ConnectInput(SynthModuleHandle)"/>
         public void ConnectInput(SynthModuleHandle targetModule) => ModuleHandle.ConnectInput(targetModule);
 
-        /// <inheritdoc cref="SynthModuleHandle.ConnectOutput"/>
+        /// <inheritdoc cref="SynthModuleHandle.ConnectOutput(SynthModuleHandle)"/>
         public void ConnectOutput(SynthModuleHandle targetModule) => ModuleHandle.ConnectOutput(targetModule);
 
-        /// <inheritdoc cref="SynthModuleHandle.DisconnectInput"/>
+        /// <inheritdoc cref="SynthModuleHandle.DisconnectInput(SynthModuleHandle)"/>
         public void DisconnectInput(SynthModuleHandle targetModule) => ModuleHandle.DisconnectInput(targetModule);
 
-        /// <inheritdoc cref="SynthModuleHandle.DisconnectOutput"/>
+        /// <inheritdoc cref="SynthModuleHandle.DisconnectOutput(SynthModuleHandle)"/>
         public void DisconnectOutput(SynthModuleHandle targetModule) => ModuleHandle.DisconnectOutput(targetModule);
 
         #endregion
 
-        /// <inheritdoc cref="ISpectraVoiceModuleHandle.GetVolume" />
+        /// <inheritdoc cref="ISpectraVoiceModuleHandle.GetVolume(ValueScalingMode)" />
         public int GetVolume(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(0, valueScalingMode);
 
-        /// <inheritdoc cref="ISpectraVoiceModuleHandle.SetVolume" />
+        /// <inheritdoc cref="ISpectraVoiceModuleHandle.SetVolume(int, ValueScalingMode)" />
         public void SetVolume(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(0, value, valueScalingMode);
 
         /// <inheritdoc cref="ISpectraVoiceModuleHandle.MakeVolumeEvent" />
@@ -404,10 +404,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 0, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="ISpectraVoiceModuleHandle.GetPanning" />
+        /// <inheritdoc cref="ISpectraVoiceModuleHandle.GetPanning(ValueScalingMode)" />
         public int GetPanning(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(1, valueScalingMode);
 
-        /// <inheritdoc cref="ISpectraVoiceModuleHandle.SetPanning" />
+        /// <inheritdoc cref="ISpectraVoiceModuleHandle.SetPanning(int, ValueScalingMode)" />
         public void SetPanning(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(1, value, valueScalingMode);
 
         /// <inheritdoc cref="ISpectraVoiceModuleHandle.MakePanningEvent" />
@@ -418,10 +418,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 1, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="ISpectraVoiceModuleHandle.GetAttack" />
+        /// <inheritdoc cref="ISpectraVoiceModuleHandle.GetAttack(ValueScalingMode)" />
         public int GetAttack(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(2, valueScalingMode);
 
-        /// <inheritdoc cref="ISpectraVoiceModuleHandle.SetAttack" />
+        /// <inheritdoc cref="ISpectraVoiceModuleHandle.SetAttack(int, ValueScalingMode)" />
         public void SetAttack(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(2, value, valueScalingMode);
 
         /// <inheritdoc cref="ISpectraVoiceModuleHandle.MakeAttackEvent" />
@@ -431,10 +431,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 2, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="ISpectraVoiceModuleHandle.GetRelease" />
+        /// <inheritdoc cref="ISpectraVoiceModuleHandle.GetRelease(ValueScalingMode)" />
         public int GetRelease(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(3, valueScalingMode);
 
-        /// <inheritdoc cref="ISpectraVoiceModuleHandle.SetRelease" />
+        /// <inheritdoc cref="ISpectraVoiceModuleHandle.SetRelease(int, ValueScalingMode)" />
         public void SetRelease(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(3, value, valueScalingMode);
 
         /// <inheritdoc cref="ISpectraVoiceModuleHandle.MakeReleaseEvent" />
@@ -444,10 +444,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 3, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="ISpectraVoiceModuleHandle.GetPolyphony" />
+        /// <inheritdoc cref="ISpectraVoiceModuleHandle.GetPolyphony(ValueScalingMode)" />
         public int GetPolyphony(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(4, valueScalingMode);
 
-        /// <inheritdoc cref="ISpectraVoiceModuleHandle.SetPolyphony" />
+        /// <inheritdoc cref="ISpectraVoiceModuleHandle.SetPolyphony(int, ValueScalingMode)" />
         public void SetPolyphony(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(4, value, valueScalingMode);
 
         /// <inheritdoc cref="ISpectraVoiceModuleHandle.MakePolyphonyEvent" />
@@ -456,10 +456,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 4, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="ISpectraVoiceModuleHandle.GetMode" />
+        /// <inheritdoc cref="ISpectraVoiceModuleHandle.GetMode()" />
         public SpectraVoiceMode GetMode() => (SpectraVoiceMode)ModuleHandle.GetControllerValue(5, ValueScalingMode.Displayed);
 
-        /// <inheritdoc cref="ISpectraVoiceModuleHandle.SetMode" />
+        /// <inheritdoc cref="ISpectraVoiceModuleHandle.SetMode(SpectraVoiceMode)" />
         public void SetMode(SpectraVoiceMode value) => ModuleHandle.SetControllerValue(5, (int)value, ValueScalingMode.Displayed);
 
         /// <inheritdoc cref="ISpectraVoiceModuleHandle.MakeModeEvent" />
@@ -468,10 +468,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 5, (ushort)Math.Clamp((int)value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="ISpectraVoiceModuleHandle.GetSustain" />
+        /// <inheritdoc cref="ISpectraVoiceModuleHandle.GetSustain()" />
         public Toggle GetSustain() => (Toggle)ModuleHandle.GetControllerValue(6, ValueScalingMode.Displayed);
 
-        /// <inheritdoc cref="ISpectraVoiceModuleHandle.SetSustain" />
+        /// <inheritdoc cref="ISpectraVoiceModuleHandle.SetSustain(Toggle)" />
         public void SetSustain(Toggle value) => ModuleHandle.SetControllerValue(6, (int)value, ValueScalingMode.Displayed);
 
         /// <inheritdoc cref="ISpectraVoiceModuleHandle.MakeSustainEvent" />
@@ -480,10 +480,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 6, (ushort)Math.Clamp((int)value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="ISpectraVoiceModuleHandle.GetSpectrumResolution" />
+        /// <inheritdoc cref="ISpectraVoiceModuleHandle.GetSpectrumResolution()" />
         public SpectraVoiceResolution GetSpectrumResolution() => (SpectraVoiceResolution)ModuleHandle.GetControllerValue(7, ValueScalingMode.Displayed);
 
-        /// <inheritdoc cref="ISpectraVoiceModuleHandle.SetSpectrumResolution" />
+        /// <inheritdoc cref="ISpectraVoiceModuleHandle.SetSpectrumResolution(SpectraVoiceResolution)" />
         public void SetSpectrumResolution(SpectraVoiceResolution value) => ModuleHandle.SetControllerValue(7, (int)value, ValueScalingMode.Displayed);
 
         /// <inheritdoc cref="ISpectraVoiceModuleHandle.MakeSpectrumResolutionEvent" />
@@ -492,10 +492,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 7, (ushort)Math.Clamp((int)value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="ISpectraVoiceModuleHandle.GetHarmonic" />
+        /// <inheritdoc cref="ISpectraVoiceModuleHandle.GetHarmonic(ValueScalingMode)" />
         public int GetHarmonic(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(8, valueScalingMode);
 
-        /// <inheritdoc cref="ISpectraVoiceModuleHandle.SetHarmonic" />
+        /// <inheritdoc cref="ISpectraVoiceModuleHandle.SetHarmonic(int, ValueScalingMode)" />
         public void SetHarmonic(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(8, value, valueScalingMode);
 
         /// <inheritdoc cref="ISpectraVoiceModuleHandle.MakeHarmonicEvent" />
@@ -504,10 +504,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 8, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="ISpectraVoiceModuleHandle.GetHFreq" />
+        /// <inheritdoc cref="ISpectraVoiceModuleHandle.GetHFreq(ValueScalingMode)" />
         public int GetHFreq(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(9, valueScalingMode);
 
-        /// <inheritdoc cref="ISpectraVoiceModuleHandle.SetHFreq" />
+        /// <inheritdoc cref="ISpectraVoiceModuleHandle.SetHFreq(int, ValueScalingMode)" />
         public void SetHFreq(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(9, value, valueScalingMode);
 
         /// <inheritdoc cref="ISpectraVoiceModuleHandle.MakeHFreqEvent" />
@@ -516,10 +516,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 9, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="ISpectraVoiceModuleHandle.GetHVolume" />
+        /// <inheritdoc cref="ISpectraVoiceModuleHandle.GetHVolume(ValueScalingMode)" />
         public int GetHVolume(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(10, valueScalingMode);
 
-        /// <inheritdoc cref="ISpectraVoiceModuleHandle.SetHVolume" />
+        /// <inheritdoc cref="ISpectraVoiceModuleHandle.SetHVolume(int, ValueScalingMode)" />
         public void SetHVolume(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(10, value, valueScalingMode);
 
         /// <inheritdoc cref="ISpectraVoiceModuleHandle.MakeHVolumeEvent" />
@@ -528,10 +528,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 10, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="ISpectraVoiceModuleHandle.GetHWidth" />
+        /// <inheritdoc cref="ISpectraVoiceModuleHandle.GetHWidth(ValueScalingMode)" />
         public int GetHWidth(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(11, valueScalingMode);
 
-        /// <inheritdoc cref="ISpectraVoiceModuleHandle.SetHWidth" />
+        /// <inheritdoc cref="ISpectraVoiceModuleHandle.SetHWidth(int, ValueScalingMode)" />
         public void SetHWidth(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(11, value, valueScalingMode);
 
         /// <inheritdoc cref="ISpectraVoiceModuleHandle.MakeHWidthEvent" />
@@ -540,10 +540,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 11, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="ISpectraVoiceModuleHandle.GetHType" />
+        /// <inheritdoc cref="ISpectraVoiceModuleHandle.GetHType()" />
         public SpectraVoiceHarmonicType GetHType() => (SpectraVoiceHarmonicType)ModuleHandle.GetControllerValue(12, ValueScalingMode.Displayed);
 
-        /// <inheritdoc cref="ISpectraVoiceModuleHandle.SetHType" />
+        /// <inheritdoc cref="ISpectraVoiceModuleHandle.SetHType(SpectraVoiceHarmonicType)" />
         public void SetHType(SpectraVoiceHarmonicType value) => ModuleHandle.SetControllerValue(12, (int)value, ValueScalingMode.Displayed);
 
         /// <inheritdoc cref="ISpectraVoiceModuleHandle.MakeHTypeEvent" />

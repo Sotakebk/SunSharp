@@ -1,5 +1,7 @@
 using System;
+using System.IO;
 using System.Runtime.InteropServices;
+using System.Xml.Linq;
 
 namespace SunSharp.Native
 {
@@ -48,22 +50,29 @@ namespace SunSharp.Native
         /// <param name="z">Layer number (0 to 7).</param>
         /// <returns>The identifier of the newly created module (0-based).</returns>
         /// <exception cref="SunVoxException">Thrown when the operation fails.</exception>
+        /// <exception cref="ArgumentNullException">Thrown if <paramref name="type"/> is null.</exception>
         /// <remarks>
         /// <para>Requires <see cref="LockSlot"/> / <see cref="UnlockSlot"/>.</para>
         /// Calls <see cref="ISunVoxLibC.sv_new_module"/>.
         /// </remarks>
         public int CreateModule(int slotId, string type, string? name = null, int x = 0, int y = 0, int z = 0)
         {
-            var typePtr = Marshal.StringToCoTaskMemUTF8(type);
-            IntPtr namePtr = IntPtr.Zero;
-            if (name != null)
+            if (type == null)
             {
-                namePtr = Marshal.StringToCoTaskMemUTF8(name);
+                throw new ArgumentNullException(nameof(type));
             }
+            var typePtr = Marshal.StringToCoTaskMemUTF8(type);
+            var namePtr = name != null ? Marshal.StringToCoTaskMemUTF8(name) : IntPtr.Zero;
             int ret;
             try
             {
                 ret = _lib.sv_new_module(slotId, typePtr, namePtr, x, y, z);
+                if (ret < 0)
+                {
+                    var details = $"{nameof(slotId)}: {slotId}, {nameof(type)}: '{type}', {nameof(name)}: '{name ?? "<null>"}', {nameof(x)}: {x}, {nameof(y)}: {y}, {nameof(z)}: {z}.";
+                    throw new SunVoxException(ret, nameof(_lib.sv_new_module), details);
+                }
+                return ret;
             }
             finally
             {
@@ -73,13 +82,6 @@ namespace SunSharp.Native
                     Marshal.ZeroFreeCoTaskMemUTF8(namePtr);
                 }
             }
-
-            if (ret < 0)
-            {
-                var details = $"{nameof(slotId)}: {slotId}, {nameof(type)}: '{type}', {nameof(name)}: '{name ?? "<null>"}', {nameof(x)}: {x}, {nameof(y)}: {y}, {nameof(z)}: {z}.";
-                throw new SunVoxException(ret, nameof(_lib.sv_new_module), details);
-            }
-            return ret;
         }
 
         /// <summary>
@@ -110,9 +112,14 @@ namespace SunSharp.Native
         /// <param name="name">Module name to search for.</param>
         /// <returns>module number  (0-based) if found.</returns>
         /// <exception cref="SunVoxException">Thrown when an error occurs during the search.</exception>
+        /// <exception cref="ArgumentNullException">Thrown if <paramref name="name"/> is null.</exception>
         /// <remarks>Calls <see cref="ISunVoxLibC.sv_find_module"/>.</remarks>
         public int? FindModule(int slotId, string name)
         {
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
             var ptr = Marshal.StringToCoTaskMemUTF8(name);
             int ret;
             try
@@ -417,9 +424,14 @@ namespace SunSharp.Native
         /// <param name="moduleId">Metamodule number (0-based).</param>
         /// <param name="path">File path (relative or absolute).</param>
         /// <exception cref="SunVoxException">Thrown when the operation fails.</exception>
+        /// <exception cref="ArgumentNullException">Thrown if <paramref name="path"/> is null.</exception>
         /// <remarks>Calls <see cref="ISunVoxLibC.sv_metamodule_load"/>.</remarks>
         public void LoadIntoMetaModule(int slotId, int moduleId, string path)
         {
+            if (path == null)
+            {
+                throw new ArgumentNullException(nameof(path));
+            }
             var ptr = Marshal.StringToCoTaskMemUTF8(path);
             int ret;
             try
@@ -446,9 +458,14 @@ namespace SunSharp.Native
         /// <param name="moduleId">Metamodule number (0-based).</param>
         /// <param name="data">Byte array with project data.</param>
         /// <exception cref="SunVoxException">Thrown when the operation fails.</exception>
+        /// <exception cref="ArgumentNullException">Thrown if <paramref name="data"/> is null.</exception>
         /// <remarks>Calls <see cref="ISunVoxLibC.sv_metamodule_load_from_memory"/>.</remarks>
         public void LoadIntoMetaModule(int slotId, int moduleId, byte[] data)
         {
+            if (data == null)
+            {
+                throw new ArgumentNullException(nameof(data));
+            }
             var handle = GCHandle.Alloc(data, GCHandleType.Pinned);
             int ret;
             try
@@ -475,25 +492,29 @@ namespace SunSharp.Native
         /// <param name="moduleId">Vorbis Player module number (0-based).</param>
         /// <param name="path">File path (relative or absolute).</param>
         /// <exception cref="SunVoxException">Thrown when the operation fails.</exception>
+        /// <exception cref="ArgumentNullException">Thrown if <paramref name="path"/> is null.</exception>
         /// <remarks>Calls <see cref="ISunVoxLibC.sv_vplayer_load"/>.</remarks>
         public void LoadIntoVorbisPlayer(int slotId, int moduleId, string path)
         {
+            if (path == null)
+            {
+                throw new ArgumentNullException(nameof(path));
+            }
             var ptr = Marshal.StringToCoTaskMemUTF8(path);
-            int ret;
             try
             {
-                ret = _lib.sv_vplayer_load(slotId, moduleId, ptr);
+                var ret = _lib.sv_vplayer_load(slotId, moduleId, ptr);
+                if (ret != 0)
+                {
+                    var details = $"{nameof(slotId)}: {slotId}, {nameof(moduleId)}: {moduleId}, {nameof(path)}: '{path ?? "<null>"}'.";
+                    throw new SunVoxException(ret, nameof(_lib.sv_vplayer_load), details);
+                }
             }
             finally
             {
                 Marshal.ZeroFreeCoTaskMemUTF8(ptr);
             }
 
-            if (ret != 0)
-            {
-                var details = $"{nameof(slotId)}: {slotId}, {nameof(moduleId)}: {moduleId}, {nameof(path)}: '{path ?? "<null>"}'.";
-                throw new SunVoxException(ret, nameof(_lib.sv_vplayer_load), details);
-            }
         }
 
         /// <summary>
@@ -504,9 +525,15 @@ namespace SunSharp.Native
         /// <param name="moduleId">Vorbis Player module number (0-based).</param>
         /// <param name="data">Byte array with audio file data.</param>
         /// <exception cref="SunVoxException">Thrown when the operation fails.</exception>
+        /// <exception cref="ArgumentNullException">Thrown if <paramref name="data"/> is null.</exception>
         /// <remarks>Calls <see cref="ISunVoxLibC.sv_vplayer_load_from_memory"/>.</remarks>
         public void LoadIntoVorbisPlayer(int slotId, int moduleId, byte[] data)
         {
+            if (data == null)
+            {
+                throw new ArgumentNullException(nameof(data));
+            }
+
             var handle = GCHandle.Alloc(data, GCHandleType.Pinned);
             int ret;
             try
@@ -537,26 +564,30 @@ namespace SunSharp.Native
         /// <param name="z">Layer number (0 to 7).</param>
         /// <returns>The number of the loaded module.</returns>
         /// <exception cref="SunVoxException">Thrown when the operation fails.</exception>
+        /// <exception cref="ArgumentNullException">Thrown if <paramref name="path"/> is null.</exception>
         /// <remarks>Calls <see cref="ISunVoxLibC.sv_load_module"/>.</remarks>
         public int LoadModule(int slotId, string path, int x = 0, int y = 0, int z = 0)
         {
+            if (path == null)
+            {
+                throw new ArgumentNullException(nameof(path));
+            }
             var ptr = Marshal.StringToCoTaskMemUTF8(path);
-            int ret;
             try
             {
-                ret = _lib.sv_load_module(slotId, ptr, x, y, z);
+                var ret = _lib.sv_load_module(slotId, ptr, x, y, z);
+                if (ret < 0)
+                {
+                    var details = $"{nameof(slotId)}: {slotId}, {nameof(path)}: '{path ?? "<null>"}', {nameof(x)}: {x}, {nameof(y)}: {y}, {nameof(z)}: {z}.";
+                    throw new SunVoxException(ret, nameof(_lib.sv_load_module), details);
+                }
+                return ret;
             }
             finally
             {
                 Marshal.ZeroFreeCoTaskMemUTF8(ptr);
             }
 
-            if (ret < 0)
-            {
-                var details = $"{nameof(slotId)}: {slotId}, {nameof(path)}: '{path ?? "<null>"}', {nameof(x)}: {x}, {nameof(y)}: {y}, {nameof(z)}: {z}.";
-                throw new SunVoxException(ret, nameof(_lib.sv_load_module), details);
-            }
-            return ret;
         }
 
         /// <summary>
@@ -570,9 +601,14 @@ namespace SunSharp.Native
         /// <param name="z">Layer number (0 to 7).</param>
         /// <returns>The number of the loaded module.</returns>
         /// <exception cref="SunVoxException">Thrown when the operation fails.</exception>
+        /// <exception cref="ArgumentNullException">Thrown if <paramref name="data"/> is null.</exception>
         /// <remarks>Calls <see cref="ISunVoxLibC.sv_load_module_from_memory"/>.</remarks>
         public int LoadModule(int slotId, byte[] data, int x = 0, int y = 0, int z = 0)
         {
+            if (data == null)
+            {
+                throw new ArgumentNullException(nameof(data));
+            }
             var handle = GCHandle.Alloc(data, GCHandleType.Pinned);
             int ret;
             try
@@ -602,24 +638,27 @@ namespace SunSharp.Native
         /// <param name="path">File path (relative or absolute).</param>
         /// <param name="sampleSlot">Sample slot number (-1 for auto/all slots).</param>
         /// <exception cref="SunVoxException">Thrown when the operation fails.</exception>
+        /// <exception cref="ArgumentNullException">Thrown if <paramref name="path"/> is null.</exception>
         /// <remarks>Calls <see cref="ISunVoxLibC.sv_sampler_load"/>.</remarks>
         public void LoadSamplerSample(int slotId, int moduleId, string path, int? sampleSlot = null)
         {
+            if (path == null)
+            {
+                throw new ArgumentNullException(nameof(path));
+            }
             var ptr = Marshal.StringToCoTaskMemUTF8(path);
-            int ret;
             try
             {
-                ret = _lib.sv_sampler_load(slotId, moduleId, ptr, sampleSlot ?? -1);
+                var ret = _lib.sv_sampler_load(slotId, moduleId, ptr, sampleSlot ?? -1);
+                if (ret != 0)
+                {
+                    var details = $"{nameof(slotId)}: {slotId}, {nameof(moduleId)}: {moduleId}, {nameof(path)}: '{path ?? "<null>"}', {nameof(sampleSlot)}: {sampleSlot}.";
+                    throw new SunVoxException(ret, nameof(_lib.sv_sampler_load), details);
+                }
             }
             finally
             {
                 Marshal.ZeroFreeCoTaskMemUTF8(ptr);
-            }
-
-            if (ret != 0)
-            {
-                var details = $"{nameof(slotId)}: {slotId}, {nameof(moduleId)}: {moduleId}, {nameof(path)}: '{path ?? "<null>"}', {nameof(sampleSlot)}: {sampleSlot}.";
-                throw new SunVoxException(ret, nameof(_lib.sv_sampler_load), details);
             }
         }
 
@@ -633,9 +672,14 @@ namespace SunSharp.Native
         /// <param name="data">Byte array with sample data.</param>
         /// <param name="sampleSlot">Sample slot number (-1 for auto/all slots).</param>
         /// <exception cref="SunVoxException">Thrown when the operation fails.</exception>
+        /// <exception cref="ArgumentNullException">Thrown if <paramref name="data"/> is null.</exception>
         /// <remarks>Calls <see cref="ISunVoxLibC.sv_sampler_load_from_memory"/>.</remarks>
         public void LoadSamplerSample(int slotId, int moduleId, byte[] data, int? sampleSlot = null)
         {
+            if (data == null)
+            {
+                throw new ArgumentNullException(nameof(data));
+            }
             var handle = GCHandle.Alloc(data, GCHandleType.Pinned);
             int ret;
             try
@@ -664,9 +708,14 @@ namespace SunSharp.Native
         /// <param name="data">Array to receive curveId data.</param>
         /// <returns>Number of values read.</returns>
         /// <exception cref="SunVoxException">Thrown when the operation fails.</exception>
+        /// <exception cref="ArgumentNullException">Thrown if <paramref name="data"/> is null.</exception>
         /// <remarks>Calls <see cref="ISunVoxLibC.sv_module_curve"/>.</remarks>
         public int ReadModuleCurve(int slotId, int moduleId, int curveId, float[] data)
         {
+            if (data == null)
+            {
+                throw new ArgumentNullException(nameof(data));
+            }
             var ret = ModuleCurveOperationInternal(slotId, moduleId, curveId, data, false);
             if (ret < 0)
             {
@@ -684,9 +733,14 @@ namespace SunSharp.Native
         /// <param name="channel">Audio channel.</param>
         /// <param name="buffer">Buffer to receive scope data.</param>
         /// <returns>Number of samples read.</returns>
+        /// <exception cref="ArgumentNullException">Thrown if <paramref name="buffer"/> is null.</exception>
         /// <remarks>Calls <see cref="ISunVoxLibC.sv_get_module_scope2"/>.</remarks>
         public int ReadModuleScope(int slotId, int moduleId, AudioChannel channel, short[] buffer)
         {
+            if (buffer == null)
+            {
+                throw new ArgumentNullException(nameof(buffer));
+            }
             var handle = GCHandle.Alloc(buffer, GCHandleType.Pinned);
             var ptr = handle.AddrOfPinnedObject();
             try
@@ -741,7 +795,7 @@ namespace SunSharp.Native
 
         /// <summary>
         /// Set a controller value.
-        /// Note: <see cref="SendEvent"/> will be used internally, which may introduce latency.
+        /// Note: <see cref="SendEvent(int, int, PatternEvent)"/> will be used internally, which may introduce latency.
         /// </summary>
         /// <param name="slotId">slot number (0 to 15).</param>
         /// <param name="moduleId">module number (0-based).</param>
@@ -786,9 +840,14 @@ namespace SunSharp.Native
         /// <param name="moduleId">module number (0-based).</param>
         /// <param name="name">New module name.</param>
         /// <exception cref="SunVoxException">Thrown when the operation fails.</exception>
+        /// <exception cref="ArgumentNullException">Thrown if <paramref name="name"/> is null.</exception>
         /// <remarks>Calls <see cref="ISunVoxLibC.sv_set_module_name"/>.</remarks>
         public void SetModuleName(int slotId, int moduleId, string name)
         {
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
             var ptr = Marshal.StringToCoTaskMemUTF8(name);
             try
             {
@@ -886,9 +945,14 @@ namespace SunSharp.Native
         /// <param name="data">Array containing curveId data to write.</param>
         /// <returns>Number of values written.</returns>
         /// <exception cref="SunVoxException">Thrown when the operation fails.</exception>
+        /// <exception cref="ArgumentNullException">Thrown if <paramref name="data"/> is null.</exception>
         /// <remarks>Calls <see cref="ISunVoxLibC.sv_module_curve"/>.</remarks>
         public int WriteModuleCurve(int slotId, int moduleId, int curveId, float[] data)
         {
+            if (data == null)
+            {
+                throw new ArgumentNullException(nameof(data));
+            }
             var ret = ModuleCurveOperationInternal(slotId, moduleId, curveId, data, true);
             if (ret < 0)
             {

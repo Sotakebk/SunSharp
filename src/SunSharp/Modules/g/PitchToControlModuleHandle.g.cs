@@ -23,7 +23,7 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 0 'Mode'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetMode(PitchToControlMode value);
 
@@ -40,7 +40,7 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 1 'On NoteOFF'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetOnNoteoff(PitchToControlOnNoteOff value);
 
@@ -57,7 +57,7 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 2 'First note'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetFirstNote(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -74,7 +74,7 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 3 'Range (number of semitones)'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetRange(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -93,7 +93,7 @@ namespace SunSharp.Modules
         /// <summary>
         /// Value range: displayed: 0 to 32768, real: 0 to 32768
         /// Original name: 4 'OUT min'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetOutMin(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -112,7 +112,7 @@ namespace SunSharp.Modules
         /// <summary>
         /// Value range: displayed: 0 to 32768, real: 0 to 32768
         /// Original name: 5 'OUT max'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetOutMax(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -129,7 +129,7 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 6 'OUT controller'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetOutController(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -265,30 +265,30 @@ namespace SunSharp.Modules
         /// <inheritdoc/>
         public PatternEvent MakeEvent(Note note = default, byte? velocity = default, byte? controller = default, Effect effect = Effect.None, ushort value = 0) => ModuleHandle.MakeEvent(note, velocity, controller, effect, value);
 
-        /// <inheritdoc cref="SynthModuleHandle.GetInputModules"/>
+        /// <inheritdoc cref="SynthModuleHandle.GetInputModules()"/>
         public SynthModuleHandle[] GetInputModules() => ModuleHandle.GetInputModules();
 
-        /// <inheritdoc cref="SynthModuleHandle.GetOutputModules"/>
+        /// <inheritdoc cref="SynthModuleHandle.GetOutputModules()"/>
         public SynthModuleHandle[] GetOutputModules() => ModuleHandle.GetOutputModules();
 
-        /// <inheritdoc cref="SynthModuleHandle.ConnectInput"/>
+        /// <inheritdoc cref="SynthModuleHandle.ConnectInput(SynthModuleHandle)"/>
         public void ConnectInput(SynthModuleHandle targetModule) => ModuleHandle.ConnectInput(targetModule);
 
-        /// <inheritdoc cref="SynthModuleHandle.ConnectOutput"/>
+        /// <inheritdoc cref="SynthModuleHandle.ConnectOutput(SynthModuleHandle)"/>
         public void ConnectOutput(SynthModuleHandle targetModule) => ModuleHandle.ConnectOutput(targetModule);
 
-        /// <inheritdoc cref="SynthModuleHandle.DisconnectInput"/>
+        /// <inheritdoc cref="SynthModuleHandle.DisconnectInput(SynthModuleHandle)"/>
         public void DisconnectInput(SynthModuleHandle targetModule) => ModuleHandle.DisconnectInput(targetModule);
 
-        /// <inheritdoc cref="SynthModuleHandle.DisconnectOutput"/>
+        /// <inheritdoc cref="SynthModuleHandle.DisconnectOutput(SynthModuleHandle)"/>
         public void DisconnectOutput(SynthModuleHandle targetModule) => ModuleHandle.DisconnectOutput(targetModule);
 
         #endregion
 
-        /// <inheritdoc cref="IPitchToControlModuleHandle.GetMode" />
+        /// <inheritdoc cref="IPitchToControlModuleHandle.GetMode()" />
         public PitchToControlMode GetMode() => (PitchToControlMode)ModuleHandle.GetControllerValue(0, ValueScalingMode.Displayed);
 
-        /// <inheritdoc cref="IPitchToControlModuleHandle.SetMode" />
+        /// <inheritdoc cref="IPitchToControlModuleHandle.SetMode(PitchToControlMode)" />
         public void SetMode(PitchToControlMode value) => ModuleHandle.SetControllerValue(0, (int)value, ValueScalingMode.Displayed);
 
         /// <inheritdoc cref="IPitchToControlModuleHandle.MakeModeEvent" />
@@ -297,10 +297,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 0, (ushort)Math.Clamp((int)value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IPitchToControlModuleHandle.GetOnNoteoff" />
+        /// <inheritdoc cref="IPitchToControlModuleHandle.GetOnNoteoff()" />
         public PitchToControlOnNoteOff GetOnNoteoff() => (PitchToControlOnNoteOff)ModuleHandle.GetControllerValue(1, ValueScalingMode.Displayed);
 
-        /// <inheritdoc cref="IPitchToControlModuleHandle.SetOnNoteoff" />
+        /// <inheritdoc cref="IPitchToControlModuleHandle.SetOnNoteoff(PitchToControlOnNoteOff)" />
         public void SetOnNoteoff(PitchToControlOnNoteOff value) => ModuleHandle.SetControllerValue(1, (int)value, ValueScalingMode.Displayed);
 
         /// <inheritdoc cref="IPitchToControlModuleHandle.MakeOnNoteoffEvent" />
@@ -309,10 +309,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 1, (ushort)Math.Clamp((int)value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IPitchToControlModuleHandle.GetFirstNote" />
+        /// <inheritdoc cref="IPitchToControlModuleHandle.GetFirstNote(ValueScalingMode)" />
         public int GetFirstNote(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(2, valueScalingMode);
 
-        /// <inheritdoc cref="IPitchToControlModuleHandle.SetFirstNote" />
+        /// <inheritdoc cref="IPitchToControlModuleHandle.SetFirstNote(int, ValueScalingMode)" />
         public void SetFirstNote(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(2, value, valueScalingMode);
 
         /// <inheritdoc cref="IPitchToControlModuleHandle.MakeFirstNoteEvent" />
@@ -321,10 +321,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 2, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IPitchToControlModuleHandle.GetRange" />
+        /// <inheritdoc cref="IPitchToControlModuleHandle.GetRange(ValueScalingMode)" />
         public int GetRange(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(3, valueScalingMode);
 
-        /// <inheritdoc cref="IPitchToControlModuleHandle.SetRange" />
+        /// <inheritdoc cref="IPitchToControlModuleHandle.SetRange(int, ValueScalingMode)" />
         public void SetRange(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(3, value, valueScalingMode);
 
         /// <inheritdoc cref="IPitchToControlModuleHandle.MakeRangeEvent" />
@@ -333,10 +333,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 3, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IPitchToControlModuleHandle.GetOutMin" />
+        /// <inheritdoc cref="IPitchToControlModuleHandle.GetOutMin(ValueScalingMode)" />
         public int GetOutMin(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(4, valueScalingMode);
 
-        /// <inheritdoc cref="IPitchToControlModuleHandle.SetOutMin" />
+        /// <inheritdoc cref="IPitchToControlModuleHandle.SetOutMin(int, ValueScalingMode)" />
         public void SetOutMin(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(4, value, valueScalingMode);
 
         /// <inheritdoc cref="IPitchToControlModuleHandle.MakeOutMinEvent" />
@@ -346,10 +346,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 4, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IPitchToControlModuleHandle.GetOutMax" />
+        /// <inheritdoc cref="IPitchToControlModuleHandle.GetOutMax(ValueScalingMode)" />
         public int GetOutMax(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(5, valueScalingMode);
 
-        /// <inheritdoc cref="IPitchToControlModuleHandle.SetOutMax" />
+        /// <inheritdoc cref="IPitchToControlModuleHandle.SetOutMax(int, ValueScalingMode)" />
         public void SetOutMax(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(5, value, valueScalingMode);
 
         /// <inheritdoc cref="IPitchToControlModuleHandle.MakeOutMaxEvent" />
@@ -359,10 +359,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 5, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IPitchToControlModuleHandle.GetOutController" />
+        /// <inheritdoc cref="IPitchToControlModuleHandle.GetOutController(ValueScalingMode)" />
         public int GetOutController(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(6, valueScalingMode);
 
-        /// <inheritdoc cref="IPitchToControlModuleHandle.SetOutController" />
+        /// <inheritdoc cref="IPitchToControlModuleHandle.SetOutController(int, ValueScalingMode)" />
         public void SetOutController(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(6, value, valueScalingMode);
 
         /// <inheritdoc cref="IPitchToControlModuleHandle.MakeOutControllerEvent" />

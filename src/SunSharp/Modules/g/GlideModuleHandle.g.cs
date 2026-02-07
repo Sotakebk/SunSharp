@@ -25,7 +25,7 @@ namespace SunSharp.Modules
         /// <summary>
         /// Value range: displayed: 0 to 1000, real: 0 to 1000
         /// Original name: 0 'Response'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetResponse(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -44,7 +44,7 @@ namespace SunSharp.Modules
         /// <summary>
         /// Value range: displayed: 1 to 32768, real: 1 to 32768
         /// Original name: 1 'Sample rate'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetSampleRate(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -61,7 +61,7 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 2 'Reset on 1st note'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetResetOnStNote1(Toggle value);
 
@@ -78,7 +78,7 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 3 'Polyphony'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetPolyphony(Toggle value);
 
@@ -97,7 +97,7 @@ namespace SunSharp.Modules
         /// <summary>
         /// Value range: displayed: -600 to 600, real: 0 to 1200
         /// Original name: 4 'Pitch'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetPitch(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -116,7 +116,7 @@ namespace SunSharp.Modules
         /// <summary>
         /// Value range: displayed: 0 to 200, real: 0 to 200
         /// Original name: 5 'Pitch scale'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetPitchScale(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -133,7 +133,7 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 6 'Reset'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetReset(Toggle value);
 
@@ -150,7 +150,7 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 7 'Octave'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetOctave(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -167,7 +167,7 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 8 'Freq multiply'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetFreqMultiply(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -184,7 +184,7 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 9 'Freq divide'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetFreqDivide(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -320,30 +320,30 @@ namespace SunSharp.Modules
         /// <inheritdoc/>
         public PatternEvent MakeEvent(Note note = default, byte? velocity = default, byte? controller = default, Effect effect = Effect.None, ushort value = 0) => ModuleHandle.MakeEvent(note, velocity, controller, effect, value);
 
-        /// <inheritdoc cref="SynthModuleHandle.GetInputModules"/>
+        /// <inheritdoc cref="SynthModuleHandle.GetInputModules()"/>
         public SynthModuleHandle[] GetInputModules() => ModuleHandle.GetInputModules();
 
-        /// <inheritdoc cref="SynthModuleHandle.GetOutputModules"/>
+        /// <inheritdoc cref="SynthModuleHandle.GetOutputModules()"/>
         public SynthModuleHandle[] GetOutputModules() => ModuleHandle.GetOutputModules();
 
-        /// <inheritdoc cref="SynthModuleHandle.ConnectInput"/>
+        /// <inheritdoc cref="SynthModuleHandle.ConnectInput(SynthModuleHandle)"/>
         public void ConnectInput(SynthModuleHandle targetModule) => ModuleHandle.ConnectInput(targetModule);
 
-        /// <inheritdoc cref="SynthModuleHandle.ConnectOutput"/>
+        /// <inheritdoc cref="SynthModuleHandle.ConnectOutput(SynthModuleHandle)"/>
         public void ConnectOutput(SynthModuleHandle targetModule) => ModuleHandle.ConnectOutput(targetModule);
 
-        /// <inheritdoc cref="SynthModuleHandle.DisconnectInput"/>
+        /// <inheritdoc cref="SynthModuleHandle.DisconnectInput(SynthModuleHandle)"/>
         public void DisconnectInput(SynthModuleHandle targetModule) => ModuleHandle.DisconnectInput(targetModule);
 
-        /// <inheritdoc cref="SynthModuleHandle.DisconnectOutput"/>
+        /// <inheritdoc cref="SynthModuleHandle.DisconnectOutput(SynthModuleHandle)"/>
         public void DisconnectOutput(SynthModuleHandle targetModule) => ModuleHandle.DisconnectOutput(targetModule);
 
         #endregion
 
-        /// <inheritdoc cref="IGlideModuleHandle.GetResponse" />
+        /// <inheritdoc cref="IGlideModuleHandle.GetResponse(ValueScalingMode)" />
         public int GetResponse(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(0, valueScalingMode);
 
-        /// <inheritdoc cref="IGlideModuleHandle.SetResponse" />
+        /// <inheritdoc cref="IGlideModuleHandle.SetResponse(int, ValueScalingMode)" />
         public void SetResponse(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(0, value, valueScalingMode);
 
         /// <inheritdoc cref="IGlideModuleHandle.MakeResponseEvent" />
@@ -353,10 +353,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 0, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IGlideModuleHandle.GetSampleRate" />
+        /// <inheritdoc cref="IGlideModuleHandle.GetSampleRate(ValueScalingMode)" />
         public int GetSampleRate(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(1, valueScalingMode);
 
-        /// <inheritdoc cref="IGlideModuleHandle.SetSampleRate" />
+        /// <inheritdoc cref="IGlideModuleHandle.SetSampleRate(int, ValueScalingMode)" />
         public void SetSampleRate(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(1, value, valueScalingMode);
 
         /// <inheritdoc cref="IGlideModuleHandle.MakeSampleRateEvent" />
@@ -367,10 +367,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 1, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IGlideModuleHandle.GetResetOnStNote1" />
+        /// <inheritdoc cref="IGlideModuleHandle.GetResetOnStNote1()" />
         public Toggle GetResetOnStNote1() => (Toggle)ModuleHandle.GetControllerValue(2, ValueScalingMode.Displayed);
 
-        /// <inheritdoc cref="IGlideModuleHandle.SetResetOnStNote1" />
+        /// <inheritdoc cref="IGlideModuleHandle.SetResetOnStNote1(Toggle)" />
         public void SetResetOnStNote1(Toggle value) => ModuleHandle.SetControllerValue(2, (int)value, ValueScalingMode.Displayed);
 
         /// <inheritdoc cref="IGlideModuleHandle.MakeResetOnStNote1Event" />
@@ -379,10 +379,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 2, (ushort)Math.Clamp((int)value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IGlideModuleHandle.GetPolyphony" />
+        /// <inheritdoc cref="IGlideModuleHandle.GetPolyphony()" />
         public Toggle GetPolyphony() => (Toggle)ModuleHandle.GetControllerValue(3, ValueScalingMode.Displayed);
 
-        /// <inheritdoc cref="IGlideModuleHandle.SetPolyphony" />
+        /// <inheritdoc cref="IGlideModuleHandle.SetPolyphony(Toggle)" />
         public void SetPolyphony(Toggle value) => ModuleHandle.SetControllerValue(3, (int)value, ValueScalingMode.Displayed);
 
         /// <inheritdoc cref="IGlideModuleHandle.MakePolyphonyEvent" />
@@ -391,10 +391,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 3, (ushort)Math.Clamp((int)value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IGlideModuleHandle.GetPitch" />
+        /// <inheritdoc cref="IGlideModuleHandle.GetPitch(ValueScalingMode)" />
         public int GetPitch(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(4, valueScalingMode);
 
-        /// <inheritdoc cref="IGlideModuleHandle.SetPitch" />
+        /// <inheritdoc cref="IGlideModuleHandle.SetPitch(int, ValueScalingMode)" />
         public void SetPitch(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(4, value, valueScalingMode);
 
         /// <inheritdoc cref="IGlideModuleHandle.MakePitchEvent" />
@@ -405,10 +405,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 4, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IGlideModuleHandle.GetPitchScale" />
+        /// <inheritdoc cref="IGlideModuleHandle.GetPitchScale(ValueScalingMode)" />
         public int GetPitchScale(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(5, valueScalingMode);
 
-        /// <inheritdoc cref="IGlideModuleHandle.SetPitchScale" />
+        /// <inheritdoc cref="IGlideModuleHandle.SetPitchScale(int, ValueScalingMode)" />
         public void SetPitchScale(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(5, value, valueScalingMode);
 
         /// <inheritdoc cref="IGlideModuleHandle.MakePitchScaleEvent" />
@@ -418,10 +418,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 5, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IGlideModuleHandle.GetReset" />
+        /// <inheritdoc cref="IGlideModuleHandle.GetReset()" />
         public Toggle GetReset() => (Toggle)ModuleHandle.GetControllerValue(6, ValueScalingMode.Displayed);
 
-        /// <inheritdoc cref="IGlideModuleHandle.SetReset" />
+        /// <inheritdoc cref="IGlideModuleHandle.SetReset(Toggle)" />
         public void SetReset(Toggle value) => ModuleHandle.SetControllerValue(6, (int)value, ValueScalingMode.Displayed);
 
         /// <inheritdoc cref="IGlideModuleHandle.MakeResetEvent" />
@@ -430,10 +430,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 6, (ushort)Math.Clamp((int)value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IGlideModuleHandle.GetOctave" />
+        /// <inheritdoc cref="IGlideModuleHandle.GetOctave(ValueScalingMode)" />
         public int GetOctave(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(7, valueScalingMode);
 
-        /// <inheritdoc cref="IGlideModuleHandle.SetOctave" />
+        /// <inheritdoc cref="IGlideModuleHandle.SetOctave(int, ValueScalingMode)" />
         public void SetOctave(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(7, value, valueScalingMode);
 
         /// <inheritdoc cref="IGlideModuleHandle.MakeOctaveEvent" />
@@ -442,10 +442,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 7, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IGlideModuleHandle.GetFreqMultiply" />
+        /// <inheritdoc cref="IGlideModuleHandle.GetFreqMultiply(ValueScalingMode)" />
         public int GetFreqMultiply(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(8, valueScalingMode);
 
-        /// <inheritdoc cref="IGlideModuleHandle.SetFreqMultiply" />
+        /// <inheritdoc cref="IGlideModuleHandle.SetFreqMultiply(int, ValueScalingMode)" />
         public void SetFreqMultiply(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(8, value, valueScalingMode);
 
         /// <inheritdoc cref="IGlideModuleHandle.MakeFreqMultiplyEvent" />
@@ -454,10 +454,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 8, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IGlideModuleHandle.GetFreqDivide" />
+        /// <inheritdoc cref="IGlideModuleHandle.GetFreqDivide(ValueScalingMode)" />
         public int GetFreqDivide(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(9, valueScalingMode);
 
-        /// <inheritdoc cref="IGlideModuleHandle.SetFreqDivide" />
+        /// <inheritdoc cref="IGlideModuleHandle.SetFreqDivide(int, ValueScalingMode)" />
         public void SetFreqDivide(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(9, value, valueScalingMode);
 
         /// <inheritdoc cref="IGlideModuleHandle.MakeFreqDivideEvent" />

@@ -25,7 +25,7 @@ namespace SunSharp.Modules
         /// <summary>
         /// Value range: displayed: 0 to 32768, real: 0 to 32768
         /// Original name: 0 'Volume'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetVolume(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -44,7 +44,7 @@ namespace SunSharp.Modules
         /// <summary>
         /// Value range: displayed: 0 to 10000, real: 0 to 10000
         /// Original name: 1 'Attack'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetAttack(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -63,7 +63,7 @@ namespace SunSharp.Modules
         /// <summary>
         /// Value range: displayed: 0 to 10000, real: 0 to 10000
         /// Original name: 2 'Decay'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetDecay(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -82,7 +82,7 @@ namespace SunSharp.Modules
         /// <summary>
         /// Value range: displayed: 0 to 32768, real: 0 to 32768
         /// Original name: 3 'Sustain level'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetSustainLevel(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -101,7 +101,7 @@ namespace SunSharp.Modules
         /// <summary>
         /// Value range: displayed: 0 to 10000, real: 0 to 10000
         /// Original name: 4 'Release'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetRelease(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -118,7 +118,7 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 5 'Attack curve'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetAttackCurve(AdsrCurveType value);
 
@@ -135,7 +135,7 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 6 'Decay curve'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetDecayCurve(AdsrCurveType value);
 
@@ -152,7 +152,7 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 7 'Release curve'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetReleaseCurve(AdsrCurveType value);
 
@@ -169,7 +169,7 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 8 'Sustain'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetSustain(AdsrSustainMode value);
 
@@ -186,7 +186,7 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 9 'Sustain pedal'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetSustainPedal(Toggle value);
 
@@ -203,7 +203,7 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 10 'State'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetState(Toggle value);
 
@@ -220,7 +220,7 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 11 'On NoteON'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetOnNoteon(AdsrOnNoteOnBehaviour value);
 
@@ -237,7 +237,7 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 12 'On NoteOFF'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetOnNoteoff(AdsrOnNoteOffBehaviour value);
 
@@ -254,7 +254,7 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 13 'Mode'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetMode(AdsrMode value);
 
@@ -271,7 +271,7 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 14 'Smooth transitions'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetSmoothTransitions(AdsrSmoothTransitions value);
 
@@ -407,30 +407,30 @@ namespace SunSharp.Modules
         /// <inheritdoc/>
         public PatternEvent MakeEvent(Note note = default, byte? velocity = default, byte? controller = default, Effect effect = Effect.None, ushort value = 0) => ModuleHandle.MakeEvent(note, velocity, controller, effect, value);
 
-        /// <inheritdoc cref="SynthModuleHandle.GetInputModules"/>
+        /// <inheritdoc cref="SynthModuleHandle.GetInputModules()"/>
         public SynthModuleHandle[] GetInputModules() => ModuleHandle.GetInputModules();
 
-        /// <inheritdoc cref="SynthModuleHandle.GetOutputModules"/>
+        /// <inheritdoc cref="SynthModuleHandle.GetOutputModules()"/>
         public SynthModuleHandle[] GetOutputModules() => ModuleHandle.GetOutputModules();
 
-        /// <inheritdoc cref="SynthModuleHandle.ConnectInput"/>
+        /// <inheritdoc cref="SynthModuleHandle.ConnectInput(SynthModuleHandle)"/>
         public void ConnectInput(SynthModuleHandle targetModule) => ModuleHandle.ConnectInput(targetModule);
 
-        /// <inheritdoc cref="SynthModuleHandle.ConnectOutput"/>
+        /// <inheritdoc cref="SynthModuleHandle.ConnectOutput(SynthModuleHandle)"/>
         public void ConnectOutput(SynthModuleHandle targetModule) => ModuleHandle.ConnectOutput(targetModule);
 
-        /// <inheritdoc cref="SynthModuleHandle.DisconnectInput"/>
+        /// <inheritdoc cref="SynthModuleHandle.DisconnectInput(SynthModuleHandle)"/>
         public void DisconnectInput(SynthModuleHandle targetModule) => ModuleHandle.DisconnectInput(targetModule);
 
-        /// <inheritdoc cref="SynthModuleHandle.DisconnectOutput"/>
+        /// <inheritdoc cref="SynthModuleHandle.DisconnectOutput(SynthModuleHandle)"/>
         public void DisconnectOutput(SynthModuleHandle targetModule) => ModuleHandle.DisconnectOutput(targetModule);
 
         #endregion
 
-        /// <inheritdoc cref="IAdsrModuleHandle.GetVolume" />
+        /// <inheritdoc cref="IAdsrModuleHandle.GetVolume(ValueScalingMode)" />
         public int GetVolume(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(0, valueScalingMode);
 
-        /// <inheritdoc cref="IAdsrModuleHandle.SetVolume" />
+        /// <inheritdoc cref="IAdsrModuleHandle.SetVolume(int, ValueScalingMode)" />
         public void SetVolume(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(0, value, valueScalingMode);
 
         /// <inheritdoc cref="IAdsrModuleHandle.MakeVolumeEvent" />
@@ -440,10 +440,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 0, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IAdsrModuleHandle.GetAttack" />
+        /// <inheritdoc cref="IAdsrModuleHandle.GetAttack(ValueScalingMode)" />
         public int GetAttack(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(1, valueScalingMode);
 
-        /// <inheritdoc cref="IAdsrModuleHandle.SetAttack" />
+        /// <inheritdoc cref="IAdsrModuleHandle.SetAttack(int, ValueScalingMode)" />
         public void SetAttack(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(1, value, valueScalingMode);
 
         /// <inheritdoc cref="IAdsrModuleHandle.MakeAttackEvent" />
@@ -453,10 +453,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 1, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IAdsrModuleHandle.GetDecay" />
+        /// <inheritdoc cref="IAdsrModuleHandle.GetDecay(ValueScalingMode)" />
         public int GetDecay(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(2, valueScalingMode);
 
-        /// <inheritdoc cref="IAdsrModuleHandle.SetDecay" />
+        /// <inheritdoc cref="IAdsrModuleHandle.SetDecay(int, ValueScalingMode)" />
         public void SetDecay(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(2, value, valueScalingMode);
 
         /// <inheritdoc cref="IAdsrModuleHandle.MakeDecayEvent" />
@@ -466,10 +466,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 2, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IAdsrModuleHandle.GetSustainLevel" />
+        /// <inheritdoc cref="IAdsrModuleHandle.GetSustainLevel(ValueScalingMode)" />
         public int GetSustainLevel(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(3, valueScalingMode);
 
-        /// <inheritdoc cref="IAdsrModuleHandle.SetSustainLevel" />
+        /// <inheritdoc cref="IAdsrModuleHandle.SetSustainLevel(int, ValueScalingMode)" />
         public void SetSustainLevel(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(3, value, valueScalingMode);
 
         /// <inheritdoc cref="IAdsrModuleHandle.MakeSustainLevelEvent" />
@@ -479,10 +479,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 3, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IAdsrModuleHandle.GetRelease" />
+        /// <inheritdoc cref="IAdsrModuleHandle.GetRelease(ValueScalingMode)" />
         public int GetRelease(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(4, valueScalingMode);
 
-        /// <inheritdoc cref="IAdsrModuleHandle.SetRelease" />
+        /// <inheritdoc cref="IAdsrModuleHandle.SetRelease(int, ValueScalingMode)" />
         public void SetRelease(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(4, value, valueScalingMode);
 
         /// <inheritdoc cref="IAdsrModuleHandle.MakeReleaseEvent" />
@@ -492,10 +492,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 4, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IAdsrModuleHandle.GetAttackCurve" />
+        /// <inheritdoc cref="IAdsrModuleHandle.GetAttackCurve()" />
         public AdsrCurveType GetAttackCurve() => (AdsrCurveType)ModuleHandle.GetControllerValue(5, ValueScalingMode.Displayed);
 
-        /// <inheritdoc cref="IAdsrModuleHandle.SetAttackCurve" />
+        /// <inheritdoc cref="IAdsrModuleHandle.SetAttackCurve(AdsrCurveType)" />
         public void SetAttackCurve(AdsrCurveType value) => ModuleHandle.SetControllerValue(5, (int)value, ValueScalingMode.Displayed);
 
         /// <inheritdoc cref="IAdsrModuleHandle.MakeAttackCurveEvent" />
@@ -504,10 +504,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 5, (ushort)Math.Clamp((int)value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IAdsrModuleHandle.GetDecayCurve" />
+        /// <inheritdoc cref="IAdsrModuleHandle.GetDecayCurve()" />
         public AdsrCurveType GetDecayCurve() => (AdsrCurveType)ModuleHandle.GetControllerValue(6, ValueScalingMode.Displayed);
 
-        /// <inheritdoc cref="IAdsrModuleHandle.SetDecayCurve" />
+        /// <inheritdoc cref="IAdsrModuleHandle.SetDecayCurve(AdsrCurveType)" />
         public void SetDecayCurve(AdsrCurveType value) => ModuleHandle.SetControllerValue(6, (int)value, ValueScalingMode.Displayed);
 
         /// <inheritdoc cref="IAdsrModuleHandle.MakeDecayCurveEvent" />
@@ -516,10 +516,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 6, (ushort)Math.Clamp((int)value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IAdsrModuleHandle.GetReleaseCurve" />
+        /// <inheritdoc cref="IAdsrModuleHandle.GetReleaseCurve()" />
         public AdsrCurveType GetReleaseCurve() => (AdsrCurveType)ModuleHandle.GetControllerValue(7, ValueScalingMode.Displayed);
 
-        /// <inheritdoc cref="IAdsrModuleHandle.SetReleaseCurve" />
+        /// <inheritdoc cref="IAdsrModuleHandle.SetReleaseCurve(AdsrCurveType)" />
         public void SetReleaseCurve(AdsrCurveType value) => ModuleHandle.SetControllerValue(7, (int)value, ValueScalingMode.Displayed);
 
         /// <inheritdoc cref="IAdsrModuleHandle.MakeReleaseCurveEvent" />
@@ -528,10 +528,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 7, (ushort)Math.Clamp((int)value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IAdsrModuleHandle.GetSustain" />
+        /// <inheritdoc cref="IAdsrModuleHandle.GetSustain()" />
         public AdsrSustainMode GetSustain() => (AdsrSustainMode)ModuleHandle.GetControllerValue(8, ValueScalingMode.Displayed);
 
-        /// <inheritdoc cref="IAdsrModuleHandle.SetSustain" />
+        /// <inheritdoc cref="IAdsrModuleHandle.SetSustain(AdsrSustainMode)" />
         public void SetSustain(AdsrSustainMode value) => ModuleHandle.SetControllerValue(8, (int)value, ValueScalingMode.Displayed);
 
         /// <inheritdoc cref="IAdsrModuleHandle.MakeSustainEvent" />
@@ -540,10 +540,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 8, (ushort)Math.Clamp((int)value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IAdsrModuleHandle.GetSustainPedal" />
+        /// <inheritdoc cref="IAdsrModuleHandle.GetSustainPedal()" />
         public Toggle GetSustainPedal() => (Toggle)ModuleHandle.GetControllerValue(9, ValueScalingMode.Displayed);
 
-        /// <inheritdoc cref="IAdsrModuleHandle.SetSustainPedal" />
+        /// <inheritdoc cref="IAdsrModuleHandle.SetSustainPedal(Toggle)" />
         public void SetSustainPedal(Toggle value) => ModuleHandle.SetControllerValue(9, (int)value, ValueScalingMode.Displayed);
 
         /// <inheritdoc cref="IAdsrModuleHandle.MakeSustainPedalEvent" />
@@ -552,10 +552,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 9, (ushort)Math.Clamp((int)value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IAdsrModuleHandle.GetState" />
+        /// <inheritdoc cref="IAdsrModuleHandle.GetState()" />
         public Toggle GetState() => (Toggle)ModuleHandle.GetControllerValue(10, ValueScalingMode.Displayed);
 
-        /// <inheritdoc cref="IAdsrModuleHandle.SetState" />
+        /// <inheritdoc cref="IAdsrModuleHandle.SetState(Toggle)" />
         public void SetState(Toggle value) => ModuleHandle.SetControllerValue(10, (int)value, ValueScalingMode.Displayed);
 
         /// <inheritdoc cref="IAdsrModuleHandle.MakeStateEvent" />
@@ -564,10 +564,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 10, (ushort)Math.Clamp((int)value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IAdsrModuleHandle.GetOnNoteon" />
+        /// <inheritdoc cref="IAdsrModuleHandle.GetOnNoteon()" />
         public AdsrOnNoteOnBehaviour GetOnNoteon() => (AdsrOnNoteOnBehaviour)ModuleHandle.GetControllerValue(11, ValueScalingMode.Displayed);
 
-        /// <inheritdoc cref="IAdsrModuleHandle.SetOnNoteon" />
+        /// <inheritdoc cref="IAdsrModuleHandle.SetOnNoteon(AdsrOnNoteOnBehaviour)" />
         public void SetOnNoteon(AdsrOnNoteOnBehaviour value) => ModuleHandle.SetControllerValue(11, (int)value, ValueScalingMode.Displayed);
 
         /// <inheritdoc cref="IAdsrModuleHandle.MakeOnNoteonEvent" />
@@ -576,10 +576,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 11, (ushort)Math.Clamp((int)value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IAdsrModuleHandle.GetOnNoteoff" />
+        /// <inheritdoc cref="IAdsrModuleHandle.GetOnNoteoff()" />
         public AdsrOnNoteOffBehaviour GetOnNoteoff() => (AdsrOnNoteOffBehaviour)ModuleHandle.GetControllerValue(12, ValueScalingMode.Displayed);
 
-        /// <inheritdoc cref="IAdsrModuleHandle.SetOnNoteoff" />
+        /// <inheritdoc cref="IAdsrModuleHandle.SetOnNoteoff(AdsrOnNoteOffBehaviour)" />
         public void SetOnNoteoff(AdsrOnNoteOffBehaviour value) => ModuleHandle.SetControllerValue(12, (int)value, ValueScalingMode.Displayed);
 
         /// <inheritdoc cref="IAdsrModuleHandle.MakeOnNoteoffEvent" />
@@ -588,10 +588,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 12, (ushort)Math.Clamp((int)value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IAdsrModuleHandle.GetMode" />
+        /// <inheritdoc cref="IAdsrModuleHandle.GetMode()" />
         public AdsrMode GetMode() => (AdsrMode)ModuleHandle.GetControllerValue(13, ValueScalingMode.Displayed);
 
-        /// <inheritdoc cref="IAdsrModuleHandle.SetMode" />
+        /// <inheritdoc cref="IAdsrModuleHandle.SetMode(AdsrMode)" />
         public void SetMode(AdsrMode value) => ModuleHandle.SetControllerValue(13, (int)value, ValueScalingMode.Displayed);
 
         /// <inheritdoc cref="IAdsrModuleHandle.MakeModeEvent" />
@@ -600,10 +600,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 13, (ushort)Math.Clamp((int)value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IAdsrModuleHandle.GetSmoothTransitions" />
+        /// <inheritdoc cref="IAdsrModuleHandle.GetSmoothTransitions()" />
         public AdsrSmoothTransitions GetSmoothTransitions() => (AdsrSmoothTransitions)ModuleHandle.GetControllerValue(14, ValueScalingMode.Displayed);
 
-        /// <inheritdoc cref="IAdsrModuleHandle.SetSmoothTransitions" />
+        /// <inheritdoc cref="IAdsrModuleHandle.SetSmoothTransitions(AdsrSmoothTransitions)" />
         public void SetSmoothTransitions(AdsrSmoothTransitions value) => ModuleHandle.SetControllerValue(14, (int)value, ValueScalingMode.Displayed);
 
         /// <inheritdoc cref="IAdsrModuleHandle.MakeSmoothTransitionsEvent" />
