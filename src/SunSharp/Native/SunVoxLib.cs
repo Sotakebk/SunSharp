@@ -28,6 +28,7 @@ namespace SunSharp.Native
         /// </returns>
         /// <exception cref="ArgumentException">Thrown when buffer size is invalid for the channel count.</exception>
         /// <exception cref="SunVoxException">Thrown when the operation fails.</exception>
+        /// <exception cref="ArgumentNullException">Thrown if <paramref name="outputBuffer"/> is null.</exception>
         /// <remarks>
         /// <para>
         /// <see cref="SunVoxInitOptions.UserAudioCallback"/> must be set in <see cref="Initialize"/> to use this function.
@@ -60,6 +61,9 @@ namespace SunSharp.Native
         /// <returns>
         /// <see langword="true"/> if buffer contains any non-0 samples.
         /// </returns>
+        /// <exception cref="ArgumentException">Thrown when buffer sizes are invalid for the channel count or not equal length.</exception>
+        /// <exception cref="SunVoxException">Thrown when the operation fails.</exception>
+        /// <exception cref="ArgumentNullException">Thrown if <paramref name="outputBuffer"/> or <paramref name="inputBuffer"/> is null.</exception>
         /// <remarks>
         /// <para>
         /// <see cref="SunVoxInitOptions.UserAudioCallback"/> must be set in <see cref="Initialize"/> to use this function.
@@ -488,6 +492,10 @@ namespace SunSharp.Native
         /// <remarks>Calls <see cref="ISunVoxLibC.sv_load_from_memory"/>.</remarks>
         public void Load(int slotId, byte[] data)
         {
+            if(data == null)
+            {
+                throw new ArgumentNullException(nameof(data));
+            }
             var handle = GCHandle.Alloc(data, GCHandleType.Pinned);
             int ret;
             try
@@ -902,6 +910,11 @@ namespace SunSharp.Native
                 throw new ArgumentException("Buffer size is not a multiple of two.");
             }
 
+            if(outputBuffer == null)
+            {
+                throw new ArgumentNullException(nameof(outputBuffer));
+            }
+
             var frames = outputBuffer.Length;
             if (channels == AudioChannels.Stereo)
             {
@@ -941,6 +954,16 @@ namespace SunSharp.Native
             if (inputChannels == AudioChannels.Stereo && (inputBuffer.Length & 1) != 0)
             {
                 throw new ArgumentException("Input buffer size is not a multiple of two.");
+            }
+
+            if (outputBuffer == null)
+            {
+                throw new ArgumentNullException(nameof(outputBuffer));
+            }
+
+            if (inputBuffer == null)
+            {
+                throw new ArgumentNullException(nameof(inputBuffer));
             }
 
             var inputFrames = inputBuffer.Length;

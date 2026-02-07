@@ -458,9 +458,14 @@ namespace SunSharp.Native
         /// <param name="moduleId">Metamodule number (0-based).</param>
         /// <param name="data">Byte array with project data.</param>
         /// <exception cref="SunVoxException">Thrown when the operation fails.</exception>
+        /// <exception cref="ArgumentNullException">Thrown if <paramref name="data"/> is null.</exception>
         /// <remarks>Calls <see cref="ISunVoxLibC.sv_metamodule_load_from_memory"/>.</remarks>
         public void LoadIntoMetaModule(int slotId, int moduleId, byte[] data)
         {
+            if (data == null)
+            {
+                throw new ArgumentNullException(nameof(data));
+            }
             var handle = GCHandle.Alloc(data, GCHandleType.Pinned);
             int ret;
             try
@@ -520,9 +525,15 @@ namespace SunSharp.Native
         /// <param name="moduleId">Vorbis Player module number (0-based).</param>
         /// <param name="data">Byte array with audio file data.</param>
         /// <exception cref="SunVoxException">Thrown when the operation fails.</exception>
+        /// <exception cref="ArgumentNullException">Thrown if <paramref name="data"/> is null.</exception>
         /// <remarks>Calls <see cref="ISunVoxLibC.sv_vplayer_load_from_memory"/>.</remarks>
         public void LoadIntoVorbisPlayer(int slotId, int moduleId, byte[] data)
         {
+            if (data == null)
+            {
+                throw new ArgumentNullException(nameof(data));
+            }
+
             var handle = GCHandle.Alloc(data, GCHandleType.Pinned);
             int ret;
             try
@@ -590,9 +601,14 @@ namespace SunSharp.Native
         /// <param name="z">Layer number (0 to 7).</param>
         /// <returns>The number of the loaded module.</returns>
         /// <exception cref="SunVoxException">Thrown when the operation fails.</exception>
+        /// <exception cref="ArgumentNullException">Thrown if <paramref name="data"/> is null.</exception>
         /// <remarks>Calls <see cref="ISunVoxLibC.sv_load_module_from_memory"/>.</remarks>
         public int LoadModule(int slotId, byte[] data, int x = 0, int y = 0, int z = 0)
         {
+            if (data == null)
+            {
+                throw new ArgumentNullException(nameof(data));
+            }
             var handle = GCHandle.Alloc(data, GCHandleType.Pinned);
             int ret;
             try
@@ -656,9 +672,14 @@ namespace SunSharp.Native
         /// <param name="data">Byte array with sample data.</param>
         /// <param name="sampleSlot">Sample slot number (-1 for auto/all slots).</param>
         /// <exception cref="SunVoxException">Thrown when the operation fails.</exception>
+        /// <exception cref="ArgumentNullException">Thrown if <paramref name="data"/> is null.</exception>
         /// <remarks>Calls <see cref="ISunVoxLibC.sv_sampler_load_from_memory"/>.</remarks>
         public void LoadSamplerSample(int slotId, int moduleId, byte[] data, int? sampleSlot = null)
         {
+            if (data == null)
+            {
+                throw new ArgumentNullException(nameof(data));
+            }
             var handle = GCHandle.Alloc(data, GCHandleType.Pinned);
             int ret;
             try
@@ -687,9 +708,14 @@ namespace SunSharp.Native
         /// <param name="data">Array to receive curveId data.</param>
         /// <returns>Number of values read.</returns>
         /// <exception cref="SunVoxException">Thrown when the operation fails.</exception>
+        /// <exception cref="ArgumentNullException">Thrown if <paramref name="data"/> is null.</exception>
         /// <remarks>Calls <see cref="ISunVoxLibC.sv_module_curve"/>.</remarks>
         public int ReadModuleCurve(int slotId, int moduleId, int curveId, float[] data)
         {
+            if (data == null)
+            {
+                throw new ArgumentNullException(nameof(data));
+            }
             var ret = ModuleCurveOperationInternal(slotId, moduleId, curveId, data, false);
             if (ret < 0)
             {
@@ -707,9 +733,14 @@ namespace SunSharp.Native
         /// <param name="channel">Audio channel.</param>
         /// <param name="buffer">Buffer to receive scope data.</param>
         /// <returns>Number of samples read.</returns>
+        /// <exception cref="ArgumentNullException">Thrown if <paramref name="buffer"/> is null.</exception>
         /// <remarks>Calls <see cref="ISunVoxLibC.sv_get_module_scope2"/>.</remarks>
         public int ReadModuleScope(int slotId, int moduleId, AudioChannel channel, short[] buffer)
         {
+            if (buffer == null)
+            {
+                throw new ArgumentNullException(nameof(buffer));
+            }
             var handle = GCHandle.Alloc(buffer, GCHandleType.Pinned);
             var ptr = handle.AddrOfPinnedObject();
             try
@@ -914,9 +945,14 @@ namespace SunSharp.Native
         /// <param name="data">Array containing curveId data to write.</param>
         /// <returns>Number of values written.</returns>
         /// <exception cref="SunVoxException">Thrown when the operation fails.</exception>
+        /// <exception cref="ArgumentNullException">Thrown if <paramref name="data"/> is null.</exception>
         /// <remarks>Calls <see cref="ISunVoxLibC.sv_module_curve"/>.</remarks>
         public int WriteModuleCurve(int slotId, int moduleId, int curveId, float[] data)
         {
+            if (data == null)
+            {
+                throw new ArgumentNullException(nameof(data));
+            }
             var ret = ModuleCurveOperationInternal(slotId, moduleId, curveId, data, true);
             if (ret < 0)
             {

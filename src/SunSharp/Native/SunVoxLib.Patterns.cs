@@ -354,6 +354,7 @@ namespace SunSharp.Native
         /// <exception cref="ArgumentOutOfRangeException">Thrown if tracks or lines are negative.</exception>
         /// <exception cref="ArgumentException">Thrown if data length doesn't match tracks * lines.</exception>
         /// <exception cref="SunVoxException">Thrown when the operation fails or pattern doesn't exist.</exception>
+        /// <exception cref="ArgumentNullException">Thrown if <paramref name="data"/> is null.</exception>
         /// <remarks>
         /// <para>Requires <see cref="LockSlot"/> / <see cref="UnlockSlot"/>.</para>
         /// Calls:
@@ -364,6 +365,10 @@ namespace SunSharp.Native
         /// </remarks>
         public void SetPatternData(int slotId, int patternId, PatternEvent[] data, int tracks, int lines)
         {
+            if(data == null)
+            {
+                throw new ArgumentNullException(nameof(data));
+            }
             if (tracks < 0)
             {
                 throw new ArgumentOutOfRangeException(nameof(tracks), tracks, "Value cannot be negative.");
@@ -414,6 +419,7 @@ namespace SunSharp.Native
         /// <exception cref="ArgumentOutOfRangeException">Thrown if any offset or size parameter is negative.</exception>
         /// <exception cref="ArgumentException">Thrown if buffer length doesn't match bufferTracks * bufferLines.</exception>
         /// <exception cref="SunVoxException">Thrown when the operation fails.</exception>
+        /// <exception cref="ArgumentNullException">Thrown if <paramref name="buffer"/> is null.</exception>
         /// <remarks>
         /// <para>Requires <see cref="LockSlot"/> / <see cref="UnlockSlot"/>.</para>
         /// Calls <see cref="ISunVoxLibC.sv_get_pattern_data"/>.
@@ -422,6 +428,10 @@ namespace SunSharp.Native
             int bufferOffsetTracks = 0, int bufferOffsetLines = 0, int readOffsetTracks = 0, int readOffsetLines = 0,
             int? maxTracks = null, int? maxLines = null)
         {
+            if (buffer == null)
+            {
+                throw new ArgumentNullException(nameof(buffer));
+            }
             if (readOffsetLines < 0)
             {
                 throw new ArgumentOutOfRangeException(nameof(readOffsetLines), readOffsetLines, "Value cannot be negative.");
@@ -510,6 +520,7 @@ namespace SunSharp.Native
         /// <returns>Number of events written.</returns>
         /// <exception cref="ArgumentOutOfRangeException">Thrown if any offset or size parameter is negative.</exception>
         /// <exception cref="ArgumentException">Thrown if buffer length doesn't match bufferTracks * bufferLines.</exception>
+        /// <exception cref="ArgumentNullException">Thrown if <paramref name="buffer"/> is null.</exception>
         /// <remarks>
         /// <para>Requires <see cref="LockSlot"/> / <see cref="UnlockSlot"/>.</para>
         /// Calls <see cref="ISunVoxLibC.sv_get_pattern_data"/>.
@@ -518,6 +529,10 @@ namespace SunSharp.Native
             int bufferOffsetTracks = 0, int bufferOffsetLines = 0, int writeOffsetTracks = 0, int writeOffsetLines = 0,
             int? maxTracks = null, int? maxLines = null)
         {
+            if (buffer == null)
+            {
+                throw new ArgumentNullException(nameof(buffer));
+            }
             if (writeOffsetLines < 0)
             {
                 throw new ArgumentOutOfRangeException(nameof(writeOffsetLines), writeOffsetLines, "Value cannot be negative.");
