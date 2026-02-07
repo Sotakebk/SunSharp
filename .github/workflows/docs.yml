@@ -13,16 +13,16 @@ on:
     branches: ["master"]
     paths:
       - "docs/**"
-      - "SunSharp/**"
-      - "SunSharp.Redistribution/**"
+      - "src/SunSharp/**"
+      - "src/SunSharp.Redistribution/**"
       - ".github/workflows/docs.yml"
 
   pull_request:
     branches: ["master"]
     paths:
       - "docs/**"
-      - "SunSharp/**"
-      - "SunSharp.Redistribution/**"
+      - "src/SunSharp/**"
+      - "src/SunSharp.Redistribution/**"
       - ".github/workflows/docs.yml"
 
 permissions:
