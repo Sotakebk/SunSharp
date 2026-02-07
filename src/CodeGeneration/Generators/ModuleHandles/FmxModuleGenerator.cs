@@ -72,11 +72,11 @@ public class FmxModuleGenerator : BasicModuleGenerator
         
         if (c.EnumName != null)
         {
-            AppendLine($"{nameof(PatternEvent)} Make{name}Event(int index, {c.EnumName} value);");
+            AppendLine($"{nameof(PatternEvent)} MakeOperator{name}Event(int index, {c.EnumName} value);");
         }
         else
         {
-            AppendLine($"{nameof(PatternEvent)} Make{name}Event(int index, int value);");
+            AppendLine($"{nameof(PatternEvent)} MakeOperator{name}Event(int index, int value);");
         }
     }
 
@@ -87,11 +87,11 @@ public class FmxModuleGenerator : BasicModuleGenerator
         
         if (c.EnumName != null)
         {
-            AppendLine($"void Set{name}(int index, {c.EnumName} value);");
+            AppendLine($"void SetOperator{name}(int index, {c.EnumName} value);");
         }
         else
         {
-            AppendLine($"void Set{name}(int index, int value, {nameof(ValueScalingMode)} valueScalingMode = {nameof(ValueScalingMode)}.{ValueScalingMode.Displayed});");
+            AppendLine($"void SetOperator{name}(int index, int value, {nameof(ValueScalingMode)} valueScalingMode = {nameof(ValueScalingMode)}.{ValueScalingMode.Displayed});");
         }
     }
     private void GenerateInterfaceGroupedGetter(int firstIndex, string name)
@@ -101,11 +101,11 @@ public class FmxModuleGenerator : BasicModuleGenerator
         
         if (c.EnumName != null)
         {
-            AppendLine($"{c.EnumName} Get{name}(int index);");
+            AppendLine($"{c.EnumName} GetOperator{name}(int index);");
         }
         else
         {
-            AppendLine($"int Get{name}(int index, {nameof(ValueScalingMode)} valueScalingMode = {nameof(ValueScalingMode)}.{ValueScalingMode.Displayed});");
+            AppendLine($"int GetOperator{name}(int index, {nameof(ValueScalingMode)} valueScalingMode = {nameof(ValueScalingMode)}.{ValueScalingMode.Displayed});");
         }
     }
 
@@ -135,7 +135,7 @@ public class FmxModuleGenerator : BasicModuleGenerator
         AppendLine($"/// Original name pattern: {firstIndex}-{firstIndex + 4} '{c.InternalName}'");
         if (isSetter || isEvent)
         {
-            AppendLine($"/// Note: equivalent <see cref=\"{nameof(IVirtualPattern)}.{nameof(IVirtualPattern.SendEvent)}\"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.");
+            AppendLine($"/// Note: equivalent <see cref=\"{nameof(IVirtualPattern)}.{nameof(IVirtualPattern.SendEvent)}(int, PatternEvent)\"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.");
         }
         AppendLine("/// </summary>");
         AppendLine("/// <param name=\"index\">Index of the controller in the group (0-4)</param>");
@@ -184,11 +184,11 @@ public class FmxModuleGenerator : BasicModuleGenerator
     private void GenerateStructGroupedMakeEvent(int firstIndex, string name)
     {
         var c = ModuleDescription.Controllers[firstIndex];
-        AppendLine($"/// <inheritdoc cref=\"{InterfaceName}.Make{name}Event\" />");
+        AppendLine($"/// <inheritdoc cref=\"{InterfaceName}.MakeOperator{name}Event\" />");
         
         if (c.EnumName != null)
         {
-            AppendLine($"public {nameof(PatternEvent)} Make{name}Event(int index, {c.EnumName} value)");
+            AppendLine($"public {nameof(PatternEvent)} MakeOperator{name}Event(int index, {c.EnumName} value)");
             AppendLine("{");
             AddIndent(() =>
             {
@@ -203,7 +203,7 @@ public class FmxModuleGenerator : BasicModuleGenerator
         }
         else
         {
-            AppendLine($"public {nameof(PatternEvent)} Make{name}Event(int index, int value)");
+            AppendLine($"public {nameof(PatternEvent)} MakeOperator{name}Event(int index, int value)");
             AppendLine("{");
             AddIndent(() =>
             {
@@ -230,11 +230,11 @@ public class FmxModuleGenerator : BasicModuleGenerator
     private void GenerateStructGroupedSetter(int firstIndex, string name)
     {
         var c = ModuleDescription.Controllers[firstIndex];
-        AppendLine($"/// <inheritdoc cref=\"{InterfaceName}.Set{name}\" />");
         
         if (c.EnumName != null)
         {
-            AppendLine($"public void Set{name}(int index, {c.EnumName} value)");
+            AppendLine($"/// <inheritdoc cref=\"{InterfaceName}.SetOperator{name}(int, {c.EnumName})\" />");
+            AppendLine($"public void SetOperator{name}(int index, {c.EnumName} value)");
             AppendLine("{");
             AddIndent(() =>
             {
@@ -245,7 +245,8 @@ public class FmxModuleGenerator : BasicModuleGenerator
         }
         else
         {
-            AppendLine($"public void Set{name}(int index, int value, {nameof(ValueScalingMode)} valueScalingMode = {nameof(ValueScalingMode)}.{ValueScalingMode.Displayed})");
+            AppendLine($"/// <inheritdoc cref=\"{InterfaceName}.SetOperator{name}(int, int, {nameof(ValueScalingMode)})\" />");
+            AppendLine($"public void SetOperator{name}(int index, int value, {nameof(ValueScalingMode)} valueScalingMode = {nameof(ValueScalingMode)}.{ValueScalingMode.Displayed})");
             AppendLine("{");
             AddIndent(() =>
             {
@@ -258,11 +259,11 @@ public class FmxModuleGenerator : BasicModuleGenerator
     private void GenerateStructGroupedGetter(int firstIndex, string name)
     {
         var c = ModuleDescription.Controllers[firstIndex];
-        AppendLine($"/// <inheritdoc cref=\"{InterfaceName}.Get{name}\" />");
         
         if (c.EnumName != null)
         {
-            AppendLine($"public {c.EnumName} Get{name}(int index)");
+            AppendLine($"/// <inheritdoc cref=\"{InterfaceName}.GetOperator{name}(int)\" />");
+            AppendLine($"public {c.EnumName} GetOperator{name}(int index)");
             AppendLine("{");
             AddIndent(() =>
             {
@@ -273,7 +274,8 @@ public class FmxModuleGenerator : BasicModuleGenerator
         }
         else
         {
-            AppendLine($"public int Get{name}(int index, {nameof(ValueScalingMode)} valueScalingMode = {nameof(ValueScalingMode)}.{ValueScalingMode.Displayed})");
+            AppendLine($"/// <inheritdoc cref=\"{InterfaceName}.GetOperator{name}(int, {nameof(ValueScalingMode)})\" />");
+            AppendLine($"public int GetOperator{name}(int index, {nameof(ValueScalingMode)} valueScalingMode = {nameof(ValueScalingMode)}.{ValueScalingMode.Displayed})");
             AppendLine("{");
             AddIndent(() =>
             {

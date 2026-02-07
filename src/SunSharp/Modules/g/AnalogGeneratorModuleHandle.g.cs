@@ -25,7 +25,7 @@ namespace SunSharp.Modules
         /// <summary>
         /// Value range: displayed: 0 to 256, real: 0 to 256
         /// Original name: 0 'Volume'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetVolume(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -42,7 +42,7 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 1 'Waveform'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetWaveform(AnalogGeneratorWaveform value);
 
@@ -61,7 +61,7 @@ namespace SunSharp.Modules
         /// <summary>
         /// Value range: displayed: -128 to 128, real: 0 to 256
         /// Original name: 2 'Panning'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetPanning(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -80,7 +80,7 @@ namespace SunSharp.Modules
         /// <summary>
         /// Value range: displayed: 0 to 256, real: 0 to 256
         /// Original name: 3 'Attack'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetAttack(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -99,7 +99,7 @@ namespace SunSharp.Modules
         /// <summary>
         /// Value range: displayed: 0 to 256, real: 0 to 256
         /// Original name: 4 'Release'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetRelease(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -116,7 +116,7 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 5 'Sustain'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetSustain(Toggle value);
 
@@ -133,7 +133,7 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 6 'Exponential envelope'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetExponentialEnvelope(Toggle value);
 
@@ -152,7 +152,7 @@ namespace SunSharp.Modules
         /// <summary>
         /// Value range: displayed: 0 to 1024, real: 0 to 1024
         /// Original name: 7 'Duty cycle'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetDutyCycle(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -177,7 +177,7 @@ namespace SunSharp.Modules
         /// <br/>
         /// Value range: displayed: -1000 to 1000, real: 0 to 2000
         /// Original name: 8 'Osc2'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetSecondaryOscillatorPitch(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -197,7 +197,7 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 9 'Filter'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetFilter(AnalogGeneratorFilterType value);
 
@@ -216,7 +216,7 @@ namespace SunSharp.Modules
         /// <summary>
         /// Value range: displayed: 0 to 14000, real: 0 to 14000
         /// Original name: 10 'F.freq'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetFilterFrequency(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -235,7 +235,7 @@ namespace SunSharp.Modules
         /// <summary>
         /// Value range: displayed: 0 to 1530, real: 0 to 1530
         /// Original name: 11 'F.resonance'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetFilterResonance(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -252,7 +252,7 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 12 'F.exponential freq'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetFilterExponentialFrequency(Toggle value);
 
@@ -271,7 +271,7 @@ namespace SunSharp.Modules
         /// <summary>
         /// Value range: displayed: 0 to 256, real: 0 to 256
         /// Original name: 13 'F.attack'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetFilterAttack(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -290,7 +290,7 @@ namespace SunSharp.Modules
         /// <summary>
         /// Value range: displayed: 0 to 256, real: 0 to 256
         /// Original name: 14 'F.release'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetFilterRelease(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -307,7 +307,7 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 15 'F.envelope'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetFilterEnvelope(AnalogGeneratorEnvelopeMode value);
 
@@ -324,7 +324,7 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 16 'Polyphony'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetPolyphony(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -345,7 +345,7 @@ namespace SunSharp.Modules
         /// Quality mode of the module.
         /// <br/>
         /// Original name: 17 'Mode'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetMode(Quality value);
 
@@ -370,7 +370,7 @@ namespace SunSharp.Modules
         /// <br/>
         /// Value range: displayed: 0 to 256, real: 0 to 256
         /// Original name: 18 'Noise'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetNoise(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -391,7 +391,7 @@ namespace SunSharp.Modules
         /// <summary>
         /// Value range: displayed: 0 to 32768, real: 0 to 32768
         /// Original name: 19 'Osc2 volume'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetSecondaryOscillatorVolume(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -408,7 +408,7 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 20 'Osc2 mode'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetSecondaryOscillatorMode(AnalogGeneratorSecondaryOscillatorMode value);
 
@@ -427,7 +427,7 @@ namespace SunSharp.Modules
         /// <summary>
         /// Value range: displayed: 0 to 32768, real: 0 to 32768
         /// Original name: 21 'Osc2 phase'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetSecondaryOscillatorPhase(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -585,30 +585,30 @@ namespace SunSharp.Modules
         /// <inheritdoc/>
         public PatternEvent MakeEvent(Note note = default, byte? velocity = default, byte? controller = default, Effect effect = Effect.None, ushort value = 0) => ModuleHandle.MakeEvent(note, velocity, controller, effect, value);
 
-        /// <inheritdoc cref="SynthModuleHandle.GetInputModules"/>
+        /// <inheritdoc cref="SynthModuleHandle.GetInputModules()"/>
         public SynthModuleHandle[] GetInputModules() => ModuleHandle.GetInputModules();
 
-        /// <inheritdoc cref="SynthModuleHandle.GetOutputModules"/>
+        /// <inheritdoc cref="SynthModuleHandle.GetOutputModules()"/>
         public SynthModuleHandle[] GetOutputModules() => ModuleHandle.GetOutputModules();
 
-        /// <inheritdoc cref="SynthModuleHandle.ConnectInput"/>
+        /// <inheritdoc cref="SynthModuleHandle.ConnectInput(SynthModuleHandle)"/>
         public void ConnectInput(SynthModuleHandle targetModule) => ModuleHandle.ConnectInput(targetModule);
 
-        /// <inheritdoc cref="SynthModuleHandle.ConnectOutput"/>
+        /// <inheritdoc cref="SynthModuleHandle.ConnectOutput(SynthModuleHandle)"/>
         public void ConnectOutput(SynthModuleHandle targetModule) => ModuleHandle.ConnectOutput(targetModule);
 
-        /// <inheritdoc cref="SynthModuleHandle.DisconnectInput"/>
+        /// <inheritdoc cref="SynthModuleHandle.DisconnectInput(SynthModuleHandle)"/>
         public void DisconnectInput(SynthModuleHandle targetModule) => ModuleHandle.DisconnectInput(targetModule);
 
-        /// <inheritdoc cref="SynthModuleHandle.DisconnectOutput"/>
+        /// <inheritdoc cref="SynthModuleHandle.DisconnectOutput(SynthModuleHandle)"/>
         public void DisconnectOutput(SynthModuleHandle targetModule) => ModuleHandle.DisconnectOutput(targetModule);
 
         #endregion
 
-        /// <inheritdoc cref="IAnalogGeneratorModuleHandle.GetVolume" />
+        /// <inheritdoc cref="IAnalogGeneratorModuleHandle.GetVolume(ValueScalingMode)" />
         public int GetVolume(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(0, valueScalingMode);
 
-        /// <inheritdoc cref="IAnalogGeneratorModuleHandle.SetVolume" />
+        /// <inheritdoc cref="IAnalogGeneratorModuleHandle.SetVolume(int, ValueScalingMode)" />
         public void SetVolume(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(0, value, valueScalingMode);
 
         /// <inheritdoc cref="IAnalogGeneratorModuleHandle.MakeVolumeEvent" />
@@ -618,10 +618,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 0, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IAnalogGeneratorModuleHandle.GetWaveform" />
+        /// <inheritdoc cref="IAnalogGeneratorModuleHandle.GetWaveform()" />
         public AnalogGeneratorWaveform GetWaveform() => (AnalogGeneratorWaveform)ModuleHandle.GetControllerValue(1, ValueScalingMode.Displayed);
 
-        /// <inheritdoc cref="IAnalogGeneratorModuleHandle.SetWaveform" />
+        /// <inheritdoc cref="IAnalogGeneratorModuleHandle.SetWaveform(AnalogGeneratorWaveform)" />
         public void SetWaveform(AnalogGeneratorWaveform value) => ModuleHandle.SetControllerValue(1, (int)value, ValueScalingMode.Displayed);
 
         /// <inheritdoc cref="IAnalogGeneratorModuleHandle.MakeWaveformEvent" />
@@ -630,10 +630,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 1, (ushort)Math.Clamp((int)value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IAnalogGeneratorModuleHandle.GetPanning" />
+        /// <inheritdoc cref="IAnalogGeneratorModuleHandle.GetPanning(ValueScalingMode)" />
         public int GetPanning(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(2, valueScalingMode);
 
-        /// <inheritdoc cref="IAnalogGeneratorModuleHandle.SetPanning" />
+        /// <inheritdoc cref="IAnalogGeneratorModuleHandle.SetPanning(int, ValueScalingMode)" />
         public void SetPanning(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(2, value, valueScalingMode);
 
         /// <inheritdoc cref="IAnalogGeneratorModuleHandle.MakePanningEvent" />
@@ -644,10 +644,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 2, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IAnalogGeneratorModuleHandle.GetAttack" />
+        /// <inheritdoc cref="IAnalogGeneratorModuleHandle.GetAttack(ValueScalingMode)" />
         public int GetAttack(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(3, valueScalingMode);
 
-        /// <inheritdoc cref="IAnalogGeneratorModuleHandle.SetAttack" />
+        /// <inheritdoc cref="IAnalogGeneratorModuleHandle.SetAttack(int, ValueScalingMode)" />
         public void SetAttack(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(3, value, valueScalingMode);
 
         /// <inheritdoc cref="IAnalogGeneratorModuleHandle.MakeAttackEvent" />
@@ -657,10 +657,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 3, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IAnalogGeneratorModuleHandle.GetRelease" />
+        /// <inheritdoc cref="IAnalogGeneratorModuleHandle.GetRelease(ValueScalingMode)" />
         public int GetRelease(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(4, valueScalingMode);
 
-        /// <inheritdoc cref="IAnalogGeneratorModuleHandle.SetRelease" />
+        /// <inheritdoc cref="IAnalogGeneratorModuleHandle.SetRelease(int, ValueScalingMode)" />
         public void SetRelease(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(4, value, valueScalingMode);
 
         /// <inheritdoc cref="IAnalogGeneratorModuleHandle.MakeReleaseEvent" />
@@ -670,10 +670,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 4, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IAnalogGeneratorModuleHandle.GetSustain" />
+        /// <inheritdoc cref="IAnalogGeneratorModuleHandle.GetSustain()" />
         public Toggle GetSustain() => (Toggle)ModuleHandle.GetControllerValue(5, ValueScalingMode.Displayed);
 
-        /// <inheritdoc cref="IAnalogGeneratorModuleHandle.SetSustain" />
+        /// <inheritdoc cref="IAnalogGeneratorModuleHandle.SetSustain(Toggle)" />
         public void SetSustain(Toggle value) => ModuleHandle.SetControllerValue(5, (int)value, ValueScalingMode.Displayed);
 
         /// <inheritdoc cref="IAnalogGeneratorModuleHandle.MakeSustainEvent" />
@@ -682,10 +682,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 5, (ushort)Math.Clamp((int)value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IAnalogGeneratorModuleHandle.GetExponentialEnvelope" />
+        /// <inheritdoc cref="IAnalogGeneratorModuleHandle.GetExponentialEnvelope()" />
         public Toggle GetExponentialEnvelope() => (Toggle)ModuleHandle.GetControllerValue(6, ValueScalingMode.Displayed);
 
-        /// <inheritdoc cref="IAnalogGeneratorModuleHandle.SetExponentialEnvelope" />
+        /// <inheritdoc cref="IAnalogGeneratorModuleHandle.SetExponentialEnvelope(Toggle)" />
         public void SetExponentialEnvelope(Toggle value) => ModuleHandle.SetControllerValue(6, (int)value, ValueScalingMode.Displayed);
 
         /// <inheritdoc cref="IAnalogGeneratorModuleHandle.MakeExponentialEnvelopeEvent" />
@@ -694,10 +694,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 6, (ushort)Math.Clamp((int)value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IAnalogGeneratorModuleHandle.GetDutyCycle" />
+        /// <inheritdoc cref="IAnalogGeneratorModuleHandle.GetDutyCycle(ValueScalingMode)" />
         public int GetDutyCycle(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(7, valueScalingMode);
 
-        /// <inheritdoc cref="IAnalogGeneratorModuleHandle.SetDutyCycle" />
+        /// <inheritdoc cref="IAnalogGeneratorModuleHandle.SetDutyCycle(int, ValueScalingMode)" />
         public void SetDutyCycle(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(7, value, valueScalingMode);
 
         /// <inheritdoc cref="IAnalogGeneratorModuleHandle.MakeDutyCycleEvent" />
@@ -707,10 +707,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 7, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IAnalogGeneratorModuleHandle.GetSecondaryOscillatorPitch" />
+        /// <inheritdoc cref="IAnalogGeneratorModuleHandle.GetSecondaryOscillatorPitch(ValueScalingMode)" />
         public int GetSecondaryOscillatorPitch(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(8, valueScalingMode);
 
-        /// <inheritdoc cref="IAnalogGeneratorModuleHandle.SetSecondaryOscillatorPitch" />
+        /// <inheritdoc cref="IAnalogGeneratorModuleHandle.SetSecondaryOscillatorPitch(int, ValueScalingMode)" />
         public void SetSecondaryOscillatorPitch(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(8, value, valueScalingMode);
 
         /// <inheritdoc cref="IAnalogGeneratorModuleHandle.MakeSecondaryOscillatorPitchEvent" />
@@ -721,10 +721,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 8, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IAnalogGeneratorModuleHandle.GetFilter" />
+        /// <inheritdoc cref="IAnalogGeneratorModuleHandle.GetFilter()" />
         public AnalogGeneratorFilterType GetFilter() => (AnalogGeneratorFilterType)ModuleHandle.GetControllerValue(9, ValueScalingMode.Displayed);
 
-        /// <inheritdoc cref="IAnalogGeneratorModuleHandle.SetFilter" />
+        /// <inheritdoc cref="IAnalogGeneratorModuleHandle.SetFilter(AnalogGeneratorFilterType)" />
         public void SetFilter(AnalogGeneratorFilterType value) => ModuleHandle.SetControllerValue(9, (int)value, ValueScalingMode.Displayed);
 
         /// <inheritdoc cref="IAnalogGeneratorModuleHandle.MakeFilterEvent" />
@@ -733,10 +733,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 9, (ushort)Math.Clamp((int)value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IAnalogGeneratorModuleHandle.GetFilterFrequency" />
+        /// <inheritdoc cref="IAnalogGeneratorModuleHandle.GetFilterFrequency(ValueScalingMode)" />
         public int GetFilterFrequency(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(10, valueScalingMode);
 
-        /// <inheritdoc cref="IAnalogGeneratorModuleHandle.SetFilterFrequency" />
+        /// <inheritdoc cref="IAnalogGeneratorModuleHandle.SetFilterFrequency(int, ValueScalingMode)" />
         public void SetFilterFrequency(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(10, value, valueScalingMode);
 
         /// <inheritdoc cref="IAnalogGeneratorModuleHandle.MakeFilterFrequencyEvent" />
@@ -746,10 +746,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 10, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IAnalogGeneratorModuleHandle.GetFilterResonance" />
+        /// <inheritdoc cref="IAnalogGeneratorModuleHandle.GetFilterResonance(ValueScalingMode)" />
         public int GetFilterResonance(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(11, valueScalingMode);
 
-        /// <inheritdoc cref="IAnalogGeneratorModuleHandle.SetFilterResonance" />
+        /// <inheritdoc cref="IAnalogGeneratorModuleHandle.SetFilterResonance(int, ValueScalingMode)" />
         public void SetFilterResonance(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(11, value, valueScalingMode);
 
         /// <inheritdoc cref="IAnalogGeneratorModuleHandle.MakeFilterResonanceEvent" />
@@ -759,10 +759,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 11, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IAnalogGeneratorModuleHandle.GetFilterExponentialFrequency" />
+        /// <inheritdoc cref="IAnalogGeneratorModuleHandle.GetFilterExponentialFrequency()" />
         public Toggle GetFilterExponentialFrequency() => (Toggle)ModuleHandle.GetControllerValue(12, ValueScalingMode.Displayed);
 
-        /// <inheritdoc cref="IAnalogGeneratorModuleHandle.SetFilterExponentialFrequency" />
+        /// <inheritdoc cref="IAnalogGeneratorModuleHandle.SetFilterExponentialFrequency(Toggle)" />
         public void SetFilterExponentialFrequency(Toggle value) => ModuleHandle.SetControllerValue(12, (int)value, ValueScalingMode.Displayed);
 
         /// <inheritdoc cref="IAnalogGeneratorModuleHandle.MakeFilterExponentialFrequencyEvent" />
@@ -771,10 +771,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 12, (ushort)Math.Clamp((int)value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IAnalogGeneratorModuleHandle.GetFilterAttack" />
+        /// <inheritdoc cref="IAnalogGeneratorModuleHandle.GetFilterAttack(ValueScalingMode)" />
         public int GetFilterAttack(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(13, valueScalingMode);
 
-        /// <inheritdoc cref="IAnalogGeneratorModuleHandle.SetFilterAttack" />
+        /// <inheritdoc cref="IAnalogGeneratorModuleHandle.SetFilterAttack(int, ValueScalingMode)" />
         public void SetFilterAttack(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(13, value, valueScalingMode);
 
         /// <inheritdoc cref="IAnalogGeneratorModuleHandle.MakeFilterAttackEvent" />
@@ -784,10 +784,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 13, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IAnalogGeneratorModuleHandle.GetFilterRelease" />
+        /// <inheritdoc cref="IAnalogGeneratorModuleHandle.GetFilterRelease(ValueScalingMode)" />
         public int GetFilterRelease(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(14, valueScalingMode);
 
-        /// <inheritdoc cref="IAnalogGeneratorModuleHandle.SetFilterRelease" />
+        /// <inheritdoc cref="IAnalogGeneratorModuleHandle.SetFilterRelease(int, ValueScalingMode)" />
         public void SetFilterRelease(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(14, value, valueScalingMode);
 
         /// <inheritdoc cref="IAnalogGeneratorModuleHandle.MakeFilterReleaseEvent" />
@@ -797,10 +797,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 14, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IAnalogGeneratorModuleHandle.GetFilterEnvelope" />
+        /// <inheritdoc cref="IAnalogGeneratorModuleHandle.GetFilterEnvelope()" />
         public AnalogGeneratorEnvelopeMode GetFilterEnvelope() => (AnalogGeneratorEnvelopeMode)ModuleHandle.GetControllerValue(15, ValueScalingMode.Displayed);
 
-        /// <inheritdoc cref="IAnalogGeneratorModuleHandle.SetFilterEnvelope" />
+        /// <inheritdoc cref="IAnalogGeneratorModuleHandle.SetFilterEnvelope(AnalogGeneratorEnvelopeMode)" />
         public void SetFilterEnvelope(AnalogGeneratorEnvelopeMode value) => ModuleHandle.SetControllerValue(15, (int)value, ValueScalingMode.Displayed);
 
         /// <inheritdoc cref="IAnalogGeneratorModuleHandle.MakeFilterEnvelopeEvent" />
@@ -809,10 +809,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 15, (ushort)Math.Clamp((int)value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IAnalogGeneratorModuleHandle.GetPolyphony" />
+        /// <inheritdoc cref="IAnalogGeneratorModuleHandle.GetPolyphony(ValueScalingMode)" />
         public int GetPolyphony(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(16, valueScalingMode);
 
-        /// <inheritdoc cref="IAnalogGeneratorModuleHandle.SetPolyphony" />
+        /// <inheritdoc cref="IAnalogGeneratorModuleHandle.SetPolyphony(int, ValueScalingMode)" />
         public void SetPolyphony(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(16, value, valueScalingMode);
 
         /// <inheritdoc cref="IAnalogGeneratorModuleHandle.MakePolyphonyEvent" />
@@ -821,10 +821,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 16, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IAnalogGeneratorModuleHandle.GetMode" />
+        /// <inheritdoc cref="IAnalogGeneratorModuleHandle.GetMode()" />
         public Quality GetMode() => (Quality)ModuleHandle.GetControllerValue(17, ValueScalingMode.Displayed);
 
-        /// <inheritdoc cref="IAnalogGeneratorModuleHandle.SetMode" />
+        /// <inheritdoc cref="IAnalogGeneratorModuleHandle.SetMode(Quality)" />
         public void SetMode(Quality value) => ModuleHandle.SetControllerValue(17, (int)value, ValueScalingMode.Displayed);
 
         /// <inheritdoc cref="IAnalogGeneratorModuleHandle.MakeModeEvent" />
@@ -833,10 +833,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 17, (ushort)Math.Clamp((int)value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IAnalogGeneratorModuleHandle.GetNoise" />
+        /// <inheritdoc cref="IAnalogGeneratorModuleHandle.GetNoise(ValueScalingMode)" />
         public int GetNoise(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(18, valueScalingMode);
 
-        /// <inheritdoc cref="IAnalogGeneratorModuleHandle.SetNoise" />
+        /// <inheritdoc cref="IAnalogGeneratorModuleHandle.SetNoise(int, ValueScalingMode)" />
         public void SetNoise(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(18, value, valueScalingMode);
 
         /// <inheritdoc cref="IAnalogGeneratorModuleHandle.MakeNoiseEvent" />
@@ -846,10 +846,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 18, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IAnalogGeneratorModuleHandle.GetSecondaryOscillatorVolume" />
+        /// <inheritdoc cref="IAnalogGeneratorModuleHandle.GetSecondaryOscillatorVolume(ValueScalingMode)" />
         public int GetSecondaryOscillatorVolume(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(19, valueScalingMode);
 
-        /// <inheritdoc cref="IAnalogGeneratorModuleHandle.SetSecondaryOscillatorVolume" />
+        /// <inheritdoc cref="IAnalogGeneratorModuleHandle.SetSecondaryOscillatorVolume(int, ValueScalingMode)" />
         public void SetSecondaryOscillatorVolume(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(19, value, valueScalingMode);
 
         /// <inheritdoc cref="IAnalogGeneratorModuleHandle.MakeSecondaryOscillatorVolumeEvent" />
@@ -859,10 +859,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 19, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IAnalogGeneratorModuleHandle.GetSecondaryOscillatorMode" />
+        /// <inheritdoc cref="IAnalogGeneratorModuleHandle.GetSecondaryOscillatorMode()" />
         public AnalogGeneratorSecondaryOscillatorMode GetSecondaryOscillatorMode() => (AnalogGeneratorSecondaryOscillatorMode)ModuleHandle.GetControllerValue(20, ValueScalingMode.Displayed);
 
-        /// <inheritdoc cref="IAnalogGeneratorModuleHandle.SetSecondaryOscillatorMode" />
+        /// <inheritdoc cref="IAnalogGeneratorModuleHandle.SetSecondaryOscillatorMode(AnalogGeneratorSecondaryOscillatorMode)" />
         public void SetSecondaryOscillatorMode(AnalogGeneratorSecondaryOscillatorMode value) => ModuleHandle.SetControllerValue(20, (int)value, ValueScalingMode.Displayed);
 
         /// <inheritdoc cref="IAnalogGeneratorModuleHandle.MakeSecondaryOscillatorModeEvent" />
@@ -871,10 +871,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 20, (ushort)Math.Clamp((int)value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IAnalogGeneratorModuleHandle.GetSecondaryOscillatorPhase" />
+        /// <inheritdoc cref="IAnalogGeneratorModuleHandle.GetSecondaryOscillatorPhase(ValueScalingMode)" />
         public int GetSecondaryOscillatorPhase(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(21, valueScalingMode);
 
-        /// <inheritdoc cref="IAnalogGeneratorModuleHandle.SetSecondaryOscillatorPhase" />
+        /// <inheritdoc cref="IAnalogGeneratorModuleHandle.SetSecondaryOscillatorPhase(int, ValueScalingMode)" />
         public void SetSecondaryOscillatorPhase(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(21, value, valueScalingMode);
 
         /// <inheritdoc cref="IAnalogGeneratorModuleHandle.MakeSecondaryOscillatorPhaseEvent" />

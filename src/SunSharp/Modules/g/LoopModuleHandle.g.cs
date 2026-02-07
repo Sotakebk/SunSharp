@@ -25,7 +25,7 @@ namespace SunSharp.Modules
         /// <summary>
         /// Value range: displayed: 0 to 256, real: 0 to 256
         /// Original name: 0 'Volume'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetVolume(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -44,7 +44,7 @@ namespace SunSharp.Modules
         /// <summary>
         /// Value range: displayed: 0 to 256, real: 0 to 256
         /// Original name: 1 'Length'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetLength(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -61,7 +61,7 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 2 'Channels'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetChannels(ChannelsInverted value);
 
@@ -78,7 +78,7 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 3 'Repeat (128=endless)'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetRepeatEndless128(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -95,7 +95,7 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 4 'Mode'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetMode(LoopMode value);
 
@@ -112,7 +112,7 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 5 'Length unit'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetLengthUnit(LoopTimeUnit value);
 
@@ -133,7 +133,7 @@ namespace SunSharp.Modules
         /// Max buffer size in seconds
         /// <br/>
         /// Original name: 6 'Max buffer size'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetMaxBufferSize(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -152,7 +152,7 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 7 'On NoteON'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetOnNoteon(LoopOnNoteOn value);
 
@@ -288,30 +288,30 @@ namespace SunSharp.Modules
         /// <inheritdoc/>
         public PatternEvent MakeEvent(Note note = default, byte? velocity = default, byte? controller = default, Effect effect = Effect.None, ushort value = 0) => ModuleHandle.MakeEvent(note, velocity, controller, effect, value);
 
-        /// <inheritdoc cref="SynthModuleHandle.GetInputModules"/>
+        /// <inheritdoc cref="SynthModuleHandle.GetInputModules()"/>
         public SynthModuleHandle[] GetInputModules() => ModuleHandle.GetInputModules();
 
-        /// <inheritdoc cref="SynthModuleHandle.GetOutputModules"/>
+        /// <inheritdoc cref="SynthModuleHandle.GetOutputModules()"/>
         public SynthModuleHandle[] GetOutputModules() => ModuleHandle.GetOutputModules();
 
-        /// <inheritdoc cref="SynthModuleHandle.ConnectInput"/>
+        /// <inheritdoc cref="SynthModuleHandle.ConnectInput(SynthModuleHandle)"/>
         public void ConnectInput(SynthModuleHandle targetModule) => ModuleHandle.ConnectInput(targetModule);
 
-        /// <inheritdoc cref="SynthModuleHandle.ConnectOutput"/>
+        /// <inheritdoc cref="SynthModuleHandle.ConnectOutput(SynthModuleHandle)"/>
         public void ConnectOutput(SynthModuleHandle targetModule) => ModuleHandle.ConnectOutput(targetModule);
 
-        /// <inheritdoc cref="SynthModuleHandle.DisconnectInput"/>
+        /// <inheritdoc cref="SynthModuleHandle.DisconnectInput(SynthModuleHandle)"/>
         public void DisconnectInput(SynthModuleHandle targetModule) => ModuleHandle.DisconnectInput(targetModule);
 
-        /// <inheritdoc cref="SynthModuleHandle.DisconnectOutput"/>
+        /// <inheritdoc cref="SynthModuleHandle.DisconnectOutput(SynthModuleHandle)"/>
         public void DisconnectOutput(SynthModuleHandle targetModule) => ModuleHandle.DisconnectOutput(targetModule);
 
         #endregion
 
-        /// <inheritdoc cref="ILoopModuleHandle.GetVolume" />
+        /// <inheritdoc cref="ILoopModuleHandle.GetVolume(ValueScalingMode)" />
         public int GetVolume(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(0, valueScalingMode);
 
-        /// <inheritdoc cref="ILoopModuleHandle.SetVolume" />
+        /// <inheritdoc cref="ILoopModuleHandle.SetVolume(int, ValueScalingMode)" />
         public void SetVolume(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(0, value, valueScalingMode);
 
         /// <inheritdoc cref="ILoopModuleHandle.MakeVolumeEvent" />
@@ -321,10 +321,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 0, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="ILoopModuleHandle.GetLength" />
+        /// <inheritdoc cref="ILoopModuleHandle.GetLength(ValueScalingMode)" />
         public int GetLength(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(1, valueScalingMode);
 
-        /// <inheritdoc cref="ILoopModuleHandle.SetLength" />
+        /// <inheritdoc cref="ILoopModuleHandle.SetLength(int, ValueScalingMode)" />
         public void SetLength(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(1, value, valueScalingMode);
 
         /// <inheritdoc cref="ILoopModuleHandle.MakeLengthEvent" />
@@ -334,10 +334,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 1, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="ILoopModuleHandle.GetChannels" />
+        /// <inheritdoc cref="ILoopModuleHandle.GetChannels()" />
         public ChannelsInverted GetChannels() => (ChannelsInverted)ModuleHandle.GetControllerValue(2, ValueScalingMode.Displayed);
 
-        /// <inheritdoc cref="ILoopModuleHandle.SetChannels" />
+        /// <inheritdoc cref="ILoopModuleHandle.SetChannels(ChannelsInverted)" />
         public void SetChannels(ChannelsInverted value) => ModuleHandle.SetControllerValue(2, (int)value, ValueScalingMode.Displayed);
 
         /// <inheritdoc cref="ILoopModuleHandle.MakeChannelsEvent" />
@@ -346,10 +346,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 2, (ushort)Math.Clamp((int)value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="ILoopModuleHandle.GetRepeatEndless128" />
+        /// <inheritdoc cref="ILoopModuleHandle.GetRepeatEndless128(ValueScalingMode)" />
         public int GetRepeatEndless128(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(3, valueScalingMode);
 
-        /// <inheritdoc cref="ILoopModuleHandle.SetRepeatEndless128" />
+        /// <inheritdoc cref="ILoopModuleHandle.SetRepeatEndless128(int, ValueScalingMode)" />
         public void SetRepeatEndless128(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(3, value, valueScalingMode);
 
         /// <inheritdoc cref="ILoopModuleHandle.MakeRepeatEndless128Event" />
@@ -358,10 +358,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 3, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="ILoopModuleHandle.GetMode" />
+        /// <inheritdoc cref="ILoopModuleHandle.GetMode()" />
         public LoopMode GetMode() => (LoopMode)ModuleHandle.GetControllerValue(4, ValueScalingMode.Displayed);
 
-        /// <inheritdoc cref="ILoopModuleHandle.SetMode" />
+        /// <inheritdoc cref="ILoopModuleHandle.SetMode(LoopMode)" />
         public void SetMode(LoopMode value) => ModuleHandle.SetControllerValue(4, (int)value, ValueScalingMode.Displayed);
 
         /// <inheritdoc cref="ILoopModuleHandle.MakeModeEvent" />
@@ -370,10 +370,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 4, (ushort)Math.Clamp((int)value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="ILoopModuleHandle.GetLengthUnit" />
+        /// <inheritdoc cref="ILoopModuleHandle.GetLengthUnit()" />
         public LoopTimeUnit GetLengthUnit() => (LoopTimeUnit)ModuleHandle.GetControllerValue(5, ValueScalingMode.Displayed);
 
-        /// <inheritdoc cref="ILoopModuleHandle.SetLengthUnit" />
+        /// <inheritdoc cref="ILoopModuleHandle.SetLengthUnit(LoopTimeUnit)" />
         public void SetLengthUnit(LoopTimeUnit value) => ModuleHandle.SetControllerValue(5, (int)value, ValueScalingMode.Displayed);
 
         /// <inheritdoc cref="ILoopModuleHandle.MakeLengthUnitEvent" />
@@ -382,10 +382,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 5, (ushort)Math.Clamp((int)value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="ILoopModuleHandle.GetMaxBufferSize" />
+        /// <inheritdoc cref="ILoopModuleHandle.GetMaxBufferSize(ValueScalingMode)" />
         public int GetMaxBufferSize(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(6, valueScalingMode);
 
-        /// <inheritdoc cref="ILoopModuleHandle.SetMaxBufferSize" />
+        /// <inheritdoc cref="ILoopModuleHandle.SetMaxBufferSize(int, ValueScalingMode)" />
         public void SetMaxBufferSize(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(6, value, valueScalingMode);
 
         /// <inheritdoc cref="ILoopModuleHandle.MakeMaxBufferSizeEvent" />
@@ -394,10 +394,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 6, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="ILoopModuleHandle.GetOnNoteon" />
+        /// <inheritdoc cref="ILoopModuleHandle.GetOnNoteon()" />
         public LoopOnNoteOn GetOnNoteon() => (LoopOnNoteOn)ModuleHandle.GetControllerValue(7, ValueScalingMode.Displayed);
 
-        /// <inheritdoc cref="ILoopModuleHandle.SetOnNoteon" />
+        /// <inheritdoc cref="ILoopModuleHandle.SetOnNoteon(LoopOnNoteOn)" />
         public void SetOnNoteon(LoopOnNoteOn value) => ModuleHandle.SetControllerValue(7, (int)value, ValueScalingMode.Displayed);
 
         /// <inheritdoc cref="ILoopModuleHandle.MakeOnNoteonEvent" />

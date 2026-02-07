@@ -221,7 +221,7 @@ public class BasicModuleGenerator : BaseGenerator
         AppendLine($"/// Original name: {i} '{c.InternalName}'");
         if (setter)
         {
-            AppendLine($"/// Note: equivalent <see cref=\"{nameof(IVirtualPattern)}.{nameof(IVirtualPattern.SendEvent)}\"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.");
+            AppendLine($"/// Note: equivalent <see cref=\"{nameof(IVirtualPattern)}.{nameof(IVirtualPattern.SendEvent)}(int, PatternEvent)\"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.");
         }
         AppendLine("/// </summary>");
     }
@@ -367,11 +367,16 @@ public class BasicModuleGenerator : BaseGenerator
 
             return paramDecl;
         }));
+        var typeList = string.Join(", ", parameters.Select(p =>
+        {
+            var paramNullability = descriptor.NullabilityContext.Create(p);
+            return CodeGenerationHelper.GetTypeName(p.ParameterType, paramNullability);
+        }));
         var argList = string.Join(", ", parameters.Select(p => p.Name));
 
         if (descriptor.InheritDocTarget != null)
         {
-            AppendLine($"/// <inheritdoc cref=\"{descriptor.InheritDocTarget}\"/>");
+            AppendLine($"/// <inheritdoc cref=\"{descriptor.InheritDocTarget}({typeList})\"/>");
         }
         else
         {
@@ -525,26 +530,28 @@ public class BasicModuleGenerator : BaseGenerator
 
     protected virtual void GenerateStructGetter(int i, ControllerDescription c)
     {
-        AppendLine($"/// <inheritdoc cref=\"{InterfaceName}.Get{c.FriendlyName}\" />");
         if (c.EnumName != null)
         {
+            AppendLine($"/// <inheritdoc cref=\"{InterfaceName}.Get{c.FriendlyName}()\" />");
             AppendLine($"public {c.EnumName} Get{c.FriendlyName}() => ({c.EnumName})ModuleHandle.GetControllerValue({i}, ValueScalingMode.Displayed);");
         }
         else
         {
+            AppendLine($"/// <inheritdoc cref=\"{InterfaceName}.Get{c.FriendlyName}({nameof(ValueScalingMode)})\" />");
             AppendLine($"public int Get{c.FriendlyName}({nameof(ValueScalingMode)} valueScalingMode = {nameof(ValueScalingMode)}.{ValueScalingMode.Displayed}) => ModuleHandle.GetControllerValue({i}, valueScalingMode);");
         }
     }
 
     protected virtual void GenerateStructSetter(int i, ControllerDescription c)
     {
-        AppendLine($"/// <inheritdoc cref=\"{InterfaceName}.Set{c.FriendlyName}\" />");
         if (c.EnumName != null)
         {
+            AppendLine($"/// <inheritdoc cref=\"{InterfaceName}.Set{c.FriendlyName}({c.EnumName})\" />");
             AppendLine($"public void Set{c.FriendlyName}({c.EnumName} value) => ModuleHandle.SetControllerValue({i}, (int)value, {nameof(ValueScalingMode)}.{ValueScalingMode.Displayed});");
         }
         else
         {
+            AppendLine($"/// <inheritdoc cref=\"{InterfaceName}.Set{c.FriendlyName}(int, {nameof(ValueScalingMode)})\" />");
             AppendLine($"public void Set{c.FriendlyName}(int value, {nameof(ValueScalingMode)} valueScalingMode = {nameof(ValueScalingMode)}.{ValueScalingMode.Displayed}) => ModuleHandle.SetControllerValue({i}, value, valueScalingMode);");
         }
     }

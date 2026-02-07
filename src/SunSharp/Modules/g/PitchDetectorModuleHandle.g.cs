@@ -23,7 +23,7 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 0 'Algorithm'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetAlgorithm(PitchDetectorAlgorithm value);
 
@@ -42,7 +42,7 @@ namespace SunSharp.Modules
         /// <summary>
         /// Value range: displayed: 0 to 10000, real: 0 to 10000
         /// Original name: 1 'Threshold'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetThreshold(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -61,7 +61,7 @@ namespace SunSharp.Modules
         /// <summary>
         /// Value range: displayed: 0 to 256, real: 0 to 256
         /// Original name: 2 'Gain'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetGain(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -78,7 +78,7 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 3 'Microtones'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetMicrotones(Toggle value);
 
@@ -97,7 +97,7 @@ namespace SunSharp.Modules
         /// <summary>
         /// Value range: displayed: -256 to 256, real: 0 to 512
         /// Original name: 4 'Detector finetune'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetDetectorFineTune(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -116,7 +116,7 @@ namespace SunSharp.Modules
         /// <summary>
         /// Value range: displayed: 0 to 4000, real: 0 to 4000
         /// Original name: 5 'LP filter freq (0 - OFF)'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetLpFilterFreqOff0(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -133,7 +133,7 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 6 'LP filter roll-off'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetLpFilterRollOff(FilterRollOff value);
 
@@ -150,7 +150,7 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 7 'Alg1-2 Sample rate (Hz)'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetAlgSampleRateHz12(PitchDetectorAlgSampleRate value);
 
@@ -167,7 +167,7 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 8 'Alg1-2 Buffer (ms)'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetAlgBufferMs12(PitchDetectorBufferSize value);
 
@@ -186,7 +186,7 @@ namespace SunSharp.Modules
         /// <summary>
         /// Value range: displayed: 0 to 100, real: 0 to 100
         /// Original name: 9 'Alg1-2 Buf overlap'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetAlgBufOverlap12(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -205,7 +205,7 @@ namespace SunSharp.Modules
         /// <summary>
         /// Value range: displayed: 0 to 100, real: 0 to 100
         /// Original name: 10 'Alg1 Sensitivity (absolute threshold)'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetAlgSensitivityAbsoluteThreshold1(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -222,7 +222,7 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 11 'Record notes'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetRecordNotes(Toggle value);
 
@@ -358,30 +358,30 @@ namespace SunSharp.Modules
         /// <inheritdoc/>
         public PatternEvent MakeEvent(Note note = default, byte? velocity = default, byte? controller = default, Effect effect = Effect.None, ushort value = 0) => ModuleHandle.MakeEvent(note, velocity, controller, effect, value);
 
-        /// <inheritdoc cref="SynthModuleHandle.GetInputModules"/>
+        /// <inheritdoc cref="SynthModuleHandle.GetInputModules()"/>
         public SynthModuleHandle[] GetInputModules() => ModuleHandle.GetInputModules();
 
-        /// <inheritdoc cref="SynthModuleHandle.GetOutputModules"/>
+        /// <inheritdoc cref="SynthModuleHandle.GetOutputModules()"/>
         public SynthModuleHandle[] GetOutputModules() => ModuleHandle.GetOutputModules();
 
-        /// <inheritdoc cref="SynthModuleHandle.ConnectInput"/>
+        /// <inheritdoc cref="SynthModuleHandle.ConnectInput(SynthModuleHandle)"/>
         public void ConnectInput(SynthModuleHandle targetModule) => ModuleHandle.ConnectInput(targetModule);
 
-        /// <inheritdoc cref="SynthModuleHandle.ConnectOutput"/>
+        /// <inheritdoc cref="SynthModuleHandle.ConnectOutput(SynthModuleHandle)"/>
         public void ConnectOutput(SynthModuleHandle targetModule) => ModuleHandle.ConnectOutput(targetModule);
 
-        /// <inheritdoc cref="SynthModuleHandle.DisconnectInput"/>
+        /// <inheritdoc cref="SynthModuleHandle.DisconnectInput(SynthModuleHandle)"/>
         public void DisconnectInput(SynthModuleHandle targetModule) => ModuleHandle.DisconnectInput(targetModule);
 
-        /// <inheritdoc cref="SynthModuleHandle.DisconnectOutput"/>
+        /// <inheritdoc cref="SynthModuleHandle.DisconnectOutput(SynthModuleHandle)"/>
         public void DisconnectOutput(SynthModuleHandle targetModule) => ModuleHandle.DisconnectOutput(targetModule);
 
         #endregion
 
-        /// <inheritdoc cref="IPitchDetectorModuleHandle.GetAlgorithm" />
+        /// <inheritdoc cref="IPitchDetectorModuleHandle.GetAlgorithm()" />
         public PitchDetectorAlgorithm GetAlgorithm() => (PitchDetectorAlgorithm)ModuleHandle.GetControllerValue(0, ValueScalingMode.Displayed);
 
-        /// <inheritdoc cref="IPitchDetectorModuleHandle.SetAlgorithm" />
+        /// <inheritdoc cref="IPitchDetectorModuleHandle.SetAlgorithm(PitchDetectorAlgorithm)" />
         public void SetAlgorithm(PitchDetectorAlgorithm value) => ModuleHandle.SetControllerValue(0, (int)value, ValueScalingMode.Displayed);
 
         /// <inheritdoc cref="IPitchDetectorModuleHandle.MakeAlgorithmEvent" />
@@ -390,10 +390,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 0, (ushort)Math.Clamp((int)value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IPitchDetectorModuleHandle.GetThreshold" />
+        /// <inheritdoc cref="IPitchDetectorModuleHandle.GetThreshold(ValueScalingMode)" />
         public int GetThreshold(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(1, valueScalingMode);
 
-        /// <inheritdoc cref="IPitchDetectorModuleHandle.SetThreshold" />
+        /// <inheritdoc cref="IPitchDetectorModuleHandle.SetThreshold(int, ValueScalingMode)" />
         public void SetThreshold(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(1, value, valueScalingMode);
 
         /// <inheritdoc cref="IPitchDetectorModuleHandle.MakeThresholdEvent" />
@@ -403,10 +403,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 1, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IPitchDetectorModuleHandle.GetGain" />
+        /// <inheritdoc cref="IPitchDetectorModuleHandle.GetGain(ValueScalingMode)" />
         public int GetGain(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(2, valueScalingMode);
 
-        /// <inheritdoc cref="IPitchDetectorModuleHandle.SetGain" />
+        /// <inheritdoc cref="IPitchDetectorModuleHandle.SetGain(int, ValueScalingMode)" />
         public void SetGain(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(2, value, valueScalingMode);
 
         /// <inheritdoc cref="IPitchDetectorModuleHandle.MakeGainEvent" />
@@ -416,10 +416,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 2, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IPitchDetectorModuleHandle.GetMicrotones" />
+        /// <inheritdoc cref="IPitchDetectorModuleHandle.GetMicrotones()" />
         public Toggle GetMicrotones() => (Toggle)ModuleHandle.GetControllerValue(3, ValueScalingMode.Displayed);
 
-        /// <inheritdoc cref="IPitchDetectorModuleHandle.SetMicrotones" />
+        /// <inheritdoc cref="IPitchDetectorModuleHandle.SetMicrotones(Toggle)" />
         public void SetMicrotones(Toggle value) => ModuleHandle.SetControllerValue(3, (int)value, ValueScalingMode.Displayed);
 
         /// <inheritdoc cref="IPitchDetectorModuleHandle.MakeMicrotonesEvent" />
@@ -428,10 +428,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 3, (ushort)Math.Clamp((int)value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IPitchDetectorModuleHandle.GetDetectorFineTune" />
+        /// <inheritdoc cref="IPitchDetectorModuleHandle.GetDetectorFineTune(ValueScalingMode)" />
         public int GetDetectorFineTune(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(4, valueScalingMode);
 
-        /// <inheritdoc cref="IPitchDetectorModuleHandle.SetDetectorFineTune" />
+        /// <inheritdoc cref="IPitchDetectorModuleHandle.SetDetectorFineTune(int, ValueScalingMode)" />
         public void SetDetectorFineTune(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(4, value, valueScalingMode);
 
         /// <inheritdoc cref="IPitchDetectorModuleHandle.MakeDetectorFineTuneEvent" />
@@ -442,10 +442,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 4, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IPitchDetectorModuleHandle.GetLpFilterFreqOff0" />
+        /// <inheritdoc cref="IPitchDetectorModuleHandle.GetLpFilterFreqOff0(ValueScalingMode)" />
         public int GetLpFilterFreqOff0(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(5, valueScalingMode);
 
-        /// <inheritdoc cref="IPitchDetectorModuleHandle.SetLpFilterFreqOff0" />
+        /// <inheritdoc cref="IPitchDetectorModuleHandle.SetLpFilterFreqOff0(int, ValueScalingMode)" />
         public void SetLpFilterFreqOff0(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(5, value, valueScalingMode);
 
         /// <inheritdoc cref="IPitchDetectorModuleHandle.MakeLpFilterFreqOff0Event" />
@@ -455,10 +455,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 5, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IPitchDetectorModuleHandle.GetLpFilterRollOff" />
+        /// <inheritdoc cref="IPitchDetectorModuleHandle.GetLpFilterRollOff()" />
         public FilterRollOff GetLpFilterRollOff() => (FilterRollOff)ModuleHandle.GetControllerValue(6, ValueScalingMode.Displayed);
 
-        /// <inheritdoc cref="IPitchDetectorModuleHandle.SetLpFilterRollOff" />
+        /// <inheritdoc cref="IPitchDetectorModuleHandle.SetLpFilterRollOff(FilterRollOff)" />
         public void SetLpFilterRollOff(FilterRollOff value) => ModuleHandle.SetControllerValue(6, (int)value, ValueScalingMode.Displayed);
 
         /// <inheritdoc cref="IPitchDetectorModuleHandle.MakeLpFilterRollOffEvent" />
@@ -467,10 +467,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 6, (ushort)Math.Clamp((int)value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IPitchDetectorModuleHandle.GetAlgSampleRateHz12" />
+        /// <inheritdoc cref="IPitchDetectorModuleHandle.GetAlgSampleRateHz12()" />
         public PitchDetectorAlgSampleRate GetAlgSampleRateHz12() => (PitchDetectorAlgSampleRate)ModuleHandle.GetControllerValue(7, ValueScalingMode.Displayed);
 
-        /// <inheritdoc cref="IPitchDetectorModuleHandle.SetAlgSampleRateHz12" />
+        /// <inheritdoc cref="IPitchDetectorModuleHandle.SetAlgSampleRateHz12(PitchDetectorAlgSampleRate)" />
         public void SetAlgSampleRateHz12(PitchDetectorAlgSampleRate value) => ModuleHandle.SetControllerValue(7, (int)value, ValueScalingMode.Displayed);
 
         /// <inheritdoc cref="IPitchDetectorModuleHandle.MakeAlgSampleRateHz12Event" />
@@ -479,10 +479,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 7, (ushort)Math.Clamp((int)value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IPitchDetectorModuleHandle.GetAlgBufferMs12" />
+        /// <inheritdoc cref="IPitchDetectorModuleHandle.GetAlgBufferMs12()" />
         public PitchDetectorBufferSize GetAlgBufferMs12() => (PitchDetectorBufferSize)ModuleHandle.GetControllerValue(8, ValueScalingMode.Displayed);
 
-        /// <inheritdoc cref="IPitchDetectorModuleHandle.SetAlgBufferMs12" />
+        /// <inheritdoc cref="IPitchDetectorModuleHandle.SetAlgBufferMs12(PitchDetectorBufferSize)" />
         public void SetAlgBufferMs12(PitchDetectorBufferSize value) => ModuleHandle.SetControllerValue(8, (int)value, ValueScalingMode.Displayed);
 
         /// <inheritdoc cref="IPitchDetectorModuleHandle.MakeAlgBufferMs12Event" />
@@ -491,10 +491,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 8, (ushort)Math.Clamp((int)value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IPitchDetectorModuleHandle.GetAlgBufOverlap12" />
+        /// <inheritdoc cref="IPitchDetectorModuleHandle.GetAlgBufOverlap12(ValueScalingMode)" />
         public int GetAlgBufOverlap12(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(9, valueScalingMode);
 
-        /// <inheritdoc cref="IPitchDetectorModuleHandle.SetAlgBufOverlap12" />
+        /// <inheritdoc cref="IPitchDetectorModuleHandle.SetAlgBufOverlap12(int, ValueScalingMode)" />
         public void SetAlgBufOverlap12(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(9, value, valueScalingMode);
 
         /// <inheritdoc cref="IPitchDetectorModuleHandle.MakeAlgBufOverlap12Event" />
@@ -504,10 +504,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 9, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IPitchDetectorModuleHandle.GetAlgSensitivityAbsoluteThreshold1" />
+        /// <inheritdoc cref="IPitchDetectorModuleHandle.GetAlgSensitivityAbsoluteThreshold1(ValueScalingMode)" />
         public int GetAlgSensitivityAbsoluteThreshold1(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(10, valueScalingMode);
 
-        /// <inheritdoc cref="IPitchDetectorModuleHandle.SetAlgSensitivityAbsoluteThreshold1" />
+        /// <inheritdoc cref="IPitchDetectorModuleHandle.SetAlgSensitivityAbsoluteThreshold1(int, ValueScalingMode)" />
         public void SetAlgSensitivityAbsoluteThreshold1(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(10, value, valueScalingMode);
 
         /// <inheritdoc cref="IPitchDetectorModuleHandle.MakeAlgSensitivityAbsoluteThreshold1Event" />
@@ -517,10 +517,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 10, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IPitchDetectorModuleHandle.GetRecordNotes" />
+        /// <inheritdoc cref="IPitchDetectorModuleHandle.GetRecordNotes()" />
         public Toggle GetRecordNotes() => (Toggle)ModuleHandle.GetControllerValue(11, ValueScalingMode.Displayed);
 
-        /// <inheritdoc cref="IPitchDetectorModuleHandle.SetRecordNotes" />
+        /// <inheritdoc cref="IPitchDetectorModuleHandle.SetRecordNotes(Toggle)" />
         public void SetRecordNotes(Toggle value) => ModuleHandle.SetControllerValue(11, (int)value, ValueScalingMode.Displayed);
 
         /// <inheritdoc cref="IPitchDetectorModuleHandle.MakeRecordNotesEvent" />

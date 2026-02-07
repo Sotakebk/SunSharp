@@ -25,7 +25,7 @@ namespace SunSharp.Modules
         /// <summary>
         /// Value range: displayed: 0 to 512, real: 0 to 512
         /// Original name: 0 'Volume'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetVolume(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -44,7 +44,7 @@ namespace SunSharp.Modules
         /// <summary>
         /// Value range: displayed: -600 to 600, real: 0 to 1200
         /// Original name: 1 'Pitch'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetPitch(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -63,7 +63,7 @@ namespace SunSharp.Modules
         /// <summary>
         /// Value range: displayed: 0 to 200, real: 0 to 200
         /// Original name: 2 'Pitch scale'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetPitchScale(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -82,7 +82,7 @@ namespace SunSharp.Modules
         /// <summary>
         /// Value range: displayed: 0 to 256, real: 0 to 256
         /// Original name: 3 'Feedback'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetFeedback(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -101,7 +101,7 @@ namespace SunSharp.Modules
         /// <summary>
         /// Value range: displayed: 0 to 256, real: 0 to 256
         /// Original name: 4 'Grain size'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetGrainSize(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -118,7 +118,7 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 5 'Mode'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetMode(Quality value);
 
@@ -135,7 +135,7 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 6 'Bypass if pitch=0'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetBypassIfPitch0(PitchShifterBypassMode value);
 
@@ -271,30 +271,30 @@ namespace SunSharp.Modules
         /// <inheritdoc/>
         public PatternEvent MakeEvent(Note note = default, byte? velocity = default, byte? controller = default, Effect effect = Effect.None, ushort value = 0) => ModuleHandle.MakeEvent(note, velocity, controller, effect, value);
 
-        /// <inheritdoc cref="SynthModuleHandle.GetInputModules"/>
+        /// <inheritdoc cref="SynthModuleHandle.GetInputModules()"/>
         public SynthModuleHandle[] GetInputModules() => ModuleHandle.GetInputModules();
 
-        /// <inheritdoc cref="SynthModuleHandle.GetOutputModules"/>
+        /// <inheritdoc cref="SynthModuleHandle.GetOutputModules()"/>
         public SynthModuleHandle[] GetOutputModules() => ModuleHandle.GetOutputModules();
 
-        /// <inheritdoc cref="SynthModuleHandle.ConnectInput"/>
+        /// <inheritdoc cref="SynthModuleHandle.ConnectInput(SynthModuleHandle)"/>
         public void ConnectInput(SynthModuleHandle targetModule) => ModuleHandle.ConnectInput(targetModule);
 
-        /// <inheritdoc cref="SynthModuleHandle.ConnectOutput"/>
+        /// <inheritdoc cref="SynthModuleHandle.ConnectOutput(SynthModuleHandle)"/>
         public void ConnectOutput(SynthModuleHandle targetModule) => ModuleHandle.ConnectOutput(targetModule);
 
-        /// <inheritdoc cref="SynthModuleHandle.DisconnectInput"/>
+        /// <inheritdoc cref="SynthModuleHandle.DisconnectInput(SynthModuleHandle)"/>
         public void DisconnectInput(SynthModuleHandle targetModule) => ModuleHandle.DisconnectInput(targetModule);
 
-        /// <inheritdoc cref="SynthModuleHandle.DisconnectOutput"/>
+        /// <inheritdoc cref="SynthModuleHandle.DisconnectOutput(SynthModuleHandle)"/>
         public void DisconnectOutput(SynthModuleHandle targetModule) => ModuleHandle.DisconnectOutput(targetModule);
 
         #endregion
 
-        /// <inheritdoc cref="IPitchShifterModuleHandle.GetVolume" />
+        /// <inheritdoc cref="IPitchShifterModuleHandle.GetVolume(ValueScalingMode)" />
         public int GetVolume(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(0, valueScalingMode);
 
-        /// <inheritdoc cref="IPitchShifterModuleHandle.SetVolume" />
+        /// <inheritdoc cref="IPitchShifterModuleHandle.SetVolume(int, ValueScalingMode)" />
         public void SetVolume(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(0, value, valueScalingMode);
 
         /// <inheritdoc cref="IPitchShifterModuleHandle.MakeVolumeEvent" />
@@ -304,10 +304,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 0, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IPitchShifterModuleHandle.GetPitch" />
+        /// <inheritdoc cref="IPitchShifterModuleHandle.GetPitch(ValueScalingMode)" />
         public int GetPitch(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(1, valueScalingMode);
 
-        /// <inheritdoc cref="IPitchShifterModuleHandle.SetPitch" />
+        /// <inheritdoc cref="IPitchShifterModuleHandle.SetPitch(int, ValueScalingMode)" />
         public void SetPitch(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(1, value, valueScalingMode);
 
         /// <inheritdoc cref="IPitchShifterModuleHandle.MakePitchEvent" />
@@ -318,10 +318,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 1, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IPitchShifterModuleHandle.GetPitchScale" />
+        /// <inheritdoc cref="IPitchShifterModuleHandle.GetPitchScale(ValueScalingMode)" />
         public int GetPitchScale(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(2, valueScalingMode);
 
-        /// <inheritdoc cref="IPitchShifterModuleHandle.SetPitchScale" />
+        /// <inheritdoc cref="IPitchShifterModuleHandle.SetPitchScale(int, ValueScalingMode)" />
         public void SetPitchScale(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(2, value, valueScalingMode);
 
         /// <inheritdoc cref="IPitchShifterModuleHandle.MakePitchScaleEvent" />
@@ -331,10 +331,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 2, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IPitchShifterModuleHandle.GetFeedback" />
+        /// <inheritdoc cref="IPitchShifterModuleHandle.GetFeedback(ValueScalingMode)" />
         public int GetFeedback(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(3, valueScalingMode);
 
-        /// <inheritdoc cref="IPitchShifterModuleHandle.SetFeedback" />
+        /// <inheritdoc cref="IPitchShifterModuleHandle.SetFeedback(int, ValueScalingMode)" />
         public void SetFeedback(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(3, value, valueScalingMode);
 
         /// <inheritdoc cref="IPitchShifterModuleHandle.MakeFeedbackEvent" />
@@ -344,10 +344,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 3, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IPitchShifterModuleHandle.GetGrainSize" />
+        /// <inheritdoc cref="IPitchShifterModuleHandle.GetGrainSize(ValueScalingMode)" />
         public int GetGrainSize(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(4, valueScalingMode);
 
-        /// <inheritdoc cref="IPitchShifterModuleHandle.SetGrainSize" />
+        /// <inheritdoc cref="IPitchShifterModuleHandle.SetGrainSize(int, ValueScalingMode)" />
         public void SetGrainSize(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(4, value, valueScalingMode);
 
         /// <inheritdoc cref="IPitchShifterModuleHandle.MakeGrainSizeEvent" />
@@ -357,10 +357,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 4, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IPitchShifterModuleHandle.GetMode" />
+        /// <inheritdoc cref="IPitchShifterModuleHandle.GetMode()" />
         public Quality GetMode() => (Quality)ModuleHandle.GetControllerValue(5, ValueScalingMode.Displayed);
 
-        /// <inheritdoc cref="IPitchShifterModuleHandle.SetMode" />
+        /// <inheritdoc cref="IPitchShifterModuleHandle.SetMode(Quality)" />
         public void SetMode(Quality value) => ModuleHandle.SetControllerValue(5, (int)value, ValueScalingMode.Displayed);
 
         /// <inheritdoc cref="IPitchShifterModuleHandle.MakeModeEvent" />
@@ -369,10 +369,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 5, (ushort)Math.Clamp((int)value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IPitchShifterModuleHandle.GetBypassIfPitch0" />
+        /// <inheritdoc cref="IPitchShifterModuleHandle.GetBypassIfPitch0()" />
         public PitchShifterBypassMode GetBypassIfPitch0() => (PitchShifterBypassMode)ModuleHandle.GetControllerValue(6, ValueScalingMode.Displayed);
 
-        /// <inheritdoc cref="IPitchShifterModuleHandle.SetBypassIfPitch0" />
+        /// <inheritdoc cref="IPitchShifterModuleHandle.SetBypassIfPitch0(PitchShifterBypassMode)" />
         public void SetBypassIfPitch0(PitchShifterBypassMode value) => ModuleHandle.SetControllerValue(6, (int)value, ValueScalingMode.Displayed);
 
         /// <inheritdoc cref="IPitchShifterModuleHandle.MakeBypassIfPitch0Event" />

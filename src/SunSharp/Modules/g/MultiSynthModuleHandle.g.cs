@@ -23,7 +23,7 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 0 'Transpose'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetTranspose(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -42,7 +42,7 @@ namespace SunSharp.Modules
         /// <summary>
         /// Value range: displayed: 0 to 4096, real: 0 to 4096
         /// Original name: 1 'Random pitch'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetRandomPitch(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -61,7 +61,7 @@ namespace SunSharp.Modules
         /// <summary>
         /// Value range: displayed: 0 to 256, real: 0 to 256
         /// Original name: 2 'Velocity'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetVelocity(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -80,7 +80,7 @@ namespace SunSharp.Modules
         /// <summary>
         /// Value range: displayed: -256 to 256, real: 0 to 512
         /// Original name: 3 'Finetune'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetFineTune(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -99,7 +99,7 @@ namespace SunSharp.Modules
         /// <summary>
         /// Value range: displayed: 0 to 32768, real: 0 to 32768
         /// Original name: 4 'Random phase'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetRandomPhase(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -118,7 +118,7 @@ namespace SunSharp.Modules
         /// <summary>
         /// Value range: displayed: 0 to 32768, real: 0 to 32768
         /// Original name: 5 'Random velocity'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetRandomVelocity(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -137,7 +137,7 @@ namespace SunSharp.Modules
         /// <summary>
         /// Value range: displayed: 0 to 32768, real: 0 to 32768
         /// Original name: 6 'Phase'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetPhase(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -156,7 +156,7 @@ namespace SunSharp.Modules
         /// <summary>
         /// Value range: displayed: 0 to 256, real: 0 to 256
         /// Original name: 7 'Curve2 influence'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetCurve2Influence(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -358,30 +358,30 @@ namespace SunSharp.Modules
         /// <inheritdoc/>
         public PatternEvent MakeEvent(Note note = default, byte? velocity = default, byte? controller = default, Effect effect = Effect.None, ushort value = 0) => ModuleHandle.MakeEvent(note, velocity, controller, effect, value);
 
-        /// <inheritdoc cref="SynthModuleHandle.GetInputModules"/>
+        /// <inheritdoc cref="SynthModuleHandle.GetInputModules()"/>
         public SynthModuleHandle[] GetInputModules() => ModuleHandle.GetInputModules();
 
-        /// <inheritdoc cref="SynthModuleHandle.GetOutputModules"/>
+        /// <inheritdoc cref="SynthModuleHandle.GetOutputModules()"/>
         public SynthModuleHandle[] GetOutputModules() => ModuleHandle.GetOutputModules();
 
-        /// <inheritdoc cref="SynthModuleHandle.ConnectInput"/>
+        /// <inheritdoc cref="SynthModuleHandle.ConnectInput(SynthModuleHandle)"/>
         public void ConnectInput(SynthModuleHandle targetModule) => ModuleHandle.ConnectInput(targetModule);
 
-        /// <inheritdoc cref="SynthModuleHandle.ConnectOutput"/>
+        /// <inheritdoc cref="SynthModuleHandle.ConnectOutput(SynthModuleHandle)"/>
         public void ConnectOutput(SynthModuleHandle targetModule) => ModuleHandle.ConnectOutput(targetModule);
 
-        /// <inheritdoc cref="SynthModuleHandle.DisconnectInput"/>
+        /// <inheritdoc cref="SynthModuleHandle.DisconnectInput(SynthModuleHandle)"/>
         public void DisconnectInput(SynthModuleHandle targetModule) => ModuleHandle.DisconnectInput(targetModule);
 
-        /// <inheritdoc cref="SynthModuleHandle.DisconnectOutput"/>
+        /// <inheritdoc cref="SynthModuleHandle.DisconnectOutput(SynthModuleHandle)"/>
         public void DisconnectOutput(SynthModuleHandle targetModule) => ModuleHandle.DisconnectOutput(targetModule);
 
         #endregion
 
-        /// <inheritdoc cref="IMultiSynthModuleHandle.GetTranspose" />
+        /// <inheritdoc cref="IMultiSynthModuleHandle.GetTranspose(ValueScalingMode)" />
         public int GetTranspose(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(0, valueScalingMode);
 
-        /// <inheritdoc cref="IMultiSynthModuleHandle.SetTranspose" />
+        /// <inheritdoc cref="IMultiSynthModuleHandle.SetTranspose(int, ValueScalingMode)" />
         public void SetTranspose(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(0, value, valueScalingMode);
 
         /// <inheritdoc cref="IMultiSynthModuleHandle.MakeTransposeEvent" />
@@ -390,10 +390,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 0, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IMultiSynthModuleHandle.GetRandomPitch" />
+        /// <inheritdoc cref="IMultiSynthModuleHandle.GetRandomPitch(ValueScalingMode)" />
         public int GetRandomPitch(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(1, valueScalingMode);
 
-        /// <inheritdoc cref="IMultiSynthModuleHandle.SetRandomPitch" />
+        /// <inheritdoc cref="IMultiSynthModuleHandle.SetRandomPitch(int, ValueScalingMode)" />
         public void SetRandomPitch(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(1, value, valueScalingMode);
 
         /// <inheritdoc cref="IMultiSynthModuleHandle.MakeRandomPitchEvent" />
@@ -403,10 +403,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 1, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IMultiSynthModuleHandle.GetVelocity" />
+        /// <inheritdoc cref="IMultiSynthModuleHandle.GetVelocity(ValueScalingMode)" />
         public int GetVelocity(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(2, valueScalingMode);
 
-        /// <inheritdoc cref="IMultiSynthModuleHandle.SetVelocity" />
+        /// <inheritdoc cref="IMultiSynthModuleHandle.SetVelocity(int, ValueScalingMode)" />
         public void SetVelocity(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(2, value, valueScalingMode);
 
         /// <inheritdoc cref="IMultiSynthModuleHandle.MakeVelocityEvent" />
@@ -416,10 +416,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 2, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IMultiSynthModuleHandle.GetFineTune" />
+        /// <inheritdoc cref="IMultiSynthModuleHandle.GetFineTune(ValueScalingMode)" />
         public int GetFineTune(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(3, valueScalingMode);
 
-        /// <inheritdoc cref="IMultiSynthModuleHandle.SetFineTune" />
+        /// <inheritdoc cref="IMultiSynthModuleHandle.SetFineTune(int, ValueScalingMode)" />
         public void SetFineTune(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(3, value, valueScalingMode);
 
         /// <inheritdoc cref="IMultiSynthModuleHandle.MakeFineTuneEvent" />
@@ -430,10 +430,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 3, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IMultiSynthModuleHandle.GetRandomPhase" />
+        /// <inheritdoc cref="IMultiSynthModuleHandle.GetRandomPhase(ValueScalingMode)" />
         public int GetRandomPhase(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(4, valueScalingMode);
 
-        /// <inheritdoc cref="IMultiSynthModuleHandle.SetRandomPhase" />
+        /// <inheritdoc cref="IMultiSynthModuleHandle.SetRandomPhase(int, ValueScalingMode)" />
         public void SetRandomPhase(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(4, value, valueScalingMode);
 
         /// <inheritdoc cref="IMultiSynthModuleHandle.MakeRandomPhaseEvent" />
@@ -443,10 +443,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 4, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IMultiSynthModuleHandle.GetRandomVelocity" />
+        /// <inheritdoc cref="IMultiSynthModuleHandle.GetRandomVelocity(ValueScalingMode)" />
         public int GetRandomVelocity(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(5, valueScalingMode);
 
-        /// <inheritdoc cref="IMultiSynthModuleHandle.SetRandomVelocity" />
+        /// <inheritdoc cref="IMultiSynthModuleHandle.SetRandomVelocity(int, ValueScalingMode)" />
         public void SetRandomVelocity(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(5, value, valueScalingMode);
 
         /// <inheritdoc cref="IMultiSynthModuleHandle.MakeRandomVelocityEvent" />
@@ -456,10 +456,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 5, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IMultiSynthModuleHandle.GetPhase" />
+        /// <inheritdoc cref="IMultiSynthModuleHandle.GetPhase(ValueScalingMode)" />
         public int GetPhase(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(6, valueScalingMode);
 
-        /// <inheritdoc cref="IMultiSynthModuleHandle.SetPhase" />
+        /// <inheritdoc cref="IMultiSynthModuleHandle.SetPhase(int, ValueScalingMode)" />
         public void SetPhase(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(6, value, valueScalingMode);
 
         /// <inheritdoc cref="IMultiSynthModuleHandle.MakePhaseEvent" />
@@ -469,10 +469,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 6, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IMultiSynthModuleHandle.GetCurve2Influence" />
+        /// <inheritdoc cref="IMultiSynthModuleHandle.GetCurve2Influence(ValueScalingMode)" />
         public int GetCurve2Influence(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(7, valueScalingMode);
 
-        /// <inheritdoc cref="IMultiSynthModuleHandle.SetCurve2Influence" />
+        /// <inheritdoc cref="IMultiSynthModuleHandle.SetCurve2Influence(int, ValueScalingMode)" />
         public void SetCurve2Influence(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(7, value, valueScalingMode);
 
         /// <inheritdoc cref="IMultiSynthModuleHandle.MakeCurve2InfluenceEvent" />

@@ -25,7 +25,7 @@ namespace SunSharp.Modules
         /// <summary>
         /// Value range: displayed: 0 to 32768, real: 0 to 32768
         /// Original name: 0 'Pitch'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetPitch(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -42,7 +42,7 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 1 'First note'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetFirstNote(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -59,7 +59,7 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 2 'Range (number of semitones)'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetRangeNumberOfSemitones(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -76,7 +76,7 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 3 'Transpose'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetTranspose(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -95,7 +95,7 @@ namespace SunSharp.Modules
         /// <summary>
         /// Value range: displayed: -256 to 256, real: 0 to 512
         /// Original name: 4 'Finetune'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetFineTune(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -114,7 +114,7 @@ namespace SunSharp.Modules
         /// <summary>
         /// Value range: displayed: 0 to 256, real: 0 to 256
         /// Original name: 5 'Velocity'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetVelocity(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -131,7 +131,7 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 6 'State'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetState(Toggle value);
 
@@ -148,7 +148,7 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 7 'NoteON'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetNoteon(ControlToNoteOnBehaviour value);
 
@@ -165,7 +165,7 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 8 'NoteOFF'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetNoteoff(ControlToNoteOffBehaviour value);
 
@@ -182,7 +182,7 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 9 'Record notes'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetRecordNotes(Toggle value);
 
@@ -318,30 +318,30 @@ namespace SunSharp.Modules
         /// <inheritdoc/>
         public PatternEvent MakeEvent(Note note = default, byte? velocity = default, byte? controller = default, Effect effect = Effect.None, ushort value = 0) => ModuleHandle.MakeEvent(note, velocity, controller, effect, value);
 
-        /// <inheritdoc cref="SynthModuleHandle.GetInputModules"/>
+        /// <inheritdoc cref="SynthModuleHandle.GetInputModules()"/>
         public SynthModuleHandle[] GetInputModules() => ModuleHandle.GetInputModules();
 
-        /// <inheritdoc cref="SynthModuleHandle.GetOutputModules"/>
+        /// <inheritdoc cref="SynthModuleHandle.GetOutputModules()"/>
         public SynthModuleHandle[] GetOutputModules() => ModuleHandle.GetOutputModules();
 
-        /// <inheritdoc cref="SynthModuleHandle.ConnectInput"/>
+        /// <inheritdoc cref="SynthModuleHandle.ConnectInput(SynthModuleHandle)"/>
         public void ConnectInput(SynthModuleHandle targetModule) => ModuleHandle.ConnectInput(targetModule);
 
-        /// <inheritdoc cref="SynthModuleHandle.ConnectOutput"/>
+        /// <inheritdoc cref="SynthModuleHandle.ConnectOutput(SynthModuleHandle)"/>
         public void ConnectOutput(SynthModuleHandle targetModule) => ModuleHandle.ConnectOutput(targetModule);
 
-        /// <inheritdoc cref="SynthModuleHandle.DisconnectInput"/>
+        /// <inheritdoc cref="SynthModuleHandle.DisconnectInput(SynthModuleHandle)"/>
         public void DisconnectInput(SynthModuleHandle targetModule) => ModuleHandle.DisconnectInput(targetModule);
 
-        /// <inheritdoc cref="SynthModuleHandle.DisconnectOutput"/>
+        /// <inheritdoc cref="SynthModuleHandle.DisconnectOutput(SynthModuleHandle)"/>
         public void DisconnectOutput(SynthModuleHandle targetModule) => ModuleHandle.DisconnectOutput(targetModule);
 
         #endregion
 
-        /// <inheritdoc cref="IControlToNoteModuleHandle.GetPitch" />
+        /// <inheritdoc cref="IControlToNoteModuleHandle.GetPitch(ValueScalingMode)" />
         public int GetPitch(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(0, valueScalingMode);
 
-        /// <inheritdoc cref="IControlToNoteModuleHandle.SetPitch" />
+        /// <inheritdoc cref="IControlToNoteModuleHandle.SetPitch(int, ValueScalingMode)" />
         public void SetPitch(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(0, value, valueScalingMode);
 
         /// <inheritdoc cref="IControlToNoteModuleHandle.MakePitchEvent" />
@@ -351,10 +351,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 0, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IControlToNoteModuleHandle.GetFirstNote" />
+        /// <inheritdoc cref="IControlToNoteModuleHandle.GetFirstNote(ValueScalingMode)" />
         public int GetFirstNote(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(1, valueScalingMode);
 
-        /// <inheritdoc cref="IControlToNoteModuleHandle.SetFirstNote" />
+        /// <inheritdoc cref="IControlToNoteModuleHandle.SetFirstNote(int, ValueScalingMode)" />
         public void SetFirstNote(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(1, value, valueScalingMode);
 
         /// <inheritdoc cref="IControlToNoteModuleHandle.MakeFirstNoteEvent" />
@@ -363,10 +363,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 1, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IControlToNoteModuleHandle.GetRangeNumberOfSemitones" />
+        /// <inheritdoc cref="IControlToNoteModuleHandle.GetRangeNumberOfSemitones(ValueScalingMode)" />
         public int GetRangeNumberOfSemitones(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(2, valueScalingMode);
 
-        /// <inheritdoc cref="IControlToNoteModuleHandle.SetRangeNumberOfSemitones" />
+        /// <inheritdoc cref="IControlToNoteModuleHandle.SetRangeNumberOfSemitones(int, ValueScalingMode)" />
         public void SetRangeNumberOfSemitones(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(2, value, valueScalingMode);
 
         /// <inheritdoc cref="IControlToNoteModuleHandle.MakeRangeNumberOfSemitonesEvent" />
@@ -375,10 +375,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 2, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IControlToNoteModuleHandle.GetTranspose" />
+        /// <inheritdoc cref="IControlToNoteModuleHandle.GetTranspose(ValueScalingMode)" />
         public int GetTranspose(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(3, valueScalingMode);
 
-        /// <inheritdoc cref="IControlToNoteModuleHandle.SetTranspose" />
+        /// <inheritdoc cref="IControlToNoteModuleHandle.SetTranspose(int, ValueScalingMode)" />
         public void SetTranspose(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(3, value, valueScalingMode);
 
         /// <inheritdoc cref="IControlToNoteModuleHandle.MakeTransposeEvent" />
@@ -387,10 +387,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 3, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IControlToNoteModuleHandle.GetFineTune" />
+        /// <inheritdoc cref="IControlToNoteModuleHandle.GetFineTune(ValueScalingMode)" />
         public int GetFineTune(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(4, valueScalingMode);
 
-        /// <inheritdoc cref="IControlToNoteModuleHandle.SetFineTune" />
+        /// <inheritdoc cref="IControlToNoteModuleHandle.SetFineTune(int, ValueScalingMode)" />
         public void SetFineTune(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(4, value, valueScalingMode);
 
         /// <inheritdoc cref="IControlToNoteModuleHandle.MakeFineTuneEvent" />
@@ -401,10 +401,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 4, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IControlToNoteModuleHandle.GetVelocity" />
+        /// <inheritdoc cref="IControlToNoteModuleHandle.GetVelocity(ValueScalingMode)" />
         public int GetVelocity(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(5, valueScalingMode);
 
-        /// <inheritdoc cref="IControlToNoteModuleHandle.SetVelocity" />
+        /// <inheritdoc cref="IControlToNoteModuleHandle.SetVelocity(int, ValueScalingMode)" />
         public void SetVelocity(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(5, value, valueScalingMode);
 
         /// <inheritdoc cref="IControlToNoteModuleHandle.MakeVelocityEvent" />
@@ -414,10 +414,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 5, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IControlToNoteModuleHandle.GetState" />
+        /// <inheritdoc cref="IControlToNoteModuleHandle.GetState()" />
         public Toggle GetState() => (Toggle)ModuleHandle.GetControllerValue(6, ValueScalingMode.Displayed);
 
-        /// <inheritdoc cref="IControlToNoteModuleHandle.SetState" />
+        /// <inheritdoc cref="IControlToNoteModuleHandle.SetState(Toggle)" />
         public void SetState(Toggle value) => ModuleHandle.SetControllerValue(6, (int)value, ValueScalingMode.Displayed);
 
         /// <inheritdoc cref="IControlToNoteModuleHandle.MakeStateEvent" />
@@ -426,10 +426,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 6, (ushort)Math.Clamp((int)value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IControlToNoteModuleHandle.GetNoteon" />
+        /// <inheritdoc cref="IControlToNoteModuleHandle.GetNoteon()" />
         public ControlToNoteOnBehaviour GetNoteon() => (ControlToNoteOnBehaviour)ModuleHandle.GetControllerValue(7, ValueScalingMode.Displayed);
 
-        /// <inheritdoc cref="IControlToNoteModuleHandle.SetNoteon" />
+        /// <inheritdoc cref="IControlToNoteModuleHandle.SetNoteon(ControlToNoteOnBehaviour)" />
         public void SetNoteon(ControlToNoteOnBehaviour value) => ModuleHandle.SetControllerValue(7, (int)value, ValueScalingMode.Displayed);
 
         /// <inheritdoc cref="IControlToNoteModuleHandle.MakeNoteonEvent" />
@@ -438,10 +438,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 7, (ushort)Math.Clamp((int)value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IControlToNoteModuleHandle.GetNoteoff" />
+        /// <inheritdoc cref="IControlToNoteModuleHandle.GetNoteoff()" />
         public ControlToNoteOffBehaviour GetNoteoff() => (ControlToNoteOffBehaviour)ModuleHandle.GetControllerValue(8, ValueScalingMode.Displayed);
 
-        /// <inheritdoc cref="IControlToNoteModuleHandle.SetNoteoff" />
+        /// <inheritdoc cref="IControlToNoteModuleHandle.SetNoteoff(ControlToNoteOffBehaviour)" />
         public void SetNoteoff(ControlToNoteOffBehaviour value) => ModuleHandle.SetControllerValue(8, (int)value, ValueScalingMode.Displayed);
 
         /// <inheritdoc cref="IControlToNoteModuleHandle.MakeNoteoffEvent" />
@@ -450,10 +450,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 8, (ushort)Math.Clamp((int)value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IControlToNoteModuleHandle.GetRecordNotes" />
+        /// <inheritdoc cref="IControlToNoteModuleHandle.GetRecordNotes()" />
         public Toggle GetRecordNotes() => (Toggle)ModuleHandle.GetControllerValue(9, ValueScalingMode.Displayed);
 
-        /// <inheritdoc cref="IControlToNoteModuleHandle.SetRecordNotes" />
+        /// <inheritdoc cref="IControlToNoteModuleHandle.SetRecordNotes(Toggle)" />
         public void SetRecordNotes(Toggle value) => ModuleHandle.SetControllerValue(9, (int)value, ValueScalingMode.Displayed);
 
         /// <inheritdoc cref="IControlToNoteModuleHandle.MakeRecordNotesEvent" />

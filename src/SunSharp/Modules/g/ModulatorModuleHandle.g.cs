@@ -25,7 +25,7 @@ namespace SunSharp.Modules
         /// <summary>
         /// Value range: displayed: 0 to 512, real: 0 to 512
         /// Original name: 0 'Volume'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetVolume(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -42,7 +42,7 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 1 'Modulation type'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetModulationType(ModulationType value);
 
@@ -59,7 +59,7 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 2 'Channels'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetChannels(Channels value);
 
@@ -76,7 +76,7 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 3 'Max PM delay'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetMaxPhaseModulationDelay(ModulatorMaxPhaseModulationDelay value);
 
@@ -93,7 +93,7 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 4 'PM interpolation'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetPhaseModulationInterpolation(ModulatorPhaseModulationInterpolation value);
 
@@ -229,30 +229,30 @@ namespace SunSharp.Modules
         /// <inheritdoc/>
         public PatternEvent MakeEvent(Note note = default, byte? velocity = default, byte? controller = default, Effect effect = Effect.None, ushort value = 0) => ModuleHandle.MakeEvent(note, velocity, controller, effect, value);
 
-        /// <inheritdoc cref="SynthModuleHandle.GetInputModules"/>
+        /// <inheritdoc cref="SynthModuleHandle.GetInputModules()"/>
         public SynthModuleHandle[] GetInputModules() => ModuleHandle.GetInputModules();
 
-        /// <inheritdoc cref="SynthModuleHandle.GetOutputModules"/>
+        /// <inheritdoc cref="SynthModuleHandle.GetOutputModules()"/>
         public SynthModuleHandle[] GetOutputModules() => ModuleHandle.GetOutputModules();
 
-        /// <inheritdoc cref="SynthModuleHandle.ConnectInput"/>
+        /// <inheritdoc cref="SynthModuleHandle.ConnectInput(SynthModuleHandle)"/>
         public void ConnectInput(SynthModuleHandle targetModule) => ModuleHandle.ConnectInput(targetModule);
 
-        /// <inheritdoc cref="SynthModuleHandle.ConnectOutput"/>
+        /// <inheritdoc cref="SynthModuleHandle.ConnectOutput(SynthModuleHandle)"/>
         public void ConnectOutput(SynthModuleHandle targetModule) => ModuleHandle.ConnectOutput(targetModule);
 
-        /// <inheritdoc cref="SynthModuleHandle.DisconnectInput"/>
+        /// <inheritdoc cref="SynthModuleHandle.DisconnectInput(SynthModuleHandle)"/>
         public void DisconnectInput(SynthModuleHandle targetModule) => ModuleHandle.DisconnectInput(targetModule);
 
-        /// <inheritdoc cref="SynthModuleHandle.DisconnectOutput"/>
+        /// <inheritdoc cref="SynthModuleHandle.DisconnectOutput(SynthModuleHandle)"/>
         public void DisconnectOutput(SynthModuleHandle targetModule) => ModuleHandle.DisconnectOutput(targetModule);
 
         #endregion
 
-        /// <inheritdoc cref="IModulatorModuleHandle.GetVolume" />
+        /// <inheritdoc cref="IModulatorModuleHandle.GetVolume(ValueScalingMode)" />
         public int GetVolume(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(0, valueScalingMode);
 
-        /// <inheritdoc cref="IModulatorModuleHandle.SetVolume" />
+        /// <inheritdoc cref="IModulatorModuleHandle.SetVolume(int, ValueScalingMode)" />
         public void SetVolume(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(0, value, valueScalingMode);
 
         /// <inheritdoc cref="IModulatorModuleHandle.MakeVolumeEvent" />
@@ -262,10 +262,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 0, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IModulatorModuleHandle.GetModulationType" />
+        /// <inheritdoc cref="IModulatorModuleHandle.GetModulationType()" />
         public ModulationType GetModulationType() => (ModulationType)ModuleHandle.GetControllerValue(1, ValueScalingMode.Displayed);
 
-        /// <inheritdoc cref="IModulatorModuleHandle.SetModulationType" />
+        /// <inheritdoc cref="IModulatorModuleHandle.SetModulationType(ModulationType)" />
         public void SetModulationType(ModulationType value) => ModuleHandle.SetControllerValue(1, (int)value, ValueScalingMode.Displayed);
 
         /// <inheritdoc cref="IModulatorModuleHandle.MakeModulationTypeEvent" />
@@ -274,10 +274,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 1, (ushort)Math.Clamp((int)value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IModulatorModuleHandle.GetChannels" />
+        /// <inheritdoc cref="IModulatorModuleHandle.GetChannels()" />
         public Channels GetChannels() => (Channels)ModuleHandle.GetControllerValue(2, ValueScalingMode.Displayed);
 
-        /// <inheritdoc cref="IModulatorModuleHandle.SetChannels" />
+        /// <inheritdoc cref="IModulatorModuleHandle.SetChannels(Channels)" />
         public void SetChannels(Channels value) => ModuleHandle.SetControllerValue(2, (int)value, ValueScalingMode.Displayed);
 
         /// <inheritdoc cref="IModulatorModuleHandle.MakeChannelsEvent" />
@@ -286,10 +286,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 2, (ushort)Math.Clamp((int)value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IModulatorModuleHandle.GetMaxPhaseModulationDelay" />
+        /// <inheritdoc cref="IModulatorModuleHandle.GetMaxPhaseModulationDelay()" />
         public ModulatorMaxPhaseModulationDelay GetMaxPhaseModulationDelay() => (ModulatorMaxPhaseModulationDelay)ModuleHandle.GetControllerValue(3, ValueScalingMode.Displayed);
 
-        /// <inheritdoc cref="IModulatorModuleHandle.SetMaxPhaseModulationDelay" />
+        /// <inheritdoc cref="IModulatorModuleHandle.SetMaxPhaseModulationDelay(ModulatorMaxPhaseModulationDelay)" />
         public void SetMaxPhaseModulationDelay(ModulatorMaxPhaseModulationDelay value) => ModuleHandle.SetControllerValue(3, (int)value, ValueScalingMode.Displayed);
 
         /// <inheritdoc cref="IModulatorModuleHandle.MakeMaxPhaseModulationDelayEvent" />
@@ -298,10 +298,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 3, (ushort)Math.Clamp((int)value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IModulatorModuleHandle.GetPhaseModulationInterpolation" />
+        /// <inheritdoc cref="IModulatorModuleHandle.GetPhaseModulationInterpolation()" />
         public ModulatorPhaseModulationInterpolation GetPhaseModulationInterpolation() => (ModulatorPhaseModulationInterpolation)ModuleHandle.GetControllerValue(4, ValueScalingMode.Displayed);
 
-        /// <inheritdoc cref="IModulatorModuleHandle.SetPhaseModulationInterpolation" />
+        /// <inheritdoc cref="IModulatorModuleHandle.SetPhaseModulationInterpolation(ModulatorPhaseModulationInterpolation)" />
         public void SetPhaseModulationInterpolation(ModulatorPhaseModulationInterpolation value) => ModuleHandle.SetControllerValue(4, (int)value, ValueScalingMode.Displayed);
 
         /// <inheritdoc cref="IModulatorModuleHandle.MakePhaseModulationInterpolationEvent" />

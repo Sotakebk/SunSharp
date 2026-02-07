@@ -25,7 +25,7 @@ namespace SunSharp.Modules
         /// <summary>
         /// Value range: displayed: 0 to 1024, real: 0 to 1024
         /// Original name: 0 'Volume'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetVolume(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -44,7 +44,7 @@ namespace SunSharp.Modules
         /// <summary>
         /// Value range: displayed: -128 to 128, real: 0 to 256
         /// Original name: 1 'Balance'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetBalance(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -63,7 +63,7 @@ namespace SunSharp.Modules
         /// <summary>
         /// Value range: displayed: -128 to 128, real: 0 to 256
         /// Original name: 2 'DC Offset'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetDcOffset(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -80,7 +80,7 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 3 'Inverse'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetInverse(Toggle value);
 
@@ -99,7 +99,7 @@ namespace SunSharp.Modules
         /// <summary>
         /// Value range: displayed: 0 to 256, real: 0 to 256
         /// Original name: 4 'Stereo width'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetStereoWidth(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -116,7 +116,7 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 5 'Absolute'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetAbsolute(Toggle value);
 
@@ -135,7 +135,7 @@ namespace SunSharp.Modules
         /// <summary>
         /// Value range: displayed: 0 to 32768, real: 0 to 32768
         /// Original name: 6 'Fine volume'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetFineVolume(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -154,7 +154,7 @@ namespace SunSharp.Modules
         /// <summary>
         /// Value range: displayed: 0 to 5000, real: 0 to 5000
         /// Original name: 7 'Gain'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetGain(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -173,7 +173,7 @@ namespace SunSharp.Modules
         /// <summary>
         /// Value range: displayed: -16384 to 16384, real: 0 to 32768
         /// Original name: 8 'Bipolar DC Offset'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetBipolarDcOffset(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -309,30 +309,30 @@ namespace SunSharp.Modules
         /// <inheritdoc/>
         public PatternEvent MakeEvent(Note note = default, byte? velocity = default, byte? controller = default, Effect effect = Effect.None, ushort value = 0) => ModuleHandle.MakeEvent(note, velocity, controller, effect, value);
 
-        /// <inheritdoc cref="SynthModuleHandle.GetInputModules"/>
+        /// <inheritdoc cref="SynthModuleHandle.GetInputModules()"/>
         public SynthModuleHandle[] GetInputModules() => ModuleHandle.GetInputModules();
 
-        /// <inheritdoc cref="SynthModuleHandle.GetOutputModules"/>
+        /// <inheritdoc cref="SynthModuleHandle.GetOutputModules()"/>
         public SynthModuleHandle[] GetOutputModules() => ModuleHandle.GetOutputModules();
 
-        /// <inheritdoc cref="SynthModuleHandle.ConnectInput"/>
+        /// <inheritdoc cref="SynthModuleHandle.ConnectInput(SynthModuleHandle)"/>
         public void ConnectInput(SynthModuleHandle targetModule) => ModuleHandle.ConnectInput(targetModule);
 
-        /// <inheritdoc cref="SynthModuleHandle.ConnectOutput"/>
+        /// <inheritdoc cref="SynthModuleHandle.ConnectOutput(SynthModuleHandle)"/>
         public void ConnectOutput(SynthModuleHandle targetModule) => ModuleHandle.ConnectOutput(targetModule);
 
-        /// <inheritdoc cref="SynthModuleHandle.DisconnectInput"/>
+        /// <inheritdoc cref="SynthModuleHandle.DisconnectInput(SynthModuleHandle)"/>
         public void DisconnectInput(SynthModuleHandle targetModule) => ModuleHandle.DisconnectInput(targetModule);
 
-        /// <inheritdoc cref="SynthModuleHandle.DisconnectOutput"/>
+        /// <inheritdoc cref="SynthModuleHandle.DisconnectOutput(SynthModuleHandle)"/>
         public void DisconnectOutput(SynthModuleHandle targetModule) => ModuleHandle.DisconnectOutput(targetModule);
 
         #endregion
 
-        /// <inheritdoc cref="IAmplifierModuleHandle.GetVolume" />
+        /// <inheritdoc cref="IAmplifierModuleHandle.GetVolume(ValueScalingMode)" />
         public int GetVolume(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(0, valueScalingMode);
 
-        /// <inheritdoc cref="IAmplifierModuleHandle.SetVolume" />
+        /// <inheritdoc cref="IAmplifierModuleHandle.SetVolume(int, ValueScalingMode)" />
         public void SetVolume(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(0, value, valueScalingMode);
 
         /// <inheritdoc cref="IAmplifierModuleHandle.MakeVolumeEvent" />
@@ -342,10 +342,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 0, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IAmplifierModuleHandle.GetBalance" />
+        /// <inheritdoc cref="IAmplifierModuleHandle.GetBalance(ValueScalingMode)" />
         public int GetBalance(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(1, valueScalingMode);
 
-        /// <inheritdoc cref="IAmplifierModuleHandle.SetBalance" />
+        /// <inheritdoc cref="IAmplifierModuleHandle.SetBalance(int, ValueScalingMode)" />
         public void SetBalance(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(1, value, valueScalingMode);
 
         /// <inheritdoc cref="IAmplifierModuleHandle.MakeBalanceEvent" />
@@ -356,10 +356,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 1, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IAmplifierModuleHandle.GetDcOffset" />
+        /// <inheritdoc cref="IAmplifierModuleHandle.GetDcOffset(ValueScalingMode)" />
         public int GetDcOffset(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(2, valueScalingMode);
 
-        /// <inheritdoc cref="IAmplifierModuleHandle.SetDcOffset" />
+        /// <inheritdoc cref="IAmplifierModuleHandle.SetDcOffset(int, ValueScalingMode)" />
         public void SetDcOffset(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(2, value, valueScalingMode);
 
         /// <inheritdoc cref="IAmplifierModuleHandle.MakeDcOffsetEvent" />
@@ -370,10 +370,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 2, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IAmplifierModuleHandle.GetInverse" />
+        /// <inheritdoc cref="IAmplifierModuleHandle.GetInverse()" />
         public Toggle GetInverse() => (Toggle)ModuleHandle.GetControllerValue(3, ValueScalingMode.Displayed);
 
-        /// <inheritdoc cref="IAmplifierModuleHandle.SetInverse" />
+        /// <inheritdoc cref="IAmplifierModuleHandle.SetInverse(Toggle)" />
         public void SetInverse(Toggle value) => ModuleHandle.SetControllerValue(3, (int)value, ValueScalingMode.Displayed);
 
         /// <inheritdoc cref="IAmplifierModuleHandle.MakeInverseEvent" />
@@ -382,10 +382,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 3, (ushort)Math.Clamp((int)value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IAmplifierModuleHandle.GetStereoWidth" />
+        /// <inheritdoc cref="IAmplifierModuleHandle.GetStereoWidth(ValueScalingMode)" />
         public int GetStereoWidth(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(4, valueScalingMode);
 
-        /// <inheritdoc cref="IAmplifierModuleHandle.SetStereoWidth" />
+        /// <inheritdoc cref="IAmplifierModuleHandle.SetStereoWidth(int, ValueScalingMode)" />
         public void SetStereoWidth(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(4, value, valueScalingMode);
 
         /// <inheritdoc cref="IAmplifierModuleHandle.MakeStereoWidthEvent" />
@@ -395,10 +395,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 4, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IAmplifierModuleHandle.GetAbsolute" />
+        /// <inheritdoc cref="IAmplifierModuleHandle.GetAbsolute()" />
         public Toggle GetAbsolute() => (Toggle)ModuleHandle.GetControllerValue(5, ValueScalingMode.Displayed);
 
-        /// <inheritdoc cref="IAmplifierModuleHandle.SetAbsolute" />
+        /// <inheritdoc cref="IAmplifierModuleHandle.SetAbsolute(Toggle)" />
         public void SetAbsolute(Toggle value) => ModuleHandle.SetControllerValue(5, (int)value, ValueScalingMode.Displayed);
 
         /// <inheritdoc cref="IAmplifierModuleHandle.MakeAbsoluteEvent" />
@@ -407,10 +407,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 5, (ushort)Math.Clamp((int)value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IAmplifierModuleHandle.GetFineVolume" />
+        /// <inheritdoc cref="IAmplifierModuleHandle.GetFineVolume(ValueScalingMode)" />
         public int GetFineVolume(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(6, valueScalingMode);
 
-        /// <inheritdoc cref="IAmplifierModuleHandle.SetFineVolume" />
+        /// <inheritdoc cref="IAmplifierModuleHandle.SetFineVolume(int, ValueScalingMode)" />
         public void SetFineVolume(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(6, value, valueScalingMode);
 
         /// <inheritdoc cref="IAmplifierModuleHandle.MakeFineVolumeEvent" />
@@ -420,10 +420,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 6, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IAmplifierModuleHandle.GetGain" />
+        /// <inheritdoc cref="IAmplifierModuleHandle.GetGain(ValueScalingMode)" />
         public int GetGain(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(7, valueScalingMode);
 
-        /// <inheritdoc cref="IAmplifierModuleHandle.SetGain" />
+        /// <inheritdoc cref="IAmplifierModuleHandle.SetGain(int, ValueScalingMode)" />
         public void SetGain(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(7, value, valueScalingMode);
 
         /// <inheritdoc cref="IAmplifierModuleHandle.MakeGainEvent" />
@@ -433,10 +433,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 7, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IAmplifierModuleHandle.GetBipolarDcOffset" />
+        /// <inheritdoc cref="IAmplifierModuleHandle.GetBipolarDcOffset(ValueScalingMode)" />
         public int GetBipolarDcOffset(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(8, valueScalingMode);
 
-        /// <inheritdoc cref="IAmplifierModuleHandle.SetBipolarDcOffset" />
+        /// <inheritdoc cref="IAmplifierModuleHandle.SetBipolarDcOffset(int, ValueScalingMode)" />
         public void SetBipolarDcOffset(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(8, value, valueScalingMode);
 
         /// <inheritdoc cref="IAmplifierModuleHandle.MakeBipolarDcOffsetEvent" />

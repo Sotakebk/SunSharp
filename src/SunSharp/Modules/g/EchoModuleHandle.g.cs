@@ -25,7 +25,7 @@ namespace SunSharp.Modules
         /// <summary>
         /// Value range: displayed: 0 to 256, real: 0 to 256
         /// Original name: 0 'Dry'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetDry(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -44,7 +44,7 @@ namespace SunSharp.Modules
         /// <summary>
         /// Value range: displayed: 0 to 256, real: 0 to 256
         /// Original name: 1 'Wet'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetWet(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -63,7 +63,7 @@ namespace SunSharp.Modules
         /// <summary>
         /// Value range: displayed: 0 to 256, real: 0 to 256
         /// Original name: 2 'Feedback'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetFeedback(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -82,7 +82,7 @@ namespace SunSharp.Modules
         /// <summary>
         /// Value range: displayed: 0 to 256, real: 0 to 256
         /// Original name: 3 'Delay'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetDelay(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -99,7 +99,7 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 4 'Right channel offset'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetRightChannelOffset(Toggle value);
 
@@ -116,7 +116,7 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 5 'Delay unit'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetDelayUnit(EchoDelayUnit value);
 
@@ -139,7 +139,7 @@ namespace SunSharp.Modules
         /// <br/>
         /// Value range: displayed: 0 to 32768, real: 0 to 32768
         /// Original name: 6 'Right channel offset'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetRightChannelOffsetDelay(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -158,7 +158,7 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 7 'Filter'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetFilter(EchoFilter value);
 
@@ -177,7 +177,7 @@ namespace SunSharp.Modules
         /// <summary>
         /// Value range: displayed: 0 to 22000, real: 0 to 22000
         /// Original name: 8 'F.freq'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetFFreq(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -313,30 +313,30 @@ namespace SunSharp.Modules
         /// <inheritdoc/>
         public PatternEvent MakeEvent(Note note = default, byte? velocity = default, byte? controller = default, Effect effect = Effect.None, ushort value = 0) => ModuleHandle.MakeEvent(note, velocity, controller, effect, value);
 
-        /// <inheritdoc cref="SynthModuleHandle.GetInputModules"/>
+        /// <inheritdoc cref="SynthModuleHandle.GetInputModules()"/>
         public SynthModuleHandle[] GetInputModules() => ModuleHandle.GetInputModules();
 
-        /// <inheritdoc cref="SynthModuleHandle.GetOutputModules"/>
+        /// <inheritdoc cref="SynthModuleHandle.GetOutputModules()"/>
         public SynthModuleHandle[] GetOutputModules() => ModuleHandle.GetOutputModules();
 
-        /// <inheritdoc cref="SynthModuleHandle.ConnectInput"/>
+        /// <inheritdoc cref="SynthModuleHandle.ConnectInput(SynthModuleHandle)"/>
         public void ConnectInput(SynthModuleHandle targetModule) => ModuleHandle.ConnectInput(targetModule);
 
-        /// <inheritdoc cref="SynthModuleHandle.ConnectOutput"/>
+        /// <inheritdoc cref="SynthModuleHandle.ConnectOutput(SynthModuleHandle)"/>
         public void ConnectOutput(SynthModuleHandle targetModule) => ModuleHandle.ConnectOutput(targetModule);
 
-        /// <inheritdoc cref="SynthModuleHandle.DisconnectInput"/>
+        /// <inheritdoc cref="SynthModuleHandle.DisconnectInput(SynthModuleHandle)"/>
         public void DisconnectInput(SynthModuleHandle targetModule) => ModuleHandle.DisconnectInput(targetModule);
 
-        /// <inheritdoc cref="SynthModuleHandle.DisconnectOutput"/>
+        /// <inheritdoc cref="SynthModuleHandle.DisconnectOutput(SynthModuleHandle)"/>
         public void DisconnectOutput(SynthModuleHandle targetModule) => ModuleHandle.DisconnectOutput(targetModule);
 
         #endregion
 
-        /// <inheritdoc cref="IEchoModuleHandle.GetDry" />
+        /// <inheritdoc cref="IEchoModuleHandle.GetDry(ValueScalingMode)" />
         public int GetDry(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(0, valueScalingMode);
 
-        /// <inheritdoc cref="IEchoModuleHandle.SetDry" />
+        /// <inheritdoc cref="IEchoModuleHandle.SetDry(int, ValueScalingMode)" />
         public void SetDry(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(0, value, valueScalingMode);
 
         /// <inheritdoc cref="IEchoModuleHandle.MakeDryEvent" />
@@ -346,10 +346,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 0, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IEchoModuleHandle.GetWet" />
+        /// <inheritdoc cref="IEchoModuleHandle.GetWet(ValueScalingMode)" />
         public int GetWet(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(1, valueScalingMode);
 
-        /// <inheritdoc cref="IEchoModuleHandle.SetWet" />
+        /// <inheritdoc cref="IEchoModuleHandle.SetWet(int, ValueScalingMode)" />
         public void SetWet(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(1, value, valueScalingMode);
 
         /// <inheritdoc cref="IEchoModuleHandle.MakeWetEvent" />
@@ -359,10 +359,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 1, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IEchoModuleHandle.GetFeedback" />
+        /// <inheritdoc cref="IEchoModuleHandle.GetFeedback(ValueScalingMode)" />
         public int GetFeedback(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(2, valueScalingMode);
 
-        /// <inheritdoc cref="IEchoModuleHandle.SetFeedback" />
+        /// <inheritdoc cref="IEchoModuleHandle.SetFeedback(int, ValueScalingMode)" />
         public void SetFeedback(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(2, value, valueScalingMode);
 
         /// <inheritdoc cref="IEchoModuleHandle.MakeFeedbackEvent" />
@@ -372,10 +372,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 2, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IEchoModuleHandle.GetDelay" />
+        /// <inheritdoc cref="IEchoModuleHandle.GetDelay(ValueScalingMode)" />
         public int GetDelay(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(3, valueScalingMode);
 
-        /// <inheritdoc cref="IEchoModuleHandle.SetDelay" />
+        /// <inheritdoc cref="IEchoModuleHandle.SetDelay(int, ValueScalingMode)" />
         public void SetDelay(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(3, value, valueScalingMode);
 
         /// <inheritdoc cref="IEchoModuleHandle.MakeDelayEvent" />
@@ -385,10 +385,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 3, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IEchoModuleHandle.GetRightChannelOffset" />
+        /// <inheritdoc cref="IEchoModuleHandle.GetRightChannelOffset()" />
         public Toggle GetRightChannelOffset() => (Toggle)ModuleHandle.GetControllerValue(4, ValueScalingMode.Displayed);
 
-        /// <inheritdoc cref="IEchoModuleHandle.SetRightChannelOffset" />
+        /// <inheritdoc cref="IEchoModuleHandle.SetRightChannelOffset(Toggle)" />
         public void SetRightChannelOffset(Toggle value) => ModuleHandle.SetControllerValue(4, (int)value, ValueScalingMode.Displayed);
 
         /// <inheritdoc cref="IEchoModuleHandle.MakeRightChannelOffsetEvent" />
@@ -397,10 +397,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 4, (ushort)Math.Clamp((int)value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IEchoModuleHandle.GetDelayUnit" />
+        /// <inheritdoc cref="IEchoModuleHandle.GetDelayUnit()" />
         public EchoDelayUnit GetDelayUnit() => (EchoDelayUnit)ModuleHandle.GetControllerValue(5, ValueScalingMode.Displayed);
 
-        /// <inheritdoc cref="IEchoModuleHandle.SetDelayUnit" />
+        /// <inheritdoc cref="IEchoModuleHandle.SetDelayUnit(EchoDelayUnit)" />
         public void SetDelayUnit(EchoDelayUnit value) => ModuleHandle.SetControllerValue(5, (int)value, ValueScalingMode.Displayed);
 
         /// <inheritdoc cref="IEchoModuleHandle.MakeDelayUnitEvent" />
@@ -409,10 +409,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 5, (ushort)Math.Clamp((int)value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IEchoModuleHandle.GetRightChannelOffsetDelay" />
+        /// <inheritdoc cref="IEchoModuleHandle.GetRightChannelOffsetDelay(ValueScalingMode)" />
         public int GetRightChannelOffsetDelay(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(6, valueScalingMode);
 
-        /// <inheritdoc cref="IEchoModuleHandle.SetRightChannelOffsetDelay" />
+        /// <inheritdoc cref="IEchoModuleHandle.SetRightChannelOffsetDelay(int, ValueScalingMode)" />
         public void SetRightChannelOffsetDelay(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(6, value, valueScalingMode);
 
         /// <inheritdoc cref="IEchoModuleHandle.MakeRightChannelOffsetDelayEvent" />
@@ -422,10 +422,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 6, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IEchoModuleHandle.GetFilter" />
+        /// <inheritdoc cref="IEchoModuleHandle.GetFilter()" />
         public EchoFilter GetFilter() => (EchoFilter)ModuleHandle.GetControllerValue(7, ValueScalingMode.Displayed);
 
-        /// <inheritdoc cref="IEchoModuleHandle.SetFilter" />
+        /// <inheritdoc cref="IEchoModuleHandle.SetFilter(EchoFilter)" />
         public void SetFilter(EchoFilter value) => ModuleHandle.SetControllerValue(7, (int)value, ValueScalingMode.Displayed);
 
         /// <inheritdoc cref="IEchoModuleHandle.MakeFilterEvent" />
@@ -434,10 +434,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 7, (ushort)Math.Clamp((int)value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IEchoModuleHandle.GetFFreq" />
+        /// <inheritdoc cref="IEchoModuleHandle.GetFFreq(ValueScalingMode)" />
         public int GetFFreq(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(8, valueScalingMode);
 
-        /// <inheritdoc cref="IEchoModuleHandle.SetFFreq" />
+        /// <inheritdoc cref="IEchoModuleHandle.SetFFreq(int, ValueScalingMode)" />
         public void SetFFreq(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(8, value, valueScalingMode);
 
         /// <inheritdoc cref="IEchoModuleHandle.MakeFFreqEvent" />

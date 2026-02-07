@@ -323,7 +323,7 @@ namespace SunSharp.Native
         /// </summary>
         /// <remarks>
         /// <para>
-        /// SunVox engine uses system-provided time space, measured in system ticks (don't confuse it with the project ticks). System ticks are used for timing in functions like <see cref="AudioCallback"/> and <see cref="SetEventTiming"/>.
+        /// SunVox engine uses system-provided time space, measured in system ticks (don't confuse it with the project ticks). System ticks are used for timing in functions like <see cref="AudioCallback(float[], AudioChannels, int, uint)"/> and <see cref="SetEventTiming"/>.
         /// </para>
         /// Calls <see cref="ISunVoxLibC.sv_get_ticks"/>.</remarks>
         public uint GetTicks()
@@ -409,7 +409,7 @@ namespace SunSharp.Native
         public SunVoxVersion Initialize(int sampleRate, string? config = null,
             AudioChannels channels = AudioChannels.Stereo, SunVoxInitOptions options = SunVoxInitOptions.None)
         {
-            var ptr = Marshal.StringToCoTaskMemUTF8(config);
+            var ptr = config != null ? Marshal.StringToCoTaskMemUTF8(config) : IntPtr.Zero;
             try
             {
                 var ret = _lib.sv_init(ptr, sampleRate, (int)channels, (uint)options);
@@ -423,7 +423,10 @@ namespace SunSharp.Native
             }
             finally
             {
-                Marshal.ZeroFreeCoTaskMemUTF8(ptr);
+                if (ptr != IntPtr.Zero)
+                {
+                    Marshal.ZeroFreeCoTaskMemUTF8(ptr);
+                }
             }
         }
 
@@ -450,9 +453,14 @@ namespace SunSharp.Native
         /// <param name="slotId">Slot number (0 to 15).</param>
         /// <param name="path">File path (relative or absolute).</param>
         /// <exception cref="SunVoxException">Thrown when the operation fails.</exception>
+        /// <exception cref="ArgumentNullException">Thrown if <paramref name="path"/> is null.</exception>
         /// <remarks>Calls <see cref="ISunVoxLibC.sv_load"/>.</remarks>
         public void Load(int slotId, string path)
         {
+            if (path == null)
+            {
+                throw new ArgumentNullException(nameof(path));
+            }
             var ptr = Marshal.StringToCoTaskMemUTF8(path);
             int ret;
             try
@@ -601,9 +609,14 @@ namespace SunSharp.Native
         /// <param name="slotId">Slot number (0 to 15).</param>
         /// <param name="path">File path where the project will be saved.</param>
         /// <exception cref="SunVoxException">Thrown when the operation fails.</exception>
+        /// <exception cref="ArgumentNullException">Thrown if <paramref name="path"/> is null.</exception>
         /// <remarks>Calls <see cref="ISunVoxLibC.sv_save"/>.</remarks>
         public void SaveToFile(int slotId, string path)
         {
+            if (path == null)
+            {
+                throw new ArgumentNullException(nameof(path));
+            }
             var ptr = Marshal.StringToCoTaskMemUTF8(path);
             int ret;
             try
@@ -720,7 +733,7 @@ namespace SunSharp.Native
         }
 
         /// <summary>
-        /// Set the timestamp of events sent by <see cref="SendEvent"/>.
+        /// Set the timestamp of events sent by <see cref="SendEvent(int, int, PatternEvent)"/>.
         /// Every event has a timestamp (when it was generated, e.g., key press time).
         /// If nonzero: event is heard at timestamp + sound latency * 2.
         /// </summary>
@@ -742,7 +755,7 @@ namespace SunSharp.Native
         }
 
         /// <summary>
-        /// Reset the timestamp of events sent by <see cref="SendEvent"/>.
+        /// Reset the timestamp of events sent by <see cref="SendEvent(int, int, PatternEvent)"/>.
         /// If timestamp is zero: event is heard as quickly as possible.
         /// </summary>
         /// <param name="slotId">Slot number (0 to 15).</param>
@@ -766,7 +779,7 @@ namespace SunSharp.Native
         /// <remarks>Calls <see cref="ISunVoxLibC.sv_set_song_name"/>.</remarks>
         public void SetSongName(int slotId, string value)
         {
-            var ptr = Marshal.StringToCoTaskMemUTF8(value);
+            var ptr = value != null ? Marshal.StringToCoTaskMemUTF8(value) : IntPtr.Zero;
             try
             {
                 var ret = _lib.sv_set_song_name(slotId, ptr);
@@ -778,7 +791,10 @@ namespace SunSharp.Native
             }
             finally
             {
-                Marshal.ZeroFreeCoTaskMemUTF8(ptr);
+                if (ptr != IntPtr.Zero)
+                {
+                    Marshal.ZeroFreeCoTaskMemUTF8(ptr);
+                }
             }
         }
 

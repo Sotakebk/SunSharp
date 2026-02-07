@@ -49,24 +49,25 @@ namespace SunSharp.Native
         /// </remarks>
         public int CreatePattern(int slotId, int x, int y, int tracks, int lines, int iconSeed = 0, string? name = null)
         {
-            var ptr = Marshal.StringToCoTaskMemUTF8(name);
-            int ret;
+            var ptr = name != null ? Marshal.StringToCoTaskMemUTF8(name) : IntPtr.Zero;
             try
             {
-                ret = _lib.sv_new_pattern(slotId, -1, x, y, tracks, lines, iconSeed, ptr);
+                var ret = _lib.sv_new_pattern(slotId, -1, x, y, tracks, lines, iconSeed, ptr);
+                if (ret < 0)
+                {
+                    var details = $"{nameof(slotId)}: {slotId}, {nameof(x)}: {x}, {nameof(y)}: {y}, {nameof(tracks)}: {tracks}, {nameof(lines)}: {lines}, {nameof(iconSeed)}: {iconSeed}, {nameof(name)}: '{name ?? "<null>"}'.";
+                    throw new SunVoxException(ret, nameof(_lib.sv_new_pattern), details);
+                }
+
+                return ret;
             }
             finally
             {
-                Marshal.ZeroFreeCoTaskMemUTF8(ptr);
+                if (ptr != IntPtr.Zero)
+                {
+                    Marshal.ZeroFreeCoTaskMemUTF8(ptr);
+                }
             }
-
-            if (ret < 0)
-            {
-                var details = $"{nameof(slotId)}: {slotId}, {nameof(x)}: {x}, {nameof(y)}: {y}, {nameof(tracks)}: {tracks}, {nameof(lines)}: {lines}, {nameof(iconSeed)}: {iconSeed}, {nameof(name)}: '{name ?? "<null>"}'.";
-                throw new SunVoxException(ret, nameof(_lib.sv_new_pattern), details);
-            }
-
-            return ret;
         }
 
         /// <summary>
@@ -76,32 +77,36 @@ namespace SunSharp.Native
         /// <param name="name">Pattern name to search for.</param>
         /// <returns>Pattern number if found.</returns>
         /// <exception cref="SunVoxException">Thrown when an error occurs during the search.</exception>
+        /// <exception cref="ArgumentNullException">Thrown if <paramref name="name"/> is null.</exception>
         /// <remarks>Calls <see cref="ISunVoxLibC.sv_find_pattern"/>.</remarks>
         public int? FindPattern(int slotId, string name)
         {
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
             var ptr = Marshal.StringToCoTaskMemUTF8(name);
-            int ret;
             try
             {
-                ret = _lib.sv_find_pattern(slotId, ptr);
+                var ret = _lib.sv_find_pattern(slotId, ptr);
+                if (ret < -1)
+                {
+                    throw new SunVoxException(ret, nameof(_lib.sv_find_pattern),
+                        $"{nameof(slotId)}: {slotId}, {nameof(name)}: '{name ?? "<null>"}'.");
+                }
+
+                if (ret != -1)
+                {
+                    return ret;
+                }
+
+                return null;
             }
             finally
             {
                 Marshal.ZeroFreeCoTaskMemUTF8(ptr);
             }
 
-            if (ret < -1)
-            {
-                throw new SunVoxException(ret, nameof(_lib.sv_find_pattern),
-                    $"{nameof(slotId)}: {slotId}, {nameof(name)}: '{name ?? "<null>"}'.");
-            }
-
-            if (ret != -1)
-            {
-                return ret;
-            }
-
-            return null;
         }
 
         /// <summary>
@@ -657,12 +662,17 @@ namespace SunSharp.Native
         /// <param name="patternId">Pattern number.</param>
         /// <param name="name">New pattern name.</param>
         /// <exception cref="SunVoxException">Thrown when the operation fails.</exception>
+        /// <exception cref="ArgumentNullException">Thrown if <paramref name="name"/> is null.</exception>
         /// <remarks>
         /// <para>Requires <see cref="LockSlot"/> / <see cref="UnlockSlot"/>.</para>
         /// Calls <see cref="ISunVoxLibC.sv_set_pattern_name"/>.
         /// </remarks>
         public void SetPatternName(int slotId, int patternId, string name)
         {
+            if (name == null)
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
             var ptr = Marshal.StringToCoTaskMemUTF8(name);
             try
             {

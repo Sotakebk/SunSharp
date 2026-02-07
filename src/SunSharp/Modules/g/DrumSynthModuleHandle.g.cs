@@ -25,7 +25,7 @@ namespace SunSharp.Modules
         /// <summary>
         /// Value range: displayed: 0 to 512, real: 0 to 512
         /// Original name: 0 'Volume'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetVolume(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -44,7 +44,7 @@ namespace SunSharp.Modules
         /// <summary>
         /// Value range: displayed: -128 to 128, real: 0 to 256
         /// Original name: 1 'Panning'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetPanning(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -61,7 +61,7 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 2 'Polyphony'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetPolyphony(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -80,7 +80,7 @@ namespace SunSharp.Modules
         /// <summary>
         /// Value range: displayed: 0 to 512, real: 0 to 512
         /// Original name: 3 'Bass volume'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetBassVolume(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -99,7 +99,7 @@ namespace SunSharp.Modules
         /// <summary>
         /// Value range: displayed: 0 to 256, real: 0 to 256
         /// Original name: 4 'Bass power'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetBassPower(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -118,7 +118,7 @@ namespace SunSharp.Modules
         /// <summary>
         /// Value range: displayed: 0 to 256, real: 0 to 256
         /// Original name: 5 'Bass tone'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetBassTone(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -137,7 +137,7 @@ namespace SunSharp.Modules
         /// <summary>
         /// Value range: displayed: 0 to 256, real: 0 to 256
         /// Original name: 6 'Bass length'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetBassLength(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -156,7 +156,7 @@ namespace SunSharp.Modules
         /// <summary>
         /// Value range: displayed: 0 to 512, real: 0 to 512
         /// Original name: 7 'Hihat volume'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetHihatVolume(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -175,7 +175,7 @@ namespace SunSharp.Modules
         /// <summary>
         /// Value range: displayed: 0 to 256, real: 0 to 256
         /// Original name: 8 'Hihat length'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetHihatLength(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -194,7 +194,7 @@ namespace SunSharp.Modules
         /// <summary>
         /// Value range: displayed: 0 to 512, real: 0 to 512
         /// Original name: 9 'Snare volume'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetSnareVolume(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -213,7 +213,7 @@ namespace SunSharp.Modules
         /// <summary>
         /// Value range: displayed: 0 to 256, real: 0 to 256
         /// Original name: 10 'Snare tone'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetSnareTone(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -232,7 +232,7 @@ namespace SunSharp.Modules
         /// <summary>
         /// Value range: displayed: 0 to 256, real: 0 to 256
         /// Original name: 11 'Snare length'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetSnareLength(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -251,7 +251,7 @@ namespace SunSharp.Modules
         /// <summary>
         /// Value range: displayed: -128 to 128, real: 0 to 256
         /// Original name: 12 'Bass panning'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetBassPanning(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -270,7 +270,7 @@ namespace SunSharp.Modules
         /// <summary>
         /// Value range: displayed: -128 to 128, real: 0 to 256
         /// Original name: 13 'Hihat panning'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetHihatPanning(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -289,7 +289,7 @@ namespace SunSharp.Modules
         /// <summary>
         /// Value range: displayed: -128 to 128, real: 0 to 256
         /// Original name: 14 'Snare panning'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetSnarePanning(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -425,30 +425,30 @@ namespace SunSharp.Modules
         /// <inheritdoc/>
         public PatternEvent MakeEvent(Note note = default, byte? velocity = default, byte? controller = default, Effect effect = Effect.None, ushort value = 0) => ModuleHandle.MakeEvent(note, velocity, controller, effect, value);
 
-        /// <inheritdoc cref="SynthModuleHandle.GetInputModules"/>
+        /// <inheritdoc cref="SynthModuleHandle.GetInputModules()"/>
         public SynthModuleHandle[] GetInputModules() => ModuleHandle.GetInputModules();
 
-        /// <inheritdoc cref="SynthModuleHandle.GetOutputModules"/>
+        /// <inheritdoc cref="SynthModuleHandle.GetOutputModules()"/>
         public SynthModuleHandle[] GetOutputModules() => ModuleHandle.GetOutputModules();
 
-        /// <inheritdoc cref="SynthModuleHandle.ConnectInput"/>
+        /// <inheritdoc cref="SynthModuleHandle.ConnectInput(SynthModuleHandle)"/>
         public void ConnectInput(SynthModuleHandle targetModule) => ModuleHandle.ConnectInput(targetModule);
 
-        /// <inheritdoc cref="SynthModuleHandle.ConnectOutput"/>
+        /// <inheritdoc cref="SynthModuleHandle.ConnectOutput(SynthModuleHandle)"/>
         public void ConnectOutput(SynthModuleHandle targetModule) => ModuleHandle.ConnectOutput(targetModule);
 
-        /// <inheritdoc cref="SynthModuleHandle.DisconnectInput"/>
+        /// <inheritdoc cref="SynthModuleHandle.DisconnectInput(SynthModuleHandle)"/>
         public void DisconnectInput(SynthModuleHandle targetModule) => ModuleHandle.DisconnectInput(targetModule);
 
-        /// <inheritdoc cref="SynthModuleHandle.DisconnectOutput"/>
+        /// <inheritdoc cref="SynthModuleHandle.DisconnectOutput(SynthModuleHandle)"/>
         public void DisconnectOutput(SynthModuleHandle targetModule) => ModuleHandle.DisconnectOutput(targetModule);
 
         #endregion
 
-        /// <inheritdoc cref="IDrumSynthModuleHandle.GetVolume" />
+        /// <inheritdoc cref="IDrumSynthModuleHandle.GetVolume(ValueScalingMode)" />
         public int GetVolume(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(0, valueScalingMode);
 
-        /// <inheritdoc cref="IDrumSynthModuleHandle.SetVolume" />
+        /// <inheritdoc cref="IDrumSynthModuleHandle.SetVolume(int, ValueScalingMode)" />
         public void SetVolume(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(0, value, valueScalingMode);
 
         /// <inheritdoc cref="IDrumSynthModuleHandle.MakeVolumeEvent" />
@@ -458,10 +458,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 0, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IDrumSynthModuleHandle.GetPanning" />
+        /// <inheritdoc cref="IDrumSynthModuleHandle.GetPanning(ValueScalingMode)" />
         public int GetPanning(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(1, valueScalingMode);
 
-        /// <inheritdoc cref="IDrumSynthModuleHandle.SetPanning" />
+        /// <inheritdoc cref="IDrumSynthModuleHandle.SetPanning(int, ValueScalingMode)" />
         public void SetPanning(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(1, value, valueScalingMode);
 
         /// <inheritdoc cref="IDrumSynthModuleHandle.MakePanningEvent" />
@@ -472,10 +472,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 1, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IDrumSynthModuleHandle.GetPolyphony" />
+        /// <inheritdoc cref="IDrumSynthModuleHandle.GetPolyphony(ValueScalingMode)" />
         public int GetPolyphony(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(2, valueScalingMode);
 
-        /// <inheritdoc cref="IDrumSynthModuleHandle.SetPolyphony" />
+        /// <inheritdoc cref="IDrumSynthModuleHandle.SetPolyphony(int, ValueScalingMode)" />
         public void SetPolyphony(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(2, value, valueScalingMode);
 
         /// <inheritdoc cref="IDrumSynthModuleHandle.MakePolyphonyEvent" />
@@ -484,10 +484,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 2, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IDrumSynthModuleHandle.GetBassVolume" />
+        /// <inheritdoc cref="IDrumSynthModuleHandle.GetBassVolume(ValueScalingMode)" />
         public int GetBassVolume(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(3, valueScalingMode);
 
-        /// <inheritdoc cref="IDrumSynthModuleHandle.SetBassVolume" />
+        /// <inheritdoc cref="IDrumSynthModuleHandle.SetBassVolume(int, ValueScalingMode)" />
         public void SetBassVolume(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(3, value, valueScalingMode);
 
         /// <inheritdoc cref="IDrumSynthModuleHandle.MakeBassVolumeEvent" />
@@ -497,10 +497,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 3, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IDrumSynthModuleHandle.GetBassPower" />
+        /// <inheritdoc cref="IDrumSynthModuleHandle.GetBassPower(ValueScalingMode)" />
         public int GetBassPower(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(4, valueScalingMode);
 
-        /// <inheritdoc cref="IDrumSynthModuleHandle.SetBassPower" />
+        /// <inheritdoc cref="IDrumSynthModuleHandle.SetBassPower(int, ValueScalingMode)" />
         public void SetBassPower(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(4, value, valueScalingMode);
 
         /// <inheritdoc cref="IDrumSynthModuleHandle.MakeBassPowerEvent" />
@@ -510,10 +510,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 4, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IDrumSynthModuleHandle.GetBassTone" />
+        /// <inheritdoc cref="IDrumSynthModuleHandle.GetBassTone(ValueScalingMode)" />
         public int GetBassTone(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(5, valueScalingMode);
 
-        /// <inheritdoc cref="IDrumSynthModuleHandle.SetBassTone" />
+        /// <inheritdoc cref="IDrumSynthModuleHandle.SetBassTone(int, ValueScalingMode)" />
         public void SetBassTone(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(5, value, valueScalingMode);
 
         /// <inheritdoc cref="IDrumSynthModuleHandle.MakeBassToneEvent" />
@@ -523,10 +523,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 5, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IDrumSynthModuleHandle.GetBassLength" />
+        /// <inheritdoc cref="IDrumSynthModuleHandle.GetBassLength(ValueScalingMode)" />
         public int GetBassLength(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(6, valueScalingMode);
 
-        /// <inheritdoc cref="IDrumSynthModuleHandle.SetBassLength" />
+        /// <inheritdoc cref="IDrumSynthModuleHandle.SetBassLength(int, ValueScalingMode)" />
         public void SetBassLength(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(6, value, valueScalingMode);
 
         /// <inheritdoc cref="IDrumSynthModuleHandle.MakeBassLengthEvent" />
@@ -536,10 +536,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 6, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IDrumSynthModuleHandle.GetHihatVolume" />
+        /// <inheritdoc cref="IDrumSynthModuleHandle.GetHihatVolume(ValueScalingMode)" />
         public int GetHihatVolume(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(7, valueScalingMode);
 
-        /// <inheritdoc cref="IDrumSynthModuleHandle.SetHihatVolume" />
+        /// <inheritdoc cref="IDrumSynthModuleHandle.SetHihatVolume(int, ValueScalingMode)" />
         public void SetHihatVolume(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(7, value, valueScalingMode);
 
         /// <inheritdoc cref="IDrumSynthModuleHandle.MakeHihatVolumeEvent" />
@@ -549,10 +549,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 7, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IDrumSynthModuleHandle.GetHihatLength" />
+        /// <inheritdoc cref="IDrumSynthModuleHandle.GetHihatLength(ValueScalingMode)" />
         public int GetHihatLength(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(8, valueScalingMode);
 
-        /// <inheritdoc cref="IDrumSynthModuleHandle.SetHihatLength" />
+        /// <inheritdoc cref="IDrumSynthModuleHandle.SetHihatLength(int, ValueScalingMode)" />
         public void SetHihatLength(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(8, value, valueScalingMode);
 
         /// <inheritdoc cref="IDrumSynthModuleHandle.MakeHihatLengthEvent" />
@@ -562,10 +562,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 8, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IDrumSynthModuleHandle.GetSnareVolume" />
+        /// <inheritdoc cref="IDrumSynthModuleHandle.GetSnareVolume(ValueScalingMode)" />
         public int GetSnareVolume(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(9, valueScalingMode);
 
-        /// <inheritdoc cref="IDrumSynthModuleHandle.SetSnareVolume" />
+        /// <inheritdoc cref="IDrumSynthModuleHandle.SetSnareVolume(int, ValueScalingMode)" />
         public void SetSnareVolume(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(9, value, valueScalingMode);
 
         /// <inheritdoc cref="IDrumSynthModuleHandle.MakeSnareVolumeEvent" />
@@ -575,10 +575,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 9, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IDrumSynthModuleHandle.GetSnareTone" />
+        /// <inheritdoc cref="IDrumSynthModuleHandle.GetSnareTone(ValueScalingMode)" />
         public int GetSnareTone(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(10, valueScalingMode);
 
-        /// <inheritdoc cref="IDrumSynthModuleHandle.SetSnareTone" />
+        /// <inheritdoc cref="IDrumSynthModuleHandle.SetSnareTone(int, ValueScalingMode)" />
         public void SetSnareTone(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(10, value, valueScalingMode);
 
         /// <inheritdoc cref="IDrumSynthModuleHandle.MakeSnareToneEvent" />
@@ -588,10 +588,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 10, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IDrumSynthModuleHandle.GetSnareLength" />
+        /// <inheritdoc cref="IDrumSynthModuleHandle.GetSnareLength(ValueScalingMode)" />
         public int GetSnareLength(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(11, valueScalingMode);
 
-        /// <inheritdoc cref="IDrumSynthModuleHandle.SetSnareLength" />
+        /// <inheritdoc cref="IDrumSynthModuleHandle.SetSnareLength(int, ValueScalingMode)" />
         public void SetSnareLength(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(11, value, valueScalingMode);
 
         /// <inheritdoc cref="IDrumSynthModuleHandle.MakeSnareLengthEvent" />
@@ -601,10 +601,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 11, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IDrumSynthModuleHandle.GetBassPanning" />
+        /// <inheritdoc cref="IDrumSynthModuleHandle.GetBassPanning(ValueScalingMode)" />
         public int GetBassPanning(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(12, valueScalingMode);
 
-        /// <inheritdoc cref="IDrumSynthModuleHandle.SetBassPanning" />
+        /// <inheritdoc cref="IDrumSynthModuleHandle.SetBassPanning(int, ValueScalingMode)" />
         public void SetBassPanning(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(12, value, valueScalingMode);
 
         /// <inheritdoc cref="IDrumSynthModuleHandle.MakeBassPanningEvent" />
@@ -615,10 +615,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 12, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IDrumSynthModuleHandle.GetHihatPanning" />
+        /// <inheritdoc cref="IDrumSynthModuleHandle.GetHihatPanning(ValueScalingMode)" />
         public int GetHihatPanning(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(13, valueScalingMode);
 
-        /// <inheritdoc cref="IDrumSynthModuleHandle.SetHihatPanning" />
+        /// <inheritdoc cref="IDrumSynthModuleHandle.SetHihatPanning(int, ValueScalingMode)" />
         public void SetHihatPanning(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(13, value, valueScalingMode);
 
         /// <inheritdoc cref="IDrumSynthModuleHandle.MakeHihatPanningEvent" />
@@ -629,10 +629,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 13, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IDrumSynthModuleHandle.GetSnarePanning" />
+        /// <inheritdoc cref="IDrumSynthModuleHandle.GetSnarePanning(ValueScalingMode)" />
         public int GetSnarePanning(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(14, valueScalingMode);
 
-        /// <inheritdoc cref="IDrumSynthModuleHandle.SetSnarePanning" />
+        /// <inheritdoc cref="IDrumSynthModuleHandle.SetSnarePanning(int, ValueScalingMode)" />
         public void SetSnarePanning(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(14, value, valueScalingMode);
 
         /// <inheritdoc cref="IDrumSynthModuleHandle.MakeSnarePanningEvent" />

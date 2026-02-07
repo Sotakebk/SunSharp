@@ -99,10 +99,10 @@ namespace SunSharp.Native
         /// <inheritdoc cref="SunVoxLib.ReadModuleCurve"/>
         int ReadModuleCurve(int slotId, int moduleId, int curveId, float[] data);
 
-        /// <inheritdoc cref="SunVoxLib.CreateModule"/>
+        /// <inheritdoc cref="SunVoxLib.CreateModule(int, SynthModuleType, string?, int, int, int)"/>
         int CreateModule(int slotId, SynthModuleType type, string? name = null, int x = 0, int y = 0, int z = 0);
 
-        /// <inheritdoc cref="SunVoxLib.CreateModule"/>
+        /// <inheritdoc cref="SunVoxLib.CreateModule(int, string, string?, int, int, int)"/>
         int CreateModule(int slotId, string type, string? name = null, int x = 0, int y = 0, int z = 0);
 
         /// <inheritdoc cref="SunVoxLib.RemoveModule"/>

@@ -25,7 +25,7 @@ namespace SunSharp.Modules
         /// <summary>
         /// Value range: displayed: 0 to 512, real: 0 to 512
         /// Original name: 0 'Volume'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetVolume(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -44,7 +44,7 @@ namespace SunSharp.Modules
         /// <summary>
         /// Value range: displayed: 0 to 256, real: 0 to 256
         /// Original name: 1 'Formant width'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetFormantWidth(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -63,7 +63,7 @@ namespace SunSharp.Modules
         /// <summary>
         /// Value range: displayed: 0 to 256, real: 0 to 256
         /// Original name: 2 'Intensity'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetIntensity(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -80,7 +80,7 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 3 'Formants'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetFormants(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -99,7 +99,7 @@ namespace SunSharp.Modules
         /// <summary>
         /// Value range: displayed: 0 to 256, real: 0 to 256
         /// Original name: 4 'Vowel (a,e,i,o,u)'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetVowelAEIOU(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -116,7 +116,7 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 5 'Voice type'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetVoiceType(VocalFilterVoiceType value);
 
@@ -133,7 +133,7 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 6 'Channels'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetChannels(Channels value);
 
@@ -152,7 +152,7 @@ namespace SunSharp.Modules
         /// <summary>
         /// Value range: displayed: 0 to 1024, real: 0 to 1024
         /// Original name: 7 'Random frequency'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetRandomFrequency(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -171,7 +171,7 @@ namespace SunSharp.Modules
         /// <summary>
         /// Value range: displayed: 0 to 32768, real: 0 to 32768
         /// Original name: 8 'Random seed'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetRandomSeed(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -188,7 +188,7 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 9 'Vowel1'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetVowel1(VocalFilterVowel value);
 
@@ -205,7 +205,7 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 10 'Vowel2'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetVowel2(VocalFilterVowel value);
 
@@ -222,7 +222,7 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 11 'Vowel3'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetVowel3(VocalFilterVowel value);
 
@@ -239,7 +239,7 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 12 'Vowel4'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetVowel4(VocalFilterVowel value);
 
@@ -256,7 +256,7 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 13 'Vowel5'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetVowel5(VocalFilterVowel value);
 
@@ -392,30 +392,30 @@ namespace SunSharp.Modules
         /// <inheritdoc/>
         public PatternEvent MakeEvent(Note note = default, byte? velocity = default, byte? controller = default, Effect effect = Effect.None, ushort value = 0) => ModuleHandle.MakeEvent(note, velocity, controller, effect, value);
 
-        /// <inheritdoc cref="SynthModuleHandle.GetInputModules"/>
+        /// <inheritdoc cref="SynthModuleHandle.GetInputModules()"/>
         public SynthModuleHandle[] GetInputModules() => ModuleHandle.GetInputModules();
 
-        /// <inheritdoc cref="SynthModuleHandle.GetOutputModules"/>
+        /// <inheritdoc cref="SynthModuleHandle.GetOutputModules()"/>
         public SynthModuleHandle[] GetOutputModules() => ModuleHandle.GetOutputModules();
 
-        /// <inheritdoc cref="SynthModuleHandle.ConnectInput"/>
+        /// <inheritdoc cref="SynthModuleHandle.ConnectInput(SynthModuleHandle)"/>
         public void ConnectInput(SynthModuleHandle targetModule) => ModuleHandle.ConnectInput(targetModule);
 
-        /// <inheritdoc cref="SynthModuleHandle.ConnectOutput"/>
+        /// <inheritdoc cref="SynthModuleHandle.ConnectOutput(SynthModuleHandle)"/>
         public void ConnectOutput(SynthModuleHandle targetModule) => ModuleHandle.ConnectOutput(targetModule);
 
-        /// <inheritdoc cref="SynthModuleHandle.DisconnectInput"/>
+        /// <inheritdoc cref="SynthModuleHandle.DisconnectInput(SynthModuleHandle)"/>
         public void DisconnectInput(SynthModuleHandle targetModule) => ModuleHandle.DisconnectInput(targetModule);
 
-        /// <inheritdoc cref="SynthModuleHandle.DisconnectOutput"/>
+        /// <inheritdoc cref="SynthModuleHandle.DisconnectOutput(SynthModuleHandle)"/>
         public void DisconnectOutput(SynthModuleHandle targetModule) => ModuleHandle.DisconnectOutput(targetModule);
 
         #endregion
 
-        /// <inheritdoc cref="IVocalFilterModuleHandle.GetVolume" />
+        /// <inheritdoc cref="IVocalFilterModuleHandle.GetVolume(ValueScalingMode)" />
         public int GetVolume(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(0, valueScalingMode);
 
-        /// <inheritdoc cref="IVocalFilterModuleHandle.SetVolume" />
+        /// <inheritdoc cref="IVocalFilterModuleHandle.SetVolume(int, ValueScalingMode)" />
         public void SetVolume(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(0, value, valueScalingMode);
 
         /// <inheritdoc cref="IVocalFilterModuleHandle.MakeVolumeEvent" />
@@ -425,10 +425,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 0, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IVocalFilterModuleHandle.GetFormantWidth" />
+        /// <inheritdoc cref="IVocalFilterModuleHandle.GetFormantWidth(ValueScalingMode)" />
         public int GetFormantWidth(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(1, valueScalingMode);
 
-        /// <inheritdoc cref="IVocalFilterModuleHandle.SetFormantWidth" />
+        /// <inheritdoc cref="IVocalFilterModuleHandle.SetFormantWidth(int, ValueScalingMode)" />
         public void SetFormantWidth(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(1, value, valueScalingMode);
 
         /// <inheritdoc cref="IVocalFilterModuleHandle.MakeFormantWidthEvent" />
@@ -438,10 +438,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 1, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IVocalFilterModuleHandle.GetIntensity" />
+        /// <inheritdoc cref="IVocalFilterModuleHandle.GetIntensity(ValueScalingMode)" />
         public int GetIntensity(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(2, valueScalingMode);
 
-        /// <inheritdoc cref="IVocalFilterModuleHandle.SetIntensity" />
+        /// <inheritdoc cref="IVocalFilterModuleHandle.SetIntensity(int, ValueScalingMode)" />
         public void SetIntensity(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(2, value, valueScalingMode);
 
         /// <inheritdoc cref="IVocalFilterModuleHandle.MakeIntensityEvent" />
@@ -451,10 +451,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 2, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IVocalFilterModuleHandle.GetFormants" />
+        /// <inheritdoc cref="IVocalFilterModuleHandle.GetFormants(ValueScalingMode)" />
         public int GetFormants(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(3, valueScalingMode);
 
-        /// <inheritdoc cref="IVocalFilterModuleHandle.SetFormants" />
+        /// <inheritdoc cref="IVocalFilterModuleHandle.SetFormants(int, ValueScalingMode)" />
         public void SetFormants(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(3, value, valueScalingMode);
 
         /// <inheritdoc cref="IVocalFilterModuleHandle.MakeFormantsEvent" />
@@ -463,10 +463,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 3, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IVocalFilterModuleHandle.GetVowelAEIOU" />
+        /// <inheritdoc cref="IVocalFilterModuleHandle.GetVowelAEIOU(ValueScalingMode)" />
         public int GetVowelAEIOU(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(4, valueScalingMode);
 
-        /// <inheritdoc cref="IVocalFilterModuleHandle.SetVowelAEIOU" />
+        /// <inheritdoc cref="IVocalFilterModuleHandle.SetVowelAEIOU(int, ValueScalingMode)" />
         public void SetVowelAEIOU(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(4, value, valueScalingMode);
 
         /// <inheritdoc cref="IVocalFilterModuleHandle.MakeVowelAEIOUEvent" />
@@ -476,10 +476,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 4, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IVocalFilterModuleHandle.GetVoiceType" />
+        /// <inheritdoc cref="IVocalFilterModuleHandle.GetVoiceType()" />
         public VocalFilterVoiceType GetVoiceType() => (VocalFilterVoiceType)ModuleHandle.GetControllerValue(5, ValueScalingMode.Displayed);
 
-        /// <inheritdoc cref="IVocalFilterModuleHandle.SetVoiceType" />
+        /// <inheritdoc cref="IVocalFilterModuleHandle.SetVoiceType(VocalFilterVoiceType)" />
         public void SetVoiceType(VocalFilterVoiceType value) => ModuleHandle.SetControllerValue(5, (int)value, ValueScalingMode.Displayed);
 
         /// <inheritdoc cref="IVocalFilterModuleHandle.MakeVoiceTypeEvent" />
@@ -488,10 +488,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 5, (ushort)Math.Clamp((int)value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IVocalFilterModuleHandle.GetChannels" />
+        /// <inheritdoc cref="IVocalFilterModuleHandle.GetChannels()" />
         public Channels GetChannels() => (Channels)ModuleHandle.GetControllerValue(6, ValueScalingMode.Displayed);
 
-        /// <inheritdoc cref="IVocalFilterModuleHandle.SetChannels" />
+        /// <inheritdoc cref="IVocalFilterModuleHandle.SetChannels(Channels)" />
         public void SetChannels(Channels value) => ModuleHandle.SetControllerValue(6, (int)value, ValueScalingMode.Displayed);
 
         /// <inheritdoc cref="IVocalFilterModuleHandle.MakeChannelsEvent" />
@@ -500,10 +500,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 6, (ushort)Math.Clamp((int)value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IVocalFilterModuleHandle.GetRandomFrequency" />
+        /// <inheritdoc cref="IVocalFilterModuleHandle.GetRandomFrequency(ValueScalingMode)" />
         public int GetRandomFrequency(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(7, valueScalingMode);
 
-        /// <inheritdoc cref="IVocalFilterModuleHandle.SetRandomFrequency" />
+        /// <inheritdoc cref="IVocalFilterModuleHandle.SetRandomFrequency(int, ValueScalingMode)" />
         public void SetRandomFrequency(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(7, value, valueScalingMode);
 
         /// <inheritdoc cref="IVocalFilterModuleHandle.MakeRandomFrequencyEvent" />
@@ -513,10 +513,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 7, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IVocalFilterModuleHandle.GetRandomSeed" />
+        /// <inheritdoc cref="IVocalFilterModuleHandle.GetRandomSeed(ValueScalingMode)" />
         public int GetRandomSeed(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(8, valueScalingMode);
 
-        /// <inheritdoc cref="IVocalFilterModuleHandle.SetRandomSeed" />
+        /// <inheritdoc cref="IVocalFilterModuleHandle.SetRandomSeed(int, ValueScalingMode)" />
         public void SetRandomSeed(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(8, value, valueScalingMode);
 
         /// <inheritdoc cref="IVocalFilterModuleHandle.MakeRandomSeedEvent" />
@@ -526,10 +526,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 8, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IVocalFilterModuleHandle.GetVowel1" />
+        /// <inheritdoc cref="IVocalFilterModuleHandle.GetVowel1()" />
         public VocalFilterVowel GetVowel1() => (VocalFilterVowel)ModuleHandle.GetControllerValue(9, ValueScalingMode.Displayed);
 
-        /// <inheritdoc cref="IVocalFilterModuleHandle.SetVowel1" />
+        /// <inheritdoc cref="IVocalFilterModuleHandle.SetVowel1(VocalFilterVowel)" />
         public void SetVowel1(VocalFilterVowel value) => ModuleHandle.SetControllerValue(9, (int)value, ValueScalingMode.Displayed);
 
         /// <inheritdoc cref="IVocalFilterModuleHandle.MakeVowel1Event" />
@@ -538,10 +538,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 9, (ushort)Math.Clamp((int)value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IVocalFilterModuleHandle.GetVowel2" />
+        /// <inheritdoc cref="IVocalFilterModuleHandle.GetVowel2()" />
         public VocalFilterVowel GetVowel2() => (VocalFilterVowel)ModuleHandle.GetControllerValue(10, ValueScalingMode.Displayed);
 
-        /// <inheritdoc cref="IVocalFilterModuleHandle.SetVowel2" />
+        /// <inheritdoc cref="IVocalFilterModuleHandle.SetVowel2(VocalFilterVowel)" />
         public void SetVowel2(VocalFilterVowel value) => ModuleHandle.SetControllerValue(10, (int)value, ValueScalingMode.Displayed);
 
         /// <inheritdoc cref="IVocalFilterModuleHandle.MakeVowel2Event" />
@@ -550,10 +550,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 10, (ushort)Math.Clamp((int)value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IVocalFilterModuleHandle.GetVowel3" />
+        /// <inheritdoc cref="IVocalFilterModuleHandle.GetVowel3()" />
         public VocalFilterVowel GetVowel3() => (VocalFilterVowel)ModuleHandle.GetControllerValue(11, ValueScalingMode.Displayed);
 
-        /// <inheritdoc cref="IVocalFilterModuleHandle.SetVowel3" />
+        /// <inheritdoc cref="IVocalFilterModuleHandle.SetVowel3(VocalFilterVowel)" />
         public void SetVowel3(VocalFilterVowel value) => ModuleHandle.SetControllerValue(11, (int)value, ValueScalingMode.Displayed);
 
         /// <inheritdoc cref="IVocalFilterModuleHandle.MakeVowel3Event" />
@@ -562,10 +562,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 11, (ushort)Math.Clamp((int)value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IVocalFilterModuleHandle.GetVowel4" />
+        /// <inheritdoc cref="IVocalFilterModuleHandle.GetVowel4()" />
         public VocalFilterVowel GetVowel4() => (VocalFilterVowel)ModuleHandle.GetControllerValue(12, ValueScalingMode.Displayed);
 
-        /// <inheritdoc cref="IVocalFilterModuleHandle.SetVowel4" />
+        /// <inheritdoc cref="IVocalFilterModuleHandle.SetVowel4(VocalFilterVowel)" />
         public void SetVowel4(VocalFilterVowel value) => ModuleHandle.SetControllerValue(12, (int)value, ValueScalingMode.Displayed);
 
         /// <inheritdoc cref="IVocalFilterModuleHandle.MakeVowel4Event" />
@@ -574,10 +574,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 12, (ushort)Math.Clamp((int)value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IVocalFilterModuleHandle.GetVowel5" />
+        /// <inheritdoc cref="IVocalFilterModuleHandle.GetVowel5()" />
         public VocalFilterVowel GetVowel5() => (VocalFilterVowel)ModuleHandle.GetControllerValue(13, ValueScalingMode.Displayed);
 
-        /// <inheritdoc cref="IVocalFilterModuleHandle.SetVowel5" />
+        /// <inheritdoc cref="IVocalFilterModuleHandle.SetVowel5(VocalFilterVowel)" />
         public void SetVowel5(VocalFilterVowel value) => ModuleHandle.SetControllerValue(13, (int)value, ValueScalingMode.Displayed);
 
         /// <inheritdoc cref="IVocalFilterModuleHandle.MakeVowel5Event" />

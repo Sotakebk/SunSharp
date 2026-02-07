@@ -25,7 +25,7 @@ namespace SunSharp.Modules
         /// <summary>
         /// Value range: displayed: 0 to 512, real: 0 to 512
         /// Original name: 0 'Dry'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetDry(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -44,7 +44,7 @@ namespace SunSharp.Modules
         /// <summary>
         /// Value range: displayed: 0 to 512, real: 0 to 512
         /// Original name: 1 'Wet'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetWet(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -63,7 +63,7 @@ namespace SunSharp.Modules
         /// <summary>
         /// Value range: displayed: 0 to 256, real: 0 to 256
         /// Original name: 2 'Delay L'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetDelayL(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -82,7 +82,7 @@ namespace SunSharp.Modules
         /// <summary>
         /// Value range: displayed: 0 to 256, real: 0 to 256
         /// Original name: 3 'Delay R'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetDelayR(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -101,7 +101,7 @@ namespace SunSharp.Modules
         /// <summary>
         /// Value range: displayed: 0 to 256, real: 0 to 256
         /// Original name: 4 'Volume L'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetVolumeL(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -120,7 +120,7 @@ namespace SunSharp.Modules
         /// <summary>
         /// Value range: displayed: 0 to 256, real: 0 to 256
         /// Original name: 5 'Volume R'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetVolumeR(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -137,7 +137,7 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 6 'Channels'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetChannels(Channels value);
 
@@ -154,7 +154,7 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 7 'Inverse'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetInverse(Toggle value);
 
@@ -171,7 +171,7 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 8 'Delay unit'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetDelayUnit(DelayUnit value);
 
@@ -188,7 +188,7 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 9 'Delay multiplier'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetDelayMultiplier(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -207,7 +207,7 @@ namespace SunSharp.Modules
         /// <summary>
         /// Value range: displayed: 0 to 32768, real: 0 to 32768
         /// Original name: 10 'Feedback'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetFeedback(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -224,7 +224,7 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 11 'Negative feedback'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetNegativeFeedback(Toggle value);
 
@@ -241,7 +241,7 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 12 'All-pass filter'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetAllPassFilter(Toggle value);
 
@@ -377,30 +377,30 @@ namespace SunSharp.Modules
         /// <inheritdoc/>
         public PatternEvent MakeEvent(Note note = default, byte? velocity = default, byte? controller = default, Effect effect = Effect.None, ushort value = 0) => ModuleHandle.MakeEvent(note, velocity, controller, effect, value);
 
-        /// <inheritdoc cref="SynthModuleHandle.GetInputModules"/>
+        /// <inheritdoc cref="SynthModuleHandle.GetInputModules()"/>
         public SynthModuleHandle[] GetInputModules() => ModuleHandle.GetInputModules();
 
-        /// <inheritdoc cref="SynthModuleHandle.GetOutputModules"/>
+        /// <inheritdoc cref="SynthModuleHandle.GetOutputModules()"/>
         public SynthModuleHandle[] GetOutputModules() => ModuleHandle.GetOutputModules();
 
-        /// <inheritdoc cref="SynthModuleHandle.ConnectInput"/>
+        /// <inheritdoc cref="SynthModuleHandle.ConnectInput(SynthModuleHandle)"/>
         public void ConnectInput(SynthModuleHandle targetModule) => ModuleHandle.ConnectInput(targetModule);
 
-        /// <inheritdoc cref="SynthModuleHandle.ConnectOutput"/>
+        /// <inheritdoc cref="SynthModuleHandle.ConnectOutput(SynthModuleHandle)"/>
         public void ConnectOutput(SynthModuleHandle targetModule) => ModuleHandle.ConnectOutput(targetModule);
 
-        /// <inheritdoc cref="SynthModuleHandle.DisconnectInput"/>
+        /// <inheritdoc cref="SynthModuleHandle.DisconnectInput(SynthModuleHandle)"/>
         public void DisconnectInput(SynthModuleHandle targetModule) => ModuleHandle.DisconnectInput(targetModule);
 
-        /// <inheritdoc cref="SynthModuleHandle.DisconnectOutput"/>
+        /// <inheritdoc cref="SynthModuleHandle.DisconnectOutput(SynthModuleHandle)"/>
         public void DisconnectOutput(SynthModuleHandle targetModule) => ModuleHandle.DisconnectOutput(targetModule);
 
         #endregion
 
-        /// <inheritdoc cref="IDelayModuleHandle.GetDry" />
+        /// <inheritdoc cref="IDelayModuleHandle.GetDry(ValueScalingMode)" />
         public int GetDry(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(0, valueScalingMode);
 
-        /// <inheritdoc cref="IDelayModuleHandle.SetDry" />
+        /// <inheritdoc cref="IDelayModuleHandle.SetDry(int, ValueScalingMode)" />
         public void SetDry(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(0, value, valueScalingMode);
 
         /// <inheritdoc cref="IDelayModuleHandle.MakeDryEvent" />
@@ -410,10 +410,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 0, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IDelayModuleHandle.GetWet" />
+        /// <inheritdoc cref="IDelayModuleHandle.GetWet(ValueScalingMode)" />
         public int GetWet(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(1, valueScalingMode);
 
-        /// <inheritdoc cref="IDelayModuleHandle.SetWet" />
+        /// <inheritdoc cref="IDelayModuleHandle.SetWet(int, ValueScalingMode)" />
         public void SetWet(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(1, value, valueScalingMode);
 
         /// <inheritdoc cref="IDelayModuleHandle.MakeWetEvent" />
@@ -423,10 +423,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 1, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IDelayModuleHandle.GetDelayL" />
+        /// <inheritdoc cref="IDelayModuleHandle.GetDelayL(ValueScalingMode)" />
         public int GetDelayL(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(2, valueScalingMode);
 
-        /// <inheritdoc cref="IDelayModuleHandle.SetDelayL" />
+        /// <inheritdoc cref="IDelayModuleHandle.SetDelayL(int, ValueScalingMode)" />
         public void SetDelayL(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(2, value, valueScalingMode);
 
         /// <inheritdoc cref="IDelayModuleHandle.MakeDelayLEvent" />
@@ -436,10 +436,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 2, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IDelayModuleHandle.GetDelayR" />
+        /// <inheritdoc cref="IDelayModuleHandle.GetDelayR(ValueScalingMode)" />
         public int GetDelayR(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(3, valueScalingMode);
 
-        /// <inheritdoc cref="IDelayModuleHandle.SetDelayR" />
+        /// <inheritdoc cref="IDelayModuleHandle.SetDelayR(int, ValueScalingMode)" />
         public void SetDelayR(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(3, value, valueScalingMode);
 
         /// <inheritdoc cref="IDelayModuleHandle.MakeDelayREvent" />
@@ -449,10 +449,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 3, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IDelayModuleHandle.GetVolumeL" />
+        /// <inheritdoc cref="IDelayModuleHandle.GetVolumeL(ValueScalingMode)" />
         public int GetVolumeL(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(4, valueScalingMode);
 
-        /// <inheritdoc cref="IDelayModuleHandle.SetVolumeL" />
+        /// <inheritdoc cref="IDelayModuleHandle.SetVolumeL(int, ValueScalingMode)" />
         public void SetVolumeL(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(4, value, valueScalingMode);
 
         /// <inheritdoc cref="IDelayModuleHandle.MakeVolumeLEvent" />
@@ -462,10 +462,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 4, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IDelayModuleHandle.GetVolumeR" />
+        /// <inheritdoc cref="IDelayModuleHandle.GetVolumeR(ValueScalingMode)" />
         public int GetVolumeR(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(5, valueScalingMode);
 
-        /// <inheritdoc cref="IDelayModuleHandle.SetVolumeR" />
+        /// <inheritdoc cref="IDelayModuleHandle.SetVolumeR(int, ValueScalingMode)" />
         public void SetVolumeR(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(5, value, valueScalingMode);
 
         /// <inheritdoc cref="IDelayModuleHandle.MakeVolumeREvent" />
@@ -475,10 +475,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 5, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IDelayModuleHandle.GetChannels" />
+        /// <inheritdoc cref="IDelayModuleHandle.GetChannels()" />
         public Channels GetChannels() => (Channels)ModuleHandle.GetControllerValue(6, ValueScalingMode.Displayed);
 
-        /// <inheritdoc cref="IDelayModuleHandle.SetChannels" />
+        /// <inheritdoc cref="IDelayModuleHandle.SetChannels(Channels)" />
         public void SetChannels(Channels value) => ModuleHandle.SetControllerValue(6, (int)value, ValueScalingMode.Displayed);
 
         /// <inheritdoc cref="IDelayModuleHandle.MakeChannelsEvent" />
@@ -487,10 +487,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 6, (ushort)Math.Clamp((int)value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IDelayModuleHandle.GetInverse" />
+        /// <inheritdoc cref="IDelayModuleHandle.GetInverse()" />
         public Toggle GetInverse() => (Toggle)ModuleHandle.GetControllerValue(7, ValueScalingMode.Displayed);
 
-        /// <inheritdoc cref="IDelayModuleHandle.SetInverse" />
+        /// <inheritdoc cref="IDelayModuleHandle.SetInverse(Toggle)" />
         public void SetInverse(Toggle value) => ModuleHandle.SetControllerValue(7, (int)value, ValueScalingMode.Displayed);
 
         /// <inheritdoc cref="IDelayModuleHandle.MakeInverseEvent" />
@@ -499,10 +499,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 7, (ushort)Math.Clamp((int)value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IDelayModuleHandle.GetDelayUnit" />
+        /// <inheritdoc cref="IDelayModuleHandle.GetDelayUnit()" />
         public DelayUnit GetDelayUnit() => (DelayUnit)ModuleHandle.GetControllerValue(8, ValueScalingMode.Displayed);
 
-        /// <inheritdoc cref="IDelayModuleHandle.SetDelayUnit" />
+        /// <inheritdoc cref="IDelayModuleHandle.SetDelayUnit(DelayUnit)" />
         public void SetDelayUnit(DelayUnit value) => ModuleHandle.SetControllerValue(8, (int)value, ValueScalingMode.Displayed);
 
         /// <inheritdoc cref="IDelayModuleHandle.MakeDelayUnitEvent" />
@@ -511,10 +511,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 8, (ushort)Math.Clamp((int)value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IDelayModuleHandle.GetDelayMultiplier" />
+        /// <inheritdoc cref="IDelayModuleHandle.GetDelayMultiplier(ValueScalingMode)" />
         public int GetDelayMultiplier(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(9, valueScalingMode);
 
-        /// <inheritdoc cref="IDelayModuleHandle.SetDelayMultiplier" />
+        /// <inheritdoc cref="IDelayModuleHandle.SetDelayMultiplier(int, ValueScalingMode)" />
         public void SetDelayMultiplier(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(9, value, valueScalingMode);
 
         /// <inheritdoc cref="IDelayModuleHandle.MakeDelayMultiplierEvent" />
@@ -523,10 +523,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 9, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IDelayModuleHandle.GetFeedback" />
+        /// <inheritdoc cref="IDelayModuleHandle.GetFeedback(ValueScalingMode)" />
         public int GetFeedback(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(10, valueScalingMode);
 
-        /// <inheritdoc cref="IDelayModuleHandle.SetFeedback" />
+        /// <inheritdoc cref="IDelayModuleHandle.SetFeedback(int, ValueScalingMode)" />
         public void SetFeedback(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(10, value, valueScalingMode);
 
         /// <inheritdoc cref="IDelayModuleHandle.MakeFeedbackEvent" />
@@ -536,10 +536,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 10, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IDelayModuleHandle.GetNegativeFeedback" />
+        /// <inheritdoc cref="IDelayModuleHandle.GetNegativeFeedback()" />
         public Toggle GetNegativeFeedback() => (Toggle)ModuleHandle.GetControllerValue(11, ValueScalingMode.Displayed);
 
-        /// <inheritdoc cref="IDelayModuleHandle.SetNegativeFeedback" />
+        /// <inheritdoc cref="IDelayModuleHandle.SetNegativeFeedback(Toggle)" />
         public void SetNegativeFeedback(Toggle value) => ModuleHandle.SetControllerValue(11, (int)value, ValueScalingMode.Displayed);
 
         /// <inheritdoc cref="IDelayModuleHandle.MakeNegativeFeedbackEvent" />
@@ -548,10 +548,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 11, (ushort)Math.Clamp((int)value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IDelayModuleHandle.GetAllPassFilter" />
+        /// <inheritdoc cref="IDelayModuleHandle.GetAllPassFilter()" />
         public Toggle GetAllPassFilter() => (Toggle)ModuleHandle.GetControllerValue(12, ValueScalingMode.Displayed);
 
-        /// <inheritdoc cref="IDelayModuleHandle.SetAllPassFilter" />
+        /// <inheritdoc cref="IDelayModuleHandle.SetAllPassFilter(Toggle)" />
         public void SetAllPassFilter(Toggle value) => ModuleHandle.SetControllerValue(12, (int)value, ValueScalingMode.Displayed);
 
         /// <inheritdoc cref="IDelayModuleHandle.MakeAllPassFilterEvent" />

@@ -23,7 +23,7 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 0 'Out'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetOut(Toggle value);
 
@@ -40,7 +40,7 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 1 'Out pin'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetOutPin(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -59,7 +59,7 @@ namespace SunSharp.Modules
         /// <summary>
         /// Value range: displayed: 0 to 100, real: 0 to 100
         /// Original name: 2 'Out threshold'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetOutThreshold(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -76,7 +76,7 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 3 'In'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetIn(Toggle value);
 
@@ -93,7 +93,7 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 4 'In pin'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetInPin(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -110,7 +110,7 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 5 'In note'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetInNote(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -129,7 +129,7 @@ namespace SunSharp.Modules
         /// <summary>
         /// Value range: displayed: 0 to 100, real: 0 to 100
         /// Original name: 6 'In amplitude'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetInAmplitude(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -265,30 +265,30 @@ namespace SunSharp.Modules
         /// <inheritdoc/>
         public PatternEvent MakeEvent(Note note = default, byte? velocity = default, byte? controller = default, Effect effect = Effect.None, ushort value = 0) => ModuleHandle.MakeEvent(note, velocity, controller, effect, value);
 
-        /// <inheritdoc cref="SynthModuleHandle.GetInputModules"/>
+        /// <inheritdoc cref="SynthModuleHandle.GetInputModules()"/>
         public SynthModuleHandle[] GetInputModules() => ModuleHandle.GetInputModules();
 
-        /// <inheritdoc cref="SynthModuleHandle.GetOutputModules"/>
+        /// <inheritdoc cref="SynthModuleHandle.GetOutputModules()"/>
         public SynthModuleHandle[] GetOutputModules() => ModuleHandle.GetOutputModules();
 
-        /// <inheritdoc cref="SynthModuleHandle.ConnectInput"/>
+        /// <inheritdoc cref="SynthModuleHandle.ConnectInput(SynthModuleHandle)"/>
         public void ConnectInput(SynthModuleHandle targetModule) => ModuleHandle.ConnectInput(targetModule);
 
-        /// <inheritdoc cref="SynthModuleHandle.ConnectOutput"/>
+        /// <inheritdoc cref="SynthModuleHandle.ConnectOutput(SynthModuleHandle)"/>
         public void ConnectOutput(SynthModuleHandle targetModule) => ModuleHandle.ConnectOutput(targetModule);
 
-        /// <inheritdoc cref="SynthModuleHandle.DisconnectInput"/>
+        /// <inheritdoc cref="SynthModuleHandle.DisconnectInput(SynthModuleHandle)"/>
         public void DisconnectInput(SynthModuleHandle targetModule) => ModuleHandle.DisconnectInput(targetModule);
 
-        /// <inheritdoc cref="SynthModuleHandle.DisconnectOutput"/>
+        /// <inheritdoc cref="SynthModuleHandle.DisconnectOutput(SynthModuleHandle)"/>
         public void DisconnectOutput(SynthModuleHandle targetModule) => ModuleHandle.DisconnectOutput(targetModule);
 
         #endregion
 
-        /// <inheritdoc cref="IGpioModuleHandle.GetOut" />
+        /// <inheritdoc cref="IGpioModuleHandle.GetOut()" />
         public Toggle GetOut() => (Toggle)ModuleHandle.GetControllerValue(0, ValueScalingMode.Displayed);
 
-        /// <inheritdoc cref="IGpioModuleHandle.SetOut" />
+        /// <inheritdoc cref="IGpioModuleHandle.SetOut(Toggle)" />
         public void SetOut(Toggle value) => ModuleHandle.SetControllerValue(0, (int)value, ValueScalingMode.Displayed);
 
         /// <inheritdoc cref="IGpioModuleHandle.MakeOutEvent" />
@@ -297,10 +297,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 0, (ushort)Math.Clamp((int)value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IGpioModuleHandle.GetOutPin" />
+        /// <inheritdoc cref="IGpioModuleHandle.GetOutPin(ValueScalingMode)" />
         public int GetOutPin(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(1, valueScalingMode);
 
-        /// <inheritdoc cref="IGpioModuleHandle.SetOutPin" />
+        /// <inheritdoc cref="IGpioModuleHandle.SetOutPin(int, ValueScalingMode)" />
         public void SetOutPin(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(1, value, valueScalingMode);
 
         /// <inheritdoc cref="IGpioModuleHandle.MakeOutPinEvent" />
@@ -309,10 +309,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 1, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IGpioModuleHandle.GetOutThreshold" />
+        /// <inheritdoc cref="IGpioModuleHandle.GetOutThreshold(ValueScalingMode)" />
         public int GetOutThreshold(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(2, valueScalingMode);
 
-        /// <inheritdoc cref="IGpioModuleHandle.SetOutThreshold" />
+        /// <inheritdoc cref="IGpioModuleHandle.SetOutThreshold(int, ValueScalingMode)" />
         public void SetOutThreshold(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(2, value, valueScalingMode);
 
         /// <inheritdoc cref="IGpioModuleHandle.MakeOutThresholdEvent" />
@@ -322,10 +322,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 2, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IGpioModuleHandle.GetIn" />
+        /// <inheritdoc cref="IGpioModuleHandle.GetIn()" />
         public Toggle GetIn() => (Toggle)ModuleHandle.GetControllerValue(3, ValueScalingMode.Displayed);
 
-        /// <inheritdoc cref="IGpioModuleHandle.SetIn" />
+        /// <inheritdoc cref="IGpioModuleHandle.SetIn(Toggle)" />
         public void SetIn(Toggle value) => ModuleHandle.SetControllerValue(3, (int)value, ValueScalingMode.Displayed);
 
         /// <inheritdoc cref="IGpioModuleHandle.MakeInEvent" />
@@ -334,10 +334,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 3, (ushort)Math.Clamp((int)value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IGpioModuleHandle.GetInPin" />
+        /// <inheritdoc cref="IGpioModuleHandle.GetInPin(ValueScalingMode)" />
         public int GetInPin(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(4, valueScalingMode);
 
-        /// <inheritdoc cref="IGpioModuleHandle.SetInPin" />
+        /// <inheritdoc cref="IGpioModuleHandle.SetInPin(int, ValueScalingMode)" />
         public void SetInPin(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(4, value, valueScalingMode);
 
         /// <inheritdoc cref="IGpioModuleHandle.MakeInPinEvent" />
@@ -346,10 +346,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 4, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IGpioModuleHandle.GetInNote" />
+        /// <inheritdoc cref="IGpioModuleHandle.GetInNote(ValueScalingMode)" />
         public int GetInNote(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(5, valueScalingMode);
 
-        /// <inheritdoc cref="IGpioModuleHandle.SetInNote" />
+        /// <inheritdoc cref="IGpioModuleHandle.SetInNote(int, ValueScalingMode)" />
         public void SetInNote(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(5, value, valueScalingMode);
 
         /// <inheritdoc cref="IGpioModuleHandle.MakeInNoteEvent" />
@@ -358,10 +358,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 5, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IGpioModuleHandle.GetInAmplitude" />
+        /// <inheritdoc cref="IGpioModuleHandle.GetInAmplitude(ValueScalingMode)" />
         public int GetInAmplitude(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(6, valueScalingMode);
 
-        /// <inheritdoc cref="IGpioModuleHandle.SetInAmplitude" />
+        /// <inheritdoc cref="IGpioModuleHandle.SetInAmplitude(int, ValueScalingMode)" />
         public void SetInAmplitude(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(6, value, valueScalingMode);
 
         /// <inheritdoc cref="IGpioModuleHandle.MakeInAmplitudeEvent" />

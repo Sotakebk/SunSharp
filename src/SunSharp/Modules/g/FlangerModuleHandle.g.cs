@@ -25,7 +25,7 @@ namespace SunSharp.Modules
         /// <summary>
         /// Value range: displayed: 0 to 256, real: 0 to 256
         /// Original name: 0 'Dry'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetDry(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -44,7 +44,7 @@ namespace SunSharp.Modules
         /// <summary>
         /// Value range: displayed: 0 to 256, real: 0 to 256
         /// Original name: 1 'Wet'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetWet(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -63,7 +63,7 @@ namespace SunSharp.Modules
         /// <summary>
         /// Value range: displayed: 0 to 256, real: 0 to 256
         /// Original name: 2 'Feedback'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetFeedback(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -82,7 +82,7 @@ namespace SunSharp.Modules
         /// <summary>
         /// Value range: displayed: 8 to 1000, real: 8 to 1000
         /// Original name: 3 'Delay'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetDelay(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -101,7 +101,7 @@ namespace SunSharp.Modules
         /// <summary>
         /// Value range: displayed: 0 to 256, real: 0 to 256
         /// Original name: 4 'Response'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetResponse(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -120,7 +120,7 @@ namespace SunSharp.Modules
         /// <summary>
         /// Value range: displayed: 0 to 512, real: 0 to 512
         /// Original name: 5 'LFO freq'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetLfoFreq(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -139,7 +139,7 @@ namespace SunSharp.Modules
         /// <summary>
         /// Value range: displayed: 0 to 256, real: 0 to 256
         /// Original name: 6 'LFO amp'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetLfoAmp(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -156,7 +156,7 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 7 'LFO waveform'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetLfoWaveform(FlangerLfoWaveform value);
 
@@ -175,7 +175,7 @@ namespace SunSharp.Modules
         /// <summary>
         /// Value range: displayed: 0 to 256, real: 0 to 256
         /// Original name: 8 'Set LFO phase'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetSetLfoPhase(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed);
 
@@ -192,7 +192,7 @@ namespace SunSharp.Modules
 
         /// <summary>
         /// Original name: 9 'LFO freq unit'
-        /// Note: equivalent <see cref="IVirtualPattern.SendEvent"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
+        /// Note: equivalent <see cref="IVirtualPattern.SendEvent(int, PatternEvent)"/> will be used internally, which may introduce latency. It will also be affected by the event timestamp set.
         /// </summary>
         void SetLfoFreqUnit(FlangerLfoFrequencyUnit value);
 
@@ -328,30 +328,30 @@ namespace SunSharp.Modules
         /// <inheritdoc/>
         public PatternEvent MakeEvent(Note note = default, byte? velocity = default, byte? controller = default, Effect effect = Effect.None, ushort value = 0) => ModuleHandle.MakeEvent(note, velocity, controller, effect, value);
 
-        /// <inheritdoc cref="SynthModuleHandle.GetInputModules"/>
+        /// <inheritdoc cref="SynthModuleHandle.GetInputModules()"/>
         public SynthModuleHandle[] GetInputModules() => ModuleHandle.GetInputModules();
 
-        /// <inheritdoc cref="SynthModuleHandle.GetOutputModules"/>
+        /// <inheritdoc cref="SynthModuleHandle.GetOutputModules()"/>
         public SynthModuleHandle[] GetOutputModules() => ModuleHandle.GetOutputModules();
 
-        /// <inheritdoc cref="SynthModuleHandle.ConnectInput"/>
+        /// <inheritdoc cref="SynthModuleHandle.ConnectInput(SynthModuleHandle)"/>
         public void ConnectInput(SynthModuleHandle targetModule) => ModuleHandle.ConnectInput(targetModule);
 
-        /// <inheritdoc cref="SynthModuleHandle.ConnectOutput"/>
+        /// <inheritdoc cref="SynthModuleHandle.ConnectOutput(SynthModuleHandle)"/>
         public void ConnectOutput(SynthModuleHandle targetModule) => ModuleHandle.ConnectOutput(targetModule);
 
-        /// <inheritdoc cref="SynthModuleHandle.DisconnectInput"/>
+        /// <inheritdoc cref="SynthModuleHandle.DisconnectInput(SynthModuleHandle)"/>
         public void DisconnectInput(SynthModuleHandle targetModule) => ModuleHandle.DisconnectInput(targetModule);
 
-        /// <inheritdoc cref="SynthModuleHandle.DisconnectOutput"/>
+        /// <inheritdoc cref="SynthModuleHandle.DisconnectOutput(SynthModuleHandle)"/>
         public void DisconnectOutput(SynthModuleHandle targetModule) => ModuleHandle.DisconnectOutput(targetModule);
 
         #endregion
 
-        /// <inheritdoc cref="IFlangerModuleHandle.GetDry" />
+        /// <inheritdoc cref="IFlangerModuleHandle.GetDry(ValueScalingMode)" />
         public int GetDry(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(0, valueScalingMode);
 
-        /// <inheritdoc cref="IFlangerModuleHandle.SetDry" />
+        /// <inheritdoc cref="IFlangerModuleHandle.SetDry(int, ValueScalingMode)" />
         public void SetDry(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(0, value, valueScalingMode);
 
         /// <inheritdoc cref="IFlangerModuleHandle.MakeDryEvent" />
@@ -361,10 +361,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 0, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IFlangerModuleHandle.GetWet" />
+        /// <inheritdoc cref="IFlangerModuleHandle.GetWet(ValueScalingMode)" />
         public int GetWet(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(1, valueScalingMode);
 
-        /// <inheritdoc cref="IFlangerModuleHandle.SetWet" />
+        /// <inheritdoc cref="IFlangerModuleHandle.SetWet(int, ValueScalingMode)" />
         public void SetWet(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(1, value, valueScalingMode);
 
         /// <inheritdoc cref="IFlangerModuleHandle.MakeWetEvent" />
@@ -374,10 +374,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 1, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IFlangerModuleHandle.GetFeedback" />
+        /// <inheritdoc cref="IFlangerModuleHandle.GetFeedback(ValueScalingMode)" />
         public int GetFeedback(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(2, valueScalingMode);
 
-        /// <inheritdoc cref="IFlangerModuleHandle.SetFeedback" />
+        /// <inheritdoc cref="IFlangerModuleHandle.SetFeedback(int, ValueScalingMode)" />
         public void SetFeedback(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(2, value, valueScalingMode);
 
         /// <inheritdoc cref="IFlangerModuleHandle.MakeFeedbackEvent" />
@@ -387,10 +387,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 2, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IFlangerModuleHandle.GetDelay" />
+        /// <inheritdoc cref="IFlangerModuleHandle.GetDelay(ValueScalingMode)" />
         public int GetDelay(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(3, valueScalingMode);
 
-        /// <inheritdoc cref="IFlangerModuleHandle.SetDelay" />
+        /// <inheritdoc cref="IFlangerModuleHandle.SetDelay(int, ValueScalingMode)" />
         public void SetDelay(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(3, value, valueScalingMode);
 
         /// <inheritdoc cref="IFlangerModuleHandle.MakeDelayEvent" />
@@ -401,10 +401,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 3, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IFlangerModuleHandle.GetResponse" />
+        /// <inheritdoc cref="IFlangerModuleHandle.GetResponse(ValueScalingMode)" />
         public int GetResponse(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(4, valueScalingMode);
 
-        /// <inheritdoc cref="IFlangerModuleHandle.SetResponse" />
+        /// <inheritdoc cref="IFlangerModuleHandle.SetResponse(int, ValueScalingMode)" />
         public void SetResponse(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(4, value, valueScalingMode);
 
         /// <inheritdoc cref="IFlangerModuleHandle.MakeResponseEvent" />
@@ -414,10 +414,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 4, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IFlangerModuleHandle.GetLfoFreq" />
+        /// <inheritdoc cref="IFlangerModuleHandle.GetLfoFreq(ValueScalingMode)" />
         public int GetLfoFreq(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(5, valueScalingMode);
 
-        /// <inheritdoc cref="IFlangerModuleHandle.SetLfoFreq" />
+        /// <inheritdoc cref="IFlangerModuleHandle.SetLfoFreq(int, ValueScalingMode)" />
         public void SetLfoFreq(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(5, value, valueScalingMode);
 
         /// <inheritdoc cref="IFlangerModuleHandle.MakeLfoFreqEvent" />
@@ -427,10 +427,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 5, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IFlangerModuleHandle.GetLfoAmp" />
+        /// <inheritdoc cref="IFlangerModuleHandle.GetLfoAmp(ValueScalingMode)" />
         public int GetLfoAmp(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(6, valueScalingMode);
 
-        /// <inheritdoc cref="IFlangerModuleHandle.SetLfoAmp" />
+        /// <inheritdoc cref="IFlangerModuleHandle.SetLfoAmp(int, ValueScalingMode)" />
         public void SetLfoAmp(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(6, value, valueScalingMode);
 
         /// <inheritdoc cref="IFlangerModuleHandle.MakeLfoAmpEvent" />
@@ -440,10 +440,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 6, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IFlangerModuleHandle.GetLfoWaveform" />
+        /// <inheritdoc cref="IFlangerModuleHandle.GetLfoWaveform()" />
         public FlangerLfoWaveform GetLfoWaveform() => (FlangerLfoWaveform)ModuleHandle.GetControllerValue(7, ValueScalingMode.Displayed);
 
-        /// <inheritdoc cref="IFlangerModuleHandle.SetLfoWaveform" />
+        /// <inheritdoc cref="IFlangerModuleHandle.SetLfoWaveform(FlangerLfoWaveform)" />
         public void SetLfoWaveform(FlangerLfoWaveform value) => ModuleHandle.SetControllerValue(7, (int)value, ValueScalingMode.Displayed);
 
         /// <inheritdoc cref="IFlangerModuleHandle.MakeLfoWaveformEvent" />
@@ -452,10 +452,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 7, (ushort)Math.Clamp((int)value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IFlangerModuleHandle.GetSetLfoPhase" />
+        /// <inheritdoc cref="IFlangerModuleHandle.GetSetLfoPhase(ValueScalingMode)" />
         public int GetSetLfoPhase(ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.GetControllerValue(8, valueScalingMode);
 
-        /// <inheritdoc cref="IFlangerModuleHandle.SetSetLfoPhase" />
+        /// <inheritdoc cref="IFlangerModuleHandle.SetSetLfoPhase(int, ValueScalingMode)" />
         public void SetSetLfoPhase(int value, ValueScalingMode valueScalingMode = ValueScalingMode.Displayed) => ModuleHandle.SetControllerValue(8, value, valueScalingMode);
 
         /// <inheritdoc cref="IFlangerModuleHandle.MakeSetLfoPhaseEvent" />
@@ -465,10 +465,10 @@ namespace SunSharp.Modules
             return PatternEvent.ControllerEvent(ModuleHandle.Id, 8, (ushort)Math.Clamp(value, 0, 0x8000));
         }
 
-        /// <inheritdoc cref="IFlangerModuleHandle.GetLfoFreqUnit" />
+        /// <inheritdoc cref="IFlangerModuleHandle.GetLfoFreqUnit()" />
         public FlangerLfoFrequencyUnit GetLfoFreqUnit() => (FlangerLfoFrequencyUnit)ModuleHandle.GetControllerValue(9, ValueScalingMode.Displayed);
 
-        /// <inheritdoc cref="IFlangerModuleHandle.SetLfoFreqUnit" />
+        /// <inheritdoc cref="IFlangerModuleHandle.SetLfoFreqUnit(FlangerLfoFrequencyUnit)" />
         public void SetLfoFreqUnit(FlangerLfoFrequencyUnit value) => ModuleHandle.SetControllerValue(9, (int)value, ValueScalingMode.Displayed);
 
         /// <inheritdoc cref="IFlangerModuleHandle.MakeLfoFreqUnitEvent" />
